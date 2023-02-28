@@ -1,5 +1,4 @@
 <script>
-  import "../CSS/app.scss";
   import Header from "./Header.svelte";
 </script>
 
