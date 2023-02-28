@@ -1,0 +1,7 @@
+/* Variables and mixins declared here will be available in all other SCSS files */
+@mixin reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
