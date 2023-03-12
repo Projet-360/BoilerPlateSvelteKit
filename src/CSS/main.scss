@@ -9,6 +9,7 @@
 
 @import './base/fonts';
 @import './base/reset';
+@import './base/normalize';
 
 @import './shared/links';
 @import './shared/sections';
@@ -18,10 +19,8 @@
 @import './components/navigation';
 @import './components/preloader';
 
-@import './pages/home/home';
-
-@import './pages/about/about';
-
+@import './pages/home';
+@import './pages/about';
 
 
 @mixin reset-list {

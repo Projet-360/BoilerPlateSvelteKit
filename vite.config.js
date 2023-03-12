@@ -7,7 +7,7 @@ const config = {
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@use "src/CSS/main.scss" as *;',
+        additionalData: '@use "src/css/main.scss" as *;',
       },
     },
   },
