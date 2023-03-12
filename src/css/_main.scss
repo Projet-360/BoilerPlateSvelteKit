@@ -13,6 +13,7 @@
 
 @import './shared/links';
 @import './shared/sections';
+@import './shared/lerp';
 
 @import './components/canvas';
 @import './components/functionals';
@@ -22,10 +23,14 @@
 @import './pages/home';
 @import './pages/about';
 
+.app {
+    min-width: 100vw;
+    min-height: 100vh;
+}
 
 @mixin reset-list {
     margin: 0;
     padding: 0;
     list-style: none;
-  }
+}
   
