@@ -6,11 +6,15 @@
   let rotation = 0;
   let scale = 1;
   let path
+  let color
 
   function animateLerp({ clientX, clientY }) {
     const { offsetWidth, offsetHeight } = lerp;
     const x = clientX - offsetWidth / 2;
     const y = clientY - offsetHeight / 2;
+    lerp.style.setProperty(
+      'transform', `translate(${x}px, ${y}px) rotate(${rotation}deg) scale(${scale})`
+    );
     lerp.style.setProperty(
       'transform', `translate(${x}px, ${y}px) rotate(${rotation}deg) scale(${scale})`
     );
