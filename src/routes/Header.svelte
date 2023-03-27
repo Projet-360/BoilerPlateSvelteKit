@@ -5,11 +5,15 @@
 <header>
 	<nav>
 		<ul>
-			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
+			<li class="test1" aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a class="test1" href="/">Home</a>
 			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
+			</li>
+
+			<li class="lerpDezoom" aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
+				<a href="/about">test</a>
 			</li>
 		</ul>
 	</nav>
