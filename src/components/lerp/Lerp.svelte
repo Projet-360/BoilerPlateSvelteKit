@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { rotate, lerpScale, Parallelogram, Message, Trapezoid, normal } from './LerpFunctions.js';
 
   let lerp;
   let box;
@@ -24,47 +25,46 @@
       );
     }
 
-    function rotate(deg) {
-      rotation = deg;
-    }
-
-    function lerpScale(size) {
-      scale = size;
-    }
-
-    function Parallelogram() {
-      lerp.style.setProperty(
-        'clip-path', `polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)`
-      );
-    }
-
-    function Message() {
-      lerp.style.setProperty(
-        'clip-path', `polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%)`
-      );
-    }
-
-    function Trapezoid() {
-      lerp.style.setProperty(
-        'clip-path', `polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)`
-      );
-    }
-
-    
-    function normal() {
-      rotation = 0;
-      scale = 1;
-      lerp.style.setProperty(
-        'clip-path', `circle(50% at 50% 50%)`
-      );
-    }
-
     onMount(() => {
       lerp = document.getElementById('lerp');
       box = document.getElementById('box');
       window.addEventListener('mousemove', animateLerp);
     });
 </script>
+
+
+<div id="box" 
+  on:mouseover={() => {
+    lerpScale(6)
+    rotate(90)
+
+    Parallelogram()
+    }} 
+  on:mouseout={normal}>
+</div>
+
+<div id="box" 
+  on:mouseover={() => {
+    lerpScale(6)
+    Message()
+    }} 
+
+  on:mouseout={normal}>
+</div>
+
+<div id="box" 
+  on:mouseover={() => {
+    lerpScale(6)
+    Trapezoid()
+    }} 
+
+  on:mouseout={normal}>
+</div>
+
+
+<div id="lerp">
+
+</div>
 
 <style lang='scss'>
   #lerp {
@@ -99,36 +99,3 @@
     }
   }
 </style>
-
-<div id="box" 
-  on:mouseover={() => {
-    lerpScale(6)
-    rotate(90)
-
-    Parallelogram()
-    }} 
-  on:mouseout={normal}>
-</div>
-
-<div id="box" 
-  on:mouseover={() => {
-    lerpScale(6)
-    Message()
-    }} 
-
-  on:mouseout={normal}>
-</div>
-
-<div id="box" 
-  on:mouseover={() => {
-    lerpScale(6)
-    Trapezoid()
-    }} 
-
-  on:mouseout={normal}>
-</div>
-
-
-<div id="lerp">
-
-</div>
