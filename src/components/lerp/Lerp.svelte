@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { rotate, lerpScale, Parallelogram, Message, Trapezoid, normal } from './LerpFunctions.js';
+  import { Parallelogram, Message, Trapezoid } from './LerpFunctions';
 
   let lerp;
   let box;
@@ -21,7 +21,23 @@
     );
 
     lerp.style.setProperty(
-      'transition', `transform .04s linear`
+      'transition', `transform .04s linear, clip-path 1s linear`
+      );
+    }
+
+    const rotate = (deg) => {
+      rotation = deg;
+    }
+
+    const lerpScale = (size) => {
+      scale = size;
+    }
+
+    const normal = () => {
+      rotation = 0;
+      scale = 1;
+      lerp.style.setProperty(
+        'clip-path', `circle(50% at 50% 50%)`
       );
     }
 
