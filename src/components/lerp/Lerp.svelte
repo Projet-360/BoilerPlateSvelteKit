@@ -1,89 +1,61 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
-
-  const cursorProps = writable({ x: 0, y: 0, rotation: 0, scale: 1, clipPath: 'circle(50% at 50% 50%)', color: 'red' });
-
+  import { animations } from './animations';
   let lerp;
 
-  function animateLerp({ clientX, clientY }) {
-    cursorProps.update((props) => {
-      const { offsetWidth, offsetHeight } = lerp;
-      const x = clientX - offsetWidth / 2;
-      const y = clientY - offsetHeight / 2;
-      return { ...props, x, y };
-    });
-  }
+  const cursorProps = writable({
+    x: 0,
+    y: 0,
+    rotation: 0,
+    scale: 1,
+    clipPath: 'circle(50% at 50% 50%)',
+    color: 'red'
+  });
 
-  const shapes = [
-    {
-      name: 'first',
-      shape: 'polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)',
-      rotation: 90,
-      scale: 6,
-      color: 'green',
-    },
-    {
-      name: 'second',
-      shape: 'polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%)',
-      rotation: 0,
-      scale: 6,
-      color: 'blue',
-    },
-    {
-      name: 'third',
-      shape: 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)',
-      rotation: 0,
-      scale: 6,
-      color: 'yellow',
-    },    
-    {
-      name: 'fourth',
-      shape: 'circle(50% at 50% 50%)',
-      rotation: 0,
-      scale: 6,
-      color: 'red',
-    },
-  ];
 
-  function updateCursor(index) {
-    cursorProps.update((props) => ({
+  const animateLerp = ({ clientX, clientY }) => {
+    if (!lerp) return;
+    cursorProps.update(props => ({
       ...props,
-      rotation: shapes[index].rotation,
-      scale: shapes[index].scale,
-      clipPath: shapes[index].shape,
-      color: shapes[index].color,
+      x: clientX - lerp.offsetWidth / 2,
+      y: clientY - lerp.offsetHeight / 2
     }));
   }
 
-  function resetCursor() {
-    cursorProps.update((props) => ({
+  const updateCursorByName = name => {
+    const index = animations.findIndex(shape => shape.name === name);
+    if (index !== -1) {
+      const { rotation, scale, shape, color } = animations[index];
+      cursorProps.update(props => ({
+        ...props,
+        rotation,
+        scale,
+        clipPath: shape,
+        color
+      }));
+    }
+  }
+
+  const resetCursor = () => {
+    cursorProps.update(props => ({
       ...props,
       rotation: 0,
       scale: 1,
       clipPath: 'circle(50% at 50% 50%)',
-      color: 'red',
+      color: 'red'
     }));
   }
 
-  function updateCursorByName(name) {
-  const index = shapes.findIndex(shape => shape.name === name);
-  if (index !== -1) {
-    updateCursor(index);
-  }
-}
-
-  let removeMouseMove = () => {};
-
   onMount(() => {
+    lerp = document.getElementById('lerp');
     window.addEventListener('mousemove', animateLerp);
-    removeMouseMove = () => {
+    onDestroy(() => {
       window.removeEventListener('mousemove', animateLerp);
-    };
+    });
   });
-
-  onDestroy(removeMouseMove);
 </script>
+
 
 <style lang="scss">
   #lerp {
@@ -108,21 +80,15 @@
 </style>
 
 <div
-  class="box"
-  style="top: calc(15% * 1); left: calc(15% * 1);"
-  on:mouseover={() => updateCursorByName('first')}
-  on:mouseout={resetCursor}
+  bind:this={lerp}
+  id="lerp"
+  style="transform: translate({$cursorProps.x}px, {$cursorProps.y}px) rotate({$cursorProps.rotation}deg) scale({$cursorProps.scale}); clip-path: {$cursorProps.clipPath}; background-color: {$cursorProps.color};"
 ></div>
 
-<div
-  class="box"
-  style="top: calc(15% * 2); left: calc(15% * 2);"
-  on:mouseover={() => updateCursorByName('second')}
-  on:mouseout={resetCursor}
-></div>
+<div class="box" style="top: calc(15% * 3); left: calc(15% * 3);"
+  on:mouseover={() => updateCursorByName('third')}
+  on:mouseout={resetCursor}></div>
 
-<div
-bind:this={lerp}
-id="lerp"
-style="transform: translate({$cursorProps.x}px, {$cursorProps.y}px) rotate({$cursorProps.rotation}deg) scale({$cursorProps.scale}); clip-path: {$cursorProps.clipPath}; background-color: {$cursorProps.color};"
-></div>
+<div class="box" style="top: calc(15% * 4); left: calc(15% * 4);"
+  on:mouseover={() => updateCursorByName('fourth')}
+  on:mouseout={resetCursor}></div>
