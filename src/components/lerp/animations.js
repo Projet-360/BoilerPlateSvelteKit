@@ -5,6 +5,8 @@ export const animations = [
     rotation: 90,
     scale: 6,
     color: 'green',
+    iconInside:'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
+    iconScale:'.5',
   },
   {
     name: 'second',
@@ -12,6 +14,8 @@ export const animations = [
     rotation: 0,
     scale: 6,
     color: 'blue',
+    iconInside:'',
+    iconScale:'.5',
   },
   {
     name: 'third',
@@ -19,6 +23,8 @@ export const animations = [
     rotation: 0,
     scale: 6,
     color: 'yellow',
+    iconInside:'',
+    iconScale:'.5',
   },    
   {
     name: 'fourth',
@@ -26,5 +32,7 @@ export const animations = [
     rotation: 0,
     scale: 6,
     color: 'red',
+    iconInside:'https://upload.wikimedia.org/wikipedia/commons/5/5a/Wikipedia%27s_W.svg',
+    iconScale:'.5',
   },
 ];

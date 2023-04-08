@@ -1,8 +1,8 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
-  import { animations } from './animations';
   let lerp;
+  let durationAnimation = 0.2
 
   const cursorProps = writable({
     x: 0,
@@ -10,9 +10,24 @@
     rotation: 0,
     scale: 1,
     clipPath: 'circle(50% at 50% 50%)',
-    color: 'red'
+    color: 'red',
+    transitionDuration: 0,
+    iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
+    iconScale: 0
   });
 
+  export const animations = [
+  {
+    name: 'first',
+    animation: 'circle(50% at 50% 50%)',
+    rotation: 0,
+    scale: 6,
+    color: 'red',
+    transitionDuration: 0.05,
+    iconInside:'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
+    iconScale:'.5',
+  },
+];
 
   const animateLerp = ({ clientX, clientY }) => {
     if (!lerp) return;
@@ -24,15 +39,18 @@
   }
 
   const updateCursorByName = name => {
-    const index = animations.findIndex(shape => shape.name === name);
+    const index = animations.findIndex(animation => animation.name === name);
     if (index !== -1) {
-      const { rotation, scale, shape, color } = animations[index];
+      const { rotation, scale, animation, color, transitionDuration, iconInside, iconScale } = animations[index];
       cursorProps.update(props => ({
         ...props,
         rotation,
         scale,
-        clipPath: shape,
-        color
+        clipPath: animation,
+        color,
+        transitionDuration,
+        iconInside,
+        iconScale,
       }));
     }
   }
@@ -43,24 +61,29 @@
       rotation: 0,
       scale: 1,
       clipPath: 'circle(50% at 50% 50%)',
-      color: 'red'
+      color: 'red',
+      transitionDuration: 0.05,
+      iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
+      iconScale: 0
     }));
   }
 
-  onMount(() => {
-    lerp = document.getElementById('lerp');
-    window.addEventListener('mousemove', animateLerp);
+  if (typeof window !== 'undefined') {
+    onMount(() => {
+      lerp = document.getElementById('lerp');
+      window.addEventListener('mousemove', animateLerp);
+    });
+
     onDestroy(() => {
       window.removeEventListener('mousemove', animateLerp);
     });
-  });
+  }
 </script>
-
 
 <style lang="scss">
   #lerp {
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
     background-color: red;
     position: fixed;
     left: 0;
@@ -68,7 +91,18 @@
     z-index: 10000;
     pointer-events: none;
     opacity: 0;
-    transition: transform .05s linear;
+  }
+
+  #lerp::after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    background-position: center;
+    background-image: var(--background-image);
+    transform: scale(var(--icon-scale));
+    transition: all 0.1s ease;
   }
 
   .box {
@@ -82,13 +116,19 @@
 <div
   bind:this={lerp}
   id="lerp"
-  style="transform: translate({$cursorProps.x}px, {$cursorProps.y}px) rotate({$cursorProps.rotation}deg) scale({$cursorProps.scale}); clip-path: {$cursorProps.clipPath}; background-color: {$cursorProps.color};"
+  style="transform: 
+  translate({$cursorProps.x}px, {$cursorProps.y}px) 
+  rotate({$cursorProps.rotation}deg) 
+  scale({$cursorProps.scale}); 
+  clip-path: {$cursorProps.clipPath}; 
+  background-color: {$cursorProps.color}; 
+  
+  transition: 
+  all {$cursorProps.transitionDuration}s linear; 
+  --background-image: url({$cursorProps.iconInside}); 
+  --icon-scale: {$cursorProps.iconScale};"
 ></div>
 
-<div class="box" style="top: calc(15% * 3); left: calc(15% * 3);"
-  on:mouseover={() => updateCursorByName('third')}
-  on:mouseout={resetCursor}></div>
-
-<div class="box" style="top: calc(15% * 4); left: calc(15% * 4);"
-  on:mouseover={() => updateCursorByName('fourth')}
+<div class="box"
+  on:mouseover={() => updateCursorByName('first')}
   on:mouseout={resetCursor}></div>
