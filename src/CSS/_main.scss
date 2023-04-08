@@ -1,0 +1,37 @@
+/* Variables and mixins declared here will be available in all other SCSS files */
+
+@import './utils/variables';
+@import './utils/functions';
+@import './utils/breackpoints';
+@import './utils/flex';
+@import './utils/mixins';
+@import './utils/vendors';
+
+@import './base/fonts';
+@import './base/reset';
+@import './base/normalize';
+
+@import './shared/links';
+@import './shared/sections';
+@import './shared/lerp';
+
+@import './components/canvas';
+@import './components/functionals';
+@import './components/navigation';
+@import './components/preloader';
+
+@import './pages/home';
+@import './pages/about';
+
+.app {
+    min-width: 100vw;
+    min-height: 100vh;
+    cursor: none;
+}
+
+@mixin reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+  
