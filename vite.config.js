@@ -2,12 +2,14 @@ import { sveltekit } from "@sveltejs/kit/vite";
 
 /** @type {import('vite').UserConfig} */
 const config = {
-  plugins: [sveltekit()],
+  plugins: [
+    sveltekit(),
+  ],
 
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@use "src/css/main.scss" as *;',
+        additionalData: '@import "src/css/main.scss"',
       },
     },
   },

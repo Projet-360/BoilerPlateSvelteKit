@@ -28,11 +28,8 @@
     min-height: 100vh;
     cursor: none;
     background: green;
+    user-select: none;
 }
 
-@mixin reset-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
+
   
