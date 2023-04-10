@@ -1,19 +1,23 @@
-import preprocess from "svelte-preprocess";
-import adapter from "@sveltejs/adapter-node";
+import { defineConfig } from 'vite';
+import sveltePreprocess from 'svelte-preprocess';
+import adapter from '@sveltejs/adapter-node';
+import sass from 'vite-plugin-sass';
 
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
-  kit: {
-    adapter: adapter(),
-  },
-
+export default defineConfig({
+  plugins: [sass({ outputStyle: "compressed" })],
   preprocess: [
-    preprocess({
+    sveltePreprocess({
       scss: {
-        prependData: '@use "src/css/main.scss" as *;',
+        includePaths: [
+          'src/css'
+        ]
       },
     }),
   ],
-};
-
-export default config;
+  kit: {
+    adapter: adapter(),
+  },
+  svelte: {
+    emitCssWarnings: false,
+  },
+});

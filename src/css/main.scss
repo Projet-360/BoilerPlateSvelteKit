@@ -11,8 +11,8 @@
 @import './base/reset';
 @import './base/normalize';
 
-@import './shared/links';
-@import './shared/sections';
+// @import './shared/links';
+// @import './shared/sections';
 @import './shared/lerp';
 
 @import './components/canvas';
@@ -20,14 +20,14 @@
 @import './components/navigation';
 @import './components/preloader';
 
-@import './pages/home';
-@import './pages/about';
+// @import './pages/home';
+// @import './pages/about';
 
 .app {
     min-width: 100vw;
     min-height: 100vh;
     cursor: none;
-    background: blue;
+    background: green;
 }
 
 @mixin reset-list {
