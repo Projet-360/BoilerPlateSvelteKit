@@ -1,8 +1,8 @@
-export const animations = [
+const animations = [
   {
     name: 'first',
     shape: 'polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)',
-    rotation: 90,
+    rotation: 140,
     scale: 6,
     color: 'green',
     iconInside:'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
@@ -36,3 +36,5 @@ export const animations = [
     iconScale:'.5',
   },
 ];
+
+export default animations

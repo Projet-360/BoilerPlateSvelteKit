@@ -1,12 +1,12 @@
 .app {
     &:hover {
-        #lerp {
+        #Cursor {
             opacity: 1;
         }
     }
 }
 
-#lerp {
+#Cursor {
   height: 30px;
   width: 30px;
   background-color: red;
@@ -18,7 +18,7 @@
   opacity: 0;
 }
 
-#lerp::after {
+#Cursor::after {
   content: "";
   display: block;
   width: 30px;

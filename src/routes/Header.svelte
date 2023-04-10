@@ -12,7 +12,7 @@
 				<a href="/about">About</a>
 			</li>
 
-			<li class="lerpDezoom" aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
+			<li class="CursorDezoom" aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">test</a>
 			</li>
 		</ul>

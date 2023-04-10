@@ -1,19 +1,11 @@
 <script>
-
+ import { updateCursorByName, resetCursor } from '../components/Cursor/CursorHelper'
 </script>
 
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
+<h1>Home</h1>
 
-<style lang="scss">
-	h1 {
-		display: flex;
-	}
-</style>
-<section>
-	<h1>
-		Home
-	</h1>
-</section>
+<div class="box"
+on:mouseover={() => updateCursorByName('first')}
+on:focus={() => updateCursorByName('first')}
+on:mouseout={resetCursor}
+on:blur={resetCursor}></div>

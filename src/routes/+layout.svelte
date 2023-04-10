@@ -1,14 +1,14 @@
 <script>
   import Header from "./Header.svelte";
-  import Lerp from "../components/lerp/Lerp.svelte";
+  import Cursor from "../components/Cursor/Cursor.svelte";
 </script>
 <style lang="scss" global>
   @import '../css/main';
 </style>
 
-  <Lerp />
-  <Header />
+<Cursor/>
+<Header />
 
-  <main>
-    <slot />
-  </main>
+<main>
+  <slot />
+</main>
