@@ -1,5 +1,5 @@
 <script>
- import { updateCursorByName, resetCursor } from '../components/Cursor/CursorHelper'
+    import { updateCursorByName, resetCursor } from '../components/Cursor/CursorHelper'
 </script>
 
 <h1>Home</h1>

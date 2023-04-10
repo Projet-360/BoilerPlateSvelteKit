@@ -1,7 +1,7 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { cursorProps } from '../../store/store';
-  import { updateCursorByName, resetCursor, animateCursor } from './CursorHelper'
+  import { animateCursor } from './CursorHelper'
   let Cursor;
 
   if (typeof window !== 'undefined') {

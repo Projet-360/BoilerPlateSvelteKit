@@ -34,7 +34,7 @@ cursorProps.update(props => ({
     scale: 1,
     clipPath: 'circle(50% at 50% 50%)',
     color: 'red',
-    transitionDuration: 0.05,
+    transitionDuration: 0.07,
     iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
     iconScale: 0
 }));

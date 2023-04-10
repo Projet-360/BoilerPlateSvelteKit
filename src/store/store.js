@@ -9,5 +9,6 @@ export const cursorProps = writable({
     color: 'red',
     transitionDuration: 0,
     iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
-    iconScale: 0
+    iconScale: 0,
+    transitionDuration: 0.05,
 });
