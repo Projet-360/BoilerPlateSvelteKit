@@ -27,8 +27,9 @@
   background-color: {$cursorProps.color}; 
   
   transition: 
-  all {$cursorProps.transitionDuration}s linear; 
+  transform {$cursorProps.transitionDuration}s linear; 
   --background-image: url({$cursorProps.iconInside}); 
   --icon-scale: {$cursorProps.iconScale};"
-></div>
+>
+</div>
 

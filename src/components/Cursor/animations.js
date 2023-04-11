@@ -1,7 +1,7 @@
 const animations = [
   {
     name: 'first',
-    transitionDuration: 0.7,
+    transitionDuration: 0.07,
     shape: 'polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%)',
     rotation: 140,
     scale: 6,
