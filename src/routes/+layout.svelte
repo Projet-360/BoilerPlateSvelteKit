@@ -7,8 +7,8 @@
   @import '../css/main';
 </style>
 
+<Cursor/>
 <SmoothScroller>
-  <Cursor/>
   <Header />
   <main>
     <slot />

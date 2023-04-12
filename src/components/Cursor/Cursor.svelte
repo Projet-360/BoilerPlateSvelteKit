@@ -1,4 +1,6 @@
 <script>
+  //https://glitch.com/edit/#!/citrine-agreeable-girdle?path=src%2Fcomponents%2Fapp.html%3A1%3A0
+  //https://svelte.dev/repl/a6268cfc4685416998c6e64516546acd?version=3.58.0
   import { onMount, onDestroy } from 'svelte';
   import { cursorProps } from '../../store/store';
   import { animateCursor } from './CursorHelper'

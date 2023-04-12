@@ -1,25 +1,27 @@
 <script>
-  import { writable } from "svelte/store";
+  import { onMount } from 'svelte';
+  import { tweened } from 'svelte/motion';
+  import { sineOut } from 'svelte/easing';
 
-  let smoothscroller;
-  const scrollY = writable(0);
-  const scrollSpeed = 1; // Modifier cette valeur pour ajuster la vitesse de défilement
+  let container;
+  let wrapper;
+  let lastY = 0;
+  const translateY = tweened(0, { duration: 1000, easing: sineOut });
 
-  function handleScroll(event) {
-    scrollY.update((value) => {
-      const newPosition = value - event.deltaY * scrollSpeed;
-      const maxScroll = smoothscroller.scrollHeight - smoothscroller.clientHeight;
+  onMount(() => {
+    container.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const deltaY = e.deltaY;
+      const wrapperHeight = wrapper.offsetHeight;
+      const containerHeight = container.offsetHeight;
 
-      if (newPosition < 0) {
-        event.preventDefault(); // Empêche le défilement natif du navigateur
-        return 0; // Bloque le défilement en haut
-      } else if (newPosition > maxScroll) {
-        return maxScroll; // Bloque le défilement en bas
-      } else {
-        return newPosition;
+      if (wrapperHeight > containerHeight) {
+        lastY += deltaY;
+        lastY = Math.min(Math.max(lastY, 0), wrapperHeight - containerHeight);
+        translateY.set(lastY);
       }
     });
-  }
+  });
 </script>
 
 <style>
@@ -27,19 +29,25 @@
     position: fixed;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
     height: 100%;
     overflow-y: scroll;
   }
 
   .smoothscroller-wrapper {
+    transform-origin: top;
     will-change: transform;
-    transition: transform 0.5s; /* Modifier la durée de la transition pour ajuster la vitesse */
   }
 </style>
 
-<div class="smoothscroller" bind:this={smoothscroller} on:wheel={handleScroll}>
-  <div class="smoothscroller-wrapper" style="transform: translateY({$scrollY}px)">
-    <slot/>
+<div bind:this={container} class="smoothscroller">
+  <div
+    bind:this={wrapper}
+    class="smoothscroller-wrapper"
+    style="transform: translateY(-{$translateY}px)"
+  >
+    <slot></slot>
   </div>
 </div>
