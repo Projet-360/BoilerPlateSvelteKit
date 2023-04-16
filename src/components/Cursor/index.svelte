@@ -1,57 +1,75 @@
 <script>
-  //https://glitch.com/edit/#!/citrine-agreeable-girdle?path=src%2Fcomponents%2Fapp.html%3A1%3A0
-  //https://svelte.dev/repl/a6268cfc4685416998c6e64516546acd?version=3.58.0
-  
- // Importe les fonctions 'onMount' et 'onDestroy' de la bibliothèque Svelte
- import { onMount, onDestroy } from 'svelte';
-  // Importe la variable 'cursorProps' du store
-  import { cursorProps } from '../../store/store';
-  // Importe la fonction 'animateCursor' du fichier 'CursorHelper'
-  import { animateCursor } from './CursorHelper'
-  // Initialise la variable 'Cursor'
-  let Cursor;
+  import { onMount, onDestroy } from 'svelte';
+  import { cursorProps } from '../../store/cursorProps';
+  import { animateCursor } from './CursorHelper';
+  import { interpolate } from "polymorph-js";
+  import { tweened } from "svelte/motion";
+  import { cubicOut } from "svelte/easing";
 
-  // Vérifie si 'window' est défini (exécution côté client)
+  let Cursor;
+  let animate = false;
+  let morph;
+  let path01 = 0;
+
+  let pathOptions = ['circle', 'square'];
+  let currentPathIndex = 0;
+
+  const progress = tweened(0, {
+    duration: 600,
+    easing: cubicOut
+  });
+
+  const animateclick = () => {
+    animate = !animate;
+    if (animate) {
+      currentPathIndex = (currentPathIndex + 1) % pathOptions.length;
+      morph = interpolate(pathOptions.map(option => `#${option}`), { precision: 1 });
+      progress.set(1);
+    } else {
+      progress.set(0);
+    }
+  }
+
+  progress.subscribe(val => (path01 = val));
+
   if (typeof window !== 'undefined') {
-    // Exécute la fonction anonyme lors du montage du composant
     onMount(() => {
-      // Récupère l'élément HTML avec l'ID 'Cursor'
       Cursor = document.getElementById('Cursor');
-      // Ajoute un gestionnaire d'événements pour le mouvement de la souris
       window.addEventListener('mousemove', animateCursor);
+      morph = interpolate(pathOptions.map(option => `#${option}`), { precision: 1 });
     });
 
-    // Exécute la fonction anonyme lors de la destruction du composant
     onDestroy(() => {
-      // Supprime le gestionnaire d'événements pour le mouvement de la souris
       window.removeEventListener('mousemove', animateCursor);
     });
   }
 </script>
 
 <style>
-  /* Applique des styles à l'élément HTML avec l'ID 'Cursor' */
   #Cursor {
     z-index: 1000;
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     position: fixed;
+    pointer-events: none;
   }
 </style>
 
-<div
-  bind:this={Cursor}
-  id="Cursor"
-  style="transform: 
-  translate({$cursorProps.x}px, {$cursorProps.y}px) 
-  rotate({$cursorProps.rotation}deg) 
-  scale({$cursorProps.scale}); 
-  clip-path: {$cursorProps.clipPath}; 
-  background-color: {$cursorProps.color}; 
-
-  transition: 
-  transform {$cursorProps.transitionDuration}s linear; 
-  --background-image: url({$cursorProps.iconInside}); 
-  --icon-scale: {$cursorProps.iconScale};"
->
+<div bind:this={Cursor} id="Cursor" style="
+  transform: translate({$cursorProps.x}px, {$cursorProps.y}px) rotate({$cursorProps.rotation}deg) scale({$cursorProps.scale});
+  transition: transform {$cursorProps.transitionDuration}s linear;
+  --background-image: url({$cursorProps.iconInside});
+  --icon-scale: {$cursorProps.iconScale};
+">
+  <svg viewbox="0 0 50 50" fill="#FBB43E">
+    <defs>
+      <path id="circle" d="M 0 25 a 25,25 0 1,0 50,0 a 25,25 0 1,0 -50,0" />
+      <path id="square" d="M 0 0, V 50, H 50 V 0 Z" />
+    </defs>
+    <path d="{(morph) && morph(path01)}" />
+  </svg>
 </div>
+
+<button on:mouseover={animateclick} on:mouseout={animateclick}>
+  animer
+</button>

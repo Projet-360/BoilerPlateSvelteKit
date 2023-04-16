@@ -21,5 +21,8 @@
     "svelte-preprocess": "latest",
     "vite-plugin-sass": "latest"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "polymorph-js": "^1.0.2"
+  }
 }

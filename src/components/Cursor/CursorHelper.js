@@ -1,4 +1,4 @@
-import { cursorProps } from '../../store/store';
+import { cursorProps } from '../../store/cursorProps';
 import animations from './animations.js'
 
 export const animateCursor = ({ clientX, clientY }) => {
@@ -18,7 +18,6 @@ export const updateCursorByName = name => {
         ...props,
         rotation,
         scale,
-        clipPath: animation,
         color,
         transitionDuration,
         iconInside,
@@ -32,8 +31,6 @@ cursorProps.update(props => ({
     ...props,
     rotation: 0,
     scale: 1,
-    clipPath: 'circle(50% at 50% 50%)',
-    color: 'red',
     transitionDuration: 0.07,
     iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
     iconScale: 0
