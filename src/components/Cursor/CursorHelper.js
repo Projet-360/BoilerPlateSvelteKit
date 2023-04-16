@@ -37,3 +37,13 @@ cursorProps.update(props => ({
 }));
 }
 
+export const animateclick = (path) => {
+  cursorProps.animate = !cursorProps.animate;
+  if (cursorProps.setanimate) {
+    currentPathIndex = cursorProps.pathOptions.indexOf(path);
+    morph = interpolate(cursorProps.pathOptions.map(option => `#${option}`), { precision: 1 });
+    progress.set(1);
+  } else {
+    progress.set(0);
+  }
+}
