@@ -14,13 +14,19 @@
       const deltaY = e.deltaY;
       const wrapperHeight = wrapper.offsetHeight;
       const containerHeight = container.offsetHeight;
+      const maxScroll = wrapperHeight - containerHeight;
 
       if (wrapperHeight > containerHeight) {
         lastY += deltaY;
-        lastY = Math.min(Math.max(lastY, 0), wrapperHeight - containerHeight);
+        lastY = Math.min(Math.max(lastY, 0), maxScroll);
         translateY.set(lastY);
+        container.scrollTop = lastY;
       }
     });
+
+    // Ajustez la hauteur du wrapper pour éliminer l'espace vide en bas
+    wrapper.style.height = `calc(100% - ${wrapper.offsetHeight - container.offsetHeight}px)`;
+    console.log(`calc(100% - ${wrapper.offsetHeight - container.offsetHeight}px)`);
   });
 </script>
 

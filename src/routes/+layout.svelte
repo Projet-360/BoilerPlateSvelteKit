@@ -9,7 +9,6 @@
 
 <Cursor/>
 <SmoothScroller>
-  <Header />
   <main>
     <slot />
   </main>

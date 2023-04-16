@@ -27,6 +27,7 @@
   scale({$cursorProps.scale}); 
   clip-path: {$cursorProps.clipPath}; 
   background-color: {$cursorProps.color}; 
+  z-index: '1000';
   
   transition: 
   transform {$cursorProps.transitionDuration}s linear; 
