@@ -31,5 +31,17 @@
     background: green;
 }
 
+#Cursor {
+    svg {
+        @include ccc;
+        position: absolute;
+        transform-origin: center;
 
+        path {
+            max-width: 50px;
+            max-height: 50px;
+            transform: translate(25%, 25%);
+        }
+    }
+}
   

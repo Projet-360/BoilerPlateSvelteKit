@@ -5,7 +5,7 @@ export const cursorProps = writable({
   x: 0,
   y: 0,
   rotation: 0,
-  scale: 1,
+  scale: 3,
   color: 'red',
   transitionDuration: 0,
   iconScale: 0,

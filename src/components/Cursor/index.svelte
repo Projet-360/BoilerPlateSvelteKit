@@ -11,7 +11,7 @@
 	const shape = tweened(undefined, {
 		interpolate,
 		easing: eases.cubicInOut,
-		duration: 600
+		duration: 150
 	});
 	
 	let selected = "circle";
@@ -29,11 +29,11 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   #Cursor {
     z-index: 1000;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     position: fixed;
     pointer-events: none;
   }
