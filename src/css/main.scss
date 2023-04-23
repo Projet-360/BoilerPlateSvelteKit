@@ -18,15 +18,16 @@
 // @import './components/canvas';
 // @import './components/functionals';
 //@import './components/navigation';
-@import './components/preloader';
+//@import './components/preloader';
 
 // @import './pages/home';
 // @import './pages/about';
 
 .app {
-    min-width: 100%;
-    min-height: 100vh;
-    cursor: none;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    //cursor: none;
     background: green;
 }
 

@@ -1,5 +1,10 @@
-import { cursorProps } from '../../store/store';
+import { cursorProps } from '../../store/cursorProps';
 import animations from './animations.js'
+
+import { interpolate } from 'flubber';
+import { tweened } from 'svelte/motion';
+import * as eases from 'svelte/easing';
+
 
 export const animateCursor = ({ clientX, clientY }) => {
     if (!Cursor) return;
@@ -10,19 +15,29 @@ export const animateCursor = ({ clientX, clientY }) => {
     }));
 }
 
+export const shape = tweened(undefined, {
+  interpolate,
+  easing: eases.cubicInOut,
+  duration: 400
+});
+
+
 export const updateCursorByName = name => {
     const index = animations.findIndex(animation => animation.name === name);
     if (index !== -1) {
-      const { rotation, scale, animation, color, transitionDuration, iconInside, iconScale } = animations[index];
+      const {rotation, scale, color, transitionDuration, iconScale, pathOptions, currentPathIndex, animate, morph, pathCursor } = animations[index];
       cursorProps.update(props => ({
         ...props,
-        rotation,
-        scale,
-        clipPath: animation,
-        color,
-        transitionDuration,
-        iconInside,
-        iconScale,
+        rotation: 0,
+        scale: 1,
+        color: 'red',
+        transitionDuration: 0,
+        iconScale: 0,
+        pathOptions: ['circle', 'camera'],
+        currentPathIndex: 0,
+        animate: false,
+        morph: undefined,
+        pathCursor: 0,
       }));
     }
 }
@@ -32,11 +47,7 @@ cursorProps.update(props => ({
     ...props,
     rotation: 0,
     scale: 1,
-    clipPath: 'circle(50% at 50% 50%)',
-    color: 'red',
     transitionDuration: 0.07,
-    iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
     iconScale: 0
 }));
 }
-
