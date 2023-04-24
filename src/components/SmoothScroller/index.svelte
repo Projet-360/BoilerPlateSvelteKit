@@ -2,7 +2,7 @@
 	// Importer la bibliothèque GSAP
 	import gsap from 'gsap';
 	// Importer le plugin ScrollTrigger de GSAP
-	import ScrollTrigger from 'gsap/ScrollTrigger';
+	import ScrollTrigger from "gsap/dist/ScrollTrigger";
 	// Importer la bibliothèque Smooth-scrollbar
 	import Scrollbar from 'smooth-scrollbar';
 
