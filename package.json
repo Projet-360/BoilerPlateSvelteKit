@@ -12,17 +12,16 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "latest",
     "@sveltejs/adapter-node": "latest",
-    "@sveltejs/kit": "^1.15.5",
+    "@sveltejs/kit": "latest",
     "autoprefixer": "latest",
     "gsap": "latest",
     "sass": "latest",
     "smooth-scrollbar": "latest",
     "svelte": "latest",
     "svelte-preprocess": "latest",
-    "vite-plugin-sass": "latest"
+    "vite-plugin-sass": "latest",
+    "polymorph-js": "latest",
+    "@esbuild/darwin-arm64": "latest"
   },
-  "type": "module",
-  "dependencies": {
-    "polymorph-js": "^1.0.2"
-  }
+  "type": "module"
 }
