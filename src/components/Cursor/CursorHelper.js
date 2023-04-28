@@ -28,7 +28,6 @@ export const updateCursorByName = name => {
       const {rotation, scale, color, transitionDuration, iconScale, pathOptions, currentPathIndex, animate, morph, pathCursor } = animations[index];
       cursorProps.update(props => ({
         ...props,
-<<<<<<< HEAD
         rotation: 0,
         scale: 1,
         color: 'red',
@@ -39,14 +38,6 @@ export const updateCursorByName = name => {
         animate: false,
         morph: undefined,
         pathCursor: 0,
-=======
-        rotation,
-        scale,
-        color,
-        transitionDuration,
-        iconInside,
-        iconScale,
->>>>>>> b6864edd9362423a77a2491db5970e9c5d5d1d19
       }));
     }
 }
@@ -60,17 +51,3 @@ cursorProps.update(props => ({
     iconScale: 0
 }));
 }
-<<<<<<< HEAD
-=======
-
-export const animateclick = (path) => {
-  cursorProps.animate = !cursorProps.animate;
-  if (cursorProps.setanimate) {
-    currentPathIndex = cursorProps.pathOptions.indexOf(path);
-    morph = interpolate(cursorProps.pathOptions.map(option => `#${option}`), { precision: 1 });
-    progress.set(1);
-  } else {
-    progress.set(0);
-  }
-}
->>>>>>> b6864edd9362423a77a2491db5970e9c5d5d1d19
