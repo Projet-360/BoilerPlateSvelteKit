@@ -9,5 +9,4 @@ export const cursorProps = writable({
   color: 'red',
   transitionDuration: 0,
   iconScale: 0,
-  selected: undefined,
 });

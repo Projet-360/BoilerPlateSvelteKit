@@ -1,6 +1,5 @@
 <script>
-  import bankPath from '../components/Cursor/bankPath/index'
-  import { cursorProps } from '../store/cursorProps';
+  export let updateShaper;
 </script>
 <h1>
     home
@@ -28,8 +27,10 @@
 
 
 
-{#each Object.keys(bankPath) as key}
-	<button on:mouseover={() => cursorProps.selected = key}>
-		{key}
-	</button>
-{/each}
+<button on:mouseover={() => updateShaper('comment')} on:mouseout={() => updateShaper('circle')}>
+  comment
+</button>
+<button on:mouseover={() => updateShaper('camera')} on:mouseout={() => updateShaper('circle')}>
+  camera
+</button>
+

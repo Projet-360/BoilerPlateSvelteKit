@@ -1,21 +1,12 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
+  import { writable } from 'svelte/store';
   import { cursorProps } from '../../store/cursorProps';
-  import { animateCursor } from './CursorHelper';
+  import { animateCursor, shape } from './CursorHelper';
   import bankPath from './bankPath/index.js'
 
-  import { interpolate } from 'flubber';
-  import { tweened } from 'svelte/motion';
-	import * as eases from 'svelte/easing';
-
-	const shape = tweened(undefined, {
-		interpolate,
-		easing: eases.cubicInOut,
-		duration: 150
-	});
-	
-	let selected = "circle";
-	$: $shape = bankPath[selected];
+  const shaper = writable("circle");
+  $: $shape = bankPath[$shaper];
 
   if (typeof window !== 'undefined') {
     onMount(() => {
@@ -47,15 +38,14 @@
   transition: transform {$cursorProps.transitionDuration}s linear;
   --icon-scale: {$cursorProps.iconScale};
 ">
-<svg viewBox="0 0 100 100">
-	<path d={$shape}/>
-</svg>
-
+  <svg viewBox="0 0 100 100">
+    <path d={$shape}/>
+  </svg>
 </div>
 
-{#each Object.keys(bankPath) as key}
-	<button on:mouseover={() => selected = key} on:mouseout={() => selected = 'circle'}>
-		{key}
-	</button>
-{/each}
-
+<button on:mouseover={() => $shaper = 'comment'} on:mouseout={() => $shaper = 'circle'}>
+  comment
+</button>
+<button on:mouseover={() => $shaper = 'camera'} on:mouseout={() => $shaper = 'circle'}>
+  camera
+</button>
