@@ -1,12 +1,10 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import { writable } from 'svelte/store';
-  import { cursorProps } from '../../store/cursorProps';
+  import { cursorProps, shaperSVG } from '../../store/cursorStore';
   import { animateCursor, shape } from './CursorHelper';
   import bankPath from './bankPath/index.js'
 
-  const shaper = writable("circle");
-  $: $shape = bankPath[$shaper];
+  $: $shape = bankPath[$shaperSVG];
 
   if (typeof window !== 'undefined') {
     onMount(() => {
@@ -34,18 +32,17 @@
 </style>
 
 <div bind:this={cursorProps.Cursor} id="Cursor" style="
-  transform: translate({$cursorProps.x}px, {$cursorProps.y}px) rotate({$cursorProps.rotation}deg) scale({$cursorProps.scale});
+  transform: translate({$cursorProps.x}px, {$cursorProps.y}px);
   transition: transform {$cursorProps.transitionDuration}s linear;
-  --icon-scale: {$cursorProps.iconScale};
 ">
   <svg viewBox="0 0 100 100">
     <path d={$shape}/>
   </svg>
 </div>
 
-<button on:mouseover={() => $shaper = 'comment'} on:mouseout={() => $shaper = 'circle'}>
+<button on:mouseover={() => $shaperSVG = 'comment'} on:mouseout={() => $shaperSVG = 'circle'}>
   comment
 </button>
-<button on:mouseover={() => $shaper = 'camera'} on:mouseout={() => $shaper = 'circle'}>
+<button on:mouseover={() => $shaperSVG = 'camera'} on:mouseout={() => $shaperSVG = 'circle'}>
   camera
 </button>

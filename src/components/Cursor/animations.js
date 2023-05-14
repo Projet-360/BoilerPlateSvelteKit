@@ -1,23 +1,15 @@
 const animations = [
   {
     name: 'first',
-    rotation: 0,
-    scale: 1,
-    color: 'red',
     transitionDuration: 0,
-    iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
-    iconScale: 0,
-    pathOptions: ['circle', 'camera']
+    shape:'camera',
+    color: 'blue'
   },
   {
     name: 'second',
-    rotation: 0,
-    scale: 1,
-    color: 'red',
     transitionDuration: 0,
-    iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
-    iconScale: 0,
-    pathOptions: ['circle', 'comment']
+    shape:'comment',
+    color: 'blue'
   },
 ];
 
