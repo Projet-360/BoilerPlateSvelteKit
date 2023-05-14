@@ -7,35 +7,22 @@ import * as eases from 'svelte/easing';
 
 export const shape = tweened(undefined, {
   interpolate,
-  easing: eases.cubicInOut,
-  duration: 150
+  easing: eases.linear,
+  duration: 100
 });
 
-export const updateCursorByName = name => {
-  const index = animations.findIndex(animation => animation.name === name);
+export const changeCursorShape = (newShape) => {
+  const index = animations.findIndex(animation => animation.name === newShape);
   if (index !== -1) {
-    const { shape } = animations[index];
-    shaperSVG.update(props => ({
-        ...props,
-        shape,
-    })); 
+    const { shapeData } = animations[index];
+    shaperSVG.set(shapeData);
   }
 }
 
-export const resetCursor = () => {
-  $shaperSVG 
-}
-
-
-export const changeCursorShape = (newShape) => {
-  shaperSVG.set(newShape);
-}
-
 export const resetCursorShape = () => {
-  shaperSVG.set('circle'); // Ou toute autre forme par défaut
+  shaperSVG.set('circle');
 }
   
-
 export const animateCursor = ({ clientX, clientY }) => {
     if (!Cursor) return;
     cursorProps.update(props => ({

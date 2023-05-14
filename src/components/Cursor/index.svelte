@@ -41,7 +41,3 @@
     <path d={$shape}/>
   </svg>
 </div>
-
-<button on:mouseover={() => changeCursorShape('comment')} on:mouseout={resetCursorShape}>
-  comment
-</button>
