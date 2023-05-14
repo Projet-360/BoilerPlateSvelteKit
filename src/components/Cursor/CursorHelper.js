@@ -11,7 +11,30 @@ export const shape = tweened(undefined, {
   duration: 150
 });
 
+export const updateCursorByName = name => {
+  const index = animations.findIndex(animation => animation.name === name);
+  if (index !== -1) {
+    const { shape } = animations[index];
+    shaperSVG.update(props => ({
+        ...props,
+        shape,
+    })); 
+  }
+}
 
+export const resetCursor = () => {
+  $shaperSVG 
+}
+
+
+export const changeCursorShape = (newShape) => {
+  shaperSVG.set(newShape);
+}
+
+export const resetCursorShape = () => {
+  shaperSVG.set('circle'); // Ou toute autre forme par défaut
+}
+  
 
 export const animateCursor = ({ clientX, clientY }) => {
     if (!Cursor) return;

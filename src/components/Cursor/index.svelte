@@ -1,21 +1,23 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { cursorProps, shaperSVG } from '../../store/cursorStore';
-  import { animateCursor, shape } from './CursorHelper';
+  import { animateCursor, shape, changeCursorShape, resetCursorShape } from './CursorHelper';
   import bankPath from './bankPath/index.js'
    
   $: $shape = bankPath[$shaperSVG];
 
-  if (typeof window !== 'undefined') {
-    onMount(() => {
+  onMount(() => {
+    if (typeof window !== 'undefined') {
       cursorProps.Cursor = document.getElementById('Cursor');
       window.addEventListener('mousemove', animateCursor);
-    });
+    }
+  });
 
-    onDestroy(() => {
+  onDestroy(() => {
+    if (typeof window !== 'undefined') {
       window.removeEventListener('mousemove', animateCursor);
-    });
-  }
+    }
+  });
 </script>
 
 <style lang="scss">
@@ -40,6 +42,6 @@
   </svg>
 </div>
 
-<button on:mouseover={() => $shaperSVG = 'comment'} on:mouseout={() => $shaperSVG = 'circle'}>
+<button on:mouseover={() => changeCursorShape('comment')} on:mouseout={resetCursorShape}>
   comment
 </button>
