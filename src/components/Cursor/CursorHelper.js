@@ -11,32 +11,7 @@ export const shape = tweened(undefined, {
   duration: 150
 });
 
-export const updateCursorByName = name => {
-  const index = animations.findIndex(animation => animation.name === name);
-  if (index !== -1) {
-    const { pathOptions, transitionDuration, shaperSVG } = animations[index];
-    cursorProps.update(props => ({
-      ...props,
-      transitionDuration,
-      pathOptions,
-    }));
-    shaperSVG.update(props => ({
-      ...props,
-      shape,
-      color
-    }));
-  }
-}
 
-export const resetCursor = () => {
-  cursorProps.update(props => ({
-      ...props,
-      transitionDuration: 0,
-      pathOptions:'circle',
-      color: 'red'
-  }));
-  }
-  
 
 export const animateCursor = ({ clientX, clientY }) => {
     if (!Cursor) return;

@@ -3,7 +3,7 @@
   import { cursorProps, shaperSVG } from '../../store/cursorStore';
   import { animateCursor, shape } from './CursorHelper';
   import bankPath from './bankPath/index.js'
-
+   
   $: $shape = bankPath[$shaperSVG];
 
   if (typeof window !== 'undefined') {
@@ -21,8 +21,8 @@
 <style lang="scss">
   #Cursor {
     z-index: 1000;
-    width: 50px;
-    height: 50px;
+    width: 150px;
+    height: 150px;
     position: fixed;
     pointer-events: none;
   }
@@ -42,7 +42,4 @@
 
 <button on:mouseover={() => $shaperSVG = 'comment'} on:mouseout={() => $shaperSVG = 'circle'}>
   comment
-</button>
-<button on:mouseover={() => $shaperSVG = 'camera'} on:mouseout={() => $shaperSVG = 'circle'}>
-  camera
 </button>

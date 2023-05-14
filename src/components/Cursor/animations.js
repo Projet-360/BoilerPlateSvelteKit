@@ -2,13 +2,13 @@ const animations = [
   {
     name: 'first',
     transitionDuration: 0,
-    shape:'camera',
+    shapeData:'camera',
     color: 'blue'
   },
   {
     name: 'second',
     transitionDuration: 0,
-    shape:'comment',
+    shapeData:'comment',
     color: 'blue'
   },
 ];
