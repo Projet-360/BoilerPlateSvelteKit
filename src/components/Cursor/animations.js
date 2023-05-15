@@ -1,15 +1,17 @@
 const animations = [
   {
     name: 'first',
-    transitionDuration: 0,
+    scale: 2,
     shapeData:'camera',
-    color: 'blue'
+    color: 'blue',
+    durationTransitionCursorSvg: .2,
   },
   {
     name: 'second',
-    transitionDuration: 0,
+    scale: 2,
     shapeData:'comment',
-    color: 'blue'
+    color: 'blue',
+    durationTransitionCursorSvg: .2,
   },
 ];
 
