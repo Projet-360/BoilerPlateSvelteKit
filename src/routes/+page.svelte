@@ -1,5 +1,5 @@
 <script>
-  export let updateShaper;
+  import { animCursor } from "../components/Cursor/helperCursor";
 </script>
 <h1>
     home
@@ -24,10 +24,7 @@
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis harum necessitatibus eius iste tempore adipisci dignissimos rem quasi ad, architecto, asperiores maxime vel consequuntur. Quo laborum excepturi libero incidunt dignissimos.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis harum necessitatibus eius iste tempore adipisci dignissimos rem quasi ad, architecto, asperiores maxime vel consequuntur. Quo laborum excepturi libero incidunt dignissimos.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis harum necessitatibus eius iste tempore adipisci dignissimos rem quasi ad, architecto, asperiores maxime vel consequuntur. Quo laborum excepturi libero incidunt dignissimos.</p>
-
-
-
-<button on:mouseover={() => updateShaper('comment')} on:mouseout={() => updateShaper('circle')}>
+<button {...animCursor('second')} >
   comment
 </button>
 <button on:mouseover={() => updateShaper('camera')} on:mouseout={() => updateShaper('circle')}>
