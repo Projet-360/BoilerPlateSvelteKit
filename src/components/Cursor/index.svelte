@@ -1,57 +1,51 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import { cursorProps, shaperSVG } from '../../store/cursorStore';
+  import { writable } from 'svelte/store';
+  import { cursorProps } from '../../store/cursorProps';
   import { animateCursor, shape } from './CursorHelper';
   import bankPath from './bankPath/index.js'
-   
-  $: $shape = bankPath[$shaperSVG];
 
- 
-  onMount(() => {
-    if (typeof window !== 'undefined') {
+  const shaper = writable("circle");
+  $: $shape = bankPath[$shaper];
+
+  if (typeof window !== 'undefined') {
+    onMount(() => {
       cursorProps.Cursor = document.getElementById('Cursor');
       window.addEventListener('mousemove', animateCursor);
-    }
-  });
+    });
 
-  onDestroy(() => {
-    if (typeof window !== 'undefined') {
+    onDestroy(() => {
       window.removeEventListener('mousemove', animateCursor);
-    }
-  });
+    });
+  }
 </script>
 
 <style lang="scss">
-  * {
-    cursor: none;
-  }
-
   #Cursor {
     z-index: 1000;
-    width: 40px;
+    width: 50px;
+    height: 50px;
     position: fixed;
     pointer-events: none;
   }
-
-  .cursorSvg {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+  button {
+    margin-top: 50px;
   }
 </style>
 
 <div bind:this={cursorProps.Cursor} id="Cursor" style="
-  transform: translate({$cursorProps.x}px, {$cursorProps.y}px)
+  transform: translate({$cursorProps.x}px, {$cursorProps.y}px) rotate({$cursorProps.rotation}deg) scale({$cursorProps.scale});
+  transition: transform {$cursorProps.transitionDuration}s linear;
+  --icon-scale: {$cursorProps.iconScale};
 ">
-  <div class="cursorSvg" style="
-  transition: all {$cursorProps.durationTransitionCursorSvg}s ease;
-  transform: scale({$cursorProps.scale});
-  ">
-    <svg viewBox="0 0 100 100">
-      <path d={$shape}/>
-    </svg>
-  </div>
+  <svg viewBox="0 0 100 100">
+    <path d={$shape}/>
+  </svg>
 </div>
+
+<button on:mouseover={() => $shaper = 'comment'} on:mouseout={() => $shaper = 'circle'}>
+  comment
+</button>
+<button on:mouseover={() => $shaper = 'camera'} on:mouseout={() => $shaper = 'circle'}>
+  camera
+</button>

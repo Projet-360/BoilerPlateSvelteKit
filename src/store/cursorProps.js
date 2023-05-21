@@ -4,8 +4,9 @@ export const cursorProps = writable({
   Cursor: undefined,
   x: 0,
   y: 0,
-  scale: 1,
-  durationTransitionCursorSvg: .2
+  rotation: 0,
+  scale: 3,
+  color: 'red',
+  transitionDuration: 0,
+  iconScale: 0,
 });
-
-export const shaperSVG = writable('circle');

@@ -1,5 +1,5 @@
 <script>
-    import { animCursor, resetCursor } from "../components/Cursor/CursorHelper";
+  export let updateShaper;
 </script>
 <h1>
     home
@@ -25,10 +25,12 @@
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis harum necessitatibus eius iste tempore adipisci dignissimos rem quasi ad, architecto, asperiores maxime vel consequuntur. Quo laborum excepturi libero incidunt dignissimos.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis harum necessitatibus eius iste tempore adipisci dignissimos rem quasi ad, architecto, asperiores maxime vel consequuntur. Quo laborum excepturi libero incidunt dignissimos.</p>
 
-<button on:mouseover={() => animCursor('first')} on:mouseout={resetCursor}>
-    comment
-  </button>
 
-  <button on:mouseover={() => animCursor('second')} on:mouseout={resetCursor}>
-    sdd
-  </button>
+
+<button on:mouseover={() => updateShaper('comment')} on:mouseout={() => updateShaper('circle')}>
+  comment
+</button>
+<button on:mouseover={() => updateShaper('camera')} on:mouseout={() => updateShaper('circle')}>
+  camera
+</button>
+
