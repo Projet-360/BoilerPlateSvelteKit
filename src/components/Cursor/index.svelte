@@ -1,14 +1,14 @@
 <script>
-  import onMount from 'svelte/onMount';
-  import onDestroy from 'svelte/onDestroy';
+  import { onMount, onDestroy } from 'svelte';
   import { tweened } from 'svelte/motion';
   import { cubicInOut } from 'svelte/easing';
   import { writable } from 'svelte/store';
 
   import animations from './animations.js';
   import bankPath from './bankPath/index.js';
+  import { interpolate } from 'flubber';
 
-  export const cursorProps = writable({
+  export let cursorProps = writable({
     Cursor: undefined,
     x: 0,
     y: 0,
@@ -16,12 +16,13 @@
     shaper: 'circle',
   });
 
-  export const shaper = writable('circle');
+  export let shaper = writable('circle');
+  
   export const shape = tweened(undefined, {
-    interpolate,
-    easing: cubicInOut,
-    duration: 150,
-  });
+  interpolate,
+  easing: cubicInOut,
+  duration: 150,
+});
 
   export const changeShaper = shaper.set;
 
@@ -37,7 +38,7 @@
   };
 
   export const animateCursor = ({ clientX, clientY }) => {
-    const { Cursor } = cursorProps;
+    const { Cursor } = $cursorProps;
     if (!Cursor) return;
     cancelAnimationFrame(animationFrameId);
     animationFrameId = requestAnimationFrame(() => {
@@ -106,8 +107,6 @@
     height: 50px;
     position: fixed;
     pointer-events: none;
-    transform: translate({$cursorProps.x}px, {$cursorProps.y}px);
-    transition: transform {$cursorProps.transitionDuration}s linear;
   }
 
   button {
@@ -115,16 +114,16 @@
   }
 </style>
 
+
 <div
-  bind:this={cursorProps.Cursor}
+  bind:this={$cursorProps.Cursor}
   id="Cursor"
   class="cursor"
+  style="transform: translate({$cursorProps.x}px, {$cursorProps.y}px); transition: transform {$cursorProps.transitionDuration}s linear;"
 >
   <svg viewBox="0 0 100 100">
     <path d={bankPathShape} />
   </svg>
 </div>
 
-<button {...animCursor('second')} >
-  comment
-</button>
+
