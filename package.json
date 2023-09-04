@@ -19,13 +19,11 @@
     "smooth-scrollbar": "latest",
     "svelte": "latest",
     "svelte-preprocess": "latest",
-    "vite-plugin-pwa": "^0.16.4",
-    "vite-plugin-sass": "latest",
-    "workbox-build": "^7.0.0"
+    "vite-plugin-sass": "latest"
   },
   "type": "module",
   "dependencies": {
     "flubber": "^0.4.2",
-    "scrolltrigger": "^1.0.1"
+    "vite-plugin-pwa": "^0.16.4"
   }
 }

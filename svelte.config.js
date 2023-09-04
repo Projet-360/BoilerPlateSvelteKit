@@ -8,7 +8,6 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   plugins: [
     sass({ outputStyle: "compressed" }),
-    svelte(),
     VitePWA({
       manifest: {
         // les options pour votre manifeste
