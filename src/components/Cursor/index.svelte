@@ -67,7 +67,8 @@ const animations = [
     if (animation) {
       const { transitionDuration, shaperForm } = animation;
       cursorProps.update(props => ({
-        ...props,
+        transitionDuration: 0,
+        shaper: 'circle',
         transitionDuration,
       }));
       changeShaper(shaperForm);
@@ -127,7 +128,7 @@ const animations = [
 </style>
 
 <div bind:this={cursorProps.Cursor} id="Cursor" style="
-  transform: translate({$cursorProps.x}px, {$cursorProps.y}px) rotate({$cursorProps.rotation}deg) scale({$cursorProps.scale});
+  transform: translate({$cursorProps.x}px, {$cursorProps.y}px);
   transition: transform {$cursorProps.transitionDuration}s linear;
   --icon-scale: {$cursorProps.iconScale};
 ">
