@@ -12,7 +12,7 @@ const animations = [
   {
     name: 'second',
     rotation: 0,
-    scale: 1,
+    scale: 2,
     color: 'red',
     transitionDuration: 0,
     iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',

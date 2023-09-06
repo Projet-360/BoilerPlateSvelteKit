@@ -1,4 +1,3 @@
-
 <svelte:head>
  <title>Page d'exemple</title>
   <meta name="description" content="Ceci est une description de la page d'exemple.">

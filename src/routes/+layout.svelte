@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
   import Header from "./Header.svelte";
-  //import Cursor from "../components/Cursor/index.svelte";
+  import Cursor from "../components/Cursor/index.svelte";
   import Preloader from "../components/Preloader/index.svelte";
   import SmoothScroller from "../components/SmoothScroller/index.svelte";
   import App from '$lib/js/index.js'
@@ -34,7 +34,7 @@
 </style>
 
 <Preloader/>
-<!-- <Cursor/> -->
+<Cursor/>
 <SmoothScroller>
   <main>
     <slot />

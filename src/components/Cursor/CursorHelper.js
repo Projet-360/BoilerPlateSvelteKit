@@ -1,4 +1,4 @@
-import { cursorProps } from '../../store/cursorProps';
+import { cursorProps } from './index.svelte';
 import animations from './animations.js'
 
 import { interpolate } from 'flubber';
