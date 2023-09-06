@@ -1,63 +1,115 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import { writable } from 'svelte/store';
-  import bankPath from './bankPath/index.js'
-  import { interpolate } from 'flubber';
   import { tweened } from 'svelte/motion';
-  import * as eases from 'svelte/easing';
-  import animations from './animations.js';
+  import { cubicInOut } from 'svelte/easing';
+  import { writable } from 'svelte/store';
+  import { interpolate } from 'flubber';
   
-  const defaultCursorProps = {
+  import bankPath from './bankPath/index.js';
+
+const animations = [
+  {
+    name: 'first',
+    rotation: 0,
+    scale: 1,
+    color: 'red',
+    transitionDuration: 2,
+    iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
+    iconScale: 0,
+    pathOptions: ['circle', 'camera']
+  },
+  {
+    name: 'second',
+    rotation: 0,
+    scale: 1,
+    color: 'red',
+    transitionDuration: 3,
+    iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
+    iconScale: 0,
+    pathOptions: ['circle', 'comment']
+  },
+];
+
+  export const cursorProps = writable({
+    Cursor: undefined,
     x: 0,
     y: 0,
-    rotation: 0,
-    scale: 3,
-    color: 'red',
     transitionDuration: 0,
-    iconScale: 0,
-  };
-  
-  const shaper = writable("circle");
-  $: $shape = bankPath[$shaper];
-  
+    shaper: 'circle',
+  });
+
+  export const shaper = writable('circle');
   export const shape = tweened(undefined, {
     interpolate,
-    easing: eases.cubicInOut,
-    duration: 150
+    easing: cubicInOut,
+    duration: 150,
   });
-  
-  let Cursor;
-  export const cursorProps = writable(defaultCursorProps);
-  
+
+  export const changeShaper = shaper.set;
+
+  let animationFrameId;
+
+
   export const animateCursor = ({ clientX, clientY }) => {
+    const { Cursor } = cursorProps;
     if (!Cursor) return;
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = requestAnimationFrame(() => {
+      cursorProps.update(({ x, y }) => ({
+        x: clientX - Cursor.offsetWidth / 2,
+        y: clientY - Cursor.offsetHeight / 2,
+      }));
+    });
+  };
+
+  export const updateCursorByName = name => {
+    const animation = animations.find(animation => animation.name === name);
+    if (animation) {
+      const { transitionDuration, shaperForm } = animation;
+      cursorProps.update(props => ({
+        ...props,
+        transitionDuration,
+      }));
+      changeShaper(shaperForm);
+    }
+  };
+
+  export const resetCursor = () => {
     cursorProps.update(props => ({
       ...props,
-      x: clientX - Cursor.offsetWidth / 2,
-      y: clientY - Cursor.offsetHeight / 2
+      transitionDuration: 0.07,
     }));
-  }
+    changeShaper('circle');
+  };
 
-export const setAnimationByName = (name) => {
-  console.log(animations);
-  animations.find(a => a.name === name);
-  console.log(a);
-  cursorProps.set({
-    ...defaultCursorProps,
-    ...animation
-  });
-  shaper.set(animation.pathOptions[0]);  // Met à jour la première forme dans pathOptions
-};
-
-  
+  // Initialise and clean up event listeners
   if (typeof window !== 'undefined') {
     onMount(() => {
-      window.addEventListener('mousemove', animateCursor);
+      initEventListeners();
     });
-  
+
     onDestroy(() => {
-      window.removeEventListener('mousemove', animateCursor);
+      removeEventListeners();
     });
+  }
+
+  // Add event listeners
+  function initEventListeners() {
+    cursorProps.update(props => ({
+      ...props,
+      Cursor: document.getElementById('Cursor'),
+    }));
+    window.addEventListener('mousemove', animateCursor);
+  }
+
+  // Remove event listeners
+  function removeEventListeners() {
+    window.removeEventListener('mousemove', animateCursor);
+  }
+
+  let bankPathShape;
+  $: {
+    bankPathShape = bankPath[$shaper];
   }
 </script>
 
@@ -74,19 +126,30 @@ export const setAnimationByName = (name) => {
   }
 </style>
 
-<div bind:this={Cursor} id="Cursor" style="
+<div bind:this={cursorProps.Cursor} id="Cursor" style="
   transform: translate({$cursorProps.x}px, {$cursorProps.y}px) rotate({$cursorProps.rotation}deg) scale({$cursorProps.scale});
   transition: transform {$cursorProps.transitionDuration}s linear;
   --icon-scale: {$cursorProps.iconScale};
-  ">
+">
   <svg viewBox="0 0 100 100">
-    <path d={$shape}/>
+  <path d={bankPathShape} />
   </svg>
 </div>
 
-<button on:mouseover={() => setAnimationByName('first')} on:mouseout={() => setAnimationByName('second')}>
-  First Animation
+<button 
+      on:mouseover={() => updateCursorByName('first')}
+      on:focus={() => updateCursorByName('first')}
+      on:blur={() => updateCursorByName('first')}
+      on:mouseout={resetCursor}
+ >
+  comment
 </button>
-<button on:mouseover={() => setAnimationByName('second')} on:mouseout={() => setAnimationByName('first')}>
-  Second Animation
+
+<button 
+      on:mouseover={() => updateCursorByName('second')}
+      on:focus={() => updateCursorByName('second')}
+      on:blur={() => updateCursorByName('second')}
+      on:mouseout={resetCursor}
+ >
+  comment
 </button>
