@@ -13,39 +13,33 @@ const animations = [
     rotation: 0,
     scale: 1,
     color: 'red',
-    transitionDuration: 2,
+    transitionDuration: 0,
     iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
     iconScale: 0,
-    pathOptions: ['circle', 'camera']
+    shaperForm :  'camera'
   },
   {
     name: 'second',
     rotation: 0,
     scale: 1,
     color: 'red',
-    transitionDuration: 3,
+    transitionDuration: 0,
     iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
     iconScale: 0,
-    pathOptions: ['circle', 'comment']
+    shaperForm : 'comment'
   },
 ];
 
+  export const shaper = writable('circle');
   export const cursorProps = writable({
     Cursor: undefined,
     x: 0,
     y: 0,
     transitionDuration: 0,
-    shaper: 'circle',
+    shaperForm: 'circle',
   });
 
-  export const shaper = writable('circle');
-  export const shape = tweened(undefined, {
-    interpolate,
-    easing: cubicInOut,
-    duration: 150,
-  });
-
-  export const changeShaper = shaper.set;
+   export const changeShaper = shaper.set;
 
   let animationFrameId;
 
@@ -108,9 +102,14 @@ const animations = [
     window.removeEventListener('mousemove', animateCursor);
   }
 
-  let bankPathShape;
+  const shape = tweened(bankPath['circle'], {
+    duration: 150,
+    easing: cubicInOut,
+    interpolate: interpolate,
+  });
+
   $: {
-    bankPathShape = bankPath[$shaper];
+    shape.set(bankPath[$shaper]);
   }
 </script>
 
@@ -133,7 +132,9 @@ const animations = [
   --icon-scale: {$cursorProps.iconScale};
 ">
   <svg viewBox="0 0 100 100">
-  <path d={bankPathShape} />
+    {#if $shape}
+      <path d={$shape} />
+    {/if}
   </svg>
 </div>
 
