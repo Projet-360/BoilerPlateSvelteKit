@@ -38,17 +38,22 @@ export function resetCursor(changeShaper) {
 };
 
 export function hoverable(node, animationName) {
-  node.addEventListener('mouseover', () => updateCursorByName(animationName, shapeStore.set));
-  node.addEventListener('focus', () => updateCursorByName(animationName, shapeStore.set));
-  node.addEventListener('blur', () => updateCursorByName(animationName, shapeStore.set));
-  node.addEventListener('mouseout', () => resetCursor(shapeStore.set));
+  const handleMouseOver = () => updateCursorByName(animationName, shapeStore.set);
+  const handleFocus = () => updateCursorByName(animationName, shapeStore.set);
+  const handleBlur = () => updateCursorByName(animationName, shapeStore.set);
+  const handleMouseOut = () => resetCursor(shapeStore.set);
+
+  node.addEventListener('mouseover', handleMouseOver);
+  node.addEventListener('focus', handleFocus);
+  node.addEventListener('blur', handleBlur);
+  node.addEventListener('mouseout', handleMouseOut);
 
   return {
       destroy() {
-          node.removeEventListener('mouseover', () => updateCursorByName(animationName, shapeStore.set));
-          node.removeEventListener('focus', () => updateCursorByName(animationName, shapeStore.set));
-          node.removeEventListener('blur', () => updateCursorByName(animationName, shapeStore.set));
-          node.removeEventListener('mouseout', () => resetCursor(shapeStore.set));
+          node.removeEventListener('mouseover', handleMouseOver);
+          node.removeEventListener('focus', handleFocus);
+          node.removeEventListener('blur', handleBlur);
+          node.removeEventListener('mouseout', handleMouseOut);
       }
   };
 }

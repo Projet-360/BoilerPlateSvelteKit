@@ -6,7 +6,6 @@
   import { interpolate } from 'flubber';
   
   import bankPath from './bankPath/index.js';
-  import animations from './animations.js';
   import { shapeStore } from './../../stores/shapeStore.js';
   import { cursorStore } from './../../stores/cursorStore.js';
   import { animateCursor, updateCursorByName, resetCursor, hoverable } from './cursorHelpers.js';
@@ -15,6 +14,17 @@
 
   let animationFrameId;
 
+  function throttle(func, delay) {
+    let lastCall = 0;
+    return function(...args) {
+      const now = new Date().getTime();
+      if (now - lastCall < delay) {
+        return;
+      }
+      lastCall = now;
+      return func(...args);
+    };
+  }
   // Initialise and clean up event listeners
   if (typeof window !== 'undefined') {
     onMount(() => {
@@ -28,7 +38,7 @@
   
   export function initEventListeners(Cursor) {
       cursorStore.update(props => ({ ...props, Cursor }));
-      window.addEventListener('mousemove', (e) => animateCursor(Cursor, e));
+      window.addEventListener('mousemove', throttle((e) => animateCursor(Cursor, e), 16));
   }
 
   export function removeEventListeners(Cursor) {
@@ -42,12 +52,7 @@
     interpolate: interpolate,
   });
 
-  $: {
-    shape.set(bankPath[$shapeStore]);
-  }
-
-
-
+  $: shape.set(bankPath[$shapeStore]);
 </script>
 
 <style lang="scss">
