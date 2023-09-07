@@ -7,47 +7,13 @@
   
   import bankPath from './bankPath/index.js';
   import animations from './animations.js';
-  import {shapeStore} from './../../stores/shapeStore.js';
-  import {cursorStore} from './../../stores/cursorStore.js';
-
+  import { shapeStore } from './../../stores/shapeStore.js';
+  import { cursorStore } from './../../stores/cursorStore.js';
+  import { animateCursor, updateCursorByName, resetCursor } from './cursorHelpers.js';
 
   const changeShaper = shapeStore.set;
+
   let animationFrameId;
-  
-  const animateCursor = ({ clientX, clientY }) => {
-    const { Cursor } = cursorStore;
-    if (!Cursor) return;
-    cancelAnimationFrame(animationFrameId);
-    animationFrameId = requestAnimationFrame(() => {
-      cursorStore.update(({ x, y }) => ({
-        x: clientX - Cursor.offsetWidth / 2,
-        y: clientY - Cursor.offsetHeight / 2,
-      }));
-    });
-  };
-
-  export const updateCursorByName = name => {
-    const animation = animations.find(animation => animation.name === name);
-    if (animation) {
-      const { transitionDuration, shaperForm, scaleSvg, transitionDurationSvg } = animation;
-      cursorStore.update(props => ({
-        transitionDuration,
-        transitionDurationSvg,
-        scaleSvg,
-      }));
-      changeShaper(shaperForm);
-    }
-  };
-
-  export const resetCursor = () => {
-    cursorStore.update(props => ({
-      ...props,
-      transitionDuration: 0.07,
-      transitionDurationSvg: 0.07,
-      scaleSvg: 1,
-    }));
-    changeShaper('circle');
-  };
 
   // Initialise and clean up event listeners
   if (typeof window !== 'undefined') {
@@ -61,18 +27,26 @@
   }
 
   // Add event listeners
-  function initEventListeners() {
-    cursorStore.update(props => ({
-      ...props,
-      Cursor: document.getElementById('Cursor'),
-    }));
-    window.addEventListener('mousemove', animateCursor);
+
+  if (typeof window !== 'undefined') {
+    onMount(() => {
+        initEventListeners(document.getElementById('Cursor'));
+    });
+
+    onDestroy(() => {
+        removeEventListeners(document.getElementById('Cursor'));
+    });
+}
+  
+  export function initEventListeners(Cursor) {
+      cursorStore.update(props => ({ ...props, Cursor }));
+      window.addEventListener('mousemove', (e) => animateCursor(Cursor, e));
   }
 
-  // Remove event listeners
-  function removeEventListeners() {
-    window.removeEventListener('mousemove', animateCursor);
+  export function removeEventListeners(Cursor) {
+      window.removeEventListener('mousemove', (e) => animateCursor(Cursor, e));
   }
+
 
   const shape = tweened(bankPath['circle'], {
     duration: 150,
@@ -86,20 +60,22 @@
 
 
   export function hoverable(node, animationName) {
-    node.addEventListener('mouseover', () => updateCursorByName(animationName));
-    node.addEventListener('focus', () => updateCursorByName(animationName));
-    node.addEventListener('blur', () => updateCursorByName(animationName));
-    node.addEventListener('mouseout', resetCursor);
+      node.addEventListener('mouseover', () => updateCursorByName(animationName, shapeStore.set));
+      node.addEventListener('focus', () => updateCursorByName(animationName, shapeStore.set));
+      node.addEventListener('blur', () => updateCursorByName(animationName, shapeStore.set));
+      node.addEventListener('mouseout', () => resetCursor(shapeStore.set));
 
-    return {
-        destroy() {
-            node.removeEventListener('mouseover', () => updateCursorByName(animationName));
-            node.removeEventListener('focus', () => updateCursorByName(animationName));
-            node.removeEventListener('blur', () => updateCursorByName(animationName));
-            node.removeEventListener('mouseout', resetCursor);
-        }
-    };
-}
+      return {
+          destroy() {
+              node.removeEventListener('mouseover', () => updateCursorByName(animationName, shapeStore.set));
+              node.removeEventListener('focus', () => updateCursorByName(animationName, shapeStore.set));
+              node.removeEventListener('blur', () => updateCursorByName(animationName, shapeStore.set));
+              node.removeEventListener('mouseout', () => resetCursor(shapeStore.set));
+          }
+      };
+  }
+
+
 </script>
 
 <style lang="scss">
