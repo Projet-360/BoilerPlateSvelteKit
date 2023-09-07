@@ -87,5 +87,3 @@ export function removeEventListeners() {
     {/if}
   </svg>
 </div>
-
-<div use:hoverable={"first"}>Mon div avec hover</div>

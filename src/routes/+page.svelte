@@ -1,3 +1,6 @@
+<script>
+  import { hoverable } from './../components/Cursor/cursorHelpers.js'
+</script>
 
 <svelte:head>
  <title>Page d'exemple</title>
@@ -16,3 +19,5 @@
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis harum necessitatibus eius iste tempore adipisci dignissimos rem quasi ad, architecto, asperiores maxime vel consequuntur. Quo laborum excepturi libero incidunt dignissimos.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis harum necessitatibus eius iste tempore adipisci dignissimos rem quasi ad, architecto, asperiores maxime vel consequuntur. Quo laborum excepturi libero incidunt dignissimos.</p>
 
+
+<div use:hoverable={"first"}>Mon div avec hover</div>
