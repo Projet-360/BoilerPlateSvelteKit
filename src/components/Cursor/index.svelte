@@ -6,35 +6,10 @@
   import { interpolate } from 'flubber';
   
   import bankPath from './bankPath/index.js';
-
-  const animations = [
-    {
-      name: 'first',
-      rotation: 0,
-      scaleSvg: 2,
-      color: 'red',
-      transitionDuration: 0.07,
-      transitionDurationSvg: 0.07,
-      iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
-      iconScale: 0,
-      shaperForm :  'camera'
-    },
-    {
-      name: 'second',
-      rotation: 0,
-      scaleSvg: 3,
-      color: 'red',
-      transitionDuration: 0.07,
-      transitionDurationSvg: 0.07,
-      iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
-      iconScale: 0,
-      shaperForm : 'comment'
-    },
-  ];
-
-
-  export const shaper = writable('circle');
-  export const cursorProps = writable({
+  import animations from './animations.js';
+  
+  const shaper = writable('circle');
+  const cursorProps = writable({
     Cursor: undefined,
     x: 0,
     y: 0,
@@ -44,10 +19,10 @@
     scaleSvg: 1,
   });
 
-  export const changeShaper = shaper.set;
+  const changeShaper = shaper.set;
   let animationFrameId;
   
-  export const animateCursor = ({ clientX, clientY }) => {
+  const animateCursor = ({ clientX, clientY }) => {
     const { Cursor } = cursorProps;
     if (!Cursor) return;
     cancelAnimationFrame(animationFrameId);
@@ -116,6 +91,23 @@
   $: {
     shape.set(bankPath[$shaper]);
   }
+
+
+  export function hoverable(node, animationName) {
+    node.addEventListener('mouseover', () => updateCursorByName(animationName));
+    node.addEventListener('focus', () => updateCursorByName(animationName));
+    node.addEventListener('blur', () => updateCursorByName(animationName));
+    node.addEventListener('mouseout', resetCursor);
+
+    return {
+        destroy() {
+            node.removeEventListener('mouseover', () => updateCursorByName(animationName));
+            node.removeEventListener('focus', () => updateCursorByName(animationName));
+            node.removeEventListener('blur', () => updateCursorByName(animationName));
+            node.removeEventListener('mouseout', resetCursor);
+        }
+    };
+}
 </script>
 
 <style lang="scss">
@@ -146,20 +138,4 @@
   </svg>
 </div>
 
-<button 
-      on:mouseover={() => updateCursorByName('first')}
-      on:focus={() => updateCursorByName('first')}
-      on:blur={() => updateCursorByName('first')}
-      on:mouseout={resetCursor}
- >
-  comment
-</button>
-
-<button 
-      on:mouseover={() => updateCursorByName('second')}
-      on:focus={() => updateCursorByName('second')}
-      on:blur={() => updateCursorByName('second')}
-      on:mouseout={resetCursor}
- >
-  comment
-</button>
+<div use:hoverable={"first"}>Mon div avec hover</div>
