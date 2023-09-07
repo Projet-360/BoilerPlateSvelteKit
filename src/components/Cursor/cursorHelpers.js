@@ -1,4 +1,5 @@
 import { cursorStore } from './../../stores/cursorStore.js';
+import { shapeStore } from './../../stores/shapeStore.js';
 import animations from './animations.js';
 
 export function animateCursor(Cursor, { clientX, clientY }) {
@@ -35,3 +36,20 @@ export function resetCursor(changeShaper) {
   }));
   changeShaper('circle');
 };
+
+export function hoverable(node, animationName) {
+  node.addEventListener('mouseover', () => updateCursorByName(animationName, shapeStore.set));
+  node.addEventListener('focus', () => updateCursorByName(animationName, shapeStore.set));
+  node.addEventListener('blur', () => updateCursorByName(animationName, shapeStore.set));
+  node.addEventListener('mouseout', () => resetCursor(shapeStore.set));
+
+  return {
+      destroy() {
+          node.removeEventListener('mouseover', () => updateCursorByName(animationName, shapeStore.set));
+          node.removeEventListener('focus', () => updateCursorByName(animationName, shapeStore.set));
+          node.removeEventListener('blur', () => updateCursorByName(animationName, shapeStore.set));
+          node.removeEventListener('mouseout', () => resetCursor(shapeStore.set));
+      }
+  };
+}
+

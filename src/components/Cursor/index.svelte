@@ -9,7 +9,7 @@
   import animations from './animations.js';
   import { shapeStore } from './../../stores/shapeStore.js';
   import { cursorStore } from './../../stores/cursorStore.js';
-  import { animateCursor, updateCursorByName, resetCursor } from './cursorHelpers.js';
+  import { animateCursor, updateCursorByName, resetCursor, hoverable } from './cursorHelpers.js';
 
   const changeShaper = shapeStore.set;
 
@@ -18,25 +18,13 @@
   // Initialise and clean up event listeners
   if (typeof window !== 'undefined') {
     onMount(() => {
-      initEventListeners();
+      initEventListeners(document.getElementById('Cursor'));
     });
 
     onDestroy(() => {
-      removeEventListeners();
+      removeEventListeners(document.getElementById('Cursor'));
     });
   }
-
-  // Add event listeners
-
-  if (typeof window !== 'undefined') {
-    onMount(() => {
-        initEventListeners(document.getElementById('Cursor'));
-    });
-
-    onDestroy(() => {
-        removeEventListeners(document.getElementById('Cursor'));
-    });
-}
   
   export function initEventListeners(Cursor) {
       cursorStore.update(props => ({ ...props, Cursor }));
@@ -58,22 +46,6 @@
     shape.set(bankPath[$shapeStore]);
   }
 
-
-  export function hoverable(node, animationName) {
-      node.addEventListener('mouseover', () => updateCursorByName(animationName, shapeStore.set));
-      node.addEventListener('focus', () => updateCursorByName(animationName, shapeStore.set));
-      node.addEventListener('blur', () => updateCursorByName(animationName, shapeStore.set));
-      node.addEventListener('mouseout', () => resetCursor(shapeStore.set));
-
-      return {
-          destroy() {
-              node.removeEventListener('mouseover', () => updateCursorByName(animationName, shapeStore.set));
-              node.removeEventListener('focus', () => updateCursorByName(animationName, shapeStore.set));
-              node.removeEventListener('blur', () => updateCursorByName(animationName, shapeStore.set));
-              node.removeEventListener('mouseout', () => resetCursor(shapeStore.set));
-          }
-      };
-  }
 
 
 </script>
