@@ -11,8 +11,10 @@
   import { animateCursor, updateCursorByName, resetCursor, hoverable } from './cursorHelpers.js';
 
   const changeShaper = shapeStore.set;
+  let cursorElement;
 
   let animationFrameId;
+  let throttledMove;
 
   function throttle(func, delay) {
     let lastCall = 0;
@@ -28,23 +30,26 @@
   // Initialise and clean up event listeners
   if (typeof window !== 'undefined') {
     onMount(() => {
-      initEventListeners(document.getElementById('Cursor'));
+        cursorElement = document.getElementById('Cursor');
+        initEventListeners(cursorElement);
     });
 
     onDestroy(() => {
-      removeEventListeners(document.getElementById('Cursor'));
+        removeEventListeners(cursorElement);
     });
   }
   
-  export function initEventListeners(Cursor) {
-      cursorStore.update(props => ({ ...props, Cursor }));
-      window.addEventListener('mousemove', throttle((e) => animateCursor(Cursor, e), 16));
-  }
 
-  export function removeEventListeners(Cursor) {
-      window.removeEventListener('mousemove', (e) => animateCursor(Cursor, e));
-  }
 
+export function initEventListeners(Cursor) {
+    throttledMove = throttle((e) => animateCursor(Cursor, e), 16);
+    cursorStore.update(props => ({ ...props, Cursor }));
+    window.addEventListener('mousemove', throttledMove);
+}
+
+export function removeEventListeners() {
+    window.removeEventListener('mousemove', throttledMove);
+}
 
   const shape = tweened(bankPath['circle'], {
     duration: 150,
@@ -68,7 +73,7 @@
   }
 </style>
 
-<div bind:this={cursorStore.Cursor} id="Cursor" style="
+<div bind:this={cursorElement} id="Cursor" style="
   transform: translate({$cursorStore.x}px, {$cursorStore.y}px);
   transition: transform {$cursorStore.transitionDuration}s linear;
   --icon-scale: {$cursorStore.iconScale};

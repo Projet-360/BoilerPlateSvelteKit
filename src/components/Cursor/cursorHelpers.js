@@ -2,16 +2,20 @@ import { cursorStore } from './../../stores/cursorStore.js';
 import { shapeStore } from './../../stores/shapeStore.js';
 import animations from './animations.js';
 
+let animationFrameId;
+
 export function animateCursor(Cursor, { clientX, clientY }) {
-  if (!Cursor) return;
-  let animationFrameId;
-  cancelAnimationFrame(animationFrameId);
-  animationFrameId = requestAnimationFrame(() => {
-    cursorStore.update(({ x, y }) => ({
-      x: clientX - Cursor.offsetWidth / 2,
-      y: clientY - Cursor.offsetHeight / 2,
-    }));
-  });
+    if (!Cursor) return;
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = requestAnimationFrame(() => {
+        const newX = clientX - Cursor.offsetWidth / 2;
+        const newY = clientY - Cursor.offsetHeight / 2;
+
+        cursorStore.update(() => ({
+            x: newX,
+            y: newY,
+        }));
+    });
 };
 
 export function updateCursorByName(name, changeShaper) {
@@ -38,23 +42,20 @@ export function resetCursor(changeShaper) {
 };
 
 export function hoverable(node, animationName) {
-  const handleMouseOver = () => updateCursorByName(animationName, shapeStore.set);
-  const handleFocus = () => updateCursorByName(animationName, shapeStore.set);
-  const handleBlur = () => updateCursorByName(animationName, shapeStore.set);
-  const handleMouseOut = () => resetCursor(shapeStore.set);
+  const handleCursorUpdate = () => updateCursorByName(animationName, shapeStore.set);
+  const handleCursorReset = () => resetCursor(shapeStore.set);
 
-  node.addEventListener('mouseover', handleMouseOver);
-  node.addEventListener('focus', handleFocus);
-  node.addEventListener('blur', handleBlur);
-  node.addEventListener('mouseout', handleMouseOut);
+  node.addEventListener('mouseover', handleCursorUpdate);
+  node.addEventListener('focus', handleCursorUpdate);
+  node.addEventListener('blur', handleCursorUpdate);
+  node.addEventListener('mouseout', handleCursorReset);
 
   return {
       destroy() {
-          node.removeEventListener('mouseover', handleMouseOver);
-          node.removeEventListener('focus', handleFocus);
-          node.removeEventListener('blur', handleBlur);
-          node.removeEventListener('mouseout', handleMouseOut);
+          node.removeEventListener('mouseover', handleCursorUpdate);
+          node.removeEventListener('focus', handleCursorUpdate);
+          node.removeEventListener('blur', handleCursorUpdate);
+          node.removeEventListener('mouseout', handleCursorReset);
       }
   };
 }
-
