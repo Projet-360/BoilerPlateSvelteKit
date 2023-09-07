@@ -39,8 +39,6 @@
     });
   }
   
-
-
 export function initEventListeners(Cursor) {
     throttledMove = throttle((e) => animateCursor(Cursor, e), 16);
     cursorStore.update(props => ({ ...props, Cursor }));

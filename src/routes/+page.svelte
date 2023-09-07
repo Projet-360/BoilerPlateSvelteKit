@@ -21,3 +21,4 @@
 
 
 <div use:hoverable={"first"}>Mon div avec hover</div>
+<div use:hoverable={"second"}>Mon div avec hover</div>

@@ -1,1 +1,4 @@
 tree "C:\wamp64\www\BoilerPlateSvelteKit" /A /F > "C:\wamp64\www\BoilerPlateSvelteKit\textfiles.txt"
+
+
+tree "C:\wamp64\www\BoilerPlateSvelteKit" /A /F | findstr /V /I "\node_modules\ \.svelte-kit\ \build\" > "C:\wamp64\www\BoilerPlateSvelteKit\textfiles.txt"
