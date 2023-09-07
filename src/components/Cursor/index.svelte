@@ -7,27 +7,19 @@
   
   import bankPath from './bankPath/index.js';
   import animations from './animations.js';
-  
-  const shaper = writable('circle');
-  const cursorProps = writable({
-    Cursor: undefined,
-    x: 0,
-    y: 0,
-    transitionDuration: 0,
-    transitionDurationSvg: 0.07,
-    shaperForm: 'circle',
-    scaleSvg: 1,
-  });
+  import {shapeStore} from './../../stores/shapeStore.js';
+  import {cursorStore} from './../../stores/cursorStore.js';
 
-  const changeShaper = shaper.set;
+
+  const changeShaper = shapeStore.set;
   let animationFrameId;
   
   const animateCursor = ({ clientX, clientY }) => {
-    const { Cursor } = cursorProps;
+    const { Cursor } = cursorStore;
     if (!Cursor) return;
     cancelAnimationFrame(animationFrameId);
     animationFrameId = requestAnimationFrame(() => {
-      cursorProps.update(({ x, y }) => ({
+      cursorStore.update(({ x, y }) => ({
         x: clientX - Cursor.offsetWidth / 2,
         y: clientY - Cursor.offsetHeight / 2,
       }));
@@ -38,7 +30,7 @@
     const animation = animations.find(animation => animation.name === name);
     if (animation) {
       const { transitionDuration, shaperForm, scaleSvg, transitionDurationSvg } = animation;
-      cursorProps.update(props => ({
+      cursorStore.update(props => ({
         transitionDuration,
         transitionDurationSvg,
         scaleSvg,
@@ -48,7 +40,7 @@
   };
 
   export const resetCursor = () => {
-    cursorProps.update(props => ({
+    cursorStore.update(props => ({
       ...props,
       transitionDuration: 0.07,
       transitionDurationSvg: 0.07,
@@ -70,7 +62,7 @@
 
   // Add event listeners
   function initEventListeners() {
-    cursorProps.update(props => ({
+    cursorStore.update(props => ({
       ...props,
       Cursor: document.getElementById('Cursor'),
     }));
@@ -89,7 +81,7 @@
   });
 
   $: {
-    shape.set(bankPath[$shaper]);
+    shape.set(bankPath[$shapeStore]);
   }
 
 
@@ -123,14 +115,14 @@
   }
 </style>
 
-<div bind:this={cursorProps.Cursor} id="Cursor" style="
-  transform: translate({$cursorProps.x}px, {$cursorProps.y}px);
-  transition: transform {$cursorProps.transitionDuration}s linear;
-  --icon-scale: {$cursorProps.iconScale};
+<div bind:this={cursorStore.Cursor} id="Cursor" style="
+  transform: translate({$cursorStore.x}px, {$cursorStore.y}px);
+  transition: transform {$cursorStore.transitionDuration}s linear;
+  --icon-scale: {$cursorStore.iconScale};
   ">
   <svg viewBox="0 0 100 100" style="
-  transform: scale({$cursorProps.scaleSvg});
-  transition: transform {$cursorProps.transitionDurationSvg}s linear;
+  transform: scale({$cursorStore.scaleSvg});
+  transition: transform {$cursorStore.transitionDurationSvg}s linear;
   ">
     {#if $shape}
       <path d={$shape} />
