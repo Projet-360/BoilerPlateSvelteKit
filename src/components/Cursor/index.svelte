@@ -7,28 +7,31 @@
   
   import bankPath from './bankPath/index.js';
 
-const animations = [
-  {
-    name: 'first',
-    rotation: 0,
-    scale: 1,
-    color: 'red',
-    transitionDuration: 0,
-    iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
-    iconScale: 0,
-    shaperForm :  'camera'
-  },
-  {
-    name: 'second',
-    rotation: 0,
-    scale: 1,
-    color: 'red',
-    transitionDuration: 0,
-    iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
-    iconScale: 0,
-    shaperForm : 'comment'
-  },
-];
+  const animations = [
+    {
+      name: 'first',
+      rotation: 0,
+      scaleSvg: 2,
+      color: 'red',
+      transitionDuration: 0.07,
+      transitionDurationSvg: 0.07,
+      iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
+      iconScale: 0,
+      shaperForm :  'camera'
+    },
+    {
+      name: 'second',
+      rotation: 0,
+      scaleSvg: 3,
+      color: 'red',
+      transitionDuration: 0.07,
+      transitionDurationSvg: 0.07,
+      iconInside: 'https://upload.wikimedia.org/wikipedia/commons/6/6c/SVG_Simple_Icon.svg',
+      iconScale: 0,
+      shaperForm : 'comment'
+    },
+  ];
+
 
   export const shaper = writable('circle');
   export const cursorProps = writable({
@@ -36,14 +39,14 @@ const animations = [
     x: 0,
     y: 0,
     transitionDuration: 0,
+    transitionDurationSvg: 0.07,
     shaperForm: 'circle',
+    scaleSvg: 1,
   });
 
-   export const changeShaper = shaper.set;
-
+  export const changeShaper = shaper.set;
   let animationFrameId;
-
-
+  
   export const animateCursor = ({ clientX, clientY }) => {
     const { Cursor } = cursorProps;
     if (!Cursor) return;
@@ -59,11 +62,11 @@ const animations = [
   export const updateCursorByName = name => {
     const animation = animations.find(animation => animation.name === name);
     if (animation) {
-      const { transitionDuration, shaperForm } = animation;
+      const { transitionDuration, shaperForm, scaleSvg, transitionDurationSvg } = animation;
       cursorProps.update(props => ({
-        transitionDuration: 0,
-        shaper: 'circle',
         transitionDuration,
+        transitionDurationSvg,
+        scaleSvg,
       }));
       changeShaper(shaperForm);
     }
@@ -73,6 +76,8 @@ const animations = [
     cursorProps.update(props => ({
       ...props,
       transitionDuration: 0.07,
+      transitionDurationSvg: 0.07,
+      scaleSvg: 1,
     }));
     changeShaper('circle');
   };
@@ -130,8 +135,11 @@ const animations = [
   transform: translate({$cursorProps.x}px, {$cursorProps.y}px);
   transition: transform {$cursorProps.transitionDuration}s linear;
   --icon-scale: {$cursorProps.iconScale};
-">
-  <svg viewBox="0 0 100 100">
+  ">
+  <svg viewBox="0 0 100 100" style="
+  transform: scale({$cursorProps.scaleSvg});
+  transition: transform {$cursorProps.transitionDurationSvg}s linear;
+  ">
     {#if $shape}
       <path d={$shape} />
     {/if}
