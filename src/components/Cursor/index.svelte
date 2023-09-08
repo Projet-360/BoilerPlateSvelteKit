@@ -39,15 +39,15 @@
     });
   }
   
-export function initEventListeners(Cursor) {
-    throttledMove = throttle((e) => animateCursor(Cursor, e), 16);
-    cursorStore.update(props => ({ ...props, Cursor }));
-    window.addEventListener('mousemove', throttledMove);
-}
+  export function initEventListeners(Cursor) {
+      throttledMove = throttle((e) => animateCursor(Cursor, e), 16);
+      cursorStore.update(props => ({ ...props, Cursor }));
+      window.addEventListener('mousemove', throttledMove);
+  }
 
-export function removeEventListeners() {
-    window.removeEventListener('mousemove', throttledMove);
-}
+  export function removeEventListeners() {
+      window.removeEventListener('mousemove', throttledMove);
+  }
 
   const shape = tweened(bankPath['circle'], {
     duration: 150,

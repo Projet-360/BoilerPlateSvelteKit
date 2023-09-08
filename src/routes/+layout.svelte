@@ -1,9 +1,15 @@
 <script>
 	import { onMount } from 'svelte';
   import Header from "./Header.svelte";
+
+  import PageTransition from "../components/pageTransition/PageTransition.svelte";
+  import { page } from '$app/stores';
+  export let data;
+
   import Cursor from "../components/Cursor/index.svelte";
   import Preloader from "../components/Preloader/index.svelte";
   import SmoothScroller from "../components/SmoothScroller/index.svelte";
+
   import App from '$lib/js/index.js'
 
   onMount(() => {
@@ -35,8 +41,10 @@
 
 <Preloader/>
 <Cursor/>
-<SmoothScroller>
-  <main>
-    <slot />
-  </main>
-</SmoothScroller>
+<PageTransition pathname={data.pathname}>
+  <SmoothScroller>
+    <main>
+      <slot />
+    </main>
+  </SmoothScroller>
+</PageTransition>

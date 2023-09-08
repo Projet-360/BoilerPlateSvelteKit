@@ -5,6 +5,7 @@
     "tabWidth": 2,
     "svelteSortOrder": "styles-scripts-markup",
     "svelteStrictMode": true,
-    "svelteBracketNewLine": true
+    "svelteBracketNewLine": true,
+    "plugins": ["prettier-plugin-svelte"]
   }
   

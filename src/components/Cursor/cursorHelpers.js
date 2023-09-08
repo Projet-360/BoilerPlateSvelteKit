@@ -34,8 +34,8 @@ export function updateCursorByName(name, changeShaper) {
 export function resetCursor(changeShaper) {
   cursorStore.update(props => ({
     ...props,
-    transitionDuration: 0.07,
-    transitionDurationSvg: 0.07,
+    transitionDuration: 0.02,
+    transitionDurationSvg: 0.02,
     scaleSvg: 1,
   }));
   changeShaper('circle');

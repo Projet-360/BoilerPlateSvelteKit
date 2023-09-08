@@ -5,4 +5,5 @@
 
 <div>
 	<h1>About</h1>
+	<a href="/">Lien vers la page home</a>
 </div>
