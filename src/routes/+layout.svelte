@@ -42,8 +42,6 @@
 <Cursor/>
 <PageTransition pathname={data.pathname}>
   <SmoothScroller>
-    <main>
       <slot />
-    </main>
   </SmoothScroller>
 </PageTransition>
