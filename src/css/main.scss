@@ -31,6 +31,12 @@
     background: green;
 }
 
+main {
+    position: absolute;
+    overflow: hidden;
+    
+}
+
 #Cursor {
     svg {
         @include ccc;

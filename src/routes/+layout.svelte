@@ -40,8 +40,10 @@
 
 <Preloader/>
 <Cursor/>
+
 <PageTransition pathname={data.pathname}>
   <SmoothScroller>
+      <Header/>
       <slot />
   </SmoothScroller>
 </PageTransition>

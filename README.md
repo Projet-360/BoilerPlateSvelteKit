@@ -1,38 +1,22 @@
-# create-svelte
+BoilerPlate pour site design:
+Animations d'éléments: Intégrez des bibliothèques comme GreenSock (GSAP) pour offrir des animations riches et fluides. Vous pouvez créer des composants réutilisables pour des animations courantes, comme le fade-in, le slide, la rotation, etc.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Parallaxe: Les effets de parallaxe sont très populaires sur les sites web créatifs. Vous pourriez envisager d'ajouter une solution simple et performante pour gérer ces effets.
 
-## Creating a project
+Effets de hover: Des composants pour des effets de survol (hover) créatifs, comme des déformations d'image, des changements de couleur fluides ou des animations textuelles.
 
-If you're seeing this, you've probably already done this step. Congrats!
+Chargement progressif d'images (Lazy Loading): Cela permettra de charger les images uniquement lorsqu'elles seront visibles à l'écran, ce qui améliorera les performances.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+Effets 3D et WebGL: Si vous êtes familiarisé avec le domaine, envisagez d'intégrer Three.js pour ajouter des effets 3D. Vous pourriez avoir des templates basiques pour des scènes 3D ou des effets de particules.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+Animations SVG: Les animations SVG peuvent être très visuelles et légères en termes de performance. Pensez à des icônes animées ou à des tracés de ligne.
 
-## Developing
+Effets de défilement (Scroll Effects): Intégrez des effets qui se déclenchent lors du défilement, comme des animations, des changements de couleur, etc.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Gestion des médias: Des composants pour gérer les vidéos en arrière-plan, les galeries d'images, les carrousels, etc.
 
-```bash
-npm run dev
+Modes clair/sombre: Un switcher pour passer du mode clair au mode sombre, ce qui est devenu courant et apprécié par beaucoup d'utilisateurs.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+Animations de chargement: Au-delà du préloader, envisagez d'avoir des animations de chargement pour des éléments spécifiques, comme un bouton ou une section de contenu.
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Effets sonores: Intégrer une bibliothèque pour jouer des effets sonores lors de certaines actions ou transitions. Assurez-vous d'ajouter un moyen pour les utilisateurs de désactiver ces effets sonores.
