@@ -3,7 +3,6 @@
   import Header from "./Header.svelte";
 
   import PageTransition from "../components/pageTransition/PageTransition.svelte";
-  import { page } from '$app/stores';
   export let data;
 
   import Cursor from "../components/Cursor/index.svelte";
