@@ -1,6 +1,6 @@
 <script>
-  import { hoverable } from '$components/Cursor/cursorHelpers.js'
-  import { t } from '$components/translations/index.js';
+  import { hoverable } from '$UITools/Cursor/cursorHelpers.js'
+  import { t } from '$UITools/translations/index.js';
 
   const link = 'https://kit.svelte.dev';
 </script>

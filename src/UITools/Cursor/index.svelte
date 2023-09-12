@@ -3,7 +3,8 @@
   import { tweened } from 'svelte/motion';
   import { cubicInOut } from 'svelte/easing';
   import { writable } from 'svelte/store';
-  import { interpolate } from 'flubber';
+  import * as flubber from 'flubber';
+  const { interpolate } = flubber;
   
   import bankPath from './bankPath/index.js';
   import { shapeStore } from '$stores/shapeStore.js';

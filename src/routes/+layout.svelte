@@ -1,14 +1,14 @@
 <script>
 	import { onMount } from 'svelte';
   import Header from "./Header.svelte";
-  import PageTransition from "$components/PageTransition/index.svelte";
-  import Cursor from "$components/Cursor/index.svelte";
-  import Preloader from "$components/Preloader/index.svelte";
-  import SmoothScroller from "$components/SmoothScroller/index.svelte";
+  import PageTransition from "$UITools/PageTransition/index.svelte";
+  import Cursor from "$UITools/Cursor/index.svelte";
+  import Preloader from "$UITools/Preloader/index.svelte";
+  import SmoothScroller from "$UITools/SmoothScroller/index.svelte";
   import App from '$lib/js/index.js'
 
   export let data;
-  
+
   onMount(() => {
     new App()
     if ('serviceWorker' in navigator) {

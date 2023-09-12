@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
-	import DarkMode from '$components/DarkMode/index.svelte'
-	import { t, locale, locales } from '$components/translations/index.js';
+	import DarkMode from '$UITools/DarkMode/index.svelte'
+	import { t, locale, locales } from '$UITools/translations/index.js';
 
 	const handleChange = ({ currentTarget }) => {
 		const { value } = currentTarget;

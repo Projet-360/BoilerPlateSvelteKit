@@ -52,7 +52,7 @@ export default defineConfig({
     alias: {
       // this will match a file
       $stores : "src/stores" , 
-      $components : "src/components" , 
+      $UITools : "src/UITools" , 
       $language : "src/language" , 
   }
   },

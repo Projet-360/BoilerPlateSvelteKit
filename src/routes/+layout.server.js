@@ -1,4 +1,4 @@
-import { locales, loadTranslations, translations, defaultLocale } from '$components/translations';
+import { locales, loadTranslations, translations, defaultLocale } from '$UITools/translations';
 
 /** @type {import('@sveltejs/kit').ServerLoad} */
 export const load = async ({ url, cookies, request }) => {
