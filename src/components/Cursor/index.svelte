@@ -6,8 +6,8 @@
   import { interpolate } from 'flubber';
   
   import bankPath from './bankPath/index.js';
-  import { shapeStore } from './../../stores/shapeStore.js';
-  import { cursorStore } from './../../stores/cursorStore.js';
+  import { shapeStore } from '$stores/shapeStore.js';
+  import { cursorStore } from '$stores/cursorStore.js';
   import { animateCursor, updateCursorByName, resetCursor, hoverable } from './cursorHelpers.js';
 
   const changeShaper = shapeStore.set;

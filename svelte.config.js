@@ -3,6 +3,7 @@ import sveltePreprocess from 'svelte-preprocess';
 import adapter from '@sveltejs/adapter-node';
 import sass from 'vite-plugin-sass';
 import autoprefixer from 'autoprefixer';
+import path from 'path';
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
@@ -48,5 +49,11 @@ export default defineConfig({
   ],
   kit: {
     adapter: adapter(),
+    alias: {
+      // this will match a file
+      $stores : "src/stores" , 
+      $components : "src/components" , 
+      $language : "src/language" , 
+  }
   },
 });

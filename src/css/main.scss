@@ -11,6 +11,8 @@
 @import './base/reset';
 @import './base/normalize';
 
+@import './base/darkMode';
+
 // @import './shared/links';
 // @import './shared/sections';
 // @import './shared/cursor';
@@ -27,8 +29,7 @@
     width: 100%;
     height: 100vh;
     position: relative;
-    //cursor: none;
-    background: green;
+    cursor: none;
 }
 
 main {

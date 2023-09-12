@@ -1,5 +1,5 @@
-import { cursorStore } from './../../stores/cursorStore.js';
-import { shapeStore } from './../../stores/shapeStore.js';
+import { cursorStore } from '$stores/cursorStore.js';
+import { shapeStore } from '$stores/shapeStore.js';
 import animations from './animations.js';
 
 let animationFrameId;

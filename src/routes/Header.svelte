@@ -1,8 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import github from '$lib/images/github.svg';
-	import Switch from '../components/Switch/index.svelte'
-	let multiValue;
+	import DarkMode from '$components/DarkMode/index.svelte'
 </script>
 <header>
 	<nav>
@@ -20,14 +18,12 @@
 		</ul>
 	</nav>
 
-	<Switch bind:value={multiValue} label="Choose a theme" design="multi" options={['light', 'dark']} fontSize={12}/>
-	<p>
-		Switch is {multiValue}
-	</p>
-	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
-			<img src={github} alt="GitHub" width="30" height="30"/>
-		</a>
-	</div>
+	<!-- <Translate/>
+	<h1>exemple translate: :</h1>
+	<h3>{languageStore.translate('welcome')}</h3>
+	<h3>{languageStore.translate('logout')}</h3> -->
+	
+	<h1>exemple darkMode: :</h1>
+	<DarkMode/>
 </header>
 
