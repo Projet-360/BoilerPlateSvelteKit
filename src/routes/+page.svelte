@@ -1,6 +1,8 @@
 <script>
   import { hoverable } from '$components/Cursor/cursorHelpers.js'
-  
+  import { t } from '$components/translations/index.js';
+
+  const link = 'https://kit.svelte.dev';
 </script>
 
 <svelte:head>
@@ -12,3 +14,6 @@
     home
 </h1>
 <a href="/about" use:hoverable={"first"}>Lien vers la page about</a>
+
+<h1>{$t('home.title')}</h1>
+<p>{@html $t('home.text', { link })}</p>

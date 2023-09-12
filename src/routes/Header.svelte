@@ -1,6 +1,13 @@
 <script>
 	import { page } from '$app/stores';
 	import DarkMode from '$components/DarkMode/index.svelte'
+	import { t, locale, locales } from '$components/translations/index.js';
+
+	const handleChange = ({ currentTarget }) => {
+		const { value } = currentTarget;
+
+		document.cookie = `lang=${value} ;`;
+	};
 </script>
 <header>
 	<nav>
@@ -18,10 +25,12 @@
 		</ul>
 	</nav>
 
-	<!-- <Translate/>
 	<h1>exemple translate: :</h1>
-	<h3>{languageStore.translate('welcome')}</h3>
-	<h3>{languageStore.translate('logout')}</h3> -->
+	<select bind:value="{$locale}" on:change={handleChange}>
+		{#each $locales as value}
+		  <option value="{value}">{$t(`lang.${value}`)}</option>
+		{/each}
+	  </select>
 	
 	<h1>exemple darkMode: :</h1>
 	<DarkMode/>

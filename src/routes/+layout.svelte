@@ -8,7 +8,7 @@
   import App from '$lib/js/index.js'
 
   export let data;
-
+  
   onMount(() => {
     new App()
     if ('serviceWorker' in navigator) {
@@ -35,7 +35,7 @@
 <Preloader/>
 <Cursor/>
 
-<PageTransition pathname={data.pathname}>
+<PageTransition pathname={data.route}>
   <SmoothScroller>
       <Header/>
       <slot />
