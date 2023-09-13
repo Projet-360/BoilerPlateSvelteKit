@@ -1,5 +1,6 @@
 <script>
   import { hoverable } from '$UITools/Cursor/cursorHelpers.js'
+  import Box from '$three/Box.svelte';
   import { t } from '$UITools/translations/index.js';
 
   const link = 'https://kit.svelte.dev';
@@ -17,3 +18,5 @@
 
 <h1>{$t('home.title')}</h1>
 <p>{@html $t('home.text', { link })}</p>
+
+<Box/>

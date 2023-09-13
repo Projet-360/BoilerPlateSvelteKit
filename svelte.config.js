@@ -54,6 +54,7 @@ export default defineConfig({
       $stores : "src/stores" , 
       $UITools : "src/UITools" , 
       $language : "src/language" , 
+      $three : "src/three" , 
   }
   },
 });

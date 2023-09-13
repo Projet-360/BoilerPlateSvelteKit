@@ -25,14 +25,12 @@
 		</ul>
 	</nav>
 
-	<h1>exemple translate: :</h1>
 	<select bind:value="{$locale}" on:change={handleChange}>
 		{#each $locales as value}
 		  <option value="{value}">{$t(`lang.${value}`)}</option>
 		{/each}
 	  </select>
 	
-	<h1>exemple darkMode: :</h1>
 	<DarkMode/>
 </header>
 
