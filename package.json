@@ -2,7 +2,7 @@
   "name": "boilersvelte",
   "version": "0.0.1",
   "scripts": {
-    "dev": "vite dev",
+    "dev": "concurrently \"cd ./backend && npm run dev\" \"vite dev\"",
     "lint": "eslint --ext .js,.svelte src/",
     "prettier": "prettier --check .",
     "build": "vite build",
