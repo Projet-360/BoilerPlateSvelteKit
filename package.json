@@ -16,6 +16,7 @@
     "@sveltejs/adapter-node": "latest",
     "@sveltejs/kit": "^1.15.5",
     "autoprefixer": "latest",
+    "concurrently": "^8.2.1",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
