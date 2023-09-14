@@ -1,21 +1,28 @@
-const Greeting = require('./GreetingModel');
 const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3001;
-
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+
+const Greeting = require('./models/GreetingModel');
+const authRoutes = require('./routes/authRoutes');
 
 mongoose.connect('mongodb://localhost:27018/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('Could not connect to MongoDB', err));
 
+const app = express();
+const PORT = process.env.PORT || 3001;
+
 const cors = require('cors');
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:5173', // Remplacez par l'URL de votre frontend
+  optionsSuccessStatus: 204,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // pour autoriser les cookies
+};
 
-// Middleware pour parser le JSON
+app.use(cors(corsOptions));
 app.use(express.json());
-
-
+app.use('/auth', authRoutes);
 
 // Read All
 app.get('/api/getGreetings', async (req, res) => {

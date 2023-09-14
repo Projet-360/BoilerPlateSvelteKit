@@ -19,8 +19,8 @@
 				<a href="/about">About</a>
 			</li>
 
-			<li class="CursorDezoom" aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-				<a href="/about">test</a>
+			<li class="CursorDezoom" aria-current={$page.url.pathname === '/signup' ? 'page' : undefined}>
+				<a href="/signup">signup</a>
 			</li>
 		</ul>
 	</nav>
