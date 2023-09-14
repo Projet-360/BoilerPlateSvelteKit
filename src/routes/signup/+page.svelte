@@ -1,5 +1,5 @@
 <script>
-    import authStore from '$stores/authStore';
+    import { authStore } from '$stores/authStore';
     import { signup } from '$services/authService';
     import { goto } from '$app/navigation';
 

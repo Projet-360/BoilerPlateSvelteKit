@@ -20,3 +20,33 @@ Modes clair/sombre: Un switcher pour passer du mode clair au mode sombre, ce qui
 Animations de chargement: Au-delà du préloader, envisagez d'avoir des animations de chargement pour des éléments spécifiques, comme un bouton ou une section de contenu.
 
 Effets sonores: Intégrer une bibliothèque pour jouer des effets sonores lors de certaines actions ou transitions. Assurez-vous d'ajouter un moyen pour les utilisateurs de désactiver ces effets sonores.
+
+
+docker run --name new-mongo-instance -p 27018:27017 -d mongo:latest
+
+
+
+Validation d'Email : Après l'inscription, envoyer un e-mail avec un lien de validation pour confirmer que l'adresse e-mail est valide.
+
+Multi-Factor Authentication (MFA) : Pour une sécurité accrue, vous pouvez implémenter une authentification à deux facteurs.
+
+Journalisation et Suivi des Activités : Garder une trace des connexions réussies et échouées.
+
+Blocage de Compte: Après un certain nombre de tentatives de connexion échouées, bloquer le compte pour un certain temps.
+
+Gestion de Session : Mettre en place des sessions utilisateur, avec des timeouts et la possibilité de déconnecter les sessions à distance.
+
+Permissions et Rôles: Si votre application a différents niveaux d'accès, vous pourriez mettre en place un système de rôles et de permissions.
+
+Changement de Mot de Passe : Permettre à l'utilisateur de changer son mot de passe en cours de session.
+
+Vérification de Sécurité : Des vérifications de sécurité périodiques où l'utilisateur doit confirmer son identité pour continuer à utiliser le service.
+
+Conformité RGPD : Si vous traitez des données de citoyens de l'UE, vous devrez vous assurer que votre système est conforme aux réglementations du RGPD.
+
+Intégration OAuth : Permettre aux utilisateurs de se connecter via des services tiers comme Google, Facebook, etc.
+
+Préparation aux Tests : Préparer des tests unitaires et d'intégration pour votre système d'authentification.
+
+
+https://www.youtube.com/watch?v=Enl4OPQ2OAM

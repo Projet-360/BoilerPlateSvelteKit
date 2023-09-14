@@ -1,11 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+require('dotenv').config();
 
 const Greeting = require('./models/GreetingModel');
 const authRoutes = require('./routes/authRoutes');
 
-mongoose.connect('mongodb://localhost:27018/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.BD, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('Could not connect to MongoDB', err));
 
