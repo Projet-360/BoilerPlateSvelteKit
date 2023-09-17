@@ -1,0 +1,41 @@
+[
+  {
+    "url": "http://localhost:5173/",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\wamp64\\www\\BoilerPlateSvelteKit\\lighthouse-reports\\localhost-_-2023_09_17_18_15_00.report.html",
+    "jsonPath": "C:\\wamp64\\www\\BoilerPlateSvelteKit\\lighthouse-reports\\localhost-_-2023_09_17_18_15_00.report.json",
+    "summary": {
+      "performance": 0.86,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 0.95,
+      "pwa": 1
+    }
+  },
+  {
+    "url": "http://localhost:5173/",
+    "isRepresentativeRun": false,
+    "htmlPath": "C:\\wamp64\\www\\BoilerPlateSvelteKit\\lighthouse-reports\\localhost-_-2023_09_17_18_15_15.report.html",
+    "jsonPath": "C:\\wamp64\\www\\BoilerPlateSvelteKit\\lighthouse-reports\\localhost-_-2023_09_17_18_15_15.report.json",
+    "summary": {
+      "performance": 0.82,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 0.95,
+      "pwa": 1
+    }
+  },
+  {
+    "url": "http://localhost:5173/",
+    "isRepresentativeRun": true,
+    "htmlPath": "C:\\wamp64\\www\\BoilerPlateSvelteKit\\lighthouse-reports\\localhost-_-2023_09_17_18_14_45.report.html",
+    "jsonPath": "C:\\wamp64\\www\\BoilerPlateSvelteKit\\lighthouse-reports\\localhost-_-2023_09_17_18_14_45.report.json",
+    "summary": {
+      "performance": 0.87,
+      "accessibility": 1,
+      "best-practices": 1,
+      "seo": 0.95,
+      "pwa": 1
+    }
+  }
+]
