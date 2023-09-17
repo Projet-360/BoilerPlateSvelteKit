@@ -1,6 +1,9 @@
 Crée une BD Mongo
 docker run --name svelteKitDB -p 27017:27017 -d mongo:latest
 
+lancer lighhouse: 
+lhci autorun --collect.url=http://localhost:5173 --upload.target=filesystem --upload.outputDir=./lighthouse-reports/
+
 
 BoilerPlate pour site design:
 Animations d'éléments: Intégrez des bibliothèques comme GreenSock (GSAP) pour offrir des animations riches et fluides. Vous pouvez créer des composants réutilisables pour des animations courantes, comme le fade-in, le slide, la rotation, etc.

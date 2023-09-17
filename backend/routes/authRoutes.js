@@ -10,18 +10,31 @@ require("dotenv").config();
 
 const router = express.Router();
 
+const HTTP_CREATED = 201;
+const HTTP_INTERNAL_SERVER_ERROR = 500;
+const HTTP_UNPROCESSABLE_ENTITY = 422;
+
 // Route d'inscription
 router.post("/signup", async (req, res) => {
   try {
-    const { username, email, password } = req.body; // Ajoutez email ici
+    const { username, email, password } = req.body;
     const { token, userId } = await authService.signup(
       username,
       email,
       password,
-    ); // Et ici
-    res.status(201).json({ token, userId });
+    );
+
+    // Définir le cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true, // Notez que 'secure: true' fonctionnera seulement si vous utilisez HTTPS
+      maxAge: 3600000,
+    });
+
+    res.status(201).json({ userId, token });
   } catch (error) {
-    res.status(500).json({ message: error.message }); // Utilisez le message d'erreur du bloc catch
+    console.error("Erreur lors de l'inscription:", error);
+    res.status(500).json({ error: error.message });
   }
 });
 

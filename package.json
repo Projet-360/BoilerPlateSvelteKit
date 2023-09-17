@@ -32,6 +32,8 @@
   },
   "type": "module",
   "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express-validator": "^7.0.1",
     "flubber": "^0.4.2",
     "sveltekit-i18n": "^2.4.2",
     "three": "^0.156.1",
