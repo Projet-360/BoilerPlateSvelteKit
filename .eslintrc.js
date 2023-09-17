@@ -1,22 +1,22 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "es6": true
+  env: {
+    browser: true,
+    es6: true,
   },
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaVersion": 2019,
-    "sourceType": "module"
+  parser: "babel-eslint",
+  parserOptions: {
+    ecmaVersion: 2019,
+    sourceType: "module",
   },
-  "plugins": ["svelte3"],
-  "extends": ["eslint:recommended"],
-  "overrides": [
+  plugins: ["svelte3"],
+  extends: ["eslint:recommended"],
+  overrides: [
     {
-      "files": ["**/*.svelte"],
-      "processor": "svelte3/svelte3"
-    }
+      files: ["**/*.svelte"],
+      processor: "svelte3/svelte3",
+    },
   ],
-  "rules": {
+  rules: {
     // ...
-  }
-}
+  },
+};

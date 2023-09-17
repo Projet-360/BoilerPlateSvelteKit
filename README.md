@@ -21,10 +21,7 @@ Animations de chargement: Au-delà du préloader, envisagez d'avoir des animatio
 
 Effets sonores: Intégrer une bibliothèque pour jouer des effets sonores lors de certaines actions ou transitions. Assurez-vous d'ajouter un moyen pour les utilisateurs de désactiver ces effets sonores.
 
-
 docker run --name sveltekitbackend -p 27017:27017 -d mongo:latest
-
-
 
 Validation d'Email : Après l'inscription, envoyer un e-mail avec un lien de validation pour confirmer que l'adresse e-mail est valide.
 
@@ -47,6 +44,5 @@ Conformité RGPD : Si vous traitez des données de citoyens de l'UE, vous devrez
 Intégration OAuth : Permettre aux utilisateurs de se connecter via des services tiers comme Google, Facebook, etc.
 
 Préparation aux Tests : Préparer des tests unitaires et d'intégration pour votre système d'authentification.
-
 
 https://www.youtube.com/watch?v=Enl4OPQ2OAM

@@ -1,15 +1,15 @@
-const express = require('express');
-const User = require('../models/User');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const CryptoJS = require('crypto-js');
-const nodemailer = require('nodemailer');
-require('dotenv').config();
+const express = require("express");
+const User = require("../models/User");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const CryptoJS = require("crypto-js");
+const nodemailer = require("nodemailer");
+require("dotenv").config();
 
 const router = express.Router();
 
 // Route d'inscription
-router.post('/signup', async (req, res) => {
+router.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   //const hashedPassword = await bcrypt.hash(password, 12);
   const newUser = new User({ username, password });
@@ -19,33 +19,33 @@ router.post('/signup', async (req, res) => {
   const token = jwt.sign(
     { userId: newUser._id, username: newUser.username },
     process.env.SECRETKEY,
-    { expiresIn: '1h' }
+    { expiresIn: "1h" },
   );
 
   res.status(201).json({ token, userId: newUser._id });
 });
 
 // Route de connexion
-router.post('/login', async (req, res) => {
+router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   // Trouver l'utilisateur dans la base de données
   const user = await User.findOne({ username });
   if (!user) {
-    return res.status(404).json({ message: 'User not found' });
+    return res.status(404).json({ message: "User not found" });
   }
 
   // Vérifier le mot de passe
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return res.status(401).json({ message: 'Incorrect password' });
+    return res.status(401).json({ message: "Incorrect password" });
   }
 
   // Générer le token JWT
   const token = jwt.sign(
     { userId: user._id, username: user.username },
     process.env.SECRETKEY,
-    { expiresIn: '1h' }
+    { expiresIn: "1h" },
   );
 
   // Envoyer le token et l'ID de l'utilisateur au client
@@ -54,21 +54,21 @@ router.post('/login', async (req, res) => {
 
 // Ajoutez cette route dans votre fichier de routes
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
+    pass: process.env.EMAIL_PASS,
+  },
 });
 
 // Ajoutez cette route dans votre fichier de routes
-router.post('/forgot-password', async (req, res) => {
+router.post("/forgot-password", async (req, res) => {
   const { email } = req.body;
 
   // Trouver l'utilisateur par email
   const user = await User.findOne({ email });
   if (!user) {
-    return res.status(404).json({ message: 'User not found' });
+    return res.status(404).json({ message: "User not found" });
   }
 
   // Générer un token de réinitialisation
@@ -81,29 +81,39 @@ router.post('/forgot-password', async (req, res) => {
   await user.save();
 
   // Envoi de l'email de réinitialisation du mot de passe
-  transporter.sendMail({
-    to: user.email,
-    subject: 'Réinitialisation du mot de passe',
-    text: `Vous avez demandé la réinitialisation du mot de passe. Utilisez ce token pour le faire: ${resetToken}`,
-  }, (error, info) => {
-    if (error) {
-      return res.status(500).json({ message: 'Erreur lors de l\'envoi de l\'email', error });
-    }
-    res.status(200).json({ message: 'Reset token generated and email sent', token: resetToken });
-  });
+  transporter.sendMail(
+    {
+      to: user.email,
+      subject: "Réinitialisation du mot de passe",
+      text: `Vous avez demandé la réinitialisation du mot de passe. Utilisez ce token pour le faire: ${resetToken}`,
+    },
+    (error, info) => {
+      if (error) {
+        return res
+          .status(500)
+          .json({ message: "Erreur lors de l'envoi de l'email", error });
+      }
+      res
+        .status(200)
+        .json({
+          message: "Reset token generated and email sent",
+          token: resetToken,
+        });
+    },
+  );
 });
 
-router.post('/reset-password', async (req, res) => {
+router.post("/reset-password", async (req, res) => {
   const { token, newPassword } = req.body;
 
   // Trouver l'utilisateur avec le token de réinitialisation correspondant et vérifier si le token a expiré
   const user = await User.findOne({
     resetPasswordToken: token,
-    resetPasswordExpires: { $gt: Date.now() }
+    resetPasswordExpires: { $gt: Date.now() },
   });
 
   if (!user) {
-    return res.status(400).json({ message: 'Token invalide ou expiré' });
+    return res.status(400).json({ message: "Token invalide ou expiré" });
   }
 
   // Hasher le nouveau mot de passe
@@ -116,7 +126,9 @@ router.post('/reset-password', async (req, res) => {
 
   await user.save();
 
-  res.status(200).json({ message: 'Votre mot de passe a été réinitialisé avec succès' });
+  res
+    .status(200)
+    .json({ message: "Votre mot de passe a été réinitialisé avec succès" });
 });
 
 function logout() {

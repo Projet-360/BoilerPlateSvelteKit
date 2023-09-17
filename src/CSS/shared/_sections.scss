@@ -6,10 +6,12 @@
   pointer-events: none;
   position: absolute;
   top: 0;
-  transition: opacity 1s ease, visibility 1s ease;
+  transition:
+    opacity 1s ease,
+    visibility 1s ease;
   visibility: hidden;
   width: 100%;
-  z-index: z('content');
+  z-index: z("content");
 }
 
 %page--active {

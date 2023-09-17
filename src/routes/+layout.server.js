@@ -1,15 +1,22 @@
-import { locales, loadTranslations, translations, defaultLocale } from '$UITools/translations';
+import {
+  locales,
+  loadTranslations,
+  translations,
+  defaultLocale,
+} from "$UITools/translations";
 
 /** @type {import('@sveltejs/kit').ServerLoad} */
 export const load = async ({ url, cookies, request }) => {
   const { pathname } = url;
 
   // Try to get the locale from cookie
-  let locale = (cookies.get('lang') || '').toLowerCase();
+  let locale = (cookies.get("lang") || "").toLowerCase();
 
   // Get user preferred locale
   if (!locale) {
-    locale = `${`${request.headers.get('accept-language')}`.match(/[a-zA-Z]+?(?=-|_|,|;)/)}`.toLowerCase();
+    locale = `${`${request.headers.get("accept-language")}`.match(
+      /[a-zA-Z]+?(?=-|_|,|;)/,
+    )}`.toLowerCase();
   }
 
   // Get defined locales

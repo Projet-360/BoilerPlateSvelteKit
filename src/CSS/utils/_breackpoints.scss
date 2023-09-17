@@ -13,8 +13,7 @@ $breakpoints: (
 @mixin breakpointMin($name) {
   @if not map-has-key($breakpoints, $name) {
     @warn "Invalid breakpoint `#{$name}`.";
-  }
-  @else {
+  } @else {
     @media (min-width: map-get($breakpoints, $name)) {
       @content;
     }
@@ -24,8 +23,7 @@ $breakpoints: (
 @mixin breakpointMax($name) {
   @if not map-has-key($breakpoints, $name) {
     @warn "Invalid breakpoint `#{$name}`.";
-  }
-  @else {
+  } @else {
     @media (max-width: map-get($breakpoints, $name)) {
       @content;
     }
@@ -34,38 +32,38 @@ $breakpoints: (
 
 .burger {
   @include breakpointMin(start) {
-    // Démarre par la valeur 0px vers l'infini    
+    // Démarre par la valeur 0px vers l'infini
   }
-  
+
   @include breakpointMin(mobile_s) {
-    // Démarre par la valeur 320px vers l'infini    
+    // Démarre par la valeur 320px vers l'infini
   }
 
   @include breakpointMin(mobile_m) {
-    // Démarre par la valeur 360px vers l'infini    
+    // Démarre par la valeur 360px vers l'infini
   }
 
   @include breakpointMin(mobile_l) {
-    // Démarre par la valeur 480px vers l'infini    
+    // Démarre par la valeur 480px vers l'infini
   }
 
   @include breakpointMin(tablet) {
-    // Démarre par la valeur 540px vers l'infini    
+    // Démarre par la valeur 540px vers l'infini
   }
 
   @include breakpointMin(screen_s) {
-    // Démarre par la valeur 1024px vers l'infini    
+    // Démarre par la valeur 1024px vers l'infini
   }
 
   @include breakpointMin(screen_m) {
-    // Démarre par la valeur 1366px vers l'infini    
+    // Démarre par la valeur 1366px vers l'infini
   }
 
   @include breakpointMin(screen_l) {
-    // Démarre par la valeur 1920px vers l'infini    
+    // Démarre par la valeur 1920px vers l'infini
   }
 
   @include breakpointMin(screen_xl) {
-    // Démarre par la valeur 3840px vers l'infini    
+    // Démarre par la valeur 3840px vers l'infini
   }
 }

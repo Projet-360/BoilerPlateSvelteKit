@@ -1,20 +1,20 @@
 /* Variables and mixins declared here will be available in all other SCSS files */
 
-@import './utils/variables';
-@import './utils/functions';
-@import './utils/breackpoints';
-@import './utils/flex';
-@import './utils/mixins';
-@import './utils/vendors';
+@import "./utils/variables";
+@import "./utils/functions";
+@import "./utils/breackpoints";
+@import "./utils/flex";
+@import "./utils/mixins";
+@import "./utils/vendors";
 
-@import './base/fonts';
-@import './base/reset';
-@import './base/normalize';
+@import "./base/fonts";
+@import "./base/reset";
+@import "./base/normalize";
 
-@import './base/darkMode';
+@import "./base/darkMode";
 
 // @import './shared/links';
-// @import './shared/sections';Nous allons intégrer 
+// @import './shared/sections';Nous allons intégrer
 // @import './shared/cursor';
 
 // @import './UITools/canvas';
@@ -26,37 +26,36 @@
 // @import './pages/about';
 
 .app {
-    width: 100%;
-    height: 100vh;
-    position: relative;
-    //cursor: none;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  //cursor: none;
 }
 
 main {
-    position: absolute;
-    overflow: hidden;
-    width: 100%;
-    
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
 }
 
 #Cursor {
-    svg {
-        @include ccc;
-        position: absolute;
-        transform-origin: center;
+  svg {
+    @include ccc;
+    position: absolute;
+    transform-origin: center;
 
-        path {
-            max-width: 50px;
-            max-height: 50px;
-            transform: translate(25%, 25%);
-        }
+    path {
+      max-width: 50px;
+      max-height: 50px;
+      transform: translate(25%, 25%);
     }
+  }
 }
 header {
-    @include rcb;
+  @include rcb;
 
-    ul {
-        width: 200px;
-        @include rcb;  
-    }
+  ul {
+    width: 200px;
+    @include rcb;
+  }
 }

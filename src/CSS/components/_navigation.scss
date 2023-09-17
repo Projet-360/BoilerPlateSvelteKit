@@ -2,7 +2,7 @@
   @extend %cover;
 
   pointer-events: none;
-  z-index: z('navigation');
+  z-index: z("navigation");
 }
 
 .navigation__link {

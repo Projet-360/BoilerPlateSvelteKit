@@ -1,11 +1,4 @@
 {
-    "singleQuote": true,
-    "trailingComma": "all",
-    "printWidth": 80,
-    "tabWidth": 2,
-    "svelteSortOrder": "styles-scripts-markup",
-    "svelteStrictMode": true,
-    "svelteBracketNewLine": true,
-    "plugins": ["prettier-plugin-svelte"]
-  }
-  
+  "tabWidth": 2,
+  "useTabs": false
+}

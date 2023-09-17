@@ -1,6 +1,6 @@
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import * as THREE from 'three';
+  import { onMount, onDestroy } from "svelte";
+  import * as THREE from "three";
 
   let container;
   let animationFrameId;
@@ -18,7 +18,7 @@
     const geometry = new THREE.BoxGeometry();
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     const cube = new THREE.Mesh(geometry, material);
-    cube.scale.set(3.5,3.5,3.5);
+    cube.scale.set(3.5, 3.5, 3.5);
 
     scene.add(cube);
     camera.position.z = 5;
@@ -46,6 +46,8 @@
   });
 </script>
 
+<div bind:this={container} />
+
 <style>
   /* Ajuster la taille du conteneur pour qu'il corresponde à la taille du cube */
   div {
@@ -53,5 +55,3 @@
     height: 400px;
   }
 </style>
-
-<div bind:this={container}></div>
