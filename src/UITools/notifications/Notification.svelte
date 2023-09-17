@@ -1,5 +1,7 @@
 <script>
-  import { onMount, onDestroy } from "svelte";
+  import { onMount, onDestroy, createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
 
   // Props du composant
   export let message = "";
@@ -13,29 +15,26 @@
     // Définir un timer pour masquer la notification après 5 secondes
     const timer = setTimeout(() => {
       isVisible = false;
+      dispatch("dismiss"); // Émettre l'événement personnalisé lors de la fermeture
     }, 5000);
 
     // Nettoyage : annuler le timer si le composant est détruit
     return () => clearTimeout(timer);
   });
 
-  onDestroy(() => {
-    clearTimeout(timer);
-    // Autres nettoyages ici
-  });
-
   // Fonction pour fermer la notification manuellement
   function closeNotification() {
     isVisible = false;
+    dispatch("dismiss"); // Émettre l'événement personnalisé lors de la fermeture
   }
 </script>
 
 {#if isVisible}
   <div class={`notification ${type}`} aria-live="assertive">
-    <span>{message}</span>
-    <button on:click={closeNotification} aria-label="Fermer la notification"
-      >X</button
-    >
+    <span>{message.message}</span>
+    <button on:click={closeNotification} aria-label="Fermer la notification">
+      X
+    </button>
   </div>
 {/if}
 
