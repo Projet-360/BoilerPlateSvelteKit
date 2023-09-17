@@ -1,6 +1,6 @@
-import { cursorStore } from "$stores/cursorStore.js";
-import { shapeStore } from "$stores/shapeStore.js";
-import animations from "./animations.js";
+import { cursorStore } from "$stores/cursorStore";
+import { shapeStore } from "$stores/shapeStore";
+import animations from "./animations";
 
 let animationFrameId;
 

@@ -5,7 +5,7 @@
   import Cursor from "$UITools/Cursor/index.svelte";
   import Preloader from "$UITools/Preloader/index.svelte";
   import SmoothScroller from "$UITools/SmoothScroller/index.svelte";
-  import App from "$lib/js/index.js";
+  import App from "$lib/js/index";
 
   export let data;
 

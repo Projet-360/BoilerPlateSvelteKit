@@ -12,9 +12,9 @@ const app = express();
 
 applyMiddlewares(app); // Application des middlewares
 
-  app.use("/auth", authRoutes);
-  app.use("/api", greetingRoutes);
+app.use("/auth", authRoutes);
+app.use("/api", greetingRoutes);
 
-  app.listen(config.PORT, () => {
-    console.log(`Server is running on port ${config.PORT}`);
-  });
+app.listen(config.PORT, () => {
+  console.log(`Server is running on port ${config.PORT}`);
+});

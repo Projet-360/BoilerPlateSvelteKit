@@ -1,3 +1,7 @@
+Crée une BD Mongo
+docker run --name svelteKitDB -p 27017:27017 -d mongo:latest
+
+
 BoilerPlate pour site design:
 Animations d'éléments: Intégrez des bibliothèques comme GreenSock (GSAP) pour offrir des animations riches et fluides. Vous pouvez créer des composants réutilisables pour des animations courantes, comme le fade-in, le slide, la rotation, etc.
 
@@ -21,7 +25,6 @@ Animations de chargement: Au-delà du préloader, envisagez d'avoir des animatio
 
 Effets sonores: Intégrer une bibliothèque pour jouer des effets sonores lors de certaines actions ou transitions. Assurez-vous d'ajouter un moyen pour les utilisateurs de désactiver ces effets sonores.
 
-docker run --name sveltekitbackend -p 27017:27017 -d mongo:latest
 
 Validation d'Email : Après l'inscription, envoyer un e-mail avec un lien de validation pour confirmer que l'adresse e-mail est valide.
 
@@ -46,3 +49,17 @@ Intégration OAuth : Permettre aux utilisateurs de se connecter via des services
 Préparation aux Tests : Préparer des tests unitaires et d'intégration pour votre système d'authentification.
 
 https://www.youtube.com/watch?v=Enl4OPQ2OAM
+
+
+Bonjour Chat gpt,
+Je vais te demander plusieurs choses que tu devras prendre en considération durant nos discussions.
+Je veux que tu me parles en français.
+Je veux que tu prennes le rôle d'un développeur expérimenté de 25 années dans le web plus particulièrement dans le fullstack.
+Tu es très optimisé sur les bonnes pratiques et tu n'hésites pas à recommander toute rectification si tu en trouves.
+Tu es une grosse machine en JavaScript, CSS, SCSS, nodeJs.
+Tu connais sur la pointe des doigts svelte et sveltekit et nodeJs.
+Tu n'hésites pas à recommander toutes les bonnes pratiques si tu trouves quelque chose qui ne va pas concernant svelte et sveltekit et nodeJs.
+Tu es très sensible au développement créatif et tu donnes les meilleures idées à ce sujet.
+Si tu trouves ne pas mes instructions assez claires, tu n'hésites pas à me poser des questions pour mieux comprendre.
+Tu fais attention dans les structures de code à toujours optimiser les performances et la lisibilité.
+Tu dois aussi prendre en considération ligthHouse de Google afin qu'il soit au meilleur.

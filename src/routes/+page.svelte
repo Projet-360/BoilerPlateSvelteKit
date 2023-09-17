@@ -1,7 +1,7 @@
 <script>
-  import { hoverable } from "$UITools/Cursor/cursorHelpers.js";
+  import { hoverable } from "$UITools/Cursor/cursorHelpers";
   import Box from "$three/Box.svelte";
-  import { t } from "$UITools/translations/index.js";
+  import { t } from "$UITools/translations/index";
   import { onMount } from "svelte";
 
   const link = "https://kit.svelte.dev";

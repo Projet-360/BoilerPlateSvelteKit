@@ -6,15 +6,15 @@
   import * as flubber from "flubber";
   const { interpolate } = flubber;
 
-  import bankPath from "./bankPath/index.js";
-  import { shapeStore } from "$stores/shapeStore.js";
-  import { cursorStore } from "$stores/cursorStore.js";
+  import bankPath from "./bankPath/index";
+  import { shapeStore } from "$stores/shapeStore";
+  import { cursorStore } from "$stores/cursorStore";
   import {
     animateCursor,
     updateCursorByName,
     resetCursor,
     hoverable,
-  } from "./cursorHelpers.js";
+  } from "./cursorHelpers";
 
   const changeShaper = shapeStore.set;
   let cursorElement;

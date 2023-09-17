@@ -3,15 +3,8 @@ const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true, match: /.+\@.+\..+/ }, // Validation sommaire par regex
   password: { type: String, required: true },
-});
-
-// Hashage du mot de passe avant de sauvegarder
-userSchema.pre("save", async function (next) {
-  if (this.isModified("password")) {
-    this.password = await bcrypt.hash(this.password, 12);
-  }
-  next();
 });
 
 module.exports = mongoose.model("User", userSchema);

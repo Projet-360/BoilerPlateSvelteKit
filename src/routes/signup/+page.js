@@ -6,7 +6,7 @@ export async function load({ session }) {
   if (!session || !session.token) {
     return {
       status: 403,
-      redirect: "/dashboard",
+      redirect: "/",
     };
   }
 

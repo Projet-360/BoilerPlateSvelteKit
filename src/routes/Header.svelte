@@ -1,11 +1,10 @@
 <script>
   import { page } from "$app/stores";
   import DarkMode from "$UITools/DarkMode/index.svelte";
-  import { t, locale, locales } from "$UITools/translations/index.js";
-  import { logout } from "$services/authService.js";
-  import { authStore } from "$stores/authStore";
+  import { t, locale, locales } from "$UITools/translations/index";
 
-  let isLoggedIn;
+  import { authStore } from "$stores/authStore";
+  import Logout from "./Logout.svelte";
 
   const handleChange = ({ currentTarget }) => {
     const { value } = currentTarget;
@@ -13,9 +12,7 @@
     document.cookie = `lang=${value} ;`;
   };
 
-  function handleLogout() {
-    logout();
-  }
+  let isLoggedIn;
 
   authStore.subscribe(($authStore) => {
     isLoggedIn = $authStore && $authStore.token ? true : false;
@@ -59,7 +56,5 @@
 
   <DarkMode />
 
-  {#if isLoggedIn}
-    <button on:click={handleLogout}>Se déconnecter</button>
-  {/if}
+  <Logout />
 </header>

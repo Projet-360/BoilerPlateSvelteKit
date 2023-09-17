@@ -1,6 +1,11 @@
+C:\wamp64\www\BoilerPlateSvelteKit\.vscode
+C:\wamp64\www\BoilerPlateSvelteKit\.vscode\settings.json
 C:\wamp64\www\BoilerPlateSvelteKit\backend
+C:\wamp64\www\BoilerPlateSvelteKit\backend\config
+C:\wamp64\www\BoilerPlateSvelteKit\backend\config\config.js
+C:\wamp64\www\BoilerPlateSvelteKit\backend\config\corsConfig.js
+C:\wamp64\www\BoilerPlateSvelteKit\backend\controllers
 C:\wamp64\www\BoilerPlateSvelteKit\backend\middlewares
-C:\wamp64\www\BoilerPlateSvelteKit\backend\middlewares\corsConfig.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\middlewares\middlewares.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\models
 C:\wamp64\www\BoilerPlateSvelteKit\backend\models\GreetingModel.js
@@ -8,8 +13,9 @@ C:\wamp64\www\BoilerPlateSvelteKit\backend\models\User.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\routes
 C:\wamp64\www\BoilerPlateSvelteKit\backend\routes\authRoutes.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\routes\greetingRoutes.js
+C:\wamp64\www\BoilerPlateSvelteKit\backend\services
+C:\wamp64\www\BoilerPlateSvelteKit\backend\services\authService.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\.env
-C:\wamp64\www\BoilerPlateSvelteKit\backend\config.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\dbConnect.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\index.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\package-lock.json
@@ -59,17 +65,18 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\routes\dashboard\+page.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\login
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\login\+page.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\login\+page.svelte
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\login\loginFunc.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\signup
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\signup\+page.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\signup\+page.svelte
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\signup\signUpFunc.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\+layout.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\+layout.server.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\+layout.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\+page.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\+page.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\Header.svelte
-C:\wamp64\www\BoilerPlateSvelteKit\src\services
-C:\wamp64\www\BoilerPlateSvelteKit\src\services\authService.js
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\Logout.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\stores
 C:\wamp64\www\BoilerPlateSvelteKit\src\stores\authStore.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\stores\cursorStore.js
@@ -121,7 +128,6 @@ C:\wamp64\www\BoilerPlateSvelteKit\.gitignore
 C:\wamp64\www\BoilerPlateSvelteKit\.npmrc
 C:\wamp64\www\BoilerPlateSvelteKit\.prettierrc
 C:\wamp64\www\BoilerPlateSvelteKit\createPathProject
-C:\wamp64\www\BoilerPlateSvelteKit\Diagramme sans nom.drawio
 C:\wamp64\www\BoilerPlateSvelteKit\jsconfig.json
 C:\wamp64\www\BoilerPlateSvelteKit\package-lock.json
 C:\wamp64\www\BoilerPlateSvelteKit\package.json
