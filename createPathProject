@@ -1,4 +1,30 @@
-tree "C:\wamp64\www\BoilerPlateSvelteKit" /A /F > "C:\wamp64\www\BoilerPlateSvelteKit\textfiles.txt"
+tree "C:\wamp64\www\BoilerPlateSvelteKit" /A /F | findstr /V /I "node_modules" > "C:\wamp64\www\BoilerPlateSvelteKit\textfiles.txt"
+
+
+function Write-Tree {
+    param (
+        [string]$folder,
+        [System.IO.StreamWriter]$writer
+    )
+    
+    $items = Get-ChildItem -Path $folder
+    foreach ($item in $items) {
+        if ($item.Name -ne "node_modules" -and $item.Name -ne ".svelte-kit" -and $item.Name -ne "build") {
+            $writer.WriteLine($item.FullName)
+            if (Test-Path $item.FullName -PathType Container) {
+                Write-Tree -folder $item.FullName -writer $writer
+            }
+        }
+    }
+}
+
+$folder = "C:\wamp64\www\BoilerPlateSvelteKit"
+$outputFile = "C:\wamp64\www\BoilerPlateSvelteKit\textfiles.txt"
+
+$writer = [System.IO.StreamWriter]::new($outputFile)
+Write-Tree -folder $folder -writer $writer
+$writer.Close()
+
 
 Bonjour Chat gpt,
 Je vais te demander plusieurs choses que tu devras prendre en considération durant nos discussions.

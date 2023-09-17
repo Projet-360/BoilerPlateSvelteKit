@@ -22,7 +22,7 @@ Animations de chargement: Au-delà du préloader, envisagez d'avoir des animatio
 Effets sonores: Intégrer une bibliothèque pour jouer des effets sonores lors de certaines actions ou transitions. Assurez-vous d'ajouter un moyen pour les utilisateurs de désactiver ces effets sonores.
 
 
-docker run --name new-mongo-instance -p 27018:27017 -d mongo:latest
+docker run --name sveltekitbackend -p 27017:27017 -d mongo:latest
 
 
 

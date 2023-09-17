@@ -1,62 +1,20 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-require('dotenv').config();
+const connectDB = require('./dbConnect');  // Importation du module de connexion à la BD
+const config = require('./config');  // Importation de la configuration
+const applyMiddlewares = require('./middlewares/middlewares.js');  // Importation des middlewares
 
-const Greeting = require('./models/GreetingModel');
 const authRoutes = require('./routes/authRoutes');
+const greetingRoutes = require('./routes/greetingRoutes');
 
-mongoose.connect(process.env.BD, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log('Connected to MongoDB'))
-.catch(err => console.error('Could not connect to MongoDB', err));
+connectDB();  // Appel de la fonction pour connecter à la BD
 
 const app = express();
-const PORT = process.env.PORT || 3001;
 
-const cors = require('cors');
-const corsOptions = {
-  origin: 'http://localhost:5173', // Remplacez par l'URL de votre frontend
-  optionsSuccessStatus: 204,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // pour autoriser les cookies
-};
+applyMiddlewares(app);  // Application des middlewares
 
-app.use(cors(corsOptions));
-app.use(express.json());
 app.use('/auth', authRoutes);
+app.use('/api', greetingRoutes);
 
-// Read All
-app.get('/api/getGreetings', async (req, res) => {
-  const greetings = await Greeting.find({});
-  res.json(greetings);
+app.listen(config.PORT, () => {
+  console.log(`Server is running on port ${config.PORT}`);
 });
-
-app.post('/api/saveGreeting', async (req, res) => {
-  const { name, message } = req.body;
-  const greeting = new Greeting({ name, message });
-  await greeting.save();
-  res.json({ status: 'saved' });
-});
-
-// Read One
-app.get('/api/getGreeting/:id', async (req, res) => {
-  const greeting = await Greeting.findById(req.params.id);
-  res.json(greeting);
-});
-
-// Update
-app.put('/api/updateGreeting/:id', async (req, res) => {
-  const updatedGreeting = await Greeting.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  res.json(updatedGreeting);
-});
-
-// Delete
-app.delete('/api/deleteGreeting/:id', async (req, res) => {
-  await Greeting.findByIdAndDelete(req.params.id);
-  res.json({ status: 'deleted' });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
