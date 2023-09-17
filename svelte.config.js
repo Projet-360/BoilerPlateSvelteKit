@@ -49,6 +49,7 @@ export default defineConfig({
     adapter: adapter(),
     alias: {
       // this will match a file
+      $components: "src/components",
       $stores: "src/stores",
       $UITools: "src/UITools",
       $language: "src/language",

@@ -3,12 +3,14 @@
   import { checkAuth } from "./authLayout";
   import { registerServiceWorker } from "$UITools/serviceWorker";
 
-  import Header from "./Header.svelte";
+  import Header from "$components/Header.svelte";
   import PageTransition from "$UITools/PageTransition/index.svelte";
   import Cursor from "$UITools/Cursor/index.svelte";
   import Preloader from "$UITools/Preloader/index.svelte";
   import SmoothScroller from "$UITools/SmoothScroller/index.svelte";
   import App from "$lib/js/index";
+  import Notification from "$UITools/notifications/Notification.svelte";
+  import notificationStore from "$stores/notificationStore";
 
   import { authStore } from "$stores/authStore";
 
@@ -44,10 +46,16 @@
 <Preloader />
 <Cursor />
 
+{#each $notificationStore as { id, message, type }}
+  <Notification {message} {type} />
+{/each}
+
 <PageTransition pathname={data.route}>
   <SmoothScroller>
     <Header />
-    <slot />
+    <main>
+      <slot />
+    </main>
   </SmoothScroller>
 </PageTransition>
 

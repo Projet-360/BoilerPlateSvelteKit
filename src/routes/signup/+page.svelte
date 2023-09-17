@@ -14,7 +14,11 @@
   }
 </script>
 
-<input type="text" bind:value={username} placeholder="Username" />
-<input type="email" bind:value={email} placeholder="Email" />
-<input type="password" bind:value={password} placeholder="Password" />
-<button on:click={handleSignup}>Sign Up</button>
+<div class="signup">
+  <form on:submit|preventDefault={handleSignup}>
+    <input type="text" bind:value={username} placeholder="Username" />
+    <input type="email" bind:value={email} placeholder="Email" />
+    <input type="password" bind:value={password} placeholder="Password" />
+    <button type="submit">S'inscrire</button>
+  </form>
+</div>

@@ -29,6 +29,23 @@ Animations de chargement: Au-delà du préloader, envisagez d'avoir des animatio
 Effets sonores: Intégrer une bibliothèque pour jouer des effets sonores lors de certaines actions ou transitions. Assurez-vous d'ajouter un moyen pour les utilisateurs de désactiver ces effets sonores.
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Validation d'Email : Après l'inscription, envoyer un e-mail avec un lien de validation pour confirmer que l'adresse e-mail est valide.
 
 Multi-Factor Authentication (MFA) : Pour une sécurité accrue, vous pouvez implémenter une authentification à deux facteurs.

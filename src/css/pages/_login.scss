@@ -1,0 +1,13 @@
+.login {
+    @include ccc;
+    width: 100%;
+    min-height: calc(100vh - 70px);
+
+    form {
+        @include cca;
+
+        input {
+            margin: 5px 0px;
+        }
+    }
+}

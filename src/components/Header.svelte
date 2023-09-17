@@ -4,7 +4,7 @@
   import { t, locale, locales } from "$UITools/translations/index";
 
   import { authStore } from "$stores/authStore";
-  import Logout from "./Logout.svelte";
+  import Logout from "$components/Logout.svelte";
 
   const handleChange = ({ currentTarget }) => {
     const { value } = currentTarget;
@@ -36,25 +36,27 @@
           class="CursorDezoom"
           aria-current={$page.url.pathname === "/signup" ? "page" : undefined}
         >
-          <a href="/signup">signup</a>
+          <a href="/signup">Signup</a>
         </li>
         <li
           class="CursorDezoom"
           aria-current={$page.url.pathname === "/login" ? "page" : undefined}
         >
-          <a href="/login">login</a>
+          <a href="/login">Login</a>
         </li>
       {/if}
     </ul>
   </nav>
 
-  <select bind:value={$locale} on:change={handleChange}>
-    {#each $locales as value}
-      <option {value}>{$t(`lang.${value}`)}</option>
-    {/each}
-  </select>
+  <div class="left-side">
+    <select bind:value={$locale} on:change={handleChange}>
+      {#each $locales as value}
+        <option {value}>{$t(`lang.${value}`)}</option>
+      {/each}
+    </select>
 
-  <DarkMode />
+    <DarkMode />
 
-  <Logout />
+    <Logout />
+  </div>
 </header>

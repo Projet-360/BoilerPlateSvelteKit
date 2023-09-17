@@ -24,7 +24,7 @@
 </script>
 
 {#key pathname}
-  <main in:fly={inAnimation} out:fly={outAnimation}>
+  <div class="pageTransition" in:fly={inAnimation} out:fly={outAnimation}>
     <slot />
-  </main>
+  </div>
 {/key}

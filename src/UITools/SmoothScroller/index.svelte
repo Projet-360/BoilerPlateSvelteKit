@@ -46,14 +46,6 @@
   });
 </script>
 
-<div id="smoothScoller">
+<div class="smoothScoller" id="smoothScoller">
   <slot />
 </div>
-
-<style>
-  #smoothScoller {
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-  }
-</style>

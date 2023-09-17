@@ -16,14 +16,10 @@
   }
 </script>
 
-<form on:submit|preventDefault={handleLogin}>
-  <label>
-    Email:
-    <input type="text" bind:value={email} />
-  </label>
-  <label>
-    Mot de passe:
-    <input type="password" bind:value={password} />
-  </label>
-  <button type="submit">Se connecter</button>
-</form>
+<div class="signup">
+  <form on:submit|preventDefault={handleLogin}>
+    <input type="text" bind:value={email} placeholder="Email" />
+    <input type="password" bind:value={password} placeholder="Password" />
+    <button type="submit">Se connecter</button>
+  </form>
+</div>
