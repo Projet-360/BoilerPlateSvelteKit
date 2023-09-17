@@ -12,10 +12,10 @@
     document.cookie = `lang=${value} ;`;
   };
 
-  let isLoggedIn;
+  let isAuthenticated;
 
   authStore.subscribe(($authStore) => {
-    isLoggedIn = $authStore && $authStore.token ? true : false;
+    isAuthenticated = $authStore && $authStore.token ? true : false;
   });
 </script>
 
@@ -31,7 +31,7 @@
       <li aria-current={$page.url.pathname === "/about" ? "page" : undefined}>
         <a href="/about">About</a>
       </li>
-      {#if !isLoggedIn}
+      {#if !isAuthenticated}
         <li
           class="CursorDezoom"
           aria-current={$page.url.pathname === "/signup" ? "page" : undefined}

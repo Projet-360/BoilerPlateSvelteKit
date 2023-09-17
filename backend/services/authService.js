@@ -22,23 +22,27 @@ exports.signup = async (username, email, password) => {
   }
 };
 
-exports.login = async (username, password) => {
-  const user = await User.findOne({ username });
+exports.login = async (email, password) => {
+  // Trouver l'utilisateur par email
+  const user = await User.findOne({ email });
   if (!user) {
-    throw new Error("User not found");
+    // Vous pouvez ajouter des logs ici
+    throw new Error("Invalid credentials");
   }
 
-  console.log("Password from request:", password);
-  console.log("Hashed password from DB:", user.password);
-
+  // Vérifier si le mot de passe correspond
   const isMatch = await bcrypt.compare(password, user.password);
-  console.log("Is match:", isMatch);
   if (!isMatch) {
-    throw new Error("Incorrect password");
+    // Vous pouvez ajouter des logs ici
+    throw new Error("Invalid credentials");
   }
 
+  // Vérification supplémentaire: est-ce que l'email a été vérifié, etc.
+  // ...
+
+  // Générer un JWT
   const token = jwt.sign(
-    { userId: user._id, username: user.username },
+    { userId: user._id, email: user.email },
     process.env.SECRETKEY,
     { expiresIn: "1h" },
   );

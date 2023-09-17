@@ -1,13 +1,14 @@
 import { authStore } from "$stores/authStore";
 
-export async function login(username, password) {
+export async function login(email, password) {
   try {
     const res = await fetch("http://localhost:3001/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      credentials: "include",
+      body: JSON.stringify({ email, password }),
     });
 
     if (!res.ok) {
@@ -16,10 +17,15 @@ export async function login(username, password) {
     }
 
     const data = await res.json();
-    authStore.set({ token: data.token, userId: data.userId });
-    localStorage.setItem("token", data.token); // Ajouté cette ligne
+    authStore.set({
+      token: data.token,
+      userId: data.userId,
+      isAuthenticated: true,
+    });
   } catch (error) {
     console.error("Erreur lors de la connexion:", error);
     throw error;
+  } finally {
+    // Vous pouvez ajouter ici d'autres opérations de nettoyage ou des logs
   }
 }

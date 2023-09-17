@@ -1,10 +1,7 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
-const CryptoJS = require("crypto-js");
-const nodemailer = require("nodemailer");
+const jwt = require("jsonwebtoken");
 
 const authService = require("../services/authService");
-const User = require("../models/User");
 
 require("dotenv").config();
 
@@ -41,12 +38,42 @@ router.post("/signup", async (req, res) => {
 // Route de connexion
 router.post("/login", async (req, res) => {
   try {
-    const { username, password } = req.body;
-    const { token, userId } = await authService.login(username, password);
+    const { email, password } = req.body;
+    const { token, userId } = await authService.login(email, password);
+    console.log(token);
+    // Définir le cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production", // Ou une autre condition pour déterminer si on est en prod ou en dev
+      maxAge: 3600000,
+    });
+
     res.status(200).json({ token, userId });
   } catch (error) {
     // Le message d'erreur peut être personnalisé en fonction de l'erreur renvoyée
     res.status(400).json({ message: error.message });
+  }
+});
+
+router.get("/check-auth", (req, res) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ isAuthenticated: false });
+  }
+
+  try {
+    // Vérifie le token et récupère les données
+    const decoded = jwt.verify(token, process.env.SECRETKEY);
+
+    // Renvoie les données de l'utilisateur ainsi que le statut d'authentification
+    res.status(200).json({
+      isAuthenticated: true,
+      token,
+      userId: decoded.userId,
+    });
+  } catch (error) {
+    res.status(401).json({ isAuthenticated: false });
   }
 });
 
@@ -127,8 +154,11 @@ router.post("/login", async (req, res) => {
 //     .json({ message: "Votre mot de passe a été réinitialisé avec succès" });
 // });
 
-function logout() {
-  authStore.set({ token: null, userId: null });
-}
+router.get("/logout", (req, res) => {
+  // Supprime le cookie
+  res.clearCookie("token");
 
+  // Vous pouvez également renvoyer une réponse pour confirmer la déconnexion
+  res.status(200).json({ message: "Déconnexion réussie" });
+});
 module.exports = router;

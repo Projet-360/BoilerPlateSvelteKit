@@ -1,22 +1,36 @@
 <script>
   import { authStore } from "$stores/authStore";
 
-  let isLoggedIn;
+  let isAuthenticated;
+
+  authStore.subscribe(($authStore) => {
+    isAuthenticated = $authStore && $authStore.token ? true : false;
+  });
 
   function handleLogout() {
     logout();
   }
 
-  function logout() {
-    authStore.set({ token: null, userId: null });
-    localStorage.removeItem("token"); // Ajouté cette ligne
+  async function logout() {
+    try {
+      const res = await fetch("http://localhost:3001/auth/logout", {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if (res.ok) {
+        authStore.set({ token: null, userId: null, isAuthenticated: false });
+      }
+    } catch (error) {
+      console.error("Erreur lors de la déconnexion:", error);
+    }
   }
 
   authStore.subscribe(($authStore) => {
-    isLoggedIn = $authStore && $authStore.token ? true : false;
+    isAuthenticated = $authStore && $authStore.token ? true : false;
   });
 </script>
 
-{#if isLoggedIn}
+{#if isAuthenticated}
   <button on:click={handleLogout}>Se déconnecter</button>
 {/if}

@@ -2,12 +2,12 @@
   import { login } from "./loginFunc";
   import { goto } from "$app/navigation";
 
-  let username = "";
+  let email = "";
   let password = "";
 
   async function handleLogin() {
     try {
-      await login(username, password);
+      await login(email, password);
       goto("/dashboard");
       // Rediriger vers la page d'accueil ou afficher un message de réussite
     } catch (error) {
@@ -18,8 +18,8 @@
 
 <form on:submit|preventDefault={handleLogin}>
   <label>
-    Nom d'utilisateur:
-    <input type="text" bind:value={username} />
+    Email:
+    <input type="text" bind:value={email} />
   </label>
   <label>
     Mot de passe:
