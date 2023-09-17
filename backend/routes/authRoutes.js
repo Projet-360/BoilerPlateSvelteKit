@@ -7,10 +7,6 @@ require("dotenv").config();
 
 const router = express.Router();
 
-const HTTP_CREATED = 201;
-const HTTP_INTERNAL_SERVER_ERROR = 500;
-const HTTP_UNPROCESSABLE_ENTITY = 422;
-
 // Route d'inscription
 router.post("/signup", async (req, res) => {
   try {
@@ -25,6 +21,7 @@ router.post("/signup", async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: true, // Notez que 'secure: true' fonctionnera seulement si vous utilisez HTTPS
+      sameSite: "strict",
       maxAge: 3600000,
     });
 
@@ -44,7 +41,8 @@ router.post("/login", async (req, res) => {
     // Définir le cookie
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Ou une autre condition pour déterminer si on est en prod ou en dev
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
       maxAge: 3600000,
     });
 
