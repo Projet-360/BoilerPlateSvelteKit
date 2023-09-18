@@ -7,7 +7,7 @@ exports.signupValidators = [
     .notEmpty()
     .withMessage(ERRORS.USERNAME_REQUIRED)
     .isLength({ min: 3, max: 20 })
-    .withMessage("Le nom d'utilisateur doit avoir entre 3 et 20 caractères"),
+    .withMessage(ERRORS.VALID_USERNAME),
 
   // Email : doit être un email valide
   check("email").isEmail().withMessage(ERRORS.VALID_EMAIL),
@@ -15,13 +15,13 @@ exports.signupValidators = [
   // Mot de passe : longueur minimale, au moins une majuscule, une minuscule, un chiffre et un caractère spécial
   check("password")
     .isLength({ min: 8 })
-    .withMessage("Le mot de passe doit avoir au moins 8 caractères")
+    .withMessage(ERRORS.NUMBE_CARAC_PASSWORD)
     .matches(/[a-z]/)
-    .withMessage("Le mot de passe doit contenir au moins une minuscule")
+    .withMessage(ERRORS.MIN_PASSWORD)
     .matches(/[A-Z]/)
-    .withMessage("Le mot de passe doit contenir au moins une majuscule")
+    .withMessage(ERRORS.MAJ_PASSWORD)
     .matches(/[0-9]/)
-    .withMessage("Le mot de passe doit contenir au moins un chiffre")
+    .withMessage(ERRORS.NUMBER_PASSWORD)
     .matches(/[!@#$%^&*(),.?":{}|<>]/)
-    .withMessage("Le mot de passe doit contenir au moins un caractère spécial"),
+    .withMessage(ERRORS.SPECIAL_CARAC_PASSWORD),
 ];

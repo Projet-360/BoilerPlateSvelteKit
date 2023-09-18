@@ -23,7 +23,7 @@ export async function login(email, password) {
       isAuthenticated: true,
     });
   } catch (error) {
-    console.error("Erreur lors de la connexion:", error);
+    //console.error("Erreur lors de la connexion:", error);
     throw error;
   } finally {
     // Vous pouvez ajouter ici d'autres opérations de nettoyage ou des logs

@@ -18,7 +18,6 @@ router.post("/signup", signupValidators, async (req, res) => {
       .json({ message: errors.array()[0].msg });
   }
 
-  // Votre logique existante
   try {
     const { username, email, password } = req.body;
 
@@ -57,7 +56,10 @@ router.post("/login", async (req, res, next) => {
 
     res.status(HTTP_STATUS.OK).json({ token, userId });
   } catch (error) {
-    next(error);
+    // Si une erreur se produit, renvoyez un code d'erreur approprié et un message explicatif.
+    res
+      .status(HTTP_STATUS.UNAUTHORIZED)
+      .json({ message: "Identifiants invalides." });
   }
 });
 

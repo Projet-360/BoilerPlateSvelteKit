@@ -1,6 +1,7 @@
 <script>
   import { login } from "./loginFunc";
   import { goto } from "$app/navigation";
+  import notificationStore from "$stores/notificationStore";
 
   let email = "";
   let password = "";
@@ -11,7 +12,7 @@
       goto("/dashboard");
       // Rediriger vers la page d'accueil ou afficher un message de réussite
     } catch (error) {
-      console.error("Erreur lors de la connexion:", error);
+      notificationStore.addNotification(error.message, "error");
     }
   }
 </script>
