@@ -9,9 +9,4 @@ module.exports = (app) => {
   app.use(express.json());
   app.use(cookieParser());
   app.use(errorHandler);
-
-  app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send("Something broke!");
-  });
 };

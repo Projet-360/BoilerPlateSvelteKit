@@ -20,6 +20,7 @@
   // Souscription au store
   const unsubscribe = authStore.subscribe((state) => {
     isAuthenticated = state.isAuthenticated;
+    console.log(state);
   });
 
   onMount(() => {
