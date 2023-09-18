@@ -8,16 +8,16 @@
   $: {
     switch (pathname) {
       case "/":
-        inAnimation = { x: -300, duration: 5000, delay: 5000 };
-        outAnimation = { x: 100, duration: 5000 };
+        inAnimation = { x: -300, duration: 500, delay: 500 };
+        outAnimation = { x: 100, duration: 500 };
         break;
       case "/about":
-        inAnimation = { y: -100, duration: 5000, delay: 5000 };
-        outAnimation = { y: 100, duration: 5000 };
+        inAnimation = { y: -100, duration: 500, delay: 500 };
+        outAnimation = { y: 100, duration: 500 };
         break;
       default:
-        inAnimation = { x: -10, duration: 5000, delay: 5000 };
-        outAnimation = { x: 5, duration: 5000 };
+        inAnimation = { x: -10, duration: 500, delay: 500 };
+        outAnimation = { x: 5, duration: 500 };
         break;
     }
   }

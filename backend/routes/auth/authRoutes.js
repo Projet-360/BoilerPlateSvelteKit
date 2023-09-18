@@ -1,17 +1,19 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
+const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const HTTP_STATUS = require("../../constants/HTTP_STATUS");
 const authService = require("../../services/authService");
-const router = express.Router();
-const { signupValidators } = require("./validators");
 
+const { signupValidators } = require("./validators");
 const BlacklistedToken = require("../../models/BlacklistedTokenModel");
+const User = require("../../models/UserModel");
 
 // Ajoutez les middlewares de validation à votre route
-router.post("/signup", signupValidators, async (req, res) => {
+router.post("/signup", signupValidators, async (req, res, next) => {
   // Gérez les erreurs de validation
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
     return res
       .status(HTTP_STATUS.BAD_REQUEST)
@@ -20,6 +22,11 @@ router.post("/signup", signupValidators, async (req, res) => {
 
   try {
     const { username, email, password } = req.body;
+
+    const existingUserByEmail = await User.findOne({ email });
+    if (existingUserByEmail) {
+      throw new Error("Email already exists");
+    }
 
     const { token, userId } = await authService.signup(
       username,
@@ -40,7 +47,6 @@ router.post("/signup", signupValidators, async (req, res) => {
     next(error);
   }
 });
-
 // Route de connexion
 router.post("/login", async (req, res, next) => {
   try {
@@ -106,6 +112,19 @@ router.get("/logout", async (req, res, next) => {
     res.status(200).json({ message: "Déconnexion réussie" });
   } catch (error) {
     next(error);
+  }
+});
+
+router.get("/verify/:token", async (req, res) => {
+  try {
+    const { token } = req.params;
+
+    const message = await authService.verifyToken(token);
+
+    res.status(200).json({ message });
+  } catch (error) {
+    console.error("Erreur lors de la vérification de l'e-mail:", error);
+    res.status(500).json({ message: error.message });
   }
 });
 

@@ -10,6 +10,8 @@ connectDB(); // Appel de la fonction pour connecter à la BD
 
 const app = express();
 
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
 applyMiddlewares(app); // Application des middlewares
 
 app.use("/auth", authRoutes);

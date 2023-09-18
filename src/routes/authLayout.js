@@ -2,7 +2,7 @@ import { authStore } from "$stores/authStore";
 
 export async function checkAuth() {
   try {
-    const res = await fetch("http://localhost:3001/auth/check-auth", {
+    const res = await fetch(`http://localhost:3001/auth/check-auth`, {
       credentials: "include",
     });
     if (res.ok) {

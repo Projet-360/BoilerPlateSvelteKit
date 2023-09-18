@@ -1,7 +1,15 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 
 const User = require("../models/UserModel");
+const EmailVerificationToken = require("../models/EmailVerificationTokenModel");
+const { sendVerificationEmail } = require("../services/emailService");
+
+// Fonction pour générer un token de vérification
+const generateVerificationToken = () => {
+  return crypto.randomBytes(32).toString("hex");
+};
 
 exports.signup = async (username, email, password) => {
   try {
@@ -14,6 +22,22 @@ exports.signup = async (username, email, password) => {
       process.env.SECRETKEY,
       { expiresIn: "1h" },
     );
+
+    // Générer le token de vérification
+    const verificationToken = generateVerificationToken();
+    await sendVerificationEmail(email, verificationToken);
+
+    // Définir la date d'expiration du token de vérification
+    const expireAt = new Date();
+    expireAt.setHours(expireAt.getHours() + 24); // Le token expirera dans 24 heures
+
+    // Créer un nouvel objet EmailVerificationToken
+    const newToken = new EmailVerificationToken({
+      userId: newUser._id,
+      token: verificationToken,
+      expireAt: expireAt,
+    });
+    await newToken.save();
 
     return { token, userId: newUser._id };
   } catch (error) {
@@ -48,4 +72,34 @@ exports.login = async (email, password) => {
   );
 
   return { token, userId: user._id };
+};
+
+exports.verifyToken = async (token) => {
+  // Trouver le token dans la base de données
+  const verificationToken = await EmailVerificationToken.findOne({ token });
+
+  if (!verificationToken) {
+    throw new Error("Token invalide");
+  }
+
+  // Vérifier si le token a expiré
+  if (new Date() > verificationToken.expireAt) {
+    throw new Error("Token expiré");
+  }
+
+  // Trouver l'utilisateur associé à ce token
+  const user = await User.findById(verificationToken.userId);
+
+  if (!user) {
+    throw new Error("Utilisateur introuvable");
+  }
+
+  // Mettre à jour le statut de vérification de l'utilisateur
+  user.isVerified = true;
+  await user.save();
+
+  // Supprimer le token de vérification car il a été utilisé
+  await EmailVerificationToken.findByIdAndDelete(verificationToken.id);
+
+  return "E-mail vérifié avec succès !";
 };
