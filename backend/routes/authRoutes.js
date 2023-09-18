@@ -1,11 +1,8 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
-
+const { HTTP_STATUS } = require("../constants");
 const authService = require("../services/authService");
-
-require("dotenv").config();
-
 const router = express.Router();
 
 // Route d'inscription
@@ -40,15 +37,16 @@ router.post(
       // Définir le cookie
       res.cookie("token", token, {
         httpOnly: true,
-        secure: true, // Notez que 'secure: true' fonctionnera seulement si vous utilisez HTTPS
+        secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
         maxAge: 3600000,
       });
 
       res.status(201).json({ userId, token });
     } catch (error) {
-      console.error("Erreur lors de l'inscription:", error);
-      res.status(500).json({ error: error.message });
+      // console.error("Erreur lors de l'inscription:", error);
+      // res.status(500).json({ error: error.message });
+      next(error);
     }
   },
 );
@@ -69,7 +67,8 @@ router.post("/login", async (req, res) => {
     res.status(200).json({ token, userId });
   } catch (error) {
     // Le message d'erreur peut être personnalisé en fonction de l'erreur renvoyée
-    res.status(400).json({ message: error.message });
+    // res.status(400).json({ message: error.message });
+    next(error);
   }
 });
 
@@ -91,7 +90,8 @@ router.get("/check-auth", (req, res) => {
       userId: decoded.userId,
     });
   } catch (error) {
-    res.status(401).json({ isAuthenticated: false });
+    //res.status(401).json({ isAuthenticated: false });
+    next(error);
   }
 });
 
@@ -172,11 +172,16 @@ router.get("/check-auth", (req, res) => {
 //     .json({ message: "Votre mot de passe a été réinitialisé avec succès" });
 // });
 
-router.get("/logout", (req, res) => {
-  // Supprime le cookie
-  res.clearCookie("token");
+router.get("/logout", (req, res, next) => {
+  try {
+    // Supprime le cookie
+    res.clearCookie("token");
 
-  // Vous pouvez également renvoyer une réponse pour confirmer la déconnexion
-  res.status(200).json({ message: "Déconnexion réussie" });
+    // Vous pouvez également renvoyer une réponse pour confirmer la déconnexion
+    res.status(HTTP_STATUS.OK).json({ message: "Déconnexion réussie" });
+  } catch (error) {
+    next(error); // Passer l'erreur au middleware d'erreur centralisé
+  }
 });
+
 module.exports = router;

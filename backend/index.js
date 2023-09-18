@@ -18,3 +18,13 @@ app.use("/api", greetingRoutes);
 app.listen(config.PORT, () => {
   console.log(`Server is running on port ${config.PORT}`);
 });
+
+// Gestion des signaux pour une fermeture propre
+process.on("SIGTERM", gracefulShutdown);
+process.on("SIGINT", gracefulShutdown);
+
+function gracefulShutdown() {
+  console.log("\nReceived exit signal, shutting down gracefully.");
+  // Fermer la connexion à la base de données, etc.
+  process.exit(0);
+}
