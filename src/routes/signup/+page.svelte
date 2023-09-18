@@ -15,12 +15,8 @@
       goto("/");
       notificationStore.addNotification("Inscription réussie", "success");
     } catch (error) {
-      console.log(error);
       notificationStore.addNotification(error.message, "error");
     }
-  }
-  function testNotification() {
-    notificationStore.addNotification("Ceci est un test", "info");
   }
 </script>
 
@@ -31,5 +27,4 @@
     <input type="password" bind:value={password} placeholder="Password" />
     <button type="submit">S'inscrire</button>
   </form>
-  <button on:click={testNotification}>Ajouter une notification</button>
 </div>

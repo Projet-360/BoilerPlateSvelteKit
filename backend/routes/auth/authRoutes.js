@@ -1,54 +1,46 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
-const HTTP_STATUS = require("../constants/HTTP_STATUS");
-const authService = require("../services/authService");
+const HTTP_STATUS = require("../../constants/HTTP_STATUS");
+const authService = require("../../services/authService");
 const router = express.Router();
-const ERRORS = require("../constants/errorMessages");
+const { signupValidators } = require("./validators");
 
-const BlacklistedToken = require("../models/BlacklistedTokenModel");
+const BlacklistedToken = require("../../models/BlacklistedTokenModel");
 
 // Ajoutez les middlewares de validation à votre route
-router.post(
-  "/signup",
-  [
-    check("username").notEmpty().withMessage(ERRORS.USERNAME_REQUIRED),
-    check("email").isEmail().withMessage(ERRORS.VALID_EMAIL),
-    check("password").isLength({ min: 5 }).withMessage(ERRORS.PASSWORD_LENGTH),
-  ],
-  async (req, res) => {
-    // Gérez les erreurs de validation
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res
-        .status(HTTP_STATUS.BAD_REQUEST)
-        .json({ message: errors.array()[0].msg });
-    }
+router.post("/signup", signupValidators, async (req, res) => {
+  // Gérez les erreurs de validation
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res
+      .status(HTTP_STATUS.BAD_REQUEST)
+      .json({ message: errors.array()[0].msg });
+  }
 
-    // Votre logique existante
-    try {
-      const { username, email, password } = req.body;
+  // Votre logique existante
+  try {
+    const { username, email, password } = req.body;
 
-      const { token, userId } = await authService.signup(
-        username,
-        email,
-        password,
-      );
+    const { token, userId } = await authService.signup(
+      username,
+      email,
+      password,
+    );
 
-      // Définir le cookie
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 3600000,
-      });
+    // Définir le cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 3600000,
+    });
 
-      res.status(HTTP_STATUS.CREATED).json({ userId, token });
-    } catch (error) {
-      next(error);
-    }
-  },
-);
+    res.status(HTTP_STATUS.CREATED).json({ userId, token });
+  } catch (error) {
+    next(error);
+  }
+});
 
 // Route de connexion
 router.post("/login", async (req, res, next) => {

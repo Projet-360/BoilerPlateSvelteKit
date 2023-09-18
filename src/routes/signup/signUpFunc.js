@@ -20,7 +20,7 @@ export async function signup(username, email, password) {
     authStore.set({ token: data.token, userId: data.userId });
     return data;
   } catch (error) {
-    console.error("Il y a eu un problème avec l'opération fetch:", error);
+    //console.error("Il y a eu un problème avec l'opération fetch:", error);
     throw error;
   }
 }

@@ -12,7 +12,6 @@
 
   // Cycle de vie : monté du composant
   onMount(() => {
-    console.log(message);
     // Définir un timer pour masquer la notification après 5 secondes
     const timer = setTimeout(() => {
       isVisible = false;
