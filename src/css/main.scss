@@ -48,36 +48,34 @@
   }
 }
 
-.pageTransition {
-  min-height: 100vh;
-  .smoothScoller {
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-    min-height: 100vh;
-
-    header {
-      @include rcb;
-      padding: 20px;
-
-      width: 100%;
-      height: 70px;
-      position: absolute;
-      z-index: 100;
-      top: 0;
-
-      ul {
-        width: 200px;
+#smoothScoller {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  
+  .pageTransition {
+      header {
         @include rcb;
-      }
-    }
+        padding: 20px;
 
-    main {
-      overflow: hidden;
-      width: 100%;
-      min-height: 100vh;
-      padding-top: 70px;
-    }
+        width: 100%;
+        height: 70px;
+        position: absolute;
+        z-index: 100;
+        top: 0;
+
+        ul {
+          width: 200px;
+          @include rcb;
+        }
+      }
+
+      main {
+        overflow: hidden;
+        width: 100%;
+        min-height: 100vh;
+        padding-top: 70px;
+      }
   }
 }
 

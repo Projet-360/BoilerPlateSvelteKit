@@ -50,14 +50,14 @@
   <Notification {message} {type} />
 {/each}
 
-<PageTransition pathname={data.route}>
-  <SmoothScroller>
+<SmoothScroller>
+  <PageTransition pathname={data.route}>
     <Header />
     <main>
       <slot />
     </main>
-  </SmoothScroller>
-</PageTransition>
+  </PageTransition>
+</SmoothScroller>
 
 <style lang="scss" global>
   @import "../css/main";
