@@ -12,6 +12,7 @@
 
   // Cycle de vie : monté du composant
   onMount(() => {
+    console.log(message);
     // Définir un timer pour masquer la notification après 5 secondes
     const timer = setTimeout(() => {
       isVisible = false;
@@ -31,7 +32,7 @@
 
 {#if isVisible}
   <div class={`notification ${type}`} aria-live="assertive">
-    <span>{message.message}</span>
+    <span>{message}</span>
     <button on:click={closeNotification} aria-label="Fermer la notification">
       X
     </button>

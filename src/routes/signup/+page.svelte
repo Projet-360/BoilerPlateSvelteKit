@@ -13,19 +13,12 @@
       const data = await signup(username, email, password);
       authStore.set({ token: data.token, userId: data.userId });
       goto("/");
-      notificationStore.addNotification({
-        message: "Inscription réussie",
-        type: "success",
-      });
+      notificationStore.addNotification("Inscription réussie", "success");
     } catch (error) {
-      console.log("error.message", error.message);
-      notificationStore.addNotification({
-        message: error.message,
-        type: "error",
-      });
+      console.log(error);
+      notificationStore.addNotification(error.message, "error");
     }
   }
-
   function testNotification() {
     notificationStore.addNotification("Ceci est un test", "info");
   }
