@@ -1,27 +1,28 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
-const HTTP_STATUS = require("../constants");
+const HTTP_STATUS = require("../constants/HTTP_STATUS");
 const authService = require("../services/authService");
 const router = express.Router();
+const ERRORS = require("../constants/errorMessages");
 
-// Route d'inscription
+const BlacklistedToken = require("../models/BlacklistedTokenModel");
 
 // Ajoutez les middlewares de validation à votre route
 router.post(
   "/signup",
   [
-    check("username").notEmpty().withMessage("Le nom d'utilisateur est requis"),
-    check("email").isEmail().withMessage("Veuillez entrer un email valide"),
-    check("password")
-      .isLength({ min: 5 })
-      .withMessage("Le mot de passe doit avoir au moins 5 caractères"),
+    check("username").notEmpty().withMessage(ERRORS.USERNAME_REQUIRED),
+    check("email").isEmail().withMessage(ERRORS.VALID_EMAIL),
+    check("password").isLength({ min: 5 }).withMessage(ERRORS.PASSWORD_LENGTH),
   ],
   async (req, res) => {
     // Gérez les erreurs de validation
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ message: errors.array()[0].msg });
+      return res
+        .status(HTTP_STATUS.BAD_REQUEST)
+        .json({ message: errors.array()[0].msg });
     }
 
     // Votre logique existante
@@ -42,7 +43,7 @@ router.post(
         maxAge: 3600000,
       });
 
-      res.status(201).json({ userId, token });
+      res.status(HTTP_STATUS.CREATED).json({ userId, token });
     } catch (error) {
       next(error);
     }
@@ -62,51 +63,55 @@ router.post("/login", async (req, res, next) => {
       maxAge: 3600000,
     });
 
-    res.status(200).json({ token, userId });
+    res.status(HTTP_STATUS.OK).json({ token, userId });
   } catch (error) {
     next(error);
   }
 });
 
-router.get("/check-auth", (req, res, next) => {
+router.get("/check-auth", async (req, res, next) => {
   const token = req.cookies.token;
 
   if (!token) {
-    return res.status(401).json({ isAuthenticated: false });
+    return res
+      .status(HTTP_STATUS.UNAUTHORIZED)
+      .json({ isAuthenticated: false });
   }
 
   try {
+    // Vérifie si le token est dans la liste noire
+    const blacklistedToken = await BlacklistedToken.findOne({ token });
+    if (blacklistedToken) {
+      return res.status(HTTP_STATUS.UNAUTHORIZED).json({
+        isAuthenticated: false,
+        message: "Le token est dans la liste noire.",
+      });
+    }
+
     // Vérifie le token et récupère les données
     const decoded = jwt.verify(token, process.env.SECRETKEY);
 
     // Renvoie les données de l'utilisateur ainsi que le statut d'authentification
-    res.status(200).json({
+    res.status(HTTP_STATUS.OK).json({
       isAuthenticated: true,
       token,
       userId: decoded.userId,
     });
   } catch (error) {
-    //res.status(401).json({ isAuthenticated: false });
     next(error);
   }
 });
 
-// router.get("/logout", (req, res) => {
-//   // Supprime le cookie
-//   res.clearCookie("token");
-
-//   // Vous pouvez également renvoyer une réponse pour confirmer la déconnexion
-//   res.status(200).json({ message: "Déconnexion réussie" });
-// });
-
-router.get("/logout", (req, res, next) => {
+router.get("/logout", async (req, res, next) => {
   try {
-    // Supprime le cookie
+    const token = req.cookies.token;
+    const newBlacklistedToken = new BlacklistedToken({ token });
+    await newBlacklistedToken.save();
+
     res.clearCookie("token");
-    // Vous pouvez également renvoyer une réponse pour confirmer la déconnexion
-    res.status(HTTP_STATUS.OK).json({ message: "Déconnexion réussie" });
+    res.status(200).json({ message: "Déconnexion réussie" });
   } catch (error) {
-    next(error); // Passer l'erreur au middleware d'erreur centralisé
+    next(error);
   }
 });
 

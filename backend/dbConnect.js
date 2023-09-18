@@ -10,7 +10,8 @@ const connectDB = async () => {
     console.log("Connected to MongoDB");
   } catch (err) {
     console.error("Could not connect to MongoDB", err);
-    process.exit(1);
+    // Vous pouvez ici soit propager l'erreur, soit renvoyer une promesse rejetée
+    return Promise.reject(err);
   }
 };
 

@@ -15,6 +15,13 @@ applyMiddlewares(app); // Application des middlewares
 app.use("/auth", authRoutes);
 app.use("/api", greetingRoutes);
 
+// Placez le middleware d'erreur ici
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  console.error(err.message, err.stack);
+  res.status(statusCode).json({ message: err.message });
+});
+
 app.listen(config.PORT, () => {
   console.log(`Server is running on port ${config.PORT}`);
 });
@@ -25,6 +32,10 @@ process.on("SIGINT", gracefulShutdown);
 
 function gracefulShutdown() {
   console.log("\nReceived exit signal, shutting down gracefully.");
-  // Fermer la connexion à la base de données, etc.
-  process.exit(0);
+
+  // Fermer la connexion à la base de données
+  mongoose.connection.close(() => {
+    console.log("MongoDB connection closed.");
+    process.exit(0);
+  });
 }
