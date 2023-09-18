@@ -68,6 +68,7 @@ Intégration OAuth : Permettre aux utilisateurs de se connecter via des services
 
 Préparation aux Tests : Préparer des tests unitaires et d'intégration pour votre système d'authentification.
 
+PWA
 https://www.youtube.com/watch?v=Enl4OPQ2OAM
 
 

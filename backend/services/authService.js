@@ -5,16 +5,6 @@ const User = require("../models/User");
 
 exports.signup = async (username, email, password) => {
   try {
-    // Validation de l'email
-    if (!email || !email.includes("@")) {
-      throw new Error("Email invalide");
-    }
-
-    // Validation du mot de passe
-    if (password.length < 5) {
-      throw new Error("Le mot de passe doit comporter au moins 5 caractères");
-    }
-
     const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
