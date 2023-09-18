@@ -1,7 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const { check, validationResult } = require("express-validator");
-const { HTTP_STATUS } = require("../constants");
+const HTTP_STATUS = require("../constants");
 const authService = require("../services/authService");
 const router = express.Router();
 
@@ -103,7 +103,6 @@ router.get("/logout", (req, res, next) => {
   try {
     // Supprime le cookie
     res.clearCookie("token");
-    console.log(HTTP_STATUS.OK);
     // Vous pouvez également renvoyer une réponse pour confirmer la déconnexion
     res.status(HTTP_STATUS.OK).json({ message: "Déconnexion réussie" });
   } catch (error) {

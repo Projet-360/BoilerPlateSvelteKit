@@ -1,4 +1,4 @@
-const { HTTP_STATUS } = require("../constants");
+const HTTP_STATUS = require("../constants");
 
 const errorHandler = (err, req, res, next) => {
   // Log de l'erreur
