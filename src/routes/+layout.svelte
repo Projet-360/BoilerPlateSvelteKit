@@ -24,7 +24,7 @@
 
   onMount(() => {
     new App();
-    registerServiceWorker();
+    //registerServiceWorker();
   });
 
   onMount(async () => {
