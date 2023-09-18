@@ -42,11 +42,12 @@
   /* Styles de base pour toutes les notifications */
   .notification {
     position: absolute;
-    bottom: 20px;
+    top: 20px;
     right: 20px;
     width: 200px;
     padding: 10px;
     color: white;
+    z-index: 9999999;
   }
 
   /* Styles spécifiques pour chaque type de notification */

@@ -2,6 +2,7 @@
   import { page } from "$app/stores";
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
+  import notificationStore from "$stores/notificationStore";
 
   let token;
 
@@ -13,7 +14,11 @@
       const res = await fetch(`http://localhost:3001/auth/verify/${token}`);
       if (res.ok) {
         console.log("Token vérifié avec succès"); // Pour le débogage
-        goto("/verifySuccess");
+        goto("/");
+        notificationStore.addNotification(
+          "Votre adresse mail est bien validée",
+          "success"
+        );
       } else {
         console.log("Échec de la vérification du token"); // Pour le débogage
         // Gérer l'échec de la vérification ici
