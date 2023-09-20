@@ -11,11 +11,8 @@
   async function handleSignup() {
     try {
       const data = await signup(username, email, password);
-
       authStore.set({ token: data.token, userId: data.userId });
-
       goto("/");
-
       notificationStore.addNotification(
         "Vous avez reçue un Email afin de valider votre compte",
         "success"
