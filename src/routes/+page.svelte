@@ -3,6 +3,11 @@
   import Box from "$three/Box.svelte";
   import { t } from "$UITools/translations/index";
   import { onMount } from "svelte";
+  import {
+    sendGreeting,
+    getAllGreetings,
+    deleteGreeting,
+  } from "$api/Greetings"; // Import les fonctions
 
   const link = "https://kit.svelte.dev";
 
@@ -11,8 +16,8 @@
   let message = "";
   let greetings = [];
 
-  onMount(() => {
-    getAllGreetings();
+  onMount(async () => {
+    greetings = await getAllGreetings();
   });
 
   function prepareUpdate(greeting) {
@@ -21,43 +26,20 @@
     editingId = greeting._id;
   }
 
-  async function sendGreeting() {
-    const url = editingId
-      ? `http://localhost:3001/api/updateGreeting/${editingId}`
-      : "http://localhost:3001/api/saveGreeting";
-    const method = editingId ? "PUT" : "POST";
-
-    const response = await fetch(url, {
-      method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name, message }),
-    });
-    if (response.ok) {
+  async function handleSendGreeting() {
+    const isSuccessful = await sendGreeting(name, message, editingId);
+    if (isSuccessful) {
       name = "";
       message = "";
       editingId = null;
-      getAllGreetings();
+      greetings = await getAllGreetings();
     }
   }
 
-  async function getAllGreetings() {
-    const response = await fetch("http://localhost:3001/api/getGreetings");
-    if (response.ok) {
-      greetings = await response.json();
-    }
-  }
-
-  async function deleteGreeting(id) {
-    const response = await fetch(
-      `http://localhost:3001/api/deleteGreeting/${id}`,
-      {
-        method: "DELETE",
-      }
-    );
-    if (response.ok) {
-      getAllGreetings();
+  async function handleDeleteGreeting(id) {
+    const isSuccessful = await deleteGreeting(id);
+    if (isSuccessful) {
+      greetings = await getAllGreetings();
     }
   }
 </script>
@@ -78,7 +60,7 @@
 
 <Box />
 
-<form on:submit|preventDefault={sendGreeting}>
+<form on:submit|preventDefault={handleSendGreeting}>
   <label>
     Nom :
     <input type="text" bind:value={name} />
@@ -95,7 +77,9 @@
     <li>
       {greeting.name}: {greeting.message}
       <button on:click={() => prepareUpdate(greeting)}>Modifier</button>
-      <button on:click={() => deleteGreeting(greeting._id)}>Supprimer</button>
+      <button on:click={() => handleDeleteGreeting(greeting._id)}
+        >Supprimer</button
+      >
     </li>
   {/each}
 </ul>

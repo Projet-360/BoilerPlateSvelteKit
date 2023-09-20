@@ -42,11 +42,8 @@ Effets sonores: Intégrer une bibliothèque pour jouer des effets sonores lors d
 
 
 
-
-
-
-
-Validation d'Email : Après l'inscription, envoyer un e-mail avec un lien de validation pour confirmer que l'adresse e-mail est valide.
+3. Création d'une fonction d'API générique
+Pour éviter la répétition du code lié aux appels d'API (comme la définition des en-têtes), tu pourrais créer une fonction d'API générique.
 
 Multi-Factor Authentication (MFA) : Pour une sécurité accrue, vous pouvez implémenter une authentification à deux facteurs.
 
