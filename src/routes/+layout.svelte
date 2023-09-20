@@ -1,6 +1,6 @@
 <script>
   import { onMount, onDestroy } from "svelte";
-  import { checkAuth } from "./authLayout";
+  import { checkAuth } from "$api/auth";
   import { registerServiceWorker } from "$UITools/serviceWorker";
 
   import Header from "$components/Header.svelte";

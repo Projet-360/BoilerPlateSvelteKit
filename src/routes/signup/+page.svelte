@@ -1,6 +1,6 @@
 <script>
   import { authStore } from "$stores/authStore";
-  import { signup } from "./signUpFunc";
+  import { signup } from "$api/auth";
   import { goto } from "$app/navigation";
   import notificationStore from "$stores/notificationStore";
 
@@ -11,8 +11,11 @@
   async function handleSignup() {
     try {
       const data = await signup(username, email, password);
+
       authStore.set({ token: data.token, userId: data.userId });
+
       goto("/");
+
       notificationStore.addNotification(
         "Vous avez reçue un Email afin de valider votre compte",
         "success"

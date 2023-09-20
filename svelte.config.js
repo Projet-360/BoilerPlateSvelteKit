@@ -54,7 +54,7 @@ export default defineConfig({
       $UITools: "src/UITools",
       $language: "src/language",
       $three: "src/three",
-      $services: "src/services",
+      $api: "src/api",
     },
   },
 });

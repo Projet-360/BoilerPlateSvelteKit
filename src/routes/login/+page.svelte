@@ -1,5 +1,5 @@
 <script>
-  import { login } from "./loginFunc";
+  import { login } from "$api/auth";
   import { goto } from "$app/navigation";
   import notificationStore from "$stores/notificationStore";
 
