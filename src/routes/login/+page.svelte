@@ -3,8 +3,8 @@
   import { goto } from "$app/navigation";
   import notificationStore from "$stores/notificationStore";
 
-  let email = "";
-  let password = "";
+  let email = import.meta.env.VITE_MAIL;
+  let password = "Password3,";
 
   async function handleLogin() {
     try {

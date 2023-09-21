@@ -5,7 +5,7 @@
   import notificationStore from "$stores/notificationStore";
 
   let username = "Name";
-  let email = import.meta.env.MAIL; // Nouvelle variable pour l'e-mail
+  let email = import.meta.env.VITE_MAIL;
   let password = "Password8,";
 
   async function handleSignup() {

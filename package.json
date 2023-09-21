@@ -33,7 +33,6 @@
   "type": "module",
   "dependencies": {
     "cookie-parser": "^1.4.6",
-    "dotenv": "^16.3.1",
     "express-validator": "^7.0.1",
     "flubber": "^0.4.2",
     "sveltekit-i18n": "^2.4.2",

@@ -4,11 +4,22 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const HTTP_STATUS = require("../../constants/HTTP_STATUS");
 const authService = require("../../services/authService");
+const rateLimit = require("express-rate-limit");
 
 const { signupValidators } = require("./validators");
 const BlacklistedToken = require("../../models/BlacklistedTokenModel");
 const User = require("../../models/UserModel");
 
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  handler: function (req, res) {
+    console.log("Rate limit reached"); // Ajoute ce log pour le débogage
+    res.status(HTTP_STATUS.TOO_MANY_REQUESTS).json({
+      message: "Trop de tentatives de connexion, veuillez réessayer plus tard.",
+    });
+  },
+});
 // Ajoutez les middlewares de validation à votre route
 router.post("/signup", signupValidators, async (req, res, next) => {
   // Gérez les erreurs de validation
@@ -48,7 +59,7 @@ router.post("/signup", signupValidators, async (req, res, next) => {
   }
 });
 // Route de connexion
-router.post("/login", async (req, res, next) => {
+router.post("/login", loginLimiter, async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const { token, userId } = await authService.login(email, password);
