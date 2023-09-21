@@ -139,4 +139,16 @@ router.get("/verify/:token", async (req, res) => {
   }
 });
 
+router.post("/reset-password", async (req, res) => {
+  const { email } = req.body;
+
+  // Rechercher l'utilisateur dans la base de données
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.status(404).json({ error: "Utilisateur non trouvé" });
+  }
+
+  await authService.requestResetPassword(user);
+});
+
 module.exports = router;

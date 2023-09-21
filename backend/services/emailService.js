@@ -30,6 +30,26 @@ const sendVerificationEmail = async (email, token) => {
     });
 };
 
+const sendResetPasswordEmail = async (user, resetToken) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+
+  const mailOptions = {
+    from: "no-reply@votreapp.com",
+    to: user.email,
+    subject: "Réinitialisation du mot de passe",
+    text: `Cliquez sur ce lien pour réinitialiser votre mot de passe : http://votreapp.com/reset-password/${resetToken}`,
+  };
+
+  return transporter.sendMail(mailOptions);
+};
+
 module.exports = {
   sendVerificationEmail,
+  sendResetPasswordEmail,
 };

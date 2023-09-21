@@ -28,8 +28,34 @@ export async function signup(username, email, password) {
       credentials: "include",
       body: { username, email, password },
     });
+
     authStore.set({ token: data.token, userId: data.userId });
     return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function resetPassword(email) {
+  console.log(email);
+  try {
+    const data = await apiCall({
+      url: `${BD}/auth/reset-password`,
+      method: "POST",
+      credentials: "include", // si nécessaire
+      body: { email },
+    });
+
+    if (data.success) {
+      // Afficher un message de succès ou gérer comme tu le souhaites
+      return data;
+    } else {
+      // Gérer les erreurs en fonction du message d'erreur renvoyé par l'API
+      throw new Error(
+        data.errorMessage ||
+          "Erreur lors de la réinitialisation du mot de passe.",
+      );
+    }
   } catch (error) {
     throw error;
   }

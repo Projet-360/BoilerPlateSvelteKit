@@ -4,10 +4,13 @@ const crypto = require("crypto");
 
 const User = require("../models/UserModel");
 const EmailVerificationToken = require("../models/EmailVerificationTokenModel");
-const { sendVerificationEmail } = require("../services/emailService");
+const {
+  sendVerificationEmail,
+  sendResetPasswordEmail,
+} = require("../services/emailService");
 
 // Fonction pour générer un token de vérification
-const generateVerificationToken = () => {
+const generateToken = () => {
   return crypto.randomBytes(32).toString("hex");
 };
 
@@ -24,7 +27,7 @@ exports.signup = async (username, email, password) => {
     );
 
     // Générer le token de vérification
-    const verificationToken = generateVerificationToken();
+    const verificationToken = generateToken();
     await sendVerificationEmail(email, verificationToken);
 
     // Définir la date d'expiration du token de vérification
@@ -102,4 +105,23 @@ exports.verifyToken = async (token) => {
   await EmailVerificationToken.findByIdAndDelete(verificationToken.id);
 
   return "E-mail vérifié avec succès !";
+};
+
+exports.requestResetPassword = async (user) => {
+  try {
+    const resetToken = generateToken();
+    user.resetToken = resetToken;
+    user.resetTokenExpiration = Date.now() + 3600000; // Le token expire dans 1 heure
+    await user.save();
+
+    await sendResetPasswordEmail(user, resetToken);
+
+    return { message: "Un e-mail de réinitialisation a été envoyé." };
+  } catch (error) {
+    console.error(
+      "Erreur lors de la génération du token de réinitialisation :",
+      error,
+    );
+    throw error;
+  }
 };
