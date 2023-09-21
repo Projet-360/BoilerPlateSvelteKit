@@ -1,36 +1,35 @@
-// greetingFunctions.js
+import { BD } from "$lib/constants";
+import { apiCall } from "$api/utils/apiCall";
 
 export async function sendGreeting(name, message, editingId) {
   const url = editingId
-    ? `http://localhost:3001/api/updateGreeting/${editingId}`
-    : "http://localhost:3001/api/saveGreeting";
+    ? `${BD}/api/updateGreeting/${editingId}`
+    : `${BD}/api/saveGreeting`;
   const method = editingId ? "PUT" : "POST";
 
-  const response = await fetch(url, {
+  const isSuccessful = await apiCall({
+    url,
     method,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ name, message }),
+    body: { name, message },
   });
 
-  return response.ok;
+  return isSuccessful !== null;
 }
 
 export async function getAllGreetings() {
-  const response = await fetch("http://localhost:3001/api/getGreetings");
-  if (response.ok) {
-    return await response.json();
-  }
-  return null;
+  const data = await apiCall({
+    url: `${BD}/api/getGreetings`,
+    method: "GET",
+  });
+
+  return data;
 }
 
 export async function deleteGreeting(id) {
-  const response = await fetch(
-    `http://localhost:3001/api/deleteGreeting/${id}`,
-    {
-      method: "DELETE",
-    },
-  );
-  return response.ok;
+  const isSuccessful = await apiCall({
+    url: `${BD}/api/deleteGreeting/${id}`,
+    method: "DELETE",
+  });
+
+  return isSuccessful !== null;
 }

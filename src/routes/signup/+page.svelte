@@ -4,9 +4,9 @@
   import { goto } from "$app/navigation";
   import notificationStore from "$stores/notificationStore";
 
-  let username = "";
-  let email = ""; // Nouvelle variable pour l'e-mail
-  let password = "";
+  let username = "Name";
+  let email = import.meta.env.MAIL; // Nouvelle variable pour l'e-mail
+  let password = "Password8,";
 
   async function handleSignup() {
     try {

@@ -1,5 +1,6 @@
 <script>
   import { authStore } from "$stores/authStore";
+  import { BD } from "$lib/constants";
 
   let isAuthenticated;
 
@@ -13,7 +14,7 @@
 
   async function logout() {
     try {
-      const res = await fetch("http://localhost:3001/auth/logout", {
+      const res = await fetch(`${BD}/auth/logout`, {
         method: "GET",
         credentials: "include",
       });

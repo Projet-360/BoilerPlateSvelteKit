@@ -1,63 +1,43 @@
+import { apiCall } from "$api/utils/apiCall"; // Assure-toi que le chemin est correct
 import { authStore } from "$stores/authStore";
+import { BD } from "$lib/constants";
 
 export async function login(email, password) {
   try {
-    const res = await fetch("http://localhost:3001/auth/login", {
+    const data = await apiCall({
+      url: `${BD}/auth/login`,
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       credentials: "include",
-      body: JSON.stringify({ email, password }),
+      body: { email, password },
     });
-
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.message || "Something went wrong");
-    }
-
-    const data = await res.json();
     authStore.set({
       token: data.token,
       userId: data.userId,
       isAuthenticated: true,
     });
   } catch (error) {
-    //console.error("Erreur lors de la connexion:", error);
     throw error;
-  } finally {
-    // Vous pouvez ajouter ici d'autres opérations de nettoyage ou des logs
   }
 }
 
 export async function signup(username, email, password) {
   try {
-    const res = await fetch("http://localhost:3001/auth/signup", {
+    const data = await apiCall({
+      url: `${BD}/auth/signup`,
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, email, password }),
       credentials: "include",
+      body: { username, email, password },
     });
-
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.message || "Something went wrong");
-    }
-
-    const data = await res.json();
     authStore.set({ token: data.token, userId: data.userId });
     return data;
   } catch (error) {
-    //console.error("Il y a eu un problème avec l'opération fetch:", error);
     throw error;
   }
 }
 
 export async function checkAuth() {
   try {
-    const res = await fetch(`http://localhost:3001/auth/check-auth`, {
+    const res = await fetch(`${BD}/auth/check-auth`, {
       credentials: "include",
     });
     if (res.ok) {

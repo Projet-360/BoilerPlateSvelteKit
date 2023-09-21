@@ -3,6 +3,7 @@
   import { goto } from "$app/navigation";
   import { onMount } from "svelte";
   import notificationStore from "$stores/notificationStore";
+  import { BD } from "$lib/constants";
 
   let token;
 
@@ -11,7 +12,7 @@
     console.log("Token reçu :", token); // Pour le débogage
 
     try {
-      const res = await fetch(`http://localhost:3001/auth/verify/${token}`);
+      const res = await fetch(`${BD}/auth/verify/${token}`);
       if (res.ok) {
         console.log("Token vérifié avec succès"); // Pour le débogage
         goto("/");

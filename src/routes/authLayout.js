@@ -1,8 +1,9 @@
 import { authStore } from "$stores/authStore";
+import { BD } from "$lib/constants";
 
 export async function checkAuth() {
   try {
-    const res = await fetch(`http://localhost:3001/auth/check-auth`, {
+    const res = await fetch(`${BD}/auth/check-auth`, {
       credentials: "include",
     });
     if (res.ok) {
