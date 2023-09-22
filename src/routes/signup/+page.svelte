@@ -1,5 +1,4 @@
 <script>
-  import { authStore } from "$stores/authStore";
   import { signup } from "$api/auth";
   import { goto } from "$app/navigation";
   import notificationStore from "$stores/notificationStore";
@@ -9,16 +8,24 @@
   let password = "Password8,";
 
   async function handleSignup() {
-    try {
-      const data = await signup(username, email, password);
-      authStore.set({ token: data.token, userId: data.userId });
+    const result = await signup(username, email, password);
+
+    if (result.success) {
       goto("/");
       notificationStore.addNotification(
-        "Vous avez reçue un Email afin de valider votre compte",
+        "Vous avez reçu un email pour valider votre compte.",
         "success"
       );
-    } catch (error) {
-      notificationStore.addNotification(error.message, "error");
+    } else {
+      let errorMessage;
+      switch (result.message) {
+        case "Email already exists":
+          errorMessage = "Cet email existe déjà."; // Vous pouvez ajouter la traduction ici.
+          break;
+        default:
+          errorMessage = "Une erreur inconnue s'est produite.";
+      }
+      notificationStore.addNotification(errorMessage, "error");
     }
   }
 </script>

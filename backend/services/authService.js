@@ -4,6 +4,8 @@ const crypto = require("crypto");
 
 const User = require("../models/UserModel");
 const EmailVerificationToken = require("../models/EmailVerificationTokenModel");
+const BlacklistedToken = require("../models/BlacklistedTokenModel");
+
 const {
   sendVerificationEmail,
   sendResetPasswordEmail,
@@ -14,16 +16,42 @@ const generateToken = () => {
   return crypto.randomBytes(32).toString("hex");
 };
 
+exports.checkAuthentication = async (token) => {
+  if (!token) {
+    console.log("Le client n'est pas connecté");
+    return { isAuthenticated: false };
+  }
+
+  const blacklistedToken = await BlacklistedToken.findOne({ token });
+
+  if (blacklistedToken) {
+    return {
+      isAuthenticated: false,
+      message: "Le token est dans la liste noire.",
+    };
+  }
+
+  const decoded = jwt.verify(token, process.env.SECRETKEY);
+
+  return {
+    isAuthenticated: true,
+    token,
+    userId: decoded.userId,
+  };
+};
+
 exports.signup = async (username, email, password) => {
   try {
     const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
 
+    const tokenExpiry = process.env.TOKEN_EXPIRY || "1h";
+
     const token = jwt.sign(
       { userId: newUser._id, username: newUser.username, email: newUser.email },
       process.env.SECRETKEY,
-      { expiresIn: "1h" },
+      { expiresIn: tokenExpiry },
     );
 
     // Générer le token de vérification
@@ -42,10 +70,10 @@ exports.signup = async (username, email, password) => {
     });
     await newToken.save();
 
-    return { token, userId: newUser._id };
+    return { userId: newUser._id };
   } catch (error) {
     console.error("Erreur lors de l'inscription:", error);
-    throw error; // Renvoyer l'erreur pour la gérer côté client
+    throw new CustomError("SignupError", error.message);
   }
 };
 

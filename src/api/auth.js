@@ -44,39 +44,43 @@ export async function login(email, password) {
 
 export async function signup(username, email, password) {
   try {
-    const data = await apiCall({
+    const response = await apiCall({
       url: `${BD}/auth/signup`,
       method: "POST",
       credentials: "include",
       body: { username, email, password },
     });
 
-    authStore.set({ token: data.token, userId: data.userId });
-    return data;
+    if (response.status === 201) {
+      return { success: true };
+    } else {
+      const data = await response.json();
+      return { success: false, message: data.message };
+    }
   } catch (error) {
-    throw error;
+    return { success: false, message: error.message };
   }
 }
 
-// export async function verifySignup() {
-//   try {
-//     const res = await fetch(`${BD}/auth/verify/${token}`);
-//     if (res.ok) {
-//       console.log("Token vérifié avec succès"); // Pour le débogage
-//       goto("/");
-//       notificationStore.addNotification(
-//         "Votre adresse mail est bien validée",
-//         "success",
-//       );
-//     } else {
-//       console.log("Échec de la vérification du token"); // Pour le débogage
-//       // Gérer l'échec de la vérification ici
-//     }
-//   } catch (error) {
-//     console.log("Erreur lors de la vérification :", error); // Pour le débogage
-//     // Gérer l'erreur ici
-//   }
-// }
+export async function verifySignup() {
+  try {
+    const res = await fetch(`${BD}/auth/verify/${token}`);
+    if (res.ok) {
+      console.log("Token vérifié avec succès"); // Pour le débogage
+      goto("/");
+      notificationStore.addNotification(
+        "Votre adresse mail est bien validée",
+        "success",
+      );
+    } else {
+      console.log("Échec de la vérification du token"); // Pour le débogage
+      // Gérer l'échec de la vérification ici
+    }
+  } catch (error) {
+    console.log("Erreur lors de la vérification :", error); // Pour le débogage
+    // Gérer l'erreur ici
+  }
+}
 
 export async function resetPassword(email) {
   try {

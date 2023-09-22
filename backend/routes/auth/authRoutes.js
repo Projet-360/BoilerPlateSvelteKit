@@ -5,6 +5,7 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const HTTP_STATUS = require("../../constants/HTTP_STATUS");
 const authService = require("../../services/authService");
+const setAuthCookie = require("../../services/setAuthCookie");
 const rateLimit = require("express-rate-limit");
 
 const { signupValidators } = require("./validators");
@@ -25,37 +26,30 @@ const loginLimiter = rateLimit({
 router.get("/check-auth", async (req, res, next) => {
   const token = req.cookies.token;
 
-  if (!token) {
-    return res
-      .status(HTTP_STATUS.UNAUTHORIZED)
-      .json({ isAuthenticated: false });
-  }
-
   try {
-    // Vérifie si le token est dans la liste noire
-    const blacklistedToken = await BlacklistedToken.findOne({ token });
-    if (blacklistedToken) {
-      return res.status(HTTP_STATUS.UNAUTHORIZED).json({
-        isAuthenticated: false,
-        message: "Le token est dans la liste noire.",
+    const result = await authService.checkAuthentication(token);
+
+    if (result.isAuthenticated) {
+      res.status(HTTP_STATUS.OK).json({
+        isAuthenticated: true,
+        token: result.token,
+        userId: result.userId,
       });
+    } else {
+      if (result.message) {
+        res.status(HTTP_STATUS.UNAUTHORIZED).json({
+          isAuthenticated: false,
+          message: result.message,
+        });
+      } else {
+        res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
+      }
     }
-
-    // Vérifie le token et récupère les données
-    const decoded = jwt.verify(token, process.env.SECRETKEY);
-
-    // Renvoie les données de l'utilisateur ainsi que le statut d'authentification
-    res.status(HTTP_STATUS.OK).json({
-      isAuthenticated: true,
-      token,
-      userId: decoded.userId,
-    });
   } catch (error) {
     next(error);
   }
 });
 
-// Ajoutez les middlewares de validation à votre route
 router.post("/signup", signupValidators, async (req, res, next) => {
   // Gérez les erreurs de validation
   const errors = validationResult(req);
@@ -70,8 +64,11 @@ router.post("/signup", signupValidators, async (req, res, next) => {
     const { username, email, password } = req.body;
 
     const existingUserByEmail = await User.findOne({ email });
+
     if (existingUserByEmail) {
-      throw new Error("Email already exists");
+      return res
+        .status(HTTP_STATUS.CONFLICT)
+        .json({ message: "Email already exists" }); // 409 Conflict
     }
 
     const { token, userId } = await authService.signup(
@@ -81,30 +78,25 @@ router.post("/signup", signupValidators, async (req, res, next) => {
     );
 
     // Définir le cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 3600000,
-    });
+    setAuthCookie(res, token);
 
-    res.status(HTTP_STATUS.CREATED).json({ userId, token });
+    res.status(HTTP_STATUS.CREATED);
   } catch (error) {
     next(error);
   }
 });
-// Route de connexion
+
 router.post("/login", loginLimiter, async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const { token, userId } = await authService.login(email, password);
     // Définir le cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 3600000,
-    });
+
+    if (!user.emailVerified) {
+      throw new Error("Email not verified");
+    }
+
+    setAuthCookie(res, token);
 
     res.status(HTTP_STATUS.OK).json({ token, userId });
   } catch (error) {
