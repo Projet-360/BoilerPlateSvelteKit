@@ -22,6 +22,30 @@
         case "Email already exists":
           errorMessage = "Cet email existe déjà."; // Vous pouvez ajouter la traduction ici.
           break;
+        case "USERNAME_REQUIRED":
+          errorMessage = "USERNAME_REQUIRED"; // Vous pouvez ajouter la traduction ici.
+          break;
+        case "VALID_EMAIL":
+          errorMessage = "VALID_EMAIL"; // Vous pouvez ajouter la traduction ici.
+          break;
+        case "VALID_USERNAME":
+          errorMessage = "VALID_USERNAME"; // Vous pouvez ajouter la traduction ici.
+          break;
+        case "NUMBE_CARAC_PASSWORD":
+          errorMessage = "NUMBE_CARAC_PASSWORD"; // Vous pouvez ajouter la traduction ici.
+          break;
+        case "MIN_PASSWORD":
+          errorMessage = "MIN_PASSWORD"; // Vous pouvez ajouter la traduction ici.
+          break;
+        case "MAJ_PASSWORD":
+          errorMessage = "MAJ_PASSWORD"; // Vous pouvez ajouter la traduction ici.
+          break;
+        case "NUMBER_PASSWORD":
+          errorMessage = "NUMBER_PASSWORD"; // Vous pouvez ajouter la traduction ici.
+          break;
+        case "SPECIAL_CARAC_PASSWORD":
+          errorMessage = "SPECIAL_CARAC_PASSWORD"; // Vous pouvez ajouter la traduction ici.
+          break;
         default:
           errorMessage = "Une erreur inconnue s'est produite.";
       }
