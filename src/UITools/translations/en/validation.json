@@ -1,0 +1,11 @@
+{
+    "EMAIL_EXIST": "This email already exists",
+    "USERNAME_REQUIRED": "Username is required",
+    "VALID_EMAIL": "The email is not valid",
+    "VALID_USERNAME": "Username must be between 3 and 20 characters",
+    "NUMBE_CARAC_PASSWORD": "The password must have at least 8 characters",
+    "MIN_PASSWORD": "The password must contain at least one lowercase letter",
+    "MAJ_PASSWORD": "The password must contain at least one uppercase letter",
+    "NUMBER_PASSWORD": "The password must contain at least one number",
+    "SPECIAL_CARAC_PASSWORD": "The password must contain at least one special character"
+}

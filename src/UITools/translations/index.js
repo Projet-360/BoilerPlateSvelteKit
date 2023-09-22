@@ -11,42 +11,38 @@ export const config = {
   },
   translations: {
     en: { lang },
-    cs: { lang },
+    fr: { lang },
   },
   loaders: [
     {
       locale: "en",
-      key: "menu",
-      loader: async () => (await import("./en/menu.json")).default,
-    },
-    {
-      locale: "en",
       key: "about",
-      routes: ["/about"],
       loader: async () => (await import("./en/about.json")).default,
     },
     {
       locale: "en",
       key: "home",
-      routes: ["/"],
       loader: async () => (await import("./en/home.json")).default,
     },
     {
-      locale: "cs",
-      key: "menu",
-      loader: async () => (await import("./cs/menu.json")).default,
+      locale: "en",
+      key: "validation",
+      loader: async () => (await import("./en/validation.json")).default,
     },
     {
-      locale: "cs",
+      locale: "fr",
       key: "about",
-      routes: ["/about"],
-      loader: async () => (await import("./cs/about.json")).default,
+      loader: async () => (await import("./fr/about.json")).default,
     },
     {
-      locale: "cs",
+      locale: "fr",
       key: "home",
-      routes: ["/"],
-      loader: async () => (await import("./cs/home.json")).default,
+      loader: async () => (await import("./fr/home.json")).default,
+    },
+    {
+      locale: "fr",
+      key: "validation",
+      loader: async () => (await import("./en/validation.json")).default,
     },
   ],
 };
