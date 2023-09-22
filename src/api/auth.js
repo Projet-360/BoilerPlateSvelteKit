@@ -2,6 +2,28 @@ import { apiCall } from "$api/utils/apiCall"; // Assure-toi que le chemin est co
 import { authStore } from "$stores/authStore";
 import { BD } from "$lib/constants";
 
+export async function checkAuth() {
+  try {
+    const res = await fetch(`${BD}/auth/check-auth`, {
+      credentials: "include",
+    });
+    if (res.ok) {
+      const data = await res.json();
+      authStore.update((state) => ({
+        ...state,
+        isAuthenticated: data.isAuthenticated,
+        token: data.token,
+        userId: data.userId,
+      }));
+    }
+  } catch (error) {
+    console.error(
+      "Erreur lors de la vérification de l'authentification:",
+      error,
+    );
+  }
+}
+
 export async function login(email, password) {
   try {
     const data = await apiCall({
@@ -36,8 +58,27 @@ export async function signup(username, email, password) {
   }
 }
 
+// export async function verifySignup() {
+//   try {
+//     const res = await fetch(`${BD}/auth/verify/${token}`);
+//     if (res.ok) {
+//       console.log("Token vérifié avec succès"); // Pour le débogage
+//       goto("/");
+//       notificationStore.addNotification(
+//         "Votre adresse mail est bien validée",
+//         "success",
+//       );
+//     } else {
+//       console.log("Échec de la vérification du token"); // Pour le débogage
+//       // Gérer l'échec de la vérification ici
+//     }
+//   } catch (error) {
+//     console.log("Erreur lors de la vérification :", error); // Pour le débogage
+//     // Gérer l'erreur ici
+//   }
+// }
+
 export async function resetPassword(email) {
-  console.log(email);
   try {
     const data = await apiCall({
       url: `${BD}/auth/reset-password`,
@@ -61,24 +102,23 @@ export async function resetPassword(email) {
   }
 }
 
-export async function checkAuth() {
+export async function resetNewPassword(token, newPassword) {
   try {
-    const res = await fetch(`${BD}/auth/check-auth`, {
-      credentials: "include",
+    const response = await fetch(`${BD}/auth/reset-password/${token}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ newPassword }),
     });
-    if (res.ok) {
-      const data = await res.json();
-      authStore.update((state) => ({
-        ...state,
-        isAuthenticated: data.isAuthenticated,
-        token: data.token,
-        userId: data.userId,
-      }));
+
+    if (response.ok) {
+      console.log("Mot de passe réinitialisé avec succès.");
+      // Redirigez l'utilisateur ou faites quelque chose d'autre ici
+    } else {
+      console.log("Erreur lors de la réinitialisation du mot de passe.");
     }
   } catch (error) {
-    console.error(
-      "Erreur lors de la vérification de l'authentification:",
-      error,
-    );
+    throw error;
   }
 }

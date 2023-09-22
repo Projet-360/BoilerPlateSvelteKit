@@ -1,5 +1,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const HTTP_STATUS = require("../../constants/HTTP_STATUS");
@@ -20,6 +21,40 @@ const loginLimiter = rateLimit({
     });
   },
 });
+
+router.get("/check-auth", async (req, res, next) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res
+      .status(HTTP_STATUS.UNAUTHORIZED)
+      .json({ isAuthenticated: false });
+  }
+
+  try {
+    // Vérifie si le token est dans la liste noire
+    const blacklistedToken = await BlacklistedToken.findOne({ token });
+    if (blacklistedToken) {
+      return res.status(HTTP_STATUS.UNAUTHORIZED).json({
+        isAuthenticated: false,
+        message: "Le token est dans la liste noire.",
+      });
+    }
+
+    // Vérifie le token et récupère les données
+    const decoded = jwt.verify(token, process.env.SECRETKEY);
+
+    // Renvoie les données de l'utilisateur ainsi que le statut d'authentification
+    res.status(HTTP_STATUS.OK).json({
+      isAuthenticated: true,
+      token,
+      userId: decoded.userId,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Ajoutez les middlewares de validation à votre route
 router.post("/signup", signupValidators, async (req, res, next) => {
   // Gérez les erreurs de validation
@@ -80,39 +115,6 @@ router.post("/login", loginLimiter, async (req, res, next) => {
   }
 });
 
-router.get("/check-auth", async (req, res, next) => {
-  const token = req.cookies.token;
-
-  if (!token) {
-    return res
-      .status(HTTP_STATUS.UNAUTHORIZED)
-      .json({ isAuthenticated: false });
-  }
-
-  try {
-    // Vérifie si le token est dans la liste noire
-    const blacklistedToken = await BlacklistedToken.findOne({ token });
-    if (blacklistedToken) {
-      return res.status(HTTP_STATUS.UNAUTHORIZED).json({
-        isAuthenticated: false,
-        message: "Le token est dans la liste noire.",
-      });
-    }
-
-    // Vérifie le token et récupère les données
-    const decoded = jwt.verify(token, process.env.SECRETKEY);
-
-    // Renvoie les données de l'utilisateur ainsi que le statut d'authentification
-    res.status(HTTP_STATUS.OK).json({
-      isAuthenticated: true,
-      token,
-      userId: decoded.userId,
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
 router.get("/logout", async (req, res, next) => {
   try {
     const token = req.cookies.token;
@@ -142,13 +144,49 @@ router.get("/verify/:token", async (req, res) => {
 router.post("/reset-password", async (req, res) => {
   const { email } = req.body;
 
-  // Rechercher l'utilisateur dans la base de données
-  const user = await User.findOne({ email });
-  if (!user) {
-    return res.status(404).json({ error: "Utilisateur non trouvé" });
+  // Validation de l'email (à faire si ce n'est pas déjà le cas)
+  if (!email || !email.includes("@")) {
+    return res.status(400).json({ error: "E-mail invalide" });
   }
 
-  await authService.requestResetPassword(user);
+  try {
+    // Rechercher l'utilisateur dans la base de données
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ error: "Utilisateur non trouvé" });
+    }
+
+    const result = await authService.requestResetPassword(user);
+    res.status(200).json({ message: result.message });
+  } catch (error) {
+    console.error("Erreur lors de la réinitialisation du mot de passe:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.post("/reset-password/:token", async (req, res) => {
+  const { token } = req.params;
+  const { newPassword } = req.body;
+
+  // Trouver l'utilisateur avec le token de réinitialisation
+  const user = await User.findOne({
+    resetToken: token,
+    resetTokenExpiration: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    return res.status(400).json({ error: "Token invalide ou expiré" });
+  }
+
+  // Chiffrer le nouveau mot de passe et le sauvegarder
+  const hashedPassword = await bcrypt.hash(newPassword, 12);
+  user.password = hashedPassword;
+  user.resetToken = undefined;
+  user.resetTokenExpiration = undefined;
+  await user.save();
+
+  res.status(200).json({ message: "Mot de passe réinitialisé avec succès" });
 });
 
 module.exports = router;

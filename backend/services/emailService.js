@@ -43,7 +43,7 @@ const sendResetPasswordEmail = async (user, resetToken) => {
     from: "no-reply@votreapp.com",
     to: user.email,
     subject: "Réinitialisation du mot de passe",
-    text: `Cliquez sur ce lien pour réinitialiser votre mot de passe : http://votreapp.com/reset-password/${resetToken}`,
+    text: `Cliquez sur ce lien pour réinitialiser votre mot de passe : ${process.env.URL_FRONT}/reset-password/${resetToken}`,
   };
 
   return transporter.sendMail(mailOptions);

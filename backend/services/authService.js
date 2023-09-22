@@ -125,3 +125,22 @@ exports.requestResetPassword = async (user) => {
     throw error;
   }
 };
+
+exports.ResetNewPassword = async (user) => {
+  try {
+    const resetToken = generateToken();
+    user.resetToken = resetToken;
+    user.resetTokenExpiration = Date.now() + 3600000; // Le token expire dans 1 heure
+    await user.save();
+
+    await sendResetPasswordEmail(user, resetToken);
+
+    return { message: "Un e-mail de réinitialisation a été envoyé." };
+  } catch (error) {
+    console.error(
+      "Erreur lors de la génération du token de réinitialisation :",
+      error,
+    );
+    throw error;
+  }
+};
