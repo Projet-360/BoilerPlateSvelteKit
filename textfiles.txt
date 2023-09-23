@@ -30,6 +30,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\backend\routes\greetingRoutes.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\services
 C:\wamp64\www\BoilerPlateSvelteKit\backend\services\authService.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\services\emailService.js
+C:\wamp64\www\BoilerPlateSvelteKit\backend\services\setAuthCookie.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\test
 C:\wamp64\www\BoilerPlateSvelteKit\backend\test\authRoutes.test.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\.env
@@ -94,6 +95,10 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\routes\dashboard\+page.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\login
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\login\+page.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\login\+page.svelte
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\reset-password
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\reset-password\[token]
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\reset-password\+page.js
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\reset-password\+page.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\signup
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\signup\+page.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\signup\+page.svelte
@@ -106,7 +111,6 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\routes\+layout.server.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\+layout.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\+page.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\+page.svelte
-C:\wamp64\www\BoilerPlateSvelteKit\src\routes\authLayout.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\stores
 C:\wamp64\www\BoilerPlateSvelteKit\src\stores\authStore.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\stores\cursorStore.js
@@ -135,14 +139,14 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\serviceWorker\index.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\SmoothScroller
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\SmoothScroller\index.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations
-C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\cs
-C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\cs\about.json
-C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\cs\home.json
-C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\cs\menu.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\en
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\en\about.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\en\home.json
-C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\en\menu.json
+C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\en\validation.json
+C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\fr
+C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\fr\about.json
+C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\fr\home.json
+C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\fr\validation.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\index.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\translations\lang.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\app.html
