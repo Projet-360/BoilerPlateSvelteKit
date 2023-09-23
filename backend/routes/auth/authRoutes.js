@@ -3,13 +3,16 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const HTTP_STATUS = require("../../constants/HTTP_STATUS");
-const authService = require("../../services/authService");
-const setAuthCookie = require("../../services/setAuthCookie");
 const rateLimit = require("express-rate-limit");
 
-const { signupValidators } = require("./validators");
-const BlacklistedToken = require("../../models/BlacklistedTokenModel");
 const User = require("../../models/UserModel");
+const BlacklistedToken = require("../../models/BlacklistedTokenModel");
+
+const authService = require("../../services/authService");
+const setAuthCookie = require("../../services/setAuthCookie");
+const handleValidationErrors = require("../../middlewares/handleValidationErrors");
+
+const { signupValidators } = require("./validators");
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -49,29 +52,22 @@ router.get("/check-auth", async (req, res, next) => {
   }
 });
 
-router.post("/signup", signupValidators, async (req, res, next) => {
-  // Gérez les erreurs de validation
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res
-      .status(HTTP_STATUS.BAD_REQUEST)
-      .json({ message: errors.array()[0].msg });
-  }
-
-  try {
-    const { username, email, password } = req.body;
-
-    const { token } = await authService.signup(username, email, password);
-
-    // Définir le cookie
-    setAuthCookie(res, token);
-
-    res.status(HTTP_STATUS.CREATED).json({ message: "Success", success: true });
-  } catch (error) {
-    next(error);
-  }
-});
+router.post(
+  "/signup",
+  [signupValidators, handleValidationErrors],
+  async (req, res, next) => {
+    try {
+      const { username, email, password } = req.body;
+      const { token } = await authService.signup(username, email, password);
+      setAuthCookie(res, token);
+      res
+        .status(HTTP_STATUS.CREATED)
+        .json({ message: "Success", success: true });
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 
 router.post("/login", loginLimiter, async (req, res, next) => {
   try {

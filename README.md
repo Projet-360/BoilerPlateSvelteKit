@@ -40,6 +40,18 @@ Expiration du Token: Mettre en place une durée de vie courte pour le token, dis
 Taux Limite: Appliquer un taux limite pour les demandes de réinitialisation par utilisateur pour éviter le spam ou les attaques par force brute.
 
 
+4. Utiliser des Enums pour les messages d'erreur :
+Au lieu d'utiliser des chaînes de caractères pour les erreurs comme "EMAIL_EXIST", utilisez des Enums pour éviter des erreurs typographiques dans le futur.
+
+javascript
+Copy code
+const ERROR_TYPES = Object.freeze({
+  EMAIL_EXISTS: "EMAIL_EXIST",
+  BAD_REQUEST: "BAD_REQUEST",
+  // ...
+});
+Ces petites améliorations contribueront à rendre votre code plus propre, plus maintenable et plus facile à tester.
+
 
 1. Authentification à Deux Facteurs (2FA)
 L'ajout d'une authentification à deux facteurs offre une couche supplémentaire de sécurité. Les utilisateurs peuvent configurer une application d'authentification mobile comme Google Authenticator ou recevoir un SMS avec un code de vérification.
