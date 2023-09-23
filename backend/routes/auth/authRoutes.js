@@ -1,5 +1,4 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
@@ -18,7 +17,7 @@ const loginLimiter = rateLimit({
   handler: function (req, res) {
     console.log("Rate limit reached"); // Ajoute ce log pour le débogage
     res.status(HTTP_STATUS.TOO_MANY_REQUESTS).json({
-      message: "Trop de tentatives de connexion, veuillez réessayer plus tard.",
+      message: "RATE_LIMIT",
     });
   },
 });
@@ -91,19 +90,11 @@ router.post("/login", loginLimiter, async (req, res, next) => {
     const { email, password } = req.body;
     const { token, userId } = await authService.login(email, password);
     // Définir le cookie
-
-    if (!user.emailVerified) {
-      throw new Error("Email not verified");
-    }
-
     setAuthCookie(res, token);
 
     res.status(HTTP_STATUS.OK).json({ token, userId });
   } catch (error) {
-    // Si une erreur se produit, renvoyez un code d'erreur approprié et un message explicatif.
-    res
-      .status(HTTP_STATUS.UNAUTHORIZED)
-      .json({ message: "Identifiants invalides." });
+    next(error);
   }
 });
 

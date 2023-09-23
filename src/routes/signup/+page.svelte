@@ -5,7 +5,7 @@
 
   let username = "Name";
   let email = import.meta.env.VITE_MAIL;
-  let password = "Password8,";
+  let password = import.meta.env.VITE_PASSWORD_TEST;
 
   async function handleSignup() {
     const result = await signup(username, email, password);

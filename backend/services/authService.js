@@ -82,14 +82,18 @@ exports.login = async (email, password) => {
   const user = await User.findOne({ email });
   if (!user) {
     // Vous pouvez ajouter des logs ici
-    throw new Error("Invalid credentials");
+    throw new Error("INVALID_CREDENTIALS");
+  }
+
+  if (!user.isVerified) {
+    throw new Error("EMAIL_NOT_VERIFIED");
   }
 
   // Vérifier si le mot de passe correspond
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
     // Vous pouvez ajouter des logs ici
-    throw new Error("Invalid credentials");
+    throw new Error("INVALID_CREDENTIALS");
   }
 
   // Vérification supplémentaire: est-ce que l'email a été vérifié, etc.
