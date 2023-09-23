@@ -14,7 +14,7 @@
     if (result.success) {
       goto("/");
       notificationStore.addNotification(
-        "Vous avez reçu un email pour valider votre compte.",
+        $t("validation.SUCCESS_INSCRIPTION"),
         "success"
       );
     } else {
@@ -25,7 +25,6 @@
           break;
         case "USERNAME_REQUIRED":
           errorMessage = $t("validation.USERNAME_REQUIRED");
-          console.log("Translated message:", errorMessage);
           break;
         case "VALID_EMAIL":
           errorMessage = $t("validation.VALID_EMAIL");

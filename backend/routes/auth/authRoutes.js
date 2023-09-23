@@ -80,7 +80,7 @@ router.post("/signup", signupValidators, async (req, res, next) => {
     // Définir le cookie
     setAuthCookie(res, token);
 
-    res.status(HTTP_STATUS.CREATED);
+    res.status(HTTP_STATUS.CREATED).json({ message: "Success", success: true });
   } catch (error) {
     next(error);
   }

@@ -1,8 +1,9 @@
 <script>
-  import { hoverable } from "$UITools/Cursor/cursorHelpers";
-  import Box from "$three/Box.svelte";
-  import { t } from "$UITools/translations/index";
   import { onMount } from "svelte";
+  import { hoverable } from "$UITools/Cursor/cursorHelpers";
+  import { t } from "$UITools/translations/index";
+  import Box from "$three/Box.svelte";
+
   import {
     sendGreeting,
     getAllGreetings,

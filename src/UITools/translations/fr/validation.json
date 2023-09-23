@@ -7,5 +7,6 @@
     "MIN_PASSWORD": "Le mot de passe doit contenir au moins une minuscule",
     "MAJ_PASSWORD": "Le mot de passe doit contenir au moins une majuscule",
     "NUMBER_PASSWORD": "Le mot de passe doit contenir au moins un chiffre",
-    "SPECIAL_CARAC_PASSWORD": "Le mot de passe doit contenir au moins un caractère spécial"
+    "SPECIAL_CARAC_PASSWORD": "Le mot de passe doit contenir au moins un caractère spécial",
+    "SUCCESS_INSCRIPTION": "Vous avez reçu un email pour valider votre compte."
 }

@@ -42,7 +42,7 @@ export const config = {
     {
       locale: "fr",
       key: "validation",
-      loader: async () => (await import("./en/validation.json")).default,
+      loader: async () => (await import("./fr/validation.json")).default,
     },
   ],
 };

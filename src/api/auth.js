@@ -51,11 +51,12 @@ export async function signup(username, email, password) {
       body: { username, email, password },
     });
 
-    if (response.status === 201) {
+    console.log("Response received: ", response);
+
+    if (response.success) {
       return { success: true };
     } else {
-      const data = await response.json();
-      return { success: false, message: data.message };
+      return { success: false, message: response.message };
     }
   } catch (error) {
     return { success: false, message: error.message };

@@ -7,5 +7,6 @@
     "MIN_PASSWORD": "The password must contain at least one lowercase letter",
     "MAJ_PASSWORD": "The password must contain at least one uppercase letter",
     "NUMBER_PASSWORD": "The password must contain at least one number",
-    "SPECIAL_CARAC_PASSWORD": "The password must contain at least one special character"
+    "SPECIAL_CARAC_PASSWORD": "The password must contain at least one special character",
+    "SUCCESS_INSCRIPTION": "you received an email to validate your account"
 }
