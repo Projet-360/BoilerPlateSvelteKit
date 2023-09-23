@@ -40,7 +40,15 @@ exports.checkAuthentication = async (token) => {
   };
 };
 
+exports.checkEmailExists = async (email) => {
+  const existingUserByEmail = await User.findOne({ email });
+  if (existingUserByEmail) {
+    throw new Error("EMAIL_EXIST");
+  }
+};
+
 exports.signup = async (username, email, password) => {
+  await this.checkEmailExists(email);
   try {
     const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = new User({ username, email, password: hashedPassword });

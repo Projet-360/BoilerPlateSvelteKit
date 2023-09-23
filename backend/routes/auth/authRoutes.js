@@ -62,19 +62,7 @@ router.post("/signup", signupValidators, async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
 
-    const existingUserByEmail = await User.findOne({ email });
-
-    if (existingUserByEmail) {
-      return res
-        .status(HTTP_STATUS.CONFLICT)
-        .json({ message: "Email already exists" }); // 409 Conflict
-    }
-
-    const { token, userId } = await authService.signup(
-      username,
-      email,
-      password,
-    );
+    const { token } = await authService.signup(username, email, password);
 
     // Définir le cookie
     setAuthCookie(res, token);

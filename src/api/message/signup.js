@@ -11,7 +11,7 @@ export const signupValidation = (result, $t) => {
   } else {
     let errorMessage;
     switch (result.message) {
-      case "Email already exists":
+      case "EMAIL_EXIST":
         errorMessage = $t("validation.EMAIL_EXIST");
         break;
       case "USERNAME_REQUIRED":
