@@ -5,26 +5,39 @@ const crypto = require("crypto");
 const User = require("../models/UserModel");
 const EmailVerificationToken = require("../models/EmailVerificationTokenModel");
 const BlacklistedToken = require("../models/BlacklistedTokenModel");
-
+const CustomError = require("../errors/CustomError");
+const {
+  TOKEN_EXPIRY,
+  SECRETKEY,
+  VERIFICATION_EXPIRY_HOURS,
+} = require("../config/config");
+const { BAD_REQUEST } = require("../constants/HTTP_STATUS");
 const {
   sendVerificationEmail,
   sendResetPasswordEmail,
 } = require("../services/emailService");
-
-const TOKEN_EXPIRY = process.env.TOKEN_EXPIRY || "1h";
-const VERIFICATION_EXPIRY_HOURS = 24;
 
 // Fonction pour générer un token de vérification
 const generateToken = () => {
   return crypto.randomBytes(32).toString("hex");
 };
 
-exports.createSignupToken = (user) => {
-  const token = jwt.sign(
-    { userId: user._id, username: user.username, email: user.email },
-    process.env.SECRETKEY,
-    { expiresIn: TOKEN_EXPIRY },
-  );
+const throwError = (type, message, status) => {
+  throw new CustomError(type, message, status);
+};
+
+const generateAndSaveResetToken = async (user) => {
+  const resetToken = generateToken();
+  user.resetToken = resetToken;
+  user.resetTokenExpiration = Date.now() + 3600000;
+  await user.save();
+  await sendResetPasswordEmail(user, resetToken);
+};
+
+exports.createSignupToken = ({ _id: userId, username, email }) => {
+  const token = jwt.sign({ userId, username, email }, SECRETKEY, {
+    expiresIn: TOKEN_EXPIRY,
+  });
   return { token };
 };
 
@@ -52,7 +65,7 @@ exports.hashPassword = async (password) => {
 exports.checkEmailExists = async (email) => {
   const existingUserByEmail = await User.findOne({ email });
   if (existingUserByEmail) {
-    throw new Error("EMAIL_EXIST");
+    throwError("EmailExists", "L'email existe déjà", BAD_REQUEST);
   }
 };
 
@@ -77,7 +90,7 @@ exports.checkAuthentication = async (token) => {
     };
   }
 
-  const decoded = jwt.verify(token, process.env.SECRETKEY);
+  const decoded = jwt.verify(token, SECRETKEY);
 
   return {
     isAuthenticated: true,
@@ -88,11 +101,11 @@ exports.checkAuthentication = async (token) => {
 
 exports.signup = async (email) => {
   try {
-    const tokenExpiry = process.env.TOKEN_EXPIRY || "1h";
+    const tokenExpiry = TOKEN_EXPIRY;
 
     const token = jwt.sign(
       { userId: newUser._id, username: newUser.username, email: newUser.email },
-      process.env.SECRETKEY,
+      SECRETKEY,
       { expiresIn: tokenExpiry },
     );
 
@@ -115,7 +128,7 @@ exports.signup = async (email) => {
     return { userId: newUser._id };
   } catch (error) {
     console.error("Erreur lors de l'inscription:", error);
-    throw new CustomError("SignupError", error.message);
+    throwError("SignupError", error.message);
   }
 };
 
@@ -124,29 +137,27 @@ exports.login = async (email, password) => {
   const user = await User.findOne({ email });
   if (!user) {
     // Vous pouvez ajouter des logs ici
-    throw new Error("INVALID_CREDENTIALS");
+    throwError("INVALID_CREDENTIALS");
   }
 
   if (!user.isVerified) {
-    throw new Error("EMAIL_NOT_VERIFIED");
+    throwError("EMAIL_NOT_VERIFIED");
   }
 
   // Vérifier si le mot de passe correspond
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
     // Vous pouvez ajouter des logs ici
-    throw new Error("INVALID_CREDENTIALS");
+    throwError("INVALID_CREDENTIALS");
   }
 
   // Vérification supplémentaire: est-ce que l'email a été vérifié, etc.
   // ...
 
   // Générer un JWT
-  const token = jwt.sign(
-    { userId: user._id, email: user.email },
-    process.env.SECRETKEY,
-    { expiresIn: "1h" },
-  );
+  const token = jwt.sign({ userId: user._id, email: user.email }, SECRETKEY, {
+    expiresIn: "1h",
+  });
 
   return { token, userId: user._id };
 };
@@ -156,19 +167,19 @@ exports.verifyToken = async (token) => {
   const verificationToken = await EmailVerificationToken.findOne({ token });
 
   if (!verificationToken) {
-    throw new Error("Token invalide");
+    throwError("Token invalide");
   }
 
   // Vérifier si le token a expiré
   if (new Date() > verificationToken.expireAt) {
-    throw new Error("Token expiré");
+    throwError("Token expiré");
   }
 
   // Trouver l'utilisateur associé à ce token
   const user = await User.findById(verificationToken.userId);
 
   if (!user) {
-    throw new Error("Utilisateur introuvable");
+    throwError("Utilisateur introuvable");
   }
 
   // Mettre à jour le statut de vérification de l'utilisateur
@@ -182,39 +193,11 @@ exports.verifyToken = async (token) => {
 };
 
 exports.requestResetPassword = async (user) => {
-  try {
-    const resetToken = generateToken();
-    user.resetToken = resetToken;
-    user.resetTokenExpiration = Date.now() + 3600000; // Le token expire dans 1 heure
-    await user.save();
-
-    await sendResetPasswordEmail(user, resetToken);
-
-    return { message: "Un e-mail de réinitialisation a été envoyé." };
-  } catch (error) {
-    console.error(
-      "Erreur lors de la génération du token de réinitialisation :",
-      error,
-    );
-    throw error;
-  }
+  await generateAndSaveResetToken(user);
+  return { message: "Un e-mail de réinitialisation a été envoyé." };
 };
 
 exports.ResetNewPassword = async (user) => {
-  try {
-    const resetToken = generateToken();
-    user.resetToken = resetToken;
-    user.resetTokenExpiration = Date.now() + 3600000; // Le token expire dans 1 heure
-    await user.save();
-
-    await sendResetPasswordEmail(user, resetToken);
-
-    return { message: "Un e-mail de réinitialisation a été envoyé." };
-  } catch (error) {
-    console.error(
-      "Erreur lors de la génération du token de réinitialisation :",
-      error,
-    );
-    throw error;
-  }
+  await generateAndSaveResetToken(user);
+  return { message: "Un e-mail de réinitialisation a été envoyé." };
 };

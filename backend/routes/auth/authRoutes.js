@@ -1,7 +1,6 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
+const { hash, compare } = require("bcryptjs");
 const router = express.Router();
-const { check, validationResult } = require("express-validator");
 const HTTP_STATUS = require("../../constants/HTTP_STATUS");
 const rateLimit = require("express-rate-limit");
 
@@ -13,6 +12,8 @@ const setAuthCookie = require("../../services/setAuthCookie");
 const handleValidationErrors = require("../../middlewares/handleValidationErrors");
 
 const { signupValidators } = require("../../validations/signupValidators");
+
+const CustomError = require("../../errors/CustomError");
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -48,7 +49,33 @@ router.get("/check-auth", async (req, res, next) => {
       }
     }
   } catch (error) {
-    next(error);
+    next(new CustomError("CheckAuthError", error.message, 400));
+  }
+});
+
+router.get("/logout", async (req, res, next) => {
+  try {
+    const token = req.cookies.token;
+    const newBlacklistedToken = new BlacklistedToken({ token });
+    await newBlacklistedToken.save();
+
+    res.clearCookie("token");
+    res.status(200).json({ message: "Déconnexion réussie" });
+  } catch (error) {
+    next(new CustomError("LogoutError", error.message, 400));
+  }
+});
+
+router.get("/verify/:token", async (req, res) => {
+  try {
+    const { token } = req.params;
+
+    const message = await authService.verifyToken(token);
+
+    res.status(200).json({ message });
+  } catch (error) {
+    console.error("Erreur lors de la vérification de l'e-mail:", error);
+    res.status(500).json({ message: error.message });
   }
 });
 
@@ -65,17 +92,14 @@ router.post(
         email,
         hashedPassword,
       );
-      const tokenDetails = await authService.createSignupToken(newUser);
-      const verificationDetails =
-        await authService.createVerificationToken(newUser);
-      setAuthCookie(res, tokenDetails.token);
+      await authService.createSignupToken(newUser);
+      await authService.createVerificationToken(newUser);
 
-      setAuthCookie(res, tokenDetails.token);
       res
         .status(HTTP_STATUS.CREATED)
         .json({ message: "Success", success: true });
     } catch (error) {
-      next(error);
+      next(new CustomError("SignupError", error.message, 400));
     }
   },
 );
@@ -89,33 +113,7 @@ router.post("/login", loginLimiter, async (req, res, next) => {
 
     res.status(HTTP_STATUS.OK).json({ token, userId });
   } catch (error) {
-    next(error);
-  }
-});
-
-router.get("/logout", async (req, res, next) => {
-  try {
-    const token = req.cookies.token;
-    const newBlacklistedToken = new BlacklistedToken({ token });
-    await newBlacklistedToken.save();
-
-    res.clearCookie("token");
-    res.status(200).json({ message: "Déconnexion réussie" });
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.get("/verify/:token", async (req, res) => {
-  try {
-    const { token } = req.params;
-
-    const message = await authService.verifyToken(token);
-
-    res.status(200).json({ message });
-  } catch (error) {
-    console.error("Erreur lors de la vérification de l'e-mail:", error);
-    res.status(500).json({ message: error.message });
+    next(new CustomError("LoginError", error.message, 400));
   }
 });
 

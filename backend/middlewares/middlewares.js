@@ -9,6 +9,6 @@ module.exports = (app) => {
   app.use(cors(corsConfig));
   app.use(express.json());
   app.use(cookieParser());
-  app.use(errorHandler);
   app.use(checkBlacklist);
+  app.use(errorHandler);
 };

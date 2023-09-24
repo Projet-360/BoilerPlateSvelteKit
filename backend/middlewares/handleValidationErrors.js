@@ -6,7 +6,7 @@ const handleValidationErrors = (req, res, next) => {
   if (!errors.isEmpty()) {
     return res
       .status(HTTP_STATUS.BAD_REQUEST)
-      .json({ message: errors.array()[0].msg });
+      .json({ errors: errors.array().map((err) => err.msg) });
   }
   next();
 };
