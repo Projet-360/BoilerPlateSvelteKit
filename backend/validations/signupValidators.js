@@ -1,5 +1,5 @@
 const { check } = require("express-validator");
-const ERRORS = require("./../../constants/errorMessages");
+const ERRORS = require("../constants/errorMessages");
 
 exports.signupValidators = [
   // Nom d'utilisateur : non vide, longueur minimale et maximale

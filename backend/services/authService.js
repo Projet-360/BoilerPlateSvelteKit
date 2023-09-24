@@ -11,9 +11,55 @@ const {
   sendResetPasswordEmail,
 } = require("../services/emailService");
 
+const TOKEN_EXPIRY = process.env.TOKEN_EXPIRY || "1h";
+const VERIFICATION_EXPIRY_HOURS = 24;
+
 // Fonction pour générer un token de vérification
 const generateToken = () => {
   return crypto.randomBytes(32).toString("hex");
+};
+
+exports.createSignupToken = (user) => {
+  const token = jwt.sign(
+    { userId: user._id, username: user.username, email: user.email },
+    process.env.SECRETKEY,
+    { expiresIn: TOKEN_EXPIRY },
+  );
+  return { token };
+};
+
+exports.createVerificationToken = async (user) => {
+  const verificationToken = generateToken();
+  await sendVerificationEmail(user.email, verificationToken);
+
+  const expireAt = new Date();
+  expireAt.setHours(expireAt.getHours() + VERIFICATION_EXPIRY_HOURS);
+
+  const newToken = new EmailVerificationToken({
+    userId: user._id,
+    token: verificationToken,
+    expireAt: expireAt,
+  });
+  await newToken.save();
+
+  return { verificationToken };
+};
+
+exports.hashPassword = async (password) => {
+  return await bcrypt.hash(password, 12);
+};
+
+exports.checkEmailExists = async (email) => {
+  const existingUserByEmail = await User.findOne({ email });
+  if (existingUserByEmail) {
+    throw new Error("EMAIL_EXIST");
+  }
+};
+
+exports.createUser = async (username, email, hashedPassword) => {
+  const newUser = new User({ username, email, password: hashedPassword });
+  await newUser.save();
+  return newUser;
 };
 
 exports.checkAuthentication = async (token) => {
@@ -40,20 +86,8 @@ exports.checkAuthentication = async (token) => {
   };
 };
 
-exports.checkEmailExists = async (email) => {
-  const existingUserByEmail = await User.findOne({ email });
-  if (existingUserByEmail) {
-    throw new Error("EMAIL_EXIST");
-  }
-};
-
-exports.signup = async (username, email, password) => {
-  await this.checkEmailExists(email);
+exports.signup = async (email) => {
   try {
-    const hashedPassword = await bcrypt.hash(password, 12);
-    const newUser = new User({ username, email, password: hashedPassword });
-    await newUser.save();
-
     const tokenExpiry = process.env.TOKEN_EXPIRY || "1h";
 
     const token = jwt.sign(

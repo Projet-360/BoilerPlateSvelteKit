@@ -12,7 +12,7 @@ const authService = require("../../services/authService");
 const setAuthCookie = require("../../services/setAuthCookie");
 const handleValidationErrors = require("../../middlewares/handleValidationErrors");
 
-const { signupValidators } = require("./validators");
+const { signupValidators } = require("../../validations/signupValidators");
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -58,8 +58,19 @@ router.post(
   async (req, res, next) => {
     try {
       const { username, email, password } = req.body;
-      const { token } = await authService.signup(username, email, password);
-      setAuthCookie(res, token);
+      await authService.checkEmailExists(email);
+      const hashedPassword = await authService.hashPassword(password);
+      const newUser = await authService.createUser(
+        username,
+        email,
+        hashedPassword,
+      );
+      const tokenDetails = await authService.createSignupToken(newUser);
+      const verificationDetails =
+        await authService.createVerificationToken(newUser);
+      setAuthCookie(res, tokenDetails.token);
+
+      setAuthCookie(res, tokenDetails.token);
       res
         .status(HTTP_STATUS.CREATED)
         .json({ message: "Success", success: true });
