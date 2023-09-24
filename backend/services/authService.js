@@ -2,16 +2,19 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
-const User = require("../models/UserModel");
-const EmailVerificationToken = require("../models/EmailVerificationTokenModel");
-const BlacklistedToken = require("../models/BlacklistedTokenModel");
-const CustomError = require("../errors/CustomError");
 const {
   TOKEN_EXPIRY,
   SECRETKEY,
   VERIFICATION_EXPIRY_HOURS,
 } = require("../config/config");
 const { BAD_REQUEST } = require("../constants/HTTP_STATUS");
+
+const User = require("../models/UserModel");
+const EmailVerificationToken = require("../models/EmailVerificationTokenModel");
+const BlacklistedToken = require("../models/BlacklistedTokenModel");
+
+const CustomError = require("../errors/CustomError");
+
 const {
   sendVerificationEmail,
   sendResetPasswordEmail,

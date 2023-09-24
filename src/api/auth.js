@@ -59,6 +59,7 @@ export async function signup(username, email, password) {
       return { success: false, message: response.message };
     }
   } catch (error) {
+    console.log("error received: ", error);
     return { success: false, message: error.message };
   }
 }

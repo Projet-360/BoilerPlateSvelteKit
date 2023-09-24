@@ -46,9 +46,11 @@
 <Preloader />
 <Cursor />
 
-{#each $notificationStore as { id, message, type }}
-  <Notification {message} {type} />
-{/each}
+<div class="notification-wrapper">
+  {#each $notificationStore as { id, message, type }}
+    <Notification {message} {type} />
+  {/each}
+</div>
 
 <SmoothScroller>
   <PageTransition pathname={data.route}>

@@ -39,18 +39,20 @@
 {/if}
 
 <style>
-  /* Styles de base pour toutes les notifications */
-  .notification {
-    position: absolute;
+  .notification-wrapper {
+    position: fixed;
     top: 20px;
     right: 20px;
     width: 200px;
-    padding: 10px;
-    color: white;
     z-index: 9999999;
   }
 
-  /* Styles spécifiques pour chaque type de notification */
+  .notification {
+    padding: 10px;
+    margin-bottom: 10px; /* Espacement entre les notifications */
+    color: white;
+  }
+
   .notification.success {
     background-color: green;
   }

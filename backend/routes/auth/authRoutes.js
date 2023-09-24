@@ -1,6 +1,8 @@
 const express = require("express");
 const { hash, compare } = require("bcryptjs");
 const router = express.Router();
+const { check, validationResult } = require("express-validator");
+
 const HTTP_STATUS = require("../../constants/HTTP_STATUS");
 const rateLimit = require("express-rate-limit");
 

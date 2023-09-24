@@ -48,6 +48,13 @@
   }
 }
 
+.notification-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+}
+
 #smoothScoller {
   height: 100%;
   overflow: hidden;
