@@ -1,7 +1,7 @@
-const { check } = require("express-validator");
-const ERRORS = require("../constants/errorMessages");
+import { check } from "express-validator";
+import { ERRORS } from "../constants/errorMessages.js";
 
-exports.signupValidators = [
+export const signupValidators = [
   // Nom d'utilisateur : non vide, longueur minimale et maximale
   check("username")
     .notEmpty()

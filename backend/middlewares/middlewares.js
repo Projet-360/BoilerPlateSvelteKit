@@ -1,11 +1,11 @@
-const express = require("express");
-const cors = require("cors");
-const corsConfig = require("../config/corsConfig");
-const cookieParser = require("cookie-parser");
-const errorHandler = require("./errorHandler");
-const checkBlacklist = require("./checkBlacklist");
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import corsConfig from "../config/corsConfig.js";
+import errorHandler from "./errorHandler.js";
+import checkBlacklist from "./checkBlacklist.js";
 
-module.exports = (app) => {
+export default (app) => {
   app.use(cors(corsConfig));
   app.use(express.json());
   app.use(cookieParser());

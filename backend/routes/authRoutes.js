@@ -1,24 +1,25 @@
-const { Router } = require("express");
+import { Router } from "express";
 const router = Router();
 
-const logger = require("../services/logger");
+import pkg from "bcryptjs";
+const { hash, compare } = pkg;
+import { check, validationResult } from "express-validator";
+import rateLimit from "express-rate-limit";
 
-const { hash, compare } = require("bcryptjs");
-const { check, validationResult } = require("express-validator");
+import { handleValidationErrors } from "../middlewares/handleValidationErrors.js";
 
-const HTTP_STATUS = require("../constants/HTTP_STATUS");
-const rateLimit = require("express-rate-limit");
+import { HTTP_STATUS } from "../constants/HTTP_STATUS.js";
 
-const User = require("../models/UserModel");
-const BlacklistedToken = require("../models/BlacklistedTokenModel");
+import User from "../models/UserModel.js";
+import BlacklistedToken from "../models/BlacklistedTokenModel.js";
 
-const authService = require("../services/authService");
-const setAuthCookie = require("../services/setAuthCookie");
-const handleValidationErrors = require("../middlewares/handleValidationErrors");
+import * as authService from "../services/authService.js";
+import { setAuthCookie } from "../services/setAuthCookie.js";
+import logger from "../services/logger.js";
 
-const { signupValidators } = require("../validations/signupValidators");
+import { signupValidators } from "../validations/signupValidators.js";
 
-const CustomError = require("../errors/CustomError");
+import CustomError from "../errors/CustomError.js";
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -172,4 +173,4 @@ router.post("/reset-password/:token", async (req, res) => {
   res.status(200).json({ message: "Mot de passe réinitialisé avec succès" });
 });
 
-module.exports = router;
+export default router;

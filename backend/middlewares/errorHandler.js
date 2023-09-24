@@ -1,9 +1,10 @@
-const HTTP_STATUS = require("../constants/HTTP_STATUS");
+import { HTTP_STATUS } from "../constants/HTTP_STATUS.js";
+import CustomError from "../errors/CustomError.js";
 
 const errorHandler = (err, req, res, next) => {
   console.error(err.stack);
 
-  let statusCode = HTTP_STATUS.INTERNAL_SERVER_ERROR;
+  let statusCode = INTERNAL_SERVER_ERROR;
 
   if (err instanceof CustomError) {
     console.log("CustomError capturé dans errorHandler:", err);
@@ -24,4 +25,4 @@ const errorHandler = (err, req, res, next) => {
   res.status(statusCode).json({ message: errorMessage });
 };
 
-module.exports = errorHandler;
+export default errorHandler;

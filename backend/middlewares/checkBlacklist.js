@@ -1,4 +1,4 @@
-const BlacklistedToken = require("../models/BlacklistedTokenModel");
+import BlacklistedToken from "../models/BlacklistedTokenModel.js";
 
 const checkBlacklist = async (req, res, next) => {
   try {
@@ -15,4 +15,4 @@ const checkBlacklist = async (req, res, next) => {
   }
 };
 
-module.exports = checkBlacklist;
+export default checkBlacklist;

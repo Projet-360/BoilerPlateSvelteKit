@@ -1,4 +1,4 @@
-const HTTP_STATUS = {
+export const HTTP_STATUS = {
   OK: 200,
   CREATED: 201,
   BAD_REQUEST: 400,
@@ -7,5 +7,3 @@ const HTTP_STATUS = {
   TOO_MANY_REQUESTS: 429, // Ajoute cette ligne
   CONFLICT: 409,
 };
-
-module.exports = HTTP_STATUS;

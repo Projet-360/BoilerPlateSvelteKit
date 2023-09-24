@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const GreetingSchema = new mongoose.Schema({
   name: String,
@@ -7,4 +7,4 @@ const GreetingSchema = new mongoose.Schema({
 
 const Greeting = mongoose.model("Greeting", GreetingSchema);
 
-module.exports = Greeting;
+export default Greeting;

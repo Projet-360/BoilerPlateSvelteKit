@@ -1,6 +1,6 @@
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
-const transporter = nodemailer.createTransport({
+export const transporter = nodemailer.createTransport({
   service: process.env.MAIL_SERVER,
   auth: {
     user: process.env.EMAIL_USER,
@@ -10,5 +10,3 @@ const transporter = nodemailer.createTransport({
     rejectUnauthorized: false, // Ajoutez cette ligne
   },
 });
-
-module.exports = transporter;

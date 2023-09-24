@@ -1,7 +1,6 @@
-// backend/services/emailService.js
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
-const sendVerificationEmail = async (email, token) => {
+export const sendVerificationEmail = async (email, token) => {
   console.log(
     `Préparation de l'envoi de l'e-mail à ${email} avec le token ${token}`,
   );
@@ -16,21 +15,19 @@ const sendVerificationEmail = async (email, token) => {
 
   const url = `${process.env.URL_FRONT}/verify/${token}`;
 
-  await transporter
-    .sendMail({
+  try {
+    await transporter.sendMail({
       to: email,
       subject: "Vérification de l'Email",
       html: `Cliquez <a href="${url}">ici</a> pour vérifier votre email.`,
-    })
-    .then(() => {
-      console.log("E-mail envoyé avec succès !");
-    })
-    .catch((error) => {
-      console.log("Erreur lors de l'envoi de l'e-mail :", error);
     });
+    console.log("E-mail envoyé avec succès !");
+  } catch (error) {
+    console.log("Erreur lors de l'envoi de l'e-mail :", error);
+  }
 };
 
-const sendResetPasswordEmail = async (user, resetToken) => {
+export const sendResetPasswordEmail = async (user, resetToken) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -46,10 +43,13 @@ const sendResetPasswordEmail = async (user, resetToken) => {
     text: `Cliquez sur ce lien pour réinitialiser votre mot de passe : ${process.env.URL_FRONT}/reset-password/${resetToken}`,
   };
 
-  return transporter.sendMail(mailOptions);
-};
-
-module.exports = {
-  sendVerificationEmail,
-  sendResetPasswordEmail,
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log("E-mail de réinitialisation envoyé avec succès !");
+  } catch (error) {
+    console.log(
+      "Erreur lors de l'envoi de l'e-mail de réinitialisation :",
+      error,
+    );
+  }
 };

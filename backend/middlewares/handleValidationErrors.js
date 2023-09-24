@@ -1,8 +1,8 @@
-const { validationResult } = require("express-validator");
-const HTTP_STATUS = require("../constants/HTTP_STATUS");
-const CustomError = require("../errors/CustomError"); // Assurez-vous que le chemin est correct
+import { validationResult } from "express-validator";
+import { HTTP_STATUS } from "../constants/HTTP_STATUS.js";
+import CustomError from "../errors/CustomError.js"; // Assurez-vous que le chemin est correct
 
-const handleValidationErrors = (req, res, next) => {
+export const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     const errorMessages = errors.array().map((err) => err.msg);
@@ -15,5 +15,3 @@ const handleValidationErrors = (req, res, next) => {
   }
   next();
 };
-
-module.exports = handleValidationErrors;

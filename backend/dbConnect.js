@@ -1,5 +1,7 @@
-const mongoose = require("mongoose");
-require("dotenv").config();
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const connectDB = async () => {
   try {
@@ -7,12 +9,12 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
-    console.log("Connected to MongoDB");
+    console.log("Connecté à MongoDB");
   } catch (err) {
-    console.error("Could not connect to MongoDB", err);
+    console.error("Impossible de se connecter à MongoDB", err);
     // Vous pouvez ici soit propager l'erreur, soit renvoyer une promesse rejetée
     return Promise.reject(err);
   }
 };
 
-module.exports = connectDB;
+export default connectDB;

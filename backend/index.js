@@ -1,10 +1,11 @@
-const express = require("express");
-const connectDB = require("./dbConnect"); // Importation du module de connexion à la BD
-const config = require("./config/config"); // Importation de la configuration
-const applyMiddlewares = require("./middlewares/middlewares.js"); // Importation des middlewares
+import express from "express";
+import connectDB from "./dbConnect.js"; // Importation du module de connexion à la BD
+import config from "./config/config.js"; // Importation de la configuration
+import applyMiddlewares from "./middlewares/middlewares.js"; // Importation des middlewares
+import mongoose from "mongoose";
 
-const authRoutes = require("./routes/authRoutes");
-const greetingRoutes = require("./routes/greetingRoutes");
+import authRoutes from "./routes/authRoutes.js";
+import greetingRoutes from "./routes/greetingRoutes.js";
 
 connectDB(); // Appel de la fonction pour connecter à la BD
 
@@ -25,7 +26,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(config.PORT, () => {
-  console.log(`Server is running on port ${config.PORT}`);
+  console.log(`Le serveur fonctionne sur le port ${config.PORT}`);
 });
 
 // Gestion des signaux pour une fermeture propre
@@ -33,11 +34,11 @@ process.on("SIGTERM", gracefulShutdown);
 process.on("SIGINT", gracefulShutdown);
 
 function gracefulShutdown() {
-  console.log("\nReceived exit signal, shutting down gracefully.");
+  console.log("\nSignal de sortie reçu, fermeture en cours.");
 
   // Fermer la connexion à la base de données
   mongoose.connection.close(() => {
-    console.log("MongoDB connection closed.");
+    console.log("Connexion MongoDB fermée.");
     process.exit(0);
   });
 }

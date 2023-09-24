@@ -1,24 +1,21 @@
-const { hash, compare } = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
+import pkg from "bcryptjs";
+const { hash, compare } = pkg;
+import jwt from "jsonwebtoken";
+import crypto from "crypto";
 
-const {
-  TOKEN_EXPIRY,
-  SECRETKEY,
-  VERIFICATION_EXPIRY_HOURS,
-} = require("../config/config");
-const { BAD_REQUEST } = require("../constants/HTTP_STATUS");
+import config from "../config/config.js";
+import { HTTP_STATUS } from "../constants/HTTP_STATUS.js";
 
-const User = require("../models/UserModel");
-const EmailVerificationToken = require("../models/EmailVerificationTokenModel");
-const BlacklistedToken = require("../models/BlacklistedTokenModel");
+import User from "../models/UserModel.js";
+import EmailVerificationToken from "../models/EmailVerificationTokenModel.js";
+import BlacklistedToken from "../models/BlacklistedTokenModel.js";
 
-const CustomError = require("../errors/CustomError");
+import CustomError from "../errors/CustomError.js";
 
-const {
+import {
   sendVerificationEmail,
   sendResetPasswordEmail,
-} = require("../services/emailService");
+} from "../services/emailService.js";
 
 // Fonction pour générer un token de vérification
 const generateToken = () => {
@@ -37,19 +34,19 @@ const generateAndSaveResetToken = async (user) => {
   await sendResetPasswordEmail(user, resetToken);
 };
 
-exports.createSignupToken = ({ _id: userId, username, email }) => {
-  const token = jwt.sign({ userId, username, email }, SECRETKEY, {
-    expiresIn: TOKEN_EXPIRY,
+export const createSignupToken = ({ _id: userId, username, email }) => {
+  const token = jwt.sign({ userId, username, email }, config.SECRETKEY, {
+    expiresIn: config.TOKEN_EXPIRY,
   });
   return { token };
 };
 
-exports.createVerificationToken = async (user) => {
+export const createVerificationToken = async (user) => {
   const verificationToken = generateToken();
   await sendVerificationEmail(user.email, verificationToken);
 
   const expireAt = new Date();
-  expireAt.setHours(expireAt.getHours() + VERIFICATION_EXPIRY_HOURS);
+  expireAt.setHours(expireAt.getHours() + config.VERIFICATION_EXPIRY_HOURS);
 
   const newToken = new EmailVerificationToken({
     userId: user._id,
@@ -61,24 +58,24 @@ exports.createVerificationToken = async (user) => {
   return { verificationToken };
 };
 
-exports.hashPassword = async (password) => {
+export const hashPassword = async (password) => {
   return await hash(password, 12);
 };
 
-exports.checkEmailExists = async (email) => {
+export const checkEmailExists = async (email) => {
   const existingUserByEmail = await User.findOne({ email });
   if (existingUserByEmail) {
-    throwError("EMAIL_EXIST", "EMAIL_EXIST", BAD_REQUEST);
+    throwError("EMAIL_EXIST", "EMAIL_EXIST", HTTP_STATUS.BAD_REQUEST);
   }
 };
 
-exports.createUser = async (username, email, hashedPassword) => {
+export const createUser = async (username, email, hashedPassword) => {
   const newUser = new User({ username, email, password: hashedPassword });
   await newUser.save();
   return newUser;
 };
 
-exports.checkAuthentication = async (token) => {
+export const checkAuthentication = async (token) => {
   if (!token) {
     console.log("Le client n'est pas connecté");
     return { isAuthenticated: false };
@@ -93,7 +90,7 @@ exports.checkAuthentication = async (token) => {
     };
   }
 
-  const decoded = jwt.verify(token, SECRETKEY);
+  const decoded = jwt.verify(token, config.SECRETKEY);
 
   return {
     isAuthenticated: true,
@@ -102,13 +99,13 @@ exports.checkAuthentication = async (token) => {
   };
 };
 
-exports.signup = async (email) => {
+export const signup = async (email) => {
   try {
-    const tokenExpiry = TOKEN_EXPIRY;
+    const tokenExpiry = config.TOKEN_EXPIRY;
 
     const token = jwt.sign(
       { userId: newUser._id, username: newUser.username, email: newUser.email },
-      SECRETKEY,
+      config.SECRETKEY,
       { expiresIn: tokenExpiry },
     );
 
@@ -134,7 +131,7 @@ exports.signup = async (email) => {
   }
 };
 
-exports.login = async (email, password) => {
+export const login = async (email, password) => {
   // Trouver l'utilisateur par email
   const user = await User.findOne({ email });
   if (!user) {
@@ -157,14 +154,18 @@ exports.login = async (email, password) => {
   // ...
 
   // Générer un JWT
-  const token = jwt.sign({ userId: user._id, email: user.email }, SECRETKEY, {
-    expiresIn: "1h",
-  });
+  const token = jwt.sign(
+    { userId: user._id, email: user.email },
+    config.SECRETKEY,
+    {
+      expiresIn: "1h",
+    },
+  );
 
   return { token, userId: user._id };
 };
 
-exports.verifyToken = async (token) => {
+export const verifyToken = async (token) => {
   // Trouver le token dans la base de données
   const verificationToken = await EmailVerificationToken.findOne({ token });
 
@@ -194,12 +195,12 @@ exports.verifyToken = async (token) => {
   return "E-mail vérifié avec succès !";
 };
 
-exports.requestResetPassword = async (user) => {
+export const requestResetPassword = async (user) => {
   await generateAndSaveResetToken(user);
   return { message: "Un e-mail de réinitialisation a été envoyé." };
 };
 
-exports.ResetNewPassword = async (user) => {
+export const ResetNewPassword = async (user) => {
   await generateAndSaveResetToken(user);
   return { message: "Un e-mail de réinitialisation a été envoyé." };
 };

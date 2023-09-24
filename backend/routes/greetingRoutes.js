@@ -1,5 +1,5 @@
-const express = require("express");
-const Greeting = require("./../models/GreetingModel");
+import express from "express";
+import Greeting from "./../models/GreetingModel.js";
 const router = express.Router();
 
 // Read All
@@ -37,4 +37,4 @@ router.delete("/deleteGreeting/:id", async (req, res) => {
   res.json({ status: "deleted" });
 });
 
-module.exports = router;
+export default router;

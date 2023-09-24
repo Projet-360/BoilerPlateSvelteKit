@@ -1,0 +1,326 @@
+C:\wamp64\www\BoilerPlateSvelteKit\backend\index.js
+const express = require("express");
+const connectDB = require("./dbConnect"); // Importation du module de connexion à la BD
+const config = require("./config/config"); // Importation de la configuration
+const applyMiddlewares = require("./middlewares/middlewares.js"); // Importation des middlewares
+
+const authRoutes = require("./routes/authRoutes");
+const greetingRoutes = require("./routes/greetingRoutes");
+
+connectDB(); // Appel de la fonction pour connecter à la BD
+
+const app = express();
+
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
+applyMiddlewares(app); // Application des middlewares
+
+app.use("/auth", authRoutes);
+app.use("/api", greetingRoutes);
+
+// Placez le middleware d'erreur ici
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  console.error(err.message, err.stack);
+  res.status(statusCode).json({ message: err.message });
+});
+
+app.listen(config.PORT, () => {
+  console.log(`Server is running on port ${config.PORT}`);
+});
+
+// Gestion des signaux pour une fermeture propre
+process.on("SIGTERM", gracefulShutdown);
+process.on("SIGINT", gracefulShutdown);
+
+function gracefulShutdown() {
+  console.log("\nReceived exit signal, shutting down gracefully.");
+
+  // Fermer la connexion à la base de données
+  mongoose.connection.close(() => {
+    console.log("MongoDB connection closed.");
+    process.exit(0);
+  });
+}
+
+C: \wamp64\www\BoilerPlateSvelteKit\backend\routes\authRoutes.js
+const { Router } = require("express");
+const router = Router();
+
+const logger = require("../services/logger");
+
+const { hash, compare } = require("bcryptjs");
+const { check, validationResult } = require("express-validator");
+
+const HTTP_STATUS = require("../constants/HTTP_STATUS");
+const rateLimit = require("express-rate-limit");
+
+const User = require("../models/UserModel");
+const BlacklistedToken = require("../models/BlacklistedTokenModel");
+
+const authService = require("../services/authService");
+const setAuthCookie = require("../services/setAuthCookie");
+const handleValidationErrors = require("../middlewares/handleValidationErrors");
+
+const { signupValidators } = require("../validations/signupValidators");
+
+const CustomError = require("../errors/CustomError");
+
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  handler: function (req, res) {
+    logger.info("Rate limit reached");
+    res.status(HTTP_STATUS.TOO_MANY_REQUESTS).json({
+      message: "RATE_LIMIT",
+    });
+  },
+});
+
+router.get("/check-auth", async (req, res, next) => {
+  const token = req.cookies.token;
+
+  try {
+    const result = await authService.checkAuthentication(token);
+
+    if (result.isAuthenticated) {
+      res.status(HTTP_STATUS.OK).json({
+        isAuthenticated: true,
+        token: result.token,
+        userId: result.userId,
+      });
+    } else {
+      if (result.message) {
+        res.status(HTTP_STATUS.UNAUTHORIZED).json({
+          isAuthenticated: false,
+          message: result.message,
+        });
+      } else {
+        res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
+      }
+    }
+  } catch (error) {
+    next(new CustomError("CheckAuthError", error.message, 400));
+  }
+});
+
+router.get("/logout", async (req, res, next) => {
+  try {
+    const token = req.cookies.token;
+    const newBlacklistedToken = new BlacklistedToken({ token });
+    await newBlacklistedToken.save();
+
+    res.clearCookie("token");
+    res.status(200).json({ message: "Déconnexion réussie" });
+  } catch (error) {
+    next(new CustomError("LogoutError", error.message, 400));
+  }
+});
+
+router.get("/verify/:token", async (req, res) => {
+  try {
+    const { token } = req.params;
+
+    const message = await authService.verifyToken(token);
+
+    res.status(200).json({ message });
+  } catch (error) {
+    console.error("Erreur lors de la vérification de l'e-mail:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.post(
+  "/signup",
+  [signupValidators, handleValidationErrors],
+  async (req, res, next) => {
+    try {
+      const { username, email, password } = req.body;
+      await authService.checkEmailExists(email);
+      const hashedPassword = await authService.hashPassword(password);
+      const newUser = await authService.createUser(
+        username,
+        email,
+        hashedPassword,
+      );
+      await authService.createSignupToken(newUser);
+      await authService.createVerificationToken(newUser);
+
+      res
+        .status(HTTP_STATUS.CREATED)
+        .json({ message: "Success", success: true });
+    } catch (error) {
+      console.log(error);
+      next(new CustomError("SignupError", error.message, 400));
+    }
+  },
+);
+
+router.post("/login", loginLimiter, async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const { token, userId } = await authService.login(email, password);
+    // Définir le cookie
+    setAuthCookie(res, token);
+
+    res.status(HTTP_STATUS.OK).json({ token, userId });
+  } catch (error) {
+    console.log("error from authRoutes", error);
+    next(new CustomError("LoginError", error.message, 400));
+  }
+});
+
+router.post("/reset-password", async (req, res) => {
+  const { email } = req.body;
+
+  // Validation de l'email (à faire si ce n'est pas déjà le cas)
+  if (!email || !email.includes("@")) {
+    return res.status(400).json({ error: "E-mail invalide" });
+  }
+
+  try {
+    // Rechercher l'utilisateur dans la base de données
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ error: "Utilisateur non trouvé" });
+    }
+
+    const result = await authService.requestResetPassword(user);
+    res.status(200).json({ message: result.message });
+  } catch (error) {
+    console.error("Erreur lors de la réinitialisation du mot de passe:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.post("/reset-password/:token", async (req, res) => {
+  const { token } = req.params;
+  const { newPassword } = req.body;
+
+  // Trouver l'utilisateur avec le token de réinitialisation
+  const user = await User.findOne({
+    resetToken: token,
+    resetTokenExpiration: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    return res.status(400).json({ error: "Token invalide ou expiré" });
+  }
+
+  // Chiffrer le nouveau mot de passe et le sauvegarder
+  const hashedPassword = await bcrypt.hash(newPassword, 12);
+  user.password = hashedPassword;
+  user.resetToken = undefined;
+  user.resetTokenExpiration = undefined;
+  await user.save();
+
+  res.status(200).json({ message: "Mot de passe réinitialisé avec succès" });
+});
+
+module.exports = router;
+
+
+C: \wamp64\www\BoilerPlateSvelteKit\backend\constants\HTTP_STATUS.js
+const HTTP_STATUS = {
+  OK: 200,
+  CREATED: 201,
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  INTERNAL_SERVER_ERROR: 500,
+  TOO_MANY_REQUESTS: 429, // Ajoute cette ligne
+  CONFLICT: 409,
+};
+
+module.exports = HTTP_STATUS;
+
+
+C: \wamp64\www\BoilerPlateSvelteKit\backend\constants\errorMessages.js
+module.exports = {
+  // SUBSCRIBE
+  USERNAME_REQUIRED: "USERNAME_REQUIRED",
+  VALID_EMAIL: "VALID_EMAIL",
+  VALID_USERNAME: "VALID_USERNAME",
+  NUMBE_CARAC_PASSWORD: "NUMBE_CARAC_PASSWORD",
+  MIN_PASSWORD: "MIN_PASSWORD",
+  MAJ_PASSWORD: "MAJ_PASSWORD",
+  NUMBER_PASSWORD: "NUMBER_PASSWORD",
+  SPECIAL_CARAC_PASSWORD: "SPECIAL_CARAC_PASSWORD",
+  MAIL_ALREADY_EXIST: "MAIL_ALREADY_EXIST",
+
+  INVALID_TOKEN: "INVALID_TOKEN",
+  EXPIRED_TOKEN: "EXPIRED_TOKEN",
+  USER_NOT_FIND: "USER_NOT_FIND",
+
+  // LOGIN
+  SUCCESS_LOGIN: "SUCCESS_LOGIN",
+  INVALID_CREDENTIALS: "INVALID_CREDENTIALS",
+};
+
+
+C: \wamp64\www\BoilerPlateSvelteKit\backend\middlewares\middlewares.js
+const express = require("express");
+const cors = require("cors");
+const corsConfig = require("../config/corsConfig");
+const cookieParser = require("cookie-parser");
+const errorHandler = require("./errorHandler");
+const checkBlacklist = require("./checkBlacklist");
+
+module.exports = (app) => {
+  app.use(cors(corsConfig));
+  app.use(express.json());
+  app.use(cookieParser());
+  app.use(checkBlacklist);
+  app.use(errorHandler);
+};
+
+C:\wamp64\www\BoilerPlateSvelteKit\backend\middlewares\handleValidationErrors.js
+const { validationResult } = require("express-validator");
+const HTTP_STATUS = require("../constants/HTTP_STATUS");
+const CustomError = require("../errors/CustomError"); // Assurez-vous que le chemin est correct
+
+const handleValidationErrors = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const errorMessages = errors.array().map((err) => err.msg);
+    const validationError = new CustomError(
+      "ValidationError",
+      errorMessages,
+      HTTP_STATUS.BAD_REQUEST,
+    );
+    return next(validationError);
+  }
+  next();
+};
+
+module.exports = handleValidationErrors;
+
+
+C:\wamp64\www\BoilerPlateSvelteKit\backend\middlewares\errorHandler.js
+const HTTP_STATUS = require("../constants/HTTP_STATUS");
+
+const errorHandler = (err, req, res, next) => {
+  console.error(err.stack);
+
+  let statusCode = HTTP_STATUS.INTERNAL_SERVER_ERROR;
+
+  if (err instanceof CustomError) {
+    console.log("CustomError capturé dans errorHandler:", err);
+    statusCode = err.statusCode;
+  }
+
+  if (err instanceof CustomError) {
+    statusCode = err.statusCode;
+  } else if (err.name === "ValidationError") {
+    statusCode = HTTP_STATUS.BAD_REQUEST;
+  }
+
+  const errorMessage =
+    process.env.NODE_ENV === "production"
+      ? "Une erreur s'est produite"
+      : err.message;
+
+  res.status(statusCode).json({ message: errorMessage });
+};
+
+module.exports = errorHandler;

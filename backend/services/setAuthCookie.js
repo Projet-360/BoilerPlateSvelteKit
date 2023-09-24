@@ -1,4 +1,4 @@
-function setAuthCookie(res, token) {
+export function setAuthCookie(res, token) {
   const cookieOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
@@ -8,5 +8,3 @@ function setAuthCookie(res, token) {
 
   res.cookie("token", token, cookieOptions);
 }
-
-module.exports = setAuthCookie;

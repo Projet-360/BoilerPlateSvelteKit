@@ -1,4 +1,4 @@
-module.exports = {
+export const ERRORS = {
   // SUBSCRIBE
   USERNAME_REQUIRED: "USERNAME_REQUIRED",
   VALID_EMAIL: "VALID_EMAIL",
