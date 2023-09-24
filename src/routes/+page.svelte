@@ -62,13 +62,26 @@
 <Box />
 
 <form on:submit|preventDefault={handleSendGreeting}>
-  <label>
+  <label for="nameInput">
     Nom :
-    <input type="text" bind:value={name} />
+    <input
+      id="nameInput"
+      name="name"
+      type="text"
+      autocomplete="name"
+      bind:value={name}
+    />
   </label>
-  <label>
+
+  <label for="messageInput">
     Message :
-    <input type="text" bind:value={message} />
+    <input
+      id="messageInput"
+      name="message"
+      type="text"
+      autocomplete="on"
+      bind:value={message}
+    />
   </label>
   <button type="submit">Envoyer</button>
 </form>

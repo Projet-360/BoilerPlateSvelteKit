@@ -49,7 +49,12 @@
   </nav>
 
   <div class="left-side">
-    <select bind:value={$locale} on:change={handleChange}>
+    <select
+      id="localeSelect"
+      name="locale"
+      bind:value={$locale}
+      on:change={handleChange}
+    >
       {#each $locales as value}
         <option {value}>{$t(`lang.${value}`)}</option>
       {/each}
