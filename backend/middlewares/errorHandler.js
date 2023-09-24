@@ -6,6 +6,11 @@ const errorHandler = (err, req, res, next) => {
   let statusCode = HTTP_STATUS.INTERNAL_SERVER_ERROR;
 
   if (err instanceof CustomError) {
+    console.log("CustomError capturé dans errorHandler:", err);
+    statusCode = err.statusCode;
+  }
+
+  if (err instanceof CustomError) {
     statusCode = err.statusCode;
   } else if (err.name === "ValidationError") {
     statusCode = HTTP_STATUS.BAD_REQUEST;

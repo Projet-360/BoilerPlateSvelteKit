@@ -3,7 +3,7 @@ const connectDB = require("./dbConnect"); // Importation du module de connexion 
 const config = require("./config/config"); // Importation de la configuration
 const applyMiddlewares = require("./middlewares/middlewares.js"); // Importation des middlewares
 
-const authRoutes = require("./routes/auth/authRoutes");
+const authRoutes = require("./routes/authRoutes");
 const greetingRoutes = require("./routes/greetingRoutes");
 
 connectDB(); // Appel de la fonction pour connecter à la BD

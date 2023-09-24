@@ -1,27 +1,30 @@
-const express = require("express");
+const { Router } = require("express");
+const router = Router();
+
+const logger = require("../services/logger");
+
 const { hash, compare } = require("bcryptjs");
-const router = express.Router();
 const { check, validationResult } = require("express-validator");
 
-const HTTP_STATUS = require("../../constants/HTTP_STATUS");
+const HTTP_STATUS = require("../constants/HTTP_STATUS");
 const rateLimit = require("express-rate-limit");
 
-const User = require("../../models/UserModel");
-const BlacklistedToken = require("../../models/BlacklistedTokenModel");
+const User = require("../models/UserModel");
+const BlacklistedToken = require("../models/BlacklistedTokenModel");
 
-const authService = require("../../services/authService");
-const setAuthCookie = require("../../services/setAuthCookie");
-const handleValidationErrors = require("../../middlewares/handleValidationErrors");
+const authService = require("../services/authService");
+const setAuthCookie = require("../services/setAuthCookie");
+const handleValidationErrors = require("../middlewares/handleValidationErrors");
 
-const { signupValidators } = require("../../validations/signupValidators");
+const { signupValidators } = require("../validations/signupValidators");
 
-const CustomError = require("../../errors/CustomError");
+const CustomError = require("../errors/CustomError");
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 5,
   handler: function (req, res) {
-    console.log("Rate limit reached"); // Ajoute ce log pour le débogage
+    logger.info("Rate limit reached");
     res.status(HTTP_STATUS.TOO_MANY_REQUESTS).json({
       message: "RATE_LIMIT",
     });
@@ -101,6 +104,7 @@ router.post(
         .status(HTTP_STATUS.CREATED)
         .json({ message: "Success", success: true });
     } catch (error) {
+      console.log(error);
       next(new CustomError("SignupError", error.message, 400));
     }
   },
@@ -115,6 +119,7 @@ router.post("/login", loginLimiter, async (req, res, next) => {
 
     res.status(HTTP_STATUS.OK).json({ token, userId });
   } catch (error) {
+    console.log("error from authRoutes", error);
     next(new CustomError("LoginError", error.message, 400));
   }
 });

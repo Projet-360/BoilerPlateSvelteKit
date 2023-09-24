@@ -1,4 +1,4 @@
-const bcrypt = require("bcryptjs");
+const { hash, compare } = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
@@ -62,13 +62,13 @@ exports.createVerificationToken = async (user) => {
 };
 
 exports.hashPassword = async (password) => {
-  return await bcrypt.hash(password, 12);
+  return await hash(password, 12);
 };
 
 exports.checkEmailExists = async (email) => {
   const existingUserByEmail = await User.findOne({ email });
   if (existingUserByEmail) {
-    throwError("EmailExists", "L'email existe déjà", BAD_REQUEST);
+    throwError("EMAIL_EXIST", "EMAIL_EXIST", BAD_REQUEST);
   }
 };
 
@@ -130,7 +130,6 @@ exports.signup = async (email) => {
 
     return { userId: newUser._id };
   } catch (error) {
-    console.error("Erreur lors de l'inscription:", error);
     throwError("SignupError", error.message);
   }
 };
@@ -140,18 +139,18 @@ exports.login = async (email, password) => {
   const user = await User.findOne({ email });
   if (!user) {
     // Vous pouvez ajouter des logs ici
-    throwError("INVALID_CREDENTIALS");
+    throwError("INVALID_CREDENTIALS", "INVALID_CREDENTIALS");
   }
 
   if (!user.isVerified) {
-    throwError("EMAIL_NOT_VERIFIED");
+    throwError("EMAIL_NOT_VERIFIED", "EMAIL_NOT_VERIFIED");
   }
 
   // Vérifier si le mot de passe correspond
-  const isMatch = await bcrypt.compare(password, user.password);
+  const isMatch = await compare(password, user.password);
   if (!isMatch) {
     // Vous pouvez ajouter des logs ici
-    throwError("INVALID_CREDENTIALS");
+    throwError("INVALID_CREDENTIALS", "INVALID_CREDENTIALS");
   }
 
   // Vérification supplémentaire: est-ce que l'email a été vérifié, etc.
@@ -170,19 +169,19 @@ exports.verifyToken = async (token) => {
   const verificationToken = await EmailVerificationToken.findOne({ token });
 
   if (!verificationToken) {
-    throwError("Token invalide");
+    throwError("INVALID_TOKEN");
   }
 
   // Vérifier si le token a expiré
   if (new Date() > verificationToken.expireAt) {
-    throwError("Token expiré");
+    throwError("EXPIRED_TOKEN");
   }
 
   // Trouver l'utilisateur associé à ce token
   const user = await User.findById(verificationToken.userId);
 
   if (!user) {
-    throwError("Utilisateur introuvable");
+    throwError("USER_NOT_FIND");
   }
 
   // Mettre à jour le statut de vérification de l'utilisateur

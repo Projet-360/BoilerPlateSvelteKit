@@ -38,6 +38,7 @@ export async function login(email, password) {
       isAuthenticated: true,
     });
   } catch (error) {
+    console.log(error);
     throw error;
   }
 }

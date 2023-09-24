@@ -4,7 +4,6 @@ const CustomError = require("../errors/CustomError"); // Assurez-vous que le che
 
 const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
-
   if (!errors.isEmpty()) {
     const errorMessages = errors.array().map((err) => err.msg);
     const validationError = new CustomError(
