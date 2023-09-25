@@ -1,22 +1,21 @@
-import { expect, test } from '@playwright/test';
-import { chromium } from 'playwright';
+import { test, chromium, expect } from '@playwright/test';
 
 test('should register a new user', async () => {
-	// Aller à la page d'inscription
 	const browser = await chromium.launch({ headless: false });
+	const newPage = await browser.newPage();
 
-	const page = await browser.newPage();
+	// Suppression du try/catch pour permettre à Playwright de gérer les erreurs.
+	await newPage.goto('http://localhost:5173/signup');
+	await newPage.fill('input[placeholder="Username"]', '');
+	await newPage.fill('input[placeholder="Email"]', 'newuser@example.com');
+	await newPage.fill('input[placeholder="Password"]', 'Newpassword8,');
+	await newPage.click('button[type="submit"]');
 
-	await page.goto('http://localhost:5173/signup');
+	const notificationElement = await newPage.waitForSelector('.notification');
+	const notificationText = await notificationElement.textContent();
 
-	// Remplir les champs du formulaire
-	await page.fill('input[placeholder="Username"]', 'newUser');
-	await page.fill('input[placeholder="Email"]', 'newuser@example.com');
-	await page.fill('input[placeholder="Password"]', 'newpassword');
+	// Assertion pour vérifier le texte de la notification.
+	expect(notificationText).toBe('Username is required X');
 
-	// Cliquer sur le bouton "S'inscrire"
-	await page.click('button[type="submit"]');
-
-	// Fermer le navigateur
 	await browser.close();
 });
