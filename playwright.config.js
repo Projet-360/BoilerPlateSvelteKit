@@ -5,10 +5,7 @@ const config = {
 		port: 4173
 	},
 	testDir: 'tests',
-	testMatch: /(.+\.)?(test|spec)\.[jt]s/,
-	use: {
-		trace: 'on-first-retry' // record traces on first retry of each test
-	}
+	testMatch: /(.+\.)?(test|spec)\.[jt]s/
 };
 
 export default config;

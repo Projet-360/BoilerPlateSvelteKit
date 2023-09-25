@@ -1,8 +1,8 @@
 {
     "EMAIL_EXIST": "This email already exists",
     "USERNAME_REQUIRED": "Username is required",
-    "VALID_EMAIL": "The email is not valid",
     "VALID_USERNAME": "Username must be between 3 and 20 characters",
+    "VALID_EMAIL": "The email is not valid",
     "NUMBE_CARAC_PASSWORD": "The password must have at least 8 characters",
     "MIN_PASSWORD": "The password must contain at least one lowercase letter",
     "MAJ_PASSWORD": "The password must contain at least one uppercase letter",
@@ -12,7 +12,5 @@
     "SUCCESS_LOGIN": "Welcome !",
     "INVALID_CREDENTIALS": "wrong identifiants",
     "RATE_LIMIT": "Too many connection attempts, please try again later",
-    "EMAIL_NOT_VERIFIED": "Your Email has not been verified, please check your mailbox",
-    "all_fields_required": "all_fields_required",
-    "unknown_error": "unknown_error"
+    "EMAIL_NOT_VERIFIED": "Your Email has not been verified, please check your mailbox"
 }

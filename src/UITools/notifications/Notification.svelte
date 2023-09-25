@@ -1,23 +1,65 @@
 <script>
-	import { signup } from '$api/auth';
-	import { signupValidation } from '$api/message/signup';
-	import { t } from '$UITools/translations/index';
+  import { onMount, onDestroy, createEventDispatcher } from "svelte";
 
-	let username = 'Name';
-	let email = import.meta.env.VITE_MAIL;
-	let password = import.meta.env.VITE_PASSWORD_TEST;
+  const dispatch = createEventDispatcher();
 
-	async function handleSignup() {
-		const result = await signup(username, email, password);
-		signupValidation(result, $t);
-	}
+  // Props du composant
+  export let message = "";
+  export let type = "info"; // Types possibles : 'success', 'error', 'info'
+
+  // État de la visibilité de la notification
+  let isVisible = true;
+
+  // Cycle de vie : monté du composant
+  onMount(() => {
+    // Définir un timer pour masquer la notification après 5 secondes
+    const timer = setTimeout(() => {
+      isVisible = false;
+      dispatch("dismiss"); // Émettre l'événement personnalisé lors de la fermeture
+    }, 5000);
+
+    // Nettoyage : annuler le timer si le composant est détruit
+    return () => clearTimeout(timer);
+  });
+
+  // Fonction pour fermer la notification manuellement
+  function closeNotification() {
+    isVisible = false;
+    dispatch("dismiss"); // Émettre l'événement personnalisé lors de la fermeture
+  }
 </script>
 
-<div class="signup">
-	<form on:submit|preventDefault={handleSignup}>
-		<input id="username" type="text" bind:value={username} placeholder="Username" />
-		<input id="email" bind:value={email} placeholder="Email" />
-		<input id="password" type="password" bind:value={password} placeholder="Password" />
-		<button type="submit">S'inscrire</button>
-	</form>
-</div>
+{#if isVisible}
+  <div class={`notification ${type}`} aria-live="assertive">
+    <span>{message}</span>
+    <button on:click={closeNotification} aria-label="Fermer la notification">
+      X
+    </button>
+  </div>
+{/if}
+
+<style>
+  .notification-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 200px;
+    z-index: 9999999;
+  }
+
+  .notification {
+    padding: 10px;
+    margin-bottom: 10px; /* Espacement entre les notifications */
+    color: white;
+  }
+
+  .notification.success {
+    background-color: green;
+  }
+  .notification.error {
+    background-color: red;
+  }
+  .notification.info {
+    background-color: blue;
+  }
+</style>
