@@ -12,5 +12,7 @@
     "SUCCESS_LOGIN": "Welcome !",
     "INVALID_CREDENTIALS": "wrong identifiants",
     "RATE_LIMIT": "Too many connection attempts, please try again later",
-    "EMAIL_NOT_VERIFIED": "Your Email has not been verified, please check your mailbox"
+    "EMAIL_NOT_VERIFIED": "Your Email has not been verified, please check your mailbox",
+    "all_fields_required": "all_fields_required",
+    "unknown_error": "unknown_error"
 }

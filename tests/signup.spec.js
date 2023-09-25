@@ -4,18 +4,33 @@ test('should register a new user', async () => {
 	const browser = await chromium.launch({ headless: false });
 	const newPage = await browser.newPage();
 
-	// Suppression du try/catch pour permettre à Playwright de gérer les erreurs.
-	await newPage.goto('http://localhost:5173/signup');
-	await newPage.fill('input[placeholder="Username"]', '');
-	await newPage.fill('input[placeholder="Email"]', 'newuser@example.com');
-	await newPage.fill('input[placeholder="Password"]', 'Newpassword8,');
+	// Navigation
+	await newPage.goto('http://localhost:5173/signup', { waitUntil: 'networkidle' });
+
+	// Username
+	await newPage.focus('#username');
+	await newPage.keyboard.type('N');
+	await newPage.waitForTimeout(200);
+
+	// Email
+	await newPage.focus('#email');
+	await newPage.keyboard.type('newuser@example.com');
+	await newPage.waitForTimeout(200);
+
+	// Password
+	await newPage.focus('#password');
+	await newPage.keyboard.type('Newpassword8,');
+	await newPage.waitForTimeout(200);
+
+	// Submit
 	await newPage.click('button[type="submit"]');
 
-	const notificationElement = await newPage.waitForSelector('.notification');
-	const notificationText = await notificationElement.textContent();
+	// Wait for error message
+	const errorMessageElement = await newPage.waitForSelector('.notification');
 
-	// Assertion pour vérifier le texte de la notification.
-	expect(notificationText).toBe('Username is required X');
+	// Verify error message text
+	const errorMessageText = await errorMessageElement.textContent();
+	expect(errorMessageText).toBe('Username must be between 3 and 20 characters X');
 
 	await browser.close();
 });
