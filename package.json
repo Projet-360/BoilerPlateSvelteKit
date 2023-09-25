@@ -5,12 +5,15 @@
     "dev": "concurrently \"cd ./backend && npm run dev\" \"vite dev\" \"npm run prettier:watch\"",
     "prettier:watch": "chokidar '**/*.js' '**/*.svelte' '**/*.css' --command 'npm run prettier -- {path}'",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "playwright test",
+		"test:unit": "vitest"
   },
   "browserslist": [
     "> 5%"
   ],
   "devDependencies": {
+    "@playwright/test": "^1.28.1",
     "@sveltejs/adapter-auto": "latest",
     "@sveltejs/adapter-node": "latest",
     "@sveltejs/kit": "^1.15.5",
