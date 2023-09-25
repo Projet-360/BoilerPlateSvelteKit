@@ -114,7 +114,7 @@
 // //   it("should return 201 Created for successful signup", async () => {
 // //     const res = await request(app).post("/auth/signup").send({
 // //       username: "JohnDoe",
-// //       email: "projet.troiscentsoixante@gmail.com",
+// //       email: "****",
 // //       password: "Password123!",
 // //     });
 // //     expect(res.statusCode).toEqual(201);
