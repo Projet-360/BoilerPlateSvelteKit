@@ -20,6 +20,7 @@ async function runSignupTest(page, username, email, password, expectedMessage) {
 	// Submit
 	await page.click('button[type="submit"]');
 
+	await page.waitForTimeout(200);
 	// Attente du message d'erreur
 	const errorMessageElement = await page.waitForSelector('.notification');
 
@@ -78,79 +79,79 @@ test.describe('Signup Tests Invalid', () => {
 		await browser.close();
 	});
 
-	// test('USERNAME_REQUIRED', async () => {
-	// 	await runSignupTest(page, '', 'newuser@example.com', 'Newpassword8,', 'Username is required X');
-	// });
+	test('USERNAME_REQUIRED', async () => {
+		await runSignupTest(page, '', 'newuser@example.com', 'Newpassword8,', 'Username is required X');
+	});
 
-	// test('VALID_USERNAME', async () => {
-	// 	await runSignupTest(
-	// 		page,
-	// 		'N',
-	// 		'newuser@example.com',
-	// 		'Newpassword8,',
-	// 		'Username must be between 3 and 20 characters X'
-	// 	);
-	// });
+	test('VALID_USERNAME', async () => {
+		await runSignupTest(
+			page,
+			'N',
+			'newuser@example.com',
+			'Newpassword8,',
+			'Username must be between 3 and 20 characters X'
+		);
+	});
 
-	// test('VALID_EMAIL', async () => {
-	// 	await runSignupTest(
-	// 		page,
-	// 		'Name',
-	// 		'newuserexample.com',
-	// 		'Newpassword8,',
-	// 		'The email is not valid X'
-	// 	);
-	// });
+	test('VALID_EMAIL', async () => {
+		await runSignupTest(
+			page,
+			'Name',
+			'newuserexample.com',
+			'Newpassword8,',
+			'The email is not valid X'
+		);
+	});
 
-	// test('NUMBE_CARAC_PASSWORD', async () => {
-	// 	await runSignupTest(
-	// 		page,
-	// 		'Name',
-	// 		'newuser@example.com',
-	// 		'Ne8,',
-	// 		'The password must have at least 8 characters X'
-	// 	);
-	// });
+	test('NUMBE_CARAC_PASSWORD', async () => {
+		await runSignupTest(
+			page,
+			'Name',
+			'newuser@example.com',
+			'Ne8,',
+			'The password must have at least 8 characters X'
+		);
+	});
 
-	// test('MIN_PASSWORD', async () => {
-	// 	await runSignupTest(
-	// 		page,
-	// 		'Name',
-	// 		'newuser@example.com',
-	// 		'NQSEGQ558,',
-	// 		'The password must contain at least one lowercase letter X'
-	// 	);
-	// });
+	test('MIN_PASSWORD', async () => {
+		await runSignupTest(
+			page,
+			'Name',
+			'newuser@example.com',
+			'NQSEGQ558,',
+			'The password must contain at least one lowercase letter X'
+		);
+	});
 
-	// test('MAJ_PASSWORD', async () => {
-	// 	await runSignupTest(
-	// 		page,
-	// 		'Name',
-	// 		'newuser@example.com',
-	// 		'ewpasdrg8,',
-	// 		'The password must contain at least one uppercase letter X'
-	// 	);
-	// });
+	test('MAJ_PASSWORD', async () => {
+		await runSignupTest(
+			page,
+			'Name',
+			'newuser@example.com',
+			'ewpasdrg8,',
+			'The password must contain at least one uppercase letter X'
+		);
+	});
 
-	// test('NUMBER_PASSWORD', async () => {
-	// 	await runSignupTest(
-	// 		page,
-	// 		'Name',
-	// 		'newuser@example.com',
-	// 		'eNMasdrg,',
-	// 		'The password must contain at least one number X'
-	// 	);
-	// });
+	test('NUMBER_PASSWORD', async () => {
+		await runSignupTest(
+			page,
+			'Name',
+			'newuser@example.com',
+			'eNMasdrg,',
+			'The password must contain at least one number X'
+		);
+	});
 
-	// test('SPECIAL_CARAC_PASSWORD', async () => {
-	// 	await runSignupTest(
-	// 		page,
-	// 		'Name',
-	// 		'newuser@example.com',
-	// 		'ewDasdrg8',
-	// 		'The password must contain at least one special character X'
-	// 	);
-	// });
+	test('SPECIAL_CARAC_PASSWORD', async () => {
+		await runSignupTest(
+			page,
+			'Name',
+			'newuser@example.com',
+			'ewDasdrg8',
+			'The password must contain at least one special character X'
+		);
+	});
 
 	test('SUCCESS_INSCRIPTION', async () => {
 		await runSignupTest(
@@ -170,6 +171,35 @@ test.describe('Signup Tests Invalid', () => {
 			'Password8,',
 			'This email already exists X'
 		);
+	});
+
+	test('EMAIL_NOT_VERIFIED', async () => {
+		const browser = await chromium.launch({ headless: false });
+		const newPage = await browser.newPage();
+
+		// Navigation vers la page de connexion
+		await newPage.goto('http://localhost:5173/login');
+
+		// Remplir les champs email et mot de passe
+		await newPage.focus('#email');
+		await newPage.keyboard.type(process.env.VITE_MAIL);
+		await newPage.waitForTimeout(200);
+
+		await newPage.focus('#password');
+		await newPage.keyboard.type('Password8,');
+		await newPage.waitForTimeout(200);
+
+		// Soumettre le formulaire
+		await newPage.click('button[type="submit"]');
+
+		// Attendre une redirection ou un message de succès, à vous de personnaliser cette partie
+		const errorMessageElement = await newPage.waitForSelector('.notification');
+
+		// Vérification du message d'erreur
+		const errorMessageText = await errorMessageElement.textContent();
+		expect(errorMessageText).toBe('Your Email has not been verified, please check your mailbox X');
+
+		await browser.close();
 	});
 
 	test('CONFIRM_EMAIL', async () => {
@@ -199,6 +229,35 @@ test.describe('Signup Tests Invalid', () => {
 		const notificationElement = await newPage.waitForSelector('.notification');
 		const notificationText = await notificationElement.textContent();
 		expect(notificationText).toBe('Votre adresse mail est bien validée X');
+
+		await browser.close();
+	});
+
+	test('LOGIN_FAILURE_PASSWORD', async () => {
+		const browser = await chromium.launch({ headless: false });
+		const newPage = await browser.newPage();
+
+		// Navigation vers la page de connexion
+		await newPage.goto('http://localhost:5173/login');
+
+		// Remplir les champs email et mot de passe avec des données incorrectes
+		await newPage.focus('#email');
+		await newPage.keyboard.type(process.env.VITE_MAIL);
+		await newPage.waitForTimeout(200);
+
+		await newPage.focus('#password');
+		await newPage.keyboard.type('sdrg');
+		await newPage.waitForTimeout(200);
+
+		// Soumettre le formulaire
+		await newPage.click('button[type="submit"]');
+
+		// Attendre une notification d'échec
+		const notificationElement = await newPage.waitForSelector('.notification');
+		const notificationText = await notificationElement.textContent();
+
+		// Vérifier que la connexion a échoué
+		expect(notificationText).toBe('wrong identifiants X');
 
 		await browser.close();
 	});

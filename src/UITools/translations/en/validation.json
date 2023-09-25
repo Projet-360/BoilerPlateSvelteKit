@@ -8,9 +8,11 @@
     "MAJ_PASSWORD": "The password must contain at least one uppercase letter",
     "NUMBER_PASSWORD": "The password must contain at least one number",
     "SPECIAL_CARAC_PASSWORD": "The password must contain at least one special character",
-    "SUCCESS_INSCRIPTION": "you received an email to validate your account",
-    "SUCCESS_LOGIN": "Welcome !",
     "INVALID_CREDENTIALS": "wrong identifiants",
+    
     "RATE_LIMIT": "Too many connection attempts, please try again later",
-    "EMAIL_NOT_VERIFIED": "Your Email has not been verified, please check your mailbox"
+    "EMAIL_NOT_VERIFIED": "Your Email has not been verified, please check your mailbox",
+
+    "SUCCESS_INSCRIPTION": "you received an email to validate your account",
+    "SUCCESS_LOGIN": "Welcome !"
 }
