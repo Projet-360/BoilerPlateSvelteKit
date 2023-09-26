@@ -5,8 +5,8 @@
 	import { t } from '$UITools/translations/index';
 	import notificationStore from '$stores/notificationStore';
 
-	let email = import.meta.env.VITE_MAIL;
-	let password = import.meta.env.VITE_PASSWORD_TEST;
+	let email = '';
+	let password = '';
 
 	async function handleLogin() {
 		try {
