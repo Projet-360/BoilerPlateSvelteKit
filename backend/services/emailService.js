@@ -36,7 +36,7 @@ export const sendResetPasswordEmail = async (user, resetToken) => {
 	await sendEmail(
 		user.email,
 		'Réinitialisation du mot de passe',
-		`Cliquez sur ce lien pour réinitialiser votre mot de passe : ${url}`
+		`Cliquez sur ce lien pour réinitialiser votre mot de passe <a href="${url}">ici</a> `
 	);
 };
 

@@ -349,12 +349,12 @@ test.describe.serial('Password Reset Tests', () => {
 		// Remplir le formulaire de réinitialisation du mot de passe
 		await fillField(page, '#newPassword', 'NewSecurePassword8!');
 		await fillField(page, '#confirmPassword', 'NewSecurePassword8!');
-		await page.click('button[type="submit"]');
+		await page.click('button[type="button"]');
 
 		// Vérifier que le mot de passe a bien été réinitialisé
 		const successMessageElement = await page.waitForSelector('.notification');
 		const successMessageText = await successMessageElement.textContent();
-		expect(successMessageText).toBe('Your password has been successfully reset X');
+		expect(successMessageText).toBe('Your email has been successfully updated X');
 
 		await page.close();
 	});

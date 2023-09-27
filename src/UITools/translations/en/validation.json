@@ -16,5 +16,5 @@
     "USER_NOT_FOUND": "User not found",
     "EMAIL_FORGOT_PASSWORD": "Email sent to reset your forgot password",
     "FORGOT_PASSWORD_INVALID": "Passwords do not match",
-	  "VALIDATION_FORGOT_PASSWORD": "Your email has been successfully updated"
+	"VALIDATION_FORGOT_PASSWORD": "Your email has been successfully updated"
 }
