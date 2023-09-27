@@ -104,10 +104,10 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\routes\dashboard\+page.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\login
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\login\+page.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\login\+page.svelte
-C:\wamp64\www\BoilerPlateSvelteKit\src\routes\reset-password
-C:\wamp64\www\BoilerPlateSvelteKit\src\routes\reset-password\[token]
-C:\wamp64\www\BoilerPlateSvelteKit\src\routes\reset-password\+page.js
-C:\wamp64\www\BoilerPlateSvelteKit\src\routes\reset-password\+page.svelte
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\forgot-password
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\forgot-password\[token]
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\forgot-password\+page.js
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\forgot-password\+page.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\signup
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\signup\+page.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\signup\+page.svelte

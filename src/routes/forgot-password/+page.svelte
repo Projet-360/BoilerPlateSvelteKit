@@ -1,4 +1,6 @@
 <script>
+	import { goto } from '$app/navigation';
+
 	import { resetPassword } from '$api/auth';
 
 	import { t } from '$UITools/translations/index';
@@ -8,13 +10,22 @@
 
 	async function handleResetPassword() {
 		try {
-			await resetPassword(email);
+			const ll = await resetPassword(email);
+			console.log('ll', ll);
+			goto('/');
+			notificationStore.addNotification($t('validation.EMAIL_FORGOT_PASSWORD'), 'success');
 		} catch (error) {
 			let errorMessage;
 			console.log(error);
 			switch (error.message) {
+				case 'VALID_EMAIL':
+					errorMessage = $t('validation.VALID_EMAIL');
+					break;
 				case 'USER_NOT_FOUND':
 					errorMessage = $t('validation.USER_NOT_FOUND');
+					break;
+				case 'EMAIL_NOT_VERIFIED':
+					errorMessage = $t('validation.EMAIL_NOT_VERIFIED');
 					break;
 				case 'RATE_LIMIT':
 					errorMessage = $t('validation.RATE_LIMIT');

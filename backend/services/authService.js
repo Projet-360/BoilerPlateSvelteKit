@@ -1,206 +1,202 @@
-import pkg from "bcryptjs";
+import pkg from 'bcryptjs';
 const { hash, compare } = pkg;
-import jwt from "jsonwebtoken";
-import crypto from "crypto";
+import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 
-import config from "../config/config.js";
-import { HTTP_STATUS } from "../constants/HTTP_STATUS.js";
+import config from '../config/config.js';
+import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
 
-import User from "../models/UserModel.js";
-import EmailVerificationToken from "../models/EmailVerificationTokenModel.js";
-import BlacklistedToken from "../models/BlacklistedTokenModel.js";
+import User from '../models/UserModel.js';
+import EmailVerificationToken from '../models/EmailVerificationTokenModel.js';
+import BlacklistedToken from '../models/BlacklistedTokenModel.js';
 
-import CustomError from "../errors/CustomError.js";
+import CustomError from '../errors/CustomError.js';
 
-import {
-  sendVerificationEmail,
-  sendResetPasswordEmail,
-} from "../services/emailService.js";
+import { sendVerificationEmail, sendResetPasswordEmail } from '../services/emailService.js';
 
 // Fonction pour générer un token de vérification
 const generateToken = () => {
-  return crypto.randomBytes(32).toString("hex");
+	return crypto.randomBytes(32).toString('hex');
 };
 
 const throwError = (type, message, status) => {
-  throw new CustomError(type, message, status);
+	throw new CustomError(type, message, status);
 };
 
 const generateAndSaveResetToken = async (user) => {
-  const resetToken = generateToken();
-  user.resetToken = resetToken;
-  user.resetTokenExpiration = Date.now() + 3600000;
-  await user.save();
-  await sendResetPasswordEmail(user, resetToken);
+	const resetToken = generateToken();
+	user.resetToken = resetToken;
+	user.resetTokenExpiration = Date.now() + 3600000;
+	await user.save();
+	await sendResetPasswordEmail(user, resetToken);
 };
 
 export const createSignupToken = ({ _id: userId, username, email }) => {
-  const token = jwt.sign({ userId, username, email }, config.SECRETKEY, {
-    expiresIn: config.TOKEN_EXPIRY,
-  });
-  return { token };
+	const token = jwt.sign({ userId, username, email }, config.SECRETKEY, {
+		expiresIn: config.TOKEN_EXPIRY
+	});
+	return { token };
 };
 
 export const createVerificationToken = async (user) => {
-  const verificationToken = generateToken();
-  await sendVerificationEmail(user.email, verificationToken);
+	const verificationToken = generateToken();
+	await sendVerificationEmail(user.email, verificationToken);
 
-  const expireAt = new Date();
-  expireAt.setHours(expireAt.getHours() + config.VERIFICATION_EXPIRY_HOURS);
+	const expireAt = new Date();
+	expireAt.setHours(expireAt.getHours() + config.VERIFICATION_EXPIRY_HOURS);
 
-  const newToken = new EmailVerificationToken({
-    userId: user._id,
-    token: verificationToken,
-    expireAt: expireAt,
-  });
-  await newToken.save();
+	const newToken = new EmailVerificationToken({
+		userId: user._id,
+		token: verificationToken,
+		expireAt: expireAt
+	});
+	await newToken.save();
 
-  return { verificationToken };
+	return { verificationToken };
 };
 
 export const hashPassword = async (password) => {
-  return await hash(password, 12);
+	return await hash(password, 12);
 };
 
 export const checkEmailExists = async (email) => {
-  const existingUserByEmail = await User.findOne({ email });
-  if (existingUserByEmail) {
-    throwError("EMAIL_EXIST", "EMAIL_EXIST", HTTP_STATUS.BAD_REQUEST);
-  }
+	const existingUserByEmail = await User.findOne({ email });
+	if (existingUserByEmail) {
+		throwError('EMAIL_EXIST', 'EMAIL_EXIST', HTTP_STATUS.BAD_REQUEST);
+	}
 };
 
 export const createUser = async (username, email, hashedPassword) => {
-  const newUser = new User({ username, email, password: hashedPassword });
-  await newUser.save();
-  return newUser;
+	const newUser = new User({ username, email, password: hashedPassword });
+	await newUser.save();
+	return newUser;
 };
 
 export const checkAuthentication = async (token) => {
-  if (!token) {
-    console.log("Le client n'est pas connecté");
-    return { isAuthenticated: false };
-  }
+	if (!token) {
+		console.log("Le client n'est pas connecté");
+		return { isAuthenticated: false };
+	}
 
-  const blacklistedToken = await BlacklistedToken.findOne({ token });
+	const blacklistedToken = await BlacklistedToken.findOne({ token });
 
-  if (blacklistedToken) {
-    return {
-      isAuthenticated: false,
-      message: "Le token est dans la liste noire.",
-    };
-  }
+	if (blacklistedToken) {
+		return {
+			isAuthenticated: false,
+			message: 'Le token est dans la liste noire.'
+		};
+	}
 
-  const decoded = jwt.verify(token, config.SECRETKEY);
+	const decoded = jwt.verify(token, config.SECRETKEY);
 
-  return {
-    isAuthenticated: true,
-    token,
-    userId: decoded.userId,
-  };
+	return {
+		isAuthenticated: true,
+		token,
+		userId: decoded.userId
+	};
 };
 
 export const signup = async (email) => {
-  try {
-    const tokenExpiry = config.TOKEN_EXPIRY;
+	try {
+		const tokenExpiry = config.TOKEN_EXPIRY;
 
-    const token = jwt.sign(
-      { userId: newUser._id, username: newUser.username, email: newUser.email },
-      config.SECRETKEY,
-      { expiresIn: tokenExpiry },
-    );
+		const token = jwt.sign(
+			{ userId: newUser._id, username: newUser.username, email: newUser.email },
+			config.SECRETKEY,
+			{ expiresIn: tokenExpiry }
+		);
 
-    // Générer le token de vérification
-    const verificationToken = generateToken();
-    await sendVerificationEmail(email, verificationToken);
+		// Générer le token de vérification
+		const verificationToken = generateToken();
+		await sendVerificationEmail(email, verificationToken);
 
-    // Définir la date d'expiration du token de vérification
-    const expireAt = new Date();
-    expireAt.setHours(expireAt.getHours() + 24); // Le token expirera dans 24 heures
+		// Définir la date d'expiration du token de vérification
+		const expireAt = new Date();
+		expireAt.setHours(expireAt.getHours() + 24); // Le token expirera dans 24 heures
 
-    // Créer un nouvel objet EmailVerificationToken
-    const newToken = new EmailVerificationToken({
-      userId: newUser._id,
-      token: verificationToken,
-      expireAt: expireAt,
-    });
-    await newToken.save();
+		// Créer un nouvel objet EmailVerificationToken
+		const newToken = new EmailVerificationToken({
+			userId: newUser._id,
+			token: verificationToken,
+			expireAt: expireAt
+		});
+		await newToken.save();
 
-    return { userId: newUser._id };
-  } catch (error) {
-    throwError("SignupError", error.message);
-  }
+		return { userId: newUser._id };
+	} catch (error) {
+		throwError('SignupError', error.message);
+	}
 };
 
 export const login = async (email, password) => {
-  // Trouver l'utilisateur par email
-  const user = await User.findOne({ email });
-  if (!user) {
-    // Vous pouvez ajouter des logs ici
-    throwError("INVALID_CREDENTIALS", "INVALID_CREDENTIALS");
-  }
+	// Trouver l'utilisateur par email
+	const user = await User.findOne({ email });
+	if (!user) {
+		// Vous pouvez ajouter des logs ici
+		throwError('INVALID_CREDENTIALS', 'INVALID_CREDENTIALS');
+	}
 
-  if (!user.isVerified) {
-    throwError("EMAIL_NOT_VERIFIED", "EMAIL_NOT_VERIFIED");
-  }
+	if (!user.isVerified) {
+		throwError('EMAIL_NOT_VERIFIED', 'EMAIL_NOT_VERIFIED');
+	}
 
-  // Vérifier si le mot de passe correspond
-  const isMatch = await compare(password, user.password);
-  if (!isMatch) {
-    // Vous pouvez ajouter des logs ici
-    throwError("INVALID_CREDENTIALS", "INVALID_CREDENTIALS");
-  }
+	// Vérifier si le mot de passe correspond
+	const isMatch = await compare(password, user.password);
+	if (!isMatch) {
+		// Vous pouvez ajouter des logs ici
+		throwError('INVALID_CREDENTIALS', 'INVALID_CREDENTIALS');
+	}
 
-  // Vérification supplémentaire: est-ce que l'email a été vérifié, etc.
-  // ...
+	// Vérification supplémentaire: est-ce que l'email a été vérifié, etc.
+	// ...
 
-  // Générer un JWT
-  const token = jwt.sign(
-    { userId: user._id, email: user.email },
-    config.SECRETKEY,
-    {
-      expiresIn: "1h",
-    },
-  );
+	// Générer un JWT
+	const token = jwt.sign({ userId: user._id, email: user.email }, config.SECRETKEY, {
+		expiresIn: '1h'
+	});
 
-  return { token, userId: user._id };
+	return { token, userId: user._id };
 };
 
 export const verifyToken = async (token) => {
-  // Trouver le token dans la base de données
-  const verificationToken = await EmailVerificationToken.findOne({ token });
+	// Trouver le token dans la base de données
+	const verificationToken = await EmailVerificationToken.findOne({ token });
 
-  if (!verificationToken) {
-    throwError("INVALID_TOKEN");
-  }
+	if (!verificationToken) {
+		throwError('INVALID_TOKEN');
+	}
 
-  // Vérifier si le token a expiré
-  if (new Date() > verificationToken.expireAt) {
-    throwError("EXPIRED_TOKEN");
-  }
+	// Vérifier si le token a expiré
+	if (new Date() > verificationToken.expireAt) {
+		throwError('EXPIRED_TOKEN');
+	}
 
-  // Trouver l'utilisateur associé à ce token
-  const user = await User.findById(verificationToken.userId);
+	// Trouver l'utilisateur associé à ce token
+	const user = await User.findById(verificationToken.userId);
 
-  if (!user) {
-    throwError("USER_NOT_FIND");
-  }
+	if (!user) {
+		throwError('USER_NOT_FIND');
+	}
 
-  // Mettre à jour le statut de vérification de l'utilisateur
-  user.isVerified = true;
-  await user.save();
+	// Mettre à jour le statut de vérification de l'utilisateur
+	user.isVerified = true;
+	await user.save();
 
-  // Supprimer le token de vérification car il a été utilisé
-  await EmailVerificationToken.findByIdAndDelete(verificationToken.id);
+	// Supprimer le token de vérification car il a été utilisé
+	await EmailVerificationToken.findByIdAndDelete(verificationToken.id);
 
-  return "E-mail vérifié avec succès !";
+	return 'E-mail vérifié avec succès !';
 };
 
-export const requestResetPassword = async (user) => {
-  await generateAndSaveResetToken(user);
-  return { message: "Un e-mail de réinitialisation a été envoyé." };
+export const requestForgotPassword = async (user) => {
+	await generateAndSaveResetToken(user);
+	return { message: 'EMAIL_FORGOT_PASSWORD' };
 };
 
-export const ResetNewPassword = async (user) => {
-  await generateAndSaveResetToken(user);
-  return { message: "Un e-mail de réinitialisation a été envoyé." };
+export const requestresetForgotPassword = async (user, newPassword) => {
+	const hashedPassword = await hash(newPassword, 12);
+	user.password = hashedPassword;
+	user.resetToken = undefined;
+	user.resetTokenExpiration = undefined;
+	await user.save();
 };

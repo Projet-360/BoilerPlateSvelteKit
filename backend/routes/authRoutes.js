@@ -4,7 +4,6 @@ const router = Router();
 import pkg from 'bcryptjs';
 const { hash, compare } = pkg;
 import { check, validationResult } from 'express-validator';
-import rateLimit from 'express-rate-limit';
 
 import { handleValidationErrors } from '../middlewares/handleValidationErrors.js';
 
@@ -16,22 +15,13 @@ import BlacklistedToken from '../models/BlacklistedTokenModel.js';
 import * as authService from '../services/authService.js';
 import { setAuthCookie } from '../services/setAuthCookie.js';
 import logger from '../services/logger.js';
+import { rateLimiter } from '../services/rateLimiter.js';
+import { requestresetForgotPassword } from '../services/authService.js';
 
 import { signupValidators } from '../validations/signupValidators.js';
 import { validateEmail } from '../validations/signupValidators.js';
 
 import CustomError from '../errors/CustomError.js';
-
-const reqLimiter = rateLimit({
-	windowMs: 15 * 60 * 1000,
-	max: 5,
-	handler: function (req, res) {
-		logger.info('Rate limit reached');
-		res.status(HTTP_STATUS.TOO_MANY_REQUESTS).json({
-			message: 'RATE_LIMIT'
-		});
-	}
-});
 
 router.get('/check-auth', async (req, res, next) => {
 	const token = req.cookies.token;
@@ -102,7 +92,7 @@ router.post('/signup', [signupValidators, handleValidationErrors], async (req, r
 	}
 });
 
-router.post('/login', reqLimiter, async (req, res, next) => {
+router.post('/login', rateLimiter, async (req, res, next) => {
 	try {
 		const { email, password } = req.body;
 		const { token, userId } = await authService.login(email, password);
@@ -117,10 +107,10 @@ router.post('/login', reqLimiter, async (req, res, next) => {
 });
 
 router.post(
-	'/reset-password',
+	'/forgot-password',
 	validateEmail,
 	handleValidationErrors,
-	reqLimiter,
+	rateLimiter,
 	async (req, res, next) => {
 		try {
 			const { email } = req.body;
@@ -130,8 +120,12 @@ router.post(
 				return next(new CustomError('USER_NOT_FOUND', 'USER_NOT_FOUND', 404));
 			}
 
-			const result = await authService.requestResetPassword(user);
-			res.status(HTTP_STATUS.OK).json({ message: result.message });
+			if (!user.isVerified) {
+				return next(new CustomError('EMAIL_NOT_VERIFIED', 'EMAIL_NOT_VERIFIED', 404));
+			}
+
+			await authService.requestForgotPassword(user);
+			res.status(HTTP_STATUS.OK).json({ message: 'Success', success: true });
 		} catch (error) {
 			logger.error('Erreur lors de la réinitialisation du mot de passe:', error);
 			next(new CustomError('ResetPasswordError', error.message, 500));
@@ -139,7 +133,7 @@ router.post(
 	}
 );
 
-router.post('/reset-password/:token', async (req, res) => {
+router.post('/forgot-password/:token', async (req, res) => {
 	const { token } = req.params;
 	const { newPassword } = req.body;
 
@@ -153,14 +147,9 @@ router.post('/reset-password/:token', async (req, res) => {
 		return res.status(400).json({ error: 'Token invalide ou expiré' });
 	}
 
-	// Chiffrer le nouveau mot de passe et le sauvegarder
-	const hashedPassword = await bcrypt.hash(newPassword, 12);
-	user.password = hashedPassword;
-	user.resetToken = undefined;
-	user.resetTokenExpiration = undefined;
-	await user.save();
+	const ll = await authService.requestresetForgotPassword(user, newPassword);
 
-	res.status(200).json({ message: 'Mot de passe réinitialisé avec succès' });
+	res.status(HTTP_STATUS.OK).json({ message: 'Success', success: true });
 });
 
 export default router;

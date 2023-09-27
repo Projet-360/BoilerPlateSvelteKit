@@ -170,7 +170,7 @@ router.post("/login", loginLimiter, async (req, res, next) => {
   }
 });
 
-router.post("/reset-password", async (req, res) => {
+router.post("/forgot-password", async (req, res) => {
   const { email } = req.body;
 
   // Validation de l'email (à faire si ce n'est pas déjà le cas)
@@ -186,7 +186,7 @@ router.post("/reset-password", async (req, res) => {
       return res.status(404).json({ error: "Utilisateur non trouvé" });
     }
 
-    const result = await authService.requestResetPassword(user);
+    const result = await authService.requestForgotPassword(user);
     res.status(200).json({ message: result.message });
   } catch (error) {
     console.error("Erreur lors de la réinitialisation du mot de passe:", error);
@@ -194,7 +194,7 @@ router.post("/reset-password", async (req, res) => {
   }
 });
 
-router.post("/reset-password/:token", async (req, res) => {
+router.post("/forgot-password/:token", async (req, res) => {
   const { token } = req.params;
   const { newPassword } = req.body;
 

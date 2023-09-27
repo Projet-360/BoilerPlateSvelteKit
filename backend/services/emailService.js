@@ -32,7 +32,7 @@ export const sendVerificationEmail = async (email, token) => {
 };
 
 export const sendResetPasswordEmail = async (user, resetToken) => {
-	const url = `${process.env.URL_FRONT}/reset-password/${resetToken}`;
+	const url = `${process.env.URL_FRONT}/forgot-password/${resetToken}`;
 	await sendEmail(
 		user.email,
 		'Réinitialisation du mot de passe',

@@ -34,7 +34,7 @@
 	}
 
 	function goToResetPassword() {
-		goto('/reset-password');
+		goto('/forgot-password');
 	}
 </script>
 
