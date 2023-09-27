@@ -14,5 +14,7 @@
     "EMAIL_NOT_VERIFIED": "Your Email has not been verified, please check your mailbox",
 
     "SUCCESS_INSCRIPTION": "you received an email to validate your account",
-    "SUCCESS_LOGIN": "Welcome !"
+    "SUCCESS_LOGIN": "Welcome !",
+
+    "USER_NOT_FOUND": "User not found" 
 }

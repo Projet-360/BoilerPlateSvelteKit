@@ -88,68 +88,6 @@ Avant de déployer en production, assure-toi que tous les paramètres de sécuri
 
 
 
-Pour tester la gestion de comptes dans une application SvelteKit avec Node.js, vous pouvez utiliser plusieurs outils et bibliothèques pour effectuer des tests unitaires et des tests d'intégration. Voici une approche générale pour tester la gestion de comptes :
-
-### 1. Jest et Testing Library
-
-[Jest](https://jestjs.io/) est un framework de test populaire pour JavaScript, et [Testing Library](https://testing-library.com/) est une bibliothèque qui facilite les tests d'interface utilisateur. Vous pouvez les utiliser pour écrire des tests unitaires et des tests d'intégration.
-
-**Installation** :
-```bash
-npm install --save-dev jest @testing-library/svelte @testing-library/jest-dom
-```
-
-### 2. Configuration de Jest
-
-Créez un fichier de configuration Jest, par exemple `jest.config.js`, pour spécifier comment Jest doit exécuter les tests :
-
-```javascript
-// jest.config.js
-module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
-};
-```
-
-### 3. Écriture des Tests
-
-Écrivez des tests unitaires et des tests d'intégration pour vérifier le comportement de la gestion de comptes dans votre application SvelteKit. Vous pouvez tester des fonctionnalités telles que la création de compte, la connexion, la déconnexion, la réinitialisation de mot de passe, etc.
-
-Voici un exemple simple de test d'intégration avec Jest et Testing Library pour tester la création de compte :
-
-```javascript
-// Exemple de test avec Jest et Testing Library
-import { render, screen, fireEvent } from '@testing-library/svelte';
-import App from './App.svelte';
-
-test('Création de compte', async () => {
-  render(App);
-
-  // Sélectionnez les éléments de formulaire et simulez une saisie
-  const emailInput = screen.getByPlaceholderText('Adresse e-mail');
-  const passwordInput = screen.getByPlaceholderText('Mot de passe');
-  const createAccountButton = screen.getByText('Créer un compte');
-
-  fireEvent.input(emailInput, { target: { value: 'nouvelutilisateur@example.com' } });
-  fireEvent.input(passwordInput, { target: { value: 'motdepasse123' } });
-
-  // Simulez un clic sur le bouton de création de compte
-  fireEvent.click(createAccountButton);
-
-  // Vérifiez si l'utilisateur est connecté après la création de compte
-  const loggedInUser = await screen.findByText('Bienvenue, nouvelutilisateur@example.com');
-  expect(loggedInUser).toBeInTheDocument();
-});
-```
-
-### 4. Exécution des Tests
-
-Vous pouvez exécuter vos tests à l'aide de la commande Jest :
-
-```bash
-npx jest
-```
 
 Assurez-vous que vos tests couvrent différents scénarios, y compris les cas de succès et d'erreur, pour garantir que la gestion de compte fonctionne correctement.
 
@@ -175,3 +113,30 @@ SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
 MAIL_SERVER=gmail
 EMAIL_USER=********
 EMAIL_PASSWORD=********
+
+
+
+
+DOC
+Signup
+contraintes form:
+    "EMAIL_EXIST": "Cet Email existe déjà",
+    "USERNAME_REQUIRED": "Le nom d'utilisateur est requis",
+    "VALID_EMAIL": "L'Email n'est pas valide",
+    "VALID_USERNAME": "Le nom d'utilisateur doit avoir entre 3 et 20 caractères",
+    "NUMBE_CARAC_PASSWORD": "Le mot de passe doit avoir au moins 8 caractères",
+    "MIN_PASSWORD": "Le mot de passe doit contenir au moins une minuscule",
+    "MAJ_PASSWORD": "Le mot de passe doit contenir au moins une majuscule",
+    "NUMBER_PASSWORD": "Le mot de passe doit contenir au moins un chiffre",
+    "SPECIAL_CARAC_PASSWORD": "Le mot de passe doit contenir au moins un caractère spécial",
+    "SUCCESS_INSCRIPTION": "Vous avez reçu un email pour valider votre compte.",
+
+Rate limiter x5:
+    "RATE_LIMIT": "Trop de tentatives de connexion, veuillez réessayer plus tard",
+
+Mauvais identifiants:
+    "INVALID_CREDENTIALS": "mauvais identifiants",
+    
+
+    "SUCCESS_LOGIN": "Bienvenue !",
+    "EMAIL_NOT_VERIFIED": "Votre Email n'a pas été vérifié, veuillez consulter votre boite mail"

@@ -12,5 +12,6 @@
     "SUCCESS_LOGIN": "Bienvenue !",
     "INVALID_CREDENTIALS": "mauvais identifiants",
     "RATE_LIMIT": "Trop de tentatives de connexion, veuillez réessayer plus tard",
-    "EMAIL_NOT_VERIFIED": "Votre Email n'a pas été vérifié, veuillez consulter votre boite mail"
+    "EMAIL_NOT_VERIFIED": "Votre Email n'a pas été vérifié, veuillez consulter votre boite mail",
+    "USER_NOT_FOUND": "L'utilisateur n'a pas été trouvé" 
 }

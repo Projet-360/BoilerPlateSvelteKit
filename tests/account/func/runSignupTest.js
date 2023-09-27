@@ -1,4 +1,4 @@
-import { fillField } from './fillField.js';
+import { fillField } from '../../components/fillField.js';
 import { expect } from '@playwright/test';
 
 export async function runSignupTest(page, username, email, password, expectedMessage) {
