@@ -21,7 +21,7 @@ export const signupValidators = [
 		.withMessage(ERRORS.MAJ_PASSWORD)
 		.matches(/[0-9]/)
 		.withMessage(ERRORS.NUMBER_PASSWORD)
-		.matches(/[!@#$%^&*(),.?":{}|<>]/)
+		.matches(/[!@#$%^&*(),\.\?":{}|<>_-]/)
 		.withMessage(ERRORS.SPECIAL_CARAC_PASSWORD)
 ];
 

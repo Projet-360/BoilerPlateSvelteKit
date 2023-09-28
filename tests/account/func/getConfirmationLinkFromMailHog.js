@@ -27,9 +27,6 @@ export async function getConfirmationLinkFromMailHog() {
 	// Décodage du contenu HTML de l'e-mail
 	const decodedHtmlContent = quotedPrintable.decode(latestEmail.Content.Body);
 
-	// Ajout d'un log pour le débogage
-	console.log('Decoded HTML Content:', decodedHtmlContent);
-
 	// Utilisation d'une expression régulière pour trouver le lien de confirmation
 	const match = decodedHtmlContent.match(/href="([^"]+)"/);
 	const confirmationLink = match ? match[1] : null;
