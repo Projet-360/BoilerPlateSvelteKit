@@ -8,9 +8,6 @@ lhci autorun --collect.url=http://localhost:5173 --upload.target=filesystem --up
 MailHog:
 https://github.com/mailhog/MailHog/releases/v1.0.0
 
-@echo off
-C:\chemin\vers\MailHog.exe
-
 http://localhost:8025
 
 

@@ -1,7 +1,5 @@
 import nodemailer from 'nodemailer';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import { env } from '../constants/env.js';
 
 const validateEnvVariables = () => {
 	const requiredEnvVariables = [
@@ -12,7 +10,7 @@ const validateEnvVariables = () => {
 		'URL_FRONT'
 	];
 	for (const varName of requiredEnvVariables) {
-		if (!process.env[varName]) {
+		if (!env[varName]) {
 			throw new Error(`Veuillez définir la variable d'environnement ${varName}.`);
 		}
 	}
@@ -20,7 +18,7 @@ const validateEnvVariables = () => {
 
 const createTransporter = () => {
 	// Utilisez MailHog en environnement de développement
-	if (process.env.NODE_ENV === 'development') {
+	if (env.NODE_ENV === 'development') {
 		return nodemailer.createTransport({
 			host: 'localhost',
 			port: 1025,
@@ -29,11 +27,11 @@ const createTransporter = () => {
 	}
 	// Configuration normale pour les autres environnements
 	return nodemailer.createTransport({
-		host: process.env.MAIL_HOST,
-		port: process.env.MAIL_PORT,
+		host: env.MAIL_HOST,
+		port: env.MAIL_PORT,
 		auth: {
-			user: process.env.EMAIL_USER,
-			pass: process.env.EMAIL_PASSWORD
+			user: env.EMAIL_USER,
+			pass: env.EMAIL_PASSWORD
 		}
 	});
 };
@@ -44,10 +42,10 @@ const transporter = createTransporter();
 
 // Ajout d'une adresse e-mail d'expéditeur par défaut pour MailHog
 const defaultSender =
-	process.env.NODE_ENV === 'development' ? 'no-reply@dev.local' : 'no-reply@yourdomain.com';
+	env.NODE_ENV === 'development' ? 'no-reply@dev.local' : 'no-reply@yourdomain.com';
 
 export const sendVerificationEmail = async (email, token) => {
-	const url = `${process.env.URL_FRONT}/verify/${token}`;
+	const url = `${env.URL_FRONT}/verify/${token}`;
 	await sendEmail(
 		email,
 		"Vérification de l'Email",
@@ -57,7 +55,7 @@ export const sendVerificationEmail = async (email, token) => {
 };
 
 export const sendResetPasswordEmail = async (user, resetToken) => {
-	const url = `${process.env.URL_FRONT}/forgot-password/${resetToken}`;
+	const url = `${env.URL_FRONT}/forgot-password/${resetToken}`;
 	await sendEmail(
 		user.email,
 		'Réinitialisation du mot de passe',

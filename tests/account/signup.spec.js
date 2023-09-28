@@ -1,6 +1,4 @@
 import { test, chromium, expect } from '@playwright/test';
-import dotenv from 'dotenv';
-dotenv.config();
 
 import { getConfirmationLinkFromMailHog } from './func/getConfirmationLinkFromMailHog.js';
 import { fillField } from '../components/fillField.js';

@@ -2,7 +2,7 @@
   "name": "boilersvelte",
   "version": "0.0.1",
   "scripts": {
-    "dev": "concurrently \"cd ./backend && npm run dev\" \"vite dev\" \"npm run prettier:watch\"",
+     "dev": "concurrently \"cd ./backend && npm run dev\" \"vite dev\" \"npm run prettier:watch\" \"start cmd.exe /K start-mailhog.bat\"",
     "prettier:watch": "chokidar '**/*.js' '**/*.svelte' '**/*.css' --command 'npm run prettier -- {path}'",
     "build": "vite build",
     "preview": "vite preview",
