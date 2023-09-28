@@ -6,30 +6,32 @@
 	import { getDashboardData } from '$api/auth.js';
 
 	let userData;
+	let unsubscribe; // Pour se désabonner du store
 
-	onMount(() => {
-		const unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {
-			console.log('lors du controle', isAuthenticated);
-
-			if (!isAuthenticated) {
-				goto('/login');
-			} else {
-				getDashboardData(token) // Passe le token ici
-					.then((data) => {
-						userData = data.message;
-					})
-					.catch((error) => {
-						console.log('Erreur lors de la récupération des données du tableau de bord:', error);
-					});
-			}
+	onMount(async () => {
+		const authStoreLoaded = new Promise((resolve) => {
+			unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {
+				if (isAuthenticated !== null && token !== null) {
+					resolve({ isAuthenticated, token });
+				}
+			});
 		});
 
-		return () => {
-			// cleanup
-			unsubscribe();
-		};
+		const { isAuthenticated, token } = await authStoreLoaded;
+		unsubscribe(); // Se désabonner pour éviter les fuites de mémoire
+
+		if (!isAuthenticated) {
+			goto('/login');
+		} else {
+			try {
+				const data = await getDashboardData(token);
+				userData = data.message;
+			} catch (error) {
+				// Insérer ici un mécanisme de gestion d'erreurs robuste
+				console.error('Erreur lors de la récupération des données du tableau de bord:', error);
+			}
+		}
 	});
-	console.log(userData);
 </script>
 
 <svelte:head>

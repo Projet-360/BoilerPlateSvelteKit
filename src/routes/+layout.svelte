@@ -1,5 +1,8 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
+
 	import { checkAuth } from '$api/auth';
 	import { registerServiceWorker } from '$UITools/serviceWorker';
 
@@ -13,19 +16,31 @@
 	import notificationStore from '$stores/notificationStore';
 
 	import { authStore } from '$stores/authStore';
-	import { subscribe } from 'svelte/internal';
 
 	export let data;
-	let isAuthenticated = false;
 
-	// Souscription au store
-	const unsubscribe = authStore.subscribe((state) => {
-		isAuthenticated = state.isAuthenticated;
+	let isStoreInitialized = false;
+	let unsubscribe; // Déclaration déplacée ici
+
+	const initializeStore = new Promise((resolve) => {
+		unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {
+			if (isAuthenticated !== null && token !== null) {
+				isStoreInitialized = true;
+				resolve();
+				if (unsubscribe) {
+					// Vérification ajoutée ici
+					unsubscribe();
+				}
+			}
+		});
 	});
 
-	authStore.subscribe((value) => {
-		console.log("Le contenu d'authStore est maintenant :", value);
-	});
+	$: if (isStoreInitialized) {
+		const { isAuthenticated } = $authStore;
+		if (isAuthenticated === false && browser) {
+			goto('/login');
+		}
+	}
 
 	onMount(() => {
 		new App();
