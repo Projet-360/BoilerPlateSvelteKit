@@ -32,7 +32,7 @@ const generateAndSaveResetToken = async (user) => {
 };
 
 export const createSignupToken = ({ _id: userId, username, email }) => {
-	const token = jwt.sign({ userId, username, email }, config.SECRETKEY, {
+	const token = jwt.sign({ userId, username, email, role }, config.SECRETKEY, {
 		expiresIn: config.TOKEN_EXPIRY
 	});
 	return { token };
@@ -89,10 +89,21 @@ export const checkAuthentication = async (token) => {
 
 	const decoded = jwt.verify(token, config.SECRETKEY);
 
+	// Chercher l'utilisateur en fonction de userId pour obtenir le rôle
+	const user = await User.findById(decoded.userId);
+
+	if (!user) {
+		return {
+			isAuthenticated: false,
+			message: 'Utilisateur non trouvé.'
+		};
+	}
+
 	return {
 		isAuthenticated: true,
 		token,
-		userId: decoded.userId
+		userId: decoded.userId,
+		role: user.role // Ajout du rôle ici
 	};
 };
 
@@ -101,7 +112,7 @@ export const signup = async (email) => {
 		const tokenExpiry = config.TOKEN_EXPIRY;
 
 		const token = jwt.sign(
-			{ userId: newUser._id, username: newUser.username, email: newUser.email },
+			{ userId: newUser._id, username: newUser.username, email: newUser.email, role: newUser.role },
 			config.SECRETKEY,
 			{ expiresIn: tokenExpiry }
 		);
@@ -151,11 +162,15 @@ export const login = async (email, password) => {
 	// ...
 
 	// Générer un JWT
-	const token = jwt.sign({ userId: user._id, email: user.email }, config.SECRETKEY, {
-		expiresIn: '1h'
-	});
+	const token = jwt.sign(
+		{ userId: user._id, email: user.email, role: user.role },
+		config.SECRETKEY,
+		{
+			expiresIn: '1h'
+		}
+	);
 
-	return { token, userId: user._id };
+	return { token, userId: user._id, role: user.role };
 };
 
 export const verifyToken = async (token) => {

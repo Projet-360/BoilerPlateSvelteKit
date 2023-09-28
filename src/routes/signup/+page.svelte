@@ -23,6 +23,6 @@
 			bind:value={password}
 			placeholder="Password"
 		/>
-		<button type="submit">S'inscrire</button>
+		<button data-testid="submit-button" type="submit">S'inscrire</button>
 	</form>
 </div>

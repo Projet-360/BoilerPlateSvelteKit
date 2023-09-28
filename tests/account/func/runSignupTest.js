@@ -7,7 +7,7 @@ export async function runSignupTest(page, username, email, password, expectedMes
 	await fillField(page, '[data-testid="password-input"]', password);
 
 	await page.waitForSelector('button[type="submit"]:enabled');
-	await page.click('button[type="submit"]');
+	await page.click('[data-testid="submit-button"]');
 
 	const errorMessageElement = await page.waitForSelector('.notification');
 	const errorMessageText = await errorMessageElement.textContent();

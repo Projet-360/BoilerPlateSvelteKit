@@ -1,7 +1,8 @@
-import { writable } from "svelte/store";
+import { writable } from 'svelte/store';
 
 export const authStore = writable({
-  token: null,
-  userId: null,
-  isAuthenticated: false,
+	token: null,
+	userId: null,
+	role: null, // Ajout de la propriété 'role'
+	isAuthenticated: false
 });

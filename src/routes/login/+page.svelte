@@ -47,7 +47,7 @@
 			bind:value={password}
 			placeholder="Password"
 		/>
-		<button type="submit">Se connecter</button>
+		<button data-testid="submit-button" type="submit">Se connecter</button>
 	</form>
 	<button on:click={goToResetPassword}>Mot de passe oublié ?</button>
 </div>

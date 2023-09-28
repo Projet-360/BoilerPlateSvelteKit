@@ -13,6 +13,7 @@ export async function checkAuth() {
 				...state,
 				isAuthenticated: data.isAuthenticated,
 				token: data.token,
+				role: data.role,
 				userId: data.userId
 			}));
 		}
@@ -32,6 +33,7 @@ export async function login(email, password) {
 		authStore.set({
 			token: data.token,
 			userId: data.userId,
+			role: data.role,
 			isAuthenticated: true
 		});
 	} catch (error) {
@@ -119,6 +121,25 @@ export async function ResetForgotNewPassword(token, newPassword) {
 			console.log('Erreur lors de la réinitialisation du mot de passe.');
 		}
 	} catch (error) {
+		throw error;
+	}
+}
+
+export async function getDashboardData(token) {
+	// Ajoute le token en paramètre
+	try {
+		const headers = new Headers();
+		headers.append('Authorization', `Bearer ${token}`);
+
+		const data = await apiCall({
+			url: `${BD}/auth/user/dashboard`,
+			method: 'GET',
+			headers: headers,
+			credentials: 'include'
+		});
+		return data;
+	} catch (error) {
+		console.log(error);
 		throw error;
 	}
 }

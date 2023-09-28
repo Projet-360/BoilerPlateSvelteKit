@@ -1,10 +1,10 @@
 import { env } from '../constants/env.js';
 
 const config = {
-	PORT: env.PORT || 3001,
+	PORT: env.PORT,
 	DB_URI: env.BD,
-	TOKEN_EXPIRY: env.TOKEN_EXPIRY || '1h',
-	SECRETKEY: env.SECRETKEY || 'your-secret-key',
+	TOKEN_EXPIRY: env.TOKEN_EXPIRY,
+	SECRETKEY: env.SECRETKEY,
 	VERIFICATION_EXPIRY_HOURS: 24
 };
 

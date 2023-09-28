@@ -35,11 +35,25 @@
 	<h1>Réinitialiser le mot de passe</h1>
 	<form>
 		<label for="newPassword">Nouveau mot de passe :</label>
-		<input type="password" id="newPassword" bind:value={newPassword} required />
+		<input
+			data-testid="newPassword-input"
+			type="password"
+			id="newPassword"
+			bind:value={newPassword}
+			required
+		/>
 
 		<label for="confirmPassword">Confirmer le mot de passe :</label>
-		<input type="password" id="confirmPassword" bind:value={confirmPassword} required />
+		<input
+			data-testid="confirmPassword-input"
+			type="password"
+			id="confirmPassword"
+			bind:value={confirmPassword}
+			required
+		/>
 
-		<button type="button" on:click={resetPassword}>Réinitialiser le mot de passe</button>
+		<button data-testid="submit-button" type="button" on:click={resetPassword}
+			>Réinitialiser le mot de passe</button
+		>
 	</form>
 </main>

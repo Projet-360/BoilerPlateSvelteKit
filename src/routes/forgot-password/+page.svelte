@@ -42,7 +42,9 @@
 	<h1>Réinitialisation du mot de passe</h1>
 	<form>
 		<label for="email">Entrez votre adresse e-mail :</label>
-		<input type="email" id="email" bind:value={email} required />
-		<button type="button" on:click={handleResetPassword}>Réinitialiser le mot de passe</button>
+		<input data-testid="email-input" type="email" id="email" bind:value={email} required />
+		<button data-testid="submit-button" type="button" on:click={handleResetPassword}
+			>Réinitialiser le mot de passe</button
+		>
 	</form>
 </main>

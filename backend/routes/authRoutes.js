@@ -6,6 +6,8 @@ const { hash, compare } = pkg;
 import { check, validationResult } from 'express-validator';
 
 import { handleValidationErrors } from '../middlewares/handleValidationErrors.js';
+import { isAuthenticated } from '../middlewares/isAuthenticated.js';
+import { checkRole } from '../middlewares/checkRole.js';
 
 import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
 
@@ -16,7 +18,6 @@ import * as authService from '../services/authService.js';
 import { setAuthCookie } from '../services/setAuthCookie.js';
 import logger from '../services/logger.js';
 import { rateLimiter } from '../services/rateLimiter.js';
-import { requestresetForgotPassword } from '../services/authService.js';
 
 import { signupValidators } from '../validations/signupValidators.js';
 import { validateEmail } from '../validations/signupValidators.js';
@@ -28,11 +29,12 @@ router.get('/check-auth', async (req, res, next) => {
 
 	try {
 		const result = await authService.checkAuthentication(token);
-
+		console.log(result);
 		if (result.isAuthenticated) {
 			res.status(HTTP_STATUS.OK).json({
 				isAuthenticated: true,
 				token: result.token,
+				role: result.role,
 				userId: result.userId
 			});
 		} else {
@@ -95,11 +97,11 @@ router.post('/signup', [signupValidators, handleValidationErrors], async (req, r
 router.post('/login', rateLimiter, async (req, res, next) => {
 	try {
 		const { email, password } = req.body;
-		const { token, userId } = await authService.login(email, password);
+		const { token, userId, role } = await authService.login(email, password);
 		// Définir le cookie
 		setAuthCookie(res, token);
 
-		res.status(HTTP_STATUS.OK).json({ token, userId });
+		res.status(HTTP_STATUS.OK).json({ token, userId, role });
 	} catch (error) {
 		console.log('error from authRoutes', error);
 		next(new CustomError('LoginError', error.message, 400));
@@ -150,6 +152,11 @@ router.post('/forgot-password/:token', async (req, res) => {
 	const ll = await authService.requestresetForgotPassword(user, newPassword);
 
 	res.status(HTTP_STATUS.OK).json({ message: 'Success', success: true });
+});
+
+router.get('/user/dashboard', isAuthenticated, checkRole('user'), (req, res) => {
+	// Logique réservée aux administrateurs
+	res.json({ message: 'Bienvenue sur le tableau de bord utilisateur' });
 });
 
 export default router;
