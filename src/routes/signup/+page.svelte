@@ -15,9 +15,14 @@
 
 <div class="signup">
 	<form on:submit|preventDefault={handleSignup}>
-		<input id="username" type="text" bind:value={username} placeholder="Username" />
-		<input id="email" bind:value={email} placeholder="Email" />
-		<input id="password" type="password" bind:value={password} placeholder="Password" />
+		<input data-testid="username-input" type="text" bind:value={username} placeholder="Username" />
+		<input data-testid="email-input" bind:value={email} placeholder="Email" />
+		<input
+			data-testid="password-input"
+			type="password"
+			bind:value={password}
+			placeholder="Password"
+		/>
 		<button type="submit">S'inscrire</button>
 	</form>
 </div>

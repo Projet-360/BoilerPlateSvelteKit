@@ -40,8 +40,13 @@
 
 <div class="signup">
 	<form on:submit|preventDefault={handleLogin}>
-		<input id="email" type="text" bind:value={email} placeholder="Email" />
-		<input id="password" type="password" bind:value={password} placeholder="Password" />
+		<input data-testid="email-input" type="text" bind:value={email} placeholder="Email" />
+		<input
+			data-testid="password-input"
+			type="password"
+			bind:value={password}
+			placeholder="Password"
+		/>
 		<button type="submit">Se connecter</button>
 	</form>
 	<button on:click={goToResetPassword}>Mot de passe oublié ?</button>

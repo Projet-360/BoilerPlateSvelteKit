@@ -2,9 +2,9 @@ import { fillField } from '../../components/fillField.js';
 import { expect } from '@playwright/test';
 
 export async function runSignupTest(page, username, email, password, expectedMessage) {
-	await fillField(page, '#username', username);
-	await fillField(page, '#email', email);
-	await fillField(page, '#password', password);
+	await fillField(page, '[data-testid="username-input"]', username);
+	await fillField(page, '[data-testid="email-input"]', email);
+	await fillField(page, '[data-testid="password-input"]', password);
 
 	await page.waitForSelector('button[type="submit"]:enabled');
 	await page.click('button[type="submit"]');

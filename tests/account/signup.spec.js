@@ -2,9 +2,18 @@ import { test, chromium, expect } from '@playwright/test';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { getConfirmationLinkFromMailtrap } from './func/getConfirmationLinkFromMailtrap.js';
+import { getConfirmationLinkFromMailHog } from './func/getConfirmationLinkFromMailHog.js';
 import { fillField } from '../components/fillField.js';
 import { runSignupTest } from './func/runSignupTest.js';
+import {
+	generateRandomUsername,
+	generateRandomEmail,
+	generateRandomPassword
+} from '../utils/functionUtils.js';
+
+const username = generateRandomUsername();
+const email = generateRandomEmail();
+const password = generateRandomPassword();
 
 test.describe('Signup validation Tests', () => {
 	let browser, page;
@@ -120,11 +129,15 @@ test.describe.serial('Signup Tests', () => {
 		page = await browser.newPage();
 		await page.goto('http://localhost:5173/signup', { waitUntil: 'networkidle' });
 
+		console.log('username', username);
+		console.log('email', email);
+		console.log('password', password);
+
 		await runSignupTest(
 			page,
-			'Name',
-			process.env.VITE_MAIL,
-			process.env.VITE_PASSWORD_TEST,
+			username,
+			email,
+			password,
 			'you received an email to validate your account X'
 		);
 	});
@@ -133,13 +146,7 @@ test.describe.serial('Signup Tests', () => {
 		page = await browser.newPage();
 		await page.goto('http://localhost:5173/signup', { waitUntil: 'networkidle' });
 
-		await runSignupTest(
-			page,
-			'Name',
-			process.env.VITE_MAIL,
-			process.env.VITE_PASSWORD_TEST,
-			'This email already exists X'
-		);
+		await runSignupTest(page, username, email, password, 'This email already exists X');
 	});
 });
 
@@ -165,9 +172,9 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		const browser = await chromium.launch({ headless: false });
 
 		// Remplir les champs email et mot de passe
-		await fillField(page, '#email', process.env.VITE_MAIL);
+		await fillField(page, '[data-testid="email-input"]', email);
 
-		await fillField(page, '#password', process.env.VITE_PASSWORD_TEST);
+		await fillField(page, '[data-testid="password-input"]', password);
 
 		// Soumettre le formulaire
 		await page.waitForSelector('button[type="submit"]:enabled');
@@ -217,7 +224,7 @@ test.describe.serial('Password Reset Tests', () => {
 
 	test('FORGOT-PASSWORD - Email pas encore verifié - UNVERIFIED_EMAIL', async () => {
 		// Remplir le champ email avec une adresse email non vérifiée
-		await fillField(page, '#email', process.env.VITE_MAIL);
+		await fillField(page, '#email', email);
 		await page.click('button[type="button"]');
 
 		// Vérifier le message d'erreur ou de succès, selon le comportement attendu
@@ -248,25 +255,17 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		const browser = await chromium.launch({ headless: false });
 		const newPage = await browser.newPage();
 
-		// Récupérer le lien de confirmation depuis Mailtrap
-		const confirmationLink = await getConfirmationLinkFromMailtrap();
-
-		// Confirmer le compte
-		await newPage.goto(confirmationLink);
-
+		const confirmationLink = await getConfirmationLinkFromMailHog();
 		if (!confirmationLink) {
 			throw new Error('Confirmation link is undefined.');
 		}
 
-		// Confirmer le compte en naviguant vers le lien de confirmation
 		await newPage.goto(confirmationLink);
 
-		// Attendre et vérifier que le h1 "Vérification en cours..." apparaît
 		const headerElement = await newPage.waitForSelector('h1');
 		const headerText = await headerElement.textContent();
 		expect(headerText).toBe('Verification en cours...');
 
-		// Attendre la notification "Votre adresse mail est bien validée x"
 		const notificationElement = await newPage.waitForSelector('.notification');
 		const notificationText = await notificationElement.textContent();
 		expect(notificationText).toBe('Votre adresse mail est bien validée X');
@@ -282,11 +281,11 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		await newPage.goto('http://localhost:5173/login');
 
 		// Remplir les champs email et mot de passe avec des données incorrectes
-		await newPage.focus('#email');
-		await newPage.keyboard.type(process.env.VITE_MAIL);
+		await newPage.focus('[data-testid="email-input"]');
+		await newPage.keyboard.type(email);
 		await newPage.waitForTimeout(200);
 
-		await newPage.focus('#password');
+		await newPage.focus('[data-testid="password-input"]');
 		await newPage.keyboard.type('sdrg');
 		await newPage.waitForTimeout(200);
 
@@ -326,7 +325,7 @@ test.describe.serial('Password Reset Tests', () => {
 
 	test('FORGOT_PASSWORD - envoi de la demande email forgot password - VALID_EMAIL', async () => {
 		// Remplir le champ email avec une adresse email valide et vérifiée
-		await fillField(page, '#email', process.env.VITE_MAIL);
+		await fillField(page, '#email', email);
 		await page.click('button[type="button"]');
 
 		// Vérifier le message de succès
@@ -337,7 +336,7 @@ test.describe.serial('Password Reset Tests', () => {
 
 	test('CONFIRM_PASSWORD_RESET', async () => {
 		// Récupérer le lien de confirmation depuis Mailtrap
-		const confirmationLink = await getConfirmationLinkFromMailtrap();
+		const confirmationLink = await getConfirmationLinkFromMailHog();
 		if (!confirmationLink) {
 			throw new Error('Confirmation link is undefined.');
 		}

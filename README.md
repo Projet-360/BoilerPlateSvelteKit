@@ -5,6 +5,15 @@ lancer lighhouse:
 lhci autorun --collect.url=http://localhost:5173 --upload.target=filesystem --upload.outputDir=./lighthouse-reports/
 
 
+MailHog:
+https://github.com/mailhog/MailHog/releases/v1.0.0
+
+@echo off
+C:\chemin\vers\MailHog.exe
+
+http://localhost:8025
+
+
 BoilerPlate pour site design:
 Animations d'éléments: Intégrez des bibliothèques comme GreenSock (GSAP) pour offrir des animations riches et fluides. Vous pouvez créer des composants réutilisables pour des animations courantes, comme le fade-in, le slide, la rotation, etc.
 
