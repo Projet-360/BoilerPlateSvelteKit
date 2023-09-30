@@ -139,10 +139,6 @@ test.describe.serial('Signup Tests', () => {
 		page = await browser.newPage();
 		await page.goto('http://localhost:5173/signup', { waitUntil: 'networkidle' });
 
-		console.log('username', username);
-		console.log('email', email);
-		console.log('password', password);
-
 		await runSignupTest(
 			page,
 			username,

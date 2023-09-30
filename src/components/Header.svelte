@@ -17,8 +17,6 @@
 	authStore.subscribe(($authStore) => {
 		isAuthenticated = $authStore && $authStore.token ? true : false;
 	});
-
-	console.log('header', $authStore.role);
 </script>
 
 <header>

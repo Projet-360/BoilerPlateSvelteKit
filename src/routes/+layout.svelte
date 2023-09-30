@@ -6,6 +6,8 @@
 	import { checkAuth } from '$api/auth';
 	import { registerServiceWorker } from '$UITools/serviceWorker';
 
+	import { t } from '$UITools/translations/index';
+
 	import Header from '$components/Header.svelte';
 	import PageTransition from '$UITools/PageTransition/index.svelte';
 	import Cursor from '$UITools/Cursor/index.svelte';
@@ -20,7 +22,8 @@
 	export let data;
 
 	let isStoreInitialized = false;
-	let unsubscribe; // Déclaration déplacée ici
+	let notificationShown = false; // Ajoutez cette ligne
+	let unsubscribe;
 
 	const initializeStore = new Promise((resolve) => {
 		unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {
@@ -28,19 +31,21 @@
 				isStoreInitialized = true;
 				resolve();
 				if (unsubscribe) {
-					// Vérification ajoutée ici
 					unsubscribe();
 				}
 			}
 		});
 	});
 
-	$: if (isStoreInitialized) {
+	$: if (isStoreInitialized && !notificationShown) {
+		// Ajoutez la condition !notificationShown
 		const { isAuthenticated } = $authStore;
-		const isUserPage = data.route === '/user'; // ajustez cette condition selon vos besoins
+		const isUserPage = data.route === '/user';
 
 		if (isUserPage && isAuthenticated === false && browser) {
 			goto('/login');
+			notificationStore.addNotification($t('validation.ACCESS_DENIED'), 'error');
+			notificationShown = true; // Mettez cette variable à true après avoir affiché la notification
 		}
 	}
 
