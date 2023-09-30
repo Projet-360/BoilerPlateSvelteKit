@@ -66,9 +66,6 @@ L'ajout d'une authentification à deux facteurs offre une couche supplémentaire
 Timeouts de Session: Comme tu l'as mentionné précédemment, ajoute un mécanisme de timeout pour les sessions.
 Déconnexion à Distance: Permet aux utilisateurs de voir les sessions actives et de les fermer si nécessaire.
 
-3. Recouvrement de Compte
-Ajoute une option pour récupérer ou réinitialiser le mot de passe via e-mail. Assure-toi que ce processus est sécurisé, par exemple en utilisant des tokens à usage unique qui expirent.
-
 4. Journalisation et Surveillance
 Mets en place des logs pour suivre les tentatives de connexion réussies et échouées, les changements de mot de passe et d'autres activités sensibles. Cela aide à l'audit de sécurité et à la détection d'activités suspectes.
 
@@ -91,7 +88,15 @@ Permet aux utilisateurs de gérer leurs informations de profil, préférences de
 10. Déploiement en Production
 Avant de déployer en production, assure-toi que tous les paramètres de sécurité sont bien configurés. Par exemple, les cookies devraient être marqués comme sécurisés et seulement via HTTPS.
 
+Headers de sécurité: Utilisez des en-têtes HTTP pour sécuriser votre application, comme Content Security Policy (CSP) pour prévenir les attaques XSS.
 
+Exemples en Node.js
+Helmet pour sécuriser les en-têtes HTTP:
+
+javascript
+Copy code
+const helmet = require('helmet');
+app.use(helmet());
 
 
 
@@ -144,3 +149,25 @@ Mauvais identifiants:
 
     "SUCCESS_LOGIN": "Bienvenue !",
     "EMAIL_NOT_VERIFIED": "Votre Email n'a pas été vérifié, veuillez consulter votre boite mail"
+
+
+
+
+
+
+
+    #FAIT
+    SIGNUP
+    LOGIN
+    FORGOT-PASSWORD
+
+    RATE-LIMITER
+    TEST PLAYWRIGHT
+
+
+    #A FAIRE
+    GESTION INFORMATION PROFIL
+    CONNECTION AVEC GOOGLE AU RESEAUX SOCIAUX
+    ADMIN GERANT ROLE
+    ROUTE MINIMUM PARAMETRABLE SOUHAIT
+    JOURNALISATION ID SECU

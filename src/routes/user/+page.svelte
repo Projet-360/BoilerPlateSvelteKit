@@ -18,7 +18,7 @@
 		});
 
 		const { isAuthenticated, token } = await authStoreLoaded;
-		unsubscribe(); // Se désabonner pour éviter les fuites de mémoire
+		unsubscribe();
 
 		if (!isAuthenticated) {
 			goto('/login');

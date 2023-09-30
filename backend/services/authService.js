@@ -31,7 +31,7 @@ const generateAndSaveResetToken = async (user) => {
 	await sendResetPasswordEmail(user, resetToken);
 };
 
-export const createSignupToken = ({ _id: userId, username, email }) => {
+export const createSignupToken = ({ _id: userId, username, email, role }) => {
 	const token = jwt.sign({ userId, username, email, role }, config.SECRETKEY, {
 		expiresIn: config.TOKEN_EXPIRY
 	});
@@ -66,8 +66,9 @@ export const checkEmailExists = async (email) => {
 	}
 };
 
-export const createUser = async (username, email, hashedPassword) => {
-	const newUser = new User({ username, email, password: hashedPassword });
+export const createUser = async (username, email, hashedPassword, role) => {
+	const newUser = new User({ username, email, password: hashedPassword, role });
+	console.log('New User:', newUser);
 	await newUser.save();
 	return newUser;
 };

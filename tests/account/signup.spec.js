@@ -1,4 +1,6 @@
 import { test, chromium, expect } from '@playwright/test';
+import dotenv from 'dotenv';
+dotenv.config();
 
 import { getConfirmationLinkFromMailHog } from './func/getConfirmationLinkFromMailHog.js';
 import { fillField } from '../components/fillField.js';
@@ -16,7 +18,7 @@ const password = generateRandomPassword();
 let browser;
 
 test.beforeAll(async () => {
-	browser = await chromium.launch({ headless: false });
+	browser = await chromium.launch({ headless: false, devtools: true });
 });
 
 test.afterAll(async () => {
@@ -26,6 +28,10 @@ test.afterAll(async () => {
 test.describe.parallel('Signup validation Tests', () => {
 	let page;
 
+	test.beforeAll(async () => {
+		browser = await chromium.launch({ headless: false });
+	});
+
 	test.beforeEach(async () => {
 		page = await browser.newPage();
 		await page.goto('http://localhost:5173/signup', { waitUntil: 'networkidle' });
@@ -33,6 +39,10 @@ test.describe.parallel('Signup validation Tests', () => {
 
 	test.afterEach(async () => {
 		await page.close();
+	});
+
+	test.afterAll(async () => {
+		await browser.close();
 	});
 
 	test('LOGIN - username vide - USERNAME_REQUIRED', async () => {
@@ -113,13 +123,25 @@ test.describe.parallel('Signup validation Tests', () => {
 test.describe.serial('Signup Tests', () => {
 	let page;
 
+	test.beforeAll(async () => {
+		browser = await chromium.launch({ headless: false });
+	});
+
 	test.afterEach(async () => {
 		await page.close();
+	});
+
+	test.afterAll(async () => {
+		await browser.close();
 	});
 
 	test('SIGNUP - inscription avec succés - SUCCESS_INSCRIPTION', async () => {
 		page = await browser.newPage();
 		await page.goto('http://localhost:5173/signup', { waitUntil: 'networkidle' });
+
+		console.log('username', username);
+		console.log('email', email);
+		console.log('password', password);
 
 		await runSignupTest(
 			page,
@@ -141,12 +163,17 @@ test.describe.serial('Signup Tests', () => {
 test.describe.serial('Email Verification and Login Tests', () => {
 	let page;
 
-	test.beforeEach(async () => {
+	test.beforeAll(async () => {
+		browser = await chromium.launch({ headless: false });
 		page = await browser.newPage();
 	});
 
 	test.afterEach(async () => {
 		await page.close();
+	});
+
+	test.afterAll(async () => {
+		await browser.close();
 	});
 
 	test('LOGIN - Email pas encore vérifié - EMAIL_NOT_VERIFIED_LOGIN', async () => {
@@ -160,7 +187,7 @@ test.describe.serial('Email Verification and Login Tests', () => {
 
 		// Soumettre le formulaire
 		await page.waitForSelector('[data-testid="submit-button"]:enabled');
-		await page.click('[data-testid="submit-button"]');
+		await page.getByTestId('submit-button').click();
 
 		// Attendre une redirection ou un message de succès, à vous de personnaliser cette partie
 		const errorMessageElement = await page.waitForSelector('.notification');
@@ -176,6 +203,10 @@ test.describe.serial('Email Verification and Login Tests', () => {
 test.describe.serial('Password Reset Tests', () => {
 	let page;
 
+	test.beforeAll(async () => {
+		browser = await chromium.launch({ headless: false });
+	});
+
 	test.beforeEach(async () => {
 		page = await browser.newPage();
 		await page.goto('http://localhost:5173/forgot-password', { waitUntil: 'networkidle' });
@@ -185,10 +216,16 @@ test.describe.serial('Password Reset Tests', () => {
 		await page.close();
 	});
 
+	test.afterAll(async () => {
+		await browser.close();
+	});
+
 	test('FORGOT-PASSWORD - Email inexistant - INVALID_EMAIL', async () => {
 		// Remplir le champ email avec une adresse email invalide
-		await fillField(page, '[data-testid="email-input"]', 'invalidemail@example.com');
-		await page.click('[data-testid="submit-button"]');
+		await fillField(page, '#email', 'invalidemail@example.com');
+
+		await page.waitForSelector('[data-testid="submit-button"]:enabled');
+		await page.getByTestId('submit-button').click();
 
 		// Vérifier le message d'erreur
 		const errorMessageElement = await page.waitForSelector('.notification');
@@ -198,8 +235,10 @@ test.describe.serial('Password Reset Tests', () => {
 
 	test('FORGOT-PASSWORD - Email pas encore verifié - UNVERIFIED_EMAIL', async () => {
 		// Remplir le champ email avec une adresse email non vérifiée
-		await fillField(page, '[data-testid="email-input"]', email);
-		await page.click('[data-testid="submit-button"]');
+		await fillField(page, '#email', email);
+
+		await page.waitForSelector('[data-testid="submit-button"]:enabled');
+		await page.getByTestId('submit-button').click();
 
 		// Vérifier le message d'erreur ou de succès, selon le comportement attendu
 		const messageElement = await page.waitForSelector('.notification');
@@ -211,12 +250,17 @@ test.describe.serial('Password Reset Tests', () => {
 test.describe.serial('Email Verification and Login Tests', () => {
 	let page;
 
-	test.beforeEach(async () => {
+	test.beforeAll(async () => {
+		browser = await chromium.launch({ headless: false });
 		page = await browser.newPage();
 	});
 
 	test.afterEach(async () => {
 		await page.close();
+	});
+
+	test.afterAll(async () => {
+		await browser.close();
 	});
 
 	test('EMAIL - Confirmation par email - CONFIRM_EMAIL', async () => {
@@ -258,7 +302,7 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		await newPage.waitForTimeout(200);
 
 		// Soumettre le formulaire
-		await newPage.click('[data-testid="submit-button"]');
+		await newPage.click('button[type="submit"]');
 
 		// Attendre une notification d'échec
 		const notificationElement = await newPage.waitForSelector('.notification');
@@ -274,6 +318,10 @@ test.describe.serial('Email Verification and Login Tests', () => {
 test.describe.serial('Password Reset Tests', () => {
 	let page;
 
+	test.beforeAll(async () => {
+		browser = await chromium.launch({ headless: false });
+	});
+
 	test.beforeEach(async () => {
 		page = await browser.newPage();
 		await page.goto('http://localhost:5173/forgot-password', { waitUntil: 'networkidle' });
@@ -283,10 +331,14 @@ test.describe.serial('Password Reset Tests', () => {
 		await page.close();
 	});
 
+	test.afterAll(async () => {
+		await browser.close();
+	});
+
 	test('FORGOT_PASSWORD - envoi de la demande email forgot password - VALID_EMAIL', async () => {
 		// Remplir le champ email avec une adresse email valide et vérifiée
-		await fillField(page, '[data-testid="email-input"]', email);
-		await page.click('[data-testid="submit-button"]');
+		await fillField(page, '#email', email);
+		await page.click('button[type="button"]');
 
 		// Vérifier le message de succès
 		const successMessageElement = await page.waitForSelector('.notification');
@@ -306,9 +358,9 @@ test.describe.serial('Password Reset Tests', () => {
 		await page.goto(confirmationLink, { waitUntil: 'networkidle' });
 
 		// Remplir le formulaire de réinitialisation du mot de passe
-		await fillField(page, '[data-testid="newPassword-input"]', 'NewSecurePassword8!');
-		await fillField(page, '[data-testid="confirmPassword-input"]', 'NewSecurePassword8!');
-		await page.click('[data-testid="submit-button"]');
+		await fillField(page, '#newPassword', 'NewSecurePassword8!');
+		await fillField(page, '#confirmPassword', 'NewSecurePassword8!');
+		await page.click('button[type="button"]');
 
 		// Vérifier que le mot de passe a bien été réinitialisé
 		const successMessageElement = await page.waitForSelector('.notification');

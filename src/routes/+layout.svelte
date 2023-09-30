@@ -37,7 +37,9 @@
 
 	$: if (isStoreInitialized) {
 		const { isAuthenticated } = $authStore;
-		if (isAuthenticated === false && browser) {
+		const isUserPage = data.route === '/user'; // ajustez cette condition selon vos besoins
+
+		if (isUserPage && isAuthenticated === false && browser) {
 			goto('/login');
 		}
 	}

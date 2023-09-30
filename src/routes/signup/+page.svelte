@@ -14,15 +14,22 @@
 </script>
 
 <div class="signup">
-	<form on:submit|preventDefault={handleSignup}>
-		<input data-testid="username-input" type="text" bind:value={username} placeholder="Username" />
-		<input data-testid="email-input" bind:value={email} placeholder="Email" />
-		<input
-			data-testid="password-input"
-			type="password"
-			bind:value={password}
-			placeholder="Password"
-		/>
-		<button data-testid="submit-button" type="submit">S'inscrire</button>
-	</form>
+	<div class="signup-container">
+		<form on:submit|preventDefault={handleSignup}>
+			<input
+				data-testid="username-input"
+				type="text"
+				bind:value={username}
+				placeholder="Username"
+			/>
+			<input data-testid="email-input" bind:value={email} placeholder="Email" />
+			<input
+				data-testid="password-input"
+				type="password"
+				bind:value={password}
+				placeholder="Password"
+			/>
+			<button data-testid="submit-button" type="submit">S'inscrire</button>
+		</form>
+	</div>
 </div>

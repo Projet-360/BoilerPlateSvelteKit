@@ -83,8 +83,9 @@ router.post('/signup', [signupValidators, handleValidationErrors], async (req, r
 		const { username, email, password } = req.body;
 		await authService.checkEmailExists(email);
 		const hashedPassword = await authService.hashPassword(password);
-		const newUser = await authService.createUser(username, email, hashedPassword);
-		await authService.createSignupToken(newUser);
+		const role = 'user';
+		const newUser = await authService.createUser(username, email, hashedPassword, role);
+		await authService.createSignupToken(newUser, role);
 		await authService.createVerificationToken(newUser);
 
 		res.status(HTTP_STATUS.CREATED).json({ message: 'Success', success: true });
