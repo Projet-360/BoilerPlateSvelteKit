@@ -8,6 +8,8 @@
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
 	import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 
+	import Greetings from '$components/Greetings.svelte';
+
 	import github from '$lib/images/github.svg';
 
 	// or only core styles
@@ -36,33 +38,6 @@
 			speed: 1
 		}
 	};
-
-	onMount(async () => {
-		greetings = await getAllGreetings();
-	});
-
-	function prepareUpdate(greeting) {
-		name = greeting.name;
-		message = greeting.message;
-		editingId = greeting._id;
-	}
-
-	async function handleSendGreeting() {
-		const isSuccessful = await sendGreeting(name, message, editingId);
-		if (isSuccessful) {
-			name = '';
-			message = '';
-			editingId = null;
-			greetings = await getAllGreetings();
-		}
-	}
-
-	async function handleDeleteGreeting(id) {
-		const isSuccessful = await deleteGreeting(id);
-		if (isSuccessful) {
-			greetings = await getAllGreetings();
-		}
-	}
 </script>
 
 <svelte:head>
@@ -78,28 +53,7 @@
 
 <Box />
 
-<form on:submit|preventDefault={handleSendGreeting}>
-	<label for="nameInput">
-		Nom :
-		<input id="nameInput" name="name" type="text" autocomplete="name" bind:value={name} />
-	</label>
-
-	<label for="messageInput">
-		Message :
-		<input id="messageInput" name="message" type="text" autocomplete="on" bind:value={message} />
-	</label>
-	<button type="submit">Envoyer</button>
-</form>
-
-<ul>
-	{#each greetings as greeting}
-		<li>
-			{greeting.name}: {greeting.message}
-			<button on:click={() => prepareUpdate(greeting)}>Modifier</button>
-			<button on:click={() => handleDeleteGreeting(greeting._id)}>Supprimer</button>
-		</li>
-	{/each}
-</ul>
+<Greetings />
 
 <Splide options={splideOptions} extensions={{ AutoScroll }} aria-label="My Favorite Images">
 	<SplideSlide>

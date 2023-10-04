@@ -79,9 +79,10 @@
 	{/each}
 </div>
 
+<Header />
+
 <SmoothScroller>
 	<PageTransition pathname={data.route}>
-		<Header />
 		<main>
 			<slot />
 		</main>

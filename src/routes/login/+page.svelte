@@ -62,9 +62,16 @@
 <div class="login">
 	<div class="login-container">
 		<form on:submit|preventDefault={handleLogin}>
-			<input data-testid="email-input" type="text" bind:value={email} placeholder="Email" />
+			<input
+				data-testid="email-input"
+				id="email-input"
+				type="text"
+				bind:value={email}
+				placeholder="Email"
+			/>
 			<input
 				data-testid="password-input"
+				id="password-input"
 				type="password"
 				bind:value={password}
 				placeholder="Password"
