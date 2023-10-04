@@ -7,7 +7,7 @@
 	import { t } from '$UITools/translations/index';
 
 	let userData;
-	let unsubscribe; // Pour se désabonner du store
+	let unsubscribe;
 
 	onMount(async () => {
 		const authStoreLoaded = new Promise((resolve) => {
@@ -28,7 +28,6 @@
 				const data = await getDashboardData(token);
 				userData = data.message;
 			} catch (error) {
-				// Insérer ici un mécanisme de gestion d'erreurs robuste
 				console.error('Error retrieving data from dashboard:', error);
 			}
 		}
@@ -36,7 +35,7 @@
 </script>
 
 <svelte:head>
-	<title>Tableau de bord utilisateur</title>
+	<title>{$t('user.title')}</title>
 	<meta name="description" content="This is your user dashboard." />
 </svelte:head>
 

@@ -49,7 +49,7 @@ const defaultSender =
 
 // Function to send email verification link
 export const sendVerificationEmail = async (email, token) => {
-	const url = `${env.URL_FRONT}/verify/${token}`;
+	const url = `${env.URL_FRONT}/signup/${token}`;
 	await sendEmail(
 		email,
 		"Vérification de l'Email",

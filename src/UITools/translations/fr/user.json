@@ -1,5 +1,5 @@
 {
     "title": "Tableau de bord utilisateur",
-    "loader": "loader ...",
-    "button": "Link to about page"
+    "loader": "chargement ...",
+    "button": "Lien vers la page d'accueil"
 }

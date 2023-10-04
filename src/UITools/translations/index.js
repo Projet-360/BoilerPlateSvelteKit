@@ -46,6 +46,11 @@ export const config = {
 		},
 		{
 			locale: 'en',
+			key: 'user',
+			loader: async () => (await import('./en/user.json')).default
+		},
+		{
+			locale: 'en',
 			key: 'validation',
 			loader: async () => (await import('./en/validation.json')).default
 		},
@@ -78,6 +83,11 @@ export const config = {
 			locale: 'fr',
 			key: 'forgot-password-token',
 			loader: async () => (await import('./fr/forgot-password-token.json')).default
+		},
+		{
+			locale: 'fr',
+			key: 'user',
+			loader: async () => (await import('./fr/user.json')).default
 		},
 		{
 			locale: 'fr',

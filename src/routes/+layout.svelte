@@ -22,7 +22,7 @@
 	export let data;
 
 	let isStoreInitialized = false;
-	let notificationShown = false; // Ajoutez cette ligne
+	let notificationShown = false;
 	let unsubscribe;
 
 	const initializeStore = new Promise((resolve) => {

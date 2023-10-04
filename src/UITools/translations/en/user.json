@@ -1,5 +1,5 @@
 {
     "title": "User dashboard",
-    "loader": "chargement ...",
-    "button": "Lien vers la page à propos"
+    "loader": "loading ...",
+    "button": "Link to about us page"
 }
