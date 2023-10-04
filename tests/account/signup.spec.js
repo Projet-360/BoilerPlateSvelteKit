@@ -289,12 +289,12 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		// Wait for the header to appear and verify its text
 		const headerElement = await newPage.waitForSelector('h1');
 		const headerText = await headerElement.textContent();
-		expect(headerText).toBe('Verification en cours...');
+		expect(headerText).toBe('Check in progress...');
 
 		// Wait for the notification to appear and verify its text
 		const notificationElement = await newPage.waitForSelector('.notification');
 		const notificationText = await notificationElement.textContent();
-		expect(notificationText).toBe('Votre adresse mail est bien validée X');
+		expect(notificationText).toBe('Your email address has been successfully verified X');
 
 		await browser.close();
 	});

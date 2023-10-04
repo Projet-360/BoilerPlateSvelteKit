@@ -39,4 +39,4 @@
 </script>
 
 <!-- Display a message while verification is in progress -->
-<h1>{$t('user.title')}</h1>
+<h1>{$t('signup.verifytoken')}</h1>
