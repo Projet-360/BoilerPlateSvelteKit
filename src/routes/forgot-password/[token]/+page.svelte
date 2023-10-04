@@ -32,9 +32,9 @@
 </script>
 
 <main>
-	<h1>Réinitialiser le mot de passe</h1>
+	<h1>{$t('forgot-password-token.title')}</h1>
 	<form>
-		<label for="newPassword">Nouveau mot de passe :</label>
+		<label for="newPassword">{$t('forgot-password-token.newPassword')}</label>
 		<input
 			data-testid="newPassword-input"
 			type="password"
@@ -43,7 +43,7 @@
 			required
 		/>
 
-		<label for="confirmPassword">Confirmer le mot de passe :</label>
+		<label for="confirmPassword">{$t('forgot-password-token.confirmPassword')}</label>
 		<input
 			data-testid="confirmPassword-input"
 			type="password"
@@ -53,7 +53,7 @@
 		/>
 
 		<button data-testid="submit-button" type="button" on:click={resetPassword}
-			>Réinitialiser le mot de passe</button
+			>{$t('forgot-password-token.link')}</button
 		>
 	</form>
 </main>

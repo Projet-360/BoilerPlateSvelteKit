@@ -4,6 +4,7 @@
 	import { authStore } from '$stores/authStore.js';
 	import { goto } from '$app/navigation';
 	import { getDashboardData } from '$api/auth.js';
+	import { t } from '$UITools/translations/index';
 
 	let userData;
 	let unsubscribe; // Pour se désabonner du store
@@ -28,7 +29,7 @@
 				userData = data.message;
 			} catch (error) {
 				// Insérer ici un mécanisme de gestion d'erreurs robuste
-				console.error('Erreur lors de la récupération des données du tableau de bord:', error);
+				console.error('Error retrieving data from dashboard:', error);
 			}
 		}
 	});
@@ -36,13 +37,13 @@
 
 <svelte:head>
 	<title>Tableau de bord utilisateur</title>
-	<meta name="description" content="Ceci est votre tableau de bord utilisateur." />
+	<meta name="description" content="This is your user dashboard." />
 </svelte:head>
 
-<h1>Dashboard User</h1>
+<h1>{$t('user.title')}</h1>
 {#if userData}
 	<h2>{userData}</h2>
 {:else}
-	<h2>Chargement...</h2>
+	<h2>{$t('user.loader')}</h2>
 {/if}
-<a href="/about" use:hoverable={'first'}>Lien vers la page about</a>
+<a href="/about" use:hoverable={'first'}>{$t('user.button')}</a>

@@ -7,16 +7,16 @@
 	onMount(() => {
 		authStore.subscribe(({ isAuthenticated }) => {
 			if (!isAuthenticated) {
-				goto('/login'); // redirige vers la page de connexion si l'utilisateur n'est pas authentifié
+				goto('/login'); // redirects to login page if user is not authenticated
 			}
 		});
 	});
 </script>
 
 <svelte:head>
-	<title>Page d'exemple</title>
-	<meta name="description" content="Ceci est une description de la page d'exemple." />
+	<title>exemple Page</title>
+	<meta name="description" content="meta description for about page." />
 </svelte:head>
 
 <h1>Dashboard</h1>
-<a href="/about" use:hoverable={'first'}>Lien vers la page about</a>
+<a href="/about" use:hoverable={'first'}>Link to the page about</a>

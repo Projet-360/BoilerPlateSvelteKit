@@ -76,8 +76,8 @@
 				bind:value={password}
 				placeholder="Password"
 			/>
-			<button data-testid="submit-button" type="submit">Se connecter</button>
+			<button data-testid="submit-button" type="submit">{$t('login.button')}</button>
 		</form>
-		<button on:click={goToResetPassword}>Mot de passe oublié ?</button>
+		<button on:click={goToResetPassword}>{$t('login.link')}</button>
 	</div>
 </div>

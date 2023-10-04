@@ -1,5 +1,4 @@
 <script>
-	import { onMount } from 'svelte';
 	import { hoverable } from '$UITools/Cursor/cursorHelpers';
 	import { t } from '$UITools/translations/index';
 	import Box from '$three/Box.svelte';
@@ -12,17 +11,9 @@
 
 	import github from '$lib/images/github.svg';
 
-	// or only core styles
 	import '@splidejs/svelte-splide/css/core';
 
-	import { sendGreeting, getAllGreetings, deleteGreeting } from '$api/Greetings'; // Import les fonctions
-
 	const link = 'https://kit.svelte.dev';
-
-	let editingId = null;
-	let name = '';
-	let message = '';
-	let greetings = [];
 
 	const splideOptions = {
 		type: 'loop',
@@ -45,11 +36,9 @@
 	<meta name="description" content="Ceci est une description de la page d'exemple." />
 </svelte:head>
 
-<h1>home</h1>
-<a href="/about" use:hoverable={'first'}>Lien vers la page about</a>
-
 <h1>{$t('home.title')}</h1>
 <p>{@html $t('home.text', { link })}</p>
+<a href="/about" use:hoverable={'first'}>{$t('home.link')}</a>
 
 <Box />
 

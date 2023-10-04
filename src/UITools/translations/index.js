@@ -26,6 +26,26 @@ export const config = {
 		},
 		{
 			locale: 'en',
+			key: 'login',
+			loader: async () => (await import('./en/login.json')).default
+		},
+		{
+			locale: 'en',
+			key: 'signup',
+			loader: async () => (await import('./en/signup.json')).default
+		},
+		{
+			locale: 'en',
+			key: 'forgot-password',
+			loader: async () => (await import('./en/forgot-password.json')).default
+		},
+		{
+			locale: 'en',
+			key: 'forgot-password-token',
+			loader: async () => (await import('./en/forgot-password-token.json')).default
+		},
+		{
+			locale: 'en',
 			key: 'validation',
 			loader: async () => (await import('./en/validation.json')).default
 		},
@@ -38,6 +58,26 @@ export const config = {
 			locale: 'fr',
 			key: 'home',
 			loader: async () => (await import('./fr/home.json')).default
+		},
+		{
+			locale: 'fr',
+			key: 'login',
+			loader: async () => (await import('./fr/login.json')).default
+		},
+		{
+			locale: 'fr',
+			key: 'signup',
+			loader: async () => (await import('./fr/signup.json')).default
+		},
+		{
+			locale: 'fr',
+			key: 'forgot-password',
+			loader: async () => (await import('./fr/forgot-password.json')).default
+		},
+		{
+			locale: 'fr',
+			key: 'forgot-password-token',
+			loader: async () => (await import('./fr/forgot-password-token.json')).default
 		},
 		{
 			locale: 'fr',

@@ -10,8 +10,7 @@
 
 	async function handleResetPassword() {
 		try {
-			const ll = await resetPassword(email);
-			console.log('ll', ll);
+			await resetPassword(email);
 			goto('/');
 			notificationStore.addNotification($t('validation.EMAIL_FORGOT_PASSWORD'), 'success');
 		} catch (error) {
@@ -39,12 +38,12 @@
 </script>
 
 <main>
-	<h1>Réinitialisation du mot de passe</h1>
+	<h1>{$t('forgot-password.title')}</h1>
 	<form>
-		<label for="email">Entrez votre adresse e-mail :</label>
+		<label for="email">{$t('forgot-password.subtitle')}</label>
 		<input data-testid="email-input" type="email" id="email" bind:value={email} required />
 		<button data-testid="submit-button" type="button" on:click={handleResetPassword}
-			>Réinitialiser le mot de passe</button
+			>{$t('forgot-password.button')}</button
 		>
 	</form>
 </main>

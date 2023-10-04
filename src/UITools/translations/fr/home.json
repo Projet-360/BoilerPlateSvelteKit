@@ -1,4 +1,5 @@
 {
-  "title": "Vítejte ve SvelteKit",
-  "text": "Dokumentace je k přečtení na <a href=\"{{link}}\">kit.svelte.dev</a>"
+  "title": "Accueil",
+  "text": "Voici le lien Github <a href=\"{{link}}\">lien</a>",
+  "link": "Exemple de polymorhisme"
 }

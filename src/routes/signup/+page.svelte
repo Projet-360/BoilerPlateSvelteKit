@@ -31,7 +31,7 @@
 				bind:value={password}
 				placeholder="Password"
 			/>
-			<button data-testid="submit-button" type="submit">S'inscrire</button>
+			<button data-testid="submit-button" type="submit">{$t('signup.button')}</button>
 		</form>
 	</div>
 </div>
