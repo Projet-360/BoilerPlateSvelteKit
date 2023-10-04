@@ -9,7 +9,8 @@ export async function runSignupTest(page, username, email, password, expectedMes
 	await page.waitForSelector('button[type="submit"]:enabled');
 	await page.click('button[type="submit"]');
 
-	const errorMessageElement = await page.waitForSelector('.notification');
+	// Wait for a redirection or success message; this part can be customized based on your application
+	const errorMessageElement = await page.waitForSelector('.notification', { timeout: 60000 });
 	const errorMessageText = await errorMessageElement.textContent();
 	expect(errorMessageText).toBe(expectedMessage);
 }

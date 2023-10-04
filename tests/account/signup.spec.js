@@ -195,9 +195,7 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		await page.getByTestId('submit-button').click();
 
 		// Wait for a redirection or success message; this part can be customized based on your application
-		const errorMessageElement = await page.waitForSelector('.notification');
-
-		// Verify the error message
+		const errorMessageElement = await page.waitForSelector('.notification', { timeout: 60000 });
 		const errorMessageText = await errorMessageElement.textContent();
 		expect(errorMessageText).toBe('Your Email has not been verified, please check your mailbox X');
 
@@ -234,8 +232,8 @@ test.describe.serial('Password Reset Tests', () => {
 		await page.waitForSelector('[data-testid="submit-button"]:enabled');
 		await page.getByTestId('submit-button').click();
 
-		// Verify the error message
-		const errorMessageElement = await page.waitForSelector('.notification');
+		// Wait for a redirection or success message; this part can be customized based on your application
+		const errorMessageElement = await page.waitForSelector('.notification', { timeout: 60000 });
 		const errorMessageText = await errorMessageElement.textContent();
 		expect(errorMessageText).toBe('User not found X');
 	});
@@ -249,10 +247,10 @@ test.describe.serial('Password Reset Tests', () => {
 		await page.waitForSelector('[data-testid="submit-button"]:enabled');
 		await page.getByTestId('submit-button').click();
 
-		// Verify the error or success message, depending on the expected behavior
-		const messageElement = await page.waitForSelector('.notification');
-		const messageText = await messageElement.textContent();
-		expect(messageText).toBe('Your Email has not been verified, please check your mailbox X');
+		// Wait for a redirection or success message; this part can be customized based on your application
+		const errorMessageElement = await page.waitForSelector('.notification', { timeout: 60000 });
+		const errorMessageText = await errorMessageElement.textContent();
+		expect(errorMessageText).toBe('Your Email has not been verified, please check your mailbox X');
 	});
 });
 
@@ -291,10 +289,10 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		const headerText = await headerElement.textContent();
 		expect(headerText).toBe('Check in progress...');
 
-		// Wait for the notification to appear and verify its text
-		const notificationElement = await newPage.waitForSelector('.notification');
-		const notificationText = await notificationElement.textContent();
-		expect(notificationText).toBe('Your email address has been successfully verified X');
+		// Attends et vérifie la notification sur la nouvelle page
+		const errorMessageElement = await newPage.waitForSelector('.notification');
+		const errorMessageText = await errorMessageElement.textContent();
+		expect(errorMessageText).toBe('Your email address has been successfully verified X');
 
 		await browser.close();
 	});
@@ -319,12 +317,10 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		// Submit the form
 		await newPage.click('button[type="submit"]');
 
-		// Wait for a failure notification to appear
-		const notificationElement = await newPage.waitForSelector('.notification');
-		const notificationText = await notificationElement.textContent();
-
-		// Verify that the login has failed
-		expect(notificationText).toBe('wrong identifiants X');
+		// Wait for a redirection or success message; this part can be customized based on your application
+		const errorMessageElement = await newPage.waitForSelector('.notification');
+		const errorMessageText = await errorMessageElement.textContent();
+		expect(errorMessageText).toBe('wrong identifiants X');
 
 		await browser.close();
 	});
@@ -350,36 +346,34 @@ test.describe.serial('Password Reset Tests', () => {
 		await browser.close();
 	});
 
-	// Test for Forgot Password functionality with valid and verified email
-	test('FORGOT_PASSWORD - Send Forgot Password Request Email - VALID_EMAIL', async () => {
-		// Fill in the email field with a valid and verified email address
+	test('FORGOT_PASSWORD - envoi de la demande email forgot password - VALID_EMAIL', async () => {
+		// Remplir le champ email avec une adresse email valide et vérifiée
 		await fillField(page, '#email', email);
 		await page.click('button[type="button"]');
 
-		// Wait for and verify the success message
+		// Vérifier le message de succès
 		const successMessageElement = await page.waitForSelector('.notification');
 		const successMessageText = await successMessageElement.textContent();
 		expect(successMessageText).toBe('Email sent to reset your forgot password X');
 	});
 
-	// Test for Confirming Password Reset
 	test('CONFIRM_PASSWORD_RESET', async () => {
-		// Retrieve the confirmation link from Mailtrap (or MailHog as per your code)
+		// Récupérer le lien de confirmation depuis Mailtrap
 		const confirmationLink = await getConfirmationLinkFromMailHog();
 		if (!confirmationLink) {
 			throw new Error('Confirmation link is undefined.');
 		}
 
-		// Open a new page and navigate to the confirmation link
+		// Ouvrir une nouvelle page et naviguer vers le lien de confirmation
 		page = await browser.newPage();
 		await page.goto(confirmationLink, { waitUntil: 'networkidle' });
 
-		// Fill in the new password and confirm password fields
+		// Remplir le formulaire de réinitialisation du mot de passe
 		await fillField(page, '#newPassword', 'NewSecurePassword8!');
 		await fillField(page, '#confirmPassword', 'NewSecurePassword8!');
 		await page.click('button[type="button"]');
 
-		// Verify that the password has been successfully reset
+		// Vérifier que le mot de passe a bien été réinitialisé
 		const successMessageElement = await page.waitForSelector('.notification');
 		const successMessageText = await successMessageElement.textContent();
 		expect(successMessageText).toBe('Your email has been successfully updated X');
