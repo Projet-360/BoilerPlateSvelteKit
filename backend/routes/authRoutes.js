@@ -1,4 +1,7 @@
+// Import required modules and middleware
 import { Router } from 'express';
+
+// Initialize Express router
 const router = Router();
 
 import pkg from 'bcryptjs';
@@ -24,6 +27,7 @@ import { validateEmail } from '../validations/signupValidators.js';
 
 import CustomError from '../errors/CustomError.js';
 
+// Endpoint to check authentication status
 router.get('/check-auth', async (req, res, next) => {
 	const token = req.cookies.token;
 
@@ -52,6 +56,7 @@ router.get('/check-auth', async (req, res, next) => {
 	}
 });
 
+// Endpoint to handle user logout
 router.get('/logout', async (req, res, next) => {
 	try {
 		const token = req.cookies.token;
@@ -65,6 +70,7 @@ router.get('/logout', async (req, res, next) => {
 	}
 });
 
+// Endpoint to verify email
 router.get('/verify/:token', async (req, res) => {
 	try {
 		const { token } = req.params;
@@ -78,6 +84,7 @@ router.get('/verify/:token', async (req, res) => {
 	}
 });
 
+// Endpoint for user signup
 router.post('/signup', [signupValidators, handleValidationErrors], async (req, res, next) => {
 	try {
 		const { username, email, password } = req.body;
@@ -95,6 +102,7 @@ router.post('/signup', [signupValidators, handleValidationErrors], async (req, r
 	}
 });
 
+// Endpoint for user login with rate limiter
 router.post('/login', rateLimiter, async (req, res, next) => {
 	try {
 		const { email, password } = req.body;
@@ -109,6 +117,7 @@ router.post('/login', rateLimiter, async (req, res, next) => {
 	}
 });
 
+// Endpoint to request password reset
 router.post(
 	'/forgot-password',
 	validateEmail,
@@ -136,6 +145,7 @@ router.post(
 	}
 );
 
+// Endpoint to reset password using a token
 router.post('/forgot-password/:token', async (req, res) => {
 	const { token } = req.params;
 	const { newPassword } = req.body;
@@ -155,9 +165,11 @@ router.post('/forgot-password/:token', async (req, res) => {
 	res.status(HTTP_STATUS.OK).json({ message: 'Success', success: true });
 });
 
+// User dashboard accessible only for authenticated users with 'user' role
 router.get('/user/dashboard', isAuthenticated, checkRole('user'), (req, res) => {
 	// Logique réservée aux administrateurs
 	res.json({ message: 'Bienvenue sur le tableau de bord utilisateur' });
 });
 
+// Export the router
 export default router;

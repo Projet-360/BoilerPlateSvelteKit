@@ -1,17 +1,20 @@
+// Import required modules and constants
 import { check } from 'express-validator';
 import { ERRORS } from '../constants/errorMessages.js';
+
+// Validators for user signup
 export const signupValidators = [
-	// Nom d'utilisateur : non vide, longueur minimale et maximale
+	// Username: must not be empty, and should be within a minimum and maximum length
 	check('username')
 		.notEmpty()
 		.withMessage(ERRORS.USERNAME_REQUIRED)
 		.isLength({ min: 3, max: 20 })
 		.withMessage(ERRORS.VALID_USERNAME),
 
-	// Email : doit être un email valide
+	// Email: must be a valid email address
 	check('email').isEmail().withMessage(ERRORS.VALID_EMAIL),
 
-	// Mot de passe : longueur minimale, au moins une majuscule, une minuscule, un chiffre et un caractère spécial
+	// Password: minimum length, must contain at least one lowercase, one uppercase, one digit and one special character
 	check('password')
 		.isLength({ min: 8 })
 		.withMessage(ERRORS.NUMBE_CARAC_PASSWORD)
@@ -25,4 +28,5 @@ export const signupValidators = [
 		.withMessage(ERRORS.SPECIAL_CARAC_PASSWORD)
 ];
 
+// Validator for email validation
 export const validateEmail = [check('email').isEmail().withMessage(ERRORS.VALID_EMAIL)];

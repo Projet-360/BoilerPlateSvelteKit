@@ -1,24 +1,25 @@
+// Import required modules
 import jwt from 'jsonwebtoken';
 import config from '../config/config.js';
 
+// Middleware to check if the user is authenticated
 export const isAuthenticated = (req, res, next) => {
-	// Récupère le token depuis les headers
+	// Retrieve the token from the authorization header
 	const tokenHeader = req.headers['authorization'];
 	const token = tokenHeader.split(' ')[1];
 
-	// Vérifie si le token est présent
+	// Check if the token is present
 	if (!token) {
-		return res.status(401).json({ error: 'Non autorisé' });
+		return res.status(401).json({ error: 'Unauthorized' });
 	}
 
-	// Vérifie le token
+	// Verify the token
 	jwt.verify(token, config.SECRETKEY, (err, decoded) => {
-		// Remplace 'TON_SECRET' par ta propre clé secrète
 		if (err) {
-			return res.status(401).json({ error: 'Token invalide' });
+			return res.status(401).json({ error: 'Invalid token' });
 		}
 
-		// Stocke les données décodées pour les utiliser dans les autres middlewares ou routes
+		// Store the decoded data for use in other middlewares or routes
 		req.user = decoded;
 		next();
 	});

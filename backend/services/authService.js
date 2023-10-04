@@ -1,3 +1,4 @@
+// Import required modules and configurations
 import pkg from 'bcryptjs';
 const { hash, compare } = pkg;
 import jwt from 'jsonwebtoken';
@@ -14,15 +15,17 @@ import CustomError from '../errors/CustomError.js';
 
 import { sendVerificationEmail, sendResetPasswordEmail } from '../services/emailService.js';
 
-// Fonction pour générer un token de vérification
+// Function to generate a random token
 const generateToken = () => {
 	return crypto.randomBytes(32).toString('hex');
 };
 
+// Function to throw custom errors
 const throwError = (type, message, status) => {
 	throw new CustomError(type, message, status);
 };
 
+// Generate and save reset password token, then send the email
 const generateAndSaveResetToken = async (user) => {
 	const resetToken = generateToken();
 	user.resetToken = resetToken;
@@ -31,6 +34,7 @@ const generateAndSaveResetToken = async (user) => {
 	await sendResetPasswordEmail(user, resetToken);
 };
 
+// Create JWT token after user signup
 export const createSignupToken = ({ _id: userId, username, email, role }) => {
 	const token = jwt.sign({ userId, username, email, role }, config.SECRETKEY, {
 		expiresIn: config.TOKEN_EXPIRY
@@ -38,6 +42,7 @@ export const createSignupToken = ({ _id: userId, username, email, role }) => {
 	return { token };
 };
 
+// Create and save email verification token
 export const createVerificationToken = async (user) => {
 	const verificationToken = generateToken();
 	await sendVerificationEmail(user.email, verificationToken);
@@ -55,10 +60,12 @@ export const createVerificationToken = async (user) => {
 	return { verificationToken };
 };
 
+// Hash user password
 export const hashPassword = async (password) => {
 	return await hash(password, 12);
 };
 
+// Check if email already exists in the database
 export const checkEmailExists = async (email) => {
 	const existingUserByEmail = await User.findOne({ email });
 	if (existingUserByEmail) {
@@ -66,6 +73,7 @@ export const checkEmailExists = async (email) => {
 	}
 };
 
+// Create a new user in the database
 export const createUser = async (username, email, hashedPassword, role) => {
 	const newUser = new User({ username, email, password: hashedPassword, role });
 	console.log('New User:', newUser);
@@ -73,6 +81,7 @@ export const createUser = async (username, email, hashedPassword, role) => {
 	return newUser;
 };
 
+// Check if the user is authenticated
 export const checkAuthentication = async (token) => {
 	if (!token) {
 		console.log("Le client n'est pas connecté");
@@ -108,6 +117,7 @@ export const checkAuthentication = async (token) => {
 	};
 };
 
+// Handle user signup process
 export const signup = async (email) => {
 	try {
 		const tokenExpiry = config.TOKEN_EXPIRY;
@@ -140,6 +150,7 @@ export const signup = async (email) => {
 	}
 };
 
+// Handle user login process
 export const login = async (email, password) => {
 	// Trouver l'utilisateur par email
 	const user = await User.findOne({ email });
@@ -174,6 +185,7 @@ export const login = async (email, password) => {
 	return { token, userId: user._id, role: user.role };
 };
 
+// Verify email token
 export const verifyToken = async (token) => {
 	// Trouver le token dans la base de données
 	const verificationToken = await EmailVerificationToken.findOne({ token });
@@ -204,11 +216,13 @@ export const verifyToken = async (token) => {
 	return 'E-mail vérifié avec succès !';
 };
 
+// Handle forgot password request
 export const requestForgotPassword = async (user) => {
 	await generateAndSaveResetToken(user);
 	return { message: 'EMAIL_FORGOT_PASSWORD' };
 };
 
+// Reset the forgotten password
 export const requestresetForgotPassword = async (user, newPassword) => {
 	const hashedPassword = await hash(newPassword, 12);
 	user.password = hashedPassword;

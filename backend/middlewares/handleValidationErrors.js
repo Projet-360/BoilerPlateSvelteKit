@@ -1,17 +1,23 @@
-import { validationResult } from "express-validator";
-import { HTTP_STATUS } from "../constants/HTTP_STATUS.js";
-import CustomError from "../errors/CustomError.js"; // Assurez-vous que le chemin est correct
+import { validationResult } from 'express-validator';
+import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
+import CustomError from '../errors/CustomError.js';
 
+// Middleware function to handle validation errors
 export const handleValidationErrors = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    const errorMessages = errors.array().map((err) => err.msg);
-    const validationError = new CustomError(
-      "ValidationError",
-      errorMessages,
-      HTTP_STATUS.BAD_REQUEST,
-    );
-    return next(validationError);
-  }
-  next();
+	// Check for validation errors using express-validator
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		// If there are validation errors, extract error messages
+		const errorMessages = errors.array().map((err) => err.msg);
+		// Create a custom error object with the error messages and HTTP status code
+		const validationError = new CustomError(
+			'ValidationError',
+			errorMessages,
+			HTTP_STATUS.BAD_REQUEST
+		);
+		// Pass the validation error to the next middleware
+		return next(validationError);
+	}
+	// If there are no validation errors, proceed to the next middleware
+	next();
 };

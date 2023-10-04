@@ -1,4 +1,4 @@
-// Liste noire en mémoire (en production, utilisez une base de données)
+// Black list in memory (in production, use a database)
 const blacklistedTokens = [];
 
 export default blacklistedTokens;

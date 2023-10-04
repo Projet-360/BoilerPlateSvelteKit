@@ -1,12 +1,15 @@
-import mongoose from "mongoose";
+// Import required modules
+import mongoose from 'mongoose';
 
+// Define the email verification token schema
 const emailVerificationTokenSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "User" },
-  token: { type: String, required: true },
-  expireAt: { type: Date, required: true },
+	// Reference to User model
+	userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
+	// Token string, required
+	token: { type: String, required: true },
+	// Expiry date for the token, required
+	expireAt: { type: Date, required: true }
 });
 
-export default mongoose.model(
-  "EmailVerificationToken",
-  emailVerificationTokenSchema,
-);
+// Export the EmailVerificationToken model
+export default mongoose.model('EmailVerificationToken', emailVerificationTokenSchema);
