@@ -45,76 +45,84 @@ test.describe.parallel('Signup validation Tests', () => {
 		await browser.close();
 	});
 
-	test('LOGIN - username vide - USERNAME_REQUIRED', async () => {
+	// Test for empty username field, expecting a 'Username is required' message
+	test('LOGIN - empty username - USERNAME_REQUIRED', async () => {
 		await runSignupTest(page, '', 'newuser@example.com', 'Newpassword8,', 'Username is required X');
 	});
 
-	test('LOGIN - username invalide - VALID_USERNAME', async () => {
+	// Test for invalid username length, expecting a message indicating the username length requirements
+	test('LOGIN - invalid username - VALID_USERNAME', async () => {
 		await runSignupTest(
 			page,
-			'N',
+			'N', // Only one character, which is invalid
 			'newuser@example.com',
 			'Newpassword8,',
 			'Username must be between 3 and 20 characters X'
 		);
 	});
 
-	test('LOGIN - email non valide - VALID_EMAIL', async () => {
+	// Test for invalid email format, expecting a 'The email is not valid' message
+	test('LOGIN - invalid email - VALID_EMAIL', async () => {
 		await runSignupTest(
 			page,
 			'Name',
-			'newuserexample.com',
+			'newuserexample.com', // Invalid email format
 			'Newpassword8,',
 			'The email is not valid X'
 		);
 	});
 
-	test('LOGIN - le mot de passe doit avoir plus de 8 caractères - NUMBE_CARAC_PASSWORD', async () => {
+	// Test for short password length, expecting a message indicating the minimum password length
+	test('LOGIN - password too short - NUMBE_CARAC_PASSWORD', async () => {
 		await runSignupTest(
 			page,
 			'Name',
 			'newuser@example.com',
-			'Ne8,',
+			'Ne8,', // Short password
 			'The password must have at least 8 characters X'
 		);
 	});
 
-	test('LOGIN - le mot de passe doit avoir une minuscule - MIN_PASSWORD', async () => {
+	// Test for password lacking lowercase letters, expecting a message indicating this requirement
+	test('LOGIN - password missing lowercase - MIN_PASSWORD', async () => {
 		await runSignupTest(
 			page,
 			'Name',
 			'newuser@example.com',
-			'NQSEGQ558,',
+			'NQSEGQ558,', // No lowercase letters
 			'The password must contain at least one lowercase letter X'
 		);
 	});
 
-	test('LOGIN - le mot de passe doit avoir une majuscule - MAJ_PASSWORD', async () => {
+	// Test for password lacking uppercase letters, expecting a message indicating this requirement
+	test('LOGIN - password missing uppercase - MAJ_PASSWORD', async () => {
 		await runSignupTest(
 			page,
 			'Name',
 			'newuser@example.com',
-			'ewpasdrg8,',
+			'ewpasdrg8,', // No uppercase letters
 			'The password must contain at least one uppercase letter X'
 		);
 	});
 
-	test('LOGIN - le mot de passe doit avoir un chiffre - NUMBER_PASSWORD', async () => {
+	// Test for password lacking numbers, expecting a message indicating this requirement
+	test('LOGIN - password missing number - NUMBER_PASSWORD', async () => {
 		await runSignupTest(
 			page,
 			'Name',
 			'newuser@example.com',
-			'eNMasdrg,',
+			'eNMasdrg,', // No numbers
 			'The password must contain at least one number X'
 		);
 	});
 
-	test('LOGIN - le mot de passe doit avoir un caractère special - SPECIAL_CARAC_PASSWORD', async () => {
+	// Test for password lacking special characters, expecting a message indicating this requirement
+	test('LOGIN - password missing special character - SPECIAL_CARAC_PASSWORD', async () => {
 		await runSignupTest(
 			page,
 			'Name',
 			'newuser@example.com',
-			'ewDasdrg8',
+			'ewDasdrg8', // No special characters
 			'The password must contain at least one special character X'
 		);
 	});
@@ -172,23 +180,24 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		await browser.close();
 	});
 
-	test('LOGIN - Email pas encore vérifié - EMAIL_NOT_VERIFIED_LOGIN', async () => {
+	// Test for trying to login with an email that has not been verified yet
+	test('LOGIN - Email not yet verified - EMAIL_NOT_VERIFIED_LOGIN', async () => {
+		// Navigate to the login page
 		await page.goto('http://localhost:5173/login', { waitUntil: 'networkidle' });
 		const browser = await chromium.launch({ headless: false });
 
-		// Remplir les champs email et mot de passe
+		// Fill in the email and password fields
 		await fillField(page, '[data-testid="email-input"]', email);
-
 		await fillField(page, '[data-testid="password-input"]', password);
 
-		// Soumettre le formulaire
+		// Submit the form
 		await page.waitForSelector('[data-testid="submit-button"]:enabled');
 		await page.getByTestId('submit-button').click();
 
-		// Attendre une redirection ou un message de succès, à vous de personnaliser cette partie
+		// Wait for a redirection or success message; this part can be customized based on your application
 		const errorMessageElement = await page.waitForSelector('.notification');
 
-		// Vérification du message d'erreur
+		// Verify the error message
 		const errorMessageText = await errorMessageElement.textContent();
 		expect(errorMessageText).toBe('Your Email has not been verified, please check your mailbox X');
 
@@ -216,27 +225,31 @@ test.describe.serial('Password Reset Tests', () => {
 		await browser.close();
 	});
 
-	test('FORGOT-PASSWORD - Email inexistant - INVALID_EMAIL', async () => {
-		// Remplir le champ email avec une adresse email invalide
+	// Test for forgotten password functionality with an invalid email
+	test('FORGOT-PASSWORD - Non-existent Email - INVALID_EMAIL', async () => {
+		// Fill in the email field with an invalid email address
 		await fillField(page, '#email', 'invalidemail@example.com');
 
+		// Wait for the submit button to be enabled and click it
 		await page.waitForSelector('[data-testid="submit-button"]:enabled');
 		await page.getByTestId('submit-button').click();
 
-		// Vérifier le message d'erreur
+		// Verify the error message
 		const errorMessageElement = await page.waitForSelector('.notification');
 		const errorMessageText = await errorMessageElement.textContent();
 		expect(errorMessageText).toBe('User not found X');
 	});
 
-	test('FORGOT-PASSWORD - Email pas encore verifié - UNVERIFIED_EMAIL', async () => {
-		// Remplir le champ email avec une adresse email non vérifiée
+	// Test for forgotten password functionality with an unverified email
+	test('FORGOT-PASSWORD - Unverified Email - UNVERIFIED_EMAIL', async () => {
+		// Fill in the email field with an unverified email address
 		await fillField(page, '#email', email);
 
+		// Wait for the submit button to be enabled and click it
 		await page.waitForSelector('[data-testid="submit-button"]:enabled');
 		await page.getByTestId('submit-button').click();
 
-		// Vérifier le message d'erreur ou de succès, selon le comportement attendu
+		// Verify the error or success message, depending on the expected behavior
 		const messageElement = await page.waitForSelector('.notification');
 		const messageText = await messageElement.textContent();
 		expect(messageText).toBe('Your Email has not been verified, please check your mailbox X');
@@ -259,21 +272,26 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		await browser.close();
 	});
 
-	test('EMAIL - Confirmation par email - CONFIRM_EMAIL', async () => {
+	// Test for email confirmation functionality
+	test('EMAIL - Confirm via Email - CONFIRM_EMAIL', async () => {
 		const browser = await chromium.launch({ headless: false });
 		const newPage = await browser.newPage();
 
+		// Fetch the confirmation link from MailHog
 		const confirmationLink = await getConfirmationLinkFromMailHog();
 		if (!confirmationLink) {
 			throw new Error('Confirmation link is undefined.');
 		}
 
+		// Navigate to the confirmation link
 		await newPage.goto(confirmationLink);
 
+		// Wait for the header to appear and verify its text
 		const headerElement = await newPage.waitForSelector('h1');
 		const headerText = await headerElement.textContent();
 		expect(headerText).toBe('Verification en cours...');
 
+		// Wait for the notification to appear and verify its text
 		const notificationElement = await newPage.waitForSelector('.notification');
 		const notificationText = await notificationElement.textContent();
 		expect(notificationText).toBe('Votre adresse mail est bien validée X');
@@ -281,14 +299,15 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		await browser.close();
 	});
 
-	test('LOGIN - mauvais identifiants - LOGIN_FAILURE_PASSWORD', async () => {
+	// Test for login functionality with incorrect credentials
+	test('LOGIN - Wrong Credentials - LOGIN_FAILURE_PASSWORD', async () => {
 		const browser = await chromium.launch({ headless: false });
 		const newPage = await browser.newPage();
 
-		// Navigation vers la page de connexion
+		// Navigate to the login page
 		await newPage.goto('http://localhost:5173/login');
 
-		// Remplir les champs email et mot de passe avec des données incorrectes
+		// Fill in the email and password fields with incorrect data
 		await newPage.focus('[data-testid="email-input"]');
 		await newPage.keyboard.type(email);
 		await newPage.waitForTimeout(200);
@@ -297,14 +316,14 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		await newPage.keyboard.type('sdrg');
 		await newPage.waitForTimeout(200);
 
-		// Soumettre le formulaire
+		// Submit the form
 		await newPage.click('button[type="submit"]');
 
-		// Attendre une notification d'échec
+		// Wait for a failure notification to appear
 		const notificationElement = await newPage.waitForSelector('.notification');
 		const notificationText = await notificationElement.textContent();
 
-		// Vérifier que la connexion a échoué
+		// Verify that the login has failed
 		expect(notificationText).toBe('wrong identifiants X');
 
 		await browser.close();
@@ -331,34 +350,36 @@ test.describe.serial('Password Reset Tests', () => {
 		await browser.close();
 	});
 
-	test('FORGOT_PASSWORD - envoi de la demande email forgot password - VALID_EMAIL', async () => {
-		// Remplir le champ email avec une adresse email valide et vérifiée
+	// Test for Forgot Password functionality with valid and verified email
+	test('FORGOT_PASSWORD - Send Forgot Password Request Email - VALID_EMAIL', async () => {
+		// Fill in the email field with a valid and verified email address
 		await fillField(page, '#email', email);
 		await page.click('button[type="button"]');
 
-		// Vérifier le message de succès
+		// Wait for and verify the success message
 		const successMessageElement = await page.waitForSelector('.notification');
 		const successMessageText = await successMessageElement.textContent();
 		expect(successMessageText).toBe('Email sent to reset your forgot password X');
 	});
 
+	// Test for Confirming Password Reset
 	test('CONFIRM_PASSWORD_RESET', async () => {
-		// Récupérer le lien de confirmation depuis Mailtrap
+		// Retrieve the confirmation link from Mailtrap (or MailHog as per your code)
 		const confirmationLink = await getConfirmationLinkFromMailHog();
 		if (!confirmationLink) {
 			throw new Error('Confirmation link is undefined.');
 		}
 
-		// Ouvrir une nouvelle page et naviguer vers le lien de confirmation
+		// Open a new page and navigate to the confirmation link
 		page = await browser.newPage();
 		await page.goto(confirmationLink, { waitUntil: 'networkidle' });
 
-		// Remplir le formulaire de réinitialisation du mot de passe
+		// Fill in the new password and confirm password fields
 		await fillField(page, '#newPassword', 'NewSecurePassword8!');
 		await fillField(page, '#confirmPassword', 'NewSecurePassword8!');
 		await page.click('button[type="button"]');
 
-		// Vérifier que le mot de passe a bien été réinitialisé
+		// Verify that the password has been successfully reset
 		const successMessageElement = await page.waitForSelector('.notification');
 		const successMessageText = await successMessageElement.textContent();
 		expect(successMessageText).toBe('Your email has been successfully updated X');

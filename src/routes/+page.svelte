@@ -57,21 +57,28 @@
 
 <Splide options={splideOptions} extensions={{ AutoScroll }} aria-label="My Favorite Images">
 	<SplideSlide>
-		<img src={github} alt="Image 1" style="height: 50px;" />
+		<img src={github} alt="Logo GitHub" class="imgcarousel" />
 	</SplideSlide>
 	<SplideSlide>
-		<img src={github} alt="Image 1" style="height: 50px;" />
+		<img src={github} alt="Logo GitHub" class="imgcarousel" />
 	</SplideSlide>
 	<SplideSlide>
-		<img src={github} alt="Image 1" style="height: 50px;" />
+		<img src={github} alt="Logo GitHub" class="imgcarousel" />
 	</SplideSlide>
 	<SplideSlide>
-		<img src={github} alt="Image 1" style="height: 50px;" />
+		<img src={github} alt="Logo GitHub" class="imgcarousel" />
 	</SplideSlide>
 	<SplideSlide>
-		<img src={github} alt="Image 1" style="height: 50px;" />
+		<img src={github} alt="Logo GitHub" class="imgcarousel" />
 	</SplideSlide>
 	<SplideSlide>
-		<img src={github} alt="Image 1" style="height: 50px;" />
+		<img src={github} alt="Logo GitHub" class="imgcarousel" />
 	</SplideSlide>
 </Splide>
+
+<style>
+	.imgcarousel {
+		height: 50px;
+		width: auto;
+	}
+</style>
