@@ -2,7 +2,7 @@
   "name": "boilersvelte",
   "version": "0.0.1",
   "scripts": {
-     "dev": "concurrently \"cd ./backend && npm run dev\" \"vite dev\" \"npm run prettier:watch\" \"start cmd.exe /K start-mailhog.bat\"",
+    "dev": "concurrently \"cd ./backend && npm run dev\" \"vite dev\" \"npm run prettier:watch\" \"start cmd.exe /K start-mailhog.bat\"",
     "prettier:watch": "chokidar '**/*.js' '**/*.svelte' '**/*.css' --command 'npm run prettier -- {path}'",
     "build": "vite build",
     "preview": "vite preview",
@@ -35,6 +35,8 @@
   },
   "type": "module",
   "dependencies": {
+    "@splidejs/splide-extension-auto-scroll": "^0.5.3",
+    "@splidejs/svelte-splide": "^0.2.9",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
     "express-validator": "^7.0.1",

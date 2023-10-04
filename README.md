@@ -93,6 +93,32 @@ Headers de sécurité: Utilisez des en-têtes HTTP pour sécuriser votre applica
 Exemples en Node.js
 Helmet pour sécuriser les en-têtes HTTP:
 
+
+Suggestions de tests supplémentaires :
+Authentification
+Vérification des taux limites (rate limiting) : s'assurer que l'utilisateur est bloqué après un certain nombre de tentatives infructueuses.
+Test du deuxième facteur d'authentification si vous en avez un (2FA).
+Vérifier que les tokens JWT (si utilisés) expirent correctement.
+Validation des données
+Tests de fuzzing : essayer avec des entrées aléatoires ou malveillantes pour voir si votre application peut être exploitée.
+Tests pour s'assurer que les scripts HTML/JS (si injectés) sont correctement échappés pour éviter les attaques XSS.
+État de l'application
+Tester avec des cookies désactivés.
+Tester avec Javascript désactivé (selon l'importance de cette catégorie d'utilisateurs pour votre application).
+Tests de performance
+Tester le temps de réponse de l'API (doit être en dessous d'un certain seuil).
+Workflow
+Tester le workflow entier de l'inscription à l'utilisation réelle du compte pour s'assurer que tout est fluide.
+Tests sur des dispositifs différents
+Mobile, tablette, desktop.
+Tests de localisation et d'internationalisation
+Si votre application est en plusieurs langues, assurez-vous que le changement de langue fonctionne correctement, et que les validations aussi sont traduites.
+Bonnes pratiques
+Utilisez des assertions significatives. Assurez-vous que le texte d'erreur est correct, par exemple.
+Évitez les "magic numbers" dans votre code de test. Si un test échoue après 27,2s, pourquoi ce nombre ? Est-ce documenté quelque part ?
+Le temps d'exécution de certains de vos tests semble un peu élevé. Vous devriez chercher à les optimiser pour des cycles de développement plus rapides.
+N'hésitez pas à me poser des questions supplémentaires ou à clarifier vos besoins. La qualité du code et des pratiques sont des choses qui me tiennent à cœur.
+
 javascript
 Copy code
 const helmet = require('helmet');
@@ -171,3 +197,50 @@ Mauvais identifiants:
     ADMIN GERANT ROLE
     ROUTE MINIMUM PARAMETRABLE SOUHAIT
     JOURNALISATION ID SECU
+
+
+
+
+
+Boiler Plate NodeJs, Sveltekit
+
+Introduction
+Salut tout le monde ! Je suis ravi de vous présenter mon boiler plate, un projet conçu pour vous aider à démarrer rapidement avec SvelteKit et Node.js. Ce boilerplate est particulièrement axé sur le développement créatif. Il commence à être assez complet et donc je pense qu'il vous demandera une approche plus importante qu'un sujet lambda.
+
+Pourquoi je fais ca ?
+Ce projet peut vous servir a vous aussi, nous pouvons l'ameliorer ensemble et le rendre plus robuste et clair.
+
+Installation:
+-Installer docker et instancier une base Mongo
+-Les variables d'environnements sont pour l'instant une constante afin de vous eviter de le configurer
+-Mailhog s'occupe de simuler les mail de confirmations, un terminal s'ouvrira quand vous démarrerai le projet afin de pouvoir le consulter. Je travaille sur windows, si vous avez un mac vous devrez changer l'executer pour celui-ci
+
+Caractéristiques Principales
+SvelteKit-> UITools: 
+Cursor : un curseur personnalisable avec du polymorphisme.
+Darkmode : un darkmode qui vous permettra de changer votre style.
+Notifications : un module notifications pour les retours du serveur.
+PageTransition : Les pages transitions natif a sveltekit.
+Preloader: chargement de page à l'entrée de l'application.
+ServiceWorker: PWA disponible.
+SmoothScroller: Scroll a transition douces.
+Translations: Traduction disponible sur l'application.
+
+ThreeJs: Une insertions vanilla de ThreeJS
+
+scss avec architecture 7-1
+
+Mongo:
+SignUp
+Login
+resetPassword
+
+Role disponible
+RateLimiter
+MailConfirmation
+
+Test Playwright:
+test validation et création de compte
+
+J'espère avoir tout afin que vous n'ayez pas de problemes en cours de route.
+J'attends votre retour avec impatience.
