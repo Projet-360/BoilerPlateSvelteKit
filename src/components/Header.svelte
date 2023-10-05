@@ -51,6 +51,7 @@
 	</nav>
 
 	<div class="left-side">
+		<label for="localeSelect">{$t('general.language')}</label>
 		<select id="localeSelect" name="locale" bind:value={$locale} on:change={handleChange}>
 			{#each $locales as value}
 				<option {value}>{$t(`lang.${value}`)}</option>

@@ -46,28 +46,21 @@
 
 <Splide options={splideOptions} extensions={{ AutoScroll }} aria-label="My Favorite Images">
 	<SplideSlide>
-		<img src={github} alt="Logo GitHub" class="imgcarousel" />
+		<img src={github} alt="Logo GitHub" class="imgcarousel" width="50" height="50" />
 	</SplideSlide>
 	<SplideSlide>
-		<img src={github} alt="Logo GitHub" class="imgcarousel" />
+		<img src={github} alt="Logo GitHub" class="imgcarousel" width="50" height="50" />
 	</SplideSlide>
 	<SplideSlide>
-		<img src={github} alt="Logo GitHub" class="imgcarousel" />
+		<img src={github} alt="Logo GitHub" class="imgcarousel" width="50" height="50" />
 	</SplideSlide>
 	<SplideSlide>
-		<img src={github} alt="Logo GitHub" class="imgcarousel" />
+		<img src={github} alt="Logo GitHub" class="imgcarousel" width="50" height="50" />
 	</SplideSlide>
 	<SplideSlide>
-		<img src={github} alt="Logo GitHub" class="imgcarousel" />
+		<img src={github} alt="Logo GitHub" class="imgcarousel" width="50" height="50" />
 	</SplideSlide>
 	<SplideSlide>
-		<img src={github} alt="Logo GitHub" class="imgcarousel" />
+		<img src={github} alt="Logo GitHub" class="imgcarousel" width="50" height="50" />
 	</SplideSlide>
 </Splide>
-
-<style>
-	.imgcarousel {
-		height: 50px;
-		width: auto;
-	}
-</style>
