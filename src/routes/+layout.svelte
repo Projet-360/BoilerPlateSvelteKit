@@ -13,45 +13,33 @@
 	import SmoothScroller from '$UITools/SmoothScroller/index.svelte';
 	import App from '$lib/js/index';
 	import NotificationWrapper from '$UITools/Notifications/NotificationWrapper.svelte';
-
-	import { authStore } from '$stores/authStore';
+	import { handleRouteBasedOnAuth } from './handleRouteBasedOnAuth.js';
+	import { initializeAuthStore } from '$stores/authStore';
 
 	export let data;
 
 	let isStoreInitialized = false;
 	let unsubscribe;
 
-	const initializeStore = new Promise((resolve) => {
-		console.log('jkkljlkjl');
-		unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {
-			if (isAuthenticated !== null && token !== null) {
-				isStoreInitialized = true;
-				resolve();
-				if (unsubscribe) {
-					unsubscribe();
-				}
-			}
-		});
-	});
-
-	$: if (isStoreInitialized) {
-		const { isAuthenticated } = $authStore;
-		const isUserPage = data.route === '/user';
-
-		if (isUserPage && isAuthenticated === false && browser) {
-			goto('/login');
-		}
-	}
-
 	onMount(async () => {
 		new App();
 		registerServiceWorker();
 		await checkAuth();
+		const initStore = initializeAuthStore();
+		await initStore.promise;
+		unsubscribe = initStore.unsubscribe;
+		isStoreInitialized = true;
 	});
 
 	onDestroy(() => {
-		unsubscribe();
+		if (unsubscribe) {
+			unsubscribe();
+		}
 	});
+
+	$: if (isStoreInitialized) {
+		handleRouteBasedOnAuth(data);
+	}
 </script>
 
 <svelte:head>

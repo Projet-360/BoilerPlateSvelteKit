@@ -7,18 +7,19 @@ export const authStore = writable({
 	isAuthenticated: false
 });
 
-export const initializeAuthStore = () => {
-	let unsubscribe = null;
-
-	return new Promise((resolve) => {
-		unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {
-			if (isAuthenticated !== null && token !== null) {
-				resolve(() => {
+export function initializeAuthStore() {
+	let unsubscribe;
+	return {
+		promise: new Promise((resolve) => {
+			unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {
+				if (isAuthenticated !== null && token !== null) {
+					resolve();
 					if (unsubscribe) {
 						unsubscribe();
 					}
-				});
-			}
-		});
-	});
-};
+				}
+			});
+		}),
+		unsubscribe
+	};
+}
