@@ -1,7 +1,7 @@
 <script>
 	import { signup } from '$api/auth';
 	import { signupValidation } from '$api/message/signup';
-	import { t } from '$UITools/translations/index';
+	import { t } from '$UITools/Translations/index';
 
 	let username = '';
 	let email = '';

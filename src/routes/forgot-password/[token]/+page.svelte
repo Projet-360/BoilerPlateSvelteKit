@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { t } from '$UITools/translations/index';
+	import { t } from '$UITools/Translations/index';
 
 	import { ResetForgotNewPassword } from '$api/auth';
 	import notificationStore from '$stores/notificationStore';

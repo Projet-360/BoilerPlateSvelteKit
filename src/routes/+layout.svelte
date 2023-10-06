@@ -1,23 +1,20 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
-	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
 
 	import { checkAuth } from '$api/auth';
-	import { registerServiceWorker } from '$UITools/serviceWorker';
+	import { authStore, initializeAuthStore } from '$stores/authStore';
 
-	import { t } from '$UITools/translations/index';
+	import { checkUserAccessAndRedirect } from './authAccess';
 
-	import Header from '$components/Header.svelte';
+	import { registerServiceWorker } from '$UITools/ServiceWorker';
 	import PageTransition from '$UITools/PageTransition/index.svelte';
+	import SmoothScroller from '$UITools/SmoothScroller/index.svelte';
 	import Cursor from '$UITools/Cursor/index.svelte';
 	import Preloader from '$UITools/Preloader/index.svelte';
-	import SmoothScroller from '$UITools/SmoothScroller/index.svelte';
-	import App from '$lib/js/index';
-	import Notification from '$UITools/notifications/Notification.svelte';
-	import notificationStore from '$stores/notificationStore';
+	import NotificationWrapper from '$UITools/Notifications/NotificationWrapper.svelte';
 
-	import { authStore } from '$stores/authStore';
+	import Header from '$components/Header.svelte';
+	import App from '$lib/js/index';
 
 	export let data;
 
@@ -25,42 +22,31 @@
 	let notificationShown = false;
 	let unsubscribe;
 
-	const initializeStore = new Promise((resolve) => {
-		unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {
-			if (isAuthenticated !== null && token !== null) {
-				isStoreInitialized = true;
-				resolve();
-				if (unsubscribe) {
-					unsubscribe();
-				}
-			}
-		});
-	});
-
-	$: if (isStoreInitialized && !notificationShown) {
-		// Ajoutez la condition !notificationShown
-		const { isAuthenticated } = $authStore;
-		const isUserPage = data.route === '/user';
-
-		if (isUserPage && isAuthenticated === false && browser) {
-			goto('/login');
-			notificationStore.addNotification($t('validation.ACCESS_DENIED'), 'error');
-			notificationShown = true; // Mettez cette variable à true après avoir affiché la notification
-		}
-	}
-
-	onMount(() => {
-		new App();
-		registerServiceWorker();
-	});
-
 	onMount(async () => {
-		await checkAuth();
+		try {
+			new App();
+			registerServiceWorker();
+			await checkAuth();
+			unsubscribe = await initializeAuthStore();
+			isStoreInitialized = true;
+		} catch (error) {
+			console.error("Erreur lors de l'initialisation :", error);
+		}
 	});
 
 	onDestroy(() => {
-		unsubscribe();
+		if (unsubscribe) {
+			unsubscribe();
+		}
 	});
+
+	$: if (isStoreInitialized) {
+		({ notificationShown } = checkUserAccessAndRedirect(
+			data,
+			$authStore.isAuthenticated,
+			notificationShown
+		));
+	}
 </script>
 
 <svelte:head>
@@ -73,11 +59,7 @@
 <Preloader />
 <Cursor />
 
-<div class="notification-wrapper">
-	{#each $notificationStore as { id, message, type }}
-		<Notification {message} {type} />
-	{/each}
-</div>
+<NotificationWrapper />
 
 <Header />
 

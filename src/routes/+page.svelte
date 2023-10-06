@@ -1,6 +1,6 @@
 <script>
 	import { hoverable } from '$UITools/Cursor/cursorHelpers';
-	import { t } from '$UITools/translations/index';
+	import { t } from '$UITools/Translations/index';
 	import Box from '$three/Box.svelte';
 
 	import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';

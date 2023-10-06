@@ -3,7 +3,7 @@
 
 	import { resetPassword } from '$api/auth';
 
-	import { t } from '$UITools/translations/index';
+	import { t } from '$UITools/Translations/index';
 	import notificationStore from '$stores/notificationStore';
 
 	let email = '';

@@ -4,7 +4,7 @@
 	import { authStore } from '$stores/authStore.js';
 	import { goto } from '$app/navigation';
 	import { getDashboardData } from '$api/auth.js';
-	import { t } from '$UITools/translations/index';
+	import { t } from '$UITools/Translations/index';
 
 	let userData;
 	let unsubscribe;

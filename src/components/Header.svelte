@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import DarkMode from '$UITools/DarkMode/index.svelte';
-	import { t, locale, locales } from '$UITools/translations/index';
+	import { t, locale, locales } from '$UITools/Translations/index';
 
 	import { authStore } from '$stores/authStore';
 	import Logout from '$components/Logout.svelte';

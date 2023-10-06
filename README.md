@@ -182,26 +182,6 @@ Mauvais identifiants:
 
 
 
-    #FAIT
-    SIGNUP
-    LOGIN
-    FORGOT-PASSWORD
-
-    RATE-LIMITER
-    TEST PLAYWRIGHT
-
-
-    #A FAIRE
-    GESTION INFORMATION PROFIL
-    CONNECTION AVEC GOOGLE AU RESEAUX SOCIAUX
-    ADMIN GERANT ROLE
-    ROUTE MINIMUM PARAMETRABLE SOUHAIT
-    JOURNALISATION ID SECU
-
-
-
-
-
 Boiler Plate NodeJs, Sveltekit
 
 Introduction
@@ -244,3 +224,14 @@ test validation et création de compte
 
 J'espère avoir tout afin que vous n'ayez pas de problemes en cours de route.
 J'attends votre retour avec impatience.
+
+
+
+
+    #A FAIRE
+    GESTION INFORMATION PROFIL
+    CONNECTION AVEC GOOGLE AU RESEAUX SOCIAUX
+    ADMIN GERANT ROLE
+    ROUTE MINIMUM PARAMETRABLE SOUHAIT
+    JOURNALISATION ID SECU
+    

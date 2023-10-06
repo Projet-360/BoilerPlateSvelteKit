@@ -1,5 +1,5 @@
 <script>
-	import { t } from '$UITools/translations/index.js';
+	import { t } from '$UITools/Translations/index.js';
 </script>
 
 <svelte:head>

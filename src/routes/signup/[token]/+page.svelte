@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte'; // Run code when the component is mounted
 	import notificationStore from '$stores/notificationStore'; // Access to a notification store
 	import { BD } from '$lib/constants'; // Import constants
-	import { t } from '$UITools/translations/index';
+	import { t } from '$UITools/Translations/index';
 
 	let token; // Declare a variable to store the token from the URL parameters
 
