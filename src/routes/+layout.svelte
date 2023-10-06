@@ -1,52 +1,57 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
 
 	import { checkAuth } from '$api/auth';
-	import { authStore, initializeAuthStore } from '$stores/authStore';
-
-	import { checkUserAccessAndRedirect } from './authAccess';
-
-	import { registerServiceWorker } from '$UITools/ServiceWorker';
-	import PageTransition from '$UITools/PageTransition/index.svelte';
-	import SmoothScroller from '$UITools/SmoothScroller/index.svelte';
-	import Cursor from '$UITools/Cursor/index.svelte';
-	import Preloader from '$UITools/Preloader/index.svelte';
-	import NotificationWrapper from '$UITools/Notifications/NotificationWrapper.svelte';
+	import { registerServiceWorker } from '$UITools/serviceWorker';
 
 	import Header from '$components/Header.svelte';
+	import PageTransition from '$UITools/PageTransition/index.svelte';
+	import Cursor from '$UITools/Cursor/index.svelte';
+	import Preloader from '$UITools/Preloader/index.svelte';
+	import SmoothScroller from '$UITools/SmoothScroller/index.svelte';
 	import App from '$lib/js/index';
+	import NotificationWrapper from '$UITools/Notifications/NotificationWrapper.svelte';
+
+	import { authStore } from '$stores/authStore';
 
 	export let data;
 
 	let isStoreInitialized = false;
-	let notificationShown = false;
 	let unsubscribe;
 
-	onMount(async () => {
-		try {
-			new App();
-			registerServiceWorker();
-			await checkAuth();
-			unsubscribe = await initializeAuthStore();
-			isStoreInitialized = true;
-		} catch (error) {
-			console.error("Erreur lors de l'initialisation :", error);
-		}
-	});
-
-	onDestroy(() => {
-		if (unsubscribe) {
-			unsubscribe();
-		}
+	const initializeStore = new Promise((resolve) => {
+		console.log('jkkljlkjl');
+		unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {
+			if (isAuthenticated !== null && token !== null) {
+				isStoreInitialized = true;
+				resolve();
+				if (unsubscribe) {
+					unsubscribe();
+				}
+			}
+		});
 	});
 
 	$: if (isStoreInitialized) {
-		({ notificationShown } = checkUserAccessAndRedirect(
-			data,
-			$authStore.isAuthenticated,
-			notificationShown
-		));
+		const { isAuthenticated } = $authStore;
+		const isUserPage = data.route === '/user';
+
+		if (isUserPage && isAuthenticated === false && browser) {
+			goto('/login');
+		}
 	}
+
+	onMount(async () => {
+		new App();
+		registerServiceWorker();
+		await checkAuth();
+	});
+
+	onDestroy(() => {
+		unsubscribe();
+	});
 </script>
 
 <svelte:head>
@@ -60,7 +65,6 @@
 <Cursor />
 
 <NotificationWrapper />
-
 <Header />
 
 <SmoothScroller>

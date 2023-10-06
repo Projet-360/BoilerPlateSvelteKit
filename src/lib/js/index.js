@@ -1,3 +1,5 @@
 export default class App {
-  constructor() {}
+	constructor() {
+		console.log('jkj');
+	}
 }

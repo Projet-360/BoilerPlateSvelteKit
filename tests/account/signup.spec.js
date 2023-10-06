@@ -336,6 +336,11 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		// Cliquer sur le bouton
 		await newPage.click('[data-testid="button-logout"]');
 
+		// Wait for a redirection or success message; this part can be customized based on your application
+		const errorMessageElement = await newPage.waitForSelector('.notification', { timeout: 60000 });
+		const errorMessageText = await errorMessageElement.textContent();
+		expect(errorMessageText).toBe('Goodbye! X');
+
 		await browser.close();
 	});
 });
