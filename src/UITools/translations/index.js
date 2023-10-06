@@ -36,6 +36,11 @@ export const config = {
 		},
 		{
 			locale: 'en',
+			key: 'logout',
+			loader: async () => (await import('./en/logout.json')).default
+		},
+		{
+			locale: 'en',
 			key: 'signup',
 			loader: async () => (await import('./en/signup.json')).default
 		},
@@ -78,6 +83,11 @@ export const config = {
 			locale: 'fr',
 			key: 'login',
 			loader: async () => (await import('./fr/login.json')).default
+		},
+		{
+			locale: 'fr',
+			key: 'logout',
+			loader: async () => (await import('./fr/logout.json')).default
 		},
 		{
 			locale: 'fr',

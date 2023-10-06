@@ -1,7 +1,7 @@
 import { test, chromium, expect } from '@playwright/test';
 import dotenv from 'dotenv';
 dotenv.config();
-
+import { runLoginTest } from './func/runLoginTest.js';
 import { getConfirmationLinkFromMailHog } from './func/getConfirmationLinkFromMailHog.js';
 import { fillField } from '../components/fillField.js';
 import { runSignupTest } from './func/runSignupTest.js';
@@ -11,9 +11,21 @@ import {
 	generateRandomPassword
 } from '../utils/functionUtils.js';
 
-const username = generateRandomUsername();
-const email = generateRandomEmail();
-const password = generateRandomPassword();
+let username, email, password;
+
+function initializeConstants() {
+	if (!username) {
+		username = generateRandomUsername();
+	}
+	if (!email) {
+		email = generateRandomEmail();
+	}
+	if (!password) {
+		password = generateRandomPassword();
+	}
+}
+
+initializeConstants();
 
 let browser;
 
@@ -146,7 +158,9 @@ test.describe.serial('Signup Tests', () => {
 	test('SIGNUP - inscription avec succés - SUCCESS_INSCRIPTION', async () => {
 		page = await browser.newPage();
 		await page.goto('http://localhost:5173/signup', { waitUntil: 'networkidle' });
-
+		console.log(username);
+		console.log(email);
+		console.log(password);
 		await runSignupTest(
 			page,
 			username,
@@ -186,18 +200,12 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		await page.goto('http://localhost:5173/login', { waitUntil: 'networkidle' });
 		const browser = await chromium.launch({ headless: false });
 
-		// Fill in the email and password fields
-		await fillField(page, '[data-testid="email-input"]', email);
-		await fillField(page, '[data-testid="password-input"]', password);
-
-		// Submit the form
-		await page.waitForSelector('[data-testid="submit-button"]:enabled');
-		await page.getByTestId('submit-button').click();
-
-		// Wait for a redirection or success message; this part can be customized based on your application
-		const errorMessageElement = await page.waitForSelector('.notification', { timeout: 60000 });
-		const errorMessageText = await errorMessageElement.textContent();
-		expect(errorMessageText).toBe('Your Email has not been verified, please check your mailbox X');
+		await runLoginTest(
+			page,
+			email,
+			password,
+			'Your Email has not been verified, please check your mailbox X'
+		);
 
 		await browser.close();
 	});
@@ -303,24 +311,30 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		const newPage = await browser.newPage();
 
 		// Navigate to the login page
-		await newPage.goto('http://localhost:5173/login');
+		await newPage.goto('http://localhost:5173/login', { waitUntil: 'networkidle' });
 
-		// Fill in the email and password fields with incorrect data
-		await newPage.focus('[data-testid="email-input"]');
-		await newPage.keyboard.type(email);
-		await newPage.waitForTimeout(200);
+		await runLoginTest(newPage, email, 'sdrg', 'wrong identifiants X');
 
-		await newPage.focus('[data-testid="password-input"]');
-		await newPage.keyboard.type('sdrg');
-		await newPage.waitForTimeout(200);
+		await browser.close();
+	});
 
-		// Submit the form
-		await newPage.click('button[type="submit"]');
+	// Test login functionality with correct credentials
+	test('LOGIN - Login successful and logout - LOGIN_VALIDE_AND_LOGOUT', async () => {
+		const browser = await chromium.launch({ headless: false });
+		const newPage = await browser.newPage();
 
-		// Wait for a redirection or success message; this part can be customized based on your application
-		const errorMessageElement = await newPage.waitForSelector('.notification');
-		const errorMessageText = await errorMessageElement.textContent();
-		expect(errorMessageText).toBe('wrong identifiants X');
+		// Navigate to the login page
+		await newPage.goto('http://localhost:5173/login', { waitUntil: 'networkidle' });
+
+		await runLoginTest(newPage, email, password, 'Welcome ! X');
+
+		await newPage.click('[data-testid="button-close-notification"]');
+
+		// Attendre que le bouton soit visible
+		await newPage.waitForSelector('[data-testid="button-logout"]', { state: 'visible' });
+
+		// Cliquer sur le bouton
+		await newPage.click('[data-testid="button-logout"]');
 
 		await browser.close();
 	});

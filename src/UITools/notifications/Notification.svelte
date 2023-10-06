@@ -16,7 +16,7 @@
 		const timer = setTimeout(() => {
 			isVisible = false;
 			dispatch('dismiss'); // Émettre l'événement personnalisé lors de la fermeture
-		}, 200000);
+		}, 5000);
 
 		// Nettoyage : annuler le timer si le composant est détruit
 		return () => clearTimeout(timer);
@@ -32,7 +32,13 @@
 {#if isVisible}
 	<div class={`notification ${type}`} aria-live="assertive">
 		<span>{message}</span>
-		<button on:click={closeNotification} aria-label="Fermer la notification"> X </button>
+		<button
+			data-testid="button-close-notification"
+			on:click={closeNotification}
+			aria-label="Fermer la notification"
+		>
+			X
+		</button>
 	</div>
 {/if}
 
