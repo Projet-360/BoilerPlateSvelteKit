@@ -18,7 +18,6 @@ import User from '../models/UserModel.js';
 import BlacklistedToken from '../models/BlacklistedTokenModel.js';
 
 import * as authService from '../services/authService.js';
-import { setAuthCookie } from '../services/setAuthCookie.js';
 import logger from '../services/logger.js';
 import { rateLimiter } from '../services/rateLimiter.js';
 
@@ -33,7 +32,6 @@ router.get('/check-auth', async (req, res, next) => {
 
 	try {
 		const result = await authService.checkAuthentication(token);
-		console.log(result);
 		if (result.isAuthenticated) {
 			res.status(HTTP_STATUS.OK).json({
 				isAuthenticated: true,
@@ -108,7 +106,7 @@ router.post('/login', rateLimiter, async (req, res, next) => {
 		const { email, password } = req.body;
 		const { token, userId, role } = await authService.login(email, password);
 		// Définir le cookie
-		setAuthCookie(res, token);
+		authService.setAuthCookie(res, token);
 
 		res.status(HTTP_STATUS.OK).json({ token, userId, role });
 	} catch (error) {
@@ -166,9 +164,15 @@ router.post('/forgot-password/:token', async (req, res) => {
 });
 
 // User dashboard accessible only for authenticated users with 'user' role
-router.get('/user/dashboard', isAuthenticated, checkRole('user'), (req, res) => {
-	// Logique réservée aux administrateurs
-	res.json({ message: 'Bienvenue sur le tableau de bord utilisateur' });
+router.get('/user/dashboard', isAuthenticated, checkRole('user'), async (req, res) => {
+	const { userId } = req.user;
+	try {
+		const userInfo = await authService.getUserInfo(userId);
+		res.json({ userInfo });
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ message: err.message });
+	}
 });
 
 // Export the router

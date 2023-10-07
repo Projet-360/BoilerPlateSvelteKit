@@ -124,7 +124,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\routes\+layout.server.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\+layout.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\+page.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\+page.svelte
-C:\wamp64\www\BoilerPlateSvelteKit\src\routes\authAccess.js
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\handleRouteBasedOnAuth.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\stores
 C:\wamp64\www\BoilerPlateSvelteKit\src\stores\authStore.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\stores\cursorStore.js
@@ -161,6 +161,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\en\forgot-password.j
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\en\general.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\en\home.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\en\login.json
+C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\en\logout.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\en\signup.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\en\user.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\en\validation.json
@@ -171,6 +172,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\fr\forgot-password.j
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\fr\general.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\fr\home.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\fr\login.json
+C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\fr\logout.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\fr\signup.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\fr\user.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\fr\validation.json
@@ -194,6 +196,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\tests
 C:\wamp64\www\BoilerPlateSvelteKit\tests\account
 C:\wamp64\www\BoilerPlateSvelteKit\tests\account\func
 C:\wamp64\www\BoilerPlateSvelteKit\tests\account\func\getConfirmationLinkFromMailHog.js
+C:\wamp64\www\BoilerPlateSvelteKit\tests\account\func\runLoginTest.js
 C:\wamp64\www\BoilerPlateSvelteKit\tests\account\func\runSignupTest.js
 C:\wamp64\www\BoilerPlateSvelteKit\tests\account\signup.spec.js
 C:\wamp64\www\BoilerPlateSvelteKit\tests\components

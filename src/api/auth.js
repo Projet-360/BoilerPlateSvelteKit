@@ -143,3 +143,23 @@ export async function getDashboardData(token) {
 		throw error;
 	}
 }
+
+export async function updateUser(token, updates) {
+	const headers = new Headers();
+	headers.append('Authorization', `Bearer ${token}`);
+	headers.append('Content-Type', 'application/json');
+
+	try {
+		const data = await apiCall({
+			url: `${BD}/auth/user/update`,
+			method: 'PUT',
+			headers,
+			body: JSON.stringify(updates)
+		});
+
+		return data;
+	} catch (error) {
+		console.error('Erreur lors de la mise à jour des données utilisateur:', error);
+		throw error;
+	}
+}

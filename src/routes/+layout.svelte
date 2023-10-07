@@ -1,7 +1,5 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
-	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
 
 	import { checkAuth } from '$api/auth';
 	import { registerServiceWorker } from '$UITools/serviceWorker';
@@ -13,33 +11,14 @@
 	import SmoothScroller from '$UITools/SmoothScroller/index.svelte';
 	import App from '$lib/js/index';
 	import NotificationWrapper from '$UITools/Notifications/NotificationWrapper.svelte';
-	import { handleRouteBasedOnAuth } from './handleRouteBasedOnAuth.js';
-	import { initializeAuthStore } from '$stores/authStore';
 
 	export let data;
-
-	let isStoreInitialized = false;
-	let unsubscribe;
 
 	onMount(async () => {
 		new App();
 		registerServiceWorker();
 		await checkAuth();
-		const initStore = initializeAuthStore();
-		await initStore.promise;
-		unsubscribe = initStore.unsubscribe;
-		isStoreInitialized = true;
 	});
-
-	onDestroy(() => {
-		if (unsubscribe) {
-			unsubscribe();
-		}
-	});
-
-	$: if (isStoreInitialized) {
-		handleRouteBasedOnAuth(data);
-	}
 </script>
 
 <svelte:head>

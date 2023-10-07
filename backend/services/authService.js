@@ -4,6 +4,7 @@ const { hash, compare } = pkg;
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 
+import { env } from '../constants/env.js';
 import config from '../config/config.js';
 import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
 
@@ -14,6 +15,7 @@ import BlacklistedToken from '../models/BlacklistedTokenModel.js';
 import CustomError from '../errors/CustomError.js';
 
 import { sendVerificationEmail, sendResetPasswordEmail } from '../services/emailService.js';
+import { log } from 'console';
 
 // Function to generate a random token
 const generateToken = () => {
@@ -230,3 +232,44 @@ export const requestresetForgotPassword = async (user, newPassword) => {
 	user.resetTokenExpiration = undefined;
 	await user.save();
 };
+
+// get informations from the user
+export const getUserInfo = async (userId) => {
+	try {
+		const user = await User.findById(userId).select('-password');
+
+		const { username, email, role, isVerified } = user;
+
+		const userInfo = {
+			username,
+			email,
+			role,
+			isVerified
+		};
+
+		if (!user) {
+			throw new Error('Utilisateur non trouvé');
+		}
+		return userInfo;
+	} catch (error) {
+		throw error;
+	}
+};
+
+// Function to set authentication cookie
+export function setAuthCookie(res, token) {
+	// Define cookie options
+	const cookieOptions = {
+		// HttpOnly flag to prevent client-side script access
+		httpOnly: true,
+		// Secure flag to ensure cookie is only sent over HTTPS (enabled in production)
+		secure: env.NODE_ENV === 'production',
+		// SameSite policy to mitigate CSRF attacks
+		sameSite: 'strict',
+		// Cookie expiry time in milliseconds (1 hour)
+		maxAge: 3600000
+	};
+
+	// Set the cookie in the response
+	res.cookie('token', token, cookieOptions);
+}

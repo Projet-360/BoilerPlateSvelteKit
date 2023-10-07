@@ -9,6 +9,11 @@
 	let userData;
 	let unsubscribe;
 
+	let username = '';
+	let email = '';
+	let role = '';
+	let isVerified = false;
+
 	onMount(async () => {
 		const authStoreLoaded = new Promise((resolve) => {
 			unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {
@@ -26,7 +31,9 @@
 		} else {
 			try {
 				const data = await getDashboardData(token);
-				userData = data.message;
+				userData = data;
+				console.log(userData);
+				({ username, email, role, isVerified } = userData.userInfo);
 			} catch (error) {
 				console.error('Error retrieving data from dashboard:', error);
 			}
@@ -41,7 +48,19 @@
 
 <h1>{$t('user.title')}</h1>
 {#if userData}
-	<h2>{userData}</h2>
+	<form>
+		<label for="username">Username</label>
+		<input id="username" type="text" value={username} />
+
+		<label for="email">Email</label>
+		<input id="email" type="email" value={email} />
+
+		<label for="role">Role</label>
+		<input id="role" type="text" value={role} />
+
+		<label for="isVerified">Is Verified</label>
+		<input id="isVerified" type="checkbox" checked={isVerified} disabled />
+	</form>
 {:else}
 	<h2>{$t('user.loader')}</h2>
 {/if}
