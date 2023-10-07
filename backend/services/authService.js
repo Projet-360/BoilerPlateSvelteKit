@@ -273,3 +273,28 @@ export function setAuthCookie(res, token) {
 	// Set the cookie in the response
 	res.cookie('token', token, cookieOptions);
 }
+
+// Mise à jour des informations de l'utilisateur
+export const updateUserInfo = async (userId, updateData) => {
+	try {
+		// Valider les données d'entrée si nécessaire
+		if (!updateData.username && !updateData.email) {
+			throw new Error('Aucune donnée à mettre à jour.');
+		}
+
+		// Mettre à jour l'utilisateur dans la base de données
+		const user = await User.findByIdAndUpdate(userId, updateData, {
+			new: true,
+			runValidators: true
+		});
+
+		if (!user) {
+			throw new Error('Utilisateur non trouvé.');
+		}
+
+		return { success: true, user };
+	} catch (error) {
+		console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
+		throw error;
+	}
+};

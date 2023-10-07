@@ -3,16 +3,27 @@
 	import { onMount } from 'svelte';
 	import { authStore } from '$stores/authStore.js';
 	import { goto } from '$app/navigation';
-	import { getDashboardData } from '$api/auth.js';
+	import { getDashboardData, updateUserInfo } from '$api/auth.js';
 	import { t } from '$UITools/Translations/index';
 
 	let userData;
 	let unsubscribe;
 
+	let token;
 	let username = '';
 	let email = '';
 	let role = '';
 	let isVerified = false;
+
+	const handleUpdate = async () => {
+		try {
+			console.log('username', username);
+			const updatedUser = await updateUserInfo(token, { username, email });
+			console.log("Informations de l'utilisateur mises à jour :", updatedUser);
+		} catch (error) {
+			console.error("Erreur lors de la mise à jour des informations de l'utilisateur :", error);
+		}
+	};
 
 	onMount(async () => {
 		const authStoreLoaded = new Promise((resolve) => {
@@ -23,7 +34,8 @@
 			});
 		});
 
-		const { isAuthenticated, token } = await authStoreLoaded;
+		const { isAuthenticated, token: fetchedToken } = await authStoreLoaded;
+		token = fetchedToken;
 		unsubscribe();
 
 		if (!isAuthenticated) {
@@ -50,16 +62,18 @@
 {#if userData}
 	<form>
 		<label for="username">Username</label>
-		<input id="username" type="text" value={username} />
+		<input id="username" type="text" bind:value={username} />
 
 		<label for="email">Email</label>
-		<input id="email" type="email" value={email} />
+		<input id="email" type="email" bind:value={email} />
 
 		<label for="role">Role</label>
 		<input id="role" type="text" value={role} />
 
 		<label for="isVerified">Is Verified</label>
 		<input id="isVerified" type="checkbox" checked={isVerified} disabled />
+
+		<button on:click={handleUpdate}>Mettre à jour</button>
 	</form>
 {:else}
 	<h2>{$t('user.loader')}</h2>

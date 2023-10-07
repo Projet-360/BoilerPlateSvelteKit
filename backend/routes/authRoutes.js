@@ -175,5 +175,19 @@ router.get('/user/dashboard', isAuthenticated, checkRole('user'), async (req, re
 	}
 });
 
+router.put('/user/update', isAuthenticated, checkRole('user'), async (req, res) => {
+	try {
+		const userId = req.user.userId; // Récupérez l'ID utilisateur du JWT
+		const updateData = req.body; // Récupérez les nouvelles données depuis le corps de la requête
+
+		const result = await authService.updateUserInfo(userId, updateData);
+
+		res.json(result);
+	} catch (error) {
+		console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
+		res.status(500).json({ message: 'Erreur du serveur.' });
+	}
+});
+
 // Export the router
 export default router;

@@ -144,22 +144,26 @@ export async function getDashboardData(token) {
 	}
 }
 
-export async function updateUser(token, updates) {
-	const headers = new Headers();
-	headers.append('Authorization', `Bearer ${token}`);
-	headers.append('Content-Type', 'application/json');
-
+export const updateUserInfo = async (token, userInfo) => {
 	try {
+		const headers = {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		};
+
 		const data = await apiCall({
 			url: `${BD}/auth/user/update`,
 			method: 'PUT',
 			headers,
-			body: JSON.stringify(updates)
+			body: userInfo
 		});
 
-		return data;
+		if (data.success) {
+			return data.user;
+		} else {
+			throw new Error("Erreur lors de la mise à jour des informations de l'utilisateur");
+		}
 	} catch (error) {
-		console.error('Erreur lors de la mise à jour des données utilisateur:', error);
 		throw error;
 	}
-}
+};
