@@ -304,3 +304,12 @@ export const updateUserInfo = async (userId, updateData) => {
 		throw error;
 	}
 };
+
+export const getAllUsers = async () => {
+	return await User.find({});
+};
+
+export const updateUser = async (userId, updateData) => {
+	const user = await User.findByIdAndUpdate(userId, updateData, { new: true });
+	return { success: true, notification: 'Utilisateur mis à jour', user };
+};

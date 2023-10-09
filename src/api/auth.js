@@ -167,3 +167,50 @@ export const updateUserInfo = async (token, userInfo) => {
 		throw error;
 	}
 };
+
+export async function getAllUsers(token) {
+	try {
+		const headers = {
+			Authorization: `Bearer ${token}`
+		};
+
+		const data = await apiCall({
+			url: `${BD}/auth/admin/users`,
+			method: 'GET',
+			headers,
+			credentials: 'include'
+		});
+
+		if (data.users) {
+			return data.users;
+		} else {
+			throw new Error('Erreur lors de la récupération des utilisateurs');
+		}
+	} catch (error) {
+		throw error;
+	}
+}
+
+export async function updateUser(token, userId, updateData) {
+	try {
+		const headers = {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json'
+		};
+
+		const data = await apiCall({
+			url: `${BD}/auth/admin/user/${userId}`,
+			method: 'PUT',
+			headers,
+			body: updateData
+		});
+
+		if (data.success) {
+			return { success: true, user: data.updatedUser, notification: data.notification };
+		} else {
+			throw new Error("Erreur lors de la mise à jour de l'utilisateur");
+		}
+	} catch (error) {
+		throw error;
+	}
+}

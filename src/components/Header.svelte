@@ -47,6 +47,14 @@
 					<a href="/user">user</a>
 				</li>
 			{/if}
+			{#if $authStore.role === 'admin'}
+				<li
+					class="CursorDezoom"
+					aria-current={$page.url.pathname === '/dashboard' ? 'page' : undefined}
+				>
+					<a href="/dashboard">dashboard</a>
+				</li>
+			{/if}
 		</ul>
 	</nav>
 

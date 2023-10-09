@@ -24,7 +24,7 @@
 				role // Redirection selon le rôle
 			) {
 				case 'admin':
-					goto('/admin/dashboard');
+					goto('/dashboard');
 					break;
 				case 'user':
 					goto('/user');

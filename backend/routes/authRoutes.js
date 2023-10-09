@@ -189,5 +189,29 @@ router.put('/user/update', isAuthenticated, checkRole('user'), async (req, res) 
 	}
 });
 
+router.get('/admin/users', isAuthenticated, checkRole('admin'), async (req, res) => {
+	try {
+		const users = await authService.getAllUsers(); // Vous devrez implémenter cette méthode
+		res.status(HTTP_STATUS.OK).json({ users });
+	} catch (error) {
+		console.error('Erreur lors de la récupération des utilisateurs :', error);
+		res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Erreur du serveur.' });
+	}
+});
+
+router.put('/admin/user/:userId', isAuthenticated, checkRole('admin'), async (req, res) => {
+	try {
+		const { userId } = req.params;
+		const updateData = req.body;
+		const { success, notification, updatedUser } = await authService.updateUserInfo(
+			userId,
+			updateData
+		);
+		res.status(HTTP_STATUS.OK).json({ message: 'Success', success, notification, updatedUser });
+	} catch (error) {
+		console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
+		res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Erreur du serveur.' });
+	}
+});
 // Export the router
 export default router;

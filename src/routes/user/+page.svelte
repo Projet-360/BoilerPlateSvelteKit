@@ -101,7 +101,7 @@
 				<button on:click={handlePasswordReset}>Réinitialiser le mot de passe</button>
 
 				<label for="role">Role</label>
-				<input id="role" type="text" value={role} onlyread />
+				<input id="role" type="text" value={role} onlyRead />
 
 				<label for="isVerified">Is Verified</label>
 				<input id="isVerified" type="checkbox" checked={isVerified} disabled />
