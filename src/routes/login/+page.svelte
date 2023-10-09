@@ -59,8 +59,8 @@
 	}
 </script>
 
-<div class="login">
-	<div class="login-container">
+<div class="page">
+	<div class="page-container">
 		<form on:submit|preventDefault={handleLogin}>
 			<input
 				data-testid="email-input"

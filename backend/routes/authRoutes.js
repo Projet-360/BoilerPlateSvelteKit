@@ -158,13 +158,13 @@ router.post('/forgot-password/:token', async (req, res) => {
 		return res.status(400).json({ error: 'Token invalide ou expiré' });
 	}
 
-	const ll = await authService.requestresetForgotPassword(user, newPassword);
+	await authService.requestresetForgotPassword(user, newPassword);
 
 	res.status(HTTP_STATUS.OK).json({ message: 'Success', success: true });
 });
 
 // User dashboard accessible only for authenticated users with 'user' role
-router.get('/user/dashboard', isAuthenticated, checkRole('user'), async (req, res) => {
+router.get('/user', isAuthenticated, checkRole('user'), async (req, res) => {
 	const { userId } = req.user;
 	try {
 		const userInfo = await authService.getUserInfo(userId);
@@ -177,15 +177,15 @@ router.get('/user/dashboard', isAuthenticated, checkRole('user'), async (req, re
 
 router.put('/user/update', isAuthenticated, checkRole('user'), async (req, res) => {
 	try {
-		const userId = req.user.userId; // Récupérez l'ID utilisateur du JWT
-		const updateData = req.body; // Récupérez les nouvelles données depuis le corps de la requête
+		const userId = req.user.userId;
+		const updateData = req.body;
 
-		const result = await authService.updateUserInfo(userId, updateData);
+		const { success, notification } = await authService.updateUserInfo(userId, updateData);
 
-		res.json(result);
+		res.status(HTTP_STATUS.OK).json({ message: 'Success', success, notification });
 	} catch (error) {
 		console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
-		res.status(500).json({ message: 'Erreur du serveur.' });
+		res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Erreur du serveur.' });
 	}
 });
 

@@ -277,22 +277,28 @@ export function setAuthCookie(res, token) {
 // Mise à jour des informations de l'utilisateur
 export const updateUserInfo = async (userId, updateData) => {
 	try {
-		// Valider les données d'entrée si nécessaire
-		if (!updateData.username && !updateData.email) {
-			throw new Error('Aucune donnée à mettre à jour.');
+		const currentUser = await User.findById(userId);
+		if (!currentUser) {
+			throw new Error('Utilisateur non trouvé.');
 		}
 
-		// Mettre à jour l'utilisateur dans la base de données
-		const user = await User.findByIdAndUpdate(userId, updateData, {
+		let notification = ''; // Pour stocker le message de notification
+
+		if (updateData.email && currentUser.email !== updateData.email) {
+			updateData.isVerified = false;
+			const verificationInfo = await createVerificationToken({
+				_id: userId,
+				email: updateData.email
+			});
+			notification = 'MAIL_CHANGED';
+		}
+
+		const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
 			new: true,
 			runValidators: true
 		});
 
-		if (!user) {
-			throw new Error('Utilisateur non trouvé.');
-		}
-
-		return { success: true, user };
+		return { success: true, updatedUser, notification };
 	} catch (error) {
 		console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
 		throw error;

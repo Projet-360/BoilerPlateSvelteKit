@@ -24,7 +24,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\backend\middlewares\isAuthenticated.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\middlewares\middlewares.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\models
 C:\wamp64\www\BoilerPlateSvelteKit\backend\models\BlacklistedTokenModel.js
-C:\wamp64\www\BoilerPlateSvelteKit\backend\models\EmailVerificationTokenModel.js
+C:\wamp64\www\BoilerPlateSvelteKit\backend\models\EmailVerificationTokenMoùdel.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\models\GreetingModel.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\models\UserModel.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\routes

@@ -132,7 +132,7 @@ export async function getDashboardData(token) {
 		headers.append('Authorization', `Bearer ${token}`);
 
 		const data = await apiCall({
-			url: `${BD}/auth/user/dashboard`,
+			url: `${BD}/auth/user`,
 			method: 'GET',
 			headers: headers,
 			credentials: 'include'
@@ -159,7 +159,7 @@ export const updateUserInfo = async (token, userInfo) => {
 		});
 
 		if (data.success) {
-			return data.user;
+			return { user: data.user, notification: data.notification };
 		} else {
 			throw new Error("Erreur lors de la mise à jour des informations de l'utilisateur");
 		}

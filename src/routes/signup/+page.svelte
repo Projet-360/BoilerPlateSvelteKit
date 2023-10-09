@@ -13,8 +13,8 @@
 	}
 </script>
 
-<div class="signup">
-	<div class="signup-container">
+<div class="page">
+	<div class="page-container">
 		<form on:submit|preventDefault={handleSignup}>
 			<input
 				data-testid="username-input"

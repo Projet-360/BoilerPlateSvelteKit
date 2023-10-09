@@ -185,15 +185,29 @@ Mauvais identifiants:
 Boiler Plate NodeJs, Sveltekit
 
 Introduction
-Salut tout le monde ! Je suis ravi de vous présenter mon boiler plate, un projet conçu pour vous aider à démarrer rapidement avec SvelteKit et Node.js. Ce boilerplate est particulièrement axé sur le développement créatif. Il commence à être assez complet et donc je pense qu'il vous demandera une approche plus importante qu'un sujet lambda.
+Salut tout le monde ! Je suis ravi de vous présenter mon boiler plate, un projet conçu pour vous aider à démarrer rapidement avec SvelteKit et Node.js. Ce boilerplate est particulièrement axé sur le développement créatif. Il commence à être assez complet et donc je pense qu'il vous demandera une approche plus importante qu'un sujet ou probleme (lambda).
 
 Pourquoi je fais ca ?
-Ce projet peut vous servir a vous aussi, nous pouvons l'ameliorer ensemble et le rendre plus robuste et clair.
+Ce projet peut vous servir a vous aussi, nous pouvons l'ameliorer ensemble et le rendre plus robuste et clair pour chacun.
+Je vous invite donc à me contacter envoyer vos retours. Mon objectif est de réaliser un boilerplate avec une gestion de compte intélligente maléable pouvant s'adapter à une base de projet. J'essaye d'avoir une sécurité de bonne valeur avec de bonnes pratiques.
+l'objectif est aussi sur le long terme de n'avoir pas de trop plugins en tout genre mais des outils natifs, par exemple je referrai le smoothscroll afin d'éviter la librairie "smooth-scrollbar".
+
+Les points positifs:
+-J'essaye de garder les performances pour lighhouse au maximum
+-Ne pas trop utiliser de librairies diverse et les faire moi même afin de pouvoir les modifier plus facilement
+
+Les points negatifs: 
+-L'intégration de typescript n'est pas faite.
+-Je suis un codeur français il est possible que vous trouviez de mauvais nommage ou des commentaires Français malgrès que je fasse mon possible.
+-Je ne suis pas un senior en la matière donc vous pourriez croisé aussi des surprise.
+-Les tests coté backend ne sont pas encore établis.
+-Je n'utilise pas de css dans les composants svelte, je préfère avoir ces deux choses dissociées. Vous pouvez tout de même utiliser les inclusions grace a sass
+-Bien d'autre choses que je ne concidère pas.
 
 Installation:
 -Installer docker et instancier une base Mongo
--Les variables d'environnements sont pour l'instant une constante afin de vous eviter de le configurer
--Mailhog s'occupe de simuler les mail de confirmations, un terminal s'ouvrira quand vous démarrerai le projet afin de pouvoir le consulter. Je travaille sur windows, si vous avez un mac vous devrez changer l'executer pour celui-ci
+-Les variables d'environnements sont pour l'instant une constante afin de vous eviter de le configurer vous même
+-Mailhog s'occupe de simuler les mail de confirmations, un terminal s'ouvrira quand vous démarrerez le projet afin de pouvoir le consulter. Je travaille sur windows, si vous avez un mac vous devrez changer l'executeur pour celui-ci.
 
 Caractéristiques Principales
 SvelteKit-> UITools: 
@@ -222,14 +236,20 @@ MailConfirmation
 Test Playwright:
 test validation et création de compte
 
-J'espère avoir tout afin que vous n'ayez pas de problemes en cours de route.
+J'espère avoir tout dis afin que vous n'ayez pas de problemes en cours de route.
 J'attends votre retour avec impatience.
 
 
 
 
     #A FAIRE
-    GESTION INFORMATION PROFIL
+    Mettre de l'ordre coté backend : modulariser au maximum toutes les fonctions
+    essayer de réunir les informations qui sont suivies afin d'avoir un seul endroit a toucher en cas de modifications
+    modifications des données utilisateurs
+
+    mettre en place le fait de pouvoir une fois auth changer l'email avec une verification de celui ci
+    renvoyer sur une demande de reset mot de passe
+    
     CONNECTION AVEC GOOGLE AU RESEAUX SOCIAUX #grant
     ADMIN GERANT ROLE
     JOURNALISATION ID SECU
