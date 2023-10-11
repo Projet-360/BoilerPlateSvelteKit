@@ -395,7 +395,7 @@ test.describe.serial('Password Reset Tests', () => {
 		// Vérifier que le mot de passe a bien été réinitialisé
 		const successMessageElement = await page.waitForSelector('.notification');
 		const successMessageText = await successMessageElement.textContent();
-		expect(successMessageText).toBe('Your email has been successfully updated X');
+		expect(successMessageText).toBe('Your password has been successfully updated X');
 
 		await page.close();
 	});

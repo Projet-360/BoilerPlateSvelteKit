@@ -9,7 +9,7 @@
 	import bankPath from './bankPath/index';
 	import { shapeStore } from '$stores/shapeStore';
 	import { cursorStore } from '$stores/cursorStore';
-	import { animateCursor, updateCursorByName, resetCursor, hoverable } from './cursorHelpers';
+	import { animateCursor } from './cursorHelpers';
 
 	const changeShaper = shapeStore.set;
 	let cursorElement;

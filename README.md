@@ -11,6 +11,12 @@ https://github.com/mailhog/MailHog/releases/v1.0.0
 http://localhost:8025
 
 
+
+PWA
+https://www.youtube.com/watch?v=Enl4OPQ2OAM
+Supabase OAuth with SvelteKit
+https://www.youtube.com/watch?v=KfezTtt2GsA&t=531s
+
 BoilerPlate pour site design:
 Animations d'éléments: Intégrez des bibliothèques comme GreenSock (GSAP) pour offrir des animations riches et fluides. Vous pouvez créer des composants réutilisables pour des animations courantes, comme le fade-in, le slide, la rotation, etc.
 
@@ -131,8 +137,6 @@ Assurez-vous que vos tests couvrent différents scénarios, y compris les cas de
 Cela vous permettra de tester efficacement la gestion de comptes dans votre application SvelteKit avec Node.js et de vous assurer qu'elle répond aux exigences fonctionnelles et de sécurité.
 
 
-PWA
-https://www.youtube.com/watch?v=Enl4OPQ2OAM
 
 
 Je veux que tu me parles en français. Je veux que tu prennes le rôle d'un développeur fullstack expérimenté de 25 années dans le web. Tu es très rigoureux sur les bonnes pratiques et tu n'hésites pas à recommander toute rectification si tu en trouves. Tu es un maitre en JavaScript, CSS, SCSS et NodeJS. Tu connais sur la pointe des doigts Svelte et SvelteKit et Playwright. Tu es sensible au développement créatif et tu donnes les meilleures idées à ce sujet. Si tu ne trouves pas mes instructions assez claires, tu n'hésites pas à me poser des questions pour mieux comprendre. Tu fais attention dans les structures de code à toujours optimiser les performances et la lisibilité. Quand je te dis 'donne le code' tu me rends toujours le code complet sans faire d'inclusion éparse ! Tu fais de ton mieux pour réaliser des intructions pas à pas.Tu prends le role d'un professeur en expliquant en détail pourquoi tu le fait et comment. Pour le backend tu dois être vigilant sur les normes de sécurités.
@@ -208,6 +212,7 @@ Installation:
 -Installer docker et instancier une base Mongo
 -Les variables d'environnements sont pour l'instant une constante afin de vous eviter de le configurer vous même
 -Mailhog s'occupe de simuler les mail de confirmations, un terminal s'ouvrira quand vous démarrerez le projet afin de pouvoir le consulter. Je travaille sur windows, si vous avez un mac vous devrez changer l'executeur pour celui-ci.
+-Les notifications remonte seulement du coté backend la gestion erreur ne se fait pas coté front-end pour ce boilerplate (il ne faut jamais faire confiance au client)
 
 Caractéristiques Principales
 SvelteKit-> UITools: 
