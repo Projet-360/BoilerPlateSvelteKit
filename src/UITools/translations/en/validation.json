@@ -11,6 +11,7 @@
     "INVALID_CREDENTIALS": "wrong identifiants",
     "RATE_LIMIT": "Too many connection attempts, please try again later",
     "EMAIL_NOT_VERIFIED": "Your Email has not been verified, please check your mailbox",
+    "EMAIL_VERIFIED": "Your Email has been verified",
     "SUCCESS_INSCRIPTION": "you received an email to validate your account",
     "SUCCESS_LOGIN": "Welcome !",
     "USER_NOT_FOUND": "User not found",

@@ -138,7 +138,7 @@ router.post(
 			}
 
 			await authService.requestForgotPassword(user);
-			res.status(HTTP_STATUS.OK).json({ message: 'Success', success: true });
+			res.status(HTTP_STATUS.OK).json({ success: true });
 		} catch (error) {
 			logger.error('Erreur lors de la réinitialisation du mot de passe:', error);
 			next(new CustomError('ResetPasswordError', error.message, 500));

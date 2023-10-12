@@ -1,18 +1,12 @@
 <script>
-	import { sendEmailResetPassword } from '$api/auth';
-
 	import { t } from '$UITools/Translations/index';
 
-	import { EmailresetPasswordValidation } from '$message/EmailresetPasswordValidation.js';
+	import { sendEmailResetPassword } from '$api/auth';
 
 	let email = '';
 
 	async function handleResetPassword() {
-		try {
-			await sendEmailResetPassword(email);
-		} catch (error) {
-			EmailresetPasswordValidation(error, $t);
-		}
+		await sendEmailResetPassword(email, $t);
 	}
 </script>
 

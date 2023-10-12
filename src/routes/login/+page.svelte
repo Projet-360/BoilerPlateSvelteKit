@@ -7,9 +7,7 @@
 	let password = '';
 
 	async function handleLogin() {
-		try {
-			await login(email, password, $t);
-		} catch (error) {}
+		await login(email, password, $t);
 	}
 
 	function goToResetPassword() {

@@ -8,8 +8,7 @@
 	let password = '';
 
 	async function handleSignup() {
-		const result = await signup(username, email, password, $t);
-		//signupValidation(result, $t);
+		await signup(username, email, password, $t);
 	}
 </script>
 

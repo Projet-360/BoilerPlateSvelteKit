@@ -300,7 +300,7 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		// Attends et vérifie la notification sur la nouvelle page
 		const errorMessageElement = await newPage.waitForSelector('.notification');
 		const errorMessageText = await errorMessageElement.textContent();
-		expect(errorMessageText).toBe('Your email address has been successfully verified X');
+		expect(errorMessageText).toBe('Your Email has been verified X');
 
 		await browser.close();
 	});

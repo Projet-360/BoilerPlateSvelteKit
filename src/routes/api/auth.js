@@ -8,6 +8,7 @@ import { authStore } from '$stores/authStore';
 import notificationStore from '$stores/notificationStore';
 import { loginValidation } from '$message/login.js';
 import { signupValidation } from '$message/signup.js';
+import { EmailresetPasswordValidation } from '$message/EmailresetPasswordValidation.js';
 
 import { goto } from '$app/navigation';
 
@@ -85,24 +86,20 @@ export async function signup(username, email, password, $t) {
 	}
 }
 
-export async function verifySignup() {
+export async function verifyToken(token, $t) {
 	try {
 		const res = await fetch(`${BD}/auth/verify/${token}`);
 		if (res.ok) {
 			console.log('Token vérifié avec succès'); // Pour le débogage
 			goto('/');
-			notificationStore.addNotification('Votre adresse mail est bien validée', 'success');
-		} else {
-			console.log('Échec de la vérification du token'); // Pour le débogage
-			// Gérer l'échec de la vérification ici
+			notificationStore.addNotification($t('validation.EMAIL_VERIFIED'), 'success');
 		}
 	} catch (error) {
-		console.log('Erreur lors de la vérification :', error); // Pour le débogage
-		// Gérer l'erreur ici
+		console.log('Erreur lors de la vérification :', error);
 	}
 }
 
-export async function sendEmailResetPassword(email) {
+export async function sendEmailResetPassword(email, $t) {
 	try {
 		const data = await apiCall({
 			url: `${BD}/auth/forgot-password`,
@@ -114,16 +111,14 @@ export async function sendEmailResetPassword(email) {
 		if (data.success) {
 			goto('/');
 			notificationStore.addNotification($t('validation.EMAIL_FORGOT_PASSWORD'), 'success');
-		} else {
-			// Gérer les erreurs en fonction du message d'erreur renvoyé par l'API
-			throw new Error(data.errorMessage || 'Erreur lors de la réinitialisation du mot de passe.');
 		}
 	} catch (error) {
+		EmailresetPasswordValidation(error, $t);
 		throw error;
 	}
 }
 
-export async function ResetForgotNewPassword(token, newPassword) {
+export async function ResetForgotNewPassword(token, newPassword, $t) {
 	try {
 		const response = await fetch(`${BD}/auth/forgot-password/${token}`, {
 			method: 'POST',
@@ -136,10 +131,9 @@ export async function ResetForgotNewPassword(token, newPassword) {
 		if (response.ok) {
 			goto('/');
 			notificationStore.addNotification($t('validation.VALIDATION_FORGOT_PASSWORD'), 'success');
-		} else {
-			console.log('Erreur lors de la réinitialisation du mot de passe.');
 		}
 	} catch (error) {
+		notificationStore.addNotification(error, 'error');
 		throw error;
 	}
 }
