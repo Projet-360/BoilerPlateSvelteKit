@@ -1,5 +1,20 @@
-// CustomError class that extends the built-in Error class
+/**
+ * CustomError class for throwing application-specific errors.
+ *
+ * Extends the built-in Error class and adds a `statusCode` property
+ * to handle HTTP errors. The `name` property is set to allow
+ * for easier debugging and logging.
+ *
+ * @extends {Error}
+ */
 class CustomError extends Error {
+	/**
+	 * Create a new custom error object.
+	 *
+	 * @param {string} name - The name of the error, usually a short identifier.
+	 * @param {string} message - A detailed error message.
+	 * @param {number} statusCode - The HTTP status code associated with the error.
+	 */
 	constructor(name, message, statusCode) {
 		// Call the constructor of the Error class and pass the error message
 		super(message);

@@ -47,7 +47,14 @@ const transporter = createTransporter();
 const defaultSender =
 	env.NODE_ENV === 'development' ? 'no-reply@dev.local' : 'no-reply@yourdomain.com';
 
-// Function to send email verification link
+/**
+ * Send an email verification link to the user.
+ *
+ * @async
+ * @param {string} email - The email address to send the verification link to.
+ * @param {string} token - The verification token to include in the email.
+ * @throws Will throw an error if the email sending fails.
+ */
 export const sendVerificationEmail = async (email, token) => {
 	const url = `${env.URL_FRONT}/signup/${token}`;
 	await sendEmail(
@@ -58,7 +65,14 @@ export const sendVerificationEmail = async (email, token) => {
 	);
 };
 
-// Function to send reset password link
+/**
+ * Send a password reset link via email.
+ *
+ * @async
+ * @param {Object} user - The user object containing at least the email address.
+ * @param {string} resetToken - The reset password token.
+ * @throws Will throw an error if the email sending fails.
+ */
 export const sendResetPasswordEmail = async (user, resetToken) => {
 	const url = `${env.URL_FRONT}/forgot-password/${resetToken}`;
 	await sendEmail(
@@ -69,7 +83,16 @@ export const sendResetPasswordEmail = async (user, resetToken) => {
 	);
 };
 
-// Function to send email using the transporter
+/**
+ * Send an email using a predefined transporter.
+ *
+ * @async
+ * @param {string} to - The recipient email address.
+ * @param {string} subject - The email subject.
+ * @param {string} html - The email content in HTML format.
+ * @param {string} [from=defaultSender] - The sender's email address.
+ * @throws Will throw an error if the email sending fails.
+ */
 const sendEmail = async (to, subject, html, from = defaultSender) => {
 	try {
 		await transporter.sendMail({ from, to, subject, html });

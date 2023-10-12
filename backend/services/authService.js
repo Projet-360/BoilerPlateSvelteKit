@@ -36,7 +36,17 @@ const generateAndSaveResetToken = async (user) => {
 	await sendResetPasswordEmail(user, resetToken);
 };
 
-// Create JWT token after user signup
+/**
+ * Create a JWT token after user signup.
+ *
+ * @param {Object} user - The user object.
+ * @param {string} user._id - The user's unique identifier.
+ * @param {string} user.username - The user's username.
+ * @param {string} user.email - The user's email.
+ * @param {string} user.role - The user's role.
+ *
+ * @returns {Object} - An object containing the JWT token.
+ */
 export const createSignupToken = ({ _id: userId, username, email, role }) => {
 	const token = jwt.sign({ userId, username, email, role }, config.SECRETKEY, {
 		expiresIn: config.TOKEN_EXPIRY
@@ -44,7 +54,15 @@ export const createSignupToken = ({ _id: userId, username, email, role }) => {
 	return { token };
 };
 
-// Create and save email verification token
+/**
+ * Create and save an email verification token.
+ *
+ * @param {Object} user - The user object.
+ * @param {string} user._id - The user's unique identifier.
+ * @param {string} user.email - The user's email.
+ *
+ * @returns {Promise<Object>} - A promise that resolves with an object containing the verification token.
+ */
 export const createVerificationToken = async (user) => {
 	const verificationToken = generateToken();
 	await sendVerificationEmail(user.email, verificationToken);
@@ -62,12 +80,25 @@ export const createVerificationToken = async (user) => {
 	return { verificationToken };
 };
 
-// Hash user password
+/**
+ * Hash a given password.
+ *
+ * @param {string} password - The password to hash.
+ *
+ * @returns {Promise<string>} - A promise that resolves with the hashed password.
+ */
 export const hashPassword = async (password) => {
 	return await hash(password, 12);
 };
 
-// Check if email already exists in the database
+/**
+ * Check if the given email already exists in the database.
+ *
+ * @async
+ * @param {string} email - The email address to check for.
+ * @throws Will throw an error if the email address already exists in the database.
+ * @returns {Promise<void>} - A promise that resolves if the email does not exist, otherwise it throws an error.
+ */
 export const checkEmailExists = async (email) => {
 	const existingUserByEmail = await User.findOne({ email });
 	if (existingUserByEmail) {
@@ -75,7 +106,17 @@ export const checkEmailExists = async (email) => {
 	}
 };
 
-// Create a new user in the database
+/**
+ * Create a new user in the database.
+ *
+ * @async
+ * @param {string} username - The username of the new user.
+ * @param {string} email - The email address of the new user.
+ * @param {string} hashedPassword - The hashed password of the new user.
+ * @param {string} role - The role assigned to the new user.
+ *
+ * @returns {Promise<Object>} - A promise that resolves with the newly created user object.
+ */
 export const createUser = async (username, email, hashedPassword, role) => {
 	const newUser = new User({ username, email, password: hashedPassword, role });
 	console.log('New User:', newUser);
@@ -83,7 +124,21 @@ export const createUser = async (username, email, hashedPassword, role) => {
 	return newUser;
 };
 
-// Check if the user is authenticated
+/**
+ * Check if the user is authenticated based on the provided token.
+ *
+ * @async
+ * @param {string} token - The JWT token to verify.
+ *
+ * @returns {Promise<Object>} - A promise that resolves with an object containing the authentication status and other details.
+ *
+ * The object has the following structure:
+ * - isAuthenticated: {boolean} Indicates whether the user is authenticated.
+ * - message: {string} [Optional] A message explaining why the authentication failed.
+ * - token: {string} [Optional] The provided JWT token.
+ * - userId: {string} [Optional] The user's ID.
+ * - role: {string} [Optional] The user's role.
+ */
 export const checkAuthentication = async (token) => {
 	if (!token) {
 		console.log("Le client n'est pas connecté");
@@ -119,7 +174,19 @@ export const checkAuthentication = async (token) => {
 	};
 };
 
-// Handle user signup process
+/**
+ * Handle the user signup process.
+ *
+ * @async
+ * @param {string} email - The email address of the user signing up.
+ *
+ * @returns {Promise<Object>} - A promise that resolves to an object containing the user's ID.
+ *
+ * The object has the following structure:
+ * - userId: {string} The ID of the newly created user.
+ *
+ * @throws Will throw an error if the signup process fails.
+ */
 export const signup = async (email) => {
 	try {
 		const tokenExpiry = config.TOKEN_EXPIRY;
@@ -152,7 +219,22 @@ export const signup = async (email) => {
 	}
 };
 
-// Handle user login process
+/**
+ * Handle the user login process.
+ *
+ * @async
+ * @param {string} email - The email address of the user trying to log in.
+ * @param {string} password - The plaintext password of the user trying to log in.
+ *
+ * @returns {Promise<Object>} - A promise that resolves to an object containing the JWT token, user's ID, and role.
+ *
+ * The object has the following structure:
+ * - token: {string} The JWT token.
+ * - userId: {string} The ID of the logged-in user.
+ * - role: {string} The role of the logged-in user.
+ *
+ * @throws Will throw an error if the login process fails, e.g., invalid credentials or email not verified.
+ */
 export const login = async (email, password) => {
 	// Trouver l'utilisateur par email
 	const user = await User.findOne({ email });
@@ -187,7 +269,19 @@ export const login = async (email, password) => {
 	return { token, userId: user._id, role: user.role };
 };
 
-// Verify email token
+/**
+ * Verify the email verification token.
+ *
+ * @async
+ * @param {string} token - The email verification token.
+ *
+ * @returns {Promise<string>} - A promise that resolves to a string indicating the result of the verification.
+ *
+ * @throws Will throw an error for the following scenarios:
+ * - Token is not found in the database ('INVALID_TOKEN').
+ * - Token has expired ('EXPIRED_TOKEN').
+ * - Associated user is not found ('USER_NOT_FIND').
+ */
 export const verifyToken = async (token) => {
 	// Trouver le token dans la base de données
 	const verificationToken = await EmailVerificationToken.findOne({ token });
@@ -218,13 +312,39 @@ export const verifyToken = async (token) => {
 	return 'E-mail vérifié avec succès !';
 };
 
-// Handle forgot password request
+/**
+ * Handle the forgot password request by generating and saving a reset token.
+ *
+ * @async
+ * @param {Object} user - The user who has requested a password reset.
+ * @param {string} user._id - The unique identifier of the user.
+ * @param {string} user.email - The email address of the user.
+ *
+ * @returns {Promise<Object>} - A promise that resolves to an object containing a message indicating that the forgot password request has been processed.
+ *
+ * @throws Will throw an error if the reset token cannot be generated or saved.
+ */
 export const requestForgotPassword = async (user) => {
 	await generateAndSaveResetToken(user);
 	return { message: 'EMAIL_FORGOT_PASSWORD' };
 };
 
-// Reset the forgotten password
+/**
+ * Reset the forgotten password of a user.
+ *
+ * @async
+ * @param {Object} user - The user whose password needs to be reset.
+ * @param {string} user._id - The unique identifier of the user.
+ * @param {string} user.email - The email address of the user.
+ * @param {string} user.password - The current hashed password of the user.
+ * @param {string} user.resetToken - The current reset token of the user, if any.
+ * @param {Date} user.resetTokenExpiration - The expiration date of the current reset token, if any.
+ * @param {string} newPassword - The new plaintext password that will replace the user's old password.
+ *
+ * @returns {Promise<void>} - A promise that resolves when the user's password has been successfully reset and saved.
+ *
+ * @throws Will throw an error if the new password cannot be hashed or saved.
+ */
 export const requestresetForgotPassword = async (user, newPassword) => {
 	const hashedPassword = await hash(newPassword, 12);
 	user.password = hashedPassword;
@@ -233,7 +353,20 @@ export const requestresetForgotPassword = async (user, newPassword) => {
 	await user.save();
 };
 
-// get informations from the user
+/**
+ * Fetch information of a user based on their unique ID.
+ *
+ * @async
+ * @param {string} userId - The unique identifier of the user to fetch information for.
+ *
+ * @returns {Promise<Object>} userInfo - A promise that resolves with the user's information.
+ * @returns {string} userInfo.username - The username of the user.
+ * @returns {string} userInfo.email - The email address of the user.
+ * @returns {string} userInfo.role - The role of the user.
+ * @returns {boolean} userInfo.isVerified - The verification status of the user's email.
+ *
+ * @throws {Error} Will throw an error if the user is not found or any other error occurs.
+ */
 export const getUserInfo = async (userId) => {
 	try {
 		const user = await User.findById(userId).select('-password');
@@ -256,7 +389,18 @@ export const getUserInfo = async (userId) => {
 	}
 };
 
-// Function to set authentication cookie
+/**
+ * Set an authentication cookie in the HTTP response.
+ *
+ * @param {Object} res - The HTTP response object.
+ * @param {string} token - The JWT token to be set as a cookie.
+ *
+ * @returns {void}
+ *
+ * @example
+ * // Set an authentication cookie in the response
+ * setAuthCookie(res, 'some-jwt-token');
+ */
 export function setAuthCookie(res, token) {
 	// Define cookie options
 	const cookieOptions = {
@@ -274,7 +418,28 @@ export function setAuthCookie(res, token) {
 	res.cookie('token', token, cookieOptions);
 }
 
-// Mise à jour des informations de l'utilisateur
+/**
+ * Update the information of a user in the database.
+ *
+ * This function performs multiple tasks such as checking for the user's existence,
+ * updating the user's verification status if the email is changed, and saving the new data.
+ *
+ * @async
+ * @param {string} userId - The ID of the user to be updated.
+ * @param {Object} updateData - The new data to update the user with.
+ * @param {string} [updateData.email] - New email of the user.
+ * @param {string} [updateData.username] - New username of the user.
+ * @param {string} [updateData.role] - New role of the user.
+ * @param {boolean} [updateData.isVerified] - New verification status of the user.
+ *
+ * @returns {Promise<Object>} Returns an object containing success status, updated user data, and any notifications.
+ *
+ * @throws Will throw an error if updating the user fails.
+ *
+ * @example
+ * // Update the email and username of a user
+ * updateUserInfo('some-user-id', { email: 'new.email@example.com', username: 'newUsername' });
+ */
 export const updateUserInfo = async (userId, updateData) => {
 	try {
 		const currentUser = await User.findById(userId);
@@ -305,10 +470,38 @@ export const updateUserInfo = async (userId, updateData) => {
 	}
 };
 
+/**
+ * Retrieve all users from the database.
+ *
+ * This function uses the `.find({})` method on the `User` model to get an array of all user objects.
+ *
+ * @async
+ * @returns {Promise<Array<Object>>} Returns a promise that resolves with an array of all user objects.
+ *
+ * @example
+ * // Fetch all users
+ * const users = await getAllUsers();
+ */
 export const getAllUsers = async () => {
 	return await User.find({});
 };
 
+/**
+ * Update a user's data in the database.
+ *
+ * This function takes a user ID and an object of data to update. It uses the `findByIdAndUpdate` method
+ * on the `User` model to update the user's data and returns the updated user object.
+ *
+ * @async
+ * @param {String} userId - The unique ID of the user to update.
+ * @param {Object} updateData - An object containing the data to update.
+ * @returns {Promise<Object>} Returns a promise that resolves with an object containing the update status and updated user data.
+ *
+ * @example
+ * // Update a user's email
+ * const updateData = { email: 'new.email@example.com' };
+ * const result = await updateUser('someUserId', updateData);
+ */
 export const updateUser = async (userId, updateData) => {
 	const user = await User.findByIdAndUpdate(userId, updateData, { new: true });
 	return { success: true, notification: 'Utilisateur mis à jour', user };

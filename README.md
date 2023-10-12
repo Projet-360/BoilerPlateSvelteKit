@@ -248,7 +248,6 @@ J'attends votre retour avec impatience.
 
 
     #A FAIRE
-    Mettre de l'ordre coté backend : modulariser au maximum toutes les fonctions
     essayer de réunir les informations qui sont suivies afin d'avoir un seul endroit a toucher en cas de modifications
     modifications des données utilisateurs
 
