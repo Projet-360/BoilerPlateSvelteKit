@@ -309,7 +309,7 @@ export const verifyToken = async (token) => {
 	// Supprimer le token de vérification car il a été utilisé
 	await EmailVerificationToken.findByIdAndDelete(verificationToken.id);
 
-	return 'E-mail vérifié avec succès !';
+	return 'success';
 };
 
 /**

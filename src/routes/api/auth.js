@@ -88,9 +88,9 @@ export async function signup(username, email, password, $t) {
 
 export async function verifyToken(token, $t) {
 	try {
-		const res = await fetch(`${BD}/auth/verify/${token}`);
-		if (res.ok) {
-			console.log('Token vérifié avec succès'); // Pour le débogage
+		const response = await fetch(`${BD}/auth/verify/${token}`);
+		console.log(response);
+		if (response.ok) {
 			goto('/');
 			notificationStore.addNotification($t('validation.EMAIL_VERIFIED'), 'success');
 		}

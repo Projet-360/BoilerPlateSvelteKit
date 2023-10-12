@@ -1,11 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
 	import { t } from '$UITools/Translations/index';
 
 	import { ResetForgotNewPassword } from '$api/auth';
-	import notificationStore from '$stores/notificationStore';
 
 	let newPassword = '';
 	let confirmPassword = '';
@@ -20,11 +18,8 @@
 			notificationStore.addNotification($t('validation.FORGOT_PASSWORD_INVALID'), 'error');
 			return;
 		}
-		try {
-			await ResetForgotNewPassword(token, newPassword);
-		} catch (error) {
-			notificationStore.addNotification(error.message, 'error');
-		}
+
+		await ResetForgotNewPassword(token, newPassword, $t);
 	}
 </script>
 

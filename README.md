@@ -122,6 +122,7 @@ J'attends votre retour avec impatience.
     Headers de sécurité: Utilisez des en-têtes HTTP pour sécuriser votre application, comme Content Security Policy (CSP) pour prévenir les attaques XSS.
     savoir comment faire pour améliorer la gestion des documents Langues
     Si un token a était envoyer ne pas donner un autre // Changement de mot de passe email
+    gerer les token invalide
     Socket.io
 
 

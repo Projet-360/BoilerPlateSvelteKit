@@ -78,7 +78,7 @@ router.get('/verify/:token', async (req, res) => {
 
 		const message = await authService.verifyToken(token);
 
-		res.status(200).json({ message });
+		res.status(HTTP_STATUS.OK).json({ success: true });
 	} catch (error) {
 		console.error("Erreur lors de la vérification de l'e-mail:", error);
 		res.status(500).json({ message: error.message });
