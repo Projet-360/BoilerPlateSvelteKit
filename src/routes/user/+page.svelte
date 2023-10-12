@@ -5,14 +5,10 @@
 	import { goto } from '$app/navigation';
 	import { getDashboardData, updateUserInfo } from '$api/auth.js';
 	import { t } from '$UITools/Translations/index';
-	import notificationStore from '$stores/notificationStore';
-	import { logout } from '$lib/logout.js';
 	import { sendEmailResetPassword } from '$api/auth.js';
 
 	let userData;
 	let unsubscribe;
-	let isAuthenticated;
-
 	let token;
 	let username = '';
 	let email = '';
@@ -21,23 +17,7 @@
 
 	const handleUpdate = async () => {
 		try {
-			const response = await updateUserInfo(token, { username, email }); // Récupérez la réponse brute
-			console.log('Réponse brute :', response); // Log de la réponse brute
-
-			const { updatedUser, notification } = response; // Destructuration
-
-			notificationStore.addNotification('Information mise à jour', 'success');
-
-			if (notification) {
-				notificationStore.addNotification(notification, 'success');
-
-				logout($t);
-
-				authStore.subscribe(($authStore) => {
-					isAuthenticated = $authStore && $authStore.token ? true : false;
-				});
-			}
-
+			await updateUserInfo(token, { username, email }, $t);
 			const data = await getDashboardData(token);
 			userData = data;
 			({ username, email, role, isVerified } = userData.userInfo);
@@ -47,12 +27,9 @@
 	};
 
 	const handlePasswordReset = async () => {
-		try {
-			await sendEmailResetPassword(email);
-		} catch (error) {
-			console.error('Erreur lors de la réinitialisation du mot de passe:', error);
-		}
+		await sendEmailResetPassword(email, $t);
 	};
+
 	onMount(async () => {
 		const authStoreLoaded = new Promise((resolve) => {
 			unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {

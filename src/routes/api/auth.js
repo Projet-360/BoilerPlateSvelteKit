@@ -11,6 +11,7 @@ import { signupValidation } from '$message/signup.js';
 import { EmailresetPasswordValidation } from '$message/EmailresetPasswordValidation.js';
 
 import { goto } from '$app/navigation';
+import { logout } from '$lib/logout.js';
 
 let currentState;
 
@@ -157,7 +158,7 @@ export async function getDashboardData(token) {
 	}
 }
 
-export const updateUserInfo = async (token, userInfo) => {
+export const updateUserInfo = async (token, userInfo, $t) => {
 	try {
 		const headers = {
 			Authorization: `Bearer ${token}`,
@@ -172,11 +173,19 @@ export const updateUserInfo = async (token, userInfo) => {
 		});
 
 		if (data.success) {
-			return { user: data.user, notification: data.notification };
+			// Ajouter la logique de notification ici
+			notificationStore.addNotification('Information mise à jour', 'success');
+			if (data.notification) {
+				notificationStore.addNotification(data.notification, 'success');
+				logout($t);
+			}
+			return data;
 		} else {
 			throw new Error("Erreur lors de la mise à jour des informations de l'utilisateur");
 		}
 	} catch (error) {
+		// La gestion des erreurs pourrait également être faite ici
+		console.error("Erreur lors de la mise à jour des informations de l'utilisateur :", error);
 		throw error;
 	}
 };
