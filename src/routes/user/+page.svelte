@@ -7,7 +7,7 @@
 	import { t } from '$UITools/Translations/index';
 	import notificationStore from '$stores/notificationStore';
 	import { logout } from '$lib/logout.js';
-	import { resetPassword } from '$api/auth.js';
+	import { sendEmailResetPassword } from '$api/auth.js';
 
 	let userData;
 	let unsubscribe;
@@ -48,9 +48,7 @@
 
 	const handlePasswordReset = async () => {
 		try {
-			await resetPassword(email);
-
-			notificationStore.addNotification($t('validation.EMAIL_FORGOT_PASSWORD'), 'success');
+			await sendEmailResetPassword(email);
 		} catch (error) {
 			console.error('Erreur lors de la réinitialisation du mot de passe:', error);
 		}

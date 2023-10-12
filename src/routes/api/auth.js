@@ -1,6 +1,21 @@
 import { apiCall } from '$api/utils/apiCall'; // Assure-toi que le chemin est correct
-import { authStore } from '$stores/authStore';
+
 import { BD } from '$lib/constants';
+import { handleRoleRedirection } from '$utils/auth/handleRoleRedirection.js';
+
+import { authStore } from '$stores/authStore';
+
+import notificationStore from '$stores/notificationStore';
+import { loginValidation } from '$message/login.js';
+import { signupValidation } from '$message/signup.js';
+
+import { goto } from '$app/navigation';
+
+let currentState;
+
+authStore.subscribe((state) => {
+	currentState = state;
+});
 
 export async function checkAuth() {
 	try {
@@ -22,7 +37,7 @@ export async function checkAuth() {
 	}
 }
 
-export async function login(email, password) {
+export async function login(email, password, $t) {
 	try {
 		const data = await apiCall({
 			url: `${BD}/auth/login`,
@@ -30,19 +45,27 @@ export async function login(email, password) {
 			credentials: 'include',
 			body: { email, password }
 		});
+
 		authStore.set({
 			token: data.token,
 			userId: data.userId,
 			role: data.role,
 			isAuthenticated: true
 		});
+
+		const { role, isAuthenticated } = currentState;
+
+		handleRoleRedirection(role, isAuthenticated);
+
+		notificationStore.addNotification($t('validation.SUCCESS_LOGIN'), 'success');
 	} catch (error) {
-		console.log(error);
+		console.log('Error caught:', error);
+		loginValidation(error, $t);
 		throw error;
 	}
 }
 
-export async function signup(username, email, password) {
+export async function signup(username, email, password, $t) {
 	try {
 		const response = await apiCall({
 			url: `${BD}/auth/signup`,
@@ -51,16 +74,14 @@ export async function signup(username, email, password) {
 			body: { username, email, password }
 		});
 
-		console.log('Response received: ', response);
-
 		if (response.success) {
-			return { success: true };
-		} else {
-			return { success: false, message: response.message };
+			goto('/');
+			notificationStore.addNotification($t('validation.SUCCESS_INSCRIPTION'), 'success');
 		}
 	} catch (error) {
 		console.log('error received: ', error);
-		return { success: false, message: error.message };
+		signupValidation(error, $t);
+		throw error;
 	}
 }
 
@@ -81,7 +102,7 @@ export async function verifySignup() {
 	}
 }
 
-export async function resetPassword(email) {
+export async function sendEmailResetPassword(email) {
 	try {
 		const data = await apiCall({
 			url: `${BD}/auth/forgot-password`,
@@ -91,8 +112,8 @@ export async function resetPassword(email) {
 		});
 
 		if (data.success) {
-			// Afficher un message de succès ou gérer comme tu le souhaites
-			return data;
+			goto('/');
+			notificationStore.addNotification($t('validation.EMAIL_FORGOT_PASSWORD'), 'success');
 		} else {
 			// Gérer les erreurs en fonction du message d'erreur renvoyé par l'API
 			throw new Error(data.errorMessage || 'Erreur lors de la réinitialisation du mot de passe.');
@@ -112,11 +133,9 @@ export async function ResetForgotNewPassword(token, newPassword) {
 			body: JSON.stringify({ newPassword })
 		});
 
-		console.log(response);
-
 		if (response.ok) {
-			console.log('Mot de passe réinitialisé avec succès.');
-			// Redirigez l'utilisateur ou faites quelque chose d'autre ici
+			goto('/');
+			notificationStore.addNotification($t('validation.VALIDATION_FORGOT_PASSWORD'), 'success');
 		} else {
 			console.log('Erreur lors de la réinitialisation du mot de passe.');
 		}

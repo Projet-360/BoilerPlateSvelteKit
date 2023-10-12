@@ -38,7 +38,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\backend\services\rateLimiter.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\test
 C:\wamp64\www\BoilerPlateSvelteKit\backend\test\authRoutes.test.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\validations
-C:\wamp64\www\BoilerPlateSvelteKit\backend\validations\signupValidators.js
+C:\wamp64\www\BoilerPlateSvelteKit\backend\validations\validators.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\blacklistedTokens.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\clear-db.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\combined.log
@@ -97,7 +97,11 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\routes\about\+page.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\about\+page.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\api
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\api\message
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\api\message\EmailresetPasswordValidation.js
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\api\message\forgotPassword.js
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\api\message\login.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\api\message\signup.js
+C:\wamp64\www\BoilerPlateSvelteKit\src\routes\api\message\updateUser.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\api\utils
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\api\utils\apiCall.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\api\auth.js
@@ -178,6 +182,9 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\fr\user.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\fr\validation.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\index.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\lang.json
+C:\wamp64\www\BoilerPlateSvelteKit\src\utils
+C:\wamp64\www\BoilerPlateSvelteKit\src\utils\auth
+C:\wamp64\www\BoilerPlateSvelteKit\src\utils\auth\handleRoleRedirection.js
 C:\wamp64\www\BoilerPlateSvelteKit\src\app.html
 C:\wamp64\www\BoilerPlateSvelteKit\src\hook.js
 C:\wamp64\www\BoilerPlateSvelteKit\static

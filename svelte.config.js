@@ -50,6 +50,8 @@ export default defineConfig({
 		alias: {
 			// this will match a file
 			$components: 'src/components',
+			$message: 'src/message',
+			$utils: 'src/utils',
 			$stores: 'src/stores',
 			$UITools: 'src/UITools',
 			$language: 'src/language',

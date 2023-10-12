@@ -122,12 +122,14 @@ J'attends votre retour avec impatience.
     Headers de sécurité: Utilisez des en-têtes HTTP pour sécuriser votre application, comme Content Security Policy (CSP) pour prévenir les attaques XSS.
     savoir comment faire pour améliorer la gestion des documents Langues
     Si un token a était envoyer ne pas donner un autre // Changement de mot de passe email
+    Socket.io
 
 
     PWA
     https://www.youtube.com/watch?v=Enl4OPQ2OAM
     Supabase OAuth with SvelteKit
     https://www.youtube.com/watch?v=KfezTtt2GsA&t=531s
+    https://www.youtube.com/watch?v=Q0XustAh080
 
     essayer de réunir les informations qui sont suivies afin d'avoir un seul endroit a toucher en cas de modifications
     modifications des données utilisateurs

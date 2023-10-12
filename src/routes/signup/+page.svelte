@@ -1,6 +1,6 @@
 <script>
 	import { signup } from '$api/auth';
-	import { signupValidation } from '$api/message/signup';
+	import { signupValidation } from '$message/signup';
 	import { t } from '$UITools/Translations/index';
 
 	let username = '';
@@ -8,8 +8,8 @@
 	let password = '';
 
 	async function handleSignup() {
-		const result = await signup(username, email, password);
-		signupValidation(result, $t);
+		const result = await signup(username, email, password, $t);
+		//signupValidation(result, $t);
 	}
 </script>
 

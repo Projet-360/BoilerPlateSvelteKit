@@ -96,7 +96,7 @@ router.post('/signup', [signupValidators, handleValidationErrors], async (req, r
 		await authService.createSignupToken(newUser, role);
 		await authService.createVerificationToken(newUser);
 
-		res.status(HTTP_STATUS.CREATED).json({ message: 'Success', success: true });
+		res.status(HTTP_STATUS.OK).json({ success: true });
 	} catch (error) {
 		console.log(error);
 		next(new CustomError('SignupError', error.message, 400));

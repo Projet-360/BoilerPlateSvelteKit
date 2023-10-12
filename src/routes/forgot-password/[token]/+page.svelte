@@ -22,10 +22,7 @@
 		}
 		try {
 			await ResetForgotNewPassword(token, newPassword);
-			goto('/');
-			notificationStore.addNotification($t('validation.VALIDATION_FORGOT_PASSWORD'), 'success');
 		} catch (error) {
-			console.log(error);
 			notificationStore.addNotification(error.message, 'error');
 		}
 	}
