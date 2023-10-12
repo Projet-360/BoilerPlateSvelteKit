@@ -21,5 +21,3 @@ $outputFile = "C:\wamp64\www\BoilerPlateSvelteKit\textfiles.txt"
 $writer = [System.IO.StreamWriter]::new($outputFile)
 Write-Tree -folder $folder -writer $writer
 $writer.Close()
-
-

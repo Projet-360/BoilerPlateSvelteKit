@@ -22,8 +22,8 @@
 <header>
 	<nav>
 		<ul>
-			<li class="test1" aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a class="test1" href="/">Home</a>
+			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
+				<a href="/">Home</a>
 			</li>
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
