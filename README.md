@@ -44,11 +44,6 @@ Réalise des tests de pénétration et utilise des outils comme OWASP ZAP pour i
 
 Exemples en Node.js
 Helmet pour sécuriser les en-têtes HTTP:
-
-
-Suggestions de tests supplémentaires :
-Authentification
-
 javascript
 Copy code
 const helmet = require('helmet');
@@ -120,7 +115,7 @@ J'attends votre retour avec impatience.
 
     #A FAIRE
     Ne pas oublier les ratelimiter sur chaque champs
-    intégrer les contraintes sur la partie admin
+    intégrer les contraintes sur la partie admin et vérifier les contraintes aussi sur toutes les page reset passwords... Rendre le code propre
     intégrer 0Auth
     Faire les tests pour les roles et langue
     mettre la lang dans local storage

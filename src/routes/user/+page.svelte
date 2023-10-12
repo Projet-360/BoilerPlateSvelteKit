@@ -76,6 +76,7 @@
 				userData = data;
 				({ username, email, role, isVerified } = userData.userInfo);
 			} catch (error) {
+				signupValidation(result, $t);
 				console.error('Error retrieving data from dashboard:', error);
 			}
 		}

@@ -21,8 +21,11 @@ import * as authService from '../services/authService.js';
 import logger from '../services/logger.js';
 import { rateLimiter } from '../services/rateLimiter.js';
 
-import { signupValidators } from '../validations/signupValidators.js';
-import { validateEmail } from '../validations/signupValidators.js';
+import {
+	signupValidators,
+	updateUserValidators,
+	emailValidators
+} from '../validations/validators.js';
 
 import CustomError from '../errors/CustomError.js';
 
@@ -118,7 +121,7 @@ router.post('/login', rateLimiter, async (req, res, next) => {
 // Endpoint to request password reset
 router.post(
 	'/forgot-password',
-	validateEmail,
+	emailValidators,
 	handleValidationErrors,
 	rateLimiter,
 	async (req, res, next) => {
@@ -175,19 +178,25 @@ router.get('/user', isAuthenticated, checkRole('user'), async (req, res) => {
 	}
 });
 
-router.put('/user/update', isAuthenticated, checkRole('user'), async (req, res) => {
-	try {
-		const userId = req.user.userId;
-		const updateData = req.body;
+router.put(
+	'/user/update',
+	isAuthenticated,
+	checkRole('user'),
+	[...updateUserValidators, handleValidationErrors],
+	async (req, res) => {
+		try {
+			const userId = req.user.userId;
+			const updateData = req.body;
 
-		const { success, notification } = await authService.updateUserInfo(userId, updateData);
+			const { success, notification } = await authService.updateUserInfo(userId, updateData);
 
-		res.status(HTTP_STATUS.OK).json({ message: 'Success', success, notification });
-	} catch (error) {
-		console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
-		res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Erreur du serveur.' });
+			res.status(HTTP_STATUS.OK).json({ message: 'Success', success, notification });
+		} catch (error) {
+			console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
+			res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Erreur du serveur.' });
+		}
 	}
-});
+);
 
 router.get('/admin/users', isAuthenticated, checkRole('admin'), async (req, res) => {
 	try {
@@ -199,19 +208,25 @@ router.get('/admin/users', isAuthenticated, checkRole('admin'), async (req, res)
 	}
 });
 
-router.put('/admin/user/:userId', isAuthenticated, checkRole('admin'), async (req, res) => {
-	try {
-		const { userId } = req.params;
-		const updateData = req.body;
-		const { success, notification, updatedUser } = await authService.updateUserInfo(
-			userId,
-			updateData
-		);
-		res.status(HTTP_STATUS.OK).json({ message: 'Success', success, notification, updatedUser });
-	} catch (error) {
-		console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
-		res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Erreur du serveur.' });
+router.put(
+	'/admin/user/:userId',
+	isAuthenticated,
+	checkRole('admin'),
+	[...updateUserValidators, handleValidationErrors],
+	async (req, res) => {
+		try {
+			const { userId } = req.params;
+			const updateData = req.body;
+			const { success, notification, updatedUser } = await authService.updateUserInfo(
+				userId,
+				updateData
+			);
+			res.status(HTTP_STATUS.OK).json({ message: 'Success', success, notification, updatedUser });
+		} catch (error) {
+			console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
+			res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Erreur du serveur.' });
+		}
 	}
-});
+);
 // Export the router
 export default router;
