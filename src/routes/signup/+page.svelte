@@ -1,6 +1,5 @@
 <script>
 	import { signup } from '$api/auth';
-	import { signupValidation } from '$message/signup';
 	import { t } from '$UITools/Translations/index';
 
 	let username = '';

@@ -173,18 +173,17 @@ export const updateUserInfo = async (token, userInfo, $t) => {
 		});
 
 		if (data.success) {
-			// Ajouter la logique de notification ici
-			notificationStore.addNotification('Information mise à jour', 'success');
+			notificationStore.addNotification($t('validation.UPDATE_SUCCESS'), 'success');
+
 			if (data.notification) {
 				notificationStore.addNotification(data.notification, 'success');
 				logout($t);
 			}
 			return data;
 		} else {
-			throw new Error("Erreur lors de la mise à jour des informations de l'utilisateur");
+			throw new Error($t('validation.UPDATE_FAILURE'));
 		}
 	} catch (error) {
-		// La gestion des erreurs pourrait également être faite ici
 		console.error("Erreur lors de la mise à jour des informations de l'utilisateur :", error);
 		throw error;
 	}

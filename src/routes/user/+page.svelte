@@ -8,12 +8,12 @@
 	import { sendEmailResetPassword } from '$api/auth.js';
 
 	let userData;
-	let unsubscribe;
 	let token;
 	let username = '';
 	let email = '';
 	let role = '';
 	let isVerified = false;
+	let unsubscribe;
 
 	const handleUpdate = async () => {
 		try {
@@ -51,7 +51,6 @@
 				userData = data;
 				({ username, email, role, isVerified } = userData.userInfo);
 			} catch (error) {
-				signupValidation(result, $t);
 				console.error('Error retrieving data from dashboard:', error);
 			}
 		}
@@ -70,18 +69,13 @@
 			<form>
 				<label for="username">Username</label>
 				<input id="username" type="text" bind:value={username} />
-
 				<label for="email">Email</label>
 				<input id="email" type="email" bind:value={email} />
-
 				<button on:click={handlePasswordReset}>Réinitialiser le mot de passe</button>
-
 				<label for="role">Role</label>
 				<input id="role" type="text" value={role} onlyRead />
-
 				<label for="isVerified">Is Verified</label>
 				<input id="isVerified" type="checkbox" checked={isVerified} disabled />
-
 				<button on:click={handleUpdate}>Mettre à jour</button>
 			</form>
 		{:else}
