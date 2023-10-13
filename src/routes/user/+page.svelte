@@ -6,6 +6,7 @@
 	import { getDashboardData, updateUserInfo } from '$api/auth.js';
 	import { t } from '$UITools/Translations/index';
 	import { sendEmailResetPassword } from '$api/auth.js';
+	import { getAuthenticatedUser } from '$utils/auth/getAuthenticatedUser.js';
 
 	let userData;
 	let token;
@@ -31,28 +32,19 @@
 	};
 
 	onMount(async () => {
-		const authStoreLoaded = new Promise((resolve) => {
-			unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {
-				if (isAuthenticated !== null && token !== null) {
-					resolve({ isAuthenticated, token });
-				}
-			});
-		});
+		try {
+			const { isAuthenticated, token: fetchedToken } = await getAuthenticatedUser(authStore);
+			token = fetchedToken;
 
-		const { isAuthenticated, token: fetchedToken } = await authStoreLoaded;
-		token = fetchedToken;
-		unsubscribe();
-
-		if (!isAuthenticated) {
-			goto('/login');
-		} else {
-			try {
+			if (!isAuthenticated) {
+				goto('/login');
+			} else {
 				const data = await getDashboardData(token);
 				userData = data;
 				({ username, email, role, isVerified } = userData.userInfo);
-			} catch (error) {
-				console.error('Error retrieving data from dashboard:', error);
 			}
+		} catch (error) {
+			console.error('Error:', error);
 		}
 	});
 </script>
