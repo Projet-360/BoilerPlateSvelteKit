@@ -6,7 +6,6 @@
 	import notificationStore from '$stores/notificationStore';
 	import { getAuthenticatedUser } from '$utils/auth/getAuthenticatedUser.js';
 
-	let unsubscribe;
 	let users = [];
 	let token;
 
@@ -61,7 +60,7 @@
 			users[index] = user;
 			notificationStore.addNotification('Utilisateur mis à jour avec succès', 'success');
 		} catch (error) {
-			console.error("Erreur lors de la mise à jour de l'utilisateur:", error);
+			console.error('Error:', error);
 		}
 	}
 </script>

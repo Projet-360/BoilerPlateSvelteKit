@@ -14,7 +14,6 @@
 	let email = '';
 	let role = '';
 	let isVerified = false;
-	let unsubscribe;
 
 	const handleUpdate = async () => {
 		try {
