@@ -4,6 +4,7 @@
 	import { goto } from '$app/navigation';
 	import { getAllUsers, updateUser } from '$api/auth.js'; // Remplacez par le bon chemin
 	import notificationStore from '$stores/notificationStore';
+	import { getAuthenticatedUser } from '$utils/auth/getAuthenticatedUser.js';
 
 	let unsubscribe;
 	let users = [];
@@ -20,26 +21,21 @@
 	}
 
 	onMount(async () => {
-		const authStoreLoaded = new Promise((resolve) => {
-			unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {
-				if (isAuthenticated !== null && token !== null) {
-					resolve({ isAuthenticated, token });
+		try {
+			const { isAuthenticated, token: fetchedToken } = await getAuthenticatedUser(authStore);
+			token = fetchedToken; // Mettre à jour la variable 'token' du module
+
+			if (!isAuthenticated) {
+				goto('/login');
+			} else {
+				try {
+					fetchUsers(fetchedToken);
+				} catch (error) {
+					console.error('Erreur lors de la récupération des utilisateurs:', error);
 				}
-			});
-		});
-
-		const { isAuthenticated, token: fetchedToken } = await authStoreLoaded;
-		token = fetchedToken; // Mettre à jour la variable 'token' du module
-		unsubscribe(); // N'oubliez pas de vous désabonner
-
-		if (!isAuthenticated) {
-			goto('/login');
-		} else {
-			try {
-				fetchUsers(fetchedToken);
-			} catch (error) {
-				console.error('Erreur lors de la récupération des utilisateurs:', error);
 			}
+		} catch (error) {
+			console.error('Error:', error);
 		}
 	});
 
