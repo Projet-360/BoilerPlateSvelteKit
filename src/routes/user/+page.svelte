@@ -33,7 +33,7 @@
 		try {
 			const { isAuthenticated } = await getAuthenticatedUser(authStore);
 			if (!isAuthenticated) {
-				goto('/login');
+				goto('/');
 			} else {
 				const data = await getDashboardData();
 				userData = data;

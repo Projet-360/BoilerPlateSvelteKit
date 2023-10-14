@@ -157,10 +157,12 @@ export async function getDashboardData() {
 
 export const updateUserInfo = async (userInfo, $t) => {
 	try {
+		const headers = new Headers();
 		const data = await apiCall({
 			url: `${BD}/auth/user/update`,
 			method: 'PUT',
-			headers,
+			headers: headers,
+			credentials: 'include',
 			body: userInfo
 		});
 
