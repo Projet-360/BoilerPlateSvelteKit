@@ -29,9 +29,7 @@ export async function checkAuth() {
 			authStore.update((state) => ({
 				...state,
 				isAuthenticated: data.isAuthenticated,
-				token: data.token,
-				role: data.role,
-				userId: data.userId
+				role: data.role
 			}));
 		}
 	} catch (error) {
@@ -49,8 +47,6 @@ export async function login(email, password, $t) {
 		});
 
 		authStore.set({
-			token: data.token,
-			userId: data.userId,
 			role: data.role,
 			isAuthenticated: true
 		});
@@ -139,17 +135,12 @@ export async function ResetForgotNewPassword(token, newPassword, $t) {
 	}
 }
 
-export async function getDashboardData(token) {
-	// Ajoute le token en paramètre
+export async function getDashboardData() {
 	try {
-		const headers = new Headers();
-		headers.append('Authorization', `Bearer ${token}`);
-
 		const data = await apiCall({
 			url: `${BD}/auth/user`,
 			method: 'GET',
-			headers: headers,
-			credentials: 'include'
+			credentials: 'include' // assure que le cookie est envoyé
 		});
 		return data;
 	} catch (error) {
@@ -158,36 +149,36 @@ export async function getDashboardData(token) {
 	}
 }
 
-export const updateUserInfo = async (token, userInfo, $t) => {
-	try {
-		const headers = {
-			Authorization: `Bearer ${token}`,
-			'Content-Type': 'application/json'
-		};
+// export const updateUserInfo = async (token, userInfo, $t) => {
+// 	try {
+// 		const headers = {
+// 			Authorization: `Bearer ${token}`,
+// 			'Content-Type': 'application/json'
+// 		};
 
-		const data = await apiCall({
-			url: `${BD}/auth/user/update`,
-			method: 'PUT',
-			headers,
-			body: userInfo
-		});
+// 		const data = await apiCall({
+// 			url: `${BD}/auth/user/update`,
+// 			method: 'PUT',
+// 			headers,
+// 			body: userInfo
+// 		});
 
-		if (data.success) {
-			notificationStore.addNotification($t('validation.UPDATE_SUCCESS'), 'success');
+// 		if (data.success) {
+// 			notificationStore.addNotification($t('validation.UPDATE_SUCCESS'), 'success');
 
-			if (data.notification) {
-				notificationStore.addNotification(data.notification, 'success');
-				logout($t);
-			}
-			return data;
-		} else {
-			throw new Error($t('validation.UPDATE_FAILURE'));
-		}
-	} catch (error) {
-		console.error("Erreur lors de la mise à jour des informations de l'utilisateur :", error);
-		throw error;
-	}
-};
+// 			if (data.notification) {
+// 				notificationStore.addNotification(data.notification, 'success');
+// 				logout($t);
+// 			}
+// 			return data;
+// 		} else {
+// 			throw new Error($t('validation.UPDATE_FAILURE'));
+// 		}
+// 	} catch (error) {
+// 		console.error("Erreur lors de la mise à jour des informations de l'utilisateur :", error);
+// 		throw error;
+// 	}
+// };
 
 export async function getAllUsers(token) {
 	try {

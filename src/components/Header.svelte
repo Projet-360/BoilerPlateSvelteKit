@@ -15,7 +15,7 @@
 	let isAuthenticated;
 
 	authStore.subscribe(($authStore) => {
-		isAuthenticated = $authStore && $authStore.token ? true : false;
+		isAuthenticated = $authStore && $authStore.isAuthenticated ? true : false;
 	});
 </script>
 

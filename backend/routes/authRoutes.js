@@ -38,7 +38,6 @@ router.get('/check-auth', async (req, res, next) => {
 		if (result.isAuthenticated) {
 			res.status(HTTP_STATUS.OK).json({
 				isAuthenticated: true,
-				token: result.token,
 				role: result.role,
 				userId: result.userId
 			});
@@ -111,7 +110,7 @@ router.post('/login', rateLimiter, async (req, res, next) => {
 		// Définir le cookie
 		authService.setAuthCookie(res, token);
 
-		res.status(HTTP_STATUS.OK).json({ token, userId, role });
+		res.status(HTTP_STATUS.OK).json({ userId, role });
 	} catch (error) {
 		console.log('error from authRoutes', error);
 		next(new CustomError('LoginError', error.message, 400));
@@ -169,6 +168,7 @@ router.post('/forgot-password/:token', async (req, res) => {
 // User dashboard accessible only for authenticated users with 'user' role
 router.get('/user', isAuthenticated, checkRole('user'), async (req, res) => {
 	const { userId } = req.user;
+	console.log('userId du backend', userId);
 	try {
 		const userInfo = await authService.getUserInfo(userId);
 		res.json({ userInfo });
@@ -178,25 +178,25 @@ router.get('/user', isAuthenticated, checkRole('user'), async (req, res) => {
 	}
 });
 
-router.put(
-	'/user/update',
-	isAuthenticated,
-	checkRole('user'),
-	[...updateUserValidators, handleValidationErrors],
-	async (req, res) => {
-		try {
-			const userId = req.user.userId;
-			const updateData = req.body;
+// router.put(
+// 	'/user/update',
+// 	isAuthenticated,
+// 	checkRole('user'),
+// 	[...updateUserValidators, handleValidationErrors],
+// 	async (req, res) => {
+// 		try {
+// 			const userId = req.user.userId;
+// 			const updateData = req.body;
 
-			const { success, notification } = await authService.updateUserInfo(userId, updateData);
+// 			const { success, notification } = await authService.updateUserInfo(userId, updateData);
 
-			res.status(HTTP_STATUS.OK).json({ message: 'Success', success, notification });
-		} catch (error) {
-			console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
-			res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Erreur du serveur.' });
-		}
-	}
-);
+// 			res.status(HTTP_STATUS.OK).json({ message: 'Success', success, notification });
+// 		} catch (error) {
+// 			console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
+// 			res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Erreur du serveur.' });
+// 		}
+// 	}
+// );
 
 router.get('/admin/users', isAuthenticated, checkRole('admin'), async (req, res) => {
 	try {
