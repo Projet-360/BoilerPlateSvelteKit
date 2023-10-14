@@ -1,6 +1,6 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
-
+	import { page } from '$app/stores';
 	import { checkAuth } from '$api/auth';
 	import { registerServiceWorker } from '$UITools/serviceWorker';
 
@@ -13,12 +13,9 @@
 	import NotificationWrapper from '$UITools/Notifications/NotificationWrapper.svelte';
 
 	export let data;
+	console.log(page.query);
 
-	import { authStore } from '$stores/authStore';
-
-	const unsubscribe = authStore.subscribe(($authStore) => {
-		console.log('Auth store value:', $authStore);
-	});
+	//let notificationRedirection = page.query.notificationRedirection;
 
 	onMount(async () => {
 		new App();

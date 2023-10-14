@@ -1,21 +1,15 @@
 <script>
 	import { hoverable } from '$UITools/Cursor/cursorHelpers.js';
 	import { onMount } from 'svelte';
-	import { authStore } from '$stores/authStore.js';
-	import { goto } from '$app/navigation';
 	import { getDashboardData, updateUserInfo } from '$api/auth.js';
 	import { t } from '$UITools/Translations/index';
 	import { sendEmailResetPassword } from '$api/auth.js';
-	import { getAuthenticatedUser } from '$utils/auth/getAuthenticatedUser.js';
 
 	let userData;
 	let username = '';
 	let email = '';
 	let role = '';
 	let isVerified = false;
-
-	let unsubscribe;
-	let showContent = false; // Ajouté
 
 	const handleUpdate = async () => {
 		try {
@@ -33,16 +27,6 @@
 	};
 
 	onMount(async () => {
-		unsubscribe = authStore.subscribe(($auth) => {
-			if (!$auth.isAuthenticated) {
-				goto('/');
-			} else {
-				showContent = true; // Afficher le contenu lorsque l'utilisateur est authentifié
-			}
-			if (unsubscribe) {
-				unsubscribe();
-			}
-		});
 		try {
 			const data = await getDashboardData();
 			userData = data;
@@ -58,27 +42,25 @@
 	<meta name="description" content="This is your user dashboard." />
 </svelte:head>
 
-{#if showContent}
-	<div class="page">
-		<div class="page-container">
-			<h1>{$t('user.title')}</h1>
-			{#if userData}
-				<form>
-					<label for="username">Username</label>
-					<input id="username" type="text" bind:value={username} />
-					<label for="email">Email</label>
-					<input id="email" type="email" bind:value={email} />
-					<button on:click={handlePasswordReset}>Réinitialiser le mot de passe</button>
-					<label for="role">Role</label>
-					<input id="role" type="text" value={role} onlyRead />
-					<label for="isVerified">Is Verified</label>
-					<input id="isVerified" type="checkbox" checked={isVerified} disabled />
-					<button on:click={handleUpdate}>Mettre à jour</button>
-				</form>
-			{:else}
-				<h2>{$t('user.loader')}</h2>
-			{/if}
-			<a href="/about" use:hoverable={'first'}>{$t('user.button')}</a>
-		</div>
+<div class="page">
+	<div class="page-container">
+		<h1>{$t('user.title')}</h1>
+		{#if userData}
+			<form>
+				<label for="username">Username</label>
+				<input id="username" type="text" bind:value={username} />
+				<label for="email">Email</label>
+				<input id="email" type="email" bind:value={email} />
+				<button on:click={handlePasswordReset}>Réinitialiser le mot de passe</button>
+				<label for="role">Role</label>
+				<input id="role" type="text" value={role} onlyRead />
+				<label for="isVerified">Is Verified</label>
+				<input id="isVerified" type="checkbox" checked={isVerified} disabled />
+				<button on:click={handleUpdate}>Mettre à jour</button>
+			</form>
+		{:else}
+			<h2>{$t('user.loader')}</h2>
+		{/if}
+		<a href="/about" use:hoverable={'first'}>{$t('user.button')}</a>
 	</div>
-{/if}
+</div>

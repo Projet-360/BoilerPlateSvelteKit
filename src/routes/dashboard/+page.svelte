@@ -21,9 +21,6 @@
 
 	onMount(async () => {
 		try {
-			const { isAuthenticated, token: fetchedToken } = await getAuthenticatedUser(authStore);
-			token = fetchedToken; // Mettre à jour la variable 'token' du module
-
 			if (!isAuthenticated) {
 				goto('/login');
 			} else {

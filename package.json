@@ -38,6 +38,7 @@
   "dependencies": {
     "@splidejs/splide-extension-auto-scroll": "^0.5.3",
     "@splidejs/svelte-splide": "^0.2.9",
+    "cookie": "^0.5.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
     "express-validator": "^7.0.1",
