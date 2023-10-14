@@ -116,12 +116,9 @@ J'attends votre retour avec impatience.
     #A FAIRE
     Ne pas oublier les ratelimiter sur chaque champs
     intégrer les contraintes sur la partie admin et vérifier les contraintes aussi sur toutes les page reset passwords... Rendre le code propre
-    se poser des questions sur handleRoleRedirection
-    s
     intégrer 0Auth
     Faire les tests pour les roles et langue
     mettre la lang dans local storage
-    Headers de sécurité: Utilisez des en-têtes HTTP pour sécuriser votre application, comme Content Security Policy (CSP) pour prévenir les attaques XSS.
     savoir comment faire pour améliorer la gestion des documents Langues
     Si un token a était envoyer ne pas donner un autre // Changement de mot de passe email
     gerer les token invalide

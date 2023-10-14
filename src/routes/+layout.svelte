@@ -1,6 +1,5 @@
 <script>
-	import { onMount, onDestroy } from 'svelte';
-	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 	import { checkAuth } from '$api/auth';
 	import { registerServiceWorker } from '$UITools/serviceWorker';
 
@@ -13,9 +12,6 @@
 	import NotificationWrapper from '$UITools/Notifications/NotificationWrapper.svelte';
 
 	export let data;
-	console.log(page.query);
-
-	//let notificationRedirection = page.query.notificationRedirection;
 
 	onMount(async () => {
 		new App();

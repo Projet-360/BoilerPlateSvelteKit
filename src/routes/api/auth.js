@@ -24,6 +24,7 @@ export async function checkAuth() {
 		const res = await fetch(`${BD}/auth/check-auth`, {
 			credentials: 'include'
 		});
+		console.log(res);
 		if (res.ok) {
 			const data = await res.json();
 			console.log(data);

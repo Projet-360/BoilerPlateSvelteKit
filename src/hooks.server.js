@@ -14,13 +14,6 @@ async function verifyToken(token) {
 export async function handle({ event, resolve }) {
 	const cookies = event.cookies.get('token');
 
-	// Ajoutez ce log pour voir si le token est bien récupéré
-	if (!cookies) {
-		console.error('Aucun token dans les cookies');
-	} else {
-		console.log('Token trouvé dans les cookies', cookies);
-	}
-
 	if (cookies) {
 		const user = await verifyToken(cookies);
 		console.log('user du hook.server', cookies);

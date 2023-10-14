@@ -30,16 +30,17 @@ import {
 import CustomError from '../errors/CustomError.js';
 
 // Endpoint to check authentication status
+// Endpoint to check authentication status
 router.get('/check-auth', async (req, res, next) => {
 	// Retrieve token from cookies
 	const token = req.cookies.token;
 
-	// Check if token is missing or malformed
-	if (!token || token === 'undefined' || token === 'null') {
-		return res.status(HTTP_STATUS.UNAUTHORIZED).json({ error: 'Token is missing or malformed' });
-	}
-
 	try {
+		// If no token is present, the user is not authenticated.
+		if (!token || token === 'undefined' || token === 'null') {
+			return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
+		}
+
 		// Validate the token and get the authentication status
 		const result = await authService.checkAuthentication(token);
 
@@ -51,15 +52,8 @@ router.get('/check-auth', async (req, res, next) => {
 				userId: result.userId
 			});
 		} else {
-			// Check if an error message exists
-			if (result.message) {
-				return res.status(HTTP_STATUS.UNAUTHORIZED).json({
-					isAuthenticated: false,
-					message: result.message
-				});
-			} else {
-				return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
-			}
+			// User is not authenticated, but no error should be thrown.
+			return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
 		}
 	} catch (error) {
 		console.error('JWT verification error:', error);
