@@ -33,6 +33,7 @@ import CustomError from '../errors/CustomError.js';
 router.get('/check-auth', async (req, res, next) => {
 	// Retrieve token from cookies
 	const token = req.cookies.token;
+	console.log('check auth');
 
 	// Check if token is missing or malformed
 	if (!token || token === 'undefined' || token === 'null') {

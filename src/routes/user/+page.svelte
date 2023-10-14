@@ -14,6 +14,9 @@
 	let role = '';
 	let isVerified = false;
 
+	let unsubscribe;
+	let showContent = false; // Ajouté
+
 	const handleUpdate = async () => {
 		try {
 			await updateUserInfo({ username, email }, $t);
@@ -30,15 +33,20 @@
 	};
 
 	onMount(async () => {
-		try {
-			const { isAuthenticated } = await getAuthenticatedUser(authStore);
-			if (!isAuthenticated) {
+		unsubscribe = authStore.subscribe(($auth) => {
+			if (!$auth.isAuthenticated) {
 				goto('/');
 			} else {
-				const data = await getDashboardData();
-				userData = data;
-				({ username, email, role, isVerified } = userData.userInfo);
+				showContent = true; // Afficher le contenu lorsque l'utilisateur est authentifié
 			}
+			if (unsubscribe) {
+				unsubscribe();
+			}
+		});
+		try {
+			const data = await getDashboardData();
+			userData = data;
+			({ username, email, role, isVerified } = userData.userInfo);
 		} catch (error) {
 			console.error('Error:', error);
 		}
@@ -50,25 +58,27 @@
 	<meta name="description" content="This is your user dashboard." />
 </svelte:head>
 
-<div class="page">
-	<div class="page-container">
-		<h1>{$t('user.title')}</h1>
-		{#if userData}
-			<form>
-				<label for="username">Username</label>
-				<input id="username" type="text" bind:value={username} />
-				<label for="email">Email</label>
-				<input id="email" type="email" bind:value={email} />
-				<button on:click={handlePasswordReset}>Réinitialiser le mot de passe</button>
-				<label for="role">Role</label>
-				<input id="role" type="text" value={role} onlyRead />
-				<label for="isVerified">Is Verified</label>
-				<input id="isVerified" type="checkbox" checked={isVerified} disabled />
-				<button on:click={handleUpdate}>Mettre à jour</button>
-			</form>
-		{:else}
-			<h2>{$t('user.loader')}</h2>
-		{/if}
-		<a href="/about" use:hoverable={'first'}>{$t('user.button')}</a>
+{#if showContent}
+	<div class="page">
+		<div class="page-container">
+			<h1>{$t('user.title')}</h1>
+			{#if userData}
+				<form>
+					<label for="username">Username</label>
+					<input id="username" type="text" bind:value={username} />
+					<label for="email">Email</label>
+					<input id="email" type="email" bind:value={email} />
+					<button on:click={handlePasswordReset}>Réinitialiser le mot de passe</button>
+					<label for="role">Role</label>
+					<input id="role" type="text" value={role} onlyRead />
+					<label for="isVerified">Is Verified</label>
+					<input id="isVerified" type="checkbox" checked={isVerified} disabled />
+					<button on:click={handleUpdate}>Mettre à jour</button>
+				</form>
+			{:else}
+				<h2>{$t('user.loader')}</h2>
+			{/if}
+			<a href="/about" use:hoverable={'first'}>{$t('user.button')}</a>
+		</div>
 	</div>
-</div>
+{/if}
