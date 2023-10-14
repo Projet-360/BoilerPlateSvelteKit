@@ -26,10 +26,12 @@ export async function checkAuth() {
 		});
 		if (res.ok) {
 			const data = await res.json();
+			console.log(data);
 			authStore.update((state) => ({
 				...state,
 				isAuthenticated: data.isAuthenticated,
-				role: data.role
+				role: data.role,
+				userId: data.userId
 			}));
 		}
 	} catch (error) {
@@ -48,7 +50,8 @@ export async function login(email, password, $t) {
 
 		authStore.set({
 			role: data.role,
-			isAuthenticated: true
+			isAuthenticated: true,
+			userId: data.userId
 		});
 
 		const { role, isAuthenticated } = currentState;
@@ -136,11 +139,14 @@ export async function ResetForgotNewPassword(token, newPassword, $t) {
 }
 
 export async function getDashboardData() {
+	// Ajoute le token en paramètre
 	try {
+		const headers = new Headers();
 		const data = await apiCall({
 			url: `${BD}/auth/user`,
 			method: 'GET',
-			credentials: 'include' // assure que le cookie est envoyé
+			headers: headers,
+			credentials: 'include'
 		});
 		return data;
 	} catch (error) {
@@ -149,43 +155,34 @@ export async function getDashboardData() {
 	}
 }
 
-// export const updateUserInfo = async (token, userInfo, $t) => {
-// 	try {
-// 		const headers = {
-// 			Authorization: `Bearer ${token}`,
-// 			'Content-Type': 'application/json'
-// 		};
-
-// 		const data = await apiCall({
-// 			url: `${BD}/auth/user/update`,
-// 			method: 'PUT',
-// 			headers,
-// 			body: userInfo
-// 		});
-
-// 		if (data.success) {
-// 			notificationStore.addNotification($t('validation.UPDATE_SUCCESS'), 'success');
-
-// 			if (data.notification) {
-// 				notificationStore.addNotification(data.notification, 'success');
-// 				logout($t);
-// 			}
-// 			return data;
-// 		} else {
-// 			throw new Error($t('validation.UPDATE_FAILURE'));
-// 		}
-// 	} catch (error) {
-// 		console.error("Erreur lors de la mise à jour des informations de l'utilisateur :", error);
-// 		throw error;
-// 	}
-// };
-
-export async function getAllUsers(token) {
+export const updateUserInfo = async (userInfo, $t) => {
 	try {
-		const headers = {
-			Authorization: `Bearer ${token}`
-		};
+		const data = await apiCall({
+			url: `${BD}/auth/user/update`,
+			method: 'PUT',
+			headers,
+			body: userInfo
+		});
 
+		if (data.success) {
+			notificationStore.addNotification($t('validation.UPDATE_SUCCESS'), 'success');
+
+			if (data.notification) {
+				notificationStore.addNotification(data.notification, 'success');
+				logout($t);
+			}
+			return data;
+		} else {
+			throw new Error($t('validation.UPDATE_FAILURE'));
+		}
+	} catch (error) {
+		console.error("Erreur lors de la mise à jour des informations de l'utilisateur :", error);
+		throw error;
+	}
+};
+
+export async function getAllUsers() {
+	try {
 		const data = await apiCall({
 			url: `${BD}/auth/admin/users`,
 			method: 'GET',
@@ -203,13 +200,8 @@ export async function getAllUsers(token) {
 	}
 }
 
-export async function updateUser(token, userId, updateData) {
+export async function updateUser(userId, updateData) {
 	try {
-		const headers = {
-			Authorization: `Bearer ${token}`,
-			'Content-Type': 'application/json'
-		};
-
 		const data = await apiCall({
 			url: `${BD}/auth/admin/user/${userId}`,
 			method: 'PUT',

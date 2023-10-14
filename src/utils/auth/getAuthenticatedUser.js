@@ -1,15 +1,15 @@
 export async function getAuthenticatedUser(authStore) {
 	return new Promise((resolve, reject) => {
 		let unsubscribe = null;
-		unsubscribe = authStore.subscribe(({ isAuthenticated, token }) => {
-			// Vous pouvez ajouter une vérification de sécurité supplémentaire ici
+		unsubscribe = authStore.subscribe(({ isAuthenticated }) => {
+			// Arrêtons la souscription une fois que nous avons obtenu les données nécessaires
 			if (unsubscribe && typeof unsubscribe === 'function') {
-				if (unsubscribe && typeof unsubscribe === 'function') {
-					unsubscribe();
-				}
+				unsubscribe();
 			}
-			if (isAuthenticated !== null && token !== null) {
-				resolve({ isAuthenticated, token });
+
+			// Si isAuthenticated est initialisé (ne devrait pas être null ou undefined)
+			if (isAuthenticated !== null) {
+				resolve({ isAuthenticated });
 			}
 		});
 	});

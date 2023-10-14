@@ -1,27 +1,22 @@
 import jwt from 'jsonwebtoken';
 import config from '../config/config.js';
 
-export const isAuthenticated = async (req, res, next) => {
-	// Récupérez le token à partir du cookie
-	const token = req.cookies['token'];
+export const isAuthenticated = (req, res, next) => {
+	const token = req.cookies['token']; // Remplace 'yourCookieName' par le nom réel de ton cookie
 
-	// Vérifiez si le token est présent
+	// Pas de token, pas d'autorisation
 	if (!token) {
-		console.log('Aucun token fourni dans les cookies.');
 		return res.status(401).json({ error: 'Unauthorized' });
 	}
 
-	try {
-		// Vérifiez le token
-		const decoded = await jwt.verify(token, config.SECRETKEY);
+	// Vérifions le token
+	jwt.verify(token, config.SECRETKEY, (err, decoded) => {
+		if (err) {
+			return res.status(401).json({ error: 'Invalid token' });
+		}
 
-		// Stockez les données décodées pour les utiliser dans d'autres middlewares ou routes
+		// Stockons les données décodées pour les utiliser plus tard
 		req.user = decoded;
-		console.log('Token décodé:', decoded);
-
 		next();
-	} catch (err) {
-		console.log('Erreur lors de la vérification du token:', err);
-		return res.status(401).json({ error: 'Invalid token' });
-	}
+	});
 };

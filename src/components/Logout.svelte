@@ -6,9 +6,7 @@
 	let isAuthenticated;
 
 	authStore.subscribe(($authStore) => {
-		// Utilisez la propriété qui représente le mieux l'état d'authentification
-		// dans votre cas, si ce n'est pas `isAuthenticated`.
-		isAuthenticated = $authStore && $authStore.isAuthenticated;
+		isAuthenticated = $authStore && $authStore.isAuthenticated ? true : false;
 	});
 
 	function handleLogout() {

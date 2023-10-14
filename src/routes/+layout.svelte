@@ -14,6 +14,12 @@
 
 	export let data;
 
+	import { authStore } from '$stores/authStore';
+
+	const unsubscribe = authStore.subscribe(($authStore) => {
+		console.log('Auth store value:', $authStore);
+	});
+
 	onMount(async () => {
 		new App();
 		registerServiceWorker();

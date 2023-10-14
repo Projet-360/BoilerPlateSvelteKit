@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 
 export const authStore = writable({
+	userId: null,
 	role: null,
 	isAuthenticated: false
 });

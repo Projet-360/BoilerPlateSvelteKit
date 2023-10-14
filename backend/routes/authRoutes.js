@@ -31,28 +31,39 @@ import CustomError from '../errors/CustomError.js';
 
 // Endpoint to check authentication status
 router.get('/check-auth', async (req, res, next) => {
+	// Retrieve token from cookies
 	const token = req.cookies.token;
 
+	// Check if token is missing or malformed
+	if (!token || token === 'undefined' || token === 'null') {
+		return res.status(HTTP_STATUS.UNAUTHORIZED).json({ error: 'Token is missing or malformed' });
+	}
+
 	try {
+		// Validate the token and get the authentication status
 		const result = await authService.checkAuthentication(token);
+
+		// Check if the user is authenticated
 		if (result.isAuthenticated) {
-			res.status(HTTP_STATUS.OK).json({
+			return res.status(HTTP_STATUS.OK).json({
 				isAuthenticated: true,
 				role: result.role,
 				userId: result.userId
 			});
 		} else {
+			// Check if an error message exists
 			if (result.message) {
-				res.status(HTTP_STATUS.UNAUTHORIZED).json({
+				return res.status(HTTP_STATUS.UNAUTHORIZED).json({
 					isAuthenticated: false,
 					message: result.message
 				});
 			} else {
-				res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
+				return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
 			}
 		}
 	} catch (error) {
-		next(new CustomError('CheckAuthError', error.message, 400));
+		console.error('JWT verification error:', error);
+		next(new CustomError('CheckAuthError', error.message, HTTP_STATUS.BAD_REQUEST));
 	}
 });
 
@@ -168,7 +179,6 @@ router.post('/forgot-password/:token', async (req, res) => {
 // User dashboard accessible only for authenticated users with 'user' role
 router.get('/user', isAuthenticated, checkRole('user'), async (req, res) => {
 	const { userId } = req.user;
-	console.log('userId du backend', userId);
 	try {
 		const userInfo = await authService.getUserInfo(userId);
 		res.json({ userInfo });
@@ -178,25 +188,25 @@ router.get('/user', isAuthenticated, checkRole('user'), async (req, res) => {
 	}
 });
 
-// router.put(
-// 	'/user/update',
-// 	isAuthenticated,
-// 	checkRole('user'),
-// 	[...updateUserValidators, handleValidationErrors],
-// 	async (req, res) => {
-// 		try {
-// 			const userId = req.user.userId;
-// 			const updateData = req.body;
+router.put(
+	'/user/update',
+	isAuthenticated,
+	checkRole('user'),
+	[...updateUserValidators, handleValidationErrors],
+	async (req, res) => {
+		try {
+			const userId = req.user.userId;
+			const updateData = req.body;
 
-// 			const { success, notification } = await authService.updateUserInfo(userId, updateData);
+			const { success, notification } = await authService.updateUserInfo(userId, updateData);
 
-// 			res.status(HTTP_STATUS.OK).json({ message: 'Success', success, notification });
-// 		} catch (error) {
-// 			console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
-// 			res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Erreur du serveur.' });
-// 		}
-// 	}
-// );
+			res.status(HTTP_STATUS.OK).json({ message: 'Success', success, notification });
+		} catch (error) {
+			console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
+			res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Erreur du serveur.' });
+		}
+	}
+);
 
 router.get('/admin/users', isAuthenticated, checkRole('admin'), async (req, res) => {
 	try {
