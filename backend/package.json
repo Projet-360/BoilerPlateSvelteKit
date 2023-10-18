@@ -10,7 +10,7 @@
      "dev": "cross-env NODE_ENV=development nodemon --watch \"**/*.ts\" --exec 'npm run format:watch & node --loader ts-node/esm' ./index.ts",
     "cleardb": "ts-node clear-db.ts",
     "docs": "typedoc --out docs",
-    "format:watch": "onchange \"**/*.ts\" -- prettier --write \"**/*.ts\"",
+    "format:watch": "onchange \"**/*.ts\" -- prettier --write \"**/*.ts\" > nul 2>&1",
     "format": "prettier --write ."
   },
   "keywords": [],
