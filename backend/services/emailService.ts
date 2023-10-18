@@ -10,7 +10,7 @@ const validateEnvVariables = () => {
     'MAIL_PORT',
     'EMAIL_USER',
     'EMAIL_PASSWORD',
-    'URL_FRONT',
+    'URL_FRONT_LOCAL',
   ];
   for (const varName of requiredEnvVariables) {
     if (!(env as any)[varName]) {
@@ -59,7 +59,7 @@ const defaultSender =
  * @throws Will throw an error if the email sending fails.
  */
 export const sendVerificationEmail = async (email: string, token: string) => {
-  const url = `${env.URL_FRONT}/signup/${token}`;
+  const url = `${env.URL_FRONT_LOCAL}/signup/${token}`;
   await sendEmail(
     email,
     "Vérification de l'Email",
@@ -80,7 +80,7 @@ export const sendResetPasswordEmail = async (
   user: IUser,
   resetToken: string,
 ) => {
-  const url = `${env.URL_FRONT}/forgot-password/${resetToken}`;
+  const url = `${env.URL_FRONT_LOCAL}/forgot-password/${resetToken}`;
   await sendEmail(
     user.email,
     'Réinitialisation du mot de passe',

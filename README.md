@@ -1,8 +1,14 @@
+Installer docker : https://www.docker.com/get-started
 Crée une BD Mongo
 docker run --name svelteKitDB -p 27017:27017 -d mongo:latest
 
+npm i 
+backend: npm i
+
+npx playwright install
+
 lancer lighhouse: 
-lhci autorun --collect.url=http://localhost:1000 --upload.target=filesystem --upload.outputDir=./lighthouse-reports/
+lhci autorun --collect.url=http://127.0.0.1:1000 --upload.target=filesystem --upload.outputDir=./lighthouse-reports/
 
 
 MailHog:
