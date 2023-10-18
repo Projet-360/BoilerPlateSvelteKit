@@ -4,14 +4,14 @@
   "type": "module",
   "description": "",
   "main": "index.js",
-  "scripts": {
+ "scripts": {
     "build": "tsc",
     "start": "cross-env NODE_ENV=production node dist/index.js",
-     "dev": "cross-env NODE_ENV=development nodemon --watch \"**/*.ts\" --exec 'npm run format:watch & node --loader ts-node/esm' ./index.ts",
+    "dev": "concurrently \"cross-env NODE_ENV=development nodemon --watch \\\"**/*.ts\\\" --exec 'node --loader ts-node/esm' ./index.ts\" \"nodemon --watch \\\"./**/*.ts\\\" --exec \\\"prettier --write \"./**/*.ts\\\"\"",
     "cleardb": "ts-node clear-db.ts",
     "docs": "typedoc --out docs",
-    "format:watch": "onchange \"**/*.ts\" -- prettier --write \"**/*.ts\" > nul 2>&1",
-    "format": "prettier --write ."
+    "format": "prettier --write \"./**/*.ts\"",
+    "prettier:watch": "nodemon --watch \"./**/*.ts\" --exec \"prettier --write \"./**/*.ts\""
   },
   "keywords": [],
   "author": "",
@@ -36,6 +36,7 @@
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20.8.6",
     "@types/nodemailer": "^6.4.11",
+    "concurrently": "^8.2.1",
     "cross-env": "^7.0.3",
     "jsdoc": "^4.0.2",
     "nodemon": "^3.0.1",

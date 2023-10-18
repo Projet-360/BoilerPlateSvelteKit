@@ -101,7 +101,7 @@ export const hashPassword = async (password: string) => {
  * Check if the given email already exists in the database.
  *
  * @async
- * @param {string} email - The email address to check for.!
+ * @param {string} email - The email address to check for.
  * @throws Will throw an error if the email address already exists in the database.
  * @returns {Promise<void>} - A promise that resolves if the email does not exist, otherwise it throws an error.
  */
