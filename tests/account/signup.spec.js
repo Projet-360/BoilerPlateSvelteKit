@@ -46,7 +46,7 @@ test.describe.parallel('Signup validation Tests', () => {
 
 	test.beforeEach(async () => {
 		page = await browser.newPage();
-		await page.goto('http://localhost:5173/signup', { waitUntil: 'networkidle' });
+		await page.goto('http://localhost:1000/signup', { waitUntil: 'networkidle' });
 	});
 
 	test.afterEach(async () => {
@@ -157,7 +157,7 @@ test.describe.serial('Signup Tests', () => {
 
 	test('SIGNUP - inscription avec succés - SUCCESS_INSCRIPTION', async () => {
 		page = await browser.newPage();
-		await page.goto('http://localhost:5173/signup', { waitUntil: 'networkidle' });
+		await page.goto('http://localhost:1000/signup', { waitUntil: 'networkidle' });
 		console.log(username);
 		console.log(email);
 		console.log(password);
@@ -172,7 +172,7 @@ test.describe.serial('Signup Tests', () => {
 
 	test('SIGNUP - Email déjà inscrit - EMAIL_EXIST', async () => {
 		page = await browser.newPage();
-		await page.goto('http://localhost:5173/signup', { waitUntil: 'networkidle' });
+		await page.goto('http://localhost:1000/signup', { waitUntil: 'networkidle' });
 
 		await runSignupTest(page, username, email, password, 'This email already exists X');
 	});
@@ -197,7 +197,7 @@ test.describe.serial('Email Verification and Login Tests', () => {
 	// Test for trying to login with an email that has not been verified yet
 	test('LOGIN - Email not yet verified - EMAIL_NOT_VERIFIED_LOGIN', async () => {
 		// Navigate to the login page
-		await page.goto('http://localhost:5173/login', { waitUntil: 'networkidle' });
+		await page.goto('http://localhost:1000/login', { waitUntil: 'networkidle' });
 		const browser = await chromium.launch({ headless: false });
 
 		await runLoginTest(
@@ -220,7 +220,7 @@ test.describe.serial('Password Reset Tests', () => {
 
 	test.beforeEach(async () => {
 		page = await browser.newPage();
-		await page.goto('http://localhost:5173/forgot-password', { waitUntil: 'networkidle' });
+		await page.goto('http://localhost:1000/forgot-password', { waitUntil: 'networkidle' });
 	});
 
 	test.afterEach(async () => {
@@ -311,7 +311,7 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		const newPage = await browser.newPage();
 
 		// Navigate to the login page
-		await newPage.goto('http://localhost:5173/login', { waitUntil: 'networkidle' });
+		await newPage.goto('http://localhost:1000/login', { waitUntil: 'networkidle' });
 
 		await runLoginTest(newPage, email, 'sdrg', 'wrong identifiants X');
 
@@ -324,7 +324,7 @@ test.describe.serial('Email Verification and Login Tests', () => {
 		const newPage = await browser.newPage();
 
 		// Navigate to the login page
-		await newPage.goto('http://localhost:5173/login', { waitUntil: 'networkidle' });
+		await newPage.goto('http://localhost:1000/login', { waitUntil: 'networkidle' });
 
 		await runLoginTest(newPage, email, password, 'Welcome ! X');
 
@@ -354,7 +354,7 @@ test.describe.serial('Password Reset Tests', () => {
 
 	test.beforeEach(async () => {
 		page = await browser.newPage();
-		await page.goto('http://localhost:5173/forgot-password', { waitUntil: 'networkidle' });
+		await page.goto('http://localhost:1000/forgot-password', { waitUntil: 'networkidle' });
 	});
 
 	test.afterEach(async () => {

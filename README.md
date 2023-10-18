@@ -2,7 +2,7 @@ Crée une BD Mongo
 docker run --name svelteKitDB -p 27017:27017 -d mongo:latest
 
 lancer lighhouse: 
-lhci autorun --collect.url=http://localhost:5173 --upload.target=filesystem --upload.outputDir=./lighthouse-reports/
+lhci autorun --collect.url=http://localhost:1000 --upload.target=filesystem --upload.outputDir=./lighthouse-reports/
 
 
 MailHog:

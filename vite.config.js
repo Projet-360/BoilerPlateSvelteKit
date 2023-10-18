@@ -1,16 +1,20 @@
-import { sveltekit } from "@sveltejs/kit/vite";
+import { sveltekit } from '@sveltejs/kit/vite';
 
 /** @type {import('vite').UserConfig} */
 const config = {
-  plugins: [sveltekit()],
+	plugins: [sveltekit()],
 
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: '@import "src/css/main.scss"',
-      },
-    },
-  },
+	css: {
+		preprocessorOptions: {
+			scss: {
+				additionalData: '@import "src/css/main.scss"'
+			}
+		}
+	},
+
+	server: {
+		port: 1000
+	}
 };
 
 export default config;

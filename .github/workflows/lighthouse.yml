@@ -25,4 +25,4 @@ jobs:
 
       
     - name: Run Lighthouse
-      run: lighthouse http://localhost:5173 --output json --output-path=./lighthouse-results.json
+      run: lighthouse http://localhost:1000 --output json --output-path=./lighthouse-results.json
