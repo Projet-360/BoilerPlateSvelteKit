@@ -1,1 +1,1 @@
-export const BD = "http://localhost:3001";
+export const BD = 'http://localhost:2000';
