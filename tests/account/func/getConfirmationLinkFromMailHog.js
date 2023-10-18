@@ -1,5 +1,6 @@
 // Dépendance nécessaire pour décoder le contenu en 'quoted-printable'
 import quotedPrintable from 'quoted-printable';
+import fetch from 'node-fetch';
 
 // Définition de la constante pour un message d'erreur spécifique
 const ERR_CONFIRM_LINK_NOT_FOUND = 'Confirmation link not found in email';

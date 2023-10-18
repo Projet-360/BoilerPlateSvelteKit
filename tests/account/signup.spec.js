@@ -11,6 +11,7 @@ import {
 	generateRandomPassword
 } from '../utils/functionUtils.js';
 
+
 let username, email, password;
 
 function initializeConstants() {
