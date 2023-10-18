@@ -6,6 +6,6 @@ module.exports = {
   singleQuote: true, // Utiliser des guillemets simples pour les chaînes de caractères
   trailingComma: 'all', // Ajouter une virgule finale dans les tableaux et les objets
   bracketSpacing: true, // Ajouter un espace entre les accolades dans les objets
-  jsxBracketSameLine: false, // Mettre les accolades JSX à la ligne
+  bracketSameLine: false, // Mettre les accolades JSX à la ligne
   arrowParens: 'always',
 };
