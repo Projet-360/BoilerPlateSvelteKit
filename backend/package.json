@@ -7,9 +7,11 @@
   "scripts": {
     "build": "tsc",
     "start": "cross-env NODE_ENV=production node dist/index.js",
-    "dev": "cross-env NODE_ENV=development nodemon --watch 'src/**/*.ts' --exec 'node --loader ts-node/esm' ./index.ts",
+     "dev": "cross-env NODE_ENV=development nodemon --watch \"**/*.ts\" --exec 'npm run format:watch & node --loader ts-node/esm' ./index.ts",
     "cleardb": "ts-node clear-db.ts",
-    "docs": "typedoc --out docs"
+    "docs": "typedoc --out docs",
+    "format:watch": "onchange \"**/*.ts\" -- prettier --write \"**/*.ts\"",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -37,6 +39,7 @@
     "cross-env": "^7.0.3",
     "jsdoc": "^4.0.2",
     "nodemon": "^3.0.1",
+    "prettier": "^3.0.3",
     "ts-node": "^10.9.1",
     "typedoc": "^0.25.2",
     "typescript": "^5.2.2"

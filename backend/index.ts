@@ -27,7 +27,6 @@ if (env.NODE_ENV === 'production') {
   (env as any)['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 }
 
-
 // Apply middlewares to the app
 applyMiddlewares(app);
 
@@ -37,16 +36,16 @@ app.use('/api', greetingRoutes);
 
 // Error handling middleware
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-	const statusCode = err.statusCode || 500;
-	// Log the error message and stack trace
-	console.error(err.message, err.stack);
-	// Send the error response
-	res.status(statusCode).json({ message: err.message });
+  const statusCode = err.statusCode || 500;
+  // Log the error message and stack trace
+  console.error(err.message, err.stack);
+  // Send the error response
+  res.status(statusCode).json({ message: err.message });
 });
 
 // Start the server on the defined port
 app.listen(config.PORT, () => {
-	console.log(`Server running on port ${config.PORT}`);
+  console.log(`Server running on port ${config.PORT}`);
 });
 
 // Graceful shutdown handlers for proper resource deallocation
@@ -55,11 +54,11 @@ process.on('SIGINT', gracefulShutdown);
 
 // Function for handling graceful shutdown
 function gracefulShutdown() {
-	console.log('\nReceived exit signal, shutting down gracefully.');
+  console.log('\nReceived exit signal, shutting down gracefully.');
 
-	// Close the MongoDB connection
-	mongoose.connection.close((() => {
-	console.log('MongoDB connection closed.');
-	process.exit(0);
-	}) as any);
+  // Close the MongoDB connection
+  mongoose.connection.close((() => {
+    console.log('MongoDB connection closed.');
+    process.exit(0);
+  }) as any);
 }

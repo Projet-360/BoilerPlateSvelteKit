@@ -10,18 +10,18 @@ import checkBlacklist from './checkBlacklist.js';
 
 // Apply middlewares
 export default (app: Application) => {
-	// Apply CORS settings from external config file
-	app.use(cors(corsConfig));
+  // Apply CORS settings from external config file
+  app.use(cors(corsConfig));
 
-	// Parse incoming JSON payloads
-	app.use(express.json());
+  // Parse incoming JSON payloads
+  app.use(express.json());
 
-	// Parse incoming cookies from the headers
-	app.use(cookieParser());
+  // Parse incoming cookies from the headers
+  app.use(cookieParser());
 
-	// Custom middleware to check if token is blacklisted
-	app.use(checkBlacklist);
+  // Custom middleware to check if token is blacklisted
+  app.use(checkBlacklist);
 
-	// Custom error-handling middleware
-	app.use(errorHandler);
+  // Custom error-handling middleware
+  app.use(errorHandler);
 };

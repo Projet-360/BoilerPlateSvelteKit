@@ -15,27 +15,30 @@ import BlacklistedToken from '../models/BlacklistedTokenModel.js';
 
 import CustomError from './../errors/CustomError.js';
 
-import { sendVerificationEmail, sendResetPasswordEmail } from './emailService.js';
+import {
+  sendVerificationEmail,
+  sendResetPasswordEmail,
+} from './emailService.js';
 
 import { IUser } from '../TypeScript/interfaces.js';
 
 // Function to generate a random token
 const generateToken = () => {
-	return crypto.randomBytes(32).toString('hex');
+  return crypto.randomBytes(32).toString('hex');
 };
 
 // Function to throw custom errors
 const throwError = (type: string, message: string, status: number) => {
-	throw new CustomError(type, message, status);
+  throw new CustomError(type, message, status);
 };
 
 // Generate and save reset password token, then send the email
 const generateAndSaveResetToken = async (user: IUser) => {
-	const resetToken = generateToken();
-	user.resetToken = resetToken;
-	user.resetTokenExpiration = new Date(Date.now() + 3600000);
-	await user.save();
-	await sendResetPasswordEmail(user, resetToken);
+  const resetToken = generateToken();
+  user.resetToken = resetToken;
+  user.resetTokenExpiration = new Date(Date.now() + 3600000);
+  await user.save();
+  await sendResetPasswordEmail(user, resetToken);
 };
 
 /**
@@ -67,20 +70,20 @@ export const createSignupToken = (user: IUser) => {
  * @returns {Promise<Object>} - A promise that resolves with an object containing the verification token.
  */
 export const createVerificationToken = async (user: IUser) => {
-	const verificationToken = generateToken();
-	await sendVerificationEmail(user.email, verificationToken);
+  const verificationToken = generateToken();
+  await sendVerificationEmail(user.email, verificationToken);
 
-	const expireAt = new Date();
-	expireAt.setHours(expireAt.getHours() + config.VERIFICATION_EXPIRY_HOURS);
+  const expireAt = new Date();
+  expireAt.setHours(expireAt.getHours() + config.VERIFICATION_EXPIRY_HOURS);
 
-	const newToken = new EmailVerificationToken({
-		userId: user._id,
-		token: verificationToken,
-		expireAt: expireAt
-	});
-	await newToken.save();
+  const newToken = new EmailVerificationToken({
+    userId: user._id,
+    token: verificationToken,
+    expireAt: expireAt,
+  });
+  await newToken.save();
 
-	return { verificationToken };
+  return { verificationToken };
 };
 
 /**
@@ -91,22 +94,22 @@ export const createVerificationToken = async (user: IUser) => {
  * @returns {Promise<string>} - A promise that resolves with the hashed password.
  */
 export const hashPassword = async (password: string) => {
-	return await hash(password, 12);
+  return await hash(password, 12);
 };
 
 /**
  * Check if the given email already exists in the database.
  *
  * @async
- * @param {string} email - The email address to check for.
+ * @param {string} email - The email address to check for.!
  * @throws Will throw an error if the email address already exists in the database.
  * @returns {Promise<void>} - A promise that resolves if the email does not exist, otherwise it throws an error.
  */
 export const checkEmailExists = async (email: string) => {
-	const existingUserByEmail = await User.findOne({ email });
-	if (existingUserByEmail) {
-		throwError('EMAIL_EXIST', 'EMAIL_EXIST', HTTP_STATUS.BAD_REQUEST);
-	}
+  const existingUserByEmail = await User.findOne({ email });
+  if (existingUserByEmail) {
+    throwError('EMAIL_EXIST', 'EMAIL_EXIST', HTTP_STATUS.BAD_REQUEST);
+  }
 };
 
 /**
@@ -120,11 +123,16 @@ export const checkEmailExists = async (email: string) => {
  *
  * @returns {Promise<Object>} - A promise that resolves with the newly created user object.
  */
-export const createUser = async (username: string, email: string, hashedPassword: string, role: string) => {
-	const newUser = new User({ username, email, password: hashedPassword, role });
-	console.log('New User:', newUser);
-	await newUser.save();
-	return newUser;
+export const createUser = async (
+  username: string,
+  email: string,
+  hashedPassword: string,
+  role: string,
+) => {
+  const newUser = new User({ username, email, password: hashedPassword, role });
+  console.log('New User:', newUser);
+  await newUser.save();
+  return newUser;
 };
 
 /**
@@ -143,38 +151,38 @@ export const createUser = async (username: string, email: string, hashedPassword
  * - role: {string} [Optional] The user's role.
  */
 export const checkAuthentication = async (token: string) => {
-	if (!token) {
-		console.log("Le client n'est pas connecté");
-		return { isAuthenticated: false };
-	}
+  if (!token) {
+    console.log("Le client n'est pas connecté");
+    return { isAuthenticated: false };
+  }
 
-	const blacklistedToken = await BlacklistedToken.findOne({ token });
+  const blacklistedToken = await BlacklistedToken.findOne({ token });
 
-	if (blacklistedToken) {
-		return {
-			isAuthenticated: false,
-			message: 'Le token est dans la liste noire.'
-		};
-	}
+  if (blacklistedToken) {
+    return {
+      isAuthenticated: false,
+      message: 'Le token est dans la liste noire.',
+    };
+  }
 
-	const decoded = jwt.verify(token, config.SECRETKEY) as JwtPayload;
+  const decoded = jwt.verify(token, config.SECRETKEY) as JwtPayload;
 
-	// Chercher l'utilisateur en fonction de userId pour obtenir le rôle
-	const user = await User.findById(decoded.userId);
+  // Chercher l'utilisateur en fonction de userId pour obtenir le rôle
+  const user = await User.findById(decoded.userId);
 
-	if (!user) {
-		return {
-			isAuthenticated: false,
-			message: 'Utilisateur non trouvé.'
-		};
-	}
+  if (!user) {
+    return {
+      isAuthenticated: false,
+      message: 'Utilisateur non trouvé.',
+    };
+  }
 
-	return {
-		isAuthenticated: true,
-		token,
-		userId: decoded.userId,
-		role: user.role // Ajout du rôle ici
-	};
+  return {
+    isAuthenticated: true,
+    token,
+    userId: decoded.userId,
+    role: user.role, // Ajout du rôle ici
+  };
 };
 
 /**
@@ -188,13 +196,13 @@ export const checkAuthentication = async (token: string) => {
 export const login = async (email: string, password: string) => {
   // Find the user by email
   const user: IUser | null = await User.findOne({ email });
-  
+
   // Handle error cases first
   if (!user) {
     throwError('INVALID_CREDENTIALS', 'INVALID_CREDENTIALS', 401);
     return;
   }
-  
+
   if (!user.isVerified) {
     throwError('EMAIL_NOT_VERIFIED', 'EMAIL_NOT_VERIFIED', 401);
     return;
@@ -212,8 +220,8 @@ export const login = async (email: string, password: string) => {
     { userId: user._id, email: user.email, role: user.role },
     config.SECRETKEY,
     {
-      expiresIn: '1h'
-    }
+      expiresIn: '1h',
+    },
   );
 
   return { token, userId: user._id, role: user.role };
@@ -285,8 +293,8 @@ export const verifyToken = async (token: string) => {
  * @throws Will throw an error if the reset token cannot be generated or saved.
  */
 export const requestForgotPassword = async (user: IUser) => {
-	await generateAndSaveResetToken(user);
-	return { message: 'EMAIL_FORGOT_PASSWORD' };
+  await generateAndSaveResetToken(user);
+  return { message: 'EMAIL_FORGOT_PASSWORD' };
 };
 
 /**
@@ -305,12 +313,15 @@ export const requestForgotPassword = async (user: IUser) => {
  *
  * @throws Will throw an error if the new password cannot be hashed or saved.
  */
-export const requestresetForgotPassword = async (user: IUser, newPassword: string) => {
-	const hashedPassword = await hash(newPassword, 12);
-	user.password = hashedPassword;
-	user.resetToken = undefined;
-	user.resetTokenExpiration = undefined;
-	await user.save();
+export const requestresetForgotPassword = async (
+  user: IUser,
+  newPassword: string,
+) => {
+  const hashedPassword = await hash(newPassword, 12);
+  user.password = hashedPassword;
+  user.resetToken = undefined;
+  user.resetTokenExpiration = undefined;
+  await user.save();
 };
 
 /**
@@ -328,25 +339,25 @@ export const requestresetForgotPassword = async (user: IUser, newPassword: strin
  * @throws {Error} Will throw an error if the user is not found or any other error occurs.
  */
 export const getUserInfo = async (userId: string) => {
-	try {
-		const user = await User.findById(userId).select('-password');
+  try {
+    const user = await User.findById(userId).select('-password');
 
-		const { username, email, role, isVerified } = user as IUser;
+    const { username, email, role, isVerified } = user as IUser;
 
-		const userInfo = {
-			username,
-			email,
-			role,
-			isVerified
-		};
+    const userInfo = {
+      username,
+      email,
+      role,
+      isVerified,
+    };
 
-		if (!user) {
-			throw new Error('Utilisateur non trouvé');
-		}
-		return userInfo;
-	} catch (error) {
-		throw error;
-	}
+    if (!user) {
+      throw new Error('Utilisateur non trouvé');
+    }
+    return userInfo;
+  } catch (error) {
+    throw error;
+  }
 };
 
 /**
@@ -362,16 +373,16 @@ export const getUserInfo = async (userId: string) => {
  * setAuthCookie(res, 'some-jwt-token');
  */
 export function setAuthCookie(res: Response, token: string) {
-	// Define cookie options
-	const cookieOptions: CookieOptions = {
-		httpOnly: true,
-		secure: env.NODE_ENV === 'production',
-		sameSite: 'strict',
-		maxAge: 3600000
-	};
+  // Define cookie options
+  const cookieOptions: CookieOptions = {
+    httpOnly: true,
+    secure: env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 3600000,
+  };
 
-	// Set the cookie in the response
-	res.cookie('token', token, cookieOptions);
+  // Set the cookie in the response
+  res.cookie('token', token, cookieOptions);
 }
 
 /**
@@ -397,30 +408,32 @@ export function setAuthCookie(res: Response, token: string) {
  * updateUserInfo('some-user-id', { email: 'new.email@example.com', username: 'newUsername' });
  */
 export const updateUserInfo = async (userId: string, updateData: any) => {
-	try {
-		const currentUser = await User.findById(userId);
-		if (!currentUser) {
-			throw new Error('Utilisateur non trouvé.');
-		}
+  try {
+    const currentUser = await User.findById(userId);
+    if (!currentUser) {
+      throw new Error('Utilisateur non trouvé.');
+    }
 
-		let notification = ''; // Pour stocker le message de notification
+    let notification = ''; // Pour stocker le message de notification
 
-		if (updateData.email && currentUser.email !== updateData.email) {
-			updateData.isVerified = false;
-			const verificationInfo = await createVerificationToken(currentUser as IUser);
-			notification = 'MAIL_CHANGED';
-		}
+    if (updateData.email && currentUser.email !== updateData.email) {
+      updateData.isVerified = false;
+      const verificationInfo = await createVerificationToken(
+        currentUser as IUser,
+      );
+      notification = 'MAIL_CHANGED';
+    }
 
-		const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
-			new: true,
-			runValidators: true
-		});
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
+      new: true,
+      runValidators: true,
+    });
 
-		return { success: true, updatedUser, notification };
-	} catch (error) {
-		console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
-		throw error;
-	}
+    return { success: true, updatedUser, notification };
+  } catch (error) {
+    console.error("Erreur lors de la mise à jour de l'utilisateur :", error);
+    throw error;
+  }
 };
 
 /**
@@ -436,7 +449,7 @@ export const updateUserInfo = async (userId: string, updateData: any) => {
  * const users = await getAllUsers();
  */
 export const getAllUsers = async () => {
-	return await User.find({});
+  return await User.find({});
 };
 
 /**
@@ -456,6 +469,6 @@ export const getAllUsers = async () => {
  * const result = await updateUser('someUserId', updateData);
  */
 export const updateUser = async (userId: string, updateData: IUser) => {
-	const user = await User.findByIdAndUpdate(userId, updateData, { new: true });
-	return { success: true, notification: 'Utilisateur mis à jour', user };
+  const user = await User.findByIdAndUpdate(userId, updateData, { new: true });
+  return { success: true, notification: 'Utilisateur mis à jour', user };
 };
