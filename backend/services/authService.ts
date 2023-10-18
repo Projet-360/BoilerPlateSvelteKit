@@ -1,7 +1,8 @@
 // Import required modules and configurations
+import { Response, CookieOptions } from 'express';
 import pkg from 'bcryptjs';
 const { hash, compare } = pkg;
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import crypto from 'crypto';
 
 import { env } from '../constants/env.js';
@@ -12,10 +13,11 @@ import User from '../models/UserModel.js';
 import EmailVerificationToken from '../models/EmailVerificationTokenModel.js';
 import BlacklistedToken from '../models/BlacklistedTokenModel.js';
 
-import CustomError from '../errors/CustomError.js';
+import CustomError from './../errors/CustomError.js';
 
-import { sendVerificationEmail, sendResetPasswordEmail } from '../services/emailService.js';
-import { log } from 'console';
+import { sendVerificationEmail, sendResetPasswordEmail } from './emailService.js';
+
+import { IUser } from '../TypeScript/interfaces.js';
 
 // Function to generate a random token
 const generateToken = () => {
@@ -23,15 +25,15 @@ const generateToken = () => {
 };
 
 // Function to throw custom errors
-const throwError = (type, message, status) => {
+const throwError = (type: string, message: string, status: number) => {
 	throw new CustomError(type, message, status);
 };
 
 // Generate and save reset password token, then send the email
-const generateAndSaveResetToken = async (user) => {
+const generateAndSaveResetToken = async (user: IUser) => {
 	const resetToken = generateToken();
 	user.resetToken = resetToken;
-	user.resetTokenExpiration = Date.now() + 3600000;
+	user.resetTokenExpiration = new Date(Date.now() + 3600000);
 	await user.save();
 	await sendResetPasswordEmail(user, resetToken);
 };
@@ -47,11 +49,12 @@ const generateAndSaveResetToken = async (user) => {
  *
  * @returns {Object} - An object containing the JWT token.
  */
-export const createSignupToken = ({ _id: userId, username, email, role }) => {
-	const token = jwt.sign({ userId, username, email, role }, config.SECRETKEY, {
-		expiresIn: config.TOKEN_EXPIRY
-	});
-	return { token };
+export const createSignupToken = (user: IUser) => {
+  const { _id: userId, username, email, role } = user;
+  const token = jwt.sign({ userId, username, email, role }, config.SECRETKEY, {
+    expiresIn: config.TOKEN_EXPIRY,
+  });
+  return { token };
 };
 
 /**
@@ -63,7 +66,7 @@ export const createSignupToken = ({ _id: userId, username, email, role }) => {
  *
  * @returns {Promise<Object>} - A promise that resolves with an object containing the verification token.
  */
-export const createVerificationToken = async (user) => {
+export const createVerificationToken = async (user: IUser) => {
 	const verificationToken = generateToken();
 	await sendVerificationEmail(user.email, verificationToken);
 
@@ -87,7 +90,7 @@ export const createVerificationToken = async (user) => {
  *
  * @returns {Promise<string>} - A promise that resolves with the hashed password.
  */
-export const hashPassword = async (password) => {
+export const hashPassword = async (password: string) => {
 	return await hash(password, 12);
 };
 
@@ -99,7 +102,7 @@ export const hashPassword = async (password) => {
  * @throws Will throw an error if the email address already exists in the database.
  * @returns {Promise<void>} - A promise that resolves if the email does not exist, otherwise it throws an error.
  */
-export const checkEmailExists = async (email) => {
+export const checkEmailExists = async (email: string) => {
 	const existingUserByEmail = await User.findOne({ email });
 	if (existingUserByEmail) {
 		throwError('EMAIL_EXIST', 'EMAIL_EXIST', HTTP_STATUS.BAD_REQUEST);
@@ -117,7 +120,7 @@ export const checkEmailExists = async (email) => {
  *
  * @returns {Promise<Object>} - A promise that resolves with the newly created user object.
  */
-export const createUser = async (username, email, hashedPassword, role) => {
+export const createUser = async (username: string, email: string, hashedPassword: string, role: string) => {
 	const newUser = new User({ username, email, password: hashedPassword, role });
 	console.log('New User:', newUser);
 	await newUser.save();
@@ -139,7 +142,7 @@ export const createUser = async (username, email, hashedPassword, role) => {
  * - userId: {string} [Optional] The user's ID.
  * - role: {string} [Optional] The user's role.
  */
-export const checkAuthentication = async (token) => {
+export const checkAuthentication = async (token: string) => {
 	if (!token) {
 		console.log("Le client n'est pas connecté");
 		return { isAuthenticated: false };
@@ -154,7 +157,7 @@ export const checkAuthentication = async (token) => {
 		};
 	}
 
-	const decoded = jwt.verify(token, config.SECRETKEY);
+	const decoded = jwt.verify(token, config.SECRETKEY) as JwtPayload;
 
 	// Chercher l'utilisateur en fonction de userId pour obtenir le rôle
 	const user = await User.findById(decoded.userId);
@@ -175,98 +178,45 @@ export const checkAuthentication = async (token) => {
 };
 
 /**
- * Handle the user signup process.
+ * Handles the login process for an existing user.
  *
- * @async
- * @param {string} email - The email address of the user signing up.
- *
- * @returns {Promise<Object>} - A promise that resolves to an object containing the user's ID.
- *
- * The object has the following structure:
- * - userId: {string} The ID of the newly created user.
- *
- * @throws Will throw an error if the signup process fails.
+ * @param email - The email address of the user.
+ * @param password - The password of the user.
+ * @returns An object containing the JWT token, user ID, and role.
+ * @throws Throws an error if any step of the login process fails.
  */
-export const signup = async (email) => {
-	try {
-		const tokenExpiry = config.TOKEN_EXPIRY;
+export const login = async (email: string, password: string) => {
+  // Find the user by email
+  const user: IUser | null = await User.findOne({ email });
+  
+  // Handle error cases first
+  if (!user) {
+    throwError('INVALID_CREDENTIALS', 'INVALID_CREDENTIALS', 401);
+    return;
+  }
+  
+  if (!user.isVerified) {
+    throwError('EMAIL_NOT_VERIFIED', 'EMAIL_NOT_VERIFIED', 401);
+    return;
+  }
 
-		const token = jwt.sign(
-			{ userId: newUser._id, username: newUser.username, email: newUser.email, role: newUser.role },
-			config.SECRETKEY,
-			{ expiresIn: tokenExpiry }
-		);
+  // At this point, we know user is not null and is verified
+  const isMatch = await compare(password, user.password);
+  if (!isMatch) {
+    throwError('INVALID_CREDENTIALS', 'INVALID_CREDENTIALS', 401);
+    return;
+  }
 
-		// Générer le token de vérification
-		const verificationToken = generateToken();
-		await sendVerificationEmail(email, verificationToken);
+  // Continue with the rest of your code...
+  const token = jwt.sign(
+    { userId: user._id, email: user.email, role: user.role },
+    config.SECRETKEY,
+    {
+      expiresIn: '1h'
+    }
+  );
 
-		// Définir la date d'expiration du token de vérification
-		const expireAt = new Date();
-		expireAt.setHours(expireAt.getHours() + 24); // Le token expirera dans 24 heures
-
-		// Créer un nouvel objet EmailVerificationToken
-		const newToken = new EmailVerificationToken({
-			userId: newUser._id,
-			token: verificationToken,
-			expireAt: expireAt
-		});
-		await newToken.save();
-
-		return { userId: newUser._id };
-	} catch (error) {
-		throwError('SignupError', error.message);
-	}
-};
-
-/**
- * Handle the user login process.
- *
- * @async
- * @param {string} email - The email address of the user trying to log in.
- * @param {string} password - The plaintext password of the user trying to log in.
- *
- * @returns {Promise<Object>} - A promise that resolves to an object containing the JWT token, user's ID, and role.
- *
- * The object has the following structure:
- * - token: {string} The JWT token.
- * - userId: {string} The ID of the logged-in user.
- * - role: {string} The role of the logged-in user.
- *
- * @throws Will throw an error if the login process fails, e.g., invalid credentials or email not verified.
- */
-export const login = async (email, password) => {
-	// Trouver l'utilisateur par email
-	const user = await User.findOne({ email });
-	if (!user) {
-		// Vous pouvez ajouter des logs ici
-		throwError('INVALID_CREDENTIALS', 'INVALID_CREDENTIALS');
-	}
-
-	if (!user.isVerified) {
-		throwError('EMAIL_NOT_VERIFIED', 'EMAIL_NOT_VERIFIED');
-	}
-
-	// Vérifier si le mot de passe correspond
-	const isMatch = await compare(password, user.password);
-	if (!isMatch) {
-		// Vous pouvez ajouter des logs ici
-		throwError('INVALID_CREDENTIALS', 'INVALID_CREDENTIALS');
-	}
-
-	// Vérification supplémentaire: est-ce que l'email a été vérifié, etc.
-	// ...
-
-	// Générer un JWT
-	const token = jwt.sign(
-		{ userId: user._id, email: user.email, role: user.role },
-		config.SECRETKEY,
-		{
-			expiresIn: '1h'
-		}
-	);
-
-	return { token, userId: user._id, role: user.role };
+  return { token, userId: user._id, role: user.role };
 };
 
 /**
@@ -282,34 +232,44 @@ export const login = async (email, password) => {
  * - Token has expired ('EXPIRED_TOKEN').
  * - Associated user is not found ('USER_NOT_FIND').
  */
-export const verifyToken = async (token) => {
-	// Trouver le token dans la base de données
-	const verificationToken = await EmailVerificationToken.findOne({ token });
+/**
+ * Verifies a given email verification token.
+ *
+ * @param token - The email verification token.
+ * @returns 'success' if the token is valid.
+ * @throws Will throw an error if the token is invalid or expired, or if the user is not found.
+ */
+export const verifyToken = async (token: string) => {
+  // Find the token in the database
+  const verificationToken = await EmailVerificationToken.findOne({ token });
 
-	if (!verificationToken) {
-		throwError('INVALID_TOKEN');
-	}
+  if (!verificationToken) {
+    throwError('INVALID_TOKEN', 'INVALID_TOKEN', 401);
+    return;
+  }
 
-	// Vérifier si le token a expiré
-	if (new Date() > verificationToken.expireAt) {
-		throwError('EXPIRED_TOKEN');
-	}
+  // Check if the token has expired
+  if (new Date() > verificationToken.expireAt) {
+    throwError('EXPIRED_TOKEN', 'EXPIRED_TOKEN', 401);
+    return;
+  }
 
-	// Trouver l'utilisateur associé à ce token
-	const user = await User.findById(verificationToken.userId);
+  // Find the user associated with this token
+  const user = await User.findById(verificationToken.userId);
 
-	if (!user) {
-		throwError('USER_NOT_FIND');
-	}
+  if (!user) {
+    throwError('USER_NOT_FOUND', 'USER_NOT_FOUND', 401);
+    return;
+  }
 
-	// Mettre à jour le statut de vérification de l'utilisateur
-	user.isVerified = true;
-	await user.save();
+  // Update the user's verification status
+  user.isVerified = true;
+  await user.save();
 
-	// Supprimer le token de vérification car il a été utilisé
-	await EmailVerificationToken.findByIdAndDelete(verificationToken.id);
+  // Delete the verification token as it has been used
+  await EmailVerificationToken.findByIdAndDelete(verificationToken.id);
 
-	return 'success';
+  return 'success';
 };
 
 /**
@@ -324,7 +284,7 @@ export const verifyToken = async (token) => {
  *
  * @throws Will throw an error if the reset token cannot be generated or saved.
  */
-export const requestForgotPassword = async (user) => {
+export const requestForgotPassword = async (user: IUser) => {
 	await generateAndSaveResetToken(user);
 	return { message: 'EMAIL_FORGOT_PASSWORD' };
 };
@@ -345,7 +305,7 @@ export const requestForgotPassword = async (user) => {
  *
  * @throws Will throw an error if the new password cannot be hashed or saved.
  */
-export const requestresetForgotPassword = async (user, newPassword) => {
+export const requestresetForgotPassword = async (user: IUser, newPassword: string) => {
 	const hashedPassword = await hash(newPassword, 12);
 	user.password = hashedPassword;
 	user.resetToken = undefined;
@@ -367,11 +327,11 @@ export const requestresetForgotPassword = async (user, newPassword) => {
  *
  * @throws {Error} Will throw an error if the user is not found or any other error occurs.
  */
-export const getUserInfo = async (userId) => {
+export const getUserInfo = async (userId: string) => {
 	try {
 		const user = await User.findById(userId).select('-password');
 
-		const { username, email, role, isVerified } = user;
+		const { username, email, role, isVerified } = user as IUser;
 
 		const userInfo = {
 			username,
@@ -401,16 +361,12 @@ export const getUserInfo = async (userId) => {
  * // Set an authentication cookie in the response
  * setAuthCookie(res, 'some-jwt-token');
  */
-export function setAuthCookie(res, token) {
+export function setAuthCookie(res: Response, token: string) {
 	// Define cookie options
-	const cookieOptions = {
-		// HttpOnly flag to prevent client-side script access
+	const cookieOptions: CookieOptions = {
 		httpOnly: true,
-		// Secure flag to ensure cookie is only sent over HTTPS (enabled in production)
 		secure: env.NODE_ENV === 'production',
-		// SameSite policy to mitigate CSRF attacks
 		sameSite: 'strict',
-		// Cookie expiry time in milliseconds (1 hour)
 		maxAge: 3600000
 	};
 
@@ -440,7 +396,7 @@ export function setAuthCookie(res, token) {
  * // Update the email and username of a user
  * updateUserInfo('some-user-id', { email: 'new.email@example.com', username: 'newUsername' });
  */
-export const updateUserInfo = async (userId, updateData) => {
+export const updateUserInfo = async (userId: string, updateData: any) => {
 	try {
 		const currentUser = await User.findById(userId);
 		if (!currentUser) {
@@ -451,10 +407,7 @@ export const updateUserInfo = async (userId, updateData) => {
 
 		if (updateData.email && currentUser.email !== updateData.email) {
 			updateData.isVerified = false;
-			const verificationInfo = await createVerificationToken({
-				_id: userId,
-				email: updateData.email
-			});
+			const verificationInfo = await createVerificationToken(currentUser as IUser);
 			notification = 'MAIL_CHANGED';
 		}
 
@@ -502,7 +455,7 @@ export const getAllUsers = async () => {
  * const updateData = { email: 'new.email@example.com' };
  * const result = await updateUser('someUserId', updateData);
  */
-export const updateUser = async (userId, updateData) => {
+export const updateUser = async (userId: string, updateData: IUser) => {
 	const user = await User.findByIdAndUpdate(userId, updateData, { new: true });
 	return { success: true, notification: 'Utilisateur mis à jour', user };
 };

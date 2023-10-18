@@ -1,6 +1,7 @@
 // Import required modules and configurations
 import nodemailer from 'nodemailer';
 import { env } from '../constants/env.js';
+import {IUser} from './../TypeScript/interfaces.js';
 
 // Validate required environment variables
 const validateEnvVariables = () => {
@@ -12,7 +13,7 @@ const validateEnvVariables = () => {
 		'URL_FRONT'
 	];
 	for (const varName of requiredEnvVariables) {
-		if (!env[varName]) {
+		if (!(env as any)[varName]) {
 			throw new Error(`Please set the environment variable ${varName}.`);
 		}
 	}
@@ -55,7 +56,7 @@ const defaultSender =
  * @param {string} token - The verification token to include in the email.
  * @throws Will throw an error if the email sending fails.
  */
-export const sendVerificationEmail = async (email, token) => {
+export const sendVerificationEmail = async (email: string, token: string) => {
 	const url = `${env.URL_FRONT}/signup/${token}`;
 	await sendEmail(
 		email,
@@ -69,11 +70,11 @@ export const sendVerificationEmail = async (email, token) => {
  * Send a password reset link via email.
  *
  * @async
- * @param {Object} user - The user object containing at least the email address.
+ * @param {IUser} user - The user IUser containing at least the email address.
  * @param {string} resetToken - The reset password token.
  * @throws Will throw an error if the email sending fails.
  */
-export const sendResetPasswordEmail = async (user, resetToken) => {
+export const sendResetPasswordEmail = async (user: IUser, resetToken: string) => {
 	const url = `${env.URL_FRONT}/forgot-password/${resetToken}`;
 	await sendEmail(
 		user.email,
@@ -93,7 +94,7 @@ export const sendResetPasswordEmail = async (user, resetToken) => {
  * @param {string} [from=defaultSender] - The sender's email address.
  * @throws Will throw an error if the email sending fails.
  */
-const sendEmail = async (to, subject, html, from = defaultSender) => {
+const sendEmail = async (to: string, subject: string, html: string, from: string = defaultSender) => {
 	try {
 		await transporter.sendMail({ from, to, subject, html });
 		console.log(`Email successfully sent to ${to}`);

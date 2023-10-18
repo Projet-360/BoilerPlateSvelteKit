@@ -1,10 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
-	import { authStore } from '$stores/authStore.js';
 	import { goto } from '$app/navigation';
 	import { getAllUsers, updateUser } from '$api/auth.js'; // Remplacez par le bon chemin
 	import notificationStore from '$stores/notificationStore';
-	import { getAuthenticatedUser } from '$utils/auth/getAuthenticatedUser.js';
 
 	let users = [];
 	let token;

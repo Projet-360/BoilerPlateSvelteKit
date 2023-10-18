@@ -1,6 +1,6 @@
 // validators.js
 
-import { check } from 'express-validator';
+import { ValidationChain, check } from 'express-validator';
 import { ERRORS } from '../constants/errorMessages.js';
 
 export const usernameValidators = [
@@ -27,5 +27,9 @@ export const passwordValidators = [
 		.withMessage(ERRORS.SPECIAL_CARAC_PASSWORD)
 ];
 
-export const signupValidators = [...usernameValidators, ...emailValidators, ...passwordValidators];
-export const updateUserValidators = [...usernameValidators, ...emailValidators];
+export const signupValidators: ValidationChain[] = [
+  ...usernameValidators,
+  ...emailValidators,
+  ...passwordValidators
+];
+export const updateUserValidators: ValidationChain[] = [...usernameValidators, ...emailValidators];

@@ -7,9 +7,9 @@ const connectDB = async () => {
 	try {
 		// Attempt to connect to MongoDB using the provided environment variables
 		await mongoose.connect(env.BD, {
-			useNewUrlParser: true, // Use the new URL parser from MongoDB driver
-			useUnifiedTopology: true // Enable the new topology engine from MongoDB driver
-		});
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		} as any);
 		// Log success message if the connection is established
 		console.log('Connected to MongoDB');
 	} catch (err) {

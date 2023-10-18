@@ -1,5 +1,5 @@
 import express from "express";
-import Greeting from "./../models/GreetingModel.js";
+import Greeting from "../models/GreetingModel.js";
 const router = express.Router();
 
 // Read All

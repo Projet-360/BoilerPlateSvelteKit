@@ -18,6 +18,8 @@
     "@sveltejs/adapter-auto": "latest",
     "@sveltejs/adapter-node": "latest",
     "@sveltejs/kit": "^1.15.5",
+    "@types/bcryptjs": "^2.4.5",
+    "@types/jsonwebtoken": "^9.0.4",
     "autoprefixer": "latest",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^8.2.1",

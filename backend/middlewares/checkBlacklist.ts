@@ -1,7 +1,8 @@
+import { NextFunction, Request, Response } from "express";
 import BlacklistedToken from '../models/BlacklistedTokenModel.js';
 
 // Middleware function to check if a token is blacklisted
-const checkBlacklist = async (req, res, next) => {
+const checkBlacklist = async (req: Request, res : Response, next: NextFunction) => {
 	try {
 		// Retrieve the token from the request cookies
 		const token = req.cookies.token;

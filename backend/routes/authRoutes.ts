@@ -1,5 +1,7 @@
 // Import required modules and middleware
+import { Request, Response, NextFunction } from 'express';
 import { Router } from 'express';
+
 
 // Initialize Express router
 const router = Router();
@@ -27,7 +29,8 @@ import {
 	emailValidators
 } from '../validations/validators.js';
 
-import CustomError from '../errors/CustomError.js';
+import CustomError from './../errors/CustomError.js';
+import { IUser } from 'TypeScript/interfaces.js';
 
 // Endpoint to check authentication status
 // Endpoint to check authentication status
@@ -55,7 +58,7 @@ router.get('/check-auth', async (req, res, next) => {
 			// User is not authenticated, but no error should be thrown.
 			return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
 		}
-	} catch (error) {
+	} catch (error: any) {
 		console.error('JWT verification error:', error);
 		next(new CustomError('CheckAuthError', error.message, HTTP_STATUS.BAD_REQUEST));
 	}
@@ -70,7 +73,7 @@ router.get('/logout', async (req, res, next) => {
 
 		res.clearCookie('token');
 		res.status(200).json({ message: 'Déconnexion réussie' });
-	} catch (error) {
+	} catch (error: any) {
 		next(new CustomError('LogoutError', error.message, 400));
 	}
 });
@@ -83,25 +86,25 @@ router.get('/verify/:token', async (req, res) => {
 		const message = await authService.verifyToken(token);
 
 		res.status(HTTP_STATUS.OK).json({ success: true });
-	} catch (error) {
+	} catch (error: any) {
 		console.error("Erreur lors de la vérification de l'e-mail:", error);
 		res.status(500).json({ message: error.message });
 	}
 });
 
 // Endpoint for user signup
-router.post('/signup', [signupValidators, handleValidationErrors], async (req, res, next) => {
+router.post('/signup', signupValidators, handleValidationErrors, async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const { username, email, password } = req.body;
 		await authService.checkEmailExists(email);
 		const hashedPassword = await authService.hashPassword(password);
 		const role = 'user';
 		const newUser = await authService.createUser(username, email, hashedPassword, role);
-		await authService.createSignupToken(newUser, role);
-		await authService.createVerificationToken(newUser);
+		await authService.createSignupToken(newUser as IUser);
+		await authService.createVerificationToken(newUser as IUser);
 
 		res.status(HTTP_STATUS.OK).json({ success: true });
-	} catch (error) {
+	} catch (error: any) {
 		console.log(error);
 		next(new CustomError('SignupError', error.message, 400));
 	}
@@ -111,12 +114,19 @@ router.post('/signup', [signupValidators, handleValidationErrors], async (req, r
 router.post('/login', rateLimiter, async (req, res, next) => {
 	try {
 		const { email, password } = req.body;
-		const { token, userId, role } = await authService.login(email, password);
-		// Définir le cookie
-		authService.setAuthCookie(res, token);
+		const loginResult = await authService.login(email, password);
+		
+		if (loginResult) {
+			const { token, userId, role } = loginResult;
+			// Définir le cookie
+			authService.setAuthCookie(res, token);
 
-		res.status(HTTP_STATUS.OK).json({ userId, role });
-	} catch (error) {
+			res.status(HTTP_STATUS.OK).json({ userId, role });
+		} else {
+			// Gérer le cas où le résultat de la connexion est indéfini
+			throw new Error('Login failed');
+		}
+	} catch (error: any) {
 		console.log('error from authRoutes', error);
 		next(new CustomError('LoginError', error.message, 400));
 	}
@@ -128,7 +138,7 @@ router.post(
 	emailValidators,
 	handleValidationErrors,
 	rateLimiter,
-	async (req, res, next) => {
+	async (req: Request, res: Response, next: NextFunction) => {
 		try {
 			const { email } = req.body;
 			const user = await User.findOne({ email });
@@ -141,9 +151,9 @@ router.post(
 				return next(new CustomError('EMAIL_NOT_VERIFIED', 'EMAIL_NOT_VERIFIED', 404));
 			}
 
-			await authService.requestForgotPassword(user);
+			await authService.requestForgotPassword(user as IUser);
 			res.status(HTTP_STATUS.OK).json({ success: true });
-		} catch (error) {
+		} catch (error: any) {
 			logger.error('Erreur lors de la réinitialisation du mot de passe:', error);
 			next(new CustomError('ResetPasswordError', error.message, 500));
 		}
@@ -165,20 +175,20 @@ router.post('/forgot-password/:token', async (req, res) => {
 		return res.status(400).json({ error: 'Token invalide ou expiré' });
 	}
 
-	await authService.requestresetForgotPassword(user, newPassword);
+	await authService.requestresetForgotPassword(user as IUser, newPassword);
 
 	res.status(HTTP_STATUS.OK).json({ message: 'Success', success: true });
 });
 
 // User dashboard accessible only for authenticated users with 'user' role
 router.get('/user', isAuthenticated, checkRole('user'), async (req, res) => {
-	const { userId } = req.user;
+	const { userId } = req.user as { userId: string };
 	try {
 		const userInfo = await authService.getUserInfo(userId);
 		res.json({ userInfo });
-	} catch (err) {
-		console.error(err);
-		res.status(500).json({ message: err.message });
+	} catch (error: any) {
+		console.error(error);
+		res.status(500).json({ message: error.message });
 	}
 });
 
@@ -187,9 +197,9 @@ router.put(
 	isAuthenticated,
 	checkRole('user'),
 	[...updateUserValidators, handleValidationErrors],
-	async (req, res) => {
+	async (req: Request, res: Response) => {
 		try {
-			const userId = req.user.userId;
+			const userId = req.user?.userId;
 			const updateData = req.body;
 			console.log(req);
 
@@ -218,7 +228,7 @@ router.put(
 	isAuthenticated,
 	checkRole('admin'),
 	[...updateUserValidators, handleValidationErrors],
-	async (req, res) => {
+	async (req: Request, res: Response) => {
 		try {
 			const { userId } = req.params;
 			const updateData = req.body;

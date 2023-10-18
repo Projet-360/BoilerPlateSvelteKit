@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { env } from './constants/env.js';
+import { env } from './constants/env';
 
 async function clearDB() {
 	const client = new MongoClient(env.BD);

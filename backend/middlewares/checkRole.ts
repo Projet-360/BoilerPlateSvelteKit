@@ -1,6 +1,8 @@
+import { NextFunction, Request, Response } from "express";
+
 // Middleware function to check user role
-export const checkRole = (role) => {
-	return (req, res, next) => {
+export const checkRole = (role: string) => {
+	return (req: Request, res: Response, next: NextFunction) => {
 		// Check if a user is logged in and has the specified role
 		if (req.user && req.user.role === role) {
 			// If the user has the specified role, continue to the next middleware

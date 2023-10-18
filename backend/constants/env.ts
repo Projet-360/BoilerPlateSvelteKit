@@ -9,5 +9,7 @@ export const env = {
 	MAIL_HOST: 'localhost',
 	MAIL_PORT: 1025,
 	EMAIL_USER: 'no_reply@SvelteKit.com',
-	EMAIL_PASSWORD: 'passwordTest'
+	EMAIL_PASSWORD: 'passwordTest',
+	MAIL_SERVER: 'no_reply@SvelteKit.com',
+	NODE_ENV: 'dev'
 };

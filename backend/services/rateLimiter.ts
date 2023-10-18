@@ -1,3 +1,4 @@
+import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
 // Import required modules
 import rateLimit from 'express-rate-limit';
 // Note: logger and HTTP_STATUS should also be imported here if they are used
@@ -10,8 +11,6 @@ export const rateLimiter = rateLimit({
 	max: 40,
 	// Custom handler function when rate limit is exceeded
 	handler: function (req, res) {
-		// Log the rate limit reached event
-		logger.info('Rate limit reached'); // Make sure to import 'logger'
 		// Respond with a 429 status code and a JSON message
 		res.status(HTTP_STATUS.TOO_MANY_REQUESTS).json({
 			// Make sure to import 'HTTP_STATUS'

@@ -1,5 +1,5 @@
 // Import required modules
-import express from 'express';
+import express, { Application } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
@@ -9,7 +9,7 @@ import errorHandler from './errorHandler.js';
 import checkBlacklist from './checkBlacklist.js';
 
 // Apply middlewares
-export default (app) => {
+export default (app: Application) => {
 	// Apply CORS settings from external config file
 	app.use(cors(corsConfig));
 
