@@ -9,7 +9,7 @@
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "dev": "concurrently \"npm run dev:node\" \"npm run prettier:watch\"",
     "dev:node": "cross-env NODE_ENV=development nodemon --watch \\\"**/*.ts\\\" --exec 'node --loader ts-node/esm' ./index.ts",
-    "cleardb": "ts-node clear-db.ts",
+    "cleardb": "ts-node --esm clear-db.ts",
     "docs": "typedoc --out docs",
     "format": "prettier --write \"./**/*.ts\"",
     "lint": "eslint \"./**/*.ts\"",
