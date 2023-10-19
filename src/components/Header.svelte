@@ -6,10 +6,11 @@
 	import { authStore } from '$stores/authStore';
 	import Logout from '$components/Logout.svelte';
 
-	const handleChange = ({ currentTarget }) => {
+	const handleChange = (event: Event) => {
+		const currentTarget = event.currentTarget as HTMLSelectElement; // Cast ici si vous êtes sûr que c'est un élément select
 		const { value } = currentTarget;
 
-		document.cookie = `lang=${value} ;`;
+		document.cookie = `lang=${value};`;
 	};
 
 	let isAuthenticated: boolean;

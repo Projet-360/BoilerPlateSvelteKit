@@ -1,12 +1,26 @@
 <script lang="ts">
 	import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
+
 	import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 
 	import '@splidejs/svelte-splide/css/core';
 	import github from '$lib/images/github.svg';
 
-	const splideOptions = {
+	const splideOptions: {
+		type: 'loop';
+		gap: string;
+		drag: 'free';
+		arrows: boolean;
+		pagination: boolean;
+		perPage: number;
+		autoScroll: {
+			pauseOnHover: boolean;
+			pauseOnFocus: boolean;
+			rewind: boolean;
+			speed: number;
+		};
+	} = {
 		type: 'loop',
 		gap: '10px',
 		drag: 'free',
