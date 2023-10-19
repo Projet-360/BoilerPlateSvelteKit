@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { signup } from '$api/auth';
 	import { t } from '$UITools/Translations/index';
 

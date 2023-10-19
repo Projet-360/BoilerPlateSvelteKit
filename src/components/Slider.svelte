@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 	import { Splide, SplideSlide } from '@splidejs/svelte-splide';
 	import '@splidejs/splide/dist/css/themes/splide-default.min.css';

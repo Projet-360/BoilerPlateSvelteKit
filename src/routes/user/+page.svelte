@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
 	import { hoverable } from '$UITools/Cursor/cursorHelpers.js';
 	import { onMount } from 'svelte';
 	import { getDashboardData, updateUserInfo } from '$api/auth.js';
 	import { t } from '$UITools/Translations/index';
 	import { sendEmailResetPassword } from '$api/auth.js';
 
-	let userData;
+	let userData: any;
 	let username = '';
 	let email = '';
 	let role = '';

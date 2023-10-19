@@ -1,24 +1,24 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { sendGreeting, getAllGreetings, deleteGreeting } from '$api/Greetings';
 
-	let editingId = null;
-	let name = '';
-	let message = '';
-	let greetings = [];
+	let editingId: string | null = null;
+	let name: string = '';
+	let message: string = '';
+	let greetings: any[] = []; // Remplacez "any" par le type approprié si possible
 
 	onMount(async () => {
 		greetings = await getAllGreetings();
 	});
 
-	export function prepareUpdate(greeting) {
+	export function prepareUpdate(greeting: { name: string; message: string; _id: string }): void {
 		name = greeting.name;
 		message = greeting.message;
 		editingId = greeting._id;
 	}
 
-	export async function handleSendGreeting() {
-		const isSuccessful = await sendGreeting(name, message, editingId);
+	export async function handleSendGreeting(): Promise<void> {
+		const isSuccessful: boolean = await sendGreeting(name, message, editingId);
 		if (isSuccessful) {
 			name = '';
 			message = '';
@@ -27,8 +27,8 @@
 		}
 	}
 
-	export async function handleDeleteGreeting(id) {
-		const isSuccessful = await deleteGreeting(id);
+	export async function handleDeleteGreeting(id: string): Promise<void> {
+		const isSuccessful: boolean = await deleteGreeting(id);
 		if (isSuccessful) {
 			greetings = await getAllGreetings();
 		}

@@ -1,7 +1,7 @@
-// src/routes/api/message/resetPassword.js
 import notificationStore from '$stores/notificationStore';
+type TranslationFunction = (key: string, options?: any) => string;
 
-export const EmailresetPasswordValidation = (error, $t) => {
+export const EmailresetPasswordValidation = (error: any, $t: TranslationFunction) => {
 	let errorMessage;
 	switch (error.message) {
 		case 'VALID_EMAIL':

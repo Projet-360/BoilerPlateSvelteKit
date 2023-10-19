@@ -1,7 +1,8 @@
 import { goto } from '$app/navigation';
 import notificationStore from '$stores/notificationStore';
+type TranslationFunction = (key: string, options?: any) => string;
 
-export const updateUser = (result, $t) => {
+export const updateUser = (result: any, $t: TranslationFunction) => {
 	// Si l'inscription est réussie
 	if (result.success) {
 		goto('/');
@@ -11,7 +12,7 @@ export const updateUser = (result, $t) => {
 		const errorMessages = result.message.split(','); // Séparation des messages d'erreur
 
 		// Itération sur chaque message d'erreur
-		errorMessages.forEach((errorMsg) => {
+		errorMessages.forEach((errorMsg: string) => {
 			let errorMessage;
 			switch (
 				errorMsg.trim() // Suppression des espaces blancs autour des messages d'erreur

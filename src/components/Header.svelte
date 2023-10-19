@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/stores';
 	import DarkMode from '$UITools/DarkMode/index.svelte';
 	import { t, locale, locales } from '$UITools/Translations/index';
@@ -12,7 +12,7 @@
 		document.cookie = `lang=${value} ;`;
 	};
 
-	let isAuthenticated;
+	let isAuthenticated: boolean;
 
 	authStore.subscribe(($authStore) => {
 		isAuthenticated = $authStore && $authStore.isAuthenticated ? true : false;

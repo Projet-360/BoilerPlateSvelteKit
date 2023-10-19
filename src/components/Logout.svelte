@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
 	import { authStore } from '$stores/authStore';
 	import { t } from '$UITools/Translations/index';
 	import { logout } from '$lib/logout.js';
 
-	let isAuthenticated;
+	let isAuthenticated: boolean;
 
 	authStore.subscribe(($authStore) => {
 		isAuthenticated = $authStore && $authStore.isAuthenticated ? true : false;

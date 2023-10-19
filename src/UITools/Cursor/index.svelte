@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { tweened } from 'svelte/motion';
 	import { cubicInOut } from 'svelte/easing';
@@ -11,23 +11,32 @@
 	import { cursorStore } from '$stores/cursorStore';
 	import { animateCursor } from './cursorHelpers';
 
+	// Type pour le store cursorStore
+	type CursorProps = {
+		x: number;
+		y: number;
+		Cursor?: HTMLElement;
+		// Ajoute d'autres propriétés si nécessaire
+	};
+
 	const changeShaper = shapeStore.set;
-	let cursorElement;
+	let cursorElement: HTMLElement | null = null;
 
-	let animationFrameId;
-	let throttledMove;
+	let animationFrameId: number | null = null;
+	let throttledMove: ((...args: any[]) => any) | null = null;
 
-	function throttle(func, delay) {
+	function throttle<T extends (...args: any[]) => any>(func: T, delay: number): T {
 		let lastCall = 0;
-		return function (...args) {
+		return function (...args: any[]) {
 			const now = new Date().getTime();
 			if (now - lastCall < delay) {
 				return;
 			}
 			lastCall = now;
 			return func(...args);
-		};
+		} as T;
 	}
+
 	// Initialise and clean up event listeners
 	if (typeof window !== 'undefined') {
 		onMount(() => {
@@ -36,18 +45,20 @@
 		});
 
 		onDestroy(() => {
-			removeEventListeners(cursorElement);
+			removeEventListeners();
 		});
 	}
 
-	export function initEventListeners(Cursor) {
+	export function initEventListeners(Cursor: HTMLElement | null) {
 		throttledMove = throttle((e) => animateCursor(Cursor, e), 16);
 		cursorStore.update((props) => ({ ...props, Cursor }));
 		window.addEventListener('mousemove', throttledMove);
 	}
 
 	export function removeEventListeners() {
-		window.removeEventListener('mousemove', throttledMove);
+		if (throttledMove) {
+			window.removeEventListener('mousemove', throttledMove);
+		}
 	}
 
 	const shape = tweened(bankPath['circle'], {

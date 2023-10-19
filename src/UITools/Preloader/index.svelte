@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 
@@ -11,11 +11,11 @@
 		};
 
 		// Attendez que toutes les ressources soient chargées
-		await new Promise((resolve) => {
+		await new Promise<void>((resolve) => {
 			if (document.readyState === 'complete') {
 				resolve();
 			} else {
-				window.addEventListener('load', resolve);
+				window.addEventListener('load', () => resolve());
 			}
 		});
 

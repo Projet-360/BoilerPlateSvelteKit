@@ -1,39 +1,44 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { getAllUsers, updateUser } from '$api/auth.js'; // Remplacez par le bon chemin
 	import notificationStore from '$stores/notificationStore';
 
-	let users = [];
-	let token;
+	// Définir le type pour un utilisateur
+	interface User {
+		_id: string;
+		username: string;
+		email: string;
+		role: string;
+	}
 
-	function fetchUsers(token) {
-		getAllUsers(token)
-			.then((fetchedUsers) => {
+	let users: User[] = [];
+
+	function fetchUsers(): void {
+		getAllUsers()
+			.then((fetchedUsers: User[]) => {
 				users = fetchedUsers;
 			})
-			.catch((error) => {
+			.catch((error: Error) => {
 				console.error('Erreur lors de la récupération des utilisateurs:', error);
 			});
 	}
 
 	onMount(async () => {
 		try {
+			const isAuthenticated: boolean = true; // Remplacez par votre logique d'authentification
+
 			if (!isAuthenticated) {
 				goto('/login');
 			} else {
-				try {
-					fetchUsers(fetchedToken);
-				} catch (error) {
-					console.error('Erreur lors de la récupération des utilisateurs:', error);
-				}
+				fetchUsers();
 			}
-		} catch (error) {
+		} catch (error: any) {
 			console.error('Error:', error);
 		}
 	});
 
-	async function handleUpdateUser(userId) {
+	async function handleUpdateUser(userId: string): Promise<void> {
 		const userToUpdate = users.find((user) => user._id === userId);
 
 		if (!userToUpdate) {
@@ -42,19 +47,13 @@
 		}
 
 		try {
-			const { user, notification } = await updateUser(token, userId, userToUpdate);
+			// Mettez à jour le type retourné par updateUser
+			const { user, notification } = await updateUser(userId, userToUpdate);
 
-			if (!user) {
-				console.error(
-					"La mise à jour de l'utilisateur a échoué, aucune donnée utilisateur renvoyée"
-				);
-				return;
-			}
-
-			const index = users.findIndex((user) => user._id === userId);
+			const index: number = users.findIndex((user) => user._id === userId);
 			users[index] = user;
 			notificationStore.addNotification('Utilisateur mis à jour avec succès', 'success');
-		} catch (error) {
+		} catch (error: any) {
 			console.error('Error:', error);
 		}
 	}

@@ -1,6 +1,7 @@
 import notificationStore from '$stores/notificationStore';
+type TranslationFunction = (key: string, options?: any) => string;
 
-export const loginValidation = (error, $t) => {
+export const loginValidation = (error: any, $t: TranslationFunction) => {
 	let errorMessage;
 	switch (error.message) {
 		case 'INVALID_CREDENTIALS':

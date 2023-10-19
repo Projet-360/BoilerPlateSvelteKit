@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Notification from '$UITools/Notifications/Notification.svelte';
 	import notificationStore from '$stores/notificationStore';
 </script>

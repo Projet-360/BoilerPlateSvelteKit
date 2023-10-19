@@ -1,7 +1,15 @@
 import { locales, loadTranslations, translations, defaultLocale } from '$UITools/Translations';
 
 /** @type {import('@sveltejs/kit').ServerLoad} */
-export const load = async ({ url, cookies, request }) => {
+export const load = async ({
+	url,
+	cookies,
+	request
+}: {
+	url: URL;
+	cookies: any;
+	request: Request;
+}) => {
 	const { pathname } = url;
 
 	// Try to get the locale from cookie

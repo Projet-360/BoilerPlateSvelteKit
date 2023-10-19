@@ -1,6 +1,7 @@
 import notificationStore from '$stores/notificationStore';
+type TranslationFunction = (key: string, options?: any) => string;
 
-export const signupValidation = (error, $t) => {
+export const signupValidation = (error, $t: TranslationFunction) => {
 	let errorMessages = [];
 
 	// Gérer le format de l'erreur

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { t } from '$UITools/Translations/index.js';
 </script>
 

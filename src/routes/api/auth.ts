@@ -13,7 +13,27 @@ import { EmailresetPasswordValidation } from '$message/EmailresetPasswordValidat
 import { goto } from '$app/navigation';
 import { logout } from '$lib/logout.js';
 
-let currentState;
+interface AuthState {
+	userId: string | null;
+	role: string | null;
+	isAuthenticated: boolean;
+}
+
+interface UserInfo {
+	name: string;
+	email: string;
+}
+
+interface User {
+	_id: string;
+	username: string;
+	email: string;
+	role: string;
+}
+
+type TranslationFunction = (key: string, options?: any) => string;
+
+let currentState: AuthState;
 
 authStore.subscribe((state) => {
 	currentState = state;
@@ -40,7 +60,7 @@ export async function checkAuth() {
 	}
 }
 
-export async function login(email, password, $t) {
+export async function login(email: string, password: string, $t: TranslationFunction) {
 	try {
 		const data = await apiCall({
 			url: `${BD}/auth/login`,
@@ -57,7 +77,7 @@ export async function login(email, password, $t) {
 
 		const { role, isAuthenticated } = currentState;
 
-		handleRoleRedirection(role, isAuthenticated);
+		handleRoleRedirection(role ?? 'defaultRole', isAuthenticated);
 
 		notificationStore.addNotification($t('validation.SUCCESS_LOGIN'), 'success');
 	} catch (error) {
@@ -67,7 +87,12 @@ export async function login(email, password, $t) {
 	}
 }
 
-export async function signup(username, email, password, $t) {
+export async function signup(
+	username: string,
+	email: string,
+	password: string,
+	$t: TranslationFunction
+) {
 	try {
 		const response = await apiCall({
 			url: `${BD}/auth/signup`,
@@ -87,7 +112,7 @@ export async function signup(username, email, password, $t) {
 	}
 }
 
-export async function verifyToken(token, $t) {
+export async function verifyToken(token: string, $t: TranslationFunction) {
 	try {
 		const response = await fetch(`${BD}/auth/verify/${token}`);
 		console.log(response);
@@ -100,7 +125,7 @@ export async function verifyToken(token, $t) {
 	}
 }
 
-export async function sendEmailResetPassword(email, $t) {
+export async function sendEmailResetPassword(email: string, $t: TranslationFunction) {
 	try {
 		const data = await apiCall({
 			url: `${BD}/auth/forgot-password`,
@@ -119,7 +144,11 @@ export async function sendEmailResetPassword(email, $t) {
 	}
 }
 
-export async function ResetForgotNewPassword(token, newPassword, $t) {
+export async function ResetForgotNewPassword(
+	token: string,
+	newPassword: string,
+	$t: TranslationFunction
+) {
 	try {
 		const response = await fetch(`${BD}/auth/forgot-password/${token}`, {
 			method: 'POST',
@@ -133,7 +162,7 @@ export async function ResetForgotNewPassword(token, newPassword, $t) {
 			goto('/');
 			notificationStore.addNotification($t('validation.VALIDATION_FORGOT_PASSWORD'), 'success');
 		}
-	} catch (error) {
+	} catch (error: any) {
 		notificationStore.addNotification(error, 'error');
 		throw error;
 	}
@@ -156,7 +185,7 @@ export async function getDashboardData() {
 	}
 }
 
-export const updateUserInfo = async (userInfo, $t) => {
+export const updateUserInfo = async (userInfo: UserInfo, $t: TranslationFunction) => {
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
@@ -186,10 +215,11 @@ export const updateUserInfo = async (userInfo, $t) => {
 
 export async function getAllUsers() {
 	try {
+		const headers = new Headers();
 		const data = await apiCall({
 			url: `${BD}/auth/admin/users`,
 			method: 'GET',
-			headers,
+			headers: headers,
 			credentials: 'include'
 		});
 
@@ -203,12 +233,13 @@ export async function getAllUsers() {
 	}
 }
 
-export async function updateUser(userId, updateData) {
+export async function updateUser(userId: string, updateData: User) {
 	try {
+		const headers = new Headers();
 		const data = await apiCall({
 			url: `${BD}/auth/admin/user/${userId}`,
 			method: 'PUT',
-			headers,
+			headers: headers,
 			body: updateData
 		});
 

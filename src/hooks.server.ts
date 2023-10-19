@@ -1,13 +1,13 @@
-import jwt from 'jsonwebtoken'; // Assurez-vous que ce package est installé.
+import jwt from 'jsonwebtoken';
 import { env } from './env.js';
 
-async function verifyToken(token) {
+async function verifyToken(token: string) {
 	try {
 		const decoded = jwt.verify(token, env.SECRETKEY);
 		return decoded;
 	} catch (error) {
-		console.error('JWT Verification Error:', error); // Use a logging tool in production
-		throw error; // Propagate the error
+		console.error('JWT Verification Error:', error);
+		throw error;
 	}
 }
 
@@ -16,6 +16,8 @@ export async function handle({ event, resolve }) {
 
 	if (cookies) {
 		const user = await verifyToken(cookies);
+		console.log(user);
+		
 		console.log('user du hook.server', cookies);
 		console.log(user);
 		if (user) {

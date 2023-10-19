@@ -1,13 +1,14 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { t } from '$UITools/Translations/index';
+	import notificationStore from '$stores/notificationStore';
 
 	import { ResetForgotNewPassword } from '$api/auth';
 
 	let newPassword = '';
 	let confirmPassword = '';
-	let token;
+	let token: string;
 
 	onMount(async () => {
 		token = $page.params.token;

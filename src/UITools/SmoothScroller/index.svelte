@@ -1,51 +1,43 @@
-<script>
-  // Importer la bibliothèque GSAP
-  import gsap from "gsap";
-  // Importer le plugin ScrollTrigger de GSAP
-  import ScrollTrigger from "gsap/dist/ScrollTrigger";
-  // Importer la bibliothèque Smooth-scrollbar
-  import Scrollbar from "smooth-scrollbar";
+<script lang="ts">
+	import gsap from 'gsap';
+	import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+	import Scrollbar from 'smooth-scrollbar';
+	import { onMount } from 'svelte';
 
-  // Importer la fonction onMount de Svelte
-  import { onMount } from "svelte";
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger);
 
-  // Exécuter une fonction lors du montage du composant
-  onMount(() => {
-    // Enregistrer le plugin ScrollTrigger avec GSAP
-    gsap.registerPlugin(ScrollTrigger);
+		const scroller = document.querySelector('#smoothScoller') as HTMLElement;
+		if (!scroller) {
+			throw new Error('Element #smoothScoller not found');
+		}
 
-    // Sélectionner l'élément ayant l'ID "smoothScoller"
-    const scroller = document.querySelector("#smoothScoller");
+		const smoothScroll = Scrollbar.init(scroller, {
+			damping: 0.1,
+			delegateTo: document,
+			alwaysShowTracks: true
+		}) as Scrollbar;
 
-    // Initialiser Smooth-scrollbar sur l'élément sélectionné avec des options spécifiques
-    const smoothScroll = Scrollbar.init(scroller, {
-      damping: 0.1,
-      delegateTo: document,
-      alwaysShowTracks: true,
-      //continuousScrolling: false
-    });
+		ScrollTrigger.scrollerProxy(scroller, {
+			scrollTop(value) {
+				if (arguments.length) {
+					if (typeof smoothScroll.scrollTop === 'number') {
+						smoothScroll.scrollTop = value ?? 0;
+					}
+				}
+				return smoothScroll.scrollTop ?? 0;
+			}
+		});
 
-    // Configurer le proxy ScrollTrigger pour utiliser Smooth-scrollbar
-    ScrollTrigger.scrollerProxy(scroller, {
-      scrollTop(value) {
-        if (arguments.length) {
-          smoothScroll.scrollTop = value;
-        }
-        return smoothScroll.scrollTop;
-      },
-    });
+		smoothScroll.addListener(ScrollTrigger.update);
 
-    // Mettre à jour ScrollTrigger lors de l'événement "scroll" de Smooth-scrollbar
-    smoothScroll.addListener(ScrollTrigger.update);
-
-    // Configurer les valeurs par défaut pour ScrollTrigger
-    ScrollTrigger.defaults({
-      scroller: scroller,
-      pinType: "transform",
-    });
-  });
+		ScrollTrigger.defaults({
+			scroller: scroller,
+			pinType: 'transform'
+		});
+	});
 </script>
 
 <div class="smoothScoller" id="smoothScoller">
-  <slot />
+	<slot />
 </div>
