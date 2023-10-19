@@ -1,0 +1,2 @@
+C:\wamp64\www\BoilerPlateSvelteKit\utils\createPath\createPathProject
+C:\wamp64\www\BoilerPlateSvelteKit\utils\createPath\PathIndicator.txt
