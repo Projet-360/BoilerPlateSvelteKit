@@ -1,12 +1,4 @@
-interface ApiCallOptions {
-	url: string;
-	method?: string;
-	headers?: Headers | Record<string, string> | null;
-	body?: Record<string, any> | null;
-	credentials?: RequestCredentials | null;
-	handleSuccess?: ((data: any) => void) | null;
-	handleError?: ((error: any) => void) | null;
-}
+import type { ApiCallOptions } from '../../../typescript';
 
 export async function apiCall({
 	url,

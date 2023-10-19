@@ -1,12 +1,6 @@
 import { writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
-
-// Interface pour le store
-interface AuthState {
-	userId: string | null;
-	role: string | null;
-	isAuthenticated: boolean;
-}
+import type { AuthState } from '../typescript';
 
 // Initialisation du store avec un état initial et un type
 export const authStore: Writable<AuthState> = writable({

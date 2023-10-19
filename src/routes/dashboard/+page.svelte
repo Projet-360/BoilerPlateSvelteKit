@@ -3,14 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { getAllUsers, updateUser } from '$api/auth.js'; // Remplacez par le bon chemin
 	import notificationStore from '$stores/notificationStore';
-
-	// Définir le type pour un utilisateur
-	interface User {
-		_id: string;
-		username: string;
-		email: string;
-		role: string;
-	}
+	import type { User } from '../../typescript';
 
 	let users: User[] = [];
 

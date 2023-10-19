@@ -1,22 +1,30 @@
 module.exports = {
-  env: {
-    browser: true,
-    es6: true,
-  },
-  parser: "babel-eslint",
-  parserOptions: {
-    ecmaVersion: 2019,
-    sourceType: "module",
-  },
-  plugins: ["svelte3"],
-  extends: ["eslint:recommended"],
-  overrides: [
-    {
-      files: ["**/*.svelte"],
-      processor: "svelte3/svelte3",
-    },
-  ],
-  rules: {
-    // ...
-  },
+	root: true,
+	extends: [
+		'eslint:recommended',
+		'plugin:@typescript-eslint/recommended',
+		'plugin:svelte/recommended',
+		'prettier'
+	],
+	parser: '@typescript-eslint/parser',
+	plugins: ['@typescript-eslint'],
+	parserOptions: {
+		sourceType: 'module',
+		ecmaVersion: 2020,
+		extraFileExtensions: ['.svelte']
+	},
+	env: {
+		browser: true,
+		es2017: true,
+		node: true
+	},
+	overrides: [
+		{
+			files: ['*.svelte'],
+			parser: 'svelte-eslint-parser',
+			parserOptions: {
+				parser: '@typescript-eslint/parser'
+			}
+		}
+	]
 };

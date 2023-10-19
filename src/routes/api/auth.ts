@@ -13,25 +13,10 @@ import { EmailresetPasswordValidation } from '$message/EmailresetPasswordValidat
 import { goto } from '$app/navigation';
 import { logout } from '$lib/logout.js';
 
-interface AuthState {
-	userId: string | null;
-	role: string | null;
-	isAuthenticated: boolean;
-}
-
-interface UserInfo {
-	name: string;
-	email: string;
-}
-
-interface User {
-	_id: string;
-	username: string;
-	email: string;
-	role: string;
-}
-
-type TranslationFunction = (key: string, options?: any) => string;
+import type { AuthState } from '../../typescript';
+import type { UserInfo } from '../../typescript';
+import type { User } from '../../typescript';
+import type { TranslationFunction } from '../../typescript';
 
 let currentState: AuthState;
 

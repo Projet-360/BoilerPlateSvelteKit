@@ -1,12 +1,6 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-
-	interface AnimationOptions {
-		x?: number;
-		y?: number;
-		duration: number;
-		delay?: number;
-	}
+	import type { AnimationOptions } from '../../typescript';
 
 	export let pathname = '';
 

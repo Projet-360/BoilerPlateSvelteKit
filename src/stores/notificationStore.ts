@@ -1,12 +1,6 @@
 import { writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
-
-// Définition du type pour une notification individuelle
-interface Notification {
-	id: number;
-	message: string;
-	type: string; // ou enum si vous avez des types spécifiques
-}
+import type { Notification } from '../typescript';
 
 // Structure initiale du store
 const initialNotifications: Notification[] = [];
