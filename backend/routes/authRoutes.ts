@@ -36,7 +36,6 @@ import { IUser } from 'TypeScript/interfaces.js';
 router.get('/check-auth', async (req, res, next) => {
   // Retrieve token from cookies
   const token = req.cookies.token;
-  console.log('jkljlkjlk');
 
   try {
     // If no token is present, the user is not authenticated.
