@@ -36,6 +36,7 @@ import { IUser } from 'TypeScript/interfaces.js';
 router.get('/check-auth', async (req, res, next) => {
   // Retrieve token from cookies
   const token = req.cookies.token;
+  console.log('jkljlkjlk');
 
   try {
     // If no token is present, the user is not authenticated.
@@ -177,24 +178,52 @@ router.post(
 );
 
 // Endpoint to reset password using a token
-router.post('/forgot-password/:token', async (req, res) => {
-  const { token } = req.params;
-  const { newPassword } = req.body;
+router.post(
+  '/forgot-password/:token',
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { token } = req.params;
+      const { newPassword, confirmPassword } = req.body;
 
-  // Trouver l'utilisateur avec le token de réinitialisation
-  const user = await User.findOne({
-    resetToken: token,
-    resetTokenExpiration: { $gt: Date.now() },
-  });
+      // Validation: Check if newPassword and confirmPassword are the same
+      if (newPassword !== confirmPassword) {
+        return next(
+          new CustomError(
+            'FORGOT_PASSWORD_INVALID',
+            'FORGOT_PASSWORD_INVALID',
+            400,
+          ),
+        );
+      }
 
-  if (!user) {
-    return res.status(400).json({ error: 'Token invalide ou expiré' });
-  }
+      // Trouver l'utilisateur avec le token de réinitialisation
+      const user = await User.findOne({
+        resetToken: token,
+        resetTokenExpiration: { $gt: Date.now() },
+      });
 
-  await authService.requestresetForgotPassword(user as IUser, newPassword);
+      if (!user) {
+        return next(
+          new CustomError(
+            'TOKEN_INVALID_OR_EXPIRED',
+            'TOKEN_INVALID_OR_EXPIRED',
+            400,
+          ),
+        );
+      }
 
-  res.status(HTTP_STATUS.OK).json({ message: 'Success', success: true });
-});
+      await authService.requestresetForgotPassword(user as IUser, newPassword);
+
+      res.status(HTTP_STATUS.OK).json({ message: 'Success', success: true });
+    } catch (error: any) {
+      logger.error(
+        'Erreur lors de la réinitialisation du mot de passe:',
+        error,
+      );
+      next(new CustomError('ResetPasswordError', error.message, 500));
+    }
+  },
+);
 
 // User dashboard accessible only for authenticated users with 'user' role
 router.get('/user', isAuthenticated, checkRole('user'), async (req, res) => {

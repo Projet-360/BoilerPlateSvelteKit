@@ -20,7 +20,7 @@
 			return;
 		}
 
-		await ResetForgotNewPassword(token, newPassword, $t);
+		await ResetForgotNewPassword(token, newPassword, confirmPassword, $t);
 	}
 </script>
 

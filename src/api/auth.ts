@@ -13,10 +13,10 @@ import { EmailresetPasswordValidation } from '$utils/message/EmailresetPasswordV
 import { goto } from '$app/navigation';
 import { logout } from '$lib/logout.js';
 
-import type { IAuthStore } from '../../typescript';
-import type { UserInfo } from '../../typescript';
-import type { User } from '../../typescript';
-import type { TranslationFunction } from '../../typescript';
+import type { IAuthStore } from '../typescript';
+import type { UserInfo } from '../typescript';
+import type { User } from '../typescript';
+import type { TranslationFunction } from '../typescript';
 
 let currentState: IAuthStore;
 
@@ -123,6 +123,7 @@ export async function sendEmailResetPassword(email: string, $t: TranslationFunct
 export async function ResetForgotNewPassword(
 	token: string,
 	newPassword: string,
+	confirmPassword: string,
 	$t: TranslationFunction
 ) {
 	try {
@@ -131,16 +132,19 @@ export async function ResetForgotNewPassword(
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ newPassword })
+			body: JSON.stringify({ newPassword, confirmPassword })
 		});
 
 		if (response.ok) {
 			goto('/');
 			notificationStore.addNotification($t('validation.VALIDATION_FORGOT_PASSWORD'), 'success');
+		} else {
+			const data = await response.json();
+			notificationStore.addNotification($t('validation.FORGOT_PASSWORD_INVALID'), 'error');
 		}
 	} catch (error: any) {
-		notificationStore.addNotification(error, 'error');
-		throw error;
+		console.log('Caught error:', error);
+		notificationStore.addNotification(error.message, 'error');
 	}
 }
 

@@ -11,7 +11,6 @@ import {
 	generateRandomPassword
 } from '../utils/functionUtils.js';
 
-
 let username, email, password;
 
 function initializeConstants() {
@@ -375,6 +374,30 @@ test.describe.serial('Password Reset Tests', () => {
 		const successMessageElement = await page.waitForSelector('.notification');
 		const successMessageText = await successMessageElement.textContent();
 		expect(successMessageText).toBe('Email sent to reset your forgot password X');
+	});
+
+	test('CONFIRM_PASSWORD_RESET INVALID', async () => {
+		// Récupérer le lien de confirmation depuis Mailtrap
+		const confirmationLink = await getConfirmationLinkFromMailHog();
+		if (!confirmationLink) {
+			throw new Error('Confirmation link is undefined.');
+		}
+
+		// Ouvrir une nouvelle page et naviguer vers le lien de confirmation
+		page = await browser.newPage();
+		await page.goto(confirmationLink, { waitUntil: 'networkidle' });
+
+		// Remplir le formulaire de réinitialisation du mot de passe
+		await fillField(page, '#newPassword', 'NewSecurePassword8!');
+		await fillField(page, '#confirmPassword', 'NewSecurePasswor');
+		await page.click('button[type="button"]');
+
+		// Vérifier que le mot de passe a bien été réinitialisé
+		const successMessageElement = await page.waitForSelector('.notification');
+		const successMessageText = await successMessageElement.textContent();
+		expect(successMessageText).toBe('Passwords do not match X');
+
+		await page.close();
 	});
 
 	test('CONFIRM_PASSWORD_RESET', async () => {
