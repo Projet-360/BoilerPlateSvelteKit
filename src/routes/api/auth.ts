@@ -13,12 +13,12 @@ import { EmailresetPasswordValidation } from '$message/EmailresetPasswordValidat
 import { goto } from '$app/navigation';
 import { logout } from '$lib/logout.js';
 
-import type { AuthState } from '../../typescript';
+import type { IAuthStore } from '../../typescript';
 import type { UserInfo } from '../../typescript';
 import type { User } from '../../typescript';
 import type { TranslationFunction } from '../../typescript';
 
-let currentState: AuthState;
+let currentState: IAuthStore;
 
 authStore.subscribe((state) => {
 	currentState = state;
@@ -29,10 +29,8 @@ export async function checkAuth() {
 		const res = await fetch(`${BD}/auth/check-auth`, {
 			credentials: 'include'
 		});
-		console.log(res);
 		if (res.ok) {
 			const data = await res.json();
-			console.log(data);
 			authStore.update((state) => ({
 				...state,
 				isAuthenticated: data.isAuthenticated,
@@ -40,9 +38,7 @@ export async function checkAuth() {
 				userId: data.userId
 			}));
 		}
-	} catch (error) {
-		console.error("Erreur lors de la vérification de l'authentification:", error);
-	}
+	} catch (error) {}
 }
 
 export async function login(email: string, password: string, $t: TranslationFunction) {
@@ -66,7 +62,6 @@ export async function login(email: string, password: string, $t: TranslationFunc
 
 		notificationStore.addNotification($t('validation.SUCCESS_LOGIN'), 'success');
 	} catch (error) {
-		console.log('Error caught:', error);
 		loginValidation(error, $t);
 		throw error;
 	}
@@ -91,7 +86,6 @@ export async function signup(
 			notificationStore.addNotification($t('validation.SUCCESS_INSCRIPTION'), 'success');
 		}
 	} catch (error) {
-		console.log('error received: ', error);
 		signupValidation(error, $t);
 		throw error;
 	}
@@ -100,14 +94,11 @@ export async function signup(
 export async function verifyToken(token: string, $t: TranslationFunction) {
 	try {
 		const response = await fetch(`${BD}/auth/verify/${token}`);
-		console.log(response);
 		if (response.ok) {
 			goto('/');
 			notificationStore.addNotification($t('validation.EMAIL_VERIFIED'), 'success');
 		}
-	} catch (error) {
-		console.log('Erreur lors de la vérification :', error);
-	}
+	} catch (error) {}
 }
 
 export async function sendEmailResetPassword(email: string, $t: TranslationFunction) {
@@ -165,7 +156,6 @@ export async function getDashboardData() {
 		});
 		return data;
 	} catch (error) {
-		console.log(error);
 		throw error;
 	}
 }
@@ -193,7 +183,6 @@ export const updateUserInfo = async (userInfo: UserInfo, $t: TranslationFunction
 			throw new Error($t('validation.UPDATE_FAILURE'));
 		}
 	} catch (error) {
-		console.error("Erreur lors de la mise à jour des informations de l'utilisateur :", error);
 		throw error;
 	}
 };

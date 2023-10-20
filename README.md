@@ -2,6 +2,9 @@ Installer docker : https://www.docker.com/get-started
 Crée une BD Mongo
 docker run --name svelteKitDB -p 27017:27017 -d mongo:latest
 
+
+docker run --name svelteKitDB -d mongo
+
 npm i 
 backend: npm i
 
@@ -23,15 +26,6 @@ Mail:   http://localhost:8025
 Chargement progressif d'images (Lazy Loading): Cela permettra de charger les images uniquement lorsqu'elles seront visibles à l'écran, ce qui améliorera les performances.
 
 Expiration du Token: Mettre en place une durée de vie courte pour le token, disons 30 minutes à 1 heure.
-
-javascript
-Copy code
-const ERROR_TYPES = Object.freeze({
-  EMAIL_EXISTS: "EMAIL_EXIST",
-  BAD_REQUEST: "BAD_REQUEST",
-  // ...
-});
-Ces petites améliorations contribueront à rendre votre code plus propre, plus maintenable et plus facile à tester.
 
 
 
@@ -77,6 +71,17 @@ Les points negatifs:
 -Je ne suis pas un senior en la matière donc vous pourriez croisé aussi des surprises.
 -Je n'utilise pas de css dans les composants svelte, je préfère avoir ces deux choses dissociées. Vous pouvez tout de même utiliser les inclusions grace a sass
 -Bien d'autre choses que je ne concidère pas.
+
+
+
+
+
+
+
+
+
+
+
 
 Installation:
 -Installer docker et instancier une base Mongo  : docker run --name svelteKitDB -p 27017:27017 -d mongo:latest

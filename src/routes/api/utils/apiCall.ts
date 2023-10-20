@@ -54,7 +54,6 @@ export async function apiCall({
 			throw new Error(errorData.message || 'Erreur du serveur');
 		}
 	} catch (error) {
-		console.error('Erreur API:', error);
 		if (handleError) {
 			handleError(error);
 		}

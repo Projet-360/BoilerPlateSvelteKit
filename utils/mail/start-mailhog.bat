@@ -1,3 +1,3 @@
 @echo off
 echo Starting MailHog...
-C:\wamp64\www\BoilerPlateSvelteKit\utils\MailHog_windows_amd64.exe
+C:\wamp64\www\BoilerPlateSvelteKit\utils\mail\MailHog_windows_amd64.exe

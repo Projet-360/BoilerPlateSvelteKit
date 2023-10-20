@@ -1,4 +1,4 @@
-export interface AuthState {
+export interface IAuthStore {
 	userId: string | null;
 	role: string | null;
 	isAuthenticated: boolean;

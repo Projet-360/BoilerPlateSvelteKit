@@ -1,5 +1,5 @@
 import notificationStore from '$stores/notificationStore';
-type TranslationFunction = (key: string, options?: any) => string;
+import type { TranslationFunction } from '../typescript';
 
 export const loginValidation = (error: any, $t: TranslationFunction) => {
 	let errorMessage;
