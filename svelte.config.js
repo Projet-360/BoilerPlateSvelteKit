@@ -50,15 +50,15 @@ export default defineConfig({
 		alias: {
 			// this will match a file
 			$components: 'src/components',
-			$message: 'src/message',
+			$message: 'src/utils/message',
 			$utils: 'src/utils',
 			$stores: 'src/stores',
 			$UITools: 'src/UITools',
 			$language: 'src/language',
-			$three: 'src/three',
+			$three: 'src/components/three',
 			$services: 'src/services',
 			$lib: 'src/lib',
-			$api: 'src/routes/api'
+			$api: 'src/api'
 		}
 	}
 });

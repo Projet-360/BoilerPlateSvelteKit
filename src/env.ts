@@ -1,6 +1,6 @@
 export const env = {
-	BD: 'mongodb://localhost:27017/svelteKitDB',
-	DB_NAME: 'svelteKitDB',
+	BD: 'mongodb://localhost:27017/BoilerPlateSvelteKitDB',
+	DB_NAME: 'BoilerPlateSvelteKitDB',
 	TOKEN_EXPIRY: '1h',
 	URL_FRONT: 'http://localhost:1000',
 	URL_BACK: 'http://localhost:2000',

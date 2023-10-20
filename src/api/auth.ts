@@ -6,9 +6,9 @@ import { handleRoleRedirection } from '$utils/auth/handleRoleRedirection.js';
 import { authStore } from '$stores/authStore';
 
 import notificationStore from '$stores/notificationStore';
-import { loginValidation } from '$message/login.js';
-import { signupValidation } from '$message/signup.js';
-import { EmailresetPasswordValidation } from '$message/EmailresetPasswordValidation.js';
+import { loginValidation } from '$utils/message/login.js';
+import { signupValidation } from '$utils/message/signup.js';
+import { EmailresetPasswordValidation } from '$utils/message/EmailresetPasswordValidation.js';
 
 import { goto } from '$app/navigation';
 import { logout } from '$lib/logout.js';

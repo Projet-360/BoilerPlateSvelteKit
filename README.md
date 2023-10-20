@@ -1,9 +1,6 @@
 Installer docker : https://www.docker.com/get-started
 Crée une BD Mongo
-docker run --name svelteKitDB -p 27017:27017 -d mongo:latest
-
-
-docker run --name svelteKitDB -d mongo
+docker run --name BoilerPlateSvelteKitDB -p 27018:27017 -d mongo:4.4
 
 npm i 
 backend: npm i
@@ -43,14 +40,6 @@ Notifications: Comme tu l'as évoqué, envoie des notifications par e-mail pour 
 6. Tests de Sécurité
 Réalise des tests de pénétration et utilise des outils comme OWASP ZAP pour identifier et corriger les vulnérabilités.
 
-
-
-Exemples en Node.js
-Helmet pour sécuriser les en-têtes HTTP:
-javascript
-Copy code
-const helmet = require('helmet');
-app.use(helmet());
 
 
 
@@ -133,6 +122,7 @@ J'attends votre retour avec impatience.
     Si un token a était envoyer ne pas donner un autre // Changement de mot de passe email
     gerer les token invalide
     Socket.io
+    réaliser un cache coté serveur
 
 
     PWA

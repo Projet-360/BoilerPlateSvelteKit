@@ -10,7 +10,7 @@
 // jest.setTimeout(30000); // 30 secondes
 
 // beforeAll(async () => {
-//   const dbURI = "mongodb://localhost:27017/svelteKitDB";
+//   const dbURI = "mongodb://localhost:27017/BoilerPlateSvelteKitDB";
 //   await mongoose.connect(dbURI, {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true,
