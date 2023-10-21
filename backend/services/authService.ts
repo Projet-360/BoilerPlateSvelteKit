@@ -21,6 +21,7 @@ import {
 } from './emailService.js';
 
 import { IUser } from '../TypeScript/interfaces.js';
+import logger from './logger.js';
 
 // Function to generate a random token
 const generateToken = () => {
@@ -130,7 +131,7 @@ export const createUser = async (
   role: string,
 ) => {
   const newUser = new User({ username, email, password: hashedPassword, role });
-  console.log('New User:', newUser);
+  logger.info('New User:', newUser);
   await newUser.save();
   return newUser;
 };
@@ -152,7 +153,7 @@ export const createUser = async (
  */
 export const checkAuthentication = async (token: string) => {
   if (!token) {
-    console.log("Le client n'est pas connecté");
+    logger.info("Le client n'est pas connecté");
     return { isAuthenticated: false };
   }
 

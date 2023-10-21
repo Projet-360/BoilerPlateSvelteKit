@@ -1,40 +1,45 @@
 import express from 'express';
+import initSocket from '../services/socket.js';
 import Greeting from '../models/GreetingModel.js';
 const router = express.Router();
 
 // Read All
-router.get('/getGreetings', async (req, res) => {
-  const greetings = await Greeting.find({});
-  res.json(greetings);
-});
+export default (io: any) => {
+  const router = express.Router();
+  router.get('/getGreetings', async (req, res) => {
+    const greetings = await Greeting.find({});
+    res.json(greetings);
+  });
 
-router.post('/saveGreeting', async (req, res) => {
-  const { name, message } = req.body;
-  const greeting = new Greeting({ name, message });
-  await greeting.save();
-  res.json({ status: 'saved' });
-});
+  router.post('/saveGreeting', async (req, res) => {
+    const { name, message } = req.body;
+    const greeting = new Greeting({ name, message });
+    await greeting.save();
 
-// Read One
-router.get('/getGreeting/:id', async (req, res) => {
-  const greeting = await Greeting.findById(req.params.id);
-  res.json(greeting);
-});
+    res.json({ status: 'saved' });
+  });
 
-// Update
-router.put('/updateGreeting/:id', async (req, res) => {
-  const updatedGreeting = await Greeting.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true },
-  );
-  res.json(updatedGreeting);
-});
+  // Read One
+  router.get('/getGreeting/:id', async (req, res) => {
+    const greeting = await Greeting.findById(req.params.id);
+    res.json(greeting);
+  });
 
-// Delete
-router.delete('/deleteGreeting/:id', async (req, res) => {
-  await Greeting.findByIdAndDelete(req.params.id);
-  res.json({ status: 'deleted' });
-});
+  // Update
+  router.put('/updateGreeting/:id', async (req, res) => {
+    const updatedGreeting = await Greeting.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    res.json(updatedGreeting);
+  });
 
-export default router;
+  // Delete
+  router.delete('/deleteGreeting/:id', async (req, res) => {
+    await Greeting.findByIdAndDelete(req.params.id);
+    res.json({ status: 'deleted' });
+  });
+
+  return router;
+};

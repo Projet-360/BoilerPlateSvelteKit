@@ -32,7 +32,6 @@ import CustomError from './../errors/CustomError.js';
 import { IUser } from 'TypeScript/interfaces.js';
 
 // Endpoint to check authentication status
-// Endpoint to check authentication status
 router.get('/check-auth', async (req, res, next) => {
   // Retrieve token from cookies
   const token = req.cookies.token;
@@ -115,7 +114,7 @@ router.post(
 
       res.status(HTTP_STATUS.OK).json({ success: true });
     } catch (error: any) {
-      console.log(error);
+      logger.info(error);
       next(new CustomError('SignupError', error.message, 400));
     }
   },
@@ -138,7 +137,7 @@ router.post('/login', rateLimiter, async (req, res, next) => {
       throw new Error('Login failed');
     }
   } catch (error: any) {
-    console.log('error from authRoutes', error);
+    logger.info('error from authRoutes', error);
     next(new CustomError('LoginError', error.message, 400));
   }
 });
@@ -245,7 +244,7 @@ router.put(
     try {
       const userId = req.user?.userId;
       const updateData = req.body;
-      console.log(req);
+      logger.info(req);
 
       const { success, notification } = await authService.updateUserInfo(
         userId,

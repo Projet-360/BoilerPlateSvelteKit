@@ -55,6 +55,7 @@
     "jsonwebtoken": "^9.0.2",
     "node-fetch": "^3.3.2",
     "quoted-printable": "^1.0.1",
+    "socket.io-client": "^4.7.2",
     "sveltekit-i18n": "^2.4.2",
     "three": "^0.156.1",
     "vite-plugin-pwa": "^0.16.4"

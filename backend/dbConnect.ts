@@ -1,6 +1,7 @@
 // Import the required modules
 import mongoose from 'mongoose';
 import { env } from './constants/env.js';
+import logger from './services/logger.js';
 
 // Asynchronous function to connect to the MongoDB database
 const connectDB = async () => {
@@ -11,7 +12,7 @@ const connectDB = async () => {
       useUnifiedTopology: true,
     } as any);
     // Log success message if the connection is established
-    console.log('Connected to MongoDB');
+    logger.info('Connected to MongoDB');
   } catch (err) {
     // Log the error message if the connection fails
     console.error('Failed to connect to MongoDB', err);

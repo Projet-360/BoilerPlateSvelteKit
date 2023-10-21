@@ -15,7 +15,7 @@ function Write-Tree {
     }
 }
 
-$folder = "C:\wamp64\www\BoilerPlateSvelteKit\utils\createPath"
+$folder = "C:\wamp64\www\BoilerPlateSvelteKit\"
 $outputFile = "C:\wamp64\www\BoilerPlateSvelteKit\utils\createPath\PathIndicator.txt"
 
 $writer = [System.IO.StreamWriter]::new($outputFile)

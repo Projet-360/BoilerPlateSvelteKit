@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb';
 import { env } from './constants/env.js';
+import logger from './services/logger.js';
 
 async function clearDB() {
   const client = new MongoClient(env.BD);
@@ -12,9 +13,12 @@ async function clearDB() {
     for (const collection of collections) {
       await collection.deleteMany({});
     }
-    console.log('Database cleared');
+
+    // Utilisation de Winston pour le logging
+    logger.info('Database cleared');
   } catch (err) {
-    console.error(err);
+    // Utilisation de Winston pour le logging d'erreur
+    logger.error(err);
   } finally {
     await client.close();
   }

@@ -5,3 +5,64 @@
 {"level":"info","message":"Rate limit reached"}
 {"level":"info","message":"Rate limit reached"}
 {"level":"info","message":"Rate limit reached"}
+{"level":"info","message":"Database cleared"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: nz4TzbSrW5VUE2-xAAAD"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: y4wfvm3TMfRflhSSAAAC"}
+{"level":"info","message":"New client connected: AKxSjO-JOr8wRZwaAAAD"}
+{"level":"info","message":"New client connected: 7GqXgJLBXZC5JHOmAAAF"}
+{"level":"info","message":"New client connected: Q4axZ_XShlEclO-3AAAH"}
+{"level":"info","message":"New client connected: RX57XYkbQWaoipFBAAAJ"}
+{"level":"info","message":"New client connected: 0MEuBgCzLEkN3HtSAAAL"}
+{"level":"info","message":"New client connected: uz6ZY9_CfzP7mrkTAAAN"}
+{"level":"info","message":"New client connected: Cm9b1nLcyWJZkKfhAAAP"}
+{"level":"info","message":"New client connected: sivTmcMxslvA_EWCAAAR"}
+{"level":"info","message":"New client connected: uF98c_xwZdz9XcOVAAAT"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: obtkontaqT63IFdKAAAB"}
+{"level":"info","message":"New client connected: lBmAHy-J7efyfLgYAAAD"}
+{"level":"info","message":"New client connected: GA94-Q2W-fgwaKpeAAAF"}
+{"level":"info","message":"Client disconnected: GA94-Q2W-fgwaKpeAAAF"}
+{"level":"info","message":"Client disconnected: lBmAHy-J7efyfLgYAAAD"}
+{"level":"info","message":"New client connected: e3JpDp8bQSZB3waXAAAH"}
+{"level":"info","message":"New client connected: 1giGMVnti6Yl6MIuAAAJ"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: 9MqLuBlAfQ3mbRR0AAAC"}
+{"level":"info","message":"New client connected: xD9crpJN0PL1mBcYAAAD"}
+{"level":"info","message":"New client connected: QyunbFy9AjeiJfXmAAAF"}
+{"level":"info","message":"Client disconnected: 9MqLuBlAfQ3mbRR0AAAC"}
+{"level":"info","message":"Client disconnected: xD9crpJN0PL1mBcYAAAD"}
+{"level":"info","message":"New client connected: qul71RINyOI-YQTkAAAH"}
+{"level":"info","message":"New client connected: FyxdG-wT-wuHpFgNAAAJ"}
+{"level":"info","message":"Greeting deleted from client: qul71RINyOI-YQTkAAAH"}
+{"level":"info","message":"Greeting deleted from client: qul71RINyOI-YQTkAAAH"}
+{"level":"info","message":"Greeting sent from client: qul71RINyOI-YQTkAAAH"}
+{"level":"info","message":"Greeting sent from client: qul71RINyOI-YQTkAAAH"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: 7JKwkL4JghA5feAJAAAC"}
+{"level":"info","message":"New client connected: 5TBNaNOiajP1LydxAAAD"}
+{"level":"info","message":"New client connected: 7OWuMDzIMoAruQZJAAAF"}
+{"level":"info","message":"Client disconnected: 7JKwkL4JghA5feAJAAAC"}
+{"level":"info","message":"Client disconnected: 5TBNaNOiajP1LydxAAAD"}
+{"level":"info","message":"New client connected: HIkyB4WkJOxxHe9GAAAI"}
+{"level":"info","message":"New client connected: gPqpkMk0b-n10ZuPAAAJ"}
+{"level":"info","message":"Greeting deleted from client: HIkyB4WkJOxxHe9GAAAI"}

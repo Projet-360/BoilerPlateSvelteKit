@@ -2,6 +2,7 @@
 import nodemailer from 'nodemailer';
 import { env } from '../constants/env.js';
 import { IUser } from './../TypeScript/interfaces.js';
+import logger from './logger.js';
 
 // Validate required environment variables
 const validateEnvVariables = () => {
@@ -107,7 +108,7 @@ const sendEmail = async (
 ) => {
   try {
     await transporter.sendMail({ from, to, subject, html });
-    console.log(`Email successfully sent to ${to}`);
+    logger.info(`Email successfully sent to ${to}`);
   } catch (error) {
     console.error(`Error while sending email to ${to}:`, error);
     // Here, you could add more robust error handling.

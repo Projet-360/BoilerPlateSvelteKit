@@ -1,20 +1,26 @@
 // Import required modules and configurations
 import express, { Request, Response, NextFunction } from 'express';
+import mongoose from 'mongoose';
+import http from 'http';
+import initSocket from './services/socket.js';
+
 import connectDB from './dbConnect.js'; // Database connection module
 import config from './config/config.js'; // Configuration settings
 import applyMiddlewares from './middlewares/middlewares.js'; // Application middlewares
-import mongoose from 'mongoose';
+import logger from './services/logger.js';
+import { env } from './constants/env.js';
 
 // Import route modules
 import authRoutes from './routes/authRoutes.js';
 import greetingRoutes from './routes/greetingRoutes.js';
-import { env } from './constants/env.js';
 
 // Initialize database connection
 connectDB();
 
 // Initialize the Express app
 const app = express();
+const server = http.createServer(app);
+const io = initSocket(server);
 
 // Disable SSL certificate verification (Not recommended in production)
 if (env.NODE_ENV === 'production') {
@@ -32,7 +38,7 @@ applyMiddlewares(app);
 
 // Route definitions
 app.use('/auth', authRoutes);
-app.use('/api', greetingRoutes);
+app.use('/api', greetingRoutes(io));
 
 // Error handling middleware
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
@@ -44,8 +50,9 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 // Start the server on the defined port
-app.listen(config.PORT, () => {
-  console.log(`Server running on port ${config.PORT}`);
+server.listen(config.PORT, () => {
+  // <-- Make sure to use 'server.listen', NOT 'app.listen'
+  logger.info(`Server running on port ${config.PORT}`);
 });
 
 // Graceful shutdown handlers for proper resource deallocation
@@ -54,11 +61,11 @@ process.on('SIGINT', gracefulShutdown);
 
 // Function for handling graceful shutdown
 function gracefulShutdown() {
-  console.log('\nReceived exit signal, shutting down gracefully.');
+  logger.info('\nReceived exit signal, shutting down gracefully.');
 
   // Close the MongoDB connection
   mongoose.connection.close((() => {
-    console.log('MongoDB connection closed.');
+    logger.info('MongoDB connection closed.');
     process.exit(0);
   }) as any);
 }

@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express'; // Import types from 
 import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
 import CustomError from './../errors/CustomError.js';
 import { env } from '../constants/env.js';
+import logger from '../services/logger.js';
 
 // Annotate types for function parameters
 const errorHandler = (
@@ -16,7 +17,7 @@ const errorHandler = (
 
   // Check if the error is an instance of CustomError
   if (err instanceof CustomError) {
-    console.log('CustomError captured in errorHandler:', err);
+    logger.info('CustomError captured in errorHandler:', err);
     statusCode = err.statusCode; // Set the status code to the one provided by CustomError
   }
 
