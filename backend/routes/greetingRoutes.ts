@@ -1,5 +1,4 @@
 import express from 'express';
-import initSocket from '../services/socket.js';
 import Greeting from '../models/GreetingModel.js';
 const router = express.Router();
 

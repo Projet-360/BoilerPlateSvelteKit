@@ -84,9 +84,6 @@
     savoir comment faire pour améliorer la gestion des documents Langues
     Si un token a était envoyer ne pas donner un autre // Changement de mot de passe email
     gerer les token invalide
-    Socket.io
-    réaliser un cache coté serveur
-
 
     PWA
     https://www.youtube.com/watch?v=Enl4OPQ2OAM
