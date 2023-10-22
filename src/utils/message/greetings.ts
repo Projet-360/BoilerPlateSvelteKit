@@ -29,6 +29,9 @@ export const greetingsValidation = (error: any, $t: TranslationFunction) => {
 			case 'MESSAGE_MIN_MAX_CARAC':
 				errorMessage = $t('validation.MESSAGE_MIN_MAX_CARAC');
 				break;
+			case 'RATE_LIMIT':
+				errorMessage = $t('validation.RATE_LIMIT');
+				break;
 			default:
 				errorMessage = "Une erreur inconnue s'est produite.";
 		}
