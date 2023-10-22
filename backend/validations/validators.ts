@@ -29,6 +29,20 @@ export const passwordValidators = [
     .withMessage(ERRORS.SPECIAL_CARAC_PASSWORD),
 ];
 
+export const inputTextValidators: ValidationChain[] = [
+  check('name').not().isEmpty().withMessage('Name should not be empty'),
+  check('name').escape(),
+  check('name')
+    .isLength({ min: 2, max: 50 })
+    .withMessage('Name should be between 2 and 50 characters'),
+
+  check('message').not().isEmpty().withMessage('Message should not be empty'),
+  check('message').escape(),
+  check('message')
+    .isLength({ min: 5, max: 500 })
+    .withMessage('Message should be between 5 and 500 characters'),
+];
+
 export const signupValidators: ValidationChain[] = [
   ...usernameValidators,
   ...emailValidators,
@@ -38,3 +52,4 @@ export const updateUserValidators: ValidationChain[] = [
   ...usernameValidators,
   ...emailValidators,
 ];
+export const greetingsValidators: ValidationChain[] = [...inputTextValidators];

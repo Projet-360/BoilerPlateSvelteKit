@@ -13,7 +13,7 @@
     "docs": "typedoc --out docs",
     "format": "prettier --write \"./**/*.ts\"",
     "lint": "eslint \"./**/*.ts\"",
-    "prettier:watch": "onchange \"./**/*.ts\" -- npm run format"
+    "prettier:watch": "onchange \"./**/*.ts\" -- prettier --write \"./**/*.ts\" > nul 2>&1"
   },
   "keywords": [],
   "author": "",

@@ -104,3 +104,47 @@
 {"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:33:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:215:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)","statusCode":401}
 {"level":"info","message":"Database cleared"}
 {"level":"info","message":"Default users inserted"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: A6772tTnSVQhNSh3AAAB"}
+{"level":"info","message":"New client connected: KXPcJVeZU0x9QHNvAAAD"}
+{"level":"info","message":"Client disconnected: KXPcJVeZU0x9QHNvAAAD"}
+{"level":"info","message":"New client connected: TbBIjeWaSNa6hQAcAAAF"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: hzdAY7HI75dxEQyLAAAB"}
+{"level":"info","message":"New client connected: _oPzU1uXm8hq4aUhAAAD"}
+{"level":"info","message":"Client disconnected: hzdAY7HI75dxEQyLAAAB"}
+{"level":"info","message":"New client connected: Bdhaq6CWML74DvW2AAAF"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: eHTehfxxGvBu_SuAAAAC"}
+{"level":"info","message":"New client connected: 62_EKR2ZMkX4wxJcAAAD"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: KqMe5vASKwzuBuXaAAAB"}
+{"level":"info","message":"New client connected: rSlGPumu5C4vmUQ4AAAD"}
+{"level":"info","message":"Client disconnected: KqMe5vASKwzuBuXaAAAB"}
+{"level":"info","message":"New client connected: PZo1usLvS2YHLSa_AAAF"}
+{"level":"info","message":"Client disconnected: PZo1usLvS2YHLSa_AAAF"}
+{"level":"info","message":"New client connected: F9dbhEj6tQqK6CIOAAAH"}
+{"level":"info","message":"Greeting sent from client: F9dbhEj6tQqK6CIOAAAH"}
+{"level":"info","message":"Greeting sent from client: F9dbhEj6tQqK6CIOAAAH"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: nNTpC8W8258xggukAAAB"}
+{"level":"info","message":"New client connected: UHdfCipPxGNcz_GfAAAD"}
+{"level":"info","message":"Client disconnected: nNTpC8W8258xggukAAAB"}
+{"level":"info","message":"New client connected: ugc8vB-X8VhcSpyPAAAF"}
+{"level":"info","message":"Greeting deleted from client: ugc8vB-X8VhcSpyPAAAF"}
+{"level":"info","message":"Greeting deleted from client: ugc8vB-X8VhcSpyPAAAF"}
+{"level":"info","message":"Greeting deleted from client: ugc8vB-X8VhcSpyPAAAF"}
+{"level":"info","message":"Greeting deleted from client: ugc8vB-X8VhcSpyPAAAF"}
+{"level":"info","message":"Greeting deleted from client: ugc8vB-X8VhcSpyPAAAF"}
+{"level":"info","message":"Greeting deleted from client: ugc8vB-X8VhcSpyPAAAF"}
+{"level":"info","message":"Greeting deleted from client: ugc8vB-X8VhcSpyPAAAF"}
+{"level":"info","message":"Greeting deleted from client: ugc8vB-X8VhcSpyPAAAF"}
