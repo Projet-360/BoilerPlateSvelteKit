@@ -77,13 +77,18 @@
 
     #A FAIRE
     Ne pas oublier les ratelimiter sur chaque champs
-    intégrer les contraintes sur la partie admin et vérifier les contraintes aussi sur toutes les page reset passwords... Rendre le code propre
+    intégrer les contraintes sur la partie admin et vérifier Rendre le code propre
     intégrer 0Auth
-    Faire les tests pour les roles et langue
+    Faire les tests pour les roles et langue, accès, greetings
     mettre la lang dans local storage
     savoir comment faire pour améliorer la gestion des documents Langues
     Si un token a était envoyer ne pas donner un autre // Changement de mot de passe email
     gerer les token invalide
+    mettre les validation sur greetings et admin
+    mettre les ratelimiter sur greetings
+    dans le 'cleardb' mettre des informations factices
+
+
 
     PWA
     https://www.youtube.com/watch?v=Enl4OPQ2OAM

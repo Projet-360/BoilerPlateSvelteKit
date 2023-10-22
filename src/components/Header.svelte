@@ -5,6 +5,7 @@
 
 	import { authStore } from '$stores/authStore';
 	import Logout from '$components/Logout.svelte';
+	import FullScreen from './FullScreen.svelte';
 
 	const handleChange = (event: Event) => {
 		const currentTarget = event.currentTarget as HTMLSelectElement; // Cast ici si vous êtes sûr que c'est un élément select
@@ -68,6 +69,8 @@
 		</select>
 
 		<DarkMode />
+
+		<FullScreen />
 
 		<Logout />
 	</div>
