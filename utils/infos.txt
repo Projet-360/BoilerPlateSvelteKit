@@ -86,8 +86,6 @@
     gerer les token invalide
     mettre les validation sur greetings et admin
     mettre les ratelimiter sur greetings
-    dans le 'cleardb' mettre des informations factices
-
 
 
     PWA

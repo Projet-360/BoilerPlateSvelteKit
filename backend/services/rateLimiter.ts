@@ -1,20 +1,40 @@
-import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
 // Import required modules
 import rateLimit from 'express-rate-limit';
-// Note: logger and HTTP_STATUS should also be imported here if they are used
+import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
+import { messageReturn } from '../constants/errorMessages.js';
 
-// Configure rate limiter middleware
+// Constants for general rate limiter configuration
+// Preferably fetch these values from environment variables or config files
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
+const RATE_LIMIT_MAX_REQUESTS = 40;
+
+// Configure general rate limiter middleware
 export const rateLimiter = rateLimit({
-  // Window duration for rate limiting in milliseconds (15 minutes)
-  windowMs: 15 * 60 * 1000,
+  // Window duration for rate limiting in milliseconds
+  windowMs: RATE_LIMIT_WINDOW_MS,
   // Maximum number of requests allowed within the window duration
-  max: 40,
+  max: RATE_LIMIT_MAX_REQUESTS,
   // Custom handler function when rate limit is exceeded
   handler: function (req, res) {
     // Respond with a 429 status code and a JSON message
     res.status(HTTP_STATUS.TOO_MANY_REQUESTS).json({
-      // Make sure to import 'HTTP_STATUS'
-      message: 'RATE_LIMIT',
+      message: messageReturn.RATE_LIMIT,
+    });
+  },
+});
+
+// Constants for aggressive rate limiter against brute force attacks
+const BRUTE_FORCE_WINDOW_MS = 1 * 60 * 1000; // 1 minute
+const BRUTE_FORCE_MAX_REQUESTS = 5; // 5 requests per minute
+
+// Configure aggressive rate limiter middleware against brute force attacks
+export const bruteForceRateLimiter = rateLimit({
+  windowMs: BRUTE_FORCE_WINDOW_MS,
+  max: BRUTE_FORCE_MAX_REQUESTS,
+  handler: function (req, res) {
+    // Respond with a 429 status code and a JSON message
+    res.status(HTTP_STATUS.TOO_MANY_REQUESTS).json({
+      message: messageReturn.RATE_LIMIT,
     });
   },
 });

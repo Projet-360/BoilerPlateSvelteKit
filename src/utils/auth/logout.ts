@@ -1,9 +1,9 @@
 import { goto } from '$app/navigation';
 import { authStore } from '$stores/authStore';
 import notificationStore from '$stores/notificationStore.js';
-import { BD } from '$lib/constants';
+import { BD } from '$utils/constants';
 import { t } from '$UITools/Translations/index';
-import type { TranslationFunction } from '../typescript';
+import type { TranslationFunction } from '../../typescript';
 
 export async function logout($t: TranslationFunction) {
 	try {

@@ -1,6 +1,6 @@
 import { apiCall } from '$api/utils/apiCall'; // Assure-toi que le chemin est correct
 
-import { BD } from '$lib/constants';
+import { BD } from '$utils/constants';
 import { handleRoleRedirection } from '$utils/auth/handleRoleRedirection.js';
 
 import { authStore } from '$stores/authStore';
@@ -11,7 +11,7 @@ import { signupValidation } from '$utils/message/signup.js';
 import { EmailresetPasswordValidation } from '$utils/message/EmailresetPasswordValidation.js';
 
 import { goto } from '$app/navigation';
-import { logout } from '$lib/logout.js';
+import { logout } from '$utils/auth/logout.js';
 
 import type { IAuthStore } from '../typescript';
 import type { UserInfo } from '../typescript';
@@ -49,6 +49,8 @@ export async function login(email: string, password: string, $t: TranslationFunc
 			credentials: 'include',
 			body: { email, password }
 		});
+
+		console.log(data);
 
 		authStore.set({
 			role: data.role,

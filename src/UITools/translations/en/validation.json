@@ -18,6 +18,9 @@
     "EMAIL_FORGOT_PASSWORD": "Email sent to reset your forgot password",
     "FORGOT_PASSWORD_INVALID": "Passwords do not match",
 	"VALIDATION_FORGOT_PASSWORD": "Your password has been successfully updated",
-
-    "ACCESS_DENIED": "Access denied"
+    "ACCESS_DENIED": "Access denied",    
+    "NAME_MIN_MAX_CARAC": "The name must be between 5 and 50 characters long.",
+    "NAME_REQUIRED": "The name field is required.",
+    "MESSAGE_MIN_MAX_CARAC": "The message must be between 10 and 500 characters long.",
+    "MESSAGE_REQUIRED": "The message field is required."
 }

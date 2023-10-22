@@ -3,6 +3,7 @@ import express from 'express';
 import Greeting from '../models/GreetingModel.js';
 import { greetingsValidators } from '../validations/validators.js';
 import { handleValidationErrors } from '../middlewares/handleValidationErrors.js';
+import { bruteForceRateLimiter } from '../services/rateLimiter.js';
 const router = express.Router();
 
 // Read All
@@ -15,11 +16,11 @@ export default (io: any) => {
 
   router.post(
     '/saveGreeting',
+    bruteForceRateLimiter,
     greetingsValidators,
     handleValidationErrors,
     async (req: Request, res: Response) => {
       const { name, message } = req.body;
-      console.log('lkjlkj');
 
       const greeting = new Greeting({ name, message });
       await greeting.save();
@@ -35,14 +36,20 @@ export default (io: any) => {
   });
 
   // Update
-  router.put('/updateGreeting/:id', async (req: Request, res: Response) => {
-    const updatedGreeting = await Greeting.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-    );
-    res.json(updatedGreeting);
-  });
+  router.put(
+    '/updateGreeting/:id',
+    bruteForceRateLimiter,
+    greetingsValidators,
+    handleValidationErrors,
+    async (req: Request, res: Response) => {
+      const updatedGreeting = await Greeting.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true },
+      );
+      res.json(updatedGreeting);
+    },
+  );
 
   // Delete
   router.delete('/deleteGreeting/:id', async (req: Request, res: Response) => {

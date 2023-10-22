@@ -20,7 +20,7 @@ import BlacklistedToken from '../models/BlacklistedTokenModel.js';
 
 import * as authService from '../services/authService.js';
 import logger from '../services/logger.js';
-import { rateLimiter } from '../services/rateLimiter.js';
+import { bruteForceRateLimiter, rateLimiter } from '../services/rateLimiter.js';
 
 import {
   signupValidators,
@@ -95,6 +95,7 @@ router.get('/verify/:token', async (req, res) => {
 // Endpoint for user signup
 router.post(
   '/signup',
+  bruteForceRateLimiter,
   signupValidators,
   handleValidationErrors,
   async (req: Request, res: Response, next: NextFunction) => {
@@ -121,7 +122,7 @@ router.post(
 );
 
 // Endpoint for user login with rate limiter
-router.post('/login', rateLimiter, async (req, res, next) => {
+router.post('/login', bruteForceRateLimiter, async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const loginResult = await authService.login(email, password);

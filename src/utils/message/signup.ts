@@ -44,6 +44,9 @@ export const signupValidation = (error, $t: TranslationFunction) => {
 			case 'SPECIAL_CARAC_PASSWORD':
 				errorMessage = $t('validation.SPECIAL_CARAC_PASSWORD');
 				break;
+			case 'RATE_LIMIT':
+				errorMessage = $t('validation.RATE_LIMIT');
+				break;
 			default:
 				errorMessage = "Une erreur inconnue s'est produite.";
 		}

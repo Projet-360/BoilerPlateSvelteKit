@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import socket from '$lib/socket.js'; // Importez le client Socket.io
+	import socket from '$utils/socket.js'; // Importez le client Socket.io
 	import { sendGreeting, getAllGreetings, deleteGreeting } from '$api/Greetings';
+	import { t } from '$UITools/Translations/index';
 
 	let editingId: string | null = null;
 	let name: string = '';
@@ -26,7 +27,7 @@
 
 	export async function handleSendGreeting(): Promise<void> {
 		console.log('Sending greeting');
-		const isSuccessful: boolean = await sendGreeting(name, message, editingId);
+		const isSuccessful: boolean = await sendGreeting(name, message, editingId, $t);
 		if (isSuccessful) {
 			name = '';
 			message = '';

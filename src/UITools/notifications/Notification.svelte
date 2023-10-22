@@ -16,7 +16,7 @@
 		const timer = setTimeout(() => {
 			isVisible = false;
 			dispatch('dismiss'); // Émettre l'événement personnalisé lors de la fermeture
-		}, 27017);
+		}, 4000);
 
 		// Nettoyage : annuler le timer si le composant est détruit
 		return () => clearTimeout(timer);
