@@ -97,6 +97,8 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\CSS\utils\_mixins.scss
 C:\wamp64\www\BoilerPlateSvelteKit\src\CSS\utils\_variables.scss
 C:\wamp64\www\BoilerPlateSvelteKit\src\CSS\utils\_vendors.scss
 C:\wamp64\www\BoilerPlateSvelteKit\src\CSS\main.scss
+C:\wamp64\www\BoilerPlateSvelteKit\src\db
+C:\wamp64\www\BoilerPlateSvelteKit\src\db\mongo.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\lib
 C:\wamp64\www\BoilerPlateSvelteKit\src\lib\images
 C:\wamp64\www\BoilerPlateSvelteKit\src\lib\images\github.svg
@@ -238,6 +240,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\utils\chatGPT.txt
 C:\wamp64\www\BoilerPlateSvelteKit\utils\infos.txt
 C:\wamp64\www\BoilerPlateSvelteKit\utils\socket.io
 C:\wamp64\www\BoilerPlateSvelteKit\.babelrc
+C:\wamp64\www\BoilerPlateSvelteKit\.env
 C:\wamp64\www\BoilerPlateSvelteKit\.eslintignore
 C:\wamp64\www\BoilerPlateSvelteKit\.eslintrc.js
 C:\wamp64\www\BoilerPlateSvelteKit\.gitattributes

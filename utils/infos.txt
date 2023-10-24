@@ -81,9 +81,9 @@
     
     
     faire vercel
-Netlify - faire une branch build pour vercel
-MongoDB Atlas - Mettre une configuration prod/env
-Freenom
+    Netlify - faire une branch build pour vercel
+    MongoDB Atlas - Mettre une configuration prod/env
+    Freenom
 
 
     améliorer les handleError pour moins se repeter et avoir un flux plus simple
