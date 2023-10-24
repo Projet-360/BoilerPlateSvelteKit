@@ -53,6 +53,7 @@
     "express-validator": "^7.0.1",
     "flubber": "^0.4.2",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.2.0",
     "node-fetch": "^3.3.2",
     "quoted-printable": "^1.0.1",
     "socket.io-client": "^4.7.2",

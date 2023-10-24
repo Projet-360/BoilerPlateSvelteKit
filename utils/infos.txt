@@ -76,16 +76,24 @@
     J'attends votre retour avec impatience.
 
     #A FAIRE
-    Ne pas oublier les ratelimiter sur chaque champs
-    intégrer les contraintes sur la partie admin et vérifier Rendre le code propre
+    
     intégrer 0Auth
+    
+    
+    faire vercel
+Netlify - faire une branch build pour vercel
+MongoDB Atlas - Mettre une configuration prod/env
+Freenom
+
+
+    améliorer les handleError pour moins se repeter et avoir un flux plus simple
     Faire les tests pour les roles et langue, accès, greetings
+
+    intégrer les contraintes sur la partie admin et vérifier Rendre le code propre
     mettre la lang dans local storage
     savoir comment faire pour améliorer la gestion des documents Langues
     Si un token a était envoyer ne pas donner un autre // Changement de mot de passe email
     gerer les token invalide
-    mettre les validation sur greetings et admin
-    mettre les ratelimiter sur greetings
 
 
     PWA
@@ -119,3 +127,4 @@
     Expiration du Token: Mettre en place une durée de vie courte pour le token, disons 30 minutes à 1 heure.
 
     
+

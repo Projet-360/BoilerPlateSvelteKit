@@ -35,6 +35,8 @@ C:\wamp64\www\BoilerPlateSvelteKit\backend\services\authService.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\services\emailService.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\services\logger.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\services\rateLimiter.ts
+C:\wamp64\www\BoilerPlateSvelteKit\backend\services\redisClient.ts
+C:\wamp64\www\BoilerPlateSvelteKit\backend\services\socket.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\test
 C:\wamp64\www\BoilerPlateSvelteKit\backend\test\authRoutes.test.js
 C:\wamp64\www\BoilerPlateSvelteKit\backend\TypeScript
@@ -63,6 +65,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\api\Greetings.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\components
 C:\wamp64\www\BoilerPlateSvelteKit\src\components\three
 C:\wamp64\www\BoilerPlateSvelteKit\src\components\three\Box.svelte
+C:\wamp64\www\BoilerPlateSvelteKit\src\components\FullScreen.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\components\Greetings.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\components\Header.svelte
 C:\wamp64\www\BoilerPlateSvelteKit\src\components\Logout.svelte
@@ -102,8 +105,6 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\lib\images\svelte-welcome.png
 C:\wamp64\www\BoilerPlateSvelteKit\src\lib\images\svelte-welcome.webp
 C:\wamp64\www\BoilerPlateSvelteKit\src\lib\js
 C:\wamp64\www\BoilerPlateSvelteKit\src\lib\js\index.ts
-C:\wamp64\www\BoilerPlateSvelteKit\src\lib\constants.ts
-C:\wamp64\www\BoilerPlateSvelteKit\src\lib\logout.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\about
 C:\wamp64\www\BoilerPlateSvelteKit\src\routes\about\+page.svelte
@@ -186,12 +187,16 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\UITools\Translations\lang.json
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils\auth
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils\auth\handleRoleRedirection.ts
+C:\wamp64\www\BoilerPlateSvelteKit\src\utils\auth\logout.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils\message
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils\message\EmailresetPasswordValidation.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils\message\forgotPassword.ts
+C:\wamp64\www\BoilerPlateSvelteKit\src\utils\message\greetings.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils\message\login.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils\message\signup.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils\message\updateUser.ts
+C:\wamp64\www\BoilerPlateSvelteKit\src\utils\constants.ts
+C:\wamp64\www\BoilerPlateSvelteKit\src\utils\socket.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\app.d.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\app.html
 C:\wamp64\www\BoilerPlateSvelteKit\src\env.ts
@@ -231,6 +236,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\utils\mail\MailHog_windows_amd64.exe
 C:\wamp64\www\BoilerPlateSvelteKit\utils\mail\start-mailhog.bat
 C:\wamp64\www\BoilerPlateSvelteKit\utils\chatGPT.txt
 C:\wamp64\www\BoilerPlateSvelteKit\utils\infos.txt
+C:\wamp64\www\BoilerPlateSvelteKit\utils\socket.io
 C:\wamp64\www\BoilerPlateSvelteKit\.babelrc
 C:\wamp64\www\BoilerPlateSvelteKit\.eslintignore
 C:\wamp64\www\BoilerPlateSvelteKit\.eslintrc.js
@@ -248,3 +254,4 @@ C:\wamp64\www\BoilerPlateSvelteKit\svelte.config.js
 C:\wamp64\www\BoilerPlateSvelteKit\tsconfig.json
 C:\wamp64\www\BoilerPlateSvelteKit\vite.config.ts
 C:\wamp64\www\BoilerPlateSvelteKit\vite.config.ts.timestamp-1697729614029-7329f61dad5c4.mjs
+C:\wamp64\www\BoilerPlateSvelteKit\vite.config.ts.timestamp-1697896451050-a44b431dfd6d6.mjs

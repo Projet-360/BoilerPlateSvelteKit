@@ -49,6 +49,7 @@ export default defineConfig({
 		adapter: adapter(),
 		alias: {
 			// this will match a file
+			$db: 'src/db',
 			$components: 'src/components',
 			$message: 'src/utils/message',
 			$utils: 'src/utils',
