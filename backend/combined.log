@@ -571,3 +571,41 @@
 {"level":"info","message":"New client connected: _l4Y98519jJMSqZ0AAAT"}
 {"level":"info","message":"Client disconnected: _l4Y98519jJMSqZ0AAAT"}
 {"level":"info","message":"New client connected: eE10i0Kk2AWgWeBAAAAV"}
+{"level":"info","message":"Client disconnected: eE10i0Kk2AWgWeBAAAAV"}
+{"level":"info","message":"New client connected: lrsEWepRev3zIiPyAAAX"}
+{"level":"info","message":"New client connected: 8LNoNi0dlV9MgqSAAAAZ"}
+{"level":"info","message":"Client disconnected: 8LNoNi0dlV9MgqSAAAAZ"}
+{"$__":{"activePaths":{"paths":{"_id":"default","email":"modify","isVerified":"default","password":"modify","role":"modify","username":"modify"},"states":{"default":{"_id":true,"isVerified":true},"modify":{"email":true,"password":true,"role":true,"username":true},"require":{}}}},"_doc":{"_id":"6538e645d3ec8fe428c31f4a","email":"zp60ea3o@example.com","isVerified":false,"password":"$2a$12$p3YzfLoYolqOB54zQZ6GMuIhado1FnD5fCyqzuQ27/hJo2389B.zC","role":"user","username":"hUko1y3m"},"level":"info","message":"New User:"}
+{"level":"info","message":"Email successfully sent to zp60ea3o@example.com"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"level":"info","message":"error from authRoutes EMAIL_NOT_VERIFIED","name":"EMAIL_NOT_VERIFIED","stack":"EMAIL_NOT_VERIFIED: EMAIL_NOT_VERIFIED\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:35:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:233:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"New client connected: DjvxlLAEevg_5QKjAAAc"}
+{"level":"info","message":"Client disconnected: DjvxlLAEevg_5QKjAAAc"}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:35:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:240:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)","statusCode":401}
+{"level":"info","message":"Email successfully sent to zp60ea3o@example.com"}
+{"level":"info","message":"New client connected: MuwrjS-bvUnA7kXhAAAf"}
+{"level":"info","message":"Client disconnected: MuwrjS-bvUnA7kXhAAAf"}
+{"level":"info","message":"Database cleared"}
+{"level":"info","message":"Default users inserted"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: 9LFsgN8bv_svGYgQAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: X9nM6CQLNHgBFC3_AAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Database cleared"}
+{"level":"info","message":"Default users inserted"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: O3DDEElrwc1DxmhnAAAC"}
+{"level":"info","message":"New client connected: zhUPwtosUHMDDdQOAAAD"}
+{"level":"info","message":"Client disconnected: O3DDEElrwc1DxmhnAAAC"}
+{"level":"info","message":"New client connected: lGawsl2ozOZ0-J_hAAAF"}
+{"level":"info","message":"Client disconnected: lGawsl2ozOZ0-J_hAAAF"}
+{"level":"info","message":"Client disconnected: zhUPwtosUHMDDdQOAAAD"}
+{"level":"info","message":"New client connected: tRMIGC7TvlkVoEzQAAAI"}
+{"level":"info","message":"New client connected: 15PC2yymca9jaUrNAAAJ"}
+{"level":"info","message":"Client disconnected: 15PC2yymca9jaUrNAAAJ"}

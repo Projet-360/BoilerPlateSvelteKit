@@ -14,6 +14,8 @@ if (
 
 let mongoUrl: string;
 
+console.log(process.env.DB_ENV);
+
 switch (process.env.DB_ENV) {
   case 'local':
     mongoUrl = process.env.MONGO_LOCAL as string;

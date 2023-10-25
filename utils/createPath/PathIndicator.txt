@@ -6,11 +6,9 @@ C:\wamp64\www\BoilerPlateSvelteKit\.vscode
 C:\wamp64\www\BoilerPlateSvelteKit\.vscode\settings.json
 C:\wamp64\www\BoilerPlateSvelteKit\backend
 C:\wamp64\www\BoilerPlateSvelteKit\backend\config
-C:\wamp64\www\BoilerPlateSvelteKit\backend\config\config.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\config\corsConfig.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\config\mailerConfig.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\constants
-C:\wamp64\www\BoilerPlateSvelteKit\backend\constants\env.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\constants\errorMessages.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\constants\HTTP_STATUS.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\errors
@@ -43,6 +41,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\backend\TypeScript
 C:\wamp64\www\BoilerPlateSvelteKit\backend\TypeScript\interfaces.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\validations
 C:\wamp64\www\BoilerPlateSvelteKit\backend\validations\validators.ts
+C:\wamp64\www\BoilerPlateSvelteKit\backend\.env
 C:\wamp64\www\BoilerPlateSvelteKit\backend\.eslintrc.cjs
 C:\wamp64\www\BoilerPlateSvelteKit\backend\.prettierrc.cjs
 C:\wamp64\www\BoilerPlateSvelteKit\backend\blacklistedTokens.ts
@@ -201,7 +200,6 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\utils\constants.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils\socket.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\app.d.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\app.html
-C:\wamp64\www\BoilerPlateSvelteKit\src\env.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\hooks.server.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\typescript.ts
 C:\wamp64\www\BoilerPlateSvelteKit\static
@@ -255,6 +253,5 @@ C:\wamp64\www\BoilerPlateSvelteKit\playwright.config.ts
 C:\wamp64\www\BoilerPlateSvelteKit\README.md
 C:\wamp64\www\BoilerPlateSvelteKit\svelte.config.js
 C:\wamp64\www\BoilerPlateSvelteKit\tsconfig.json
+C:\wamp64\www\BoilerPlateSvelteKit\vercel.json
 C:\wamp64\www\BoilerPlateSvelteKit\vite.config.ts
-C:\wamp64\www\BoilerPlateSvelteKit\vite.config.ts.timestamp-1697729614029-7329f61dad5c4.mjs
-C:\wamp64\www\BoilerPlateSvelteKit\vite.config.ts.timestamp-1697896451050-a44b431dfd6d6.mjs

@@ -16,7 +16,8 @@ const validateEnvVariables = () => {
     'URL_FRONT_LOCAL',
   ];
   for (const varName of requiredEnvVariables) {
-    if (process.env[varName]) {
+    if (!process.env[varName]) {
+      // Ajout du '!' pour vérifier si la variable n'est PAS définie
       throw new Error(`Please set the environment variable ${varName}.`);
     }
   }

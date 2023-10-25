@@ -6,7 +6,7 @@
     "prettier:watch": "chokidar '**/*.js' '**/*.ts' '**/*.svelte' '**/*.scss' --command 'npm run prettier -- {path}'",
     "prettier": "prettier --write",
     "build": "vite build",
-    "preview": "vite preview",
+    "preview": "concurrently \"cd ./backend && npm run dev\" \"vite preview\"",
     "test": "playwright test",
     "test:unit": "vitest",
     "cleardb": "npm --prefix ./backend run cleardb"

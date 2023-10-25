@@ -6,9 +6,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const isDev = process.env.NODE_ENV === 'dev';
-console.log(process.env.NODE_ENV);
-
-console.log('isDev', isDev);
 
 const RATE_LIMIT_WINDOW_MS = isDev ? 24 * 60 * 60 * 1000 : 15 * 60 * 1000; // 24 hours in dev, 15 minutes in prod
 const RATE_LIMIT_MAX_REQUESTS = isDev ? 10000 : 40; // 10000 requests in dev, 40 in prod
