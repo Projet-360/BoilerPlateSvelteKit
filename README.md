@@ -83,3 +83,41 @@ Si vous avez des questions ou des suggestions, n'hésitez pas à m'envoyer un [m
 ---
 
 Merci d'avoir pris le temps de lire ce README. J'attends vos retours avec impatience ! 😄🚀
+
+
+env front: 
+VITE_MONGO_ONLINE=mongodb+srv://pierrefabiendev:2Yt0dDpR05onq9UG@mongosveltekit.csdduve.mongodb.net/
+VITE_MONGO_LOCAL=mongodb://localhost:27018/BoilerPlateSvelteKitDB
+VITE_DATABASE_NAME=BoilerPlateSvelteKitDB
+VITE_TOKEN_EXPIRY=1
+VITE_URL_FRONT=http://127.0.0.1:1000
+VITE_URL_FRONT_LOCAL=http://localhost:1000
+VITE_URL_BACK=http://localhost:2000
+VITE_PORT: 2000
+VITE_SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
+VITE_MAIL_HOST=localhost
+VITE_MAIL_PORT: 1025
+VITE_EMAIL_USER=no_reply@SvelteKit.com
+VITE_EMAIL_PASSWORD=passwordTest
+VITE_MAIL_SERVER=no_reply@SvelteKit.com
+VITE_NODE_ENV=dev
+VITE_DB_ENV=atlas
+
+back:
+MONGO_ONLINE=mongodb+srv://pierrefabiendev:2Yt0dDpR05onq9UG@mongosveltekit.csdduve.mongodb.net/
+MONGO_LOCAL=mongodb://localhost:27018/BoilerPlateSvelteKitDB
+DATABASE_NAME=BoilerPlateSvelteKitDB
+TOKEN_EXPIRY=1
+URL_FRONT=http://127.0.0.1:1000
+URL_FRONT_LOCAL=http://localhost:1000
+URL_BACK=http://localhost:2000
+PORT: 2000
+SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
+MAIL_HOST=localhost
+MAIL_PORT: 1025
+EMAIL_USER=no_reply@SvelteKit.com
+EMAIL_PASSWORD=passwordTest
+MAIL_SERVER=no_reply@SvelteKit.com
+NODE_ENV=dev
+DB_ENV=atlas
+
