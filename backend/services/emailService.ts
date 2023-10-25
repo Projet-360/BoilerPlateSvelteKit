@@ -22,8 +22,8 @@ const validateEnvVariables = () => {
 
 // Create a nodemailer transporter based on environment
 const createTransporter = () => {
-  if (env.NODE_ENV === 'development') {
-    // Use MailHog in development environment
+  if (env.NODE_ENV === 'dev') {
+    // Use MailHog in dev environment
     return nodemailer.createTransport({
       host: 'localhost',
       port: 1025,
@@ -47,9 +47,7 @@ const transporter = createTransporter();
 
 // Default sender email address
 const defaultSender =
-  env.NODE_ENV === 'development'
-    ? 'no-reply@dev.local'
-    : 'no-reply@yourdomain.com';
+  env.NODE_ENV === 'dev' ? 'no-reply@dev.local' : 'no-reply@yourdomain.com';
 
 /**
  * Send an email verification link to the user.

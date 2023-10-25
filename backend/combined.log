@@ -457,3 +457,92 @@
 {"level":"info","message":"New client connected: Y2v0QY11ZHTAnSdhAAAF"}
 {"level":"info","message":"Client disconnected: Y2v0QY11ZHTAnSdhAAAF"}
 {"level":"info","message":"New client connected: udxWwFcpChvhsMVYAAAH"}
+{"level":"info","message":"New client connected: lHcNcw-aH6ojegWTAAAJ"}
+{"level":"info","message":"Client disconnected: udxWwFcpChvhsMVYAAAH"}
+{"level":"info","message":"New client connected: UqnvTO-nL4HVgPA_AAAL"}
+{"level":"info","message":"Client disconnected: UqnvTO-nL4HVgPA_AAAL"}
+{"level":"info","message":"New client connected: QaZDzFE2EKGTVou3AAAN"}
+{"level":"info","message":"New client connected: 2sSDkqReozVDqAXfAAAP"}
+{"level":"info","message":"Client disconnected: 2sSDkqReozVDqAXfAAAP"}
+{"$__":{"activePaths":{"paths":{"_id":"default","email":"modify","isVerified":"default","password":"modify","role":"modify","username":"modify"},"states":{"default":{"_id":true,"isVerified":true},"modify":{"email":true,"password":true,"role":true,"username":true},"require":{}}}},"_doc":{"_id":"6538da76306ea9a5d23f86d4","email":"8bvru5a5@example.com","isVerified":false,"password":"$2a$12$kPOAuma561SdMD7BploS6eeMxGtGxKQ.cEc1DlTaWVvv2JTyV47sK","role":"user","username":"tAdruOWR"},"level":"info","message":"New User:"}
+{"level":"info","message":"Email successfully sent to 8bvru5a5@example.com"}
+{"level":"info"}
+{"level":"info","message":"Client disconnected: QaZDzFE2EKGTVou3AAAN"}
+{"level":"info","message":"New client connected: N1tloIthUj9qPzaWAAAR"}
+{"$__":{"activePaths":{"paths":{"_id":"default","email":"modify","isVerified":"default","password":"modify","role":"modify","username":"modify"},"states":{"default":{"_id":true,"isVerified":true},"modify":{"email":true,"password":true,"role":true,"username":true},"require":{}}}},"_doc":{"_id":"6538dad0306ea9a5d23f86f3","email":"papa@papa.fr","isVerified":false,"password":"$2a$12$xnmEkJk9x7l9fIPTHDvOhur1weahgSVFpSNwwjHbmPor9Pg2H/Mga","role":"user","username":"Name"},"level":"info","message":"New User:"}
+{"level":"info","message":"Email successfully sent to papa@papa.fr"}
+{"level":"info"}
+{"level":"info","message":"Client disconnected: N1tloIthUj9qPzaWAAAR"}
+{"level":"info","message":"Client disconnected: lHcNcw-aH6ojegWTAAAJ"}
+{"level":"info","message":"Client disconnected: U_Vb9BFDxOxCuTMVAAAD"}
+{"level":"info","message":"New client connected: BnbeKDL-YoE1O5SZAAAT"}
+{"level":"info","message":"New client connected: kpwcz42HfOWdy_a2AAAV"}
+{"level":"info","message":"New client connected: 4nbAi6TVGejivi1WAAAX"}
+{"level":"info","message":"Client disconnected: 4nbAi6TVGejivi1WAAAX"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"error","message":"Failed to connect to MongoDB Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":"atlas-2xawvy-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"stack":"MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/\n    at _handleConnectionErrors (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:805:11)\n    at NativeConnection.openUri (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:780:11)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"$__":{"activePaths":{"paths":{"_id":"default","email":"modify","isVerified":"default","password":"modify","role":"modify","username":"modify"},"states":{"default":{"_id":true,"isVerified":true},"modify":{"email":true,"password":true,"role":true,"username":true},"require":{}}}},"_doc":{"_id":"6538dff79b95059b2c6f0a79","email":"pa@pa.fr","isVerified":false,"password":"$2a$12$RJd9TSoLNk6whiFRXCYJweRXurjdytGoboA3/ii7vDP1Kk4naVF16","role":"user","username":"Name"},"level":"info","message":"New User:"}
+{"level":"info"}
+{"$__":{"activePaths":{"paths":{"_id":"default","email":"modify","isVerified":"default","password":"modify","role":"modify","username":"modify"},"states":{"default":{"_id":true,"isVerified":true},"modify":{"email":true,"password":true,"role":true,"username":true},"require":{}}}},"_doc":{"_id":"6538e03a9b95059b2c6f0a7e","email":"user@user.fr","isVerified":false,"password":"$2a$12$3Y9kNFkWQC6M6xtOKv6hme5zh7C9ZTPRum35b40rXWjHCOxjdNQEa","role":"user","username":"Name"},"level":"info","message":"New User:"}
+{"level":"info"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"$__":{"activePaths":{"paths":{"_id":"default","email":"modify","isVerified":"default","password":"modify","role":"modify","username":"modify"},"states":{"default":{"_id":true,"isVerified":true},"modify":{"email":true,"password":true,"role":true,"username":true},"require":{}}}},"_doc":{"_id":"6538e075d482a5f9c510af66","email":"popo@popo.fr","isVerified":false,"password":"$2a$12$y3FtZKLYOah0AI0BKlFwWuCD6gbJL9VfcSqOSCKeRf2TwZb1sWboG","role":"user","username":"Name"},"level":"info","message":"New User:"}
+{"level":"info","message":"Email successfully sent to popo@popo.fr"}
+{"level":"info","message":"New client connected: WUCriK0v_uRapUQhAAAB"}
+{"level":"info","message":"New client connected: frDz3tKKrXk7GMfHAAAD"}
+{"level":"info","message":"Client disconnected: WUCriK0v_uRapUQhAAAB"}
+{"level":"info","message":"New client connected: Umc4fxqmOGam27crAAAF"}
+{"level":"info","message":"New client connected: -BkmkGPYjXRvJ7W-AAAH"}
+{"level":"info","message":"Client disconnected: -BkmkGPYjXRvJ7W-AAAH"}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:35:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:228:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"New client connected: cRc3c8KtA3ZdNCFrAAAJ"}
+{"level":"info","message":"Client disconnected: cRc3c8KtA3ZdNCFrAAAJ"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: j70hIxxkRlvTRreBAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: p3U-PT3R0A8eai3IAAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: JE3a_AQegNoZlf3SAAAD"}
+{"level":"info","message":"Client disconnected: p3U-PT3R0A8eai3IAAAB"}
+{"level":"info","message":"New client connected: S1LlWIJhmljdmmMoAAAF"}
+{"level":"info","message":"New client connected: BWaHX9gxwqI-vyx6AAAH"}
+{"level":"info","message":"Client disconnected: BWaHX9gxwqI-vyx6AAAH"}
+{"$__":{"activePaths":{"paths":{"_id":"default","email":"modify","isVerified":"default","password":"modify","role":"modify","username":"modify"},"states":{"default":{"_id":true,"isVerified":true},"modify":{"email":true,"password":true,"role":true,"username":true},"require":{}}}},"_doc":{"_id":"6538e1c78d617fd125bd76b4","email":"9p9x9wkx@example.com","isVerified":false,"password":"$2a$12$d6ZzqHjrp1KUiKHuuEmmT.PQGAgTd4sFcj6U5BNvzm2O5mX2mAMY.","role":"user","username":"p4Vzcg0W"},"level":"info","message":"New User:"}
+{"level":"info","message":"Email successfully sent to 9p9x9wkx@example.com"}
+{"level":"info","message":"New client connected: Eutfy0-eWetuOV4FAAAJ"}
+{"level":"info","message":"Client disconnected: Eutfy0-eWetuOV4FAAAJ"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: 2-8UkWNA2bt_ViaaAAAB"}
+{"level":"info","message":"New client connected: BRrHOSiPWFTrjOmWAAAD"}
+{"level":"info","message":"Client disconnected: 2-8UkWNA2bt_ViaaAAAB"}
+{"level":"info","message":"New client connected: ilmpVdfBRopSKvFeAAAF"}
+{"level":"info","message":"Client disconnected: ilmpVdfBRopSKvFeAAAF"}
+{"level":"info","message":"New client connected: usxL6WWXifnXasbzAAAH"}
+{"$__":{"activePaths":{"paths":{"_id":"default","email":"modify","isVerified":"default","password":"modify","role":"modify","username":"modify"},"states":{"default":{"_id":true,"isVerified":true},"modify":{"email":true,"password":true,"role":true,"username":true},"require":{}}}},"_doc":{"_id":"6538e25063d271ffd0c19baf","email":"6m7ex58w@example.com","isVerified":false,"password":"$2a$12$Hy0DgxiXDAbtl.ctl06MEuEraC1sbrYanFHxs3/QhMVIWaWm0hZNm","role":"user","username":"3Q4vkhmW"},"level":"info","message":"New User:"}
+{"level":"info","message":"Email successfully sent to 6m7ex58w@example.com"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: i5gEtE0fafdWqd9NAAAB"}
+{"level":"info","message":"New client connected: arcQIwv96OvgyilUAAAD"}
+{"level":"info","message":"Client disconnected: i5gEtE0fafdWqd9NAAAB"}
+{"level":"info","message":"New client connected: knvmDLVvw1jGeByAAAAF"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: pkNM8A62pau9b98LAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: fKn3D_T8ypS-3fKzAAAB"}
+{"level":"info","message":"Connected to MongoDB"}

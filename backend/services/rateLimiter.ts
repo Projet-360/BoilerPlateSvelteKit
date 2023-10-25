@@ -1,38 +1,35 @@
-// Import required modules
 import rateLimit from 'express-rate-limit';
 import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
 import { messageReturn } from '../constants/errorMessages.js';
+import dotenv from 'dotenv';
 
-// Constants for general rate limiter configuration
-// Preferably fetch these values from environment variables or config files
-const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
-const RATE_LIMIT_MAX_REQUESTS = 40;
+dotenv.config();
 
-// Configure general rate limiter middleware
+const isDev = process.env.NODE_ENV === 'dev';
+console.log(process.env.NODE_ENV);
+
+console.log('isDev', isDev);
+
+const RATE_LIMIT_WINDOW_MS = isDev ? 24 * 60 * 60 * 1000 : 15 * 60 * 1000; // 24 hours in dev, 15 minutes in prod
+const RATE_LIMIT_MAX_REQUESTS = isDev ? 10000 : 40; // 10000 requests in dev, 40 in prod
+
 export const rateLimiter = rateLimit({
-  // Window duration for rate limiting in milliseconds
   windowMs: RATE_LIMIT_WINDOW_MS,
-  // Maximum number of requests allowed within the window duration
   max: RATE_LIMIT_MAX_REQUESTS,
-  // Custom handler function when rate limit is exceeded
   handler: function (req, res) {
-    // Respond with a 429 status code and a JSON message
     res.status(HTTP_STATUS.TOO_MANY_REQUESTS).json({
       message: messageReturn.RATE_LIMIT,
     });
   },
 });
 
-// Constants for aggressive rate limiter against brute force attacks
-const BRUTE_FORCE_WINDOW_MS = 1 * 60 * 1000; // 1 minute
-const BRUTE_FORCE_MAX_REQUESTS = 5; // 5 requests per minute
+const BRUTE_FORCE_WINDOW_MS = isDev ? 24 * 60 * 60 * 1000 : 1 * 60 * 1000; // 24 hours in dev, 1 minute in prod
+const BRUTE_FORCE_MAX_REQUESTS = isDev ? 10000 : 5; // 10000 requests in dev, 5 in prod
 
-// Configure aggressive rate limiter middleware against brute force attacks
 export const bruteForceRateLimiter = rateLimit({
   windowMs: BRUTE_FORCE_WINDOW_MS,
   max: BRUTE_FORCE_MAX_REQUESTS,
   handler: function (req, res) {
-    // Respond with a 429 status code and a JSON message
     res.status(HTTP_STATUS.TOO_MANY_REQUESTS).json({
       message: messageReturn.RATE_LIMIT,
     });
