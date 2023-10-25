@@ -1,6 +1,7 @@
 // Import required modules and configurations
 import winston from 'winston';
-import { env } from '../constants/env.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Create a new logger instance
 const logger = winston.createLogger({
@@ -18,7 +19,7 @@ const logger = winston.createLogger({
 });
 
 // If the application is not in production, also log to the console
-if (env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
   logger.add(
     new winston.transports.Console({
       // Use a simple text format for console logging

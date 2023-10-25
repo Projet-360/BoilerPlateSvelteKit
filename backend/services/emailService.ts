@@ -1,8 +1,10 @@
 // Import required modules and configurations
 import nodemailer from 'nodemailer';
-import { env } from '../constants/env.js';
+import dotenv from 'dotenv';
 import { IUser } from './../TypeScript/interfaces.js';
 import logger from './logger.js';
+
+dotenv.config();
 
 // Validate required environment variables
 const validateEnvVariables = () => {
@@ -14,7 +16,7 @@ const validateEnvVariables = () => {
     'URL_FRONT_LOCAL',
   ];
   for (const varName of requiredEnvVariables) {
-    if (!(env as any)[varName]) {
+    if (process.env[varName]) {
       throw new Error(`Please set the environment variable ${varName}.`);
     }
   }
@@ -22,21 +24,24 @@ const validateEnvVariables = () => {
 
 // Create a nodemailer transporter based on environment
 const createTransporter = () => {
-  if (env.NODE_ENV === 'dev') {
-    // Use MailHog in dev environment
+  validateEnvVariables(); // Call the validation function
+
+  if (process.env.NODE_ENV === 'dev') {
     return nodemailer.createTransport({
       host: 'localhost',
       port: 1025,
       secure: false, // MailHog runs a non-secure server
     });
   }
-  // Regular configuration for other environments
+
+  // Use non-null assertion for process.env variables.
+  // Make sure you validate these variables before using them like this.
   return nodemailer.createTransport({
-    host: env.MAIL_HOST,
-    port: env.MAIL_PORT,
+    host: process.env.MAIL_HOST!,
+    port: Number(process.env.MAIL_PORT!), // Convert string to number
     auth: {
-      user: env.EMAIL_USER,
-      pass: env.EMAIL_PASSWORD,
+      user: process.env.EMAIL_USER!,
+      pass: process.env.EMAIL_PASSWORD!,
     },
   });
 };
@@ -47,7 +52,9 @@ const transporter = createTransporter();
 
 // Default sender email address
 const defaultSender =
-  env.NODE_ENV === 'dev' ? 'no-reply@dev.local' : 'no-reply@yourdomain.com';
+  process.env.NODE_ENV === 'dev'
+    ? 'no-reply@dev.local'
+    : 'no-reply@yourdomain.com';
 
 /**
  * Send an email verification link to the user.
@@ -58,7 +65,7 @@ const defaultSender =
  * @throws Will throw an error if the email sending fails.
  */
 export const sendVerificationEmail = async (email: string, token: string) => {
-  const url = `${env.URL_FRONT_LOCAL}/signup/${token}`;
+  const url = `${process.env.URL_FRONT_LOCAL}/signup/${token}`;
   await sendEmail(
     email,
     "Vérification de l'Email",
@@ -79,7 +86,7 @@ export const sendResetPasswordEmail = async (
   user: IUser,
   resetToken: string,
 ) => {
-  const url = `${env.URL_FRONT_LOCAL}/forgot-password/${resetToken}`;
+  const url = `${process.env.URL_FRONT_LOCAL}/forgot-password/${resetToken}`;
   await sendEmail(
     user.email,
     'Réinitialisation du mot de passe',

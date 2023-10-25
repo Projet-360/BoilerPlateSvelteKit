@@ -1,9 +1,10 @@
 import jwt from 'jsonwebtoken';
-import { env } from './env.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 async function verifyToken(token: string) {
 	try {
-		const decoded = jwt.verify(token, env.SECRETKEY);
+		const decoded = jwt.verify(token, process.env.VITE_SECRETKEY as string);
 		return decoded;
 	} catch (error) {
 		console.error('JWT Verification Error:', error);
@@ -17,7 +18,7 @@ export async function handle({ event, resolve }) {
 	if (cookies) {
 		const user = await verifyToken(cookies);
 		console.log(user);
-		
+
 		console.log('user du hook.server', cookies);
 		console.log(user);
 		if (user) {
