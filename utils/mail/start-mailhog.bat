@@ -1,3 +1,0 @@
-@echo off
-echo Starting MailHog...
-.\utils\mail\MailHog_windows_amd64.exe
