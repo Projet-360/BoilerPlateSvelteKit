@@ -449,6 +449,79 @@
 {"level":"info","message":"New client connected: WrSErS25hL5xHbJzAAAN"}
 {"level":"info","message":"Client disconnected: WrSErS25hL5xHbJzAAAN"}
 {"level":"info","message":"New client connected: PwyEJ1v-5lwcT9OmAAAP"}
+{"level":"info","message":"New client connected: cWHdyGS2BpvuWPdaAAAF"}
+{"level":"info","message":"Client disconnected: cWHdyGS2BpvuWPdaAAAF"}
+{"level":"info","message":"New client connected: 4j9JzDkFgwb8AHhMAAAH"}
+{"level":"info","message":"Client disconnected: 4j9JzDkFgwb8AHhMAAAH"}
+{"level":"info","message":"New client connected: kfJLc0nxWncD0d2tAAAJ"}
+{"level":"info","message":"Client disconnected: kfJLc0nxWncD0d2tAAAJ"}
+{"level":"info","message":"New client connected: Q_7V3bevT-CAXOe_AAAL"}
+{"level":"info","message":"Client disconnected: Q_7V3bevT-CAXOe_AAAL"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: 3PcaoI_PCn81K1eQAAAB"}
+{"level":"info","message":"New client connected: 1htfaHuAularW8DVAAAD"}
+{"level":"info","message":"New client connected: 0wPz2rGGYKYqJFwtAAAF"}
+{"level":"info","message":"Client disconnected: 1htfaHuAularW8DVAAAD"}
+{"level":"info","message":"New client connected: KDWpvTHdQ2WHnQEGAAAH"}
+{"level":"info","message":"Client disconnected: KDWpvTHdQ2WHnQEGAAAH"}
+{"level":"info","message":"New client connected: IL-eowiCU4i4qPaeAAAJ"}
+{"level":"info","message":"New client connected: MPu3AyeC2lnoCrxwAAAL"}
+{"level":"info","message":"Client disconnected: MPu3AyeC2lnoCrxwAAAL"}
+{"level":"info","message":"New client connected: hcA2pNGPKfgKP4qGAAAN"}
+{"level":"info","message":"Client disconnected: IL-eowiCU4i4qPaeAAAJ"}
+{"level":"info","message":"New client connected: WOe1nJX2aoN8QPoTAAAP"}
+{"level":"info","message":"New client connected: -V9-488M6Y_29QNIAAAR"}
+{"level":"info","message":"Client disconnected: WOe1nJX2aoN8QPoTAAAP"}
+{"level":"info","message":"New client connected: j-SRAXBka7Ni-xJUAAAT"}
+{"level":"info","message":"New client connected: 3vXBlExSKKw7_ujKAAAV"}
+{"level":"info","message":"Client disconnected: j-SRAXBka7Ni-xJUAAAT"}
+{"level":"info","message":"New client connected: 6BS5msJUYcjB_OSuAAAX"}
+{"level":"info","message":"New client connected: Edfgk2KA9-HRvHJrAAAZ"}
+{"level":"info","message":"Client disconnected: 6BS5msJUYcjB_OSuAAAX"}
+{"level":"info","message":"New client connected: EUJBb5PTEXuBCz3nAAAb"}
+{"level":"info","message":"New client connected: 4gh3q_q4D0DrwqhgAAAd"}
+{"level":"info","message":"Client disconnected: EUJBb5PTEXuBCz3nAAAb"}
+{"level":"info","message":"New client connected: vJAsQiIAm2FkySLNAAAf"}
+{"level":"info","message":"New client connected: eUAbvKtGypeMJBx4AAAh"}
+{"level":"info","message":"Client disconnected: vJAsQiIAm2FkySLNAAAf"}
+{"level":"info","message":"New client connected: QAEPzBcJg6II7O9WAAAj"}
+{"level":"info","message":"New client connected: qLqeNuLeXwdZZsc5AAAl"}
+{"level":"info","message":"Client disconnected: QAEPzBcJg6II7O9WAAAj"}
+{"level":"info","message":"New client connected: qSYFScxTmw5BhEQLAAAn"}
+{"level":"info","message":"New client connected: KB6t-60A5dXMsZzvAAAp"}
+{"level":"info","message":"Client disconnected: qSYFScxTmw5BhEQLAAAn"}
+{"level":"info","message":"New client connected: HlfVTrnrwqcbIBU7AAAr"}
+{"level":"info","message":"Client disconnected: HlfVTrnrwqcbIBU7AAAr"}
+{"level":"info","message":"New client connected: i6lYHXaje7wJTd-uAAAt"}
+{"level":"info","message":"Client disconnected: i6lYHXaje7wJTd-uAAAt"}
+{"level":"info","message":"New client connected: 7kol3ziAXxJd0LckAAAv"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"error","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":"atlas-2xawvy-shard-0","stale":false,"type":"ReplicaSetNoPrimary"}}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: Wui7ihU1yopiL4t9AAAB"}
+{"level":"error","message":"Failed to connect to MongoDB Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":"atlas-2xawvy-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"stack":"MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/\n    at _handleConnectionErrors (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:805:11)\n    at NativeConnection.openUri (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:780:11)"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: gRX2iP9g3k1XsftNAAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: C0Z8kJ6P44uu48d3AAAD"}
+{"level":"info","message":"Client disconnected: gRX2iP9g3k1XsftNAAAB"}
+{"level":"info","message":"New client connected: 6R6n5cwc9vxzXwNzAAAF"}
+{"level":"info","message":"New client connected: UNzdBuVpgd6UyKhyAAAH"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: njSZGB-msgK5IbFGAAAB"}
+{"level":"info","message":"New client connected: _jD5HTIs1Bqq9u0PAAAD"}
+{"level":"info","message":"New client connected: aJCEQlR6MSvg6JXHAAAF"}
+{"level":"info","message":"New client connected: JbK6P_2xkSh31XGkAAAH"}
+{"level":"info","message":"New client connected: JsZq9AtlaQghHQgbAAAJ"}
+{"level":"info","message":"Client disconnected: JsZq9AtlaQghHQgbAAAJ"}
+{"level":"info","message":"New client connected: HK22uJli5oGHBhZUAAAL"}
+{"level":"info","message":"New client connected: WrSErS25hL5xHbJzAAAN"}
+{"level":"info","message":"Client disconnected: WrSErS25hL5xHbJzAAAN"}
+{"level":"info","message":"New client connected: PwyEJ1v-5lwcT9OmAAAP"}
 {"level":"info","message":"Server running on port 2000"}
 {"level":"info","message":"Connected to MongoDB"}
 {"level":"info","message":"New client connected: cC567dQ4YY9K88g9AAAB"}
@@ -609,3 +682,375 @@
 {"level":"info","message":"New client connected: tRMIGC7TvlkVoEzQAAAI"}
 {"level":"info","message":"New client connected: 15PC2yymca9jaUrNAAAJ"}
 {"level":"info","message":"Client disconnected: 15PC2yymca9jaUrNAAAJ"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: Pk-2fJryI8JSsRzIAAAB"}
+{"level":"error","message":"Failed to connect to MongoDB Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":"atlas-2xawvy-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"stack":"MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/\n    at _handleConnectionErrors (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:805:11)\n    at NativeConnection.openUri (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:780:11)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: 3GnHf8KCZaABXs8GAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: yZJ8c9F7_zUqCThTAAAB"}
+{"level":"info","message":"Client disconnected: yZJ8c9F7_zUqCThTAAAB"}
+{"level":"error","message":"Failed to connect to MongoDB Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":"atlas-2xawvy-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"stack":"MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/\n    at _handleConnectionErrors (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:805:11)\n    at NativeConnection.openUri (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:780:11)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"error","message":"Failed to connect to MongoDB Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":"atlas-2xawvy-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"stack":"MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/\n    at _handleConnectionErrors (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:805:11)\n    at NativeConnection.openUri (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:780:11)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: JWSeEhZQtuIhAO3RAAAB"}
+{"level":"info","message":"Client disconnected: JWSeEhZQtuIhAO3RAAAB"}
+{"level":"info","message":"New client connected: 9GURQ3F5XeUA4vG-AAAD"}
+{"level":"error","message":"Failed to connect to MongoDB Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":"atlas-2xawvy-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"stack":"MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/\n    at _handleConnectionErrors (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:805:11)\n    at NativeConnection.openUri (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:780:11)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: Iol1ZxsCL2mFDZDaAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: D-GJXKtCrocrBZ66AAAB"}
+{"level":"info","message":"Client disconnected: D-GJXKtCrocrBZ66AAAB"}
+{"level":"info","message":"New client connected: SP9WFkcxxKjNSg8RAAAD"}
+{"level":"error","message":"Failed to connect to MongoDB Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":"atlas-2xawvy-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"stack":"MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/\n    at _handleConnectionErrors (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:805:11)\n    at NativeConnection.openUri (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:780:11)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: Fe7tteo0sTZfgN7QAAAB"}
+{"level":"info","message":"New client connected: mV07tMKCt4ShedT-AAAD"}
+{"level":"info","message":"Client disconnected: Fe7tteo0sTZfgN7QAAAB"}
+{"level":"info","message":"New client connected: yWtEwo-HO-Q0n-05AAAF"}
+{"level":"info","message":"Client disconnected: yWtEwo-HO-Q0n-05AAAF"}
+{"level":"info","message":"New client connected: xb-l1F7ijGnX32crAAAH"}
+{"level":"error","message":"Failed to connect to MongoDB Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":"atlas-2xawvy-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"stack":"MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/\n    at _handleConnectionErrors (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:805:11)\n    at NativeConnection.openUri (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:780:11)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: XwWQbQu0n7Y_ss3IAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: J_NGgIhWKyOZnZ2yAAAB"}
+{"level":"info","message":"New client connected: SAIZZcu1fiIvwG0HAAAD"}
+{"level":"info","message":"Client disconnected: J_NGgIhWKyOZnZ2yAAAB"}
+{"level":"info","message":"New client connected: oFOKWX6rRQ_cP-y7AAAF"}
+{"level":"error","message":"Failed to connect to MongoDB Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":"atlas-2xawvy-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"stack":"MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/\n    at _handleConnectionErrors (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:805:11)\n    at NativeConnection.openUri (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:780:11)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: nuoYGbTZzmCoVK5AAAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: 8ESpiyfaC0AhkjNnAAAD"}
+{"level":"info","message":"Client disconnected: nuoYGbTZzmCoVK5AAAAB"}
+{"level":"info","message":"New client connected: ytGYUxBKdSNwhhcKAAAF"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: zKmFlwo9dPUA_02zAAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Client disconnected: zKmFlwo9dPUA_02zAAAB"}
+{"level":"info","message":"New client connected: d16NTqpLx_uvcXfJAAAD"}
+{"level":"info","message":"Greeting deleted from client: d16NTqpLx_uvcXfJAAAD"}
+{"level":"info","message":"Client disconnected: d16NTqpLx_uvcXfJAAAD"}
+{"level":"info","message":"New client connected: g5adgvhWPkvDiZ6WAAAF"}
+{"level":"info","message":"Client disconnected: g5adgvhWPkvDiZ6WAAAF"}
+{"level":"info","message":"New client connected: gNoAmSv4wm1UBqILAAAH"}
+{"level":"info","message":"Client disconnected: gNoAmSv4wm1UBqILAAAH"}
+{"level":"info","message":"New client connected: w64EtWscz5pqPmwoAAAJ"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: NT2NB8ohdA-4nsCkAAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: XfJ_48Ihytrh6RH2AAAB"}
+{"level":"info","message":"New client connected: evHZswOWfLHgpQ2qAAAD"}
+{"level":"info","message":"Client disconnected: XfJ_48Ihytrh6RH2AAAB"}
+{"level":"info","message":"New client connected: UvxdjStYnFnxI4jJAAAF"}
+{"level":"error","message":"Failed to connect to MongoDB Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{},"setName":"atlas-2xawvy-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"stack":"MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/\n    at _handleConnectionErrors (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:805:11)\n    at NativeConnection.openUri (C:\\wamp64\\www\\BoilerPlateSvelteKit\\backend\\node_modules\\mongoose\\lib\\connection.js:780:11)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: gkXwHj5TVwcHAvWuAAAB"}
+{"level":"info","message":"New client connected: k5PlVU3EAgO-jcFwAAAD"}
+{"level":"info","message":"Client disconnected: gkXwHj5TVwcHAvWuAAAB"}
+{"level":"info","message":"New client connected: D2BiNKhoQ6R0NhMZAAAF"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Client disconnected: D2BiNKhoQ6R0NhMZAAAF"}
+{"level":"info","message":"New client connected: iEtRGFxy7Tr-WXJlAAAH"}
+{"level":"info","message":"Client disconnected: iEtRGFxy7Tr-WXJlAAAH"}
+{"level":"info","message":"New client connected: U7MKvRXeCPZqK_QbAAAJ"}
+{"level":"info","message":"Greeting sent from client: U7MKvRXeCPZqK_QbAAAJ"}
+{"level":"info","message":"Client disconnected: U7MKvRXeCPZqK_QbAAAJ"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: k8lgsFsWZLZtN61LAAAB"}
+{"level":"info","message":"New client connected: BM48hh6L9wG2pPegAAAD"}
+{"level":"info","message":"Client disconnected: BM48hh6L9wG2pPegAAAD"}
+{"level":"info","message":"New client connected: xr2rFzIPcg0RtcVUAAAF"}
+{"level":"info","message":"New client connected: 6iHZSK2ATVbhCxyCAAAH"}
+{"level":"info","message":"Client disconnected: xr2rFzIPcg0RtcVUAAAF"}
+{"level":"info","message":"New client connected: 7Gi7GE9U4Rcj3ulsAAAJ"}
+{"level":"info","message":"New client connected: Uqpd__q-Ew_c77rqAAAL"}
+{"level":"info","message":"New client connected: Q01n1Prd6d5nBK12AAAN"}
+{"level":"info","message":"New client connected: B-KxgiU49oskwdJtAAAP"}
+{"level":"info","message":"New client connected: q1DUQaEmId-hhrktAAAR"}
+{"level":"info","message":"New client connected: e9DN8e5fyeapI-PlAAAT"}
+{"level":"info","message":"New client connected: 1Bjyq-U0qPLuRI8iAAAV"}
+{"level":"info","message":"New client connected: vFlOQu7Gf5dbSFdPAAAX"}
+{"level":"info","message":"Client disconnected: vFlOQu7Gf5dbSFdPAAAX"}
+{"level":"info","message":"Client disconnected: 1Bjyq-U0qPLuRI8iAAAV"}
+{"level":"info","message":"New client connected: DaEafuwwB1IbOWZ3AAAZ"}
+{"level":"info","message":"Client disconnected: DaEafuwwB1IbOWZ3AAAZ"}
+{"level":"info","message":"New client connected: rnraKlieQjOLkUR4AAAb"}
+{"level":"info","message":"New client connected: jyaaSg9TztwFpgXRAAAd"}
+{"level":"info","message":"New client connected: FtKVV2zSCM9GEaH3AAAf"}
+{"level":"info","message":"Client disconnected: jyaaSg9TztwFpgXRAAAd"}
+{"level":"info","message":"New client connected: Ly8iPUJ_U9XQR4AYAAAh"}
+{"level":"info","message":"New client connected: oPlxHe4c_LnVFDE-AAAj"}
+{"level":"info","message":"New client connected: IicHScHHJJ-TOPSmAAAl"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: QpC5SESwe5un8InHAAAB"}
+{"level":"info","message":"New client connected: 98YGaACf6fpV6QKjAAAD"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"code":"ECONNREFUSED","hostname":"_mongodb._tcp.mongosveltekit.csdduve.mongodb.net","level":"error","message":"Failed to connect to MongoDB querySrv ECONNREFUSED _mongodb._tcp.mongosveltekit.csdduve.mongodb.net","stack":"Error: querySrv ECONNREFUSED _mongodb._tcp.mongosveltekit.csdduve.mongodb.net\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:251:17)","syscall":"querySrv"}
+{"level":"info","message":"Server running on port 2000"}
+{"code":"ECONNREFUSED","hostname":"_mongodb._tcp.mongosveltekit.csdduve.mongodb.net","level":"error","message":"Failed to connect to MongoDB querySrv ECONNREFUSED _mongodb._tcp.mongosveltekit.csdduve.mongodb.net","stack":"Error: querySrv ECONNREFUSED _mongodb._tcp.mongosveltekit.csdduve.mongodb.net\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:251:17)","syscall":"querySrv"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: eNidPvqQbFJ7djnGAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: K_vbqTGwxIIsXPt1AAAB"}
+{"level":"info","message":"New client connected: xw6xPQCr8tnJ3KMIAAAD"}
+{"level":"info","message":"New client connected: sKGwTfeUVM2YCo8sAAAF"}
+{"level":"info","message":"New client connected: lYUilI3LuGezDwJTAAAH"}
+{"level":"info","message":"New client connected: 1cZ_QsJ3Mjl6qs8UAAAJ"}
+{"level":"info","message":"New client connected: z2uTlLSBvwalBdmWAAAL"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: Hp1HxXoSBKtqmb5yAAAB"}
+{"level":"info","message":"New client connected: wUJymeAwkQbLHyf6AAAD"}
+{"level":"info","message":"New client connected: Ijcego1lAW4BXzOHAAAF"}
+{"level":"info","message":"New client connected: VNBQlhRnhmxa1IWGAAAH"}
+{"level":"info","message":"New client connected: lYEwzf7tESMNVNFBAAAJ"}
+{"level":"info","message":"New client connected: VHgB1XZl4ctDrM0KAAAL"}
+{"level":"info","message":"New client connected: vtG99n0pvXmy5ydeAAAN"}
+{"level":"info","message":"Client disconnected: vtG99n0pvXmy5ydeAAAN"}
+{"level":"info","message":"New client connected: yqYVt159siqAVU7MAAAP"}
+{"level":"info","message":"New client connected: kEo__5B0HBcZBZICAAAR"}
+{"level":"info","message":"Client disconnected: kEo__5B0HBcZBZICAAAR"}
+{"level":"info","message":"New client connected: qu8VovMrkgTERjj0AAAT"}
+{"level":"info","message":"New client connected: s8EP4NGBI3Q3dSwTAAAV"}
+{"level":"info","message":"Client disconnected: qu8VovMrkgTERjj0AAAT"}
+{"level":"info","message":"New client connected: qe28Jk5UbT-yUDEJAAAX"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: 0-wDTotfOgqLeuxaAAAB"}
+{"level":"info","message":"Client disconnected: 0-wDTotfOgqLeuxaAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"code":"ECONNREFUSED","hostname":"_mongodb._tcp.mongosveltekit.csdduve.mongodb.net","level":"error","message":"Failed to connect to MongoDB querySrv ECONNREFUSED _mongodb._tcp.mongosveltekit.csdduve.mongodb.net","stack":"Error: querySrv ECONNREFUSED _mongodb._tcp.mongosveltekit.csdduve.mongodb.net\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:251:17)","syscall":"querySrv"}
+{"level":"info","message":"Server running on port 2000"}
+{"code":"ECONNREFUSED","hostname":"_mongodb._tcp.mongosveltekit.csdduve.mongodb.net","level":"error","message":"Failed to connect to MongoDB querySrv ECONNREFUSED _mongodb._tcp.mongosveltekit.csdduve.mongodb.net","stack":"Error: querySrv ECONNREFUSED _mongodb._tcp.mongosveltekit.csdduve.mongodb.net\n    at QueryReqWrap.onresolve [as oncomplete] (node:internal/dns/promises:251:17)","syscall":"querySrv"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: 0UIVyUWgxH1pf6UyAAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: W6-woqrflZYlUbT_AAAD"}
+{"level":"info","message":"Client disconnected: 0UIVyUWgxH1pf6UyAAAB"}
+{"level":"info","message":"New client connected: ojOaxapmNqwWeCepAAAF"}
+{"level":"info","message":"Greeting sent from client: ojOaxapmNqwWeCepAAAF"}
+{"level":"info","message":"Client disconnected: ojOaxapmNqwWeCepAAAF"}
+{"level":"info","message":"New client connected: qlersfVeSrBx4BYBAAAH"}
+{"level":"info","message":"Client disconnected: qlersfVeSrBx4BYBAAAH"}
+{"level":"info","message":"New client connected: BihTdM-WI7KNzc_VAAAJ"}
+{"level":"info","message":"Client disconnected: BihTdM-WI7KNzc_VAAAJ"}
+{"level":"info","message":"New client connected: IqasqcYHQ5trLfhbAAAL"}
+{"level":"info","message":"Client disconnected: IqasqcYHQ5trLfhbAAAL"}
+{"level":"info","message":"New client connected: Y7qy61p67AW7Nm7iAAAN"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: xUnNXGqwcSB_AKrQAAAB"}
+{"level":"info","message":"New client connected: DIRi5MVfsx0Jetr1AAAD"}
+{"level":"info","message":"Client disconnected: xUnNXGqwcSB_AKrQAAAB"}
+{"level":"info","message":"New client connected: 7fPk7fpLxKP1hWYLAAAF"}
+{"level":"info","message":"Client disconnected: 7fPk7fpLxKP1hWYLAAAF"}
+{"level":"info","message":"New client connected: pPA6ZisDjrqn4zVUAAAH"}
+{"level":"info","message":"Client disconnected: pPA6ZisDjrqn4zVUAAAH"}
+{"level":"info","message":"New client connected: junW07N_SrsdxfjnAAAJ"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: mB0EQ6dO3AWUaNiSAAAB"}
+{"level":"info","message":"New client connected: lF68U_lqTVa0XI8HAAAD"}
+{"level":"info","message":"Client disconnected: mB0EQ6dO3AWUaNiSAAAB"}
+{"level":"info","message":"New client connected: xa2Rf9f_fwcxiqJZAAAF"}
+{"level":"info","message":"Client disconnected: xa2Rf9f_fwcxiqJZAAAF"}
+{"level":"info","message":"New client connected: pA6TUziy51NAFtxCAAAH"}
+{"level":"info","message":"Client disconnected: pA6TUziy51NAFtxCAAAH"}
+{"level":"info","message":"New client connected: Us1Gc0yDr6rD_1_uAAAJ"}
+{"level":"info","message":"Client disconnected: Us1Gc0yDr6rD_1_uAAAJ"}
+{"level":"info","message":"New client connected: UD32kUwTO4SthIltAAAL"}
+{"level":"info","message":"Client disconnected: UD32kUwTO4SthIltAAAL"}
+{"level":"info","message":"New client connected: TNuu8dsEb0ECNwlDAAAN"}
+{"level":"info","message":"Client disconnected: TNuu8dsEb0ECNwlDAAAN"}
+{"level":"info","message":"New client connected: Sqf-c62kU8Ry-syGAAAP"}
+{"level":"info","message":"Client disconnected: Sqf-c62kU8Ry-syGAAAP"}
+{"level":"info","message":"New client connected: G1Gr1hu1_3Zs-aZlAAAR"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: qCOn0SvYRE26mgcrAAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: BHUddbiNPzJMJcWDAAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: T80TnZWclRDnvS7CAAAD"}
+{"level":"info","message":"Client disconnected: BHUddbiNPzJMJcWDAAAB"}
+{"level":"info","message":"New client connected: GjZiCr1-ih8z9eA-AAAF"}
+{"level":"info","message":"Client disconnected: GjZiCr1-ih8z9eA-AAAF"}
+{"level":"info","message":"New client connected: Dd3pDtI5orb774AgAAAH"}
+{"level":"info","message":"Client disconnected: Dd3pDtI5orb774AgAAAH"}
+{"level":"info","message":"New client connected: fARATeejutlGRA-AAAAJ"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: GhDU8dXjqnMkPpwKAAAB"}
+{"level":"info","message":"New client connected: 33pPY-dYa2p8MU5IAAAD"}
+{"level":"info","message":"Client disconnected: GhDU8dXjqnMkPpwKAAAB"}
+{"level":"info","message":"New client connected: 2IJike73IYA2WBKYAAAF"}
+{"level":"info","message":"Client disconnected: 2IJike73IYA2WBKYAAAF"}
+{"level":"info","message":"New client connected: 8Ciu7kIPK5hd1VWQAAAH"}
+{"level":"info","message":"Client disconnected: 8Ciu7kIPK5hd1VWQAAAH"}
+{"level":"info","message":"New client connected: 2Y0LGKgr3te3tWTSAAAJ"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: rpYdlMC-HSqq0rHlAAAB"}
+{"level":"info","message":"New client connected: -zU9cmmjzMvTHEOxAAAD"}
+{"level":"info","message":"Client disconnected: rpYdlMC-HSqq0rHlAAAB"}
+{"level":"info","message":"New client connected: ueWEjXN4LwBUemLjAAAF"}
+{"level":"info","message":"Client disconnected: ueWEjXN4LwBUemLjAAAF"}
+{"level":"info","message":"New client connected: sin_z1yB9u94pbuTAAAH"}
+{"level":"info","message":"Client disconnected: sin_z1yB9u94pbuTAAAH"}
+{"level":"info","message":"Client disconnected: -zU9cmmjzMvTHEOxAAAD"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: wCFJEJK_LPl-8vxpAAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: xceQ_kKrS0UK1YAeAAAD"}
+{"level":"info","message":"Client disconnected: wCFJEJK_LPl-8vxpAAAB"}
+{"level":"info","message":"New client connected: tPFUEPnzk3qW6Ne9AAAF"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: QAQHX92LagSXB8sEAAAB"}
+{"level":"info","message":"New client connected: uy781xLSU0dBS5NNAAAD"}
+{"level":"info","message":"Client disconnected: QAQHX92LagSXB8sEAAAB"}
+{"level":"info","message":"New client connected: 1wUmS1nw5DtiwOmyAAAF"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: 7TkVQaSUYtY5KIRyAAAB"}
+{"level":"info","message":"New client connected: PZGK4cRvZsvUOieOAAAD"}
+{"level":"info","message":"Client disconnected: 7TkVQaSUYtY5KIRyAAAB"}
+{"level":"info","message":"New client connected: 2cuYN5KEy3QmtkB0AAAF"}
+{"level":"info","message":"Client disconnected: PZGK4cRvZsvUOieOAAAD"}
+{"level":"info","message":"Client disconnected: 2cuYN5KEy3QmtkB0AAAF"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: l8YW2PV15rgU5CurAAAB"}
+{"level":"info","message":"New client connected: JGhlnaqZjvziTn_VAAAD"}
+{"level":"info","message":"Client disconnected: l8YW2PV15rgU5CurAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: m1cxofTEL8Zq3MkLAAAB"}
+{"level":"info","message":"Client disconnected: m1cxofTEL8Zq3MkLAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: DSzjDB2wN-DOssuyAAAB"}
+{"level":"info","message":"New client connected: rgTT7QU6jTpKxJQBAAAD"}
+{"level":"info","message":"Client disconnected: rgTT7QU6jTpKxJQBAAAD"}
+{"level":"info","message":"New client connected: aT58wRfYQ1AbEv9EAAAF"}
+{"level":"info","message":"Client disconnected: aT58wRfYQ1AbEv9EAAAF"}
+{"level":"info","message":"New client connected: VsxG25NbEo_slAVqAAAH"}
+{"level":"info","message":"Client disconnected: VsxG25NbEo_slAVqAAAH"}
+{"level":"info","message":"New client connected: tua0hMRCqQDwa21VAAAJ"}
+{"level":"info","message":"Client disconnected: tua0hMRCqQDwa21VAAAJ"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: eWvUeefPcUDYU7xCAAAB"}
+{"level":"info","message":"Client disconnected: eWvUeefPcUDYU7xCAAAB"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: 1SeG2dJVDDAglYOZAAAB"}
+{"level":"info","message":"New client connected: M-lZkS0e_8FcEU8qAAAD"}
+{"level":"info","message":"Client disconnected: M-lZkS0e_8FcEU8qAAAD"}

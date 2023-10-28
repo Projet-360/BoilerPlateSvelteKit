@@ -3,7 +3,14 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import logger from './services/logger.js';
 
-dotenv.config();
+import path from 'path';
+import url from 'url';
+
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const envPath = path.resolve(__dirname, './../.env');
+dotenv.config({ path: envPath });
 
 if (
   !process.env.MONGO_LOCAL ||

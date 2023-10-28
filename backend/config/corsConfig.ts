@@ -4,7 +4,8 @@ import { CorsOptions } from 'cors';
 const allowedOrigins = [
   'http://localhost:1000',
   'http://127.0.0.1:1000',
-  'http://localhost:4173', // Ajout de l'origine du build
+  'http://localhost:4173',
+  'boilerplatesveltekit.vercel.app',
 ];
 
 const corsConfig: CorsOptions = {

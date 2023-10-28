@@ -102,6 +102,12 @@
     https://www.youtube.com/watch?v=KfezTtt2GsA&t=531s
     https://www.youtube.com/watch?v=Q0XustAh080
 
+
+    https://devpress.csdn.net/mongodb/6303ca72c67703293080a216.html
+    https://github.com/huzaifac137/sveltekit-auth-crud/tree/main
+    https://egghead.io/blog/learn-sveltekit-part-4-form-actions
+    https://github.com/stolinski/svelte-kit-mongodb-example/tree/main
+
     essayer de réunir les informations qui sont suivies afin d'avoir un seul endroit a toucher en cas de modifications
     modifications des données utilisateurs
     

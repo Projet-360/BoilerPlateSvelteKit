@@ -3,8 +3,6 @@ import type { TranslationFunction } from '../../typescript';
 
 export const loginValidation = (error: any, $t: TranslationFunction) => {
 	let errorMessage;
-	console.log(error.message);
-
 	switch (error.message) {
 		case 'INVALID_CREDENTIALS':
 			errorMessage = $t('validation.INVALID_CREDENTIALS');

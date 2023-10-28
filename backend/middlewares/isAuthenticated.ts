@@ -2,7 +2,14 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 import dotenv from 'dotenv';
 
-dotenv.config();
+import path from 'path';
+import url from 'url';
+
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const envPath = path.resolve(__dirname, './../.env');
+dotenv.config({ path: envPath });
 
 declare global {
   namespace Express {

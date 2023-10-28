@@ -1,6 +1,5 @@
 import { apiCall } from '$api/utils/apiCall'; // Assure-toi que le chemin est correct
-
-import { BD } from '$utils/constants';
+import { browser } from '$app/environment';
 import { handleRoleRedirection } from '$utils/auth/handleRoleRedirection.js';
 
 import { authStore } from '$stores/authStore';
@@ -17,6 +16,11 @@ import type { IAuthStore } from '../typescript';
 import type { UserInfo } from '../typescript';
 import type { User } from '../typescript';
 import type { TranslationFunction } from '../typescript';
+import { PUBLIC_VERCEL_URL_BACK, PUBLIC_LOCAL_URL_BACK, PUBLIC_ENV } from '$env/static/public';
+
+// Configure Database URL
+let BD =
+	PUBLIC_ENV === 'prod' ? (PUBLIC_VERCEL_URL_BACK as string) : (PUBLIC_LOCAL_URL_BACK as string);
 
 let currentState: IAuthStore;
 
@@ -49,8 +53,6 @@ export async function login(email: string, password: string, $t: TranslationFunc
 			credentials: 'include',
 			body: { email, password }
 		});
-
-		console.log(data);
 
 		authStore.set({
 			role: data.role,

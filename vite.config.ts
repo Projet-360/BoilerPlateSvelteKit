@@ -4,7 +4,13 @@ import { sveltekit } from '@sveltejs/kit/vite';
 const config = {
 	plugins: [sveltekit()],
 	resolve: {
-		preserveSymlinks: true
+		preserveSymlinks: true,
+		alias: [
+			{
+				find: /^~(.*)$/,
+				replacement: '$1'
+			}
+		]
 	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
@@ -16,7 +22,6 @@ const config = {
 			}
 		}
 	},
-
 	server: {
 		port: 1000
 	}

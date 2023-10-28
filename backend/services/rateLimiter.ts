@@ -3,7 +3,14 @@ import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
 import { messageReturn } from '../constants/errorMessages.js';
 import dotenv from 'dotenv';
 
-dotenv.config();
+import path from 'path';
+import url from 'url';
+
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const envPath = path.resolve(__dirname, './../.env');
+dotenv.config({ path: envPath });
 
 const isDev = process.env.NODE_ENV === 'dev';
 

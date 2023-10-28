@@ -1,4 +1,4 @@
-import type { ApiCallOptions } from '../../../typescript';
+import type { ApiCallOptions } from '../../typescript';
 
 export async function apiCall({
 	url,
