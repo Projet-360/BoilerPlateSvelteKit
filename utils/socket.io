@@ -192,3 +192,57 @@ function gracefulShutdown() {
    ```
 
 Cela récapitule les étapes principales pour configurer Socket.io dans le backend et le frontend de votre application. Assurez-vous de personnaliser ces étapes en fonction de votre application et de la logique spécifique que vous souhaitez mettre en place pour les mises à jour en temps réel.
+
+
+
+
+
+
+
+
+
+
+
+
+
+La meilleure manière de garder la variable d'environnement MONGO_ONLINE privée tout en l'utilisant dans le client est de passer par votre backend. Voici comment vous pourriez procéder :
+
+Backend : Exposer une route API pour récupérer l'URL de la base de données
+Vous pouvez créer une nouvelle route dans votre serveur Express qui renvoie l'URL de la base de données.
+
+ATTENTION : Ne faites cela que si l'URL de la base de données ne contient pas d'informations sensibles comme des mots de passe.
+
+typescript
+Copy code
+// Dans votre fichier de routes Express, ajoutez quelque chose comme ceci
+app.get("/api/getMongoUrl", (req, res) => {
+  res.json({ mongoUrl: process.env.MONGO_ONLINE });
+});
+Frontend : Récupérer l'URL lors de l'initialisation de l'application
+
+typescript
+Copy code
+// Dans un fichier Svelte ou un module d'initialisation
+let mongoUrl = "";
+
+onMount(async () => {
+  const res = await fetch("/api/getMongoUrl");
+  const data = await res.json();
+  mongoUrl = data.mongoUrl;
+});
+Frontend : Utiliser l'URL dans le client Socket.io
+
+typescript
+Copy code
+// src/lib/socket.js
+import { io } from 'socket.io-client';
+import { onMount } from 'svelte';
+
+let socket;
+
+onMount(() => {
+  socket = io(mongoUrl);  // Assurez-vous que mongoUrl est bien initialisé avant cette ligne
+});
+
+export default socket;
+Cela permet de garder votre variable d'environnement côté serveur, tout en permettant à votre client d'y accéder de manière contrôlée.
