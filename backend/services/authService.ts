@@ -23,14 +23,7 @@ import {
 import { IUser } from '../TypeScript/interfaces.js';
 import logger from './logger.js';
 
-import path from 'path';
-import url from 'url';
-
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const envPath = path.resolve(__dirname, './../.env');
-dotenv.config({ path: envPath });
+dotenv.config();
 
 // Function to generate a random token
 const generateToken = () => {

@@ -1,31 +1,17 @@
 {
   "version": 2,
-  "env": {
-    "MONGO_ONLINE":"mongodb+srv://pierrefabiendev:2Yt0dDpR05onq9UG@mongosveltekit.csdduve.mongodb.net/",
-    "MONGO_LOCAL":"mongodb://localhost:27018/BoilerPlateSvelteKitDB",
-    "DATABASE_NAME":"BoilerPlateSvelteKitDB",
-    "TOKEN_EXPIRY":"1",
-    "VERIFICATION_EXPIRY_HOURS":"1",
-    "URL_FRONT":"http://127.0.0.1:1000",
-    "URL_FRONT_LOCAL":"http://localhost:1000",
-    "URL_BACK":"http://localhost:2000",
-    "PORT":"2000",
-    "SECRETKEY":"kjqhfkjefhllhswfmosjgmsrdgjmdsligj",
-    "MAIL_HOST":"localhost",
-    "MAIL_PORT":"1025",
-    "EMAIL_USER":"no_reply@SvelteKit.com",
-    "EMAIL_PASSWORD":"passwordTest",
-    "MAIL_SERVER":"no_reply@SvelteKit.com",
-    "DB_ENV":"atlas",
-    "NODE_ENV":"prod",
-    "PUBLIC_LOCAL_URL_BACK":"http://localhost:2000",
-    "PUBLIC_VERCEL_URL_BACK":"boilerplatesveltekit.vercel.app",
-    "PUBLIC_ENV":"prod"
-  },
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/backend/api/$1" },
-    { "source": "/auth/(.*)", "destination": "/backend/auth/$1" },
-    { "source": "/(.*)", "destination": "/src/$1" }
-  ],
-  "routes": []
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "backend/$1.ts"
+    },
+    {
+      "src": "/auth/(.*)",
+      "dest": "backend/$1.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "$1"
+    }
+  ]
 }

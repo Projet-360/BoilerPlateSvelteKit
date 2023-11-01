@@ -1,7 +1,4 @@
 <script lang="ts">
-	import log from '$lib/utils/log.js';
-	log.layout('+layout.svelte');
-
 	import { onMount } from 'svelte';
 	import { checkAuth } from '$api/auth.js';
 	import { registerServiceWorker } from '$UITools/serviceWorker';
@@ -45,5 +42,5 @@
 </SmoothScroller>
 
 <style lang="scss" global>
-	@use '../CSS/main.scss';
+	@import './src/css/main';
 </style>

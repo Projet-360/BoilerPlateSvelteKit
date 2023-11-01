@@ -5,7 +5,6 @@ import sass from 'vite-plugin-sass';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
 import { VitePWA } from 'vite-plugin-pwa';
-import vercel from '@sveltejs/adapter-vercel';
 
 export default defineConfig({
 	plugins: [
@@ -47,7 +46,7 @@ export default defineConfig({
 		})
 	],
 	kit: {
-		adapter: vercel(),
+		adapter: adapter(),
 		alias: {
 			// this will match a file
 			$db: 'src/db',

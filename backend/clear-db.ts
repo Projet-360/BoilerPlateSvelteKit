@@ -2,14 +2,7 @@ import { MongoClient, ObjectId } from 'mongodb';
 import dotenv from 'dotenv';
 import logger from './services/logger.js';
 
-import path from 'path';
-import url from 'url';
-
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const envPath = path.resolve(__dirname, './../.env');
-dotenv.config({ path: envPath });
+dotenv.config();
 
 if (
   !process.env.MONGO_LOCAL ||
@@ -20,6 +13,8 @@ if (
 }
 
 let mongoUrl: string;
+
+console.log(process.env.DB_ENV);
 
 switch (process.env.DB_ENV) {
   case 'local':

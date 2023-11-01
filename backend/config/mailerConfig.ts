@@ -1,14 +1,7 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 
-import path from 'path';
-import url from 'url';
-
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const envPath = path.resolve(__dirname, './../.env');
-dotenv.config({ path: envPath });
+dotenv.config();
 
 // Create a transporter for sending emails using Nodemailer
 export const transporter = nodemailer.createTransport({

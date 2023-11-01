@@ -97,8 +97,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\CSS\utils\_variables.scss
 C:\wamp64\www\BoilerPlateSvelteKit\src\CSS\utils\_vendors.scss
 C:\wamp64\www\BoilerPlateSvelteKit\src\CSS\main.scss
 C:\wamp64\www\BoilerPlateSvelteKit\src\db
-C:\wamp64\www\BoilerPlateSvelteKit\src\db\auth.ts
-C:\wamp64\www\BoilerPlateSvelteKit\src\db\database.ts
+C:\wamp64\www\BoilerPlateSvelteKit\src\db\mongo.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\lib
 C:\wamp64\www\BoilerPlateSvelteKit\src\lib\images
 C:\wamp64\www\BoilerPlateSvelteKit\src\lib\images\github.svg
@@ -197,11 +196,11 @@ C:\wamp64\www\BoilerPlateSvelteKit\src\utils\message\greetings.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils\message\login.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils\message\signup.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils\message\updateUser.ts
+C:\wamp64\www\BoilerPlateSvelteKit\src\utils\constants.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\utils\socket.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\app.d.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\app.html
 C:\wamp64\www\BoilerPlateSvelteKit\src\hooks.server.ts
-C:\wamp64\www\BoilerPlateSvelteKit\src\hooks.ts
 C:\wamp64\www\BoilerPlateSvelteKit\src\typescript.ts
 C:\wamp64\www\BoilerPlateSvelteKit\static
 C:\wamp64\www\BoilerPlateSvelteKit\static\pwa
@@ -236,7 +235,6 @@ C:\wamp64\www\BoilerPlateSvelteKit\utils\mail
 C:\wamp64\www\BoilerPlateSvelteKit\utils\mail\MailHog_windows_amd64.exe
 C:\wamp64\www\BoilerPlateSvelteKit\utils\mail\start-mailhog.bat
 C:\wamp64\www\BoilerPlateSvelteKit\utils\chatGPT.txt
-C:\wamp64\www\BoilerPlateSvelteKit\utils\env.txt
 C:\wamp64\www\BoilerPlateSvelteKit\utils\infos.txt
 C:\wamp64\www\BoilerPlateSvelteKit\utils\socket.io
 C:\wamp64\www\BoilerPlateSvelteKit\.babelrc

@@ -1,8 +1,5 @@
 import { locales, loadTranslations, translations, defaultLocale } from '$UITools/Translations';
 
-import log from '$lib/utils/log.js';
-log.layout('+layout.server.ts');
-
 /** @type {import('@sveltejs/kit').ServerLoad} */
 export const load = async ({
 	url,
