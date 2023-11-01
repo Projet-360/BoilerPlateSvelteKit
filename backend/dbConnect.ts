@@ -5,39 +5,17 @@ import logger from './services/logger.js';
 
 dotenv.config();
 
-if (
-  !process.env.MONGO_LOCAL ||
-  !process.env.MONGO_ONLINE ||
-  !process.env.DATABASE_NAME
-) {
-  throw new Error('Required environment variables are not set');
-}
-
-let mongoUrl: string;
-
-switch (process.env.DB_ENV) {
-  case 'local':
-    mongoUrl = process.env.MONGO_LOCAL as string;
-    break;
-  case 'atlas':
-    mongoUrl = process.env.MONGO_ONLINE as string;
-    break;
-  default:
-    throw new Error('Invalid DB_ENV value');
-}
-
-if (!mongoUrl) {
-  throw new Error('Required environment variable for MongoDB URL is not set');
-}
-
 // Asynchronous function to connect to the MongoDB database
 const connectDB = async () => {
   try {
     // Attempt to connect to MongoDB using the determined URL
-    await mongoose.connect(mongoUrl, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    } as any);
+    await mongoose.connect(
+      process.env.MONGO_ONLINE as string,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      } as any,
+    );
 
     // Log success message if the connection is established
     logger.info('Connected to MongoDB');

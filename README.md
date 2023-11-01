@@ -88,16 +88,14 @@ Merci d'avoir pris le temps de lire ce README. J'attends vos retours avec impati
 env front: 
 VITE_MONGO_ONLINE=mongodb+srv://pierrefabiendev:2Yt0dDpR05onq9UG@mongosveltekit.csdduve.mongodb.net/
 VITE_URL_BACK=http://localhost:2000
+VITE_SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
 
 back:
 MONGO_ONLINE=mongodb+srv://pierrefabiendev:2Yt0dDpR05onq9UG@mongosveltekit.csdduve.mongodb.net/
-MONGO_LOCAL=mongodb://localhost:27018/BoilerPlateSvelteKitDB
 DATABASE_NAME=BoilerPlateSvelteKitDB
 TOKEN_EXPIRY=1
 VERIFICATION_EXPIRY_HOURS=1h
-URL_FRONT=http://127.0.0.1:1000
 URL_FRONT_LOCAL=http://localhost:1000
-URL_BACK=http://localhost:2000
 PORT: 2000
 SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
 MAIL_HOST=localhost
@@ -106,4 +104,3 @@ EMAIL_USER=no_reply@SvelteKit.com
 EMAIL_PASSWORD=passwordTest
 MAIL_SERVER=no_reply@SvelteKit.com
 NODE_ENV=dev
-DB_ENV=atlas

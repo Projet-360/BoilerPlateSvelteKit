@@ -4,37 +4,10 @@ import logger from './services/logger.js';
 
 dotenv.config();
 
-if (
-  !process.env.MONGO_LOCAL ||
-  !process.env.MONGO_ONLINE ||
-  !process.env.DATABASE_NAME
-) {
-  throw new Error('Required environment variables are not set');
-}
-
-let mongoUrl: string;
-
-console.log(process.env.DB_ENV);
-
-switch (process.env.DB_ENV) {
-  case 'local':
-    mongoUrl = process.env.MONGO_LOCAL as string;
-    break;
-  case 'atlas':
-    mongoUrl = process.env.MONGO_ONLINE as string;
-    break;
-  default:
-    throw new Error('Invalid DB_ENV value');
-}
-
 const dbName = process.env.DATABASE_NAME;
 
-if (!mongoUrl || !dbName) {
-  throw new Error('Required environment variables are not set');
-}
-
 async function clearDB() {
-  const client = new MongoClient(mongoUrl);
+  const client = new MongoClient(process.env.MONGO_ONLINE as string);
 
   try {
     await client.connect();
