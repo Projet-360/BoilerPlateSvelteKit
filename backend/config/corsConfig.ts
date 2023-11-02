@@ -1,11 +1,8 @@
-// Fichier corsConfig.ts
 import { CorsOptions } from 'cors';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const allowedOrigins = [
-  'http://localhost:1000',
-  'http://127.0.0.1:1000',
-  'http://localhost:4173',
-];
+const allowedOrigins = [process.env.URL_FRONT_LOCAL];
 
 const corsConfig: CorsOptions = {
   origin: function (

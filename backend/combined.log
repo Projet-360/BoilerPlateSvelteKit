@@ -823,3 +823,17 @@
 {"level":"info","message":"New client connected: sEyzUvN45vAhfjJvAAAJ"}
 {"level":"info","message":"Client disconnected: sEyzUvN45vAhfjJvAAAJ"}
 {"level":"info","message":"Client disconnected: -hjxjdOaAqGKSVppAAAH"}
+{"level":"info","message":"Client disconnected: 7miDNl5OT4Qx2T9LAAAD"}
+{"level":"info","message":"Client disconnected: KZSHmMcnJXd-noe4AAAC"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: so2bRnrQbp7Dt7Y7AAAB"}
+{"level":"info","message":"Client disconnected: so2bRnrQbp7Dt7Y7AAAB"}
+{"$__":{"activePaths":{"paths":{"_id":"default","email":"modify","isVerified":"default","password":"modify","role":"modify","username":"modify"},"states":{"default":{"_id":true,"isVerified":true},"modify":{"email":true,"password":true,"role":true,"username":true},"require":{}}}},"_doc":{"_id":"65438613f9be2124ccf8be34","email":"np5ryle9@example.com","isVerified":false,"password":"$2a$12$iNot6JaOmgRBcEoyQPJWY.TWa8cDWhhbPkrDLN93NN1m5PU4lci3y","role":"user","username":"e5L8TAaH"},"level":"info","message":"New User:"}
+{"level":"info","message":"Email successfully sent to np5ryle9@example.com"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"level":"info","message":"error from authRoutes EMAIL_NOT_VERIFIED","name":"EMAIL_NOT_VERIFIED","stack":"EMAIL_NOT_VERIFIED: EMAIL_NOT_VERIFIED\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:35:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:233:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:35:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:240:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)","statusCode":401}
+{"level":"info","message":"Email successfully sent to np5ryle9@example.com"}
+{"level":"info","message":"New client connected: 5d7q_z4kJMaa-Iy2AAAD"}
+{"level":"info","message":"Client disconnected: 5d7q_z4kJMaa-Iy2AAAD"}
