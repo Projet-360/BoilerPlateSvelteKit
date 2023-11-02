@@ -1,6 +1,5 @@
-// src/lib/socket.js
 import { io } from 'socket.io-client';
 
-const socket = io(import.meta.env.VITE_URL_BACK); // Remplacez par l'URL de votre serveur
+const socket = io(import.meta.env.VITE_URL_BACK);
 
 export default socket;
