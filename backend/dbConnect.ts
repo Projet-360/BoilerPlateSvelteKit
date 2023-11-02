@@ -19,7 +19,6 @@ const connectDB = async () => {
 
     // Log success message if the connection is established
     logger.info('Connected to MongoDB');
-    console.log(mongoose.connection.db.databaseName);
   } catch (err) {
     // Log the error message if the connection fails
     logger.error('Failed to connect to MongoDB', err);

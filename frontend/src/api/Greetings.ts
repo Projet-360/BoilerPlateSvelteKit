@@ -1,4 +1,3 @@
-import { BD } from '$utils/constants';
 import { apiCall } from '$api/utils/apiCall';
 import { greetingsValidation } from '$message/greetings';
 import type { TranslationFunction } from '../typescript';
@@ -10,7 +9,9 @@ export async function sendGreeting(
 	$t: TranslationFunction
 ) {
 	try {
-		const url = editingId ? `${BD}/api/updateGreeting/${editingId}` : `${BD}/api/saveGreeting`;
+		const url = editingId
+			? `${import.meta.env.VITE_URL_BACK}/api/updateGreeting/${editingId}`
+			: `${import.meta.env.VITE_URL_BACK}/api/saveGreeting`;
 		const method = editingId ? 'PUT' : 'POST';
 
 		const isSuccessful = await apiCall({
@@ -28,7 +29,7 @@ export async function sendGreeting(
 
 export async function getAllGreetings() {
 	const data = await apiCall({
-		url: `${BD}/api/getGreetings`,
+		url: `${import.meta.env.VITE_URL_BACK}/api/getGreetings`,
 		method: 'GET'
 	});
 
@@ -37,7 +38,7 @@ export async function getAllGreetings() {
 
 export async function deleteGreeting(id: string) {
 	const isSuccessful = await apiCall({
-		url: `${BD}/api/deleteGreeting/${id}`,
+		url: `${import.meta.env.VITE_URL_BACK}/api/deleteGreeting/${id}`,
 		method: 'DELETE'
 	});
 

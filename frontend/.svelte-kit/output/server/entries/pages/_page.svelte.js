@@ -1,4 +1,4 @@
-import { c as create_ssr_component, p as onDestroy, b as add_attribute, s as subscribe, a as each, e as escape, u as compute_rest_props, q as createEventDispatcher, w as spread, x as escape_attribute_value, y as escape_object, v as validate_component } from "../../chunks/index2.js";
+import { c as create_ssr_component, o as onDestroy, b as add_attribute, s as subscribe, a as each, e as escape, j as compute_rest_props, k as createEventDispatcher, l as spread, p as escape_attribute_value, q as escape_object, v as validate_component } from "../../chunks/index2.js";
 import { e as t } from "../../chunks/index.js";
 import { io } from "socket.io-client";
 import { n as notificationStore } from "../../chunks/notificationStore.js";
@@ -52,7 +52,6 @@ async function apiCall({
     throw error;
   }
 }
-const BD = "http://localhost:2000";
 const Box_svelte_svelte_type_style_lang = "";
 const css = {
   code: "div.svelte-1g8vqg2{width:400px;height:400px}",
@@ -101,7 +100,7 @@ const greetingsValidation = (error, $t) => {
 };
 async function sendGreeting(name, message, editingId = null, $t) {
   try {
-    const url = editingId ? `${BD}/api/updateGreeting/${editingId}` : `${BD}/api/saveGreeting`;
+    const url = editingId ? `${"http://localhost:2000"}/api/updateGreeting/${editingId}` : `${"http://localhost:2000"}/api/saveGreeting`;
     const method = editingId ? "PUT" : "POST";
     const isSuccessful = await apiCall({
       url,
@@ -116,14 +115,14 @@ async function sendGreeting(name, message, editingId = null, $t) {
 }
 async function getAllGreetings() {
   const data = await apiCall({
-    url: `${BD}/api/getGreetings`,
+    url: `${"http://localhost:2000"}/api/getGreetings`,
     method: "GET"
   });
   return data;
 }
 async function deleteGreeting(id) {
   const isSuccessful = await apiCall({
-    url: `${BD}/api/deleteGreeting/${id}`,
+    url: `${"http://localhost:2000"}/api/deleteGreeting/${id}`,
     method: "DELETE"
   });
   return isSuccessful !== null;

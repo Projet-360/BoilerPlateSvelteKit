@@ -1,6 +1,5 @@
-import { apiCall } from '$api/utils/apiCall'; // Assure-toi que le chemin est correct
+import { apiCall } from '$api/utils/apiCall';
 
-import { BD } from '$utils/constants';
 import { handleRoleRedirection } from '$utils/auth/handleRoleRedirection.js';
 
 import { authStore } from '$stores/authStore';
@@ -26,7 +25,7 @@ authStore.subscribe((state) => {
 
 export async function checkAuth() {
 	try {
-		const res = await fetch(`${BD}/auth/check-auth`, {
+		const res = await fetch(`${import.meta.env.VITE_URL_BACK}/auth/check-auth`, {
 			credentials: 'include'
 		});
 		if (res.ok) {
@@ -44,7 +43,7 @@ export async function checkAuth() {
 export async function login(email: string, password: string, $t: TranslationFunction) {
 	try {
 		const data = await apiCall({
-			url: `${BD}/auth/login`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/login`,
 			method: 'POST',
 			credentials: 'include',
 			body: { email, password }
@@ -77,7 +76,7 @@ export async function signup(
 ) {
 	try {
 		const response = await apiCall({
-			url: `${BD}/auth/signup`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/signup`,
 			method: 'POST',
 			credentials: 'include',
 			body: { username, email, password }
@@ -95,7 +94,7 @@ export async function signup(
 
 export async function verifyToken(token: string, $t: TranslationFunction) {
 	try {
-		const response = await fetch(`${BD}/auth/verify/${token}`);
+		const response = await fetch(`${import.meta.env.VITE_URL_BACK}/auth/verify/${token}`);
 		if (response.ok) {
 			goto('/');
 			notificationStore.addNotification($t('validation.EMAIL_VERIFIED'), 'success');
@@ -106,7 +105,7 @@ export async function verifyToken(token: string, $t: TranslationFunction) {
 export async function sendEmailResetPassword(email: string, $t: TranslationFunction) {
 	try {
 		const data = await apiCall({
-			url: `${BD}/auth/forgot-password`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/forgot-password`,
 			method: 'POST',
 			credentials: 'include', // si nécessaire
 			body: { email }
@@ -129,7 +128,7 @@ export async function ResetForgotNewPassword(
 	$t: TranslationFunction
 ) {
 	try {
-		const response = await fetch(`${BD}/auth/forgot-password/${token}`, {
+		const response = await fetch(`${import.meta.env.VITE_URL_BACK}/auth/forgot-password/${token}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -155,7 +154,7 @@ export async function getDashboardData() {
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
-			url: `${BD}/auth/user`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/user`,
 			method: 'GET',
 			headers: headers,
 			credentials: 'include'
@@ -170,7 +169,7 @@ export const updateUserInfo = async (userInfo: UserInfo, $t: TranslationFunction
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
-			url: `${BD}/auth/user/update`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/user/update`,
 			method: 'PUT',
 			headers: headers,
 			credentials: 'include',
@@ -197,7 +196,7 @@ export async function getAllUsers() {
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
-			url: `${BD}/auth/admin/users`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/admin/users`,
 			method: 'GET',
 			headers: headers,
 			credentials: 'include'
@@ -217,7 +216,7 @@ export async function updateUser(userId: string, updateData: User) {
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
-			url: `${BD}/auth/admin/user/${userId}`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/admin/user/${userId}`,
 			method: 'PUT',
 			headers: headers,
 			body: updateData

@@ -289,6 +289,8 @@ router.put(
   async (req: Request, res: Response) => {
     try {
       const { userId } = req.params;
+      console.log('userId', userId);
+
       const updateData = req.body;
       const { success, notification, updatedUser } =
         await authService.updateUserInfo(userId, updateData);
