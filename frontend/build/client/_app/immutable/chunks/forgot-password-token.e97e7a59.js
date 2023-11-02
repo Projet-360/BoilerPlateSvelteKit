@@ -1,0 +1,1 @@
+const s="Reset password",o="New password :",r="Confirm password :",t="Reset password",n={title:s,newPassword:o,confirmPassword:r,link:t};export{r as confirmPassword,n as default,t as link,o as newPassword,s as title};

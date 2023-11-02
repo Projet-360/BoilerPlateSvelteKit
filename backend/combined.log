@@ -79,3 +79,18 @@
 {"level":"info","message":"Cleared collection: greetings, documents deleted: 0"}
 {"level":"info","message":"Default users inserted, count: 2"}
 {"level":"info","message":"MongoClient connection closed"}
+{"level":"info","message":"New client connected: H-Dugw01V04O1UlsAAAH"}
+{"level":"info","message":"Client disconnected: F7_hZ8begv83VXDhAAAB"}
+{"level":"info","message":"New client connected: JJk7Joweb6d8sGEjAAAJ"}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:35:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:240:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)","statusCode":401}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:35:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:240:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)","statusCode":401}
+{"$__":{"activePaths":{"paths":{"_id":"default","email":"modify","isVerified":"default","password":"modify","role":"modify","username":"modify"},"states":{"default":{"_id":true,"isVerified":true},"modify":{"email":true,"password":true,"role":true,"username":true},"require":{}}}},"_doc":{"_id":"6543b8727b7589fedb1b30ea","email":"lili@lili.fr","isVerified":false,"password":"$2a$12$kO25xqCYiev6PMWLzjL7Yu6EnADDNZC7FAfK2T6SY6TbImaZgNtBi","role":"user","username":"Name"},"level":"info","message":"New User:"}
+{"level":"info","message":"Email successfully sent to lili@lili.fr"}
+{"level":"info","message":"Connected to database: BoilerPlateSvelteKitDB"}
+{"level":"info","message":"Collections found: users, emailverificationtokens, blacklistedtokens, greetings"}
+{"level":"info","message":"Cleared collection: users, documents deleted: 3"}
+{"level":"info","message":"Cleared collection: emailverificationtokens, documents deleted: 1"}
+{"level":"info","message":"Cleared collection: blacklistedtokens, documents deleted: 0"}
+{"level":"info","message":"Cleared collection: greetings, documents deleted: 0"}
+{"level":"info","message":"Default users inserted, count: 2"}
+{"level":"info","message":"MongoClient connection closed"}

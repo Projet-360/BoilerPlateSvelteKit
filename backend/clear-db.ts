@@ -42,7 +42,7 @@ async function clearDB() {
         username: 'Admin',
         email: 'admin@admin.fr',
         password:
-          '$2a$12$Rd43bsIzTi3Dlwq7rgNCWuRHqOap82AdMCSSbFxYjqWmhG0hfBp/6',
+          '$2a$12$kO25xqCYiev6PMWLzjL7Yu6EnADDNZC7FAfK2T6SY6TbImaZgNtBi',
         isVerified: true,
         role: 'admin',
         __v: 0,
@@ -52,7 +52,7 @@ async function clearDB() {
         username: 'User',
         email: 'user@user.fr',
         password:
-          '$2a$12$Rd43bsIzTi3Dlwq7rgNCWuRHqOap82AdMCSSbFxYjqWmhG0hfBp/6',
+          '$2a$12$kO25xqCYiev6PMWLzjL7Yu6EnADDNZC7FAfK2T6SY6TbImaZgNtBi',
         isVerified: true,
         role: 'user',
         __v: 0,

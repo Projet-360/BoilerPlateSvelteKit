@@ -1,0 +1,357 @@
+{
+  ".svelte-kit/generated/client-optimized/app.js": {
+    "dynamicImports": [
+      ".svelte-kit/generated/client-optimized/nodes/0.js",
+      ".svelte-kit/generated/client-optimized/nodes/1.js",
+      ".svelte-kit/generated/client-optimized/nodes/2.js",
+      ".svelte-kit/generated/client-optimized/nodes/3.js",
+      ".svelte-kit/generated/client-optimized/nodes/4.js",
+      ".svelte-kit/generated/client-optimized/nodes/5.js",
+      ".svelte-kit/generated/client-optimized/nodes/6.js",
+      ".svelte-kit/generated/client-optimized/nodes/7.js",
+      ".svelte-kit/generated/client-optimized/nodes/8.js",
+      ".svelte-kit/generated/client-optimized/nodes/9.js",
+      ".svelte-kit/generated/client-optimized/nodes/10.js"
+    ],
+    "file": "_app/immutable/entry/app.b5769b1d.js",
+    "imports": [
+      "_preload-helper.a4192956.js",
+      "_index.958f6a32.js"
+    ],
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/app.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/0.css": {
+    "file": "_app/immutable/assets/0.91337714.css",
+    "src": ".svelte-kit/generated/client-optimized/nodes/0.css"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/0.js": {
+    "css": [
+      "_app/immutable/assets/0.91337714.css"
+    ],
+    "file": "_app/immutable/nodes/0.12fd7818.js",
+    "imports": [
+      "_index.a9363749.js",
+      "_index.958f6a32.js",
+      "_auth.49264929.js",
+      "_stores.fbd63435.js",
+      "_index.d28b6c62.js",
+      "_cursorHelpers.05cb0207.js",
+      "_notificationStore.6f5071e2.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/0.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/1.js": {
+    "file": "_app/immutable/nodes/1.c472437d.js",
+    "imports": [
+      "_index.958f6a32.js",
+      "_stores.fbd63435.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/1.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/10.js": {
+    "file": "_app/immutable/nodes/10.25fcd267.js",
+    "imports": [
+      "_index.958f6a32.js",
+      "_cursorHelpers.05cb0207.js",
+      "_auth.49264929.js",
+      "_index.a9363749.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/10.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/2.css": {
+    "file": "_app/immutable/assets/2.df2daf6c.css",
+    "src": ".svelte-kit/generated/client-optimized/nodes/2.css"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/2.js": {
+    "assets": [
+      "_app/immutable/assets/github.1ea8d62e.svg"
+    ],
+    "css": [
+      "_app/immutable/assets/2.df2daf6c.css"
+    ],
+    "file": "_app/immutable/nodes/2.d6dc7ba0.js",
+    "imports": [
+      "_index.958f6a32.js",
+      "_cursorHelpers.05cb0207.js",
+      "_index.a9363749.js",
+      "_notificationStore.6f5071e2.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/2.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/3.js": {
+    "file": "_app/immutable/nodes/3.11a157d2.js",
+    "imports": [
+      "_index.958f6a32.js",
+      "_index.a9363749.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/3.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/4.js": {
+    "file": "_app/immutable/nodes/4.c5668b18.js",
+    "imports": [
+      "_index.958f6a32.js",
+      "_auth.49264929.js",
+      "_notificationStore.6f5071e2.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/4.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/5.js": {
+    "file": "_app/immutable/nodes/5.7d20214e.js",
+    "imports": [
+      "_index.958f6a32.js",
+      "_index.a9363749.js",
+      "_auth.49264929.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/5.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/6.js": {
+    "file": "_app/immutable/nodes/6.255e6af4.js",
+    "imports": [
+      "_index.958f6a32.js",
+      "_stores.fbd63435.js",
+      "_index.a9363749.js",
+      "_notificationStore.6f5071e2.js",
+      "_auth.49264929.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/6.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/7.js": {
+    "file": "_app/immutable/nodes/7.e7ac5b94.js",
+    "imports": [
+      "_index.958f6a32.js",
+      "_auth.49264929.js",
+      "_index.a9363749.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/7.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/8.js": {
+    "file": "_app/immutable/nodes/8.206d9c3c.js",
+    "imports": [
+      "_index.958f6a32.js",
+      "_auth.49264929.js",
+      "_index.a9363749.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/8.js"
+  },
+  ".svelte-kit/generated/client-optimized/nodes/9.js": {
+    "file": "_app/immutable/nodes/9.7091be8b.js",
+    "imports": [
+      "_index.958f6a32.js",
+      "_stores.fbd63435.js",
+      "_index.a9363749.js",
+      "_auth.49264929.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": ".svelte-kit/generated/client-optimized/nodes/9.js"
+  },
+  "_auth.49264929.js": {
+    "file": "_app/immutable/chunks/auth.49264929.js",
+    "imports": [
+      "_notificationStore.6f5071e2.js",
+      "_singletons.8869f9cf.js",
+      "_index.d28b6c62.js",
+      "_index.a9363749.js"
+    ]
+  },
+  "_cursorHelpers.05cb0207.js": {
+    "file": "_app/immutable/chunks/cursorHelpers.05cb0207.js",
+    "imports": [
+      "_index.d28b6c62.js"
+    ]
+  },
+  "_index.958f6a32.js": {
+    "file": "_app/immutable/chunks/index.958f6a32.js"
+  },
+  "_index.a9363749.js": {
+    "dynamicImports": [
+      "src/UITools/Translations/en/general.json",
+      "src/UITools/Translations/en/about.json",
+      "src/UITools/Translations/en/home.json",
+      "src/UITools/Translations/en/login.json",
+      "src/UITools/Translations/en/logout.json",
+      "src/UITools/Translations/en/signup.json",
+      "src/UITools/Translations/en/forgot-password.json",
+      "src/UITools/Translations/en/forgot-password-token.json",
+      "src/UITools/Translations/en/user.json",
+      "src/UITools/Translations/en/validation.json",
+      "src/UITools/Translations/fr/general.json",
+      "src/UITools/Translations/fr/about.json",
+      "src/UITools/Translations/fr/home.json",
+      "src/UITools/Translations/fr/login.json",
+      "src/UITools/Translations/fr/logout.json",
+      "src/UITools/Translations/fr/signup.json",
+      "src/UITools/Translations/fr/forgot-password.json",
+      "src/UITools/Translations/fr/forgot-password-token.json",
+      "src/UITools/Translations/fr/user.json",
+      "src/UITools/Translations/fr/validation.json"
+    ],
+    "file": "_app/immutable/chunks/index.a9363749.js",
+    "imports": [
+      "_preload-helper.a4192956.js",
+      "_index.d28b6c62.js",
+      "_index.958f6a32.js"
+    ]
+  },
+  "_index.d28b6c62.js": {
+    "file": "_app/immutable/chunks/index.d28b6c62.js",
+    "imports": [
+      "_index.958f6a32.js"
+    ]
+  },
+  "_notificationStore.6f5071e2.js": {
+    "file": "_app/immutable/chunks/notificationStore.6f5071e2.js",
+    "imports": [
+      "_index.d28b6c62.js"
+    ]
+  },
+  "_preload-helper.a4192956.js": {
+    "file": "_app/immutable/chunks/preload-helper.a4192956.js"
+  },
+  "_singletons.8869f9cf.js": {
+    "file": "_app/immutable/chunks/singletons.8869f9cf.js",
+    "imports": [
+      "_index.d28b6c62.js"
+    ]
+  },
+  "_stores.fbd63435.js": {
+    "file": "_app/immutable/chunks/stores.fbd63435.js",
+    "imports": [
+      "_singletons.8869f9cf.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/client/start.js": {
+    "file": "_app/immutable/entry/start.69f8c4b1.js",
+    "imports": [
+      "_index.958f6a32.js",
+      "_singletons.8869f9cf.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/client/start.js"
+  },
+  "src/UITools/Translations/en/about.json": {
+    "file": "_app/immutable/chunks/about.12721109.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/about.json"
+  },
+  "src/UITools/Translations/en/forgot-password-token.json": {
+    "file": "_app/immutable/chunks/forgot-password-token.e97e7a59.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/forgot-password-token.json"
+  },
+  "src/UITools/Translations/en/forgot-password.json": {
+    "file": "_app/immutable/chunks/forgot-password.2604dae1.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/forgot-password.json"
+  },
+  "src/UITools/Translations/en/general.json": {
+    "file": "_app/immutable/chunks/general.97c7a5c3.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/general.json"
+  },
+  "src/UITools/Translations/en/home.json": {
+    "file": "_app/immutable/chunks/home.e2722f08.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/home.json"
+  },
+  "src/UITools/Translations/en/login.json": {
+    "file": "_app/immutable/chunks/login.d1c50e06.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/login.json"
+  },
+  "src/UITools/Translations/en/logout.json": {
+    "file": "_app/immutable/chunks/logout.0409f1b0.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/logout.json"
+  },
+  "src/UITools/Translations/en/signup.json": {
+    "file": "_app/immutable/chunks/signup.7adf8fed.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/signup.json"
+  },
+  "src/UITools/Translations/en/user.json": {
+    "file": "_app/immutable/chunks/user.c4a32993.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/user.json"
+  },
+  "src/UITools/Translations/en/validation.json": {
+    "file": "_app/immutable/chunks/validation.38c0b508.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/validation.json"
+  },
+  "src/UITools/Translations/fr/about.json": {
+    "file": "_app/immutable/chunks/about.644695f1.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/about.json"
+  },
+  "src/UITools/Translations/fr/forgot-password-token.json": {
+    "file": "_app/immutable/chunks/forgot-password-token.c1805068.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/forgot-password-token.json"
+  },
+  "src/UITools/Translations/fr/forgot-password.json": {
+    "file": "_app/immutable/chunks/forgot-password.5e1987bc.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/forgot-password.json"
+  },
+  "src/UITools/Translations/fr/general.json": {
+    "file": "_app/immutable/chunks/general.3a3395a9.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/general.json"
+  },
+  "src/UITools/Translations/fr/home.json": {
+    "file": "_app/immutable/chunks/home.ec950bea.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/home.json"
+  },
+  "src/UITools/Translations/fr/login.json": {
+    "file": "_app/immutable/chunks/login.6114d837.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/login.json"
+  },
+  "src/UITools/Translations/fr/logout.json": {
+    "file": "_app/immutable/chunks/logout.db8b5a69.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/logout.json"
+  },
+  "src/UITools/Translations/fr/signup.json": {
+    "file": "_app/immutable/chunks/signup.60c6c763.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/signup.json"
+  },
+  "src/UITools/Translations/fr/user.json": {
+    "file": "_app/immutable/chunks/user.b8b1ac19.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/user.json"
+  },
+  "src/UITools/Translations/fr/validation.json": {
+    "file": "_app/immutable/chunks/validation.df3c52cd.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/validation.json"
+  },
+  "src/lib/images/github.svg": {
+    "file": "_app/immutable/assets/github.1ea8d62e.svg",
+    "src": "src/lib/images/github.svg"
+  }
+}

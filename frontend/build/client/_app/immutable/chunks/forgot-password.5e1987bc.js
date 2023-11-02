@@ -1,0 +1,1 @@
+const t="Réinitialisation du mot de passe",s="Saisissez votre adresse e-mail :",e="Réinitialiser le mot de passe",i={title:t,subtitle:s,button:e};export{e as button,i as default,s as subtitle,t as title};

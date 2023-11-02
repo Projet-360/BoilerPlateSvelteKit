@@ -1,0 +1,404 @@
+{
+  ".svelte-kit/generated/server/internal.js": {
+    "file": "internal.js",
+    "imports": [
+      "_internal.js"
+    ],
+    "isEntry": true,
+    "src": ".svelte-kit/generated/server/internal.js"
+  },
+  "_auth.js": {
+    "file": "chunks/auth.js",
+    "imports": [
+      "_index4.js",
+      "_notificationStore.js",
+      "_index.js"
+    ]
+  },
+  "_index.js": {
+    "dynamicImports": [
+      "src/UITools/Translations/en/general.json",
+      "src/UITools/Translations/en/about.json",
+      "src/UITools/Translations/en/home.json",
+      "src/UITools/Translations/en/login.json",
+      "src/UITools/Translations/en/logout.json",
+      "src/UITools/Translations/en/signup.json",
+      "src/UITools/Translations/en/forgot-password.json",
+      "src/UITools/Translations/en/forgot-password-token.json",
+      "src/UITools/Translations/en/user.json",
+      "src/UITools/Translations/en/validation.json",
+      "src/UITools/Translations/fr/general.json",
+      "src/UITools/Translations/fr/about.json",
+      "src/UITools/Translations/fr/home.json",
+      "src/UITools/Translations/fr/login.json",
+      "src/UITools/Translations/fr/logout.json",
+      "src/UITools/Translations/fr/signup.json",
+      "src/UITools/Translations/fr/forgot-password.json",
+      "src/UITools/Translations/fr/forgot-password-token.json",
+      "src/UITools/Translations/fr/user.json",
+      "src/UITools/Translations/fr/validation.json"
+    ],
+    "file": "chunks/index.js",
+    "imports": [
+      "_index4.js",
+      "_index2.js"
+    ]
+  },
+  "_index2.js": {
+    "file": "chunks/index2.js"
+  },
+  "_index3.js": {
+    "file": "chunks/index3.js"
+  },
+  "_index4.js": {
+    "file": "chunks/index4.js",
+    "imports": [
+      "_index2.js"
+    ]
+  },
+  "_internal.js": {
+    "dynamicImports": [
+      "src/hooks.server.ts"
+    ],
+    "file": "chunks/internal.js",
+    "imports": [
+      "_index2.js"
+    ]
+  },
+  "_notificationStore.js": {
+    "file": "chunks/notificationStore.js",
+    "imports": [
+      "_index4.js"
+    ]
+  },
+  "_prod-ssr.js": {
+    "file": "chunks/prod-ssr.js"
+  },
+  "_stores.js": {
+    "file": "chunks/stores.js",
+    "imports": [
+      "_index2.js"
+    ]
+  },
+  "node_modules/@sveltejs/kit/src/runtime/components/error.svelte": {
+    "file": "entries/fallbacks/error.svelte.js",
+    "imports": [
+      "_index2.js",
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/components/error.svelte"
+  },
+  "node_modules/@sveltejs/kit/src/runtime/server/index.js": {
+    "file": "index.js",
+    "imports": [
+      "_prod-ssr.js",
+      "_internal.js",
+      "_index3.js",
+      "_index4.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/@sveltejs/kit/src/runtime/server/index.js"
+  },
+  "src/UITools/Translations/en/about.json": {
+    "file": "chunks/about.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/about.json"
+  },
+  "src/UITools/Translations/en/forgot-password-token.json": {
+    "file": "chunks/forgot-password-token.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/forgot-password-token.json"
+  },
+  "src/UITools/Translations/en/forgot-password.json": {
+    "file": "chunks/forgot-password.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/forgot-password.json"
+  },
+  "src/UITools/Translations/en/general.json": {
+    "file": "chunks/general.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/general.json"
+  },
+  "src/UITools/Translations/en/home.json": {
+    "file": "chunks/home.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/home.json"
+  },
+  "src/UITools/Translations/en/login.json": {
+    "file": "chunks/login.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/login.json"
+  },
+  "src/UITools/Translations/en/logout.json": {
+    "file": "chunks/logout.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/logout.json"
+  },
+  "src/UITools/Translations/en/signup.json": {
+    "file": "chunks/signup.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/signup.json"
+  },
+  "src/UITools/Translations/en/user.json": {
+    "file": "chunks/user.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/user.json"
+  },
+  "src/UITools/Translations/en/validation.json": {
+    "file": "chunks/validation.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/en/validation.json"
+  },
+  "src/UITools/Translations/fr/about.json": {
+    "file": "chunks/about2.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/about.json"
+  },
+  "src/UITools/Translations/fr/forgot-password-token.json": {
+    "file": "chunks/forgot-password-token2.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/forgot-password-token.json"
+  },
+  "src/UITools/Translations/fr/forgot-password.json": {
+    "file": "chunks/forgot-password2.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/forgot-password.json"
+  },
+  "src/UITools/Translations/fr/general.json": {
+    "file": "chunks/general2.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/general.json"
+  },
+  "src/UITools/Translations/fr/home.json": {
+    "file": "chunks/home2.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/home.json"
+  },
+  "src/UITools/Translations/fr/login.json": {
+    "file": "chunks/login2.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/login.json"
+  },
+  "src/UITools/Translations/fr/logout.json": {
+    "file": "chunks/logout2.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/logout.json"
+  },
+  "src/UITools/Translations/fr/signup.json": {
+    "file": "chunks/signup2.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/signup.json"
+  },
+  "src/UITools/Translations/fr/user.json": {
+    "file": "chunks/user2.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/user.json"
+  },
+  "src/UITools/Translations/fr/validation.json": {
+    "file": "chunks/validation2.js",
+    "isDynamicEntry": true,
+    "src": "src/UITools/Translations/fr/validation.json"
+  },
+  "src/hooks.server.ts": {
+    "file": "chunks/hooks.server.js",
+    "isDynamicEntry": true,
+    "src": "src/hooks.server.ts"
+  },
+  "src/lib/images/github.svg": {
+    "file": "_app/immutable/assets/github.1ea8d62e.svg",
+    "src": "src/lib/images/github.svg"
+  },
+  "src/routes/+layout.css": {
+    "file": "_app/immutable/assets/_layout.91337714.css",
+    "src": "src/routes/+layout.css"
+  },
+  "src/routes/+layout.server.ts": {
+    "file": "entries/pages/_layout.server.ts.js",
+    "imports": [
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+layout.server.ts"
+  },
+  "src/routes/+layout.svelte": {
+    "css": [
+      "_app/immutable/assets/_layout.91337714.css"
+    ],
+    "file": "entries/pages/_layout.svelte.js",
+    "imports": [
+      "_index2.js",
+      "_auth.js",
+      "_stores.js",
+      "_index4.js",
+      "_index.js",
+      "_notificationStore.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+layout.svelte"
+  },
+  "src/routes/+layout.ts": {
+    "file": "entries/pages/_layout.ts.js",
+    "imports": [
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+layout.ts"
+  },
+  "src/routes/+page.css": {
+    "file": "_app/immutable/assets/_page.8a0ad1f6.css",
+    "src": "src/routes/+page.css"
+  },
+  "src/routes/+page.svelte": {
+    "assets": [
+      "_app/immutable/assets/github.1ea8d62e.svg"
+    ],
+    "css": [
+      "_app/immutable/assets/_page.8a0ad1f6.css"
+    ],
+    "file": "entries/pages/_page.svelte.js",
+    "imports": [
+      "_index2.js",
+      "_index.js",
+      "_notificationStore.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/+page.svelte"
+  },
+  "src/routes/+page.ts": {
+    "file": "entries/pages/_page.ts.js",
+    "isEntry": true,
+    "src": "src/routes/+page.ts"
+  },
+  "src/routes/about/+page.svelte": {
+    "file": "entries/pages/about/_page.svelte.js",
+    "imports": [
+      "_index2.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/about/+page.svelte"
+  },
+  "src/routes/about/+page.ts": {
+    "file": "entries/pages/about/_page.ts.js",
+    "imports": [
+      "_prod-ssr.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/about/+page.ts"
+  },
+  "src/routes/dashboard/+page.server.ts": {
+    "file": "entries/pages/dashboard/_page.server.ts.js",
+    "imports": [
+      "_index3.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/dashboard/+page.server.ts"
+  },
+  "src/routes/dashboard/+page.svelte": {
+    "file": "entries/pages/dashboard/_page.svelte.js",
+    "imports": [
+      "_index2.js",
+      "_auth.js",
+      "_notificationStore.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/dashboard/+page.svelte"
+  },
+  "src/routes/dashboard/+page.ts": {
+    "file": "entries/pages/dashboard/_page.ts.js",
+    "isEntry": true,
+    "src": "src/routes/dashboard/+page.ts"
+  },
+  "src/routes/forgot-password/+page.svelte": {
+    "file": "entries/pages/forgot-password/_page.svelte.js",
+    "imports": [
+      "_index2.js",
+      "_index.js",
+      "_auth.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/forgot-password/+page.svelte"
+  },
+  "src/routes/forgot-password/+page.ts": {
+    "file": "entries/pages/forgot-password/_page.ts.js",
+    "isEntry": true,
+    "src": "src/routes/forgot-password/+page.ts"
+  },
+  "src/routes/forgot-password/[token]/+page.svelte": {
+    "file": "entries/pages/forgot-password/_token_/_page.svelte.js",
+    "imports": [
+      "_index2.js",
+      "_stores.js",
+      "_index.js",
+      "_notificationStore.js",
+      "_auth.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/forgot-password/[token]/+page.svelte"
+  },
+  "src/routes/login/+page.svelte": {
+    "file": "entries/pages/login/_page.svelte.js",
+    "imports": [
+      "_index2.js",
+      "_index.js",
+      "_auth.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/login/+page.svelte"
+  },
+  "src/routes/login/+page.ts": {
+    "file": "entries/pages/login/_page.ts.js",
+    "isEntry": true,
+    "src": "src/routes/login/+page.ts"
+  },
+  "src/routes/signup/+page.svelte": {
+    "file": "entries/pages/signup/_page.svelte.js",
+    "imports": [
+      "_index2.js",
+      "_auth.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/signup/+page.svelte"
+  },
+  "src/routes/signup/+page.ts": {
+    "file": "entries/pages/signup/_page.ts.js",
+    "isEntry": true,
+    "src": "src/routes/signup/+page.ts"
+  },
+  "src/routes/signup/[token]/+page.svelte": {
+    "file": "entries/pages/signup/_token_/_page.svelte.js",
+    "imports": [
+      "_index2.js",
+      "_stores.js",
+      "_index.js",
+      "_auth.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/signup/[token]/+page.svelte"
+  },
+  "src/routes/user/+page.server.ts": {
+    "file": "entries/pages/user/_page.server.ts.js",
+    "imports": [
+      "_index3.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/user/+page.server.ts"
+  },
+  "src/routes/user/+page.svelte": {
+    "file": "entries/pages/user/_page.svelte.js",
+    "imports": [
+      "_index2.js",
+      "_auth.js",
+      "_index.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/user/+page.svelte"
+  },
+  "src/routes/user/+page.ts": {
+    "file": "entries/pages/user/_page.ts.js",
+    "isEntry": true,
+    "src": "src/routes/user/+page.ts"
+  }
+}
