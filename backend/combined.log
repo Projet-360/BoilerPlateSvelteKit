@@ -23,3 +23,59 @@
 {"level":"info","message":"New client connected: EZ1bBkDxNaHLWGpjAAAN"}
 {"level":"info","message":"New client connected: Yyp85GYgndbYSSbCAAAQ"}
 {"level":"info","message":"New client connected: GBNxKPJKBY3syehTAAAR"}
+{"level":"info","message":"Greeting sent from client: Yyp85GYgndbYSSbCAAAQ"}
+{"level":"info","message":"Database cleared"}
+{"level":"info","message":"Default users inserted"}
+{"level":"info","message":"Connected to database: BoilerPlateSvelteKitDB"}
+{"level":"info","message":"Collections found: users"}
+{"level":"info","message":"Cleared collection: users, documents deleted: 2"}
+{"level":"info","message":"Default users inserted, count: 2"}
+{"level":"info","message":"MongoClient connection closed"}
+{"level":"info","message":"Connected to database: BoilerPlateSvelteKitDB"}
+{"level":"info","message":"Collections found: "}
+{"level":"info","message":"Default users inserted, count: 2"}
+{"level":"info","message":"MongoClient connection closed"}
+{"level":"info","message":"Client disconnected: EZ1bBkDxNaHLWGpjAAAN"}
+{"level":"info","message":"Client disconnected: dft5Ob8QQS7W-jO6AAAH"}
+{"level":"info","message":"Client disconnected: GBNxKPJKBY3syehTAAAR"}
+{"level":"info","message":"Client disconnected: hq1iTRdUJQAMip0WAAAM"}
+{"level":"info","message":"Client disconnected: XC19qO5zp9C-a605AAAJ"}
+{"level":"info","message":"Client disconnected: Yyp85GYgndbYSSbCAAAQ"}
+{"level":"info","message":"New client connected: b4G-1DHJihzsFQXzAAAT"}
+{"level":"info","message":"New client connected: 8zsTraawfgV2Hn8qAAAV"}
+{"level":"info","message":"New client connected: o5xztfk67JSLK8tXAAAX"}
+{"level":"info","message":"Client disconnected: o5xztfk67JSLK8tXAAAX"}
+{"$__":{"activePaths":{"paths":{"_id":"default","email":"modify","isVerified":"default","password":"modify","role":"modify","username":"modify"},"states":{"default":{"_id":true,"isVerified":true},"modify":{"email":true,"password":true,"role":true,"username":true},"require":{}}}},"_doc":{"_id":"6543b5cc442a045f6ba8e953","email":"ppsxius4@example.com","isVerified":false,"password":"$2a$12$ae5QElXlz7nvLvI4.zUlWexnf6zdFeuy2AEnVyxfKSKTuIbeSsL4e","role":"user","username":"2ROQNSpY"},"level":"info","message":"New User:"}
+{"level":"info","message":"Email successfully sent to ppsxius4@example.com"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"level":"info","message":"error from authRoutes EMAIL_NOT_VERIFIED","name":"EMAIL_NOT_VERIFIED","stack":"EMAIL_NOT_VERIFIED: EMAIL_NOT_VERIFIED\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:35:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:233:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:35:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:240:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)","statusCode":401}
+{"level":"info","message":"Email successfully sent to ppsxius4@example.com"}
+{"level":"info","message":"New client connected: gAbUtilhbo0wU6LOAAAZ"}
+{"level":"info","message":"Client disconnected: gAbUtilhbo0wU6LOAAAZ"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: SoapppsUD8zVkc3cAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: F7_hZ8begv83VXDhAAAB"}
+{"level":"info","message":"New client connected: KhzaY_GLUQ5s4z_LAAAD"}
+{"level":"info","message":"Client disconnected: KhzaY_GLUQ5s4z_LAAAD"}
+{"$__":{"activePaths":{"paths":{"_id":"default","email":"modify","isVerified":"default","password":"modify","role":"modify","username":"modify"},"states":{"default":{"_id":true,"isVerified":true},"modify":{"email":true,"password":true,"role":true,"username":true},"require":{}}}},"_doc":{"_id":"6543b75d7b7589fedb1b30a8","email":"g9fcqs77@example.com","isVerified":false,"password":"$2a$12$5/1BS2BdsDyCuWRX18Lb8egITTNcXQ2JZcLLEOjfjKdJxn8C7unN.","role":"user","username":"rtlyeMEz"},"level":"info","message":"New User:"}
+{"level":"info","message":"Email successfully sent to g9fcqs77@example.com"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"level":"info","message":"error from authRoutes EMAIL_NOT_VERIFIED","name":"EMAIL_NOT_VERIFIED","stack":"EMAIL_NOT_VERIFIED: EMAIL_NOT_VERIFIED\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:35:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:233:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:35:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:240:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)","statusCode":401}
+{"level":"info","message":"Email successfully sent to g9fcqs77@example.com"}
+{"level":"info","message":"New client connected: E_d1bOenX9QH4QrxAAAF"}
+{"level":"info","message":"Client disconnected: E_d1bOenX9QH4QrxAAAF"}
+{"level":"info","message":"Connected to database: BoilerPlateSvelteKitDB"}
+{"level":"info","message":"Collections found: users, emailverificationtokens, blacklistedtokens, greetings"}
+{"level":"info","message":"Cleared collection: users, documents deleted: 3"}
+{"level":"info","message":"Cleared collection: emailverificationtokens, documents deleted: 0"}
+{"level":"info","message":"Cleared collection: blacklistedtokens, documents deleted: 1"}
+{"level":"info","message":"Cleared collection: greetings, documents deleted: 0"}
+{"level":"info","message":"Default users inserted, count: 2"}
+{"level":"info","message":"MongoClient connection closed"}

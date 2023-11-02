@@ -7,23 +7,36 @@ dotenv.config();
 const dbName = process.env.DATABASE_NAME;
 
 async function clearDB() {
-  const client = new MongoClient(process.env.MONGO_ONLINE as string);
+  const mongoOnlineUri = process.env.MONGO_ONLINE;
+  if (!mongoOnlineUri) {
+    logger.error('MongoDB URI is not defined in the environment variables.');
+    return;
+  }
+
+  const client = new MongoClient(mongoOnlineUri);
 
   try {
     await client.connect();
+    logger.info(`Connected to database: ${dbName}`);
+
     const db = client.db(dbName);
     const collections = await db.collections();
 
+    logger.info(
+      `Collections found: ${collections
+        .map((c) => c.collectionName)
+        .join(', ')}`,
+    );
+
     for (const collection of collections) {
-      await collection.deleteMany({});
+      const deleteResult = await collection.deleteMany({});
+      logger.info(
+        `Cleared collection: ${collection.collectionName}, documents deleted: ${deleteResult.deletedCount}`,
+      );
     }
 
-    // Using Winston for logging
-    logger.info('Database cleared');
-
-    // INSERTING BASE DATA FOR USERS
     const usersCollection = db.collection('users');
-    await usersCollection.insertMany([
+    const insertResult = await usersCollection.insertMany([
       {
         _id: new ObjectId('6535292976d3db78fbc95f3e'),
         username: 'Admin',
@@ -44,16 +57,18 @@ async function clearDB() {
         role: 'user',
         __v: 0,
       },
-      // ... other users
     ]);
 
-    // Using Winston for logging
-    logger.info('Default users inserted');
+    logger.info(`Default users inserted, count: ${insertResult.insertedCount}`);
   } catch (err) {
-    // Using Winston for error logging
-    logger.error(err);
+    if (err instanceof Error) {
+      logger.error(`Error clearing database: ${err.message}`);
+    } else {
+      logger.error('An unexpected error occurred');
+    }
   } finally {
     await client.close();
+    logger.info('MongoClient connection closed');
   }
 }
 
