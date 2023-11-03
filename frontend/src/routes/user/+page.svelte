@@ -6,9 +6,9 @@
 	import { sendEmailResetPassword } from '$api/auth.js';
 
 	let userData: any;
-	let username = '';
-	let email = '';
-	let role = '';
+	let username: string = '';
+	let email: string = '';
+	let role: string = '';
 	let isVerified = false;
 
 	const handleUpdate = async () => {
@@ -52,8 +52,8 @@
 				<label for="email">Email</label>
 				<input id="email" type="email" bind:value={email} />
 				<button on:click={handlePasswordReset}>Réinitialiser le mot de passe</button>
-				<label for="role">Role</label>
-				<input id="role" type="text" value={role} onlyRead />
+
+				<p><label for="role">Role</label>: {role}</p>
 				<label for="isVerified">Is Verified</label>
 				<input id="isVerified" type="checkbox" checked={isVerified} disabled />
 				<button on:click={handleUpdate}>Mettre à jour</button>

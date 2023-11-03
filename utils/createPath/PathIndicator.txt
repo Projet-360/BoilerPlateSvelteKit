@@ -52,8 +52,11 @@ C:\wamp64\www\BoilerPlateSvelteKit\backend\jsdoc.json
 C:\wamp64\www\BoilerPlateSvelteKit\backend\package-lock.json
 C:\wamp64\www\BoilerPlateSvelteKit\backend\package.json
 C:\wamp64\www\BoilerPlateSvelteKit\backend\tsconfig.json
-C:\wamp64\www\BoilerPlateSvelteKit\backend\yarn-error.log
 C:\wamp64\www\BoilerPlateSvelteKit\frontend
+C:\wamp64\www\BoilerPlateSvelteKit\frontend\.github
+C:\wamp64\www\BoilerPlateSvelteKit\frontend\.github\workflows
+C:\wamp64\www\BoilerPlateSvelteKit\frontend\.github\workflows\lighthouse.yml
+C:\wamp64\www\BoilerPlateSvelteKit\frontend\.github\workflows\lighthouserc.json
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\.vscode
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\.vscode\settings.json
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src
@@ -197,7 +200,6 @@ C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\message\greetings.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\message\login.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\message\signup.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\message\updateUser.ts
-C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\constants.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\socket.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\app.d.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\app.html
@@ -227,10 +229,9 @@ C:\wamp64\www\BoilerPlateSvelteKit\frontend\tests\components\fillField.js
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\tests\utils
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\tests\utils\functionUtils.js
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\.babelrc
+C:\wamp64\www\BoilerPlateSvelteKit\frontend\.env
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\.eslintignore
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\.eslintrc.js
-C:\wamp64\www\BoilerPlateSvelteKit\frontend\.gitattributes
-C:\wamp64\www\BoilerPlateSvelteKit\frontend\.gitignore
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\.npmrc
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\.prettierignore
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\.prettierrc
@@ -238,9 +239,9 @@ C:\wamp64\www\BoilerPlateSvelteKit\frontend\jsconfig.json
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\package-lock.json
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\package.json
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\playwright.config.ts
+C:\wamp64\www\BoilerPlateSvelteKit\frontend\README.md
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\svelte.config.js
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\tsconfig.json
-C:\wamp64\www\BoilerPlateSvelteKit\frontend\vercel.json
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\vite.config.ts
 C:\wamp64\www\BoilerPlateSvelteKit\utils
 C:\wamp64\www\BoilerPlateSvelteKit\utils\createPath
@@ -254,6 +255,8 @@ C:\wamp64\www\BoilerPlateSvelteKit\utils\mail\start-mailhog.bat
 C:\wamp64\www\BoilerPlateSvelteKit\utils\chatGPT.txt
 C:\wamp64\www\BoilerPlateSvelteKit\utils\infos.txt
 C:\wamp64\www\BoilerPlateSvelteKit\utils\socket.io
-C:\wamp64\www\BoilerPlateSvelteKit\.env
+C:\wamp64\www\BoilerPlateSvelteKit\.gitattributes
+C:\wamp64\www\BoilerPlateSvelteKit\.gitignore
+C:\wamp64\www\BoilerPlateSvelteKit\package-lock.json
 C:\wamp64\www\BoilerPlateSvelteKit\package.json
 C:\wamp64\www\BoilerPlateSvelteKit\README.md

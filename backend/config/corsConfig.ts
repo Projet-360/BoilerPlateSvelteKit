@@ -2,7 +2,7 @@ import { CorsOptions } from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const allowedOrigins = [process.env.URL_FRONT_LOCAL];
+const allowedOrigins = [process.env.URL_FRONT_LOCAL, process.env.URL_FRONT];
 
 const corsConfig: CorsOptions = {
   origin: function (

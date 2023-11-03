@@ -219,6 +219,7 @@ export async function updateUser(userId: string, updateData: User) {
 			url: `${import.meta.env.VITE_URL_BACK}/auth/admin/user/${userId}`,
 			method: 'PUT',
 			headers: headers,
+			credentials: 'include',
 			body: updateData
 		});
 

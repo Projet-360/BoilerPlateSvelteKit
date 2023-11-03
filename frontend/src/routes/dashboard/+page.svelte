@@ -33,6 +33,7 @@
 
 	async function handleUpdateUser(userId: string): Promise<void> {
 		const userToUpdate = users.find((user) => user._id === userId);
+		console.log(userToUpdate);
 
 		if (!userToUpdate) {
 			console.error('Utilisateur à mettre à jour introuvable');
