@@ -163,3 +163,6 @@
 {"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
 {"level":"info","message":"Server running on port 2000"}
 {"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: GWh2KV03sznlSRlJAAAB"}
+{"level":"info","message":"Greeting sent from client: GWh2KV03sznlSRlJAAAB"}
+{"level":"info","message":"Client disconnected: GWh2KV03sznlSRlJAAAB"}
