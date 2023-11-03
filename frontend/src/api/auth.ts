@@ -228,7 +228,7 @@ export async function updateUser(userId: string, updateData: User) {
 		} else {
 			throw new Error("Erreur lors de la mise à jour de l'utilisateur");
 		}
-	} catch (error) {
-		throw error;
+	} catch (error: any) {
+		signupValidation(error, $t);
 	}
 }

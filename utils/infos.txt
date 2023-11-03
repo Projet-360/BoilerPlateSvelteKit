@@ -77,17 +77,7 @@
 
     #A FAIRE
     
-    intégrer 0Auth
 
-
-    améliorer les handleError pour moins se repeter et avoir un flux plus simple
-    Faire les tests pour les roles et langue, accès, greetings
-
-    intégrer les contraintes sur la partie admin et vérifier Rendre le code propre
-    mettre la lang dans local storage
-    savoir comment faire pour améliorer la gestion des documents Langues
-    Si un token a était envoyer ne pas donner un autre // Changement de mot de passe email
-    gerer les token invalide
 
 
     PWA
@@ -119,46 +109,3 @@
     Chargement progressif d'images (Lazy Loading): Cela permettra de charger les images uniquement lorsqu'elles seront visibles à l'écran, ce qui améliorera les performances.
 
     Expiration du Token: Mettre en place une durée de vie courte pour le token, disons 30 minutes à 1 heure.
-
-    
-
-
-
-
-backend
-MONGO_ONLINE=mongodb+srv://pierrefabiendev:2Yt0dDpR05onq9UG@mongosveltekit.csdduve.mongodb.net/
-MONGO_LOCAL=mongodb://localhost:27018/BoilerPlateSvelteKitDB
-DATABASE_NAME=BoilerPlateSvelteKitDB
-TOKEN_EXPIRY=1
-VERIFICATION_EXPIRY_HOURS=1h
-URL_FRONT=http://127.0.0.1:1000
-URL_FRONT_LOCAL=http://localhost:1000
-URL_BACK=http://localhost:2000
-PORT: 2000
-SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
-MAIL_HOST=localhost
-MAIL_PORT: 1025
-EMAIL_USER=no_reply@SvelteKit.com
-EMAIL_PASSWORD=passwordTest
-MAIL_SERVER=no_reply@SvelteKit.com
-NODE_ENV=dev
-DB_ENV=atlas
-
-
-frontend:
-VITE_MONGO_ONLINE=mongodb+srv://pierrefabiendev:2Yt0dDpR05onq9UG@mongosveltekit.csdduve.mongodb.net/
-VITE_MONGO_LOCAL=mongodb://localhost:27018/BoilerPlateSvelteKitDB
-VITE_DATABASE_NAME=BoilerPlateSvelteKitDB
-VITE_TOKEN_EXPIRY=1
-VITE_URL_FRONT=http://127.0.0.1:1000
-VITE_URL_FRONT_LOCAL=http://localhost:1000
-VITE_URL_BACK=http://localhost:2000
-VITE_PORT: 2000
-VITE_SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
-VITE_MAIL_HOST=localhost
-VITE_MAIL_PORT: 1025
-VITE_EMAIL_USER=no_reply@SvelteKit.com
-VITE_EMAIL_PASSWORD=passwordTest
-VITE_MAIL_SERVER=no_reply@SvelteKit.com
-VITE_NODE_ENV=dev
-VITE_DB_ENV=atlas

@@ -86,7 +86,6 @@ Merci d'avoir pris le temps de lire ce README. J'attends vos retours avec impati
 
 
 env front: 
-VITE_MONGO_ONLINE=mongodb+srv://pierrefabiendev:2Yt0dDpR05onq9UG@mongosveltekit.csdduve.mongodb.net/
 VITE_URL_BACK=http://localhost:2000
 VITE_SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
 
@@ -104,3 +103,22 @@ EMAIL_USER=no_reply@SvelteKit.com
 EMAIL_PASSWORD=passwordTest
 MAIL_SERVER=no_reply@SvelteKit.com
 NODE_ENV=dev
+
+
+A FAIRE:
+    intégrer 0Auth
+
+
+    améliorer les handleError pour moins se repeter et avoir un flux plus simple
+    Faire les tests pour les roles et langue, accès, greetings
+
+    intégrer les contraintes sur la partie admin et vérifier Rendre le code propre
+    mettre la lang dans local storage
+    savoir comment faire pour améliorer la gestion des documents Langues
+    Si un token a était envoyer ne pas donner un autre // Changement de mot de passe email
+    gerer les token invalide
+    
+-rendre le notification generale ...genre un tableaux sur toute les possibilités
+-Faire les messages coté admin et user de notification
+-faire les tests coté admin et user
+-Mettre en ligne l'app
