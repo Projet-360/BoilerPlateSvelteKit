@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { getAllUsers, updateUser } from '$api/auth.js'; // Remplacez par le bon chemin
+	import { getAllUsers, updateUser } from '$api/auth.js'; // Assurez-vous que le chemin est correct.
 	import notificationStore from '$stores/notificationStore';
 	import { t } from '$UITools/Translations';
 
@@ -9,8 +9,8 @@
 
 	function fetchUsers(): void {
 		getAllUsers()
-			.then((fetchedUsers: User[]) => {
-				users = fetchedUsers;
+			.then((fetchedUsers: App.User[]) => {
+				users = fetchedUsers.filter((user) => user != null);
 			})
 			.catch((error: Error) => {
 				console.error('Erreur lors de la récupération des utilisateurs:', error);
@@ -19,12 +19,12 @@
 
 	onMount(async () => {
 		try {
-			const isAuthenticated: boolean = true; // Remplacez par votre logique d'authentification
+			const isAuthenticated: boolean = true;
 
 			if (!isAuthenticated) {
 				goto('/login');
 			} else {
-				fetchUsers();
+				await fetchUsers();
 			}
 		} catch (error: any) {
 			console.error('Error:', error);
@@ -32,24 +32,23 @@
 	});
 
 	async function handleUpdateUser(userId: string): Promise<void> {
-		const userToUpdate = users.find((user) => user._id === userId);
-		console.log(userToUpdate);
-
+		const userToUpdate = users.find((user) => user?._id === userId);
 		if (!userToUpdate) {
 			console.error('Utilisateur à mettre à jour introuvable');
 			return;
 		}
 
 		try {
-			// Mettez à jour le type retourné par updateUser
 			const { user, notification } = await updateUser(userId, userToUpdate, $t);
 
-			const index: number = users.findIndex((user) => user._id === userId);
-			users[index] = user;
-			notificationStore.addNotification(
-				`Utilisateur mis à jour avec succès ${notification}`,
-				'success'
-			);
+			const index = users.findIndex((u) => u._id === userId);
+			if (index !== -1) {
+				users[index] = user;
+				notificationStore.addNotification(
+					`Utilisateur mis à jour avec succès ${notification}`,
+					'success'
+				);
+			}
 		} catch (error: any) {
 			console.error('Error:', error);
 		}

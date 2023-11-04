@@ -1,5 +1,5 @@
 import { apiCall } from '$api/utils/apiCall';
-import { greetingsValidation } from '$message/greetings';
+import { greetingsValidation } from '$modelNotifications/greetings';
 
 export async function sendGreeting(
 	name: string,

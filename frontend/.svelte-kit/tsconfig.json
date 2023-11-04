@@ -13,11 +13,11 @@
 			"$components/*": [
 				"../src/components/*"
 			],
-			"$message": [
-				"../src/utils/message"
+			"$modelNotifications": [
+				"../src/api/modelNotifications"
 			],
-			"$message/*": [
-				"../src/utils/message/*"
+			"$modelNotifications/*": [
+				"../src/api/modelNotifications/*"
 			],
 			"$utils": [
 				"../src/utils"

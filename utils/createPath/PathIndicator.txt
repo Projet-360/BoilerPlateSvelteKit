@@ -35,13 +35,12 @@ C:\wamp64\www\BoilerPlateSvelteKit\backend\services\redisClient.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\services\socket.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\test
 C:\wamp64\www\BoilerPlateSvelteKit\backend\test\authRoutes.test.js
-C:\wamp64\www\BoilerPlateSvelteKit\backend\TypeScript
-C:\wamp64\www\BoilerPlateSvelteKit\backend\TypeScript\interfaces.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\validations
 C:\wamp64\www\BoilerPlateSvelteKit\backend\validations\validators.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\.env
 C:\wamp64\www\BoilerPlateSvelteKit\backend\.eslintrc.cjs
 C:\wamp64\www\BoilerPlateSvelteKit\backend\.prettierrc.cjs
+C:\wamp64\www\BoilerPlateSvelteKit\backend\app.d.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\blacklistedTokens.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\clear-db.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\combined.log
@@ -204,7 +203,6 @@ C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\socket.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\app.d.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\app.html
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\hooks.server.ts
-C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\typescript.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\static
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\static\pwa
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\static\pwa\favicon
@@ -254,7 +252,6 @@ C:\wamp64\www\BoilerPlateSvelteKit\utils\mail\MailHog_windows_amd64.exe
 C:\wamp64\www\BoilerPlateSvelteKit\utils\mail\start-mailhog.bat
 C:\wamp64\www\BoilerPlateSvelteKit\utils\chatGPT.txt
 C:\wamp64\www\BoilerPlateSvelteKit\utils\infos.txt
-C:\wamp64\www\BoilerPlateSvelteKit\utils\socket.io
 C:\wamp64\www\BoilerPlateSvelteKit\.gitattributes
 C:\wamp64\www\BoilerPlateSvelteKit\.gitignore
 C:\wamp64\www\BoilerPlateSvelteKit\package-lock.json

@@ -300,7 +300,8 @@
     "imports": [
       "_index2.js",
       "_auth.js",
-      "_notificationStore.js"
+      "_notificationStore.js",
+      "_index.js"
     ],
     "isEntry": true,
     "src": "src/routes/dashboard/+page.svelte"

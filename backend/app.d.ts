@@ -1,24 +1,26 @@
 // app.d.ts
+import mongoose from 'mongoose';
 
-declare namespace App {
-  interface IUser extends mongoose.Document {
-    _id: string;
-    username: string;
-    email: string;
-    password: string;
-    isVerified?: boolean;
-    resetToken?: string;
-    resetTokenExpiration?: Date;
-    role?: 'user' | 'admin' | 'moderator';
-    save(
-      options?: mongoose.SaveOptions,
-      fn?: (err: any, product: this) => void,
-    ): Promise<this>;
+// Enlevez l'importation mongoose d'ici
+declare global {
+  namespace App {
+    interface IUser extends mongoose.Document {
+      _id: mongoose.Schema.Types.ObjectId;
+      username: string;
+      email: string;
+      password: string;
+      isVerified?: boolean;
+      resetToken?: string;
+      resetTokenExpiration?: Date;
+      role?: 'user' | 'admin' | 'moderator';
+      // ... autres méthodes et propriétés
+    }
+  }
+
+  namespace Express {
+    interface Request {
+      user?: App.IUser;
+    }
   }
 }
-
-declare namespace Express {
-  interface Request {
-    user?: App.IUser;
-  }
-}
+// Pas besoin d'exporter quoi que ce soit ici

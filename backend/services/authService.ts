@@ -9,7 +9,7 @@ import dotenv from 'dotenv';
 
 import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
 
-import User from '../models/UserModel.js';
+import { User } from '../models/UserModel.js';
 import EmailVerificationToken from '../models/EmailVerificationTokenModel.js';
 import BlacklistedToken from '../models/BlacklistedTokenModel.js';
 
@@ -150,9 +150,8 @@ export const createUser = async (
   email: string,
   hashedPassword: string,
   role: string,
-) => {
+): Promise<App.IUser> => {
   const newUser = new User({ username, email, password: hashedPassword, role });
-  logger.info('New User:', newUser);
   await newUser.save();
   return newUser;
 };

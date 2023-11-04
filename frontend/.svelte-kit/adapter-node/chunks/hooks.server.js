@@ -12,6 +12,7 @@ async function verifyToken(token) {
 }
 async function handle({ event, resolve }) {
   const cookies = event.cookies.get("token");
+  console.log("cookie from hook", cookies);
   if (cookies) {
     const user = await verifyToken(cookies);
     console.log(user);

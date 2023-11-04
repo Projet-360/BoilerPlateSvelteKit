@@ -9,7 +9,9 @@ async function load({ locals }) {
       }
     };
   }
-  throw redirect(307, "/");
+  if (!user) {
+    throw redirect(307, "/");
+  }
 }
 export {
   load

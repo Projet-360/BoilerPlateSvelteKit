@@ -51,7 +51,7 @@ export default defineConfig({
 			// this will match a file
 			$db: 'src/db',
 			$components: 'src/components',
-			$message: 'src/utils/message',
+			$modelNotifications: 'src/api/modelNotifications',
 			$utils: 'src/utils',
 			$stores: 'src/stores',
 			$UITools: 'src/UITools',

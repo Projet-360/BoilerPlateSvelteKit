@@ -5,9 +5,9 @@ import { handleRoleRedirection } from '$utils/auth/handleRoleRedirection.js';
 import { authStore } from '$stores/authStore';
 
 import notificationStore from '$stores/notificationStore';
-import { loginValidation } from '$utils/message/login.js';
-import { signupValidation } from '$utils/message/signup.js';
-import { EmailresetPasswordValidation } from '$utils/message/EmailresetPasswordValidation.js';
+import { loginValidation } from '$modelNotifications/login';
+import { signupValidation } from '$modelNotifications/signup';
+import { EmailresetPasswordValidation } from '$api/modelNotifications/EmailresetPasswordValidation.js';
 
 import { goto } from '$app/navigation';
 import { logout } from '$utils/auth/logout.js';
@@ -183,6 +183,7 @@ export const updateUserInfo = async (userInfo: App.UserInfo, $t: App.Translation
 			throw new Error($t('validation.UPDATE_FAILURE'));
 		}
 	} catch (error) {
+		signupValidation(error, $t);
 		throw error;
 	}
 };

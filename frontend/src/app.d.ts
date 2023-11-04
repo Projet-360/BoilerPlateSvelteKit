@@ -16,6 +16,12 @@ declare namespace App {
 		email: string;
 	}
 
+	interface UserSave {
+		username: string;
+		email: string;
+		role: string;
+	}
+
 	interface User {
 		_id: string;
 		username: string;

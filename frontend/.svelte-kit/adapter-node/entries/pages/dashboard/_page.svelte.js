@@ -1,8 +1,12 @@
-import { c as create_ssr_component, a as each, b as add_attribute } from "../../../chunks/index2.js";
+import { c as create_ssr_component, s as subscribe, a as each, b as add_attribute } from "../../../chunks/index2.js";
 import "../../../chunks/auth.js";
 import "../../../chunks/notificationStore.js";
+import { e as t } from "../../../chunks/index.js";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let $$unsubscribe_t;
+  $$unsubscribe_t = subscribe(t, (value) => value);
   let users = [];
+  $$unsubscribe_t();
   return `${$$result.head += `<!-- HEAD_svelte-jic9p0_START -->${$$result.title = `<title>exemple Page</title>`, ""}<meta name="description" content="meta description for about page."><!-- HEAD_svelte-jic9p0_END -->`, ""}
 
 <div class="page"><div class="page-container"><h1>Tableau de bord administrateur</h1>

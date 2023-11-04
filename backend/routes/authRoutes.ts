@@ -15,7 +15,7 @@ import { checkRole } from '../middlewares/checkRole.js';
 
 import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
 
-import User from '../models/UserModel.js';
+import { User } from '../models/UserModel.js';
 import BlacklistedToken from '../models/BlacklistedTokenModel.js';
 
 import * as authService from '../services/authService.js';
@@ -31,54 +31,64 @@ import {
 import CustomError from './../errors/CustomError.js';
 
 // Endpoint to check authentication status
-router.get('/check-auth', async (req, res, next) => {
-  // Retrieve token from cookies
-  const token = req.cookies.token;
+router.get(
+  '/check-auth',
+  async (req: Request, res: Response, next: NextFunction) => {
+    // Retrieve token from cookies
+    const token = req.cookies.token;
 
-  try {
-    // If no token is present, the user is not authenticated.
-    if (!token || token === 'undefined' || token === 'null') {
-      return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
+    try {
+      // If no token is present, the user is not authenticated.
+      if (!token || token === 'undefined' || token === 'null') {
+        return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
+      }
+
+      // Validate the token and get the authentication status
+      const result = await authService.checkAuthentication(token);
+
+      // Check if the user is authenticated
+      if (result.isAuthenticated) {
+        return res.status(HTTP_STATUS.OK).json({
+          isAuthenticated: true,
+          role: result.role,
+          _id: result._id,
+        });
+      } else {
+        // User is not authenticated, but no error should be thrown.
+        return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
+      }
+    } catch (error: any) {
+      console.error('JWT verification error:', error);
+      next(
+        new CustomError(
+          'CheckAuthError',
+          error.message,
+          HTTP_STATUS.BAD_REQUEST,
+        ),
+      );
     }
-
-    // Validate the token and get the authentication status
-    const result = await authService.checkAuthentication(token);
-
-    // Check if the user is authenticated
-    if (result.isAuthenticated) {
-      return res.status(HTTP_STATUS.OK).json({
-        isAuthenticated: true,
-        role: result.role,
-        _id: result._id,
-      });
-    } else {
-      // User is not authenticated, but no error should be thrown.
-      return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
-    }
-  } catch (error: any) {
-    console.error('JWT verification error:', error);
-    next(
-      new CustomError('CheckAuthError', error.message, HTTP_STATUS.BAD_REQUEST),
-    );
-  }
-});
+  },
+);
 
 // Endpoint to handle user logout
-router.get('/logout', async (req, res, next) => {
-  try {
-    const token = req.cookies.token;
-    const newBlacklistedToken = new BlacklistedToken({ token });
-    await newBlacklistedToken.save();
+router.get(
+  '/logout',
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const token = req.cookies.token;
+      const newBlacklistedToken = new BlacklistedToken({ token });
+      await newBlacklistedToken.save();
 
-    res.clearCookie('token');
-    res.status(200).json({ message: 'Déconnexion réussie' });
-  } catch (error: any) {
-    next(new CustomError('LogoutError', error.message, 400));
-  }
-});
+      res.clearCookie('token');
+      res.status(200).json({ message: 'Déconnexion réussie' });
+    } catch (error: any) {
+      next(new CustomError('LogoutError', error.message, 400));
+    }
+  },
+);
 
 // Endpoint to verify email
-router.get('/verify/:token', async (req, res) => {
+router.get('/verify/:token', async (req: Request, res: Response) => {
   try {
     const { token } = req.params;
 
@@ -109,8 +119,8 @@ router.post(
         hashedPassword,
         role,
       );
-      await authService.createSignupToken(newUser as App.IUser);
-      await authService.createVerificationToken(newUser as App.IUser);
+      await authService.createSignupToken(newUser);
+      await authService.createVerificationToken(newUser);
 
       res.status(HTTP_STATUS.OK).json({ success: true });
     } catch (error: any) {
@@ -121,26 +131,30 @@ router.post(
 );
 
 // Endpoint for user login with rate limiter
-router.post('/login', bruteForceRateLimiter, async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
-    const loginResult = await authService.login(email, password);
+router.post(
+  '/login',
+  bruteForceRateLimiter,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { email, password } = req.body;
+      const loginResult = await authService.login(email, password);
 
-    if (loginResult) {
-      const { token, _id, role } = loginResult;
-      // Définir le cookie
-      authService.setAuthCookie(res, token);
+      if (loginResult) {
+        const { token, _id, role } = loginResult;
+        // Définir le cookie
+        authService.setAuthCookie(res, token);
 
-      res.status(HTTP_STATUS.OK).json({ _id, role });
-    } else {
-      // Gérer le cas où le résultat de la connexion est indéfini
-      throw new Error('Login failed');
+        res.status(HTTP_STATUS.OK).json({ _id, role });
+      } else {
+        // Gérer le cas où le résultat de la connexion est indéfini
+        throw new Error('Login failed');
+      }
+    } catch (error: any) {
+      logger.info('error from authRoutes', error);
+      next(new CustomError('LoginError', error.message, 400));
     }
-  } catch (error: any) {
-    logger.info('error from authRoutes', error);
-    next(new CustomError('LoginError', error.message, 400));
-  }
-});
+  },
+);
 
 // Endpoint to request password reset
 router.post(
@@ -227,16 +241,25 @@ router.post(
 );
 
 // User dashboard accessible only for authenticated users with 'user' role
-router.get('/user', isAuthenticated, checkRole('user'), async (req, res) => {
-  const { _id } = req.user as { _id: string };
-  try {
-    const userInfo = await authService.getUserInfo(_id);
-    res.json({ userInfo });
-  } catch (error: any) {
-    console.error(error);
-    res.status(500).json({ message: error.message });
-  }
-});
+router.get(
+  '/user',
+  isAuthenticated,
+  checkRole('user'),
+  async (req: Request & { user?: App.IUser }, res: Response) => {
+    if (!req.user as any) {
+      return res.status(401).json({ message: 'User not authenticated' });
+    }
+
+    const _id = req.user!._id;
+    try {
+      const userInfo = await authService.getUserInfo(_id.toString());
+      res.json({ userInfo });
+    } catch (error: any) {
+      console.error(error);
+      res.status(500).json({ message: error.message });
+    }
+  },
+);
 
 router.put(
   '/user/update',
@@ -277,7 +300,7 @@ router.get(
   '/admin/users',
   isAuthenticated,
   checkRole('admin'),
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     try {
       const users = await authService.getAllUsers(); // Vous devrez implémenter cette méthode
       res.status(HTTP_STATUS.OK).json({ users });
