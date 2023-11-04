@@ -1,12 +1,11 @@
 import { apiCall } from '$api/utils/apiCall';
 import { greetingsValidation } from '$message/greetings';
-import type { TranslationFunction } from '../typescript';
 
 export async function sendGreeting(
 	name: string,
 	message: string,
 	editingId: string | null = null,
-	$t: TranslationFunction
+	$t: App.TranslationFunction
 ) {
 	try {
 		const url = editingId

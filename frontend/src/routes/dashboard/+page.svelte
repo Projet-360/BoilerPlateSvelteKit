@@ -3,9 +3,8 @@
 	import { goto } from '$app/navigation';
 	import { getAllUsers, updateUser } from '$api/auth.js'; // Remplacez par le bon chemin
 	import notificationStore from '$stores/notificationStore';
-	import type { User } from '../../typescript';
 
-	let users: User[] = [];
+	let users: App.User[] = [];
 
 	function fetchUsers(): void {
 		getAllUsers()

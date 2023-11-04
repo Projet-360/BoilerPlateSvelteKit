@@ -1,5 +1,3 @@
-import type { ApiCallOptions } from '../../../typescript';
-
 export async function apiCall({
 	url,
 	method = 'GET',
@@ -8,7 +6,7 @@ export async function apiCall({
 	credentials = null,
 	handleSuccess = null,
 	handleError = null
-}: ApiCallOptions): Promise<any> {
+}: App.ApiCallOptions): Promise<any> {
 	try {
 		// Initialise les options de la requête
 		const options: RequestInit = {

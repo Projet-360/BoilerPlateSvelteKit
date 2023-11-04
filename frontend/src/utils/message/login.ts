@@ -1,7 +1,6 @@
 import notificationStore from '$stores/notificationStore';
-import type { TranslationFunction } from '../../typescript';
 
-export const loginValidation = (error: any, $t: TranslationFunction) => {
+export const loginValidation = (error: any, $t: App.TranslationFunction) => {
 	let errorMessage;
 	console.log(error.message);
 

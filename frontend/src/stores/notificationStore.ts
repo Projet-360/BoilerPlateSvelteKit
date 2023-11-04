@@ -1,12 +1,11 @@
 import { writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
-import type { Notification } from '../typescript';
 
 // Structure initiale du store
-const initialNotifications: Notification[] = [];
+const initialNotifications: App.Notification[] = [];
 
 // Création du store
-const notifications: Writable<Notification[]> = writable(initialNotifications);
+const notifications: Writable<App.Notification[]> = writable(initialNotifications);
 
 // Fonction pour ajouter une notification
 function addNotification(message: string, type: string): void {

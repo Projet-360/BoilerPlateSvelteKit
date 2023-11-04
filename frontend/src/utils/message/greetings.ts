@@ -1,7 +1,6 @@
 import notificationStore from '$stores/notificationStore';
-import type { TranslationFunction } from '../../typescript';
 
-export const greetingsValidation = (error: any, $t: TranslationFunction) => {
+export const greetingsValidation = (error: any, $t: App.TranslationFunction) => {
 	let errorMessages = [];
 
 	// Gérer le format de l'erreur

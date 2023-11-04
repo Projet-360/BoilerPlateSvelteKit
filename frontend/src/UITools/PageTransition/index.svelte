@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-	import type { AnimationOptions } from '../../typescript';
 
 	export let pathname = '';
 
-	let inAnimation: AnimationOptions;
-	let outAnimation: AnimationOptions;
+	let inAnimation: App.AnimationOptions;
+	let outAnimation: App.AnimationOptions;
 
 	$: {
 		switch (pathname) {

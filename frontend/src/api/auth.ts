@@ -12,12 +12,7 @@ import { EmailresetPasswordValidation } from '$utils/message/EmailresetPasswordV
 import { goto } from '$app/navigation';
 import { logout } from '$utils/auth/logout.js';
 
-import type { IAuthStore } from '../typescript';
-import type { UserInfo } from '../typescript';
-import type { User } from '../typescript';
-import type { TranslationFunction } from '../typescript';
-
-let currentState: IAuthStore;
+let currentState: App.IAuthStore;
 
 authStore.subscribe((state) => {
 	currentState = state;
@@ -40,7 +35,7 @@ export async function checkAuth() {
 	} catch (error) {}
 }
 
-export async function login(email: string, password: string, $t: TranslationFunction) {
+export async function login(email: string, password: string, $t: App.TranslationFunction) {
 	try {
 		const data = await apiCall({
 			url: `${import.meta.env.VITE_URL_BACK}/auth/login`,
@@ -165,7 +160,7 @@ export async function getDashboardData() {
 	}
 }
 
-export const updateUserInfo = async (userInfo: UserInfo, $t: TranslationFunction) => {
+export const updateUserInfo = async (userInfo: App.UserInfo, $t: TranslationFunction) => {
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
@@ -212,7 +207,7 @@ export async function getAllUsers() {
 	}
 }
 
-export async function updateUser(userId: string, updateData: User) {
+export async function updateUser(userId: string, updateData: App.User) {
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
