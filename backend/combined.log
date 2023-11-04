@@ -223,3 +223,54 @@
 {"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
 {"level":"info","message":"Server running on port 2000"}
 {"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: 9PpE1AzwHICyHoDWAAAB"}
+{"level":"info","message":"Client disconnected: 9PpE1AzwHICyHoDWAAAB"}
+{"level":"info","message":"New client connected: 2Y5Sq0-DcTuLPQRIAAAD"}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:226:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"Email successfully sent to i4f8x9ks@example.com"}
+{"level":"info","message":"Email successfully sent to lolo@lolo.fr"}
+{"level":"info","message":"New client connected: qm_jQNMbxBG5Pjx-AAAG"}
+{"level":"info","message":"Connected to database: BoilerPlateSvelteKitDB"}
+{"level":"info","message":"Collections found: users, emailverificationtokens, blacklistedtokens, greetings"}
+{"level":"info","message":"Cleared collection: users, documents deleted: 4"}
+{"level":"info","message":"Cleared collection: emailverificationtokens, documents deleted: 2"}
+{"level":"info","message":"Cleared collection: blacklistedtokens, documents deleted: 0"}
+{"level":"info","message":"Cleared collection: greetings, documents deleted: 0"}
+{"level":"info","message":"Default users inserted, count: 2"}
+{"level":"info","message":"MongoClient connection closed"}
+{"level":"info","message":"Client disconnected: qm_jQNMbxBG5Pjx-AAAG"}
+{"level":"info","message":"New client connected: -Njwip5O0Vy9n_OCAAAI"}
+{"level":"info","message":"Client disconnected: -Njwip5O0Vy9n_OCAAAI"}
+{"level":"info","message":"New client connected: 3VNVdIDR3Seo95UnAAAK"}
+{"level":"info","message":"New client connected: FlWs9CW0Qnv5QocsAAAM"}
+{"level":"info","message":"Client disconnected: FlWs9CW0Qnv5QocsAAAM"}
+{"level":"info","message":"Email successfully sent to ad7y0suc@example.com"}
+{"level":"info","message":"New client connected: I_pHKAP8PApdFpf5AAAO"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"level":"info","message":"error from authRoutes EMAIL_NOT_VERIFIED","name":"EMAIL_NOT_VERIFIED","stack":"EMAIL_NOT_VERIFIED: EMAIL_NOT_VERIFIED\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:231:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"New client connected: DUE4C1kwzBCn46FfAAAQ"}
+{"level":"info","message":"Client disconnected: DUE4C1kwzBCn46FfAAAQ"}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:238:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)","statusCode":401}
+{"level":"info","message":"New client connected: msEaifctCy8yE0gvAAAS"}
+{"level":"info","message":"Client disconnected: msEaifctCy8yE0gvAAAS"}
+{"level":"info","message":"Email successfully sent to ad7y0suc@example.com"}
+{"level":"info","message":"New client connected: LtJpG-zmUrYMkTM4AAAU"}
+{"level":"info","message":"Client disconnected: LtJpG-zmUrYMkTM4AAAU"}
+{"level":"info","message":"Client disconnected: I_pHKAP8PApdFpf5AAAO"}
+{"level":"info","message":"New client connected: IkjObZG6g1ZpZYosAAAW"}
+{"level":"info","message":"Client disconnected: IkjObZG6g1ZpZYosAAAW"}
+{"level":"info","message":"Client disconnected: 3VNVdIDR3Seo95UnAAAK"}
+{"level":"info","message":"New client connected: c-ctBxKQvbCzHAnpAAAY"}
+{"level":"info","message":"New client connected: dGTvmhPjcXfbBfOrAAAa"}
+{"level":"info","message":"Client disconnected: dGTvmhPjcXfbBfOrAAAa"}
+{"level":"info","message":"Email successfully sent to ey20cwm4@example.com"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"level":"info","message":"error from authRoutes EMAIL_NOT_VERIFIED","name":"EMAIL_NOT_VERIFIED","stack":"EMAIL_NOT_VERIFIED: EMAIL_NOT_VERIFIED\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:231:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:238:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)","statusCode":401}
+{"level":"info","message":"New client connected: yjQ-2RFlNN3nJXsQAAAc"}
+{"level":"info","message":"Client disconnected: yjQ-2RFlNN3nJXsQAAAc"}
+{"level":"info","message":"Email successfully sent to ey20cwm4@example.com"}
+{"level":"info","message":"New client connected: bX77IZTwjX6Oa9iLAAAe"}
+{"level":"info","message":"Client disconnected: bX77IZTwjX6Oa9iLAAAe"}
+{"level":"info","message":"New client connected: 10RdXbMm4jLfZMxnAAAg"}
+{"level":"info","message":"Client disconnected: 10RdXbMm4jLfZMxnAAAg"}
