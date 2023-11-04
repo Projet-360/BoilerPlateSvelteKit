@@ -106,13 +106,12 @@ NODE_ENV=dev
 
 
 A FAIRE:
-    intégrer 0Auth
+intégrer 0Auth
 
-    intégrer les contraintes sur la partie admin et vérifier Rendre le code propre
-    mettre la lang dans local storage
-    savoir comment faire pour améliorer la gestion des documents Langues
-    Si un token a était envoyer ne pas donner un autre // Changement de mot de passe email
-    gerer les token invalide
+mettre la lang dans local storage
+savoir comment faire pour améliorer la gestion des documents Langues
+Si un token a était envoyer ne pas donner un autre // Changement de mot de passe email
+gerer les token invalide
 
 -rendre le notification generale ...genre un tableaux sur toute les possibilités
 -Faire les messages coté admin et user de notification

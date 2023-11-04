@@ -306,3 +306,11 @@
 {"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
 {"level":"info","message":"Server running on port 2000"}
 {"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Connected to database: BoilerPlateSvelteKitDB"}
+{"level":"info","message":"Collections found: users, emailverificationtokens, blacklistedtokens, greetings"}
+{"level":"info","message":"Cleared collection: users, documents deleted: 5"}
+{"level":"info","message":"Cleared collection: emailverificationtokens, documents deleted: 1"}
+{"level":"info","message":"Cleared collection: blacklistedtokens, documents deleted: 4"}
+{"level":"info","message":"Cleared collection: greetings, documents deleted: 0"}
+{"level":"info","message":"Default users inserted, count: 2"}
+{"level":"info","message":"MongoClient connection closed"}

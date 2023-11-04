@@ -7,7 +7,8 @@
     "dev": "concurrently \"npm --prefix ./frontend run dev\" \"npm --prefix ./backend run dev\" \"start cmd.exe /K .\\utils\\mail\\start-mailhog.bat\"",
     "test": "npm --prefix ./frontend run test",
     "start-mailhog": "start cmd.exe /K .\\utils\\mail\\start-mailhog.bat",
-    "cleardb": "npm --prefix ./backend run cleardb"
+    "cleardb": "npm --prefix ./backend run cleardb",
+    "in": "cd backend && npm i && cd ../frontend && npm i"
   },
   "author": "",
   "license": "ISC",
