@@ -108,10 +108,6 @@ NODE_ENV=dev
 A FAIRE:
     intégrer 0Auth
 
-
-    améliorer les handleError pour moins se repeter et avoir un flux plus simple
-    Faire les tests pour les roles et langue, accès, greetings
-
     intégrer les contraintes sur la partie admin et vérifier Rendre le code propre
     mettre la lang dans local storage
     savoir comment faire pour améliorer la gestion des documents Langues

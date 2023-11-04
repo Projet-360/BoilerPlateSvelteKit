@@ -274,3 +274,31 @@
 {"level":"info","message":"Client disconnected: bX77IZTwjX6Oa9iLAAAe"}
 {"level":"info","message":"New client connected: 10RdXbMm4jLfZMxnAAAg"}
 {"level":"info","message":"Client disconnected: 10RdXbMm4jLfZMxnAAAg"}
+{"level":"info","message":"Client disconnected: c-ctBxKQvbCzHAnpAAAY"}
+{"level":"info","message":"New client connected: 6h0pOUpabacU6URsAAAi"}
+{"level":"info","message":"New client connected: E3Pfbm_j02t3KCwxAAAk"}
+{"level":"info","message":"Client disconnected: E3Pfbm_j02t3KCwxAAAk"}
+{"level":"info","message":"Email successfully sent to 8y3mf7ky@example.com"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"level":"info","message":"error from authRoutes EMAIL_NOT_VERIFIED","name":"EMAIL_NOT_VERIFIED","stack":"EMAIL_NOT_VERIFIED: EMAIL_NOT_VERIFIED\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:231:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"New client connected: Frcs38UmXNPES4a6AAAm"}
+{"level":"info","message":"Client disconnected: Frcs38UmXNPES4a6AAAm"}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:238:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)","statusCode":401}
+{"level":"info","message":"New client connected: jK63qVH_UoFor2-gAAAo"}
+{"level":"info","message":"Client disconnected: jK63qVH_UoFor2-gAAAo"}
+{"level":"info","message":"Email successfully sent to 8y3mf7ky@example.com"}
+{"level":"info","message":"New client connected: M5-06N9dcAPAOiUtAAAq"}
+{"level":"info","message":"Client disconnected: M5-06N9dcAPAOiUtAAAq"}
+{"level":"info","message":"Client disconnected: 6h0pOUpabacU6URsAAAi"}
+{"level":"info","message":"Client disconnected: 2Y5Sq0-DcTuLPQRIAAAD"}
+{"level":"info","message":"New client connected: B9csTS6yPgnT5mHiAAAs"}
+{"level":"info","message":"New client connected: g6oxezvx2pSmFYmTAAAu"}
+{"level":"info","message":"Client disconnected: g6oxezvx2pSmFYmTAAAu"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: dbxqtfltLPE8d8fyAAAB"}
+{"level":"info","message":"Client disconnected: dbxqtfltLPE8d8fyAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
