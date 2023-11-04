@@ -11,6 +11,8 @@
 	import App from '$lib/js/index';
 	import NotificationWrapper from '$UITools/Notifications/NotificationWrapper.svelte';
 
+	import { authStore } from '$stores/authStore.js';
+
 	export let data;
 
 	onMount(async () => {

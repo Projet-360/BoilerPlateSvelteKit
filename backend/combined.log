@@ -330,3 +330,21 @@
 {"level":"info","message":"Cleared collection: greetings, documents deleted: 0"}
 {"level":"info","message":"Default users inserted, count: 3"}
 {"level":"info","message":"MongoClient connection closed"}
+{"level":"info","message":"New client connected: _Q3fd8WiDCS3zivjAAAB"}
+{"level":"info","message":"New client connected: 3_1nDTumpohk28FyAAAD"}
+{"level":"info","message":"Client disconnected: 3_1nDTumpohk28FyAAAD"}
+{"level":"info","message":"New client connected: VzmNUTuz8iw0hXxhAAAF"}
+{"level":"info","message":"Client disconnected: VzmNUTuz8iw0hXxhAAAF"}
+{"level":"info","message":"New client connected: A7AFaXq-Oq0Rs75XAAAH"}
+{"level":"info","message":"Client disconnected: A7AFaXq-Oq0Rs75XAAAH"}
+{"level":"info","message":"Email successfully sent to chwqw1p0@example.com"}
+{"level":"info","message":"New client connected: FXDFCE46aAH_Q13BAAAJ"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"level":"info","message":"error from authRoutes EMAIL_NOT_VERIFIED","name":"EMAIL_NOT_VERIFIED","stack":"EMAIL_NOT_VERIFIED: EMAIL_NOT_VERIFIED\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:231:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"New client connected: o9Myr9wEJ_oCUvICAAAL"}
+{"level":"info","message":"Client disconnected: o9Myr9wEJ_oCUvICAAAL"}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:238:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)","statusCode":401}
+{"level":"info","message":"Email successfully sent to chwqw1p0@example.com"}
+{"level":"info","message":"New client connected: ba9hoE9sAe_IZ3HdAAAN"}
+{"level":"info","message":"Client disconnected: ba9hoE9sAe_IZ3HdAAAN"}
+{"level":"info","message":"Client disconnected: FXDFCE46aAH_Q13BAAAJ"}

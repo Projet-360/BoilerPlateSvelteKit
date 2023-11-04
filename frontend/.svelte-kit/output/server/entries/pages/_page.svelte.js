@@ -1,4 +1,4 @@
-import { c as create_ssr_component, o as onDestroy, b as add_attribute, s as subscribe, a as each, e as escape, j as compute_rest_props, k as createEventDispatcher, l as spread, p as escape_attribute_value, q as escape_object, v as validate_component } from "../../chunks/index2.js";
+import { c as create_ssr_component, o as onDestroy, a as add_attribute, s as subscribe, h as each, e as escape, j as compute_rest_props, k as createEventDispatcher, l as spread, p as escape_attribute_value, q as escape_object, v as validate_component } from "../../chunks/index2.js";
 import { e as t } from "../../chunks/index.js";
 import { io } from "socket.io-client";
 import { n as notificationStore } from "../../chunks/notificationStore.js";

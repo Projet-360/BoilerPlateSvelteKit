@@ -1,4 +1,4 @@
-import { c as create_ssr_component, s as subscribe, e as escape, b as add_attribute } from "../../../../chunks/index2.js";
+import { c as create_ssr_component, s as subscribe, e as escape, a as add_attribute } from "../../../../chunks/index2.js";
 import { p as page } from "../../../../chunks/stores.js";
 import { e as t } from "../../../../chunks/index.js";
 import "../../../../chunks/notificationStore.js";

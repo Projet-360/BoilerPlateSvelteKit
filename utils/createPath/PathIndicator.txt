@@ -60,6 +60,12 @@ C:\wamp64\www\BoilerPlateSvelteKit\frontend\.vscode
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\.vscode\settings.json
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api
+C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\modelNotifications
+C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\modelNotifications\EmailresetPasswordValidation.ts
+C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\modelNotifications\forgotPassword.ts
+C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\modelNotifications\greetings.ts
+C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\modelNotifications\login.ts
+C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\modelNotifications\signup.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\utils
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\utils\apiCall.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\auth.ts
@@ -192,13 +198,6 @@ C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\auth
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\auth\handleRoleRedirection.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\auth\logout.ts
-C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\message
-C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\message\EmailresetPasswordValidation.ts
-C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\message\forgotPassword.ts
-C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\message\greetings.ts
-C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\message\login.ts
-C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\message\signup.ts
-C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\message\updateUser.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\utils\socket.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\app.d.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\app.html

@@ -1,5 +1,5 @@
 import { w as writable, d as derived } from "./index4.js";
-import { f as get_store_value } from "./index2.js";
+import { d as get_store_value } from "./index2.js";
 import C$1 from "@sveltekit-i18n/parser-default";
 var H = Object.defineProperty, q = Object.defineProperties;
 var B = Object.getOwnPropertyDescriptors;

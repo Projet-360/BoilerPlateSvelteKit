@@ -1,4 +1,4 @@
-import { c as create_ssr_component, s as subscribe, b as add_attribute, e as escape } from "../../../chunks/index2.js";
+import { c as create_ssr_component, s as subscribe, a as add_attribute, e as escape } from "../../../chunks/index2.js";
 import "../../../chunks/auth.js";
 import { e as t } from "../../../chunks/index.js";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
