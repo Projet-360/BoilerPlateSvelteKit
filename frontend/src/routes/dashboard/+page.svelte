@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { getAllUsers, updateUser } from '$api/auth.js'; // Remplacez par le bon chemin
 	import notificationStore from '$stores/notificationStore';
+	import { t } from '$UITools/Translations';
 
 	let users: App.User[] = [];
 
@@ -41,11 +42,14 @@
 
 		try {
 			// Mettez à jour le type retourné par updateUser
-			const { user, notification } = await updateUser(userId, userToUpdate);
+			const { user, notification } = await updateUser(userId, userToUpdate, $t);
 
 			const index: number = users.findIndex((user) => user._id === userId);
 			users[index] = user;
-			notificationStore.addNotification('Utilisateur mis à jour avec succès', 'success');
+			notificationStore.addNotification(
+				`Utilisateur mis à jour avec succès ${notification}`,
+				'success'
+			);
 		} catch (error: any) {
 			console.error('Error:', error);
 		}

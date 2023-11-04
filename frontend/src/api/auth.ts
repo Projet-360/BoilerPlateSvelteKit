@@ -67,7 +67,7 @@ export async function signup(
 	username: string,
 	email: string,
 	password: string,
-	$t: TranslationFunction
+	$t: App.TranslationFunction
 ) {
 	try {
 		const response = await apiCall({
@@ -87,7 +87,7 @@ export async function signup(
 	}
 }
 
-export async function verifyToken(token: string, $t: TranslationFunction) {
+export async function verifyToken(token: string, $t: App.TranslationFunction) {
 	try {
 		const response = await fetch(`${import.meta.env.VITE_URL_BACK}/auth/verify/${token}`);
 		if (response.ok) {
@@ -97,7 +97,7 @@ export async function verifyToken(token: string, $t: TranslationFunction) {
 	} catch (error) {}
 }
 
-export async function sendEmailResetPassword(email: string, $t: TranslationFunction) {
+export async function sendEmailResetPassword(email: string, $t: App.TranslationFunction) {
 	try {
 		const data = await apiCall({
 			url: `${import.meta.env.VITE_URL_BACK}/auth/forgot-password`,
@@ -120,7 +120,7 @@ export async function ResetForgotNewPassword(
 	token: string,
 	newPassword: string,
 	confirmPassword: string,
-	$t: TranslationFunction
+	$t: App.TranslationFunction
 ) {
 	try {
 		const response = await fetch(`${import.meta.env.VITE_URL_BACK}/auth/forgot-password/${token}`, {
@@ -160,7 +160,7 @@ export async function getDashboardData() {
 	}
 }
 
-export const updateUserInfo = async (userInfo: App.UserInfo, $t: TranslationFunction) => {
+export const updateUserInfo = async (userInfo: App.UserInfo, $t: App.TranslationFunction) => {
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
@@ -207,7 +207,11 @@ export async function getAllUsers() {
 	}
 }
 
-export async function updateUser(userId: string, updateData: App.User) {
+export async function updateUser(
+	userId: string,
+	updateData: App.User,
+	$t: App.TranslationFunction
+) {
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
@@ -225,5 +229,6 @@ export async function updateUser(userId: string, updateData: App.User) {
 		}
 	} catch (error: any) {
 		signupValidation(error, $t);
+		return { success: false, user: null, notification: 'Une erreur est survenue' };
 	}
 }

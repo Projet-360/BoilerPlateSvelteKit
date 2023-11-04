@@ -118,7 +118,6 @@ A FAIRE:
     Si un token a était envoyer ne pas donner un autre // Changement de mot de passe email
     gerer les token invalide
 
--corriger les affections typescript pour app.data.ts    
 -rendre le notification generale ...genre un tableaux sur toute les possibilités
 -Faire les messages coté admin et user de notification
 -faire les tests coté admin et user

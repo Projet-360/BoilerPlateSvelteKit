@@ -1,8 +1,8 @@
 import notificationStore from '$stores/notificationStore';
 type TranslationFunction = (key: string, options?: any) => string;
 
-export const signupValidation = (error, $t: App.TranslationFunction) => {
-	let errorMessages = [];
+export const signupValidation = (error: any, $t: App.TranslationFunction) => {
+	let errorMessages: any = [];
 
 	// Gérer le format de l'erreur
 	if (typeof error === 'string') {
@@ -14,7 +14,7 @@ export const signupValidation = (error, $t: App.TranslationFunction) => {
 	}
 
 	// Itération sur chaque message d'erreur
-	errorMessages.forEach((errorMsg) => {
+	errorMessages.forEach((errorMsg: string) => {
 		let errorMessage;
 		switch (errorMsg.trim()) {
 			case 'EMAIL_EXIST':
