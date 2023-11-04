@@ -302,3 +302,7 @@
 {"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
 {"level":"info","message":"Server running on port 2000"}
 {"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Email successfully sent to 8y3mf7ky@example.com"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}

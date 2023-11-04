@@ -448,6 +448,14 @@ export const updateUserInfo = async (_id: string, updateData: any) => {
       notification = 'MAIL_CHANGED';
     }
 
+    if (updateData.username && currentUser.username !== updateData.username) {
+      notification = 'NAME_CHANGED';
+    }
+
+    if (updateData.role && currentUser.role !== updateData.role) {
+      notification = 'ROLE_CHANGED';
+    }
+
     const updatedUser = await User.findByIdAndUpdate(_id, updateData, {
       new: true,
       runValidators: true,
