@@ -4,14 +4,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-declare global {
-  namespace Express {
-    interface Request {
-      user?: JwtPayload;
-    }
-  }
-}
-
 export const isAuthenticated = (
   req: Request,
   res: Response,
@@ -32,7 +24,7 @@ export const isAuthenticated = (
         return res.status(401).json({ error: 'Invalid token' });
       }
 
-      req.user = decoded as JwtPayload;
+      req.user = decoded as App.IUser;
       next();
     },
   );

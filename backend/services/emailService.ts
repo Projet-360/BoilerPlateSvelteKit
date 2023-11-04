@@ -1,7 +1,6 @@
 // Import required modules and configurations
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
-import { IUser } from './../TypeScript/interfaces.js';
 import logger from './logger.js';
 
 dotenv.config();
@@ -79,12 +78,12 @@ export const sendVerificationEmail = async (email: string, token: string) => {
  * Send a password reset link via email.
  *
  * @async
- * @param {IUser} user - The user IUser containing at least the email address.
+ * @param {App.IUser} user - The user App.IUser containing at least the email address.
  * @param {string} resetToken - The reset password token.
  * @throws Will throw an error if the email sending fails.
  */
 export const sendResetPasswordEmail = async (
-  user: IUser,
+  user: App.IUser,
   resetToken: string,
 ) => {
   const url = `${process.env.URL_FRONT_LOCAL}/forgot-password/${resetToken}`;

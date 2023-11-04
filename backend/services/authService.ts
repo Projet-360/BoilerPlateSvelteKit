@@ -20,7 +20,6 @@ import {
   sendResetPasswordEmail,
 } from './emailService.js';
 
-import { IUser } from '../TypeScript/interfaces.js';
 import logger from './logger.js';
 
 dotenv.config();
@@ -36,7 +35,7 @@ const throwError = (type: string, message: string, status: number) => {
 };
 
 // Generate and save reset password token, then send the email
-const generateAndSaveResetToken = async (user: IUser) => {
+const generateAndSaveResetToken = async (user: App.IUser) => {
   const resetToken = generateToken();
   user.resetToken = resetToken;
   user.resetTokenExpiration = new Date(Date.now() + 3600000);
@@ -55,7 +54,7 @@ const generateAndSaveResetToken = async (user: IUser) => {
  *
  * @returns {Object} - An object containing the JWT token.
  */
-export const createSignupToken = (user: IUser) => {
+export const createSignupToken = (user: App.IUser) => {
   const { _id: userId, username, email, role } = user;
   const token = jwt.sign(
     { userId, username, email, role },
@@ -76,7 +75,7 @@ export const createSignupToken = (user: IUser) => {
  *
  * @returns {Promise<Object>} - A promise that resolves with an object containing the verification token.
  */
-export const createVerificationToken = async (user: IUser) => {
+export const createVerificationToken = async (user: App.IUser) => {
   // Generate verification token and send email
   const verificationToken = generateToken();
   await sendVerificationEmail(user.email, verificationToken);
@@ -221,7 +220,7 @@ export const checkAuthentication = async (token: string) => {
  */
 export const login = async (email: string, password: string) => {
   // Find the user by email
-  const user: IUser | null = await User.findOne({ email });
+  const user: App.IUser | null = await User.findOne({ email });
 
   // Handle error cases first
   if (!user) {
@@ -318,7 +317,7 @@ export const verifyToken = async (token: string) => {
  *
  * @throws Will throw an error if the reset token cannot be generated or saved.
  */
-export const requestForgotPassword = async (user: IUser) => {
+export const requestForgotPassword = async (user: App.IUser) => {
   await generateAndSaveResetToken(user);
   return { message: 'EMAIL_FORGOT_PASSWORD' };
 };
@@ -340,7 +339,7 @@ export const requestForgotPassword = async (user: IUser) => {
  * @throws Will throw an error if the new password cannot be hashed or saved.
  */
 export const requestresetForgotPassword = async (
-  user: IUser,
+  user: App.IUser,
   newPassword: string,
 ) => {
   const hashedPassword = await hash(newPassword, 12);
@@ -368,7 +367,7 @@ export const getUserInfo = async (userId: string) => {
   try {
     const user = await User.findById(userId).select('-password');
 
-    const { username, email, role, isVerified } = user as IUser;
+    const { username, email, role, isVerified } = user as App.IUser;
 
     const userInfo = {
       username,
@@ -445,7 +444,7 @@ export const updateUserInfo = async (userId: string, updateData: any) => {
     if (updateData.email && currentUser.email !== updateData.email) {
       updateData.isVerified = false;
       const verificationInfo = await createVerificationToken(
-        currentUser as IUser,
+        currentUser as App.IUser,
       );
       notification = 'MAIL_CHANGED';
     }
@@ -494,7 +493,7 @@ export const getAllUsers = async () => {
  * const updateData = { email: 'new.email@example.com' };
  * const result = await updateUser('someUserId', updateData);
  */
-export const updateUser = async (userId: string, updateData: IUser) => {
+export const updateUser = async (userId: string, updateData: App.IUser) => {
   const user = await User.findByIdAndUpdate(userId, updateData, { new: true });
   return { success: true, notification: 'Utilisateur mis à jour', user };
 };

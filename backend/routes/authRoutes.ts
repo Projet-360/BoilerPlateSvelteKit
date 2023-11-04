@@ -29,7 +29,6 @@ import {
 } from '../validations/validators.js';
 
 import CustomError from './../errors/CustomError.js';
-import { IUser } from 'TypeScript/interfaces.js';
 
 // Endpoint to check authentication status
 router.get('/check-auth', async (req, res, next) => {
@@ -110,8 +109,8 @@ router.post(
         hashedPassword,
         role,
       );
-      await authService.createSignupToken(newUser as IUser);
-      await authService.createVerificationToken(newUser as IUser);
+      await authService.createSignupToken(newUser as App.IUser);
+      await authService.createVerificationToken(newUser as App.IUser);
 
       res.status(HTTP_STATUS.OK).json({ success: true });
     } catch (error: any) {
@@ -164,7 +163,7 @@ router.post(
         );
       }
 
-      await authService.requestForgotPassword(user as IUser);
+      await authService.requestForgotPassword(user as App.IUser);
       res.status(HTTP_STATUS.OK).json({ success: true });
     } catch (error: any) {
       logger.error(
@@ -211,7 +210,10 @@ router.post(
         );
       }
 
-      await authService.requestresetForgotPassword(user as IUser, newPassword);
+      await authService.requestresetForgotPassword(
+        user as App.IUser,
+        newPassword,
+      );
 
       res.status(HTTP_STATUS.OK).json({ message: 'Success', success: true });
     } catch (error: any) {
