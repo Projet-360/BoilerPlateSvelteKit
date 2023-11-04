@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 // Define the user schema
 const userSchema = new mongoose.Schema({
-  userId: String,
+  _id: String,
   // Username field, required
   username: { type: String, required: true },
   // Email field, required, must be unique, and match the given regular expression

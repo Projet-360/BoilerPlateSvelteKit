@@ -55,9 +55,9 @@ const generateAndSaveResetToken = async (user: App.IUser) => {
  * @returns {Object} - An object containing the JWT token.
  */
 export const createSignupToken = (user: App.IUser) => {
-  const { _id: userId, username, email, role } = user;
+  const { _id, username, email, role } = user;
   const token = jwt.sign(
-    { userId, username, email, role },
+    { _id, username, email, role },
     process.env.SECRETKEY as string,
     {
       expiresIn: process.env.TOKEN_EXPIRY,
@@ -99,7 +99,7 @@ export const createVerificationToken = async (user: App.IUser) => {
 
   // Save the token
   const newToken = new EmailVerificationToken({
-    userId: user._id,
+    _id: user._id,
     token: verificationToken,
     expireAt: expireAt,
   });
@@ -169,7 +169,7 @@ export const createUser = async (
  * - isAuthenticated: {boolean} Indicates whether the user is authenticated.
  * - message: {string} [Optional] A message explaining why the authentication failed.
  * - token: {string} [Optional] The provided JWT token.
- * - userId: {string} [Optional] The user's ID.
+ * - _id: {string} [Optional] The user's ID.
  * - role: {string} [Optional] The user's role.
  */
 export const checkAuthentication = async (token: string) => {
@@ -192,8 +192,8 @@ export const checkAuthentication = async (token: string) => {
     process.env.SECRETKEY as string,
   ) as JwtPayload;
 
-  // Chercher l'utilisateur en fonction de userId pour obtenir le rôle
-  const user = await User.findById(decoded.userId);
+  // Chercher l'utilisateur en fonction de _id pour obtenir le rôle
+  const user = await User.findById(decoded._id);
 
   if (!user) {
     return {
@@ -205,7 +205,7 @@ export const checkAuthentication = async (token: string) => {
   return {
     isAuthenticated: true,
     token,
-    userId: decoded.userId,
+    _id: decoded._id,
     role: user.role, // Ajout du rôle ici
   };
 };
@@ -242,14 +242,14 @@ export const login = async (email: string, password: string) => {
 
   // Continue with the rest of your code...
   const token = jwt.sign(
-    { userId: user._id, email: user.email, role: user.role },
+    { _id: user._id, email: user.email, role: user.role },
     process.env.SECRETKEY as string,
     {
       expiresIn: '1h',
     },
   );
 
-  return { token, userId: user._id, role: user.role };
+  return { token, _id: user._id, role: user.role };
 };
 
 /**
@@ -288,7 +288,7 @@ export const verifyToken = async (token: string) => {
   }
 
   // Find the user associated with this token
-  const user = await User.findById(verificationToken.userId);
+  const user = await User.findById(verificationToken._id);
 
   if (!user) {
     throwError('USER_NOT_FOUND', 'USER_NOT_FOUND', 401);
@@ -353,7 +353,7 @@ export const requestresetForgotPassword = async (
  * Fetch information of a user based on their unique ID.
  *
  * @async
- * @param {string} userId - The unique identifier of the user to fetch information for.
+ * @param {string} _id - The unique identifier of the user to fetch information for.
  *
  * @returns {Promise<Object>} userInfo - A promise that resolves with the user's information.
  * @returns {string} userInfo.username - The username of the user.
@@ -363,9 +363,9 @@ export const requestresetForgotPassword = async (
  *
  * @throws {Error} Will throw an error if the user is not found or any other error occurs.
  */
-export const getUserInfo = async (userId: string) => {
+export const getUserInfo = async (_id: string) => {
   try {
-    const user = await User.findById(userId).select('-password');
+    const user = await User.findById(_id).select('-password');
 
     const { username, email, role, isVerified } = user as App.IUser;
 
@@ -417,7 +417,7 @@ export function setAuthCookie(res: Response, token: string) {
  * updating the user's verification status if the email is changed, and saving the new data.
  *
  * @async
- * @param {string} userId - The ID of the user to be updated.
+ * @param {string} _id - The ID of the user to be updated.
  * @param {Object} updateData - The new data to update the user with.
  * @param {string} [updateData.email] - New email of the user.
  * @param {string} [updateData.username] - New username of the user.
@@ -432,9 +432,9 @@ export function setAuthCookie(res: Response, token: string) {
  * // Update the email and username of a user
  * updateUserInfo('some-user-id', { email: 'new.email@example.com', username: 'newUsername' });
  */
-export const updateUserInfo = async (userId: string, updateData: any) => {
+export const updateUserInfo = async (_id: string, updateData: any) => {
   try {
-    const currentUser = await User.findById(userId);
+    const currentUser = await User.findById(_id);
     if (!currentUser) {
       throw new Error('Utilisateur non trouvé.');
     }
@@ -449,7 +449,7 @@ export const updateUserInfo = async (userId: string, updateData: any) => {
       notification = 'MAIL_CHANGED';
     }
 
-    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
+    const updatedUser = await User.findByIdAndUpdate(_id, updateData, {
       new: true,
       runValidators: true,
     });
@@ -484,7 +484,7 @@ export const getAllUsers = async () => {
  * on the `User` model to update the user's data and returns the updated user object.
  *
  * @async
- * @param {String} userId - The unique ID of the user to update.
+ * @param {String} _id - The unique ID of the user to update.
  * @param {Object} updateData - An object containing the data to update.
  * @returns {Promise<Object>} Returns a promise that resolves with an object containing the update status and updated user data.
  *
@@ -493,7 +493,7 @@ export const getAllUsers = async () => {
  * const updateData = { email: 'new.email@example.com' };
  * const result = await updateUser('someUserId', updateData);
  */
-export const updateUser = async (userId: string, updateData: App.IUser) => {
-  const user = await User.findByIdAndUpdate(userId, updateData, { new: true });
+export const updateUser = async (_id: string, updateData: App.IUser) => {
+  const user = await User.findByIdAndUpdate(_id, updateData, { new: true });
   return { success: true, notification: 'Utilisateur mis à jour', user };
 };

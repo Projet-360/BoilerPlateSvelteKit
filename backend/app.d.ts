@@ -2,7 +2,7 @@
 
 declare namespace App {
   interface IUser extends mongoose.Document {
-    userId: string;
+    _id: string;
     username: string;
     email: string;
     password: string;
@@ -10,6 +10,10 @@ declare namespace App {
     resetToken?: string;
     resetTokenExpiration?: Date;
     role?: 'user' | 'admin' | 'moderator';
+    save(
+      options?: mongoose.SaveOptions,
+      fn?: (err: any, product: this) => void,
+    ): Promise<this>;
   }
 }
 

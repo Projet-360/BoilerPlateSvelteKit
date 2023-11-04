@@ -49,7 +49,7 @@ router.get('/check-auth', async (req, res, next) => {
       return res.status(HTTP_STATUS.OK).json({
         isAuthenticated: true,
         role: result.role,
-        userId: result.userId,
+        _id: result._id,
       });
     } else {
       // User is not authenticated, but no error should be thrown.
@@ -127,11 +127,11 @@ router.post('/login', bruteForceRateLimiter, async (req, res, next) => {
     const loginResult = await authService.login(email, password);
 
     if (loginResult) {
-      const { token, userId, role } = loginResult;
+      const { token, _id, role } = loginResult;
       // Définir le cookie
       authService.setAuthCookie(res, token);
 
-      res.status(HTTP_STATUS.OK).json({ userId, role });
+      res.status(HTTP_STATUS.OK).json({ _id, role });
     } else {
       // Gérer le cas où le résultat de la connexion est indéfini
       throw new Error('Login failed');
@@ -228,9 +228,9 @@ router.post(
 
 // User dashboard accessible only for authenticated users with 'user' role
 router.get('/user', isAuthenticated, checkRole('user'), async (req, res) => {
-  const { userId } = req.user as { userId: string };
+  const { _id } = req.user as { _id: string };
   try {
-    const userInfo = await authService.getUserInfo(userId);
+    const userInfo = await authService.getUserInfo(_id);
     res.json({ userInfo });
   } catch (error: any) {
     console.error(error);
@@ -245,12 +245,19 @@ router.put(
   [...updateUserValidators, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const userId = req.user?.userId;
+      const _id = req.user?._id;
+      if (typeof _id !== 'string') {
+        // Si _id est undefined ou pas une chaîne, renvoyez une erreur.
+        return res
+          .status(HTTP_STATUS.BAD_REQUEST)
+          .json({ message: "L'ID utilisateur est requis." });
+      }
+
       const updateData = req.body;
       logger.info(req);
 
       const { success, notification } = await authService.updateUserInfo(
-        userId,
+        _id,
         updateData,
       );
 
@@ -284,18 +291,18 @@ router.get(
 );
 
 router.put(
-  '/admin/user/:userId',
+  '/admin/user/:_id',
   isAuthenticated,
   checkRole('admin'),
   [...updateUserValidators, handleValidationErrors],
   async (req: Request, res: Response) => {
     try {
-      const { userId } = req.params;
-      console.log('userId', userId);
+      const { _id } = req.params;
+      console.log('_id', _id);
 
       const updateData = req.body;
       const { success, notification, updatedUser } =
-        await authService.updateUserInfo(userId, updateData);
+        await authService.updateUserInfo(_id, updateData);
       res
         .status(HTTP_STATUS.OK)
         .json({ message: 'Success', success, notification, updatedUser });

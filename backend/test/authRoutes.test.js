@@ -118,7 +118,7 @@
 // //       password: "Password123!",
 // //     });
 // //     expect(res.statusCode).toEqual(201);
-// //     expect(res.body).toHaveProperty("userId");
+// //     expect(res.body).toHaveProperty("_id");
 // //     expect(res.body).toHaveProperty("token");
 // //   }, 10000); // Augmente le délai d'expiration à 10 secondes
 // // });
