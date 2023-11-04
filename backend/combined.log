@@ -314,3 +314,19 @@
 {"level":"info","message":"Cleared collection: greetings, documents deleted: 0"}
 {"level":"info","message":"Default users inserted, count: 2"}
 {"level":"info","message":"MongoClient connection closed"}
+{"level":"info","message":"Connected to database: BoilerPlateSvelteKitDB"}
+{"level":"info","message":"Collections found: users, emailverificationtokens, blacklistedtokens, greetings"}
+{"level":"info","message":"Cleared collection: users, documents deleted: 2"}
+{"level":"info","message":"Cleared collection: emailverificationtokens, documents deleted: 0"}
+{"level":"info","message":"Cleared collection: blacklistedtokens, documents deleted: 0"}
+{"level":"info","message":"Cleared collection: greetings, documents deleted: 0"}
+{"level":"error","message":"Error clearing database: E11000 duplicate key error collection: BoilerPlateSvelteKitDB.users index: _id_ dup key: { _id: ObjectId('65352a1b76d3db78fbc95f46') }"}
+{"level":"info","message":"MongoClient connection closed"}
+{"level":"info","message":"Connected to database: BoilerPlateSvelteKitDB"}
+{"level":"info","message":"Collections found: users, emailverificationtokens, blacklistedtokens, greetings"}
+{"level":"info","message":"Cleared collection: users, documents deleted: 2"}
+{"level":"info","message":"Cleared collection: emailverificationtokens, documents deleted: 0"}
+{"level":"info","message":"Cleared collection: blacklistedtokens, documents deleted: 0"}
+{"level":"info","message":"Cleared collection: greetings, documents deleted: 0"}
+{"level":"info","message":"Default users inserted, count: 3"}
+{"level":"info","message":"MongoClient connection closed"}

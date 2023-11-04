@@ -38,7 +38,6 @@ async function clearDB() {
     const usersCollection = db.collection('users');
     const insertResult = await usersCollection.insertMany([
       {
-        _id: new ObjectId('6535292976d3db78fbc95f3e'),
         username: 'Admin',
         email: 'admin@admin.fr',
         password:
@@ -48,13 +47,21 @@ async function clearDB() {
         __v: 0,
       },
       {
-        _id: new ObjectId('65352a1b76d3db78fbc95f46'),
         username: 'User',
         email: 'user@user.fr',
         password:
           '$2a$12$kO25xqCYiev6PMWLzjL7Yu6EnADDNZC7FAfK2T6SY6TbImaZgNtBi',
         isVerified: true,
         role: 'user',
+        __v: 0,
+      },
+      {
+        username: 'Moderator',
+        email: 'moderator@moderator.fr',
+        password:
+          '$2a$12$kO25xqCYiev6PMWLzjL7Yu6EnADDNZC7FAfK2T6SY6TbImaZgNtBi',
+        isVerified: true,
+        role: 'moderator',
         __v: 0,
       },
     ]);
