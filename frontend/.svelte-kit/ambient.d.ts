@@ -43,7 +43,7 @@ declare module '$env/static/private' {
 	export const DEBUG_COLORS: string;
 	export const DriverData: string;
 	export const EDITOR: string;
-	export const EFC_9916: string;
+	export const EFC_12112: string;
 	export const FORCE_COLOR: string;
 	export const FPS_BROWSER_APP_PROFILE_STRING: string;
 	export const FPS_BROWSER_USER_PROFILE_STRING: string;
@@ -166,7 +166,7 @@ declare module '$env/dynamic/private' {
 		DEBUG_COLORS: string;
 		DriverData: string;
 		EDITOR: string;
-		EFC_9916: string;
+		EFC_12112: string;
 		FORCE_COLOR: string;
 		FPS_BROWSER_APP_PROFILE_STRING: string;
 		FPS_BROWSER_USER_PROFILE_STRING: string;

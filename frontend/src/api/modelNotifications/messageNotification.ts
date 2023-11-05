@@ -1,7 +1,7 @@
 import notificationStore from '$stores/notificationStore';
 type TranslationFunction = (key: string, options?: any) => string;
 
-export const signupValidation = (error: any, $t: App.TranslationFunction) => {
+export const messageNotification = (error: any, $t: App.TranslationFunction) => {
 	let errorMessages: any = [];
 
 	// Gérer le format de l'erreur
@@ -46,6 +46,24 @@ export const signupValidation = (error: any, $t: App.TranslationFunction) => {
 				break;
 			case 'RATE_LIMIT':
 				errorMessage = $t('validation.RATE_LIMIT');
+				break;
+			case 'USER_NOT_FOUND':
+				errorMessage = $t('validation.USER_NOT_FOUND');
+				break;
+			case 'EMAIL_NOT_VERIFIED':
+				errorMessage = $t('validation.EMAIL_NOT_VERIFIED');
+				break;
+			case 'NAME_MIN_MAX_CARAC':
+				errorMessage = $t('validation.NAME_MIN_MAX_CARAC');
+				break;
+			case 'MESSAGE_REQUIRED':
+				errorMessage = $t('validation.MESSAGE_REQUIRED');
+				break;
+			case 'MESSAGE_MIN_MAX_CARAC':
+				errorMessage = $t('validation.MESSAGE_MIN_MAX_CARAC');
+				break;
+			case 'INVALID_CREDENTIALS':
+				errorMessage = $t('validation.INVALID_CREDENTIALS');
 				break;
 			default:
 				errorMessage = "Une erreur inconnue s'est produite.";

@@ -5,9 +5,7 @@ import { handleRoleRedirection } from '$utils/auth/handleRoleRedirection.js';
 import { authStore } from '$stores/authStore';
 
 import notificationStore from '$stores/notificationStore';
-import { loginValidation } from '$modelNotifications/login';
-import { signupValidation } from '$modelNotifications/signup';
-import { EmailresetPasswordValidation } from '$api/modelNotifications/EmailresetPasswordValidation.js';
+import { messageNotification } from '$modelNotifications/messageNotification';
 
 import { goto } from '$app/navigation';
 import { logout } from '$utils/auth/logout.js';
@@ -58,7 +56,7 @@ export async function login(email: string, password: string, $t: App.Translation
 
 		notificationStore.addNotification($t('validation.SUCCESS_LOGIN'), 'success');
 	} catch (error) {
-		loginValidation(error, $t);
+		messageNotification(error, $t);
 		throw error;
 	}
 }
@@ -82,7 +80,7 @@ export async function signup(
 			notificationStore.addNotification($t('validation.SUCCESS_INSCRIPTION'), 'success');
 		}
 	} catch (error) {
-		signupValidation(error, $t);
+		messageNotification(error, $t);
 		throw error;
 	}
 }
@@ -111,7 +109,7 @@ export async function sendEmailResetPassword(email: string, $t: App.TranslationF
 			notificationStore.addNotification($t('validation.EMAIL_FORGOT_PASSWORD'), 'success');
 		}
 	} catch (error) {
-		EmailresetPasswordValidation(error, $t);
+		messageNotification(error, $t);
 		throw error;
 	}
 }
@@ -183,7 +181,7 @@ export const updateUserInfo = async (userInfo: App.UserInfo, $t: App.Translation
 			throw new Error($t('validation.UPDATE_FAILURE'));
 		}
 	} catch (error) {
-		signupValidation(error, $t);
+		messageNotification(error, $t);
 		throw error;
 	}
 };
@@ -229,7 +227,7 @@ export async function updateUser(
 			throw new Error("Erreur lors de la mise à jour de l'utilisateur");
 		}
 	} catch (error: any) {
-		signupValidation(error, $t);
+		messageNotification(error, $t);
 		return { success: false, user: null, notification: 'Une erreur est survenue' };
 	}
 }

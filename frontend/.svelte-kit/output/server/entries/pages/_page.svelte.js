@@ -52,6 +52,72 @@ async function apiCall({
     throw error;
   }
 }
+const messageNotification = (error, $t) => {
+  let errorMessages = [];
+  if (typeof error === "string") {
+    errorMessages = error.split(",");
+  } else if (error && error.message) {
+    errorMessages = error.message.split(",");
+  } else {
+    errorMessages = ["Une erreur inconnue s'est produite."];
+  }
+  errorMessages.forEach((errorMsg) => {
+    let errorMessage;
+    switch (errorMsg.trim()) {
+      case "EMAIL_EXIST":
+        errorMessage = $t("validation.EMAIL_EXIST");
+        break;
+      case "USERNAME_REQUIRED":
+        errorMessage = $t("validation.USERNAME_REQUIRED");
+        break;
+      case "VALID_EMAIL":
+        errorMessage = $t("validation.VALID_EMAIL");
+        break;
+      case "VALID_USERNAME":
+        errorMessage = $t("validation.VALID_USERNAME");
+        break;
+      case "NUMBE_CARAC_PASSWORD":
+        errorMessage = $t("validation.NUMBE_CARAC_PASSWORD");
+        break;
+      case "MIN_PASSWORD":
+        errorMessage = $t("validation.MIN_PASSWORD");
+        break;
+      case "MAJ_PASSWORD":
+        errorMessage = $t("validation.MAJ_PASSWORD");
+        break;
+      case "NUMBER_PASSWORD":
+        errorMessage = $t("validation.NUMBER_PASSWORD");
+        break;
+      case "SPECIAL_CARAC_PASSWORD":
+        errorMessage = $t("validation.SPECIAL_CARAC_PASSWORD");
+        break;
+      case "RATE_LIMIT":
+        errorMessage = $t("validation.RATE_LIMIT");
+        break;
+      case "USER_NOT_FOUND":
+        errorMessage = $t("validation.USER_NOT_FOUND");
+        break;
+      case "EMAIL_NOT_VERIFIED":
+        errorMessage = $t("validation.EMAIL_NOT_VERIFIED");
+        break;
+      case "NAME_MIN_MAX_CARAC":
+        errorMessage = $t("validation.NAME_MIN_MAX_CARAC");
+        break;
+      case "MESSAGE_REQUIRED":
+        errorMessage = $t("validation.MESSAGE_REQUIRED");
+        break;
+      case "MESSAGE_MIN_MAX_CARAC":
+        errorMessage = $t("validation.MESSAGE_MIN_MAX_CARAC");
+        break;
+      case "INVALID_CREDENTIALS":
+        errorMessage = $t("validation.INVALID_CREDENTIALS");
+        break;
+      default:
+        errorMessage = "Une erreur inconnue s'est produite.";
+    }
+    notificationStore.addNotification(errorMessage, "error");
+  });
+};
 const Box_svelte_svelte_type_style_lang = "";
 const css = {
   code: "div.svelte-1g8vqg2{width:400px;height:400px}",
@@ -65,39 +131,6 @@ const Box = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   return `<div class="svelte-1g8vqg2"${add_attribute("this", container, 0)}></div>`;
 });
 const socket = io("http://localhost:2000");
-const greetingsValidation = (error, $t) => {
-  let errorMessages = [];
-  if (typeof error === "string") {
-    errorMessages = error.split(",");
-  } else if (error && error.message) {
-    errorMessages = error.message.split(",");
-  } else {
-    errorMessages = ["Une erreur inconnue s'est produite."];
-  }
-  errorMessages.forEach((errorMsg) => {
-    let errorMessage;
-    switch (errorMsg.trim()) {
-      case "NAME_REQUIRED":
-        errorMessage = $t("validation.NAME_REQUIRED");
-        break;
-      case "NAME_MIN_MAX_CARAC":
-        errorMessage = $t("validation.NAME_MIN_MAX_CARAC");
-        break;
-      case "MESSAGE_REQUIRED":
-        errorMessage = $t("validation.MESSAGE_REQUIRED");
-        break;
-      case "MESSAGE_MIN_MAX_CARAC":
-        errorMessage = $t("validation.MESSAGE_MIN_MAX_CARAC");
-        break;
-      case "RATE_LIMIT":
-        errorMessage = $t("validation.RATE_LIMIT");
-        break;
-      default:
-        errorMessage = "Une erreur inconnue s'est produite.";
-    }
-    notificationStore.addNotification(errorMessage, "error");
-  });
-};
 async function sendGreeting(name, message, editingId = null, $t) {
   try {
     const url = editingId ? `${"http://localhost:2000"}/api/updateGreeting/${editingId}` : `${"http://localhost:2000"}/api/saveGreeting`;
@@ -109,7 +142,7 @@ async function sendGreeting(name, message, editingId = null, $t) {
     });
     return isSuccessful !== null;
   } catch (error) {
-    greetingsValidation(error, $t);
+    messageNotification(error, $t);
     throw error;
   }
 }

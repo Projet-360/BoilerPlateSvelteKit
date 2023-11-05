@@ -1,5 +1,5 @@
 import { apiCall } from '$api/utils/apiCall';
-import { greetingsValidation } from '$modelNotifications/greetings';
+import { messageNotification } from '$modelNotifications/messageNotification';
 
 export async function sendGreeting(
 	name: string,
@@ -21,7 +21,7 @@ export async function sendGreeting(
 
 		return isSuccessful !== null;
 	} catch (error) {
-		greetingsValidation(error, $t);
+		messageNotification(error, $t);
 		throw error;
 	}
 }
