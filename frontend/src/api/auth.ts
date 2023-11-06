@@ -158,6 +158,24 @@ export async function getDashboardData() {
 	}
 }
 
+export async function requestAccountDeletion(id: string, $t: App.TranslationFunction) {
+	try {
+		const response = await apiCall({
+			url: `${import.meta.env.VITE_URL_BACK}/auth/user/request-delete`,
+			method: 'POST',
+			credentials: 'include',
+			body: { id }
+		});
+
+		if (response.success) {
+			notificationStore.addNotification($t('validation.DELETE_ACCOUNT_EMAIL_SENT'), 'success');
+		}
+	} catch (error) {
+		messageNotification(error, $t);
+		throw error;
+	}
+}
+
 export const updateUserInfo = async (userInfo: App.UserInfo, $t: App.TranslationFunction) => {
 	try {
 		const headers = new Headers();

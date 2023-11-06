@@ -366,9 +366,10 @@ export const getUserInfo = async (_id: string) => {
   try {
     const user = await User.findById(_id).select('-password');
 
-    const { username, email, role, isVerified } = user as App.IUser;
+    const { id, username, email, role, isVerified } = user as App.IUser;
 
     const userInfo = {
+      id,
       username,
       email,
       role,

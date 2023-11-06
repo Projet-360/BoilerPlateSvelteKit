@@ -253,6 +253,8 @@ router.get(
     const _id = req.user!._id;
     try {
       const userInfo = await authService.getUserInfo(_id.toString());
+      console.log(userInfo);
+
       res.json({ userInfo });
     } catch (error: any) {
       console.error(error);
@@ -292,6 +294,27 @@ router.put(
       res
         .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
         .json({ message: 'Erreur du serveur.' });
+    }
+  },
+);
+
+router.post(
+  '/user/request-delete',
+  isAuthenticated,
+  checkRole('user'),
+  async (req, res) => {
+    try {
+      const userId = req.body.id;
+      // Générez un jeton de confirmation de suppression
+      console.log('demande de deletion', userId);
+
+      res.status(200).json({ message: 'Email de confirmation envoyé.' });
+    } catch (error) {
+      console.error(
+        "Erreur lors de l'envoi de l'email de suppression :",
+        error,
+      );
+      res.status(500).json({ message: 'Erreur du serveur.' });
     }
   },
 );

@@ -184,7 +184,6 @@ const Greetings = create_ssr_component(($$result, $$props, $$bindings, slots) =>
     }
   }
   async function handleDeleteGreeting(id) {
-    console.log(`Deleting greeting with id ${id}`);
     const isSuccessful = await deleteGreeting(id);
     if (isSuccessful) {
       socket.emit("greetingDeleted");

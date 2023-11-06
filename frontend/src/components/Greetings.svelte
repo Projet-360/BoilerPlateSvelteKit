@@ -41,7 +41,6 @@
 	}
 
 	export async function handleDeleteGreeting(id: string): Promise<void> {
-		console.log(`Deleting greeting with id ${id}`);
 		const isSuccessful: boolean = await deleteGreeting(id);
 		if (isSuccessful) {
 			// Émettez un événement pour informer le serveur que les salutations doivent être mises à jour

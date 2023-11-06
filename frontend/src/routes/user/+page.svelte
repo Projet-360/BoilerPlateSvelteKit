@@ -3,9 +3,10 @@
 	import { onMount } from 'svelte';
 	import { getDashboardData, updateUserInfo } from '$api/auth.js';
 	import { t } from '$UITools/Translations/index';
-	import { sendEmailResetPassword } from '$api/auth.js';
+	import { sendEmailResetPassword, requestAccountDeletion } from '$api/auth.js';
 
-	let userData: any;
+	let userData: App.User;
+	let id: string = '';
 	let username: string = '';
 	let email: string = '';
 	let role: string = '';
@@ -16,7 +17,7 @@
 			await updateUserInfo({ username, email }, $t);
 			const data = await getDashboardData();
 			userData = data;
-			({ username, email, role, isVerified } = userData.userInfo);
+			({ id, username, email, role, isVerified } = userData.userInfo);
 		} catch (error) {
 			console.error("Erreur lors de la mise à jour des informations de l'utilisateur :", error);
 		}
@@ -26,11 +27,15 @@
 		await sendEmailResetPassword(email, $t);
 	};
 
+	const DeleteAccount = async (id: string) => {
+		await requestAccountDeletion(id, $t);
+	};
+
 	onMount(async () => {
 		try {
 			const data = await getDashboardData();
 			userData = data;
-			({ username, email, role, isVerified } = userData.userInfo);
+			({ id, username, email, role, isVerified } = userData.userInfo);
 		} catch (error) {
 			console.error('Error:', error);
 		}
@@ -56,6 +61,9 @@
 				<p><label for="role">Role</label>: {role}</p>
 				<label for="isVerified">Is Verified</label>
 				<input id="isVerified" type="checkbox" checked={isVerified} disabled />
+
+				<button on:click={() => DeleteAccount(id)}>Supprimer le compte</button>
+
 				<button on:click={handleUpdate}>Mettre à jour</button>
 			</form>
 		{:else}

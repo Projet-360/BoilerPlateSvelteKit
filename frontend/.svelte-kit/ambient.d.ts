@@ -30,7 +30,6 @@ declare module '$env/static/private' {
 	export const VITE_SECRETKEY: string;
 	export const ALLUSERSPROFILE: string;
 	export const APPDATA: string;
-	export const BROWSER: string;
 	export const ChocolateyInstall: string;
 	export const ChocolateyLastPathUpdate: string;
 	export const CHROME_CRASHPAD_PIPE_NAME: string;
@@ -40,10 +39,9 @@ declare module '$env/static/private' {
 	export const CommonProgramW6432: string;
 	export const COMPUTERNAME: string;
 	export const ComSpec: string;
-	export const DEBUG_COLORS: string;
 	export const DriverData: string;
 	export const EDITOR: string;
-	export const EFC_12112: string;
+	export const EFC_15044: string;
 	export const FORCE_COLOR: string;
 	export const FPS_BROWSER_APP_PROFILE_STRING: string;
 	export const FPS_BROWSER_USER_PROFILE_STRING: string;
@@ -91,7 +89,6 @@ declare module '$env/static/private' {
 	export const OS: string;
 	export const Path: string;
 	export const PATHEXT: string;
-	export const PLAYWRIGHT_TEST_BASE_URL: string;
 	export const PROCESSOR_ARCHITECTURE: string;
 	export const PROCESSOR_IDENTIFIER: string;
 	export const PROCESSOR_LEVEL: string;
@@ -102,7 +99,6 @@ declare module '$env/static/private' {
 	export const PROMPT: string;
 	export const PSModulePath: string;
 	export const PUBLIC: string;
-	export const PW_TS_ESM_ON: string;
 	export const SESSIONNAME: string;
 	export const SystemDrive: string;
 	export const SystemRoot: string;
@@ -153,7 +149,6 @@ declare module '$env/dynamic/private' {
 		VITE_SECRETKEY: string;
 		ALLUSERSPROFILE: string;
 		APPDATA: string;
-		BROWSER: string;
 		ChocolateyInstall: string;
 		ChocolateyLastPathUpdate: string;
 		CHROME_CRASHPAD_PIPE_NAME: string;
@@ -163,10 +158,9 @@ declare module '$env/dynamic/private' {
 		CommonProgramW6432: string;
 		COMPUTERNAME: string;
 		ComSpec: string;
-		DEBUG_COLORS: string;
 		DriverData: string;
 		EDITOR: string;
-		EFC_12112: string;
+		EFC_15044: string;
 		FORCE_COLOR: string;
 		FPS_BROWSER_APP_PROFILE_STRING: string;
 		FPS_BROWSER_USER_PROFILE_STRING: string;
@@ -214,7 +208,6 @@ declare module '$env/dynamic/private' {
 		OS: string;
 		Path: string;
 		PATHEXT: string;
-		PLAYWRIGHT_TEST_BASE_URL: string;
 		PROCESSOR_ARCHITECTURE: string;
 		PROCESSOR_IDENTIFIER: string;
 		PROCESSOR_LEVEL: string;
@@ -225,7 +218,6 @@ declare module '$env/dynamic/private' {
 		PROMPT: string;
 		PSModulePath: string;
 		PUBLIC: string;
-		PW_TS_ESM_ON: string;
 		SESSIONNAME: string;
 		SystemDrive: string;
 		SystemRoot: string;
