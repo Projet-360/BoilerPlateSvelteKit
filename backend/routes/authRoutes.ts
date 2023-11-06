@@ -8,6 +8,7 @@ const router = Router();
 import pkg from 'bcryptjs';
 const { hash, compare } = pkg;
 import { check, validationResult } from 'express-validator';
+import UAParser from 'ua-parser-js';
 
 import { handleValidationErrors } from '../middlewares/handleValidationErrors.js';
 import { isAuthenticated } from '../middlewares/isAuthenticated.js';
@@ -145,6 +146,17 @@ router.post(
         const { token, _id, role } = loginResult;
         // Définir le cookie
         authService.setAuthCookie(res, token);
+
+        // Simulons une chaîne User Agent
+        const userAgentString =
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36';
+
+        const parser = new UAParser(userAgentString);
+
+        // Extrait les informations du User Agent
+        const browserInfo = parser.getBrowser(); // Obtenir les informations sur le navigateur
+        const osInfo = parser.getOS(); // Obtenir les informations sur l'OS
+        const deviceInfo = parser.getDevice(); // Obtenir les informations sur le dispositif
 
         // Enregistre les informations de la session dans la base de données
         const sessionData = {

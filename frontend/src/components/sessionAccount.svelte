@@ -20,7 +20,7 @@
 	async function handleCloseSession(sessionId: string) {
 		try {
 			await closeUserSession(sessionId);
-			sessions = sessions.filter((session) => session._id !== sessionId);
+			sessions = sessions.filter((session) => session.userId !== sessionId);
 			// Afficher un message de succès à l'utilisateur
 			notificationStore.addNotification('Session fermée avec succès.', 'success');
 		} catch (error) {
@@ -43,11 +43,14 @@
 		<ul>
 			{#each sessions as session}
 				<li class="session">
-					<p>ID de session : {session._id}</p>
+					<p>ID de session : {session.id}</p>
 					<p>User Agent : {session.userAgent}</p>
+					<p>Browser : {session.browser?.name ?? 'Inconnu'} {session.browser?.version ?? ''}</p>
+					<p>OS : {session.os?.name ?? 'Inconnu'} {session.os?.version ?? ''}</p>
+					<p>Device : {session.device ?? 'Inconnu'}</p>
 					<p>IP : {session.ip}</p>
 					<p>Créé à : {new Date(session.createdAt).toLocaleString()}</p>
-					<button on:click={() => handleCloseSession(session._id)}>Fermer la session</button>
+					<button on:click={() => handleCloseSession(session.id)}>Fermer la session</button>
 				</li>
 			{/each}
 		</ul>
