@@ -670,3 +670,43 @@
 {"level":"info","message":"Email successfully sent to user@user.fr"}
 {"level":"info","message":"Email successfully sent to user@user.fr"}
 {"level":"info","message":"New client connected: rjBHMy5LguJvuny8AAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Connected to database: BoilerPlateSvelteKitDB"}
+{"level":"info","message":"Collections found: users, emailverificationtokens, blacklistedtokens, greetings"}
+{"level":"info","message":"Cleared collection: users, documents deleted: 5"}
+{"level":"info","message":"Cleared collection: emailverificationtokens, documents deleted: 2"}
+{"level":"info","message":"Cleared collection: blacklistedtokens, documents deleted: 0"}
+{"level":"info","message":"Cleared collection: greetings, documents deleted: 0"}
+{"level":"info","message":"Default users inserted, count: 3"}
+{"level":"info","message":"MongoClient connection closed"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: hcz_jvQ6HqF9E8D8AAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: p9a2-KLgJmXUUXkfAAAD"}
+{"level":"info","message":"New client connected: XEOpd1uZMOaOV4ZjAAAF"}
+{"level":"info","message":"Client disconnected: XEOpd1uZMOaOV4ZjAAAF"}
+{"level":"info","message":"Client disconnected: hcz_jvQ6HqF9E8D8AAAB"}
+{"level":"info","message":"New client connected: tTE8Z_YgseeVdGsXAAAH"}
+{"level":"info","message":"Client disconnected: tTE8Z_YgseeVdGsXAAAH"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: grNk5x8wFMTagg3QAAAB"}
+{"level":"info","message":"New client connected: PD6aUufXFkt_GL1nAAAD"}
+{"level":"info","message":"New client connected: JRWm2Gc5st9hlr7rAAAF"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: TUCwhYTrxVM4rcpTAAAB"}
+{"level":"info","message":"New client connected: 1ruqF7kJZ_2OM0y0AAAD"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: jCBK2_IKP7xbZgk2AAAF"}
+{"level":"info","message":"Client disconnected: 1ruqF7kJZ_2OM0y0AAAD"}
+{"level":"info","message":"New client connected: faH17sH1FvaZbwyxAAAH"}
+{"level":"info","message":"Client disconnected: TUCwhYTrxVM4rcpTAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: q_RjTehWodk9WguGAAAB"}
+{"level":"info","message":"Client disconnected: q_RjTehWodk9WguGAAAB"}
+{"level":"info","message":"New client connected: dZEWWspqYzxcD66pAAAD"}
+{"level":"info","message":"New client connected: L4UMDqCxdIGUxkLRAAAF"}

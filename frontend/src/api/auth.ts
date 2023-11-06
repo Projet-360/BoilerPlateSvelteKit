@@ -47,7 +47,8 @@ export async function login(email: string, password: string, $t: App.Translation
 		authStore.set({
 			role: data.role,
 			isAuthenticated: true,
-			userId: data.userId
+			userId: data.userId,
+			sessionId: data.sessionId
 		});
 
 		const { role, isAuthenticated } = currentState;
@@ -100,7 +101,7 @@ export async function sendEmailResetPassword(email: string, $t: App.TranslationF
 		const data = await apiCall({
 			url: `${import.meta.env.VITE_URL_BACK}/auth/forgot-password`,
 			method: 'POST',
-			credentials: 'include', // si nécessaire
+			credentials: 'include',
 			body: { email }
 		});
 
@@ -143,7 +144,6 @@ export async function ResetForgotNewPassword(
 }
 
 export async function getDashboardData() {
-	// Ajoute le token en paramètre
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
@@ -179,7 +179,8 @@ export async function requestAccountDeletion(id: string, $t: App.TranslationFunc
 export async function confirmAccountDeletion(token: string) {
 	try {
 		const headers = new Headers();
-		const response = await fetch(`${import.meta.env.VITE_URL_BACK}/auth/confirm-delete/${token}`, {
+		const response = await apiCall({
+			url: `${import.meta.env.VITE_URL_BACK}/auth/confirm-delete/${token}`,
 			method: 'POST',
 			headers
 		});
@@ -188,12 +189,10 @@ export async function confirmAccountDeletion(token: string) {
 			throw new Error(`HTTP error! status: ${response.status}`);
 		}
 
-		// Essayer de parser la réponse en JSON
 		try {
 			const data = await response.json();
 			return data;
 		} catch (e) {
-			// Si la réponse n'est pas du JSON, log l'erreur et renvoyer une erreur générique
 			console.error("La réponse n'est pas en JSON :", e);
 			throw new Error("La réponse du serveur n'est pas au format JSON.");
 		}
@@ -230,6 +229,25 @@ export const updateUserInfo = async (userInfo: App.UserInfo, $t: App.Translation
 		throw error;
 	}
 };
+
+export async function getUserSessions() {
+	return apiCall({
+		url: `${import.meta.env.VITE_URL_BACK}/auth/sessions`,
+		credentials: 'include',
+		handleSuccess: (data) => console.log('Sessions récupérées avec succès :', data),
+		handleError: (error) => console.error('Erreur lors de la récupération des sessions :', error)
+	});
+}
+
+export async function closeUserSession(sessionId: string) {
+	return apiCall({
+		url: `${import.meta.env.VITE_URL_BACK}/auth/sessions/${sessionId}`,
+		method: 'DELETE',
+		credentials: 'include',
+		handleSuccess: (data) => console.log('Session fermée avec succès :', data),
+		handleError: (error) => console.error('Erreur lors de la fermeture de la session :', error)
+	});
+}
 
 export async function getAllUsers() {
 	try {

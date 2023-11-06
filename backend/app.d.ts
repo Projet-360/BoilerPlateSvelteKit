@@ -17,6 +17,13 @@ declare global {
       role?: 'user' | 'admin' | 'moderator';
       // ... autres méthodes et propriétés
     }
+
+    interface ISession extends Document {
+      userId: mongoose.Schema.Types.ObjectId; // ou string si vous n'utilisez pas ObjectId
+      userAgent: string;
+      ip: string;
+      createdAt: Date;
+    }
   }
 
   namespace Express {

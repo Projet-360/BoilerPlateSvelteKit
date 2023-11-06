@@ -5,7 +5,9 @@ import type { Writable } from 'svelte/store';
 export const authStore: Writable<App.IAuthStore> = writable({
 	userId: null,
 	role: null,
-	isAuthenticated: false
+	isAuthenticated: false,
+	currentSessionId: undefined, // Initialisez à undefined ou null
+	sessions: [] // Initialisez avec un tableau vide
 });
 
 // Fonction pour initialiser le store

@@ -16,6 +16,7 @@ import { checkRole } from '../middlewares/checkRole.js';
 import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
 
 import { User } from '../models/UserModel.js';
+import { Session } from '../models/sessionModel.js';
 import BlacklistedToken from '../models/BlacklistedTokenModel.js';
 
 import * as authService from '../services/authService.js';
@@ -145,6 +146,16 @@ router.post(
         // Définir le cookie
         authService.setAuthCookie(res, token);
 
+        // Enregistre les informations de la session dans la base de données
+        const sessionData = {
+          userId: _id,
+          userAgent: req.headers['user-agent'],
+          ip: req.ip,
+        };
+
+        const session = new Session(sessionData);
+        await session.save();
+
         res.status(HTTP_STATUS.OK).json({ _id, role });
       } else {
         // Gérer le cas où le résultat de la connexion est indéfini
@@ -156,6 +167,52 @@ router.post(
     }
   },
 );
+
+router.get('/sessions', isAuthenticated, async (req, res) => {
+  console.log('Route /sessions atteinte');
+  if (!req.user || !req.user._id) {
+    console.log('Utilisateur non authentifié dans /sessions');
+    return res.status(401).json({ message: 'Utilisateur non authentifié' });
+  }
+
+  try {
+    const sessions = await Session.find({ userId: req.user._id }).exec();
+    console.log('sessions', sessions);
+    res.json(
+      sessions.map((s) => ({
+        id: s._id,
+        userAgent: s.userAgent,
+        ip: s.ip,
+        createdAt: s.createdAt,
+      })),
+    );
+  } catch (error) {
+    console.error('Erreur lors de la récupération des sessions', error);
+    res.status(500).json({ message: 'Erreur interne du serveur' });
+  }
+});
+
+router.delete('/sessions/:sessionId', isAuthenticated, async (req, res) => {
+  console.log('//sessions/:sessionId');
+  const { sessionId } = req.params;
+
+  if (!req.user || !req.user._id) {
+    return res.status(401).json({ message: 'Utilisateur non authentifié' });
+  }
+
+  const session = await Session.findOneAndDelete({
+    _id: sessionId,
+    userId: req.user._id,
+  }).exec();
+
+  if (!session) {
+    return res
+      .status(404)
+      .json({ message: 'Session non trouvée ou déjà fermée' });
+  }
+
+  res.json({ message: 'Session fermée avec succès' });
+});
 
 // Endpoint to request password reset
 router.post(
@@ -345,7 +402,6 @@ router.post(
   },
 );
 
-// Endpoint to confirm account deletion
 // Endpoint to confirm account deletion
 router.post(
   '/confirm-delete/:deleteToken',

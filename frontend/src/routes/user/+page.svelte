@@ -4,6 +4,7 @@
 	import { getDashboardData, updateUserInfo } from '$api/auth.js';
 	import { t } from '$UITools/Translations/index';
 	import { sendEmailResetPassword, requestAccountDeletion } from '$api/auth.js';
+	import SessionAccount from '$components/sessionAccount.svelte';
 
 	let userData: App.User;
 	let id: string = '';
@@ -66,6 +67,8 @@
 
 				<button on:click={handleUpdate}>Mettre à jour</button>
 			</form>
+
+			<SessionAccount />
 		{:else}
 			<h2>{$t('user.loader')}</h2>
 		{/if}

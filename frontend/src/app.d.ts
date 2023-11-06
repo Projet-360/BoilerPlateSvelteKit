@@ -5,10 +5,27 @@ declare namespace App {
 	interface PageData {
 		greetings?: { _id: string }[];
 	}
-	interface IAuthStore {
+
+	interface Session {
+		sessionId: string;
+		device: string; // Exemple: 'Desktop - Chrome'
+		lastActive: Date;
+	}
+
+	export interface IAuthStore {
 		userId: string | null;
 		role: string | null;
 		isAuthenticated: boolean;
+		sessionId?: string;
+	}
+
+	// Mettez à jour votre interface IAuthStore pour inclure les détails de session
+	export interface IAuthStore {
+		userId: string | null;
+		role: string | null;
+		isAuthenticated: boolean;
+		currentSessionId?: string; // L'identifiant de la session actuelle
+		sessions?: Session[]; // Une liste de toutes les sessions actives de l'utilisateur
 	}
 
 	interface UserInfo {
