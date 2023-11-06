@@ -641,3 +641,32 @@
 {"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
 {"level":"info","message":"Server running on port 2000"}
 {"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: Y9L-6GVjD9OPdmPgAAAB"}
+{"level":"info","message":"New client connected: OIxJrpUJ25QWr1jwAAAD"}
+{"level":"info","message":"Client disconnected: OIxJrpUJ25QWr1jwAAAD"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Email successfully sent to user@user.fr"}
+{"level":"info","message":"Email successfully sent to user@user.fr"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Email successfully sent to user@user.fr"}
+{"level":"info","message":"Email successfully sent to user@user.fr"}
+{"level":"info","message":"New client connected: L3vTSHnsDzJUNfgsAAAB"}
+{"level":"info","message":"New client connected: 9mMKPrNcB2_W8S--AAAD"}
+{"level":"info","message":"Client disconnected: 9mMKPrNcB2_W8S--AAAD"}
+{"level":"info","message":"Email successfully sent to user@user.fr"}
+{"level":"info","message":"Email successfully sent to user@user.fr"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Email successfully sent to user@user.fr"}
+{"level":"info","message":"Email successfully sent to user@user.fr"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Email successfully sent to user@user.fr"}
+{"level":"info","message":"Email successfully sent to user@user.fr"}
+{"level":"info","message":"New client connected: rjBHMy5LguJvuny8AAAB"}

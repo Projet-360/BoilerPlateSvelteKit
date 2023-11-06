@@ -3,7 +3,7 @@ import { Response, CookieOptions } from 'express';
 import pkg from 'bcryptjs';
 const { hash, compare } = pkg;
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import crypto from 'crypto';
+import crypto, { randomBytes } from 'crypto';
 
 import dotenv from 'dotenv';
 
@@ -504,4 +504,20 @@ export const getAllUsers = async () => {
 export const updateUser = async (_id: string, updateData: App.IUser) => {
   const user = await User.findByIdAndUpdate(_id, updateData, { new: true });
   return { success: true, notification: 'Utilisateur mis à jour', user };
+};
+
+/**
+ * Génère un jeton sécurisé pour la suppression du compte.
+ * @returns {Promise<string>} Un jeton sécurisé sous forme de chaîne hexadécimale.
+ */
+export const generateDeleteToken = (): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    randomBytes(32, (err, buffer) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(buffer.toString('hex'));
+      }
+    });
+  });
 };

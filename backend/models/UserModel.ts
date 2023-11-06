@@ -16,6 +16,8 @@ const userModel = new mongoose.Schema<App.IUser>({
   // Expiry time for the reset token
   resetTokenExpiration: { type: Date },
   // Role of the user, defaults to 'user'
+  deleteToken: { type: String },
+  deleteTokenExpiration: { type: Date },
   role: {
     type: String,
     default: 'user',

@@ -45,5 +45,9 @@
 		"src/routes/user/+page.server.ts",
 		"src/routes/+layout.ts",
 		"src/routes/+layout.server.ts"
+	],
+	"/user/confirm-delete/[token]": [
+		"src/routes/+layout.ts",
+		"src/routes/+layout.server.ts"
 	]
 }

@@ -95,6 +95,18 @@ export const sendResetPasswordEmail = async (
   );
 };
 
+export const sendDeleteAccountEmail = async (
+  email: string,
+  deleteToken: string,
+) => {
+  const url = `${process.env.URL_FRONT_LOCAL}/user/confirm-delete/${deleteToken}`;
+  await sendEmail(
+    email,
+    'Confirmation de suppression de compte',
+    `Pour confirmer la suppression de votre compte, veuillez cliquer sur ce lien: <a href="${url}">Confirmer la suppression</a>`,
+  );
+};
+
 /**
  * Send an email using a predefined transporter.
  *

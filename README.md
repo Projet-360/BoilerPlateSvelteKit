@@ -112,6 +112,7 @@ mettre la lang dans local storage
 savoir comment faire pour améliorer la gestion des documents Langues
 Si un token a était envoyer ne pas donner un autre // Changement de mot de passe email
 gerer les token invalide
+Les envoie d'email ne sont pas traduits
 
 -rendre le notification generale ...genre un tableaux sur toute les possibilités
 -Faire les messages coté admin et user de notification

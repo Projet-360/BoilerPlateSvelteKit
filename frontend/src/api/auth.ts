@@ -176,6 +176,33 @@ export async function requestAccountDeletion(id: string, $t: App.TranslationFunc
 	}
 }
 
+export async function confirmAccountDeletion(token: string) {
+	try {
+		const headers = new Headers();
+		const response = await fetch(`${import.meta.env.VITE_URL_BACK}/auth/confirm-delete/${token}`, {
+			method: 'POST',
+			headers
+		});
+
+		if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`);
+		}
+
+		// Essayer de parser la réponse en JSON
+		try {
+			const data = await response.json();
+			return data;
+		} catch (e) {
+			// Si la réponse n'est pas du JSON, log l'erreur et renvoyer une erreur générique
+			console.error("La réponse n'est pas en JSON :", e);
+			throw new Error("La réponse du serveur n'est pas au format JSON.");
+		}
+	} catch (error) {
+		console.error('Erreur lors de la confirmation de suppression du compte :', error);
+		throw error;
+	}
+}
+
 export const updateUserInfo = async (userInfo: App.UserInfo, $t: App.TranslationFunction) => {
 	try {
 		const headers = new Headers();

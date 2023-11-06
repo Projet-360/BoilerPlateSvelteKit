@@ -19,6 +19,7 @@ import { User } from '../models/UserModel.js';
 import BlacklistedToken from '../models/BlacklistedTokenModel.js';
 
 import * as authService from '../services/authService.js';
+import * as emailService from '../services/emailService.js';
 import logger from '../services/logger.js';
 import { bruteForceRateLimiter, rateLimiter } from '../services/rateLimiter.js';
 
@@ -298,23 +299,81 @@ router.put(
   },
 );
 
+// Endpoint to request account deletion
 router.post(
   '/user/request-delete',
   isAuthenticated,
   checkRole('user'),
-  async (req, res) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const userId = req.body.id;
-      // Générez un jeton de confirmation de suppression
-      console.log('demande de deletion', userId);
+      if (!req.user || !req.user._id) {
+        return res
+          .status(HTTP_STATUS.UNAUTHORIZED)
+          .json({ message: "Identification de l'utilisateur requise." });
+      }
 
-      res.status(200).json({ message: 'Email de confirmation envoyé.' });
-    } catch (error) {
-      console.error(
-        "Erreur lors de l'envoi de l'email de suppression :",
+      // Génération d'un jeton de suppression sécurisé
+      const deleteToken = await authService.generateDeleteToken();
+
+      // Trouver l'utilisateur et enregistrer le jeton avec une date d'expiration
+      const user = await User.findById(req.user._id);
+      if (!user) {
+        return res
+          .status(HTTP_STATUS.NOT_FOUND)
+          .json({ message: 'Utilisateur non trouvé.' });
+      }
+
+      user.deleteToken = deleteToken;
+      user.deleteTokenExpiration = new Date(Date.now() + 3600000); // 1 heure pour l'expiration
+      await user.save();
+
+      // Envoyer l'email de suppression
+      await emailService.sendDeleteAccountEmail(user.email, deleteToken);
+
+      res
+        .status(HTTP_STATUS.OK)
+        .json({ message: 'E-mail de suppression de compte envoyé.' });
+    } catch (error: any) {
+      logger.error(
+        'Erreur lors de la demande de suppression de compte:',
         error,
       );
-      res.status(500).json({ message: 'Erreur du serveur.' });
+      res
+        .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
+        .json({ message: 'Erreur du serveur.' });
+    }
+  },
+);
+
+// Endpoint to confirm account deletion
+// Endpoint to confirm account deletion
+router.post(
+  '/confirm-delete/:deleteToken',
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { deleteToken } = req.params;
+      console.log('deleteToken', deleteToken);
+
+      // Trouver l'utilisateur avec le jeton de suppression valide et le supprimer
+      const result = await User.deleteOne({
+        deleteToken: deleteToken,
+        deleteTokenExpiration: { $gt: Date.now() },
+      });
+
+      console.log('result', result);
+
+      if (result.deletedCount === 0) {
+        return res
+          .status(404)
+          .json({ message: 'Jeton invalide ou compte déjà supprimé.' });
+      }
+
+      res
+        .status(HTTP_STATUS.OK)
+        .json({ message: 'Compte supprimé avec succès.' });
+    } catch (error: any) {
+      // Gestion des erreurs
+      next(new CustomError('DeleteAccountError', error.message, 500));
     }
   },
 );

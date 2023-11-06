@@ -12,6 +12,8 @@ declare global {
       isVerified?: boolean;
       resetToken?: string;
       resetTokenExpiration?: Date;
+      deleteToken?: string; // Ajout pour la suppression du compte
+      deleteTokenExpiration?: Date; // Ajout pour la suppression du compte
       role?: 'user' | 'admin' | 'moderator';
       // ... autres méthodes et propriétés
     }
