@@ -731,3 +731,38 @@
 {"level":"info","message":"MongoClient connection closed"}
 {"level":"info","message":"Server running on port 2000"}
 {"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: dLStG3xY7dZQPjuhAAAB"}
+{"level":"info","message":"New client connected: F4VuU7E_KFQlwx5mAAAD"}
+{"level":"info","message":"Connected to database: BoilerPlateSvelteKitDB"}
+{"level":"info","message":"Collections found: users, emailverificationtokens, blacklistedtokens, greetings, sessions"}
+{"level":"info","message":"Cleared collection: users, documents deleted: 3"}
+{"level":"info","message":"Cleared collection: emailverificationtokens, documents deleted: 0"}
+{"level":"info","message":"Cleared collection: blacklistedtokens, documents deleted: 0"}
+{"level":"info","message":"Cleared collection: greetings, documents deleted: 0"}
+{"level":"info","message":"Cleared collection: sessions, documents deleted: 1"}
+{"level":"info","message":"Default users inserted, count: 3"}
+{"level":"info","message":"MongoClient connection closed"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Connected to database: BoilerPlateSvelteKitDB"}
+{"level":"info","message":"Collections found: users, emailverificationtokens, blacklistedtokens, greetings, sessions"}
+{"level":"info","message":"Cleared collection: users, documents deleted: 3"}
+{"level":"info","message":"Cleared collection: emailverificationtokens, documents deleted: 0"}
+{"level":"info","message":"Cleared collection: blacklistedtokens, documents deleted: 1"}
+{"level":"info","message":"Cleared collection: greetings, documents deleted: 0"}
+{"level":"info","message":"Cleared collection: sessions, documents deleted: 1"}
+{"level":"info","message":"Default users inserted, count: 3"}
+{"level":"info","message":"MongoClient connection closed"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: Tty38xLKHEmIdTJ4AAAB"}
+{"level":"info","message":"Client disconnected: Tty38xLKHEmIdTJ4AAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: LhM7tiybACCkercgAAAB"}
+{"level":"info","message":"New client connected: jLjpdWQj7SyYjFIOAAAD"}

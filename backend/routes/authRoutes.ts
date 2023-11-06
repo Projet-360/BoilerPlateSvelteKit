@@ -34,44 +34,45 @@ import {
 import CustomError from './../errors/CustomError.js';
 
 // Endpoint to check authentication status
-router.get(
-  '/check-auth',
-  async (req: Request, res: Response, next: NextFunction) => {
-    // Retrieve token from cookies
-    const token = req.cookies.token;
+router.get('/check-auth', async (req, res, next) => {
+  // Retrieve token from cookies
+  const token = req.cookies.token;
 
-    try {
-      // If no token is present, the user is not authenticated.
-      if (!token || token === 'undefined' || token === 'null') {
-        return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
-      }
-
-      // Validate the token and get the authentication status
-      const result = await authService.checkAuthentication(token);
-
-      // Check if the user is authenticated
-      if (result.isAuthenticated) {
-        return res.status(HTTP_STATUS.OK).json({
-          isAuthenticated: true,
-          role: result.role,
-          _id: result._id,
-        });
-      } else {
-        // User is not authenticated, but no error should be thrown.
-        return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
-      }
-    } catch (error: any) {
-      console.error('JWT verification error:', error);
-      next(
-        new CustomError(
-          'CheckAuthError',
-          error.message,
-          HTTP_STATUS.BAD_REQUEST,
-        ),
-      );
+  try {
+    // If no token is present, the user is not authenticated.
+    if (!token || token === 'undefined' || token === 'null') {
+      return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
     }
-  },
-);
+
+    // Check if the token is blacklisted
+    const isBlacklisted = await BlacklistedToken.findOne({ token });
+    if (isBlacklisted) {
+      // Clear the cookie as the token is blacklisted
+      res.clearCookie('token');
+      return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
+    }
+
+    // Validate the token and get the authentication status
+    const result = await authService.checkAuthentication(token);
+
+    // Check if the user is authenticated
+    if (result.isAuthenticated) {
+      return res.status(HTTP_STATUS.OK).json({
+        isAuthenticated: true,
+        role: result.role,
+        _id: result._id,
+      });
+    } else {
+      // User is not authenticated, but no error should be thrown.
+      return res.status(HTTP_STATUS.OK).json({ isAuthenticated: false });
+    }
+  } catch (error: any) {
+    console.error('JWT verification error:', error);
+    next(
+      new CustomError('CheckAuthError', error.message, HTTP_STATUS.BAD_REQUEST),
+    );
+  }
+});
 
 // Endpoint to handle user logout
 router.get(
@@ -147,21 +148,30 @@ router.post(
         // Définir le cookie
         authService.setAuthCookie(res, token);
 
-        // Simulons une chaîne User Agent
-        const userAgentString =
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36';
+        // Utilisez le User Agent de la requête au lieu d'une chaîne simulée
+        const userAgentString = req.headers['user-agent'];
 
+        // Créez une instance de UAParser avec le User Agent de la requête
         const parser = new UAParser(userAgentString);
 
         // Extrait les informations du User Agent
-        const browserInfo = parser.getBrowser(); // Obtenir les informations sur le navigateur
-        const osInfo = parser.getOS(); // Obtenir les informations sur l'OS
-        const deviceInfo = parser.getDevice(); // Obtenir les informations sur le dispositif
+        const browserInfo = parser.getBrowser();
+        const osInfo = parser.getOS();
+        const deviceInfo = parser.getDevice();
 
-        // Enregistre les informations de la session dans la base de données
+        // Enregistrez les informations de la session dans la base de données
         const sessionData = {
           userId: _id,
-          userAgent: req.headers['user-agent'],
+          userAgent: userAgentString,
+          browser: {
+            name: browserInfo.name,
+            version: browserInfo.version,
+          },
+          os: {
+            name: osInfo.name,
+            version: osInfo.version,
+          },
+          device: deviceInfo.model || 'unknown', // Utilisez 'unknown' si le modèle n'est pas disponible
           ip: req.ip,
         };
 
@@ -194,6 +204,9 @@ router.get('/sessions', isAuthenticated, async (req, res) => {
       sessions.map((s) => ({
         id: s._id,
         userAgent: s.userAgent,
+        browser: s.browser, // Assurez-vous que ces champs existent dans votre modèle
+        os: s.os, // Assurez-vous que ces champs existent dans votre modèle
+        device: s.device, // Assurez-vous que ces champs existent dans votre modèle
         ip: s.ip,
         createdAt: s.createdAt,
       })),
@@ -205,25 +218,37 @@ router.get('/sessions', isAuthenticated, async (req, res) => {
 });
 
 router.delete('/sessions/:sessionId', isAuthenticated, async (req, res) => {
-  console.log('//sessions/:sessionId');
   const { sessionId } = req.params;
 
   if (!req.user || !req.user._id) {
     return res.status(401).json({ message: 'Utilisateur non authentifié' });
   }
 
-  const session = await Session.findOneAndDelete({
-    _id: sessionId,
-    userId: req.user._id,
-  }).exec();
+  try {
+    const session = await Session.findOneAndDelete({
+      _id: sessionId,
+      userId: req.user._id,
+    }).exec();
 
-  if (!session) {
-    return res
-      .status(404)
-      .json({ message: 'Session non trouvée ou déjà fermée' });
+    if (!session) {
+      return res
+        .status(404)
+        .json({ message: 'Session non trouvée ou déjà fermée' });
+    }
+
+    // Supposons que le token est stocké dans un cookie nommé 'token'
+    const token = req.cookies.token;
+    if (token) {
+      const newBlacklistedToken = new BlacklistedToken({ token });
+      await newBlacklistedToken.save();
+      res.clearCookie('token');
+    }
+
+    res.json({ message: 'Session fermée avec succès' });
+  } catch (error) {
+    console.error('Erreur lors de la fermeture de la session :', error);
+    return res.status(500).json({ message: 'Erreur interne du serveur' });
   }
-
-  res.json({ message: 'Session fermée avec succès' });
 });
 
 // Endpoint to request password reset
