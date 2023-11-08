@@ -2,9 +2,11 @@
 // for information about these interfaces
 
 declare namespace App {
-	interface PageData {
-		greetings?: { _id: string }[];
-	}
+	type Greeting = {
+		_id: string;
+		name: string;
+		message: string;
+	};
 
 	interface Session {
 		sessionId: string;

@@ -7,45 +7,69 @@
 	let editingId: string | null = null;
 	let name: string = '';
 	let message: string = '';
-	let greetings: any[] = []; // Remplacez "any" par le type approprié si possible
+	let greetings: App.Greeting[] = [];
 
 	onMount(async () => {
-		greetings = await getAllGreetings();
+		const response = await getAllGreetings();
+		if (response.success) {
+			greetings = response.data;
+		} else {
+			// Gérer l'erreur, par exemple avec une notification ou un message d'erreur
+		}
 
-		// Écoutez les événements du serveur et mettez à jour les données localement
-		socket.on('updateGreetings', async () => {
-			greetings = await getAllGreetings();
-		});
+		const updateGreetingsHandler = async () => {
+			const updateResponse = await getAllGreetings();
+			if (updateResponse.success) {
+				greetings = updateResponse.data;
+			} else {
+				// Gérer l'erreur
+			}
+		};
+
+		socket.on('updateGreetings', updateGreetingsHandler);
+
+		return () => {
+			// Ceci est appelé lorsque le composant est détruit
+			socket.off('updateGreetings', updateGreetingsHandler);
+		};
 	});
 
-	export function prepareUpdate(greeting: { name: string; message: string; _id: string }): void {
+	export function prepareUpdate(greeting: App.Greeting): void {
 		name = greeting.name;
 		message = greeting.message;
 		editingId = greeting._id;
 	}
 
 	export async function handleSaveGreeting(): Promise<void> {
-		console.log('Sending greeting');
-		const isSuccessful: boolean = await saveGreeting(name, message, editingId, $t);
-		if (isSuccessful) {
+		const saveResponse = await saveGreeting(name, message, editingId, $t);
+		if (saveResponse.success) {
 			name = '';
 			message = '';
 			editingId = null;
-
-			// Émettez un événement pour informer le serveur que les salutations doivent être mises à jour
 			socket.emit('greetingSent');
-
-			greetings = await getAllGreetings();
+			const refreshResponse = await getAllGreetings();
+			if (refreshResponse.success) {
+				greetings = refreshResponse.data;
+			} else {
+				// Gérer l'erreur
+			}
+		} else {
+			// Gérer l'erreur
 		}
 	}
 
 	export async function handleDeleteGreeting(id: string): Promise<void> {
-		const isSuccessful: boolean = await deleteGreeting(id);
-		if (isSuccessful) {
-			// Émettez un événement pour informer le serveur que les salutations doivent être mises à jour
+		const deleteResponse = await deleteGreeting(id);
+		if (deleteResponse.success) {
 			socket.emit('greetingDeleted');
-
-			greetings = await getAllGreetings();
+			const refreshResponse = await getAllGreetings();
+			if (refreshResponse.success) {
+				greetings = refreshResponse.data;
+			} else {
+				// Gérer l'erreur
+			}
+		} else {
+			// Gérer l'erreur
 		}
 	}
 </script>
