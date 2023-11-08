@@ -4,7 +4,7 @@
 	import { t, locale, locales } from '$UITools/Translations/index';
 
 	import { authStore } from '$stores/authStore';
-	import Logout from '$components/Logout.svelte';
+	import Logout from './Logout.svelte';
 	import FullScreen from './FullScreen.svelte';
 
 	const handleChange = (event: Event) => {

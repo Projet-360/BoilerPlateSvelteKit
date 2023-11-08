@@ -1,6 +1,6 @@
 import { apiCall } from '$api/utils/apiCall';
 
-import { handleRoleRedirection } from '$utils/auth/handleRoleRedirection.js';
+import { handleRoleRedirection } from '$api/utils/handleRoleRedirection';
 
 import { authStore } from '$stores/authStore';
 

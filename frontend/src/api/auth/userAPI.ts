@@ -3,7 +3,7 @@ import { apiCall } from '$api/utils/apiCall';
 import notificationStore from '$stores/notificationStore';
 
 import { messageNotification } from '$modelNotifications/messageNotification';
-import { logout } from '$utils/auth/logout.js';
+import { logout } from '$api/auth/logoutAPI.js';
 
 export async function getDashboardData() {
 	try {

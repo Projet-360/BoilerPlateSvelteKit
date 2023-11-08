@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import socket from '$utils/socket.js';
+	import socket from '$api/utils/socket';
 	import { sendGreeting, getAllGreetings, deleteGreeting } from '$api/Greetings';
 	import { t } from '$UITools/Translations/index';
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { authStore } from '$stores/authStore';
 	import { t } from '$UITools/Translations/index';
-	import { logout } from '$utils/auth/logout';
+	import { logout } from '$api/auth/logoutAPI';
 
 	let isAuthenticated: boolean;
 
