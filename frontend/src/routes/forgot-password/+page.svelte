@@ -10,6 +10,11 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Page d'exemple</title>
+	<meta name="description" content="Ceci est une description de la page d'exemple." />
+</svelte:head>
+
 <main>
 	<h1>{$t('forgot-password.title')}</h1>
 	<form>

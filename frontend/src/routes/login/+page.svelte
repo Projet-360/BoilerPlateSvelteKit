@@ -15,6 +15,11 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Page d'exemple</title>
+	<meta name="description" content="Ceci est une description de la page d'exemple." />
+</svelte:head>
+
 <div class="page">
 	<div class="page-container">
 		<form on:submit|preventDefault={handleLogin}>
