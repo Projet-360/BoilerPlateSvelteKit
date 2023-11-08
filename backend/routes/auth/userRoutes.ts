@@ -15,13 +15,13 @@ const router = Router();
 // GET /user
 // Ce point de terminaison est le tableau de bord de l'utilisateur, accessible seulement si l'utilisateur est authentifié
 // et a le rôle 'user'.
-router.get('/user', isAuthenticated, checkRole('user'), user);
+router.get('/getDashboardData', isAuthenticated, checkRole('user'), user);
 
 // PUT /user/update
 // Ce point de terminaison permet à l'utilisateur de mettre à jour ses informations personnelles, après avoir vérifié
 // son authentification et son rôle.
 router.put(
-  '/user/update',
+  '/user/updateUserInfo',
   isAuthenticated,
   checkRole('user'),
   [...updateUserValidators, handleValidationErrors],
@@ -32,7 +32,7 @@ router.put(
 // Ce point de terminaison permet à l'utilisateur de demander la suppression de son compte, en vérifiant
 // son authentification et son rôle avant de procéder.
 router.post(
-  '/user/request-delete',
+  '/user/requestAccountDeletion',
   isAuthenticated,
   checkRole('user'),
   userRequestDelete,

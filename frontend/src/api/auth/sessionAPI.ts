@@ -2,7 +2,7 @@ import { apiCall } from '$api/utils/apiCall';
 
 export async function getUserSessions() {
 	return apiCall({
-		url: `${import.meta.env.VITE_URL_BACK}/auth/sessions`,
+		url: `${import.meta.env.VITE_URL_BACK}/auth/getUserSessions`,
 		credentials: 'include',
 		handleSuccess: (data) => console.log('Sessions récupérées avec succès :', data),
 		handleError: (error) => console.error('Erreur lors de la récupération des sessions :', error)
@@ -11,7 +11,7 @@ export async function getUserSessions() {
 
 export async function closeUserSession(sessionId: string) {
 	return apiCall({
-		url: `${import.meta.env.VITE_URL_BACK}/auth/sessions/${sessionId}`,
+		url: `${import.meta.env.VITE_URL_BACK}/auth/closeUserSession/${sessionId}`,
 		method: 'DELETE',
 		credentials: 'include',
 		handleSuccess: (data) => console.log('Session fermée avec succès :', data),

@@ -9,20 +9,20 @@ import {
 
 const router = Router();
 
-// POST /forgot-password
+// POST /sendEmailResetPassword
 // Ce point de terminaison initie le processus de réinitialisation du mot de passe en vérifiant l'email de l'utilisateur
 // et en utilisant un système de limitation de taux pour prévenir les abus.
 router.post(
-  '/forgot-password',
+  '/sendEmailResetPassword',
   emailValidators,
   handleValidationErrors,
   rateLimiter,
   forgotPassword,
 );
 
-// POST /forgot-password/:token
+// POST /ResetForgotNewPassword/:token
 // Ce point de terminaison permet à l'utilisateur de réinitialiser son mot de passe en utilisant un token
 // qui a été envoyé à son adresse email.
-router.post('/forgot-password/:token', forgotPasswordToken);
+router.post('/ResetForgotNewPassword/:token', forgotPasswordToken);
 
 export default router;

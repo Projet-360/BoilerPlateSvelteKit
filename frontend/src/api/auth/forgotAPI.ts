@@ -7,7 +7,7 @@ import { goto } from '$app/navigation';
 export async function sendEmailResetPassword(email: string, $t: App.TranslationFunction) {
 	try {
 		const data = await apiCall({
-			url: `${import.meta.env.VITE_URL_BACK}/auth/forgot-password`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/sendEmailResetPassword`,
 			method: 'POST',
 			credentials: 'include',
 			body: { email }
@@ -30,13 +30,16 @@ export async function ResetForgotNewPassword(
 	$t: App.TranslationFunction
 ) {
 	try {
-		const response = await fetch(`${import.meta.env.VITE_URL_BACK}/auth/forgot-password/${token}`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ newPassword, confirmPassword })
-		});
+		const response = await fetch(
+			`${import.meta.env.VITE_URL_BACK}/auth/ResetForgotNewPassword/${token}`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ newPassword, confirmPassword })
+			}
+		);
 
 		if (response.ok) {
 			goto('/');

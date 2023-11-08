@@ -5,7 +5,7 @@ export async function getAllUsers() {
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
-			url: `${import.meta.env.VITE_URL_BACK}/auth/admin/users`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/admin/getAllUsers`,
 			method: 'GET',
 			headers: headers,
 			credentials: 'include'
@@ -29,7 +29,7 @@ export async function updateUser(
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
-			url: `${import.meta.env.VITE_URL_BACK}/auth/admin/user/${userId}`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/admin/updateUser/${userId}`,
 			method: 'PUT',
 			headers: headers,
 			credentials: 'include',

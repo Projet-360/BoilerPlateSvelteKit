@@ -9,7 +9,7 @@ export async function getDashboardData() {
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
-			url: `${import.meta.env.VITE_URL_BACK}/auth/user`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/getDashboardData`,
 			method: 'GET',
 			headers: headers,
 			credentials: 'include'
@@ -23,7 +23,7 @@ export async function getDashboardData() {
 export async function requestAccountDeletion(id: string, $t: App.TranslationFunction) {
 	try {
 		const response = await apiCall({
-			url: `${import.meta.env.VITE_URL_BACK}/auth/user/request-delete`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/user/requestAccountDeletion`,
 			method: 'POST',
 			credentials: 'include',
 			body: { id }
@@ -42,7 +42,7 @@ export const updateUserInfo = async (userInfo: App.UserInfo, $t: App.Translation
 	try {
 		const headers = new Headers();
 		const data = await apiCall({
-			url: `${import.meta.env.VITE_URL_BACK}/auth/user/update`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/user/updateUserInfo`,
 			method: 'PUT',
 			headers: headers,
 			credentials: 'include',
@@ -70,7 +70,7 @@ export async function confirmAccountDeletion(token: string) {
 	try {
 		const headers = new Headers();
 		const response = await apiCall({
-			url: `${import.meta.env.VITE_URL_BACK}/auth/confirm-delete/${token}`,
+			url: `${import.meta.env.VITE_URL_BACK}/auth/confirmAccountDeletion/${token}`,
 			method: 'POST',
 			headers
 		});

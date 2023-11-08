@@ -99,7 +99,7 @@ export const sendDeleteAccountEmail = async (
   email: string,
   deleteToken: string,
 ) => {
-  const url = `${process.env.URL_FRONT_LOCAL}/user/confirm-delete/${deleteToken}`;
+  const url = `${process.env.URL_FRONT_LOCAL}/user/confirmAccountDeletion/${deleteToken}`;
   await sendEmail(
     email,
     'Confirmation de suppression de compte',

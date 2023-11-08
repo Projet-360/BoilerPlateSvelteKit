@@ -13,7 +13,12 @@ const router = Router();
  * GET /admin/users
  * Endpoint to list all users for the admin, ensuring authentication and 'admin' role.
  */
-router.get('/admin/users', isAuthenticated, checkRole('admin'), adminUser);
+router.get(
+  '/admin/getAllUsers',
+  isAuthenticated,
+  checkRole('admin'),
+  adminUser,
+);
 
 /**
  * PUT /admin/user/:_id
@@ -21,7 +26,7 @@ router.get('/admin/users', isAuthenticated, checkRole('admin'), adminUser);
  * authentication and 'admin' role.
  */
 router.put(
-  '/admin/user/:_id',
+  '/admin/updateUser/:_id',
   isAuthenticated,
   checkRole('admin'),
   [...updateUserValidators, handleValidationErrors],

@@ -7,7 +7,7 @@ authStore.subscribe((state) => {
 
 export async function checkAuth() {
 	try {
-		const res = await fetch(`${import.meta.env.VITE_URL_BACK}/auth/check-auth`, {
+		const res = await fetch(`${import.meta.env.VITE_URL_BACK}/auth/checkAuth`, {
 			credentials: 'include'
 		});
 		if (res.ok) {
