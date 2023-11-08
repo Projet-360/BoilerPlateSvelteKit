@@ -37,22 +37,26 @@
 </script>
 
 <Splide options={splideOptions} extensions={{ AutoScroll }} aria-label="My Favorite Images">
-	<SplideSlide>
+	<SplideSlide role="tabpanel" aria-label="GitHub Logo 1" id="splide01">
 		<img src={github} alt="Logo GitHub" class="imgcarousel" width="50" height="50" />
 	</SplideSlide>
-	<SplideSlide>
+	<SplideSlide role="tabpanel" aria-label="GitHub Logo 2" id="splide02">
 		<img src={github} alt="Logo GitHub" class="imgcarousel" width="50" height="50" />
 	</SplideSlide>
-	<SplideSlide>
+	<SplideSlide role="tabpanel" aria-label="GitHub Logo 3" id="splide03">
 		<img src={github} alt="Logo GitHub" class="imgcarousel" width="50" height="50" />
 	</SplideSlide>
-	<SplideSlide>
+	<SplideSlide role="tabpanel" aria-label="GitHub Logo 4" id="splide04">
 		<img src={github} alt="Logo GitHub" class="imgcarousel" width="50" height="50" />
 	</SplideSlide>
-	<SplideSlide>
+	<SplideSlide role="tabpanel" aria-label="GitHub Logo 5" id="splide05">
 		<img src={github} alt="Logo GitHub" class="imgcarousel" width="50" height="50" />
 	</SplideSlide>
-	<SplideSlide>
+	<SplideSlide role="tabpanel" aria-label="GitHub Logo 6" id="splide06">
 		<img src={github} alt="Logo GitHub" class="imgcarousel" width="50" height="50" />
 	</SplideSlide>
+	<SplideSlide role="tabpanel" aria-label="GitHub Logo 7" id="splide07">
+		<img src={github} alt="Logo GitHub" class="imgcarousel" width="50" height="50" />
+	</SplideSlide>
+	<!-- Plus de SplideSlides ici -->
 </Splide>

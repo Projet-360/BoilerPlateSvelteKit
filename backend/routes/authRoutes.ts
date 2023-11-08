@@ -4,32 +4,22 @@ import { Router } from 'express';
 const router = Router();
 
 import { handleValidationErrors } from '../middlewares/handleValidationErrors.js';
-import { isAuthenticated } from '../middlewares/isAuthenticated.js';
-import { checkRole } from '../middlewares/checkRole.js';
 
 import { bruteForceRateLimiter, rateLimiter } from '../services/rateLimiter.js';
 
 import {
   signupValidators,
-  updateUserValidators,
   emailValidators,
 } from '../validations/validators.js';
 
 import {
-  adminUser,
-  adminUserID,
   checkAuthStatus,
   confirmDeleteToken,
   forgotPassword,
   forgotPasswordToken,
   login,
   logout,
-  sessionID,
-  sessions,
   signup,
-  user,
-  userRequestDelete,
-  userUpdate,
   verify,
 } from '../controllers/autControllers.js';
 

@@ -4,7 +4,6 @@ import Greeting from '../models/GreetingModel.js';
 import { greetingsValidators } from '../validations/validators.js';
 import { handleValidationErrors } from '../middlewares/handleValidationErrors.js';
 import { bruteForceRateLimiter } from '../services/rateLimiter.js';
-const router = express.Router();
 
 // Read All
 export default (io: any) => {
