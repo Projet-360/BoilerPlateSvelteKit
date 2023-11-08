@@ -11,12 +11,12 @@ export default function initSocket(httpServer: Server) {
   io.on('connection', (socket) => {
     logger.info(`New client connected: ${socket.id}`);
 
-    socket.on('greetingSent', () => {
+    socket.on('saveGreeting', () => {
       logger.info(`Greeting sent from client: ${socket.id}`);
       io.emit('updateGreetings');
     });
 
-    socket.on('greetingDeleted', () => {
+    socket.on('deleteGreeting', () => {
       logger.info(`Greeting deleted from client: ${socket.id}`);
       io.emit('updateGreetings');
     });

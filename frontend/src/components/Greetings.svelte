@@ -3,16 +3,28 @@
 	import socket from '$api/utils/socket';
 	import { saveGreeting, getAllGreetings, deleteGreeting } from '$api/greetingsAPI';
 	import { t } from '$UITools/Translations/index';
+	import {
+		greetingsStore,
+		setGreetings,
+		deleteGreeting as deleteGreetingFromStore,
+		updateGreeting as updateGreetingInStore
+	} from '$stores/greetingsStore';
+	import { messageNotification } from '$modelNotifications/messageNotification';
 
 	let editingId: string | null = null;
 	let name: string = '';
 	let message: string = '';
-	let greetings: App.Greeting[] = [];
+
+	// Souscrire au magasin Svelte
+	const unsubscribe = greetingsStore.subscribe((value) => {
+		// Cette fonction est appelée à chaque mise à jour du magasin
+		// Vous pouvez utiliser 'value' pour faire des choses avec les données du magasin
+	});
 
 	onMount(async () => {
 		const response = await getAllGreetings();
 		if (response.success) {
-			greetings = response.data;
+			setGreetings(response.data);
 		} else {
 			// Gérer l'erreur, par exemple avec une notification ou un message d'erreur
 		}
@@ -20,7 +32,7 @@
 		const updateGreetingsHandler = async () => {
 			const updateResponse = await getAllGreetings();
 			if (updateResponse.success) {
-				greetings = updateResponse.data;
+				setGreetings(updateResponse.data);
 			} else {
 				// Gérer l'erreur
 			}
@@ -29,7 +41,8 @@
 		socket.on('updateGreetings', updateGreetingsHandler);
 
 		return () => {
-			// Ceci est appelé lorsque le composant est détruit
+			// Se désinscrire du magasin et retirer l'écouteur d'événements du socket
+			unsubscribe();
 			socket.off('updateGreetings', updateGreetingsHandler);
 		};
 	});
@@ -46,30 +59,29 @@
 			name = '';
 			message = '';
 			editingId = null;
-			socket.emit('greetingSent');
-			const refreshResponse = await getAllGreetings();
-			if (refreshResponse.success) {
-				greetings = refreshResponse.data;
-			} else {
-				// Gérer l'erreur
+			socket.emit('saveGreeting');
+			// Mettre à jour le magasin après l'ajout ou la mise à jour d'une salutation
+			if (saveResponse.data) {
+				updateGreetingInStore(saveResponse.data._id, saveResponse.data);
 			}
 		} else {
-			// Gérer l'erreur
+			messageNotification(
+				saveResponse.error?.message || 'Une erreur est survenue lors de la sauvegarde.',
+				$t
+			);
 		}
 	}
 
 	export async function handleDeleteGreeting(id: string): Promise<void> {
 		const deleteResponse = await deleteGreeting(id);
 		if (deleteResponse.success) {
-			socket.emit('greetingDeleted');
-			const refreshResponse = await getAllGreetings();
-			if (refreshResponse.success) {
-				greetings = refreshResponse.data;
-			} else {
-				// Gérer l'erreur
-			}
+			deleteGreetingFromStore(id);
+			socket.emit('deleteGreeting');
 		} else {
-			// Gérer l'erreur
+			messageNotification(
+				deleteResponse.error?.message || 'Une erreur est survenue lors de la suppression.',
+				$t
+			);
 		}
 	}
 </script>
@@ -87,7 +99,7 @@
 	<button type="submit">Envoyer</button>
 </form>
 
-{#each greetings as greeting}
+{#each $greetingsStore as greeting}
 	<li>
 		{greeting.name}: {greeting.message}
 		<button on:click={() => prepareUpdate(greeting)}>Modifier</button>
