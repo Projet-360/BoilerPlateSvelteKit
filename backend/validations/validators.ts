@@ -29,13 +29,15 @@ export const passwordValidators = [
     .withMessage(messageReturn.SPECIAL_CARAC_PASSWORD),
 ];
 
-export const inputTextValidators: ValidationChain[] = [
+export const nameValidator = [
   check('name').not().isEmpty().withMessage(messageReturn.NAME_REQUIRED),
   check('name').escape(),
   check('name')
-    .isLength({ min: 2, max: 50 })
+    .isLength({ min: 5, max: 50 })
     .withMessage(messageReturn.NAME_MIN_MAX_CARAC),
+];
 
+export const messageValidator = [
   check('message').not().isEmpty().withMessage(messageReturn.MESSAGE_REQUIRED),
   check('message').escape(),
   check('message')
@@ -52,4 +54,7 @@ export const updateUserValidators: ValidationChain[] = [
   ...usernameValidators,
   ...emailValidators,
 ];
-export const greetingsValidators: ValidationChain[] = [...inputTextValidators];
+export const greetingsValidators: ValidationChain[] = [
+  ...nameValidator,
+  ...messageValidator,
+];
