@@ -1,14 +1,14 @@
 import { Router } from 'express';
-import { handleValidationErrors } from '../middlewares/handleValidationErrors.js';
-import { checkRole } from '../middlewares/checkRole.js';
-import { isAuthenticated } from '../middlewares/isAuthenticated.js';
-import { updateUserValidators } from '../validations/validators.js';
+import { handleValidationErrors } from '../../middlewares/handleValidationErrors.js';
+import { checkRole } from '../../middlewares/checkRole.js';
+import { isAuthenticated } from '../../middlewares/isAuthenticated.js';
+import { updateUserValidators } from '../../validations/validators.js';
 
 import {
   user,
   userRequestDelete,
   userUpdate,
-} from '../controllers/userControllers.js';
+} from '../../controllers/userControllers.js';
 
 const router = Router();
 

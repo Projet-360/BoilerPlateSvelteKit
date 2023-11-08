@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { handleValidationErrors } from '../middlewares/handleValidationErrors.js';
-import { emailValidators } from '../validations/validators.js';
-import { rateLimiter } from '../services/rateLimiter.js';
+import { handleValidationErrors } from '../../middlewares/handleValidationErrors.js';
+import { emailValidators } from '../../validations/validators.js';
+import { rateLimiter } from '../../services/rateLimiter.js';
 import {
   forgotPassword,
   forgotPasswordToken,
-} from '../controllers/forgotController.js';
+} from '../../controllers/forgotController.js';
 
 const router = Router();
 

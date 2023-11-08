@@ -11,13 +11,17 @@ import logger from './services/logger.js';
 import dotenv from 'dotenv';
 
 // Import route modules
-import authRoutes from './routes/authRoutes.js';
+import checkAuthStatusRoutes from './routes/auth/checkAuthStatusRoutes.js';
+import adminRoutes from './routes/auth/adminRoutes.js';
+import userRoutes from './routes/auth/userRoutes.js';
+import forgotRoutes from './routes/auth/forgotRoutes.js';
+import signupRoutes from './routes/auth/signupRoutes.js';
+import sessionRoutes from './routes/auth/sessionRoutes.js';
 import greetingRoutes from './routes/greetingRoutes.js';
-import adminRoutes from './routes/adminRoutes.js';
-import userRoutes from './routes/userRoutes.js';
-import sessionRoutes from './routes/sessionRoutes.js';
-import forgotRoutes from './routes/forgotRoutes.js';
-import checkAuthStatusRoutes from './routes/checkAuthStatusRoutes.js';
+import loginRoutes from './routes/auth/loginRoutes.js';
+import logoutRoutes from './routes/auth/logoutRoutes.js';
+import confirmTokenRoutes from './routes/auth/confirmTokenRoutes.js';
+import verifyRoutes from './routes/auth/verifyRoutes.js';
 
 dotenv.config();
 
@@ -46,11 +50,18 @@ applyMiddlewares(app);
 
 // Route definitions
 app.use('/auth', checkAuthStatusRoutes);
-app.use('/auth', authRoutes);
 app.use('/auth', adminRoutes);
 app.use('/auth', userRoutes);
-app.use('/auth', sessionRoutes);
+
+app.use('/auth', signupRoutes);
+app.use('/auth', loginRoutes);
+app.use('/auth', logoutRoutes);
+app.use('/auth', verifyRoutes);
+app.use('/auth', confirmTokenRoutes);
+
 app.use('/auth', forgotRoutes);
+app.use('/auth', sessionRoutes);
+
 app.use('/api', greetingRoutes(io));
 
 // Error handling middleware
