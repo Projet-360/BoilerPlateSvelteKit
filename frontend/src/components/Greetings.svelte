@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import socket from '$api/utils/socket';
-	import { sendGreeting, getAllGreetings, deleteGreeting } from '$api/Greetings';
+	import { sendGreeting, getAllGreetings, deleteGreeting } from '$api/greetingsAPI';
 	import { t } from '$UITools/Translations/index';
 
 	let editingId: string | null = null;
@@ -14,7 +14,6 @@
 
 		// Écoutez les événements du serveur et mettez à jour les données localement
 		socket.on('updateGreetings', async () => {
-			console.log('Received updateGreetings event from server');
 			greetings = await getAllGreetings();
 		});
 	});

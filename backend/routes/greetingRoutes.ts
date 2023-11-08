@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import express from 'express';
 import Greeting from '../models/GreetingModel.js';
 import { greetingsValidators } from '../validations/validators.js';
