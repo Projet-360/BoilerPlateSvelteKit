@@ -4,7 +4,7 @@
 	import { t } from '$UITools/Translations/index';
 	import notificationStore from '$stores/notificationStore';
 
-	import { ResetForgotNewPassword } from '$api/auth';
+	import { ResetForgotNewPassword } from '$api/auth/forgotAPI';
 
 	let newPassword = '';
 	let confirmPassword = '';

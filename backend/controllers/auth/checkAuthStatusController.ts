@@ -1,10 +1,10 @@
 // authController.js
 import { Request, Response, NextFunction } from 'express';
 
-import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
-import BlacklistedToken from '../models/BlacklistedTokenModel.js';
-import * as authService from '../services/authService.js';
-import CustomError from '../errors/CustomError.js';
+import { HTTP_STATUS } from '../../constants/HTTP_STATUS.js';
+import BlacklistedToken from '../../models/BlacklistedTokenModel.js';
+import * as authService from '../../services/authService.js';
+import CustomError from '../../errors/CustomError.js';
 
 export const checkAuthStatus = async (
   req: Request,

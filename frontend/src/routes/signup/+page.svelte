@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { signup } from '$api/auth';
+	import { signup } from '$api/auth/signupAPI';
 	import { t } from '$UITools/Translations/index';
 
 	let username = '';

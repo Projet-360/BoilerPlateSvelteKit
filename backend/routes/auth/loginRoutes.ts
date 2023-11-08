@@ -5,7 +5,7 @@ const router = Router();
 
 import { bruteForceRateLimiter } from '../../services/rateLimiter.js';
 
-import { login } from '../../controllers/authControllers.js';
+import { login } from '../../controllers/auth/loginControllers.js';
 
 // POST /login
 // Ce point de terminaison gère la connexion utilisateur avec un système de limitation de taux

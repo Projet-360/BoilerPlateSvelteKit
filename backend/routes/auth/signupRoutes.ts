@@ -6,7 +6,7 @@ const router = Router();
 import { handleValidationErrors } from '../../middlewares/handleValidationErrors.js';
 import { bruteForceRateLimiter } from '../../services/rateLimiter.js';
 import { signupValidators } from '../../validations/validators.js';
-import { signup } from '../../controllers/authControllers.js';
+import { signup } from '../../controllers/auth/signupControllers.js';
 
 // POST /signup
 // Ce point de terminaison gère l'inscription d'un nouvel utilisateur. Il utilise une suite de middlewares pour

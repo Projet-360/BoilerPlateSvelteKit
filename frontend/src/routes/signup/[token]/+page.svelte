@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { t } from '$UITools/Translations/index';
-	import { verifyToken } from '$api/auth.js';
+	import { verifyToken } from '$api/auth/verifyTokenAPI';
 
 	let token;
 

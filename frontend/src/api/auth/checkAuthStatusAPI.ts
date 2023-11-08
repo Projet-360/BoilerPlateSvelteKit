@@ -1,6 +1,4 @@
-import { apiCall } from '$api/utils/apiCall';
 import { authStore } from '$stores/authStore';
-
 let currentState: App.IAuthStore;
 
 authStore.subscribe((state) => {

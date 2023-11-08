@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { t } from '$UITools/Translations/index';
-	import { login } from '$api/auth';
+	import { login } from '$api/auth/loginAPI';
 
 	let email = '';
 	let password = '';

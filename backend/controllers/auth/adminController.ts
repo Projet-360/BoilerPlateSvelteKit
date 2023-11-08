@@ -1,7 +1,7 @@
 // authController.js
 import { Request, Response, NextFunction } from 'express';
-import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
-import * as authService from '../services/authService.js';
+import { HTTP_STATUS } from '../../constants/HTTP_STATUS.js';
+import * as authService from '../../services/authService.js';
 
 export const adminUser = async (
   req: Request,

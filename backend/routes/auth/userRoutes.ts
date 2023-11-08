@@ -8,7 +8,7 @@ import {
   user,
   userRequestDelete,
   userUpdate,
-} from '../../controllers/userControllers.js';
+} from '../../controllers/auth/userControllers.js';
 
 const router = Router();
 

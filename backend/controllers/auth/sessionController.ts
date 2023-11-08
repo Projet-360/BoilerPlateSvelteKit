@@ -1,7 +1,7 @@
 // authController.js
 import { Request, Response, NextFunction } from 'express';
-import BlacklistedToken from '../models/BlacklistedTokenModel.js';
-import { Session } from '../models/sessionModel.js';
+import BlacklistedToken from '../../models/BlacklistedTokenModel.js';
+import { Session } from '../../models/sessionModel.js';
 
 export const sessions = async (req: Request, res: Response) => {
   console.log('Route /sessions atteinte');

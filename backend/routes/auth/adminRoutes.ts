@@ -2,7 +2,10 @@ import { Router } from 'express';
 import { handleValidationErrors } from '../../middlewares/handleValidationErrors.js';
 import { checkRole } from '../../middlewares/checkRole.js';
 import { isAuthenticated } from '../../middlewares/isAuthenticated.js';
-import { adminUser, adminUserID } from '../../controllers/adminController.js';
+import {
+  adminUser,
+  adminUserID,
+} from '../../controllers/auth/adminController.js';
 import { updateUserValidators } from '../../validations/validators.js';
 const router = Router();
 

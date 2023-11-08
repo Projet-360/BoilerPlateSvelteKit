@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { getAllUsers, updateUser } from '$api/auth.js';
+	import { getAllUsers, updateUser } from '$api/auth/adminAPI';
 	import notificationStore from '$stores/notificationStore';
 	import { t } from '$UITools/Translations';
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { t } from '$UITools/Translations/index';
 
-	import { sendEmailResetPassword } from '$api/auth';
+	import { sendEmailResetPassword } from '$api/auth/forgotAPI';
 
 	let email = '';
 

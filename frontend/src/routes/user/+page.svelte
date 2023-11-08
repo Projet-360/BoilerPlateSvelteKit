@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { hoverable } from '$UITools/Cursor/cursorHelpers.js';
 	import { onMount } from 'svelte';
-	import { getDashboardData, updateUserInfo } from '$api/auth.js';
+	import { getDashboardData, updateUserInfo } from '$api/auth/userAPI';
 	import { t } from '$UITools/Translations/index';
-	import { sendEmailResetPassword, requestAccountDeletion } from '$api/auth.js';
+	import { sendEmailResetPassword } from '$api/auth/forgotAPI';
+	import { requestAccountDeletion } from '$api/auth/userAPI';
 	import SessionAccount from '$components/sessionAccount.svelte';
 
 	let userData: App.User;

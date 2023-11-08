@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { confirmAccountDeletion } from '$api/auth.js';
+	import { confirmAccountDeletion } from '$api/auth/userAPI';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 
@@ -17,7 +17,7 @@
 				alert('Votre compte a été supprimé avec succès.');
 				goto('/'); // Rediriger l'utilisateur vers la page d'accueil
 			} catch (error) {
-				alert('Impossible de supprimer le compte: ' + error.message);
+				alert(('Impossible de supprimer le compte: ' + error.message) as string);
 			}
 		}
 	});

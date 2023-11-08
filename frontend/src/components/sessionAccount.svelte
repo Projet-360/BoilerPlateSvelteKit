@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getUserSessions, closeUserSession } from '$api/auth.js'; // Assurez-vous que le chemin d'importation est correct
+	import { getUserSessions, closeUserSession } from '$api/auth/sessionAPI';
 	import notificationStore from '$stores/notificationStore'; // Supposons que vous ayez un store pour les notifications
 
 	let sessions: App.Session[] = [];

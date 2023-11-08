@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { checkAuth } from '$api/checkAuthStatusAPI.js';
+	import { checkAuth } from '$api/auth/checkAuthStatusAPI.js';
 	import { registerServiceWorker } from '$UITools/serviceWorker';
 
 	import Header from '$components/Header.svelte';
