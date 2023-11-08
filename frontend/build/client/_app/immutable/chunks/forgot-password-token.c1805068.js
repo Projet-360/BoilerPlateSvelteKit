@@ -1,1 +1,0 @@
-const s="Réinitialiser le mot de passe",e="Nouveau mot de passe :",o="Confirmer le mot de passe :",t="Réinitialiser le mot de passe",i={title:s,newPassword:e,confirmPassword:o,link:t};export{o as confirmPassword,i as default,t as link,e as newPassword,s as title};

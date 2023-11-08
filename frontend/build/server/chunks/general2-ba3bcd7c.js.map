@@ -1,1 +1,0 @@
-{"version":3,"file":"general2-ba3bcd7c.js","sources":["../../../.svelte-kit/adapter-node/chunks/general2.js"],"sourcesContent":["const language = \"Choisissez une langue :\";\nconst general = {\n  language\n};\nexport {\n  general as default,\n  language\n};\n"],"names":[],"mappings":"AAAK,MAAC,QAAQ,GAAG,0BAA0B;AACtC,MAAC,OAAO,GAAG;AAChB,EAAE,QAAQ;AACV;;;;"}
