@@ -1,13 +1,57 @@
+# System files
 .DS_Store
-node_modules
+
+# Dependencies
+node_modules/
+
+# Build output
 build/
+dist/
+public/build/
+public/global/
+
+# Svelte & SvelteKit
 .svelte-kit/
+.svelte/
+
+# Git directories
 **/.github/
+**/.git/
+
+# Test results
 **/test-results/
-/package
+
+# Environment files
 .env
 .env.*
 !.env.example
-.output
-vite.config.js.timestamp-*
-vite.config.ts.timestamp-*
+
+# Cache files
+.cache/
+.npm/
+.pnpm/
+.yarn/
+
+# Lock files (à inclure selon votre préférence de workflow)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-workspace
+
+# OS generated files
+ehthumbs.db
+Thumbs.db
+
+# Misc
+*.timestamp-*
+*.local
