@@ -59,7 +59,7 @@
 			name = '';
 			message = '';
 			editingId = null;
-			socket.emit('saveGreeting');
+			socket.emit('saveGreetingSocket');
 			// Mettre à jour le magasin après l'ajout ou la mise à jour d'une salutation
 			if (saveResponse.data) {
 				updateGreetingInStore(saveResponse.data._id, saveResponse.data);
@@ -76,7 +76,7 @@
 		const deleteResponse = await deleteGreeting(id);
 		if (deleteResponse.success) {
 			deleteGreetingFromStore(id);
-			socket.emit('deleteGreeting');
+			socket.emit('deleteGreetingSocket');
 		} else {
 			messageNotification(
 				deleteResponse.error?.message || 'Une erreur est survenue lors de la suppression.',
