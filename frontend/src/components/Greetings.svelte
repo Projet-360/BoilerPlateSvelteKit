@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import socket from '$api/utils/socket';
-	import { sendGreeting, getAllGreetings, deleteGreeting } from '$api/greetingsAPI';
+	import { saveGreeting, getAllGreetings, deleteGreeting } from '$api/greetingsAPI';
 	import { t } from '$UITools/Translations/index';
 
 	let editingId: string | null = null;
@@ -24,9 +24,9 @@
 		editingId = greeting._id;
 	}
 
-	export async function handleSendGreeting(): Promise<void> {
+	export async function handleSaveGreeting(): Promise<void> {
 		console.log('Sending greeting');
-		const isSuccessful: boolean = await sendGreeting(name, message, editingId, $t);
+		const isSuccessful: boolean = await saveGreeting(name, message, editingId, $t);
 		if (isSuccessful) {
 			name = '';
 			message = '';
@@ -50,7 +50,7 @@
 	}
 </script>
 
-<form on:submit|preventDefault={handleSendGreeting}>
+<form on:submit|preventDefault={handleSaveGreeting}>
 	<label for="nameInput">
 		Nom :
 		<input id="nameInput" name="name" type="text" autocomplete="name" bind:value={name} />
@@ -63,12 +63,15 @@
 	<button type="submit">Envoyer</button>
 </form>
 
-<ul>
-	{#each greetings as greeting}
-		<li>
-			{greeting.name}: {greeting.message}
-			<button on:click={() => prepareUpdate(greeting)}>Modifier</button>
-			<button on:click={() => handleDeleteGreeting(greeting._id)}>Supprimer</button>
-		</li>
-	{/each}
-</ul>
+{#each greetings as greeting}
+	<li>
+		{greeting.name}: {greeting.message}
+		<button on:click={() => prepareUpdate(greeting)}>Modifier</button>
+		<button
+			on:click={() => handleDeleteGreeting(greeting._id)}
+			disabled={editingId === greeting._id}
+		>
+			Supprimer
+		</button>
+	</li>
+{/each}

@@ -1,7 +1,7 @@
 import { apiCall } from '$api/utils/apiCall';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
-export async function sendGreeting(
+export async function saveGreeting(
 	name: string,
 	message: string,
 	editingId: string | null = null,
@@ -9,8 +9,8 @@ export async function sendGreeting(
 ) {
 	try {
 		const url = editingId
-			? `${import.meta.env.VITE_URL_BACK}/api/updateGreeting/${editingId}`
-			: `${import.meta.env.VITE_URL_BACK}/api/saveGreeting`;
+			? `${import.meta.env.VITE_URL_BACK}/api/greetings/${editingId}`
+			: `${import.meta.env.VITE_URL_BACK}/api/greetings`;
 		const method = editingId ? 'PUT' : 'POST';
 
 		const isSuccessful = await apiCall({
@@ -28,7 +28,7 @@ export async function sendGreeting(
 
 export async function getAllGreetings() {
 	const data = await apiCall({
-		url: `${import.meta.env.VITE_URL_BACK}/api/getGreetings`,
+		url: `${import.meta.env.VITE_URL_BACK}/api/greetings`,
 		method: 'GET'
 	});
 
@@ -37,7 +37,7 @@ export async function getAllGreetings() {
 
 export async function deleteGreeting(id: string) {
 	const isSuccessful = await apiCall({
-		url: `${import.meta.env.VITE_URL_BACK}/api/deleteGreeting/${id}`,
+		url: `${import.meta.env.VITE_URL_BACK}/api/greetings/${id}`,
 		method: 'DELETE'
 	});
 
