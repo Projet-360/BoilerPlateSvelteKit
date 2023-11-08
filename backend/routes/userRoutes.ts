@@ -6,7 +6,7 @@ import {
   user,
   userRequestDelete,
   userUpdate,
-} from '../controllers/autControllers.js';
+} from '../controllers/authControllers.js';
 import { updateUserValidators } from '../validations/validators.js';
 const router = Router();
 

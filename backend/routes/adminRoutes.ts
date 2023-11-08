@@ -4,7 +4,7 @@ import { handleValidationErrors } from '../middlewares/handleValidationErrors.js
 import {
   forgotPassword,
   forgotPasswordToken,
-} from '../controllers/autControllers.js';
+} from '../controllers/authControllers.js';
 import { emailValidators } from '../validations/validators.js';
 import { rateLimiter } from '../services/rateLimiter.js';
 const router = Router();

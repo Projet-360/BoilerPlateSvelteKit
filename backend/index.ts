@@ -17,6 +17,7 @@ import adminRoutes from './routes/adminRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import sessionRoutes from './routes/sessionRoutes.js';
 import forgotRoutes from './routes/forgotRoutes.js';
+import checkAuthStatusRoutes from './routes/checkAuthStatusRoutes.js';
 
 dotenv.config();
 
@@ -44,10 +45,11 @@ if (process.env.NODE_ENV === 'prod') {
 applyMiddlewares(app);
 
 // Route definitions
+app.use(checkAuthStatusRoutes);
 app.use('/auth', authRoutes);
-app.use(adminRoutes);
-app.use(userRoutes);
-app.use(sessionRoutes);
+app.use('/auth', adminRoutes);
+app.use('/auth', userRoutes);
+app.use('/auth', sessionRoutes);
 app.use(forgotRoutes);
 app.use('/api', greetingRoutes(io));
 

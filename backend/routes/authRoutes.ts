@@ -21,7 +21,7 @@ import {
   logout,
   signup,
   verify,
-} from '../controllers/autControllers.js';
+} from '../controllers/authControllers.js';
 
 // GET /check-auth
 // Ce point de terminaison vérifie si l'utilisateur est actuellement authentifié
