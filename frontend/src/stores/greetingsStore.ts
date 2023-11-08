@@ -1,28 +1,28 @@
-// store.ts
+import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
 
-export const greetingsStore = writable<App.Greeting[]>([]);
+export interface Greeting {
+	_id: string;
+	name: string;
+	message: string;
+}
 
-export const setGreetings = (greetings: App.Greeting[]) => {
+export const greetingsStore: Writable<Greeting[]> = writable([]);
+
+export const setGreetings = (greetings: Greeting[]) => {
 	greetingsStore.set(greetings);
 };
 
-export const addGreeting = (greeting: App.Greeting) => {
-	greetingsStore.update((currentGreetings) => {
-		return [...currentGreetings, greeting];
-	});
+export const addGreeting = (greeting: Greeting) => {
+	greetingsStore.update((currentGreetings) => [...currentGreetings, greeting]);
 };
 
-export const updateGreeting = (id: string, updatedFields: Partial<App.Greeting>) => {
-	greetingsStore.update((currentGreetings) => {
-		return currentGreetings.map((greeting) =>
-			greeting._id === id ? { ...greeting, ...updatedFields } : greeting
-		);
-	});
+export const updateGreetingInStore = (id: string, updatedFields: Partial<Greeting>) => {
+	greetingsStore.update((currentGreetings) =>
+		currentGreetings.map((g) => (g._id === id ? { ...g, ...updatedFields } : g))
+	);
 };
 
-export const deleteGreeting = (id: string) => {
-	greetingsStore.update((currentGreetings) => {
-		return currentGreetings.filter((greeting) => greeting._id !== id);
-	});
+export const deleteGreetingFromStore = (id: string) => {
+	greetingsStore.update((currentGreetings) => currentGreetings.filter((g) => g._id !== id));
 };
