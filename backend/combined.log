@@ -811,3 +811,65 @@
 {"level":"info","message":"Server running on port 2000"}
 {"level":"info","message":"Connected to MongoDB"}
 {"level":"info","message":"New client connected: jEqoTaqn8DrSzNDvAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: k0y1Rx1aLVORTLkMAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: qtwcKspiN-71iqukAAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: YGrs0t2G3M1q15WeAAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: TuG318-O3k3UoOU6AAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: T7OcMQgVhvExYO9gAAAB"}
+{"level":"info","message":"New client connected: B7eJFZMOqf3mOOrYAAAD"}
+{"level":"info","message":"Client disconnected: B7eJFZMOqf3mOOrYAAAD"}
+{"level":"info","message":"Email successfully sent to fbrrnarv@example.com"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"level":"info","message":"error from authRoutes EMAIL_NOT_VERIFIED","name":"EMAIL_NOT_VERIFIED","stack":"EMAIL_NOT_VERIFIED: EMAIL_NOT_VERIFIED\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:231:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"New client connected: I5U3UKI9D3D0sYrQAAAF"}
+{"level":"info","message":"Client disconnected: I5U3UKI9D3D0sYrQAAAF"}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:226:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:226:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"New client connected: ctk49HRouF_C_5tVAAAH"}
+{"level":"info","message":"Client disconnected: T7OcMQgVhvExYO9gAAAB"}
+{"level":"info","message":"New client connected: YLAnDlCleL7I3Z30AAAJ"}
+{"level":"info","message":"New client connected: ZfomPc2lDtpVujB3AAAL"}
+{"level":"info","message":"Client disconnected: ZfomPc2lDtpVujB3AAAL"}
+{"level":"info","message":"Email successfully sent to 2t3o8y4n@example.com"}
+{"level":"info","message":"New client connected: BiejYMi531JbmlAfAAAN"}
+{"level":"info","message":"Client disconnected: BiejYMi531JbmlAfAAAN"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"level":"info","message":"error from authRoutes EMAIL_NOT_VERIFIED","name":"EMAIL_NOT_VERIFIED","stack":"EMAIL_NOT_VERIFIED: EMAIL_NOT_VERIFIED\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:231:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:226:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:226:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"Client disconnected: YLAnDlCleL7I3Z30AAAJ"}
+{"level":"info","message":"New client connected: GF77x_lyU66ql3tcAAAP"}
+{"level":"info","message":"Client disconnected: GF77x_lyU66ql3tcAAAP"}
+{"level":"info","message":"New client connected: gVrD_0apjmGJlxOaAAAR"}
+{"level":"info","message":"New client connected: bCCyQqMqC8y9BUWYAAAT"}
+{"level":"info","message":"Client disconnected: bCCyQqMqC8y9BUWYAAAT"}
+{"level":"info","message":"Email successfully sent to fgq2t65z@example.com"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"level":"info","message":"error from authRoutes EMAIL_NOT_VERIFIED","name":"EMAIL_NOT_VERIFIED","stack":"EMAIL_NOT_VERIFIED: EMAIL_NOT_VERIFIED\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:231:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"New client connected: GQ9jWZlpuww0VpOqAAAV"}
+{"level":"info","message":"Client disconnected: GQ9jWZlpuww0VpOqAAAV"}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:226:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:226:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"Client disconnected: gVrD_0apjmGJlxOaAAAR"}
+{"level":"info","message":"New client connected: e0kFEB3ctqtBe4TIAAAX"}
+{"level":"info","message":"Client disconnected: e0kFEB3ctqtBe4TIAAAX"}
+{"level":"info","message":"New client connected: hBxTlNQZfmXrQCgIAAAZ"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: JzagP4CHW-dpx7dxAAAB"}
+{"level":"info","message":"Connected to MongoDB"}

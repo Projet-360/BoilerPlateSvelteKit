@@ -63,16 +63,6 @@ router.post(
 // pour prévenir les attaques par force brute.
 router.post('/login', bruteForceRateLimiter, login);
 
-// GET /sessions
-// Ce point de terminaison liste toutes les sessions actives de l'utilisateur, en s'assurant
-// que l'utilisateur est authentifié avant de fournir l'information.
-router.get('/sessions', isAuthenticated, sessions);
-
-// DELETE /sessions/:sessionId
-// Ce point de terminaison permet à l'utilisateur de supprimer une session active spécifique, en s'assurant
-// que l'utilisateur est authentifié.
-router.delete('/sessions/:sessionId', isAuthenticated, sessionID);
-
 // POST /forgot-password
 // Ce point de terminaison initie le processus de réinitialisation du mot de passe en vérifiant l'email de l'utilisateur
 // et en utilisant un système de limitation de taux pour prévenir les abus.
@@ -89,50 +79,8 @@ router.post(
 // qui a été envoyé à son adresse email.
 router.post('/forgot-password/:token', forgotPasswordToken);
 
-// GET /user
-// Ce point de terminaison est le tableau de bord de l'utilisateur, accessible seulement si l'utilisateur est authentifié
-// et a le rôle 'user'.
-router.get('/user', isAuthenticated, checkRole('user'), user);
-
-// PUT /user/update
-// Ce point de terminaison permet à l'utilisateur de mettre à jour ses informations personnelles, après avoir vérifié
-// son authentification et son rôle.
-router.put(
-  '/user/update',
-  isAuthenticated,
-  checkRole('user'),
-  [...updateUserValidators, handleValidationErrors],
-  userUpdate,
-);
-
-// POST /user/request-delete
-// Ce point de terminaison permet à l'utilisateur de demander la suppression de son compte, en vérifiant
-// son authentification et son rôle avant de procéder.
-router.post(
-  '/user/request-delete',
-  isAuthenticated,
-  checkRole('user'),
-  userRequestDelete,
-);
-
 // POST /confirm-delete/:deleteToken
 // Ce point de terminaison permet à l'utilisateur de confirmer la suppression de son compte en utilisant un token de suppression.
 router.post('/confirm-delete/:deleteToken', confirmDeleteToken);
-
-// GET /admin/users
-// Ce point de terminaison permet à l'administrateur de lister tous les utilisateurs, en vérifiant
-// son authentification et son rôle 'admin'.
-router.get('/admin/users', isAuthenticated, checkRole('admin'), adminUser);
-
-// PUT /admin/user/:_id
-// Ce point de terminaison permet à l'administrateur de mettre à jour les informations d'un utilisateur spécifique,
-// en vérifiant d'abord son authentification et son rôle 'admin'.
-router.put(
-  '/admin/user/:_id',
-  isAuthenticated,
-  checkRole('admin'),
-  [...updateUserValidators, handleValidationErrors],
-  adminUserID,
-);
 
 export default router;

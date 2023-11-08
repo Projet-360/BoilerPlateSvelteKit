@@ -10,11 +10,15 @@ import applyMiddlewares from './middlewares/middlewares.js'; // Application midd
 import logger from './services/logger.js';
 import dotenv from 'dotenv';
 
-dotenv.config();
-
 // Import route modules
 import authRoutes from './routes/authRoutes.js';
 import greetingRoutes from './routes/greetingRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import sessionRoutes from './routes/sessionRoutes.js';
+import forgotRoutes from './routes/forgotRoutes.js';
+
+dotenv.config();
 
 dotenv.config();
 // Initialize database connection
@@ -41,6 +45,10 @@ applyMiddlewares(app);
 
 // Route definitions
 app.use('/auth', authRoutes);
+app.use(adminRoutes);
+app.use(userRoutes);
+app.use(sessionRoutes);
+app.use(forgotRoutes);
 app.use('/api', greetingRoutes(io));
 
 // Error handling middleware

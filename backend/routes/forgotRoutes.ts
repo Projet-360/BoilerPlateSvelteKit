@@ -1,18 +1,11 @@
 import { Router } from 'express';
 import { handleValidationErrors } from '../middlewares/handleValidationErrors.js';
-import { checkRole } from '../middlewares/checkRole.js';
-import { isAuthenticated } from '../middlewares/isAuthenticated.js';
+import { emailValidators } from '../validations/validators.js';
+import { rateLimiter } from '../services/rateLimiter.js';
 import {
-  adminUser,
-  adminUserID,
   forgotPassword,
   forgotPasswordToken,
 } from '../controllers/autControllers.js';
-import {
-  emailValidators,
-  updateUserValidators,
-} from '../validations/validators.js';
-import { rateLimiter } from '../services/rateLimiter.js';
 const router = Router();
 
 // POST /forgot-password
