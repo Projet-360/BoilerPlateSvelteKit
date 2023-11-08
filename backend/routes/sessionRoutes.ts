@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { isAuthenticated } from '../middlewares/isAuthenticated.js';
-import { sessionID, sessions } from '../controllers/authControllers.js';
+import { sessionID, sessions } from 'controllers/sessionController.js';
 
 const router = Router();
 

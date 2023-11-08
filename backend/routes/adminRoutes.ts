@@ -1,28 +1,28 @@
 import { Router } from 'express';
-import { handleValidationErrors } from '../middlewares/handleValidationErrors.js';
-
-import {
-  forgotPassword,
-  forgotPasswordToken,
-} from '../controllers/authControllers.js';
-import { emailValidators } from '../validations/validators.js';
-import { rateLimiter } from '../services/rateLimiter.js';
+import { handleValidationErrors } from 'middlewares/handleValidationErrors.js';
+import { checkRole } from 'middlewares/checkRole.js';
+import { isAuthenticated } from 'middlewares/isAuthenticated.js';
+import { adminUser, adminUserID } from 'controllers/adminController.js';
+import { updateUserValidators } from 'validations/validators.js';
 const router = Router();
 
-// POST /forgot-password
-// Ce point de terminaison initie le processus de réinitialisation du mot de passe en vérifiant l'email de l'utilisateur
-// et en utilisant un système de limitation de taux pour prévenir les abus.
-router.post(
-  '/forgot-password',
-  emailValidators,
-  handleValidationErrors,
-  rateLimiter,
-  forgotPassword,
-);
+/**
+ * GET /admin/users
+ * Endpoint to list all users for the admin, ensuring authentication and 'admin' role.
+ */
+router.get('/admin/users', isAuthenticated, checkRole('admin'), adminUser);
 
-// POST /forgot-password/:token
-// Ce point de terminaison permet à l'utilisateur de réinitialiser son mot de passe en utilisant un token
-// qui a été envoyé à son adresse email.
-router.post('/forgot-password/:token', forgotPasswordToken);
+/**
+ * PUT /admin/user/:_id
+ * Endpoint for the admin to update specific user information, after verifying
+ * authentication and 'admin' role.
+ */
+router.put(
+  '/admin/user/:_id',
+  isAuthenticated,
+  checkRole('admin'),
+  [...updateUserValidators, handleValidationErrors],
+  adminUserID,
+);
 
 export default router;

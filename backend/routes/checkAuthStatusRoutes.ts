@@ -3,7 +3,7 @@ import { Router } from 'express';
 // Initialize Express router
 const router = Router();
 
-import { checkAuthStatus } from '../controllers/authControllers.js';
+import { checkAuthStatus } from 'controllers/checkAuthStatusController.js';
 
 // GET /check-auth
 // Ce point de terminaison vérifie si l'utilisateur est actuellement authentifié

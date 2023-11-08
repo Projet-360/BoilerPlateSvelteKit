@@ -5,28 +5,17 @@ const router = Router();
 
 import { handleValidationErrors } from '../middlewares/handleValidationErrors.js';
 
-import { bruteForceRateLimiter, rateLimiter } from '../services/rateLimiter.js';
+import { bruteForceRateLimiter } from '../services/rateLimiter.js';
+
+import { signupValidators } from '../validations/validators.js';
 
 import {
-  signupValidators,
-  emailValidators,
-} from '../validations/validators.js';
-
-import {
-  checkAuthStatus,
-  confirmDeleteToken,
-  forgotPassword,
-  forgotPasswordToken,
   login,
   logout,
   signup,
   verify,
 } from '../controllers/authControllers.js';
-
-// GET /check-auth
-// Ce point de terminaison vérifie si l'utilisateur est actuellement authentifié
-// en utilisant le middleware checkAuthStatus pour contrôler l'état de l'authentification.
-router.get('/check-auth', checkAuthStatus);
+import { confirmDeleteToken } from 'controllers/userControllers.js';
 
 // GET /logout
 // Ce point de terminaison permet à un utilisateur de se déconnecter en nettoyant la session ou les cookies.
@@ -52,22 +41,6 @@ router.post(
 // Ce point de terminaison gère la connexion utilisateur avec un système de limitation de taux
 // pour prévenir les attaques par force brute.
 router.post('/login', bruteForceRateLimiter, login);
-
-// POST /forgot-password
-// Ce point de terminaison initie le processus de réinitialisation du mot de passe en vérifiant l'email de l'utilisateur
-// et en utilisant un système de limitation de taux pour prévenir les abus.
-router.post(
-  '/forgot-password',
-  emailValidators,
-  handleValidationErrors,
-  rateLimiter,
-  forgotPassword,
-);
-
-// POST /forgot-password/:token
-// Ce point de terminaison permet à l'utilisateur de réinitialiser son mot de passe en utilisant un token
-// qui a été envoyé à son adresse email.
-router.post('/forgot-password/:token', forgotPasswordToken);
 
 // POST /confirm-delete/:deleteToken
 // Ce point de terminaison permet à l'utilisateur de confirmer la suppression de son compte en utilisant un token de suppression.

@@ -5,7 +5,8 @@ import { rateLimiter } from '../services/rateLimiter.js';
 import {
   forgotPassword,
   forgotPasswordToken,
-} from '../controllers/authControllers.js';
+} from 'controllers/forgotController.js';
+
 const router = Router();
 
 // POST /forgot-password
