@@ -45,12 +45,12 @@ if (process.env.NODE_ENV === 'prod') {
 applyMiddlewares(app);
 
 // Route definitions
-app.use(checkAuthStatusRoutes);
+app.use('/auth', checkAuthStatusRoutes);
 app.use('/auth', authRoutes);
 app.use('/auth', adminRoutes);
 app.use('/auth', userRoutes);
 app.use('/auth', sessionRoutes);
-app.use(forgotRoutes);
+app.use('/auth', forgotRoutes);
 app.use('/api', greetingRoutes(io));
 
 // Error handling middleware

@@ -15,7 +15,7 @@ import {
   signup,
   verify,
 } from '../controllers/authControllers.js';
-import { confirmDeleteToken } from 'controllers/userControllers.js';
+import { confirmDeleteToken } from '../controllers/userControllers.js';
 
 // GET /logout
 // Ce point de terminaison permet à un utilisateur de se déconnecter en nettoyant la session ou les cookies.

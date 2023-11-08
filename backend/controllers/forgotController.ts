@@ -5,6 +5,10 @@ import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
 import CustomError from '../errors/CustomError.js';
 import logger from '../services/logger.js';
 import { User } from '../models/UserModel.js';
+import {
+  requestForgotPassword,
+  requestresetForgotPassword,
+} from '../services/authService.js';
 
 export const forgotPassword = async (
   req: Request,
@@ -25,7 +29,7 @@ export const forgotPassword = async (
       );
     }
 
-    await authService.requestForgotPassword(user as App.IUser);
+    await requestForgotPassword(user as App.IUser);
     res.status(HTTP_STATUS.OK).json({ success: true });
   } catch (error: any) {
     logger.error('Erreur lors de la réinitialisation du mot de passe:', error);
@@ -69,10 +73,7 @@ export const forgotPasswordToken = async (
       );
     }
 
-    await authService.requestresetForgotPassword(
-      user as App.IUser,
-      newPassword,
-    );
+    await requestresetForgotPassword(user as App.IUser, newPassword);
 
     res.status(HTTP_STATUS.OK).json({ message: 'Success', success: true });
   } catch (error: any) {
