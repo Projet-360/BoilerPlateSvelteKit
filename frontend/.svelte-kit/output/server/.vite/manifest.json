@@ -392,7 +392,8 @@
     "imports": [
       "_index2.js",
       "_auth.js",
-      "_index.js"
+      "_index.js",
+      "_notificationStore.js"
     ],
     "isEntry": true,
     "src": "src/routes/user/+page.svelte"
@@ -401,5 +402,15 @@
     "file": "entries/pages/user/_page.ts.js",
     "isEntry": true,
     "src": "src/routes/user/+page.ts"
+  },
+  "src/routes/user/confirm-delete/[token]/+page.svelte": {
+    "file": "entries/pages/user/confirm-delete/_token_/_page.svelte.js",
+    "imports": [
+      "_index2.js",
+      "_auth.js",
+      "_stores.js"
+    ],
+    "isEntry": true,
+    "src": "src/routes/user/confirm-delete/[token]/+page.svelte"
   }
 }

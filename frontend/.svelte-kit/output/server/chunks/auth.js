@@ -4,7 +4,11 @@ import "./index.js";
 const authStore = writable({
   userId: null,
   role: null,
-  isAuthenticated: false
+  isAuthenticated: false,
+  currentSessionId: void 0,
+  // Initialisez à undefined ou null
+  sessions: []
+  // Initialisez avec un tableau vide
 });
 authStore.subscribe((state) => {
 });

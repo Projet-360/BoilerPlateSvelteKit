@@ -1,6 +1,7 @@
 import { c as create_ssr_component, s as subscribe, e as escape } from "../../../chunks/index2.js";
 import "../../../chunks/auth.js";
 import { e as t } from "../../../chunks/index.js";
+import "../../../chunks/notificationStore.js";
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let $t, $$unsubscribe_t;
   $$unsubscribe_t = subscribe(t, (value) => $t = value);

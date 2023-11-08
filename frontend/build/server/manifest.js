@@ -10,15 +10,16 @@ return {
 	assets: new Set(["favicon.png","logo.svg","pwa/favicon/favicon.png","pwa/favicon/icon-192x192.png","pwa/favicon/icon-512x512.png","pwa/manifest.webmanifest","robots.txt","sw.js"]),
 	mimeTypes: {".png":"image/png",".svg":"image/svg+xml",".webmanifest":"application/manifest+json",".txt":"text/plain",".js":"application/javascript"},
 	_: {
-		client: {"start":"_app/immutable/entry/start.19bf19ae.js","app":"_app/immutable/entry/app.666fc6bf.js","imports":["_app/immutable/entry/start.19bf19ae.js","_app/immutable/chunks/index.42327729.js","_app/immutable/chunks/singletons.a2ac07bd.js","_app/immutable/chunks/index.be155689.js","_app/immutable/entry/app.666fc6bf.js","_app/immutable/chunks/preload-helper.a4192956.js","_app/immutable/chunks/index.42327729.js"],"stylesheets":[],"fonts":[]},
+		client: {"start":"_app/immutable/entry/start.8333320a.js","app":"_app/immutable/entry/app.c3bbe385.js","imports":["_app/immutable/entry/start.8333320a.js","_app/immutable/chunks/index.42327729.js","_app/immutable/chunks/singletons.9b2ab02f.js","_app/immutable/chunks/index.be155689.js","_app/immutable/entry/app.c3bbe385.js","_app/immutable/chunks/preload-helper.a4192956.js","_app/immutable/chunks/index.42327729.js"],"stylesheets":[],"fonts":[]},
 		nodes: [
-			__memo(() => import('./chunks/0-f6902c08.js')),
-			__memo(() => import('./chunks/1-80946eab.js')),
-			__memo(() => import('./chunks/4-a4b433e0.js')),
-			__memo(() => import('./chunks/5-30163893.js')),
-			__memo(() => import('./chunks/6-62eff78e.js')),
-			__memo(() => import('./chunks/9-c1e8a0d0.js')),
-			__memo(() => import('./chunks/10-fe725c25.js'))
+			__memo(() => import('./chunks/0-ba9d5e80.js')),
+			__memo(() => import('./chunks/1-b5d658fc.js')),
+			__memo(() => import('./chunks/4-f653ecb9.js')),
+			__memo(() => import('./chunks/5-f22ff272.js')),
+			__memo(() => import('./chunks/6-7657a440.js')),
+			__memo(() => import('./chunks/9-edcf97a7.js')),
+			__memo(() => import('./chunks/10-ce6deffc.js')),
+			__memo(() => import('./chunks/11-356c92cd.js'))
 		],
 		routes: [
 			{
@@ -54,6 +55,13 @@ return {
 				pattern: /^\/user\/?$/,
 				params: [],
 				page: { layouts: [0,], errors: [1,], leaf: 6 },
+				endpoint: null
+			},
+			{
+				id: "/user/confirm-delete/[token]",
+				pattern: /^\/user\/confirm-delete\/([^/]+?)\/?$/,
+				params: [{"name":"token","optional":false,"rest":false,"chained":false}],
+				page: { layouts: [0,], errors: [1,], leaf: 7 },
 				endpoint: null
 			}
 		],

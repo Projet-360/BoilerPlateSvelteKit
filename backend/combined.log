@@ -766,3 +766,48 @@
 {"level":"info","message":"Connected to MongoDB"}
 {"level":"info","message":"New client connected: LhM7tiybACCkercgAAAB"}
 {"level":"info","message":"New client connected: jLjpdWQj7SyYjFIOAAAD"}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: LWbZes2Iz9aGN7QrAAAB"}
+{"level":"info","message":"New client connected: K3KNOXlRJwGiT9cUAAAD"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"New client connected: LkujUHfJ_hqZXZM5AAAB"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: AG9l5vm5n07vknDEAAAB"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: Ijr8V1dbUc_ezaRFAAAB"}
+{"level":"info","message":"New client connected: g6zKVsHOG6Ev0jfyAAAD"}
+{"level":"info","message":"Client disconnected: g6zKVsHOG6Ev0jfyAAAD"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"level":"info","message":"error from authRoutes EMAIL_NOT_VERIFIED","name":"EMAIL_NOT_VERIFIED","stack":"EMAIL_NOT_VERIFIED: EMAIL_NOT_VERIFIED\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:231:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: KJuo_T6fKGQTnwynAAAB"}
+{"level":"info","message":"New client connected: 19IuESWzTeQPBmI1AAAD"}
+{"level":"info","message":"Client disconnected: 19IuESWzTeQPBmI1AAAD"}
+{"level":"info","message":"Email successfully sent to t0j0jo5r@example.com"}
+{"level":"info","name":"EMAIL_EXIST","statusCode":400}
+{"level":"info","message":"error from authRoutes EMAIL_NOT_VERIFIED","name":"EMAIL_NOT_VERIFIED","stack":"EMAIL_NOT_VERIFIED: EMAIL_NOT_VERIFIED\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:231:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","statusCode":401}
+{"level":"info","message":"New client connected: mnlgidT288wQwb2RAAAF"}
+{"level":"info","message":"Client disconnected: mnlgidT288wQwb2RAAAF"}
+{"level":"info","message":"error from authRoutes INVALID_CREDENTIALS","name":"INVALID_CREDENTIALS","stack":"INVALID_CREDENTIALS: INVALID_CREDENTIALS\n    at throwError (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:34:9)\n    at file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:238:5\n    at Generator.next (<anonymous>)\n    at fulfilled (file:///C:/wamp64/www/BoilerPlateSvelteKit/backend/services/authService.ts:4:58)","statusCode":401}
+{"level":"info","message":"Email successfully sent to t0j0jo5r@example.com"}
+{"level":"info","message":"New client connected: 7dGe5YGAc25LOx_9AAAH"}
+{"level":"info","message":"Client disconnected: 7dGe5YGAc25LOx_9AAAH"}
+{"level":"info","message":"New client connected: 0MACBrdE1Xu17q3tAAAJ"}
+{"level":"info","message":"Client disconnected: KJuo_T6fKGQTnwynAAAB"}
+{"level":"info","message":"New client connected: QkBlkO8UMazMTpfiAAAL"}
+{"level":"info","message":"\nReceived exit signal, shutting down gracefully."}
+{"level":"info","message":"Server running on port 2000"}
+{"level":"info","message":"Connected to MongoDB"}
+{"level":"info","message":"New client connected: jEqoTaqn8DrSzNDvAAAB"}
