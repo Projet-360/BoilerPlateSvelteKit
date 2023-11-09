@@ -1,23 +1,17 @@
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
 
-export interface Greeting {
-	_id: string;
-	name: string;
-	message: string;
-}
+export const greetingsStore: Writable<App.Greeting[]> = writable([]);
 
-export const greetingsStore: Writable<Greeting[]> = writable([]);
-
-export const setGreetings = (greetings: Greeting[]) => {
+export const setGreetings = (greetings: App.Greeting[]) => {
 	greetingsStore.set(greetings);
 };
 
-export const addGreeting = (greeting: Greeting) => {
+export const addGreeting = (greeting: App.Greeting) => {
 	greetingsStore.update((currentGreetings) => [...currentGreetings, greeting]);
 };
 
-export const updateGreetingInStore = (id: string, updatedFields: Partial<Greeting>) => {
+export const updateGreetingInStore = (id: string, updatedFields: Partial<App.Greeting>) => {
 	greetingsStore.update((currentGreetings) =>
 		currentGreetings.map((g) => (g._id === id ? { ...g, ...updatedFields } : g))
 	);

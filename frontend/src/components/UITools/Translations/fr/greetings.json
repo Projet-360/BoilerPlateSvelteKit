@@ -1,0 +1,7 @@
+{
+    "MESSAGE_REQUIRED": "Le champ du message est obligatoire.",
+    "GREETING_ADDED": "Un nouveau message d'accueil a été ajouté avec succès.",
+    "GREETING_GET": "Le message d'accueil a été récupéré.",
+    "GREETING_UPDATED": "Le message d'accueil a été mis à jour avec succès.",
+    "GREETING_DELETED": "Le message d'accueil a été supprimé avec succès."
+}
