@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+	import { onMount, createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
 

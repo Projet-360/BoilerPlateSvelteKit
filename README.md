@@ -114,7 +114,22 @@ Si un token a était envoyer ne pas donner un autre // Changement de mot de pass
 gerer les token invalide
 Les envoie d'email ne sont pas traduits
 
--rendre le notification generale ...genre un tableaux sur toute les possibilités
--Faire les messages coté admin et user de notification
--faire les tests coté admin et user
--Mettre en ligne l'app
+NEWS FRONT END:
+- Rendre la 3d modulaire
+creer un store pour les modele 3d
+renderer en module
+mettre en place un clearer
+Le loader modele
+savoir prendre en considération le fait d'initialiser dans des const l'utilisation de modele 3d afin de clear facilement
+
+- mettre en place loader au début et préloader et transition de page
+- optimiser les stores pour la gestion des loader
+- mettre en place des dossiers pour la data
+- Mettre en place la compréhension en profondeur du serviceWorker afin de telecharger les ressources avec une bonne gestion
+- mettre en place la gestion des scrolls.
+- faire un cursor ultime en 3d
+
+- rendre le notification generale ...genre un tableaux sur toute les possibilités
+- Faire les messages coté admin et user de notification
+- faire les tests coté admin et user
+- Mettre en ligne l'app

@@ -54,7 +54,7 @@ export default defineConfig({
 			$modelNotifications: 'src/api/modelNotifications',
 			$utils: 'src/utils',
 			$stores: 'src/stores',
-			$UITools: 'src/components/UITools',
+			$UITools: 'src/lib/UITools',
 			$language: 'src/language',
 			$three: 'src/components/three',
 			$services: 'src/services',
