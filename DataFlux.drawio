@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-01-22T19:01:53.480Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="RShHCBciW6TLx_WLWaoE" version="22.1.21" type="github">
+<mxfile host="app.diagrams.net" modified="2024-01-22T19:39:53.167Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="twLswm7ex4mZJlrMKveC" version="22.1.21" type="github">
   <diagram name="Page-1" id="VXtNGIWzz0i97T_DtU3W">
     <mxGraphModel dx="1434" dy="772" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -20,7 +20,10 @@
         <mxCell id="yugVjjV_UeTPimWIvTRu-2" value="front end" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="200" y="520" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="yugVjjV_UeTPimWIvTRu-4" value="Loader" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="yugVjjV_UeTPimWIvTRu-4" target="uxCP0doEJ4sgyuuDpB1K-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yugVjjV_UeTPimWIvTRu-4" value="démarrage du front end" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
           <mxGeometry x="360" y="520" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="uxCP0doEJ4sgyuuDpB1K-1" value="back end" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -34,6 +37,15 @@
               <mxPoint x="260" y="470" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-7" value="hooks.server.ts" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="640" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="uxCP0doEJ4sgyuuDpB1K-9" target="uxCP0doEJ4sgyuuDpB1K-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-9" value="&lt;h1&gt;hooks.server&lt;/h1&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;Le hooks.server.ts sert a vérifier si il y a sur le navigateur du client un cookie sécurisé et vérifie si le token est valide grâce à la clé secrète dans le .env. Si c&#39;est valide alors nous avons toujours accès à la session d&#39;authentification.&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="600" width="240" height="140" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
