@@ -1,0 +1,90 @@
+<mxfile host="app.diagrams.net" modified="2024-01-23T00:10:28.709Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="_SZZGwdNpr2bcK_6PkMS" version="22.1.21" type="github">
+  <diagram name="Page-1" id="VXtNGIWzz0i97T_DtU3W">
+    <mxGraphModel dx="1434" dy="772" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="yugVjjV_UeTPimWIvTRu-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="yugVjjV_UeTPimWIvTRu-1" target="yugVjjV_UeTPimWIvTRu-2" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="260" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yugVjjV_UeTPimWIvTRu-1" value="npm run dev" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="yugVjjV_UeTPimWIvTRu-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="yugVjjV_UeTPimWIvTRu-2" target="yugVjjV_UeTPimWIvTRu-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="yugVjjV_UeTPimWIvTRu-2" value="front end" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="200" y="520" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="yugVjjV_UeTPimWIvTRu-4" target="uxCP0doEJ4sgyuuDpB1K-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="yugVjjV_UeTPimWIvTRu-4" value="démarrage du front end" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="360" y="520" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-1" value="back end" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="200" y="340" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-2" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="yugVjjV_UeTPimWIvTRu-1" target="uxCP0doEJ4sgyuuDpB1K-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="500" as="sourcePoint" />
+            <mxPoint x="440" y="450" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="260" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="uxCP0doEJ4sgyuuDpB1K-7" target="uxCP0doEJ4sgyuuDpB1K-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-7" value="hooks.server.ts" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="360" y="790" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="uxCP0doEJ4sgyuuDpB1K-9" target="uxCP0doEJ4sgyuuDpB1K-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-9" value="&lt;h1&gt;hooks.server&lt;/h1&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;Le hooks.server.ts sert a vérifier si il y a sur le navigateur du client un cookie sécurisé et vérifie si le token est valide grâce à la clé secrète dans le .env. Si c&#39;est valide alors nous avons toujours accès à la session d&#39;authentification.&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="750" width="240" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="uxCP0doEJ4sgyuuDpB1K-12" target="uxCP0doEJ4sgyuuDpB1K-21" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-12" value="Layout.server.ts" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="360" y="930" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="uxCP0doEJ4sgyuuDpB1K-14" target="uxCP0doEJ4sgyuuDpB1K-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <UserObject label="svelte.config.js" link="svelte.config.js" id="uxCP0doEJ4sgyuuDpB1K-14">
+          <mxCell style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+            <mxGeometry x="360" y="650" width="120" height="60" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="uxCP0doEJ4sgyuuDpB1K-16" target="uxCP0doEJ4sgyuuDpB1K-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-16" value="&lt;h1&gt;svelte.config&lt;/h1&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;Appel pour mettre en place la PWA, la gestion du SASS les adaptateurs et les raccourcis fichiers dans le projet.&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="630" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-20" value="&lt;h1&gt;Layout.server&lt;/h1&gt;&lt;p style=&quot;text-align: justify;&quot;&gt;Assure la prise en charge des traductions du site.&lt;br&gt;&lt;/p&gt;" style="text;html=1;strokeColor=none;fillColor=none;spacing=5;spacingTop=-20;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="910" width="240" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="uxCP0doEJ4sgyuuDpB1K-21" target="uxCP0doEJ4sgyuuDpB1K-23" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-21" value="Layout.svelte" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="360" y="1070" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uxCP0doEJ4sgyuuDpB1K-23" value="" style="whiteSpace=wrap;html=1;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="560" y="1070" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
