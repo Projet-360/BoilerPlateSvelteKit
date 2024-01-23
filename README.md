@@ -90,7 +90,7 @@ VITE_URL_BACK=http://localhost:2000
 VITE_SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
 
 back:
-MONGO_ONLINE=mongodb+srv://pierrefabiendev:2Yt0dDpR05onq9UG@mongosveltekit.csdduve.mongodb.net/
+MONGO_ONLINE=mongodb+srv://pierrefabiendev:lNy9vN07FA7l1Hmb@mongosveltekit.csdduve.mongodb.net/
 DATABASE_NAME=BoilerPlateSvelteKitDB
 TOKEN_EXPIRY=1
 VERIFICATION_EXPIRY_HOURS=1h

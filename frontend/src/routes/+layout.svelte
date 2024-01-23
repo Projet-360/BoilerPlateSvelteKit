@@ -11,10 +11,12 @@
 	import SmoothScroller from '$UITools/SmoothScroller/index.svelte';
 	import NotificationWrapper from '$UITools/Notifications/NotificationWrapper.svelte';
 	import { isInitialLoading } from '$stores/loaderStore';
+	import { setFirstLoadComplete, firstLoadComplete } from '$stores/initialLoader';
 
 	onMount(async () => {
 		new App();
 		registerServiceWorker();
+		setFirstLoadComplete();
 	});
 </script>
 
@@ -25,23 +27,23 @@
 	<meta name="theme-color" content="#4285f4" />
 </svelte:head>
 
-{#if $isInitialLoading}
+{#if !$firstLoadComplete}
 	<Loader />
 {:else}
-	<Preloader />
+	<!-- <Preloader /> -->
+
+	<Cursor />
+	<NotificationWrapper />
+	<Header />
+
+	<SmoothScroller>
+		<PageTransition>
+			<main>
+				<slot />
+			</main>
+		</PageTransition>
+	</SmoothScroller>
 {/if}
-
-<Cursor />
-<NotificationWrapper />
-<Header />
-
-<SmoothScroller>
-	<PageTransition>
-		<main>
-			<slot />
-		</main>
-	</PageTransition>
-</SmoothScroller>
 
 <style lang="scss" global>
 	@import './src/css/main';

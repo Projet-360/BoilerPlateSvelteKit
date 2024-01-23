@@ -71,7 +71,7 @@
 	}
 </script>
 
-{#if !$visible}
+{#if !$visible && $isInitialLoading}
 	<div class="loader" bind:this={loader}>
 		{#each Array.from('Bienvenue') as letter, i (letter + i)}
 			<span class="letter">{letter}</span>

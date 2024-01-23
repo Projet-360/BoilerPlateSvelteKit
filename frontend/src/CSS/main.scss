@@ -47,25 +47,25 @@
   }
 }
 
-                  .notification-wrapper {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    z-index: 101;
-                  }
+.notification-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 101;
+}
 
 #smoothScoller {
   height: 100%;
   overflow: hidden;
   position: relative;
-  
+
   .pageTransition {
-      main {
-        overflow: hidden;
-        width: 100%;
-        min-height: 100vh;
-        padding-top: 70px;
-      }
+    main {
+      overflow: hidden;
+      width: 100%;
+      min-height: 100vh;
+      padding-top: 70px;
+    }
   }
 }
 
@@ -83,4 +83,8 @@ header {
     width: 200px;
     @include rcb;
   }
+}
+
+main {
+  margin-top: 70px;
 }

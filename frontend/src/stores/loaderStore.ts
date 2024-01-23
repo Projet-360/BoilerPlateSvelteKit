@@ -11,13 +11,14 @@ export const visible = derived([domLoader, HandleVisible], ([$domLoader, $Handle
 	return !$domLoader && !$HandleVisible;
 });
 
-domLoader.subscribe((value) => {
-	console.log('domLoader: ', value);
-});
+// domLoader.subscribe((value) => {
+// 	console.log('domLoader: ', value);
+// });
 
-HandleVisible.subscribe((value) => {
-	console.log('HandleVisible: ', value);
-});
-visible.subscribe((value) => {
-	console.log('visible: ', value);
-});
+// HandleVisible.subscribe((value) => {
+// 	console.log('HandleVisible: ', value);
+// });
+
+// visible.subscribe((value) => {
+// 	console.log('visible: ', value);
+// });

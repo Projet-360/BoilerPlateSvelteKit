@@ -6,7 +6,7 @@ import BlacklistedToken from '../../models/BlacklistedTokenModel.js';
 import * as authService from '../../services/authService.js';
 import CustomError from '../../errors/CustomError.js';
 
-export const checkAuthStatus = async (
+export const checkAuthStatus: any = async (
   req: Request,
   res: Response,
   next: NextFunction,
