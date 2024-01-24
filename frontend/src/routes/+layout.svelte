@@ -6,19 +6,28 @@
 	import Header from '$components/Header.svelte';
 	import PageTransition from '$UITools/PageTransition/index.svelte';
 	import Cursor from '$UITools/Cursor/index.svelte';
-	import Preloader from '$UITools/Preloader/index.svelte';
 	import Loader from '$UITools/InitialLoader/index.svelte';
 	import SmoothScroller from '$UITools/SmoothScroller/index.svelte';
 	import NotificationWrapper from '$UITools/Notifications/NotificationWrapper.svelte';
-	import { firstLoadComplete, setFirstOpen, setRessourceToValide } from '$stores/initialLoader';
+	import {
+		firstLoadComplete,
+		loadingStates,
+		setFirstOpen,
+		setRessourceToValide
+	} from '$stores/initialLoaderStore';
+
+	import { fetchMockData } from '$api/utils/mockService';
 
 	onMount(async () => {
 		new App();
 		registerServiceWorker();
 		setFirstOpen(true);
 
-		// Ressource fictive à valider
-		setRessourceToValide(true);
+		const mockData = await fetchMockData();
+		if (mockData) {
+			setRessourceToValide(true);
+			console.log($loadingStates);
+		}
 	});
 </script>
 
@@ -32,8 +41,6 @@
 {#if !$firstLoadComplete}
 	<Loader />
 {/if}
-
-<!-- <Preloader /> -->
 
 <Cursor />
 <NotificationWrapper />

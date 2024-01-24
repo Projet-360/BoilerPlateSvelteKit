@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onDestroy, afterUpdate, beforeUpdate } from 'svelte';
 	import { onNavigate } from '$app/navigation';
-	import { ressourceToValide, visible } from '$stores/loaderStore';
+	import Preloader from '$UITools/PageTransition/Preloader/index.svelte';
 	import smoothScrollStore from '$stores/scrollStore';
 	import { animateOut, animateIn } from './pages';
-	import { afterUpdate } from 'svelte';
 	import type Scrollbar from 'smooth-scrollbar';
+	import { setTransitionLoader, transitionLoader } from '$stores/transitionLoaderStore';
 
 	let layoutContainer: HTMLElement;
 	let smoothScroll: Scrollbar | null;
@@ -23,10 +23,17 @@
 	});
 
 	onNavigate(async (navigation) => {
+		console.log('onNavigate');
+
 		currentUrl = navigation.from?.url?.href;
 		targetUrl = navigation.to?.url?.href;
 		classUrlFrom = navigation.from?.route?.id;
 		classUrlto = navigation.to?.route?.id;
+
+		console.log('currentUrl', currentUrl);
+		console.log('targetUrl', targetUrl);
+		console.log('classUrlFrom', classUrlFrom);
+		console.log('classUrlto', classUrlto);
 
 		// Vérifier si l'une des URLs est indéfinie ou si elles sont identiques
 		if (!currentUrl || !targetUrl || currentUrl === targetUrl) {
@@ -36,6 +43,7 @@
 		if (classUrlFrom === '/') {
 			classUrlFrom = 'home';
 		}
+
 		if (classUrlto === '/') {
 			classUrlto = 'home';
 		}
@@ -43,22 +51,21 @@
 		classUrlFrom = classUrlFrom?.replace(/\//g, '');
 		classUrlto = classUrlto?.replace(/\//g, '');
 
-		// Démarrer l'animation de sortie
-		await animateOut(classUrlFrom, layoutContainer);
-		ressourceToValide.set(true);
+		// Activer le transitionLoader avant l'animation de sortie
+		setTransitionLoader(true);
 
+		// Attendre que le transitionLoader soit activé
 		await new Promise<void>((resolve) => {
-			const unsubscribe = visible.subscribe(($visible) => {
-				if (!$visible) {
+			const unsubscribe = transitionLoader.subscribe(($transitionLoader) => {
+				if ($transitionLoader) {
 					resolve();
+					unsubscribe();
 				}
 			});
-
-			// Nettoyage de l'abonnement
-			return () => {
-				unsubscribe();
-			};
 		});
+
+		// Démarrer l'animation de sortie
+		await animateOut(classUrlFrom, layoutContainer);
 
 		if (smoothScroll) {
 			smoothScroll.scrollTo(0, 0, 500);
@@ -66,12 +73,15 @@
 	});
 
 	afterUpdate(() => {
-		if ($visible) {
+		if (!$transitionLoader) {
 			animateIn(classUrlto, layoutContainer);
 		}
 	});
 </script>
 
 <div class="layoutContainer" bind:this={layoutContainer}>
+	{#if $transitionLoader}
+		<Preloader />
+	{/if}
 	<slot />
 </div>

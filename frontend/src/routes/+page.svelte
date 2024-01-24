@@ -1,12 +1,18 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { hoverable } from '$UITools/Cursor/cursorHelpers';
 	import { t } from '$UITools/Translations/index';
 	import Box from '$three/Box.svelte';
 
 	import Greetings from '$components/Greetings.svelte';
 	import Slider from '$components/Slider.svelte';
+	import { setTransitionLoader } from '$stores/transitionLoaderStore';
 
 	const link: string = 'https://kit.svelte.dev';
+
+	onMount(() => {
+		setTransitionLoader(false);
+	});
 </script>
 
 <svelte:head>
@@ -16,6 +22,7 @@
 
 <h1>{$t('home.title')}</h1>
 <p>{@html $t('home.text', { link })}</p>
+
 <a href="/about" use:hoverable={'first'}>{$t('home.link')}</a>
 
 <Box />

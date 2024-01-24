@@ -2,7 +2,7 @@
 	import gsap from 'gsap';
 	import { onMount, onDestroy, tick } from 'svelte';
 	import { get } from 'svelte/store';
-	import { setDomLoaded, setFirstLoadComplete, loadingStates } from '$stores/initialLoader';
+	import { setDomLoaded, setFirstLoadComplete, loadingStates } from '$stores/initialLoaderStore';
 
 	let initalLoader: HTMLElement;
 	let observer: IntersectionObserver;
@@ -48,14 +48,19 @@
 				duration: 0.2,
 				stagger: 0.1,
 				ease: 'power2.out',
-				onComplete: () => {
-					const currentLoadingStates = get(loadingStates);
-					if (Object.values(currentLoadingStates).every((state) => state === true)) {
-						animateOut();
-					}
-				}
+				onComplete: checkLoadingComplete
 			}
 		);
+	}
+
+	function checkLoadingComplete() {
+		const currentLoadingStates = get(loadingStates);
+		if (Object.values(currentLoadingStates).every((state) => state === true)) {
+			animateOut();
+		} else {
+			// Réessaye dans 500 ms
+			setTimeout(checkLoadingComplete, 500);
+		}
 	}
 
 	function animateOut() {
