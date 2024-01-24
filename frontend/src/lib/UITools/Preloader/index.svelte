@@ -1,15 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { domLoader, HandleVisible, visible } from '$stores/loaderStore';
+	import { domLoader, ressourceToValide, visible } from '$stores/loaderStore';
 
 	let preloader: HTMLElement;
 
 	$: if ($domLoader) {
-		HandleVisible.set(true);
+		ressourceToValide.set(true);
 	}
 
 	$: if (!$domLoader) {
-		HandleVisible.set(false);
+		ressourceToValide.set(false);
 	}
 
 	onMount(async () => {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { onNavigate } from '$app/navigation';
-	import { HandleVisible, visible } from '$stores/loaderStore';
+	import { ressourceToValide, visible } from '$stores/loaderStore';
 	import smoothScrollStore from '$stores/scrollStore';
 	import { animateOut, animateIn } from './pages';
 	import { afterUpdate } from 'svelte';
@@ -45,7 +45,7 @@
 
 		// Démarrer l'animation de sortie
 		await animateOut(classUrlFrom, layoutContainer);
-		HandleVisible.set(true);
+		ressourceToValide.set(true);
 
 		await new Promise<void>((resolve) => {
 			const unsubscribe = visible.subscribe(($visible) => {

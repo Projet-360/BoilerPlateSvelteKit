@@ -7,16 +7,17 @@
 	import PageTransition from '$UITools/PageTransition/index.svelte';
 	import Cursor from '$UITools/Cursor/index.svelte';
 	import Preloader from '$UITools/Preloader/index.svelte';
-	import Loader from '$UITools/Loader/index.svelte';
+	import Loader from '$UITools/InitialLoader/index.svelte';
 	import SmoothScroller from '$UITools/SmoothScroller/index.svelte';
 	import NotificationWrapper from '$UITools/Notifications/NotificationWrapper.svelte';
-	import { isInitialLoading } from '$stores/loaderStore';
-	import { setFirstLoadComplete, firstLoadComplete } from '$stores/initialLoader';
+	import { firstLoadComplete, setFirstOpen, setRessourceToValide } from '$stores/initialLoader';
 
 	onMount(async () => {
 		new App();
 		registerServiceWorker();
-		setFirstLoadComplete();
+		setFirstOpen(true);
+
+		setRessourceToValide(true);
 	});
 </script>
 
@@ -29,21 +30,21 @@
 
 {#if !$firstLoadComplete}
 	<Loader />
-{:else}
-	<!-- <Preloader /> -->
-
-	<Cursor />
-	<NotificationWrapper />
-	<Header />
-
-	<SmoothScroller>
-		<PageTransition>
-			<main>
-				<slot />
-			</main>
-		</PageTransition>
-	</SmoothScroller>
 {/if}
+
+<!-- <Preloader /> -->
+
+<Cursor />
+<NotificationWrapper />
+<Header />
+
+<SmoothScroller>
+	<PageTransition>
+		<main>
+			<slot />
+		</main>
+	</PageTransition>
+</SmoothScroller>
 
 <style lang="scss" global>
 	@import './src/css/main';
