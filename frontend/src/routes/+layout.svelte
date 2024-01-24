@@ -17,6 +17,7 @@
 		registerServiceWorker();
 		setFirstOpen(true);
 
+		// Ressource fictive à valider
 		setRessourceToValide(true);
 	});
 </script>

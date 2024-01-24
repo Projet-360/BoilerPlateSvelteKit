@@ -10,21 +10,21 @@ export const loadingStates = writable({
 // Store séparé pour firstLoadComplete
 export const firstLoadComplete = writable(false);
 
-export function setFirstLoadComplete(value) {
+export function setFirstLoadComplete(value: boolean) {
 	firstLoadComplete.set(value);
 }
 
 // Fonctions pour mettre à jour les états de chargement
-export function setFirstOpen(value) {
+export function setFirstOpen(value: boolean) {
 	loadingStates.update((states) => ({ ...states, firstOpen: value }));
 }
 
 // Fonctions pour mettre à jour les états de chargement
-export function setDomLoaded(value) {
+export function setDomLoaded(value: boolean) {
 	loadingStates.update((states) => ({ ...states, domLoaded: value }));
 }
 
-export function setRessourceToValide(value) {
+export function setRessourceToValide(value: boolean) {
 	loadingStates.update((states) => ({ ...states, ressourceToValide: value }));
 }
 
