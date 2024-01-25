@@ -51,10 +51,17 @@
 		classUrlFrom = classUrlFrom?.replace(/\//g, '');
 		classUrlto = classUrlto?.replace(/\//g, '');
 
+		// Démarrer l'animation de sortie
+		await animateOut(classUrlFrom, layoutContainer);
+
+		if (smoothScroll) {
+			smoothScroll.scrollTo(0, 0, 500);
+		}
+
 		// Activer le transitionLoader avant l'animation de sortie
 		setTransitionLoader(true);
 
-		let transitionLoaderUnsubscribe = null;
+		let transitionLoaderUnsubscribe: () => void = () => {};
 
 		// S'abonner à transitionLoader
 		await new Promise<void>((resolve) => {
@@ -66,15 +73,8 @@
 		});
 
 		// Assurez-vous que la fonction de désabonnement est définie avant de l'appeler
-		if (transitionLoaderUnsubscribe) {
+		if (typeof transitionLoaderUnsubscribe === 'function') {
 			transitionLoaderUnsubscribe();
-		}
-
-		// Démarrer l'animation de sortie
-		await animateOut(classUrlFrom, layoutContainer);
-
-		if (smoothScroll) {
-			smoothScroll.scrollTo(0, 0, 500);
 		}
 	});
 
