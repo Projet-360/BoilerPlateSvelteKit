@@ -1,10 +1,16 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { signup } from '$api/auth/signupAPI';
+	import { setTransitionLoader } from '$stores/transitionLoaderStore';
 	import { t } from '$UITools/Translations/index';
 
 	let username = '';
 	let email = '';
 	let password = '';
+
+	onMount(() => {
+		setTransitionLoader(false);
+	});
 
 	async function handleSignup() {
 		await signup(username, email, password, $t);
