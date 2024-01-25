@@ -14,12 +14,12 @@
 	let classUrlFrom: string | undefined | null;
 	let classUrlto: string | undefined | null;
 
-	const unsubscribe = smoothScrollStore.subscribe(($smoothScroll: any) => {
+	const smoothScrollUnsubscribe = smoothScrollStore.subscribe(($smoothScroll: any) => {
 		smoothScroll = $smoothScroll;
 	});
 
 	onDestroy(() => {
-		if (unsubscribe) unsubscribe();
+		smoothScrollUnsubscribe(); // Nettoyage correct
 	});
 
 	onNavigate(async (navigation) => {
@@ -54,15 +54,21 @@
 		// Activer le transitionLoader avant l'animation de sortie
 		setTransitionLoader(true);
 
-		// Attendre que le transitionLoader soit activé
+		let transitionLoaderUnsubscribe = null;
+
+		// S'abonner à transitionLoader
 		await new Promise<void>((resolve) => {
-			const unsubscribe = transitionLoader.subscribe(($transitionLoader) => {
+			transitionLoaderUnsubscribe = transitionLoader.subscribe(($transitionLoader) => {
 				if ($transitionLoader) {
 					resolve();
-					unsubscribe();
 				}
 			});
 		});
+
+		// Assurez-vous que la fonction de désabonnement est définie avant de l'appeler
+		if (transitionLoaderUnsubscribe) {
+			transitionLoaderUnsubscribe();
+		}
 
 		// Démarrer l'animation de sortie
 		await animateOut(classUrlFrom, layoutContainer);

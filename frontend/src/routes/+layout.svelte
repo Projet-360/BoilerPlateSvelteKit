@@ -21,8 +21,10 @@
 	onMount(async () => {
 		new App();
 		registerServiceWorker();
+		// Détermine le premier chargement de l'application
 		setFirstOpen(true);
 
+		// Test de chargement de ressource au démarrage de l'application
 		const mockData = await fetchMockData();
 		if (mockData) {
 			setRessourceToValide(true);

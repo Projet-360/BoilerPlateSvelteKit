@@ -59,7 +59,7 @@
 			animateOut();
 		} else {
 			// Réessaye dans 500 ms
-			setTimeout(checkLoadingComplete, 500);
+			setTimeout(checkLoadingComplete, 200);
 		}
 	}
 

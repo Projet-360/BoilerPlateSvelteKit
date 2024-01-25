@@ -31,12 +31,15 @@ export const animateOut = (
 ) => {
 	const animationsForPage: { [key: string]: LayoutElement[] } = {
 		home: [
-			{ selector: '.containerCan', animationProps: { opacity: 0, x: 100, duration: 0.7 } },
-			{ selector: '.containerText', animationProps: { opacity: 0, x: -100, duration: 0.7 } }
+			{ selector: 'main h1', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
+			{ selector: 'main p', animationProps: { opacity: 0, y: -100, duration: 0.7 } },
+			{ selector: 'main div', animationProps: { opacity: 0, y: -100, duration: 0.7 } },
+			{ selector: 'main form', animationProps: { opacity: 0, y: -100, duration: 0.7 } }
 		],
-		recettes: [
-			{ selector: '.boutique', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
-			{ selector: '.about-paragraph-text', animationProps: { opacity: 0, y: 200, duration: 0.7 } }
+		about: [
+			{ selector: 'main h1', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
+			{ selector: 'main p', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
+			{ selector: 'main a', animationProps: { opacity: 0, y: 100, duration: 0.7 } }
 		]
 	};
 
@@ -60,18 +63,16 @@ export const animateIn = (classUrlTo: string | undefined | null, layoutContainer
 	// Définition des animations spécifiques pour chaque page
 	const animationsForPage: { [key: string]: LayoutElement[] } = {
 		home: [
-			{
-				selector: '.containerCan',
-				animationProps: { opacity: 0, y: '-20vw', duration: 1 }
-			},
-			{
-				selector: '.containerText',
-				animationProps: { opacity: 0, y: 100, duration: 0.7, delay: 0.5 }
-			}
+			{ selector: 'main h1', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
+			{ selector: 'main p', animationProps: { opacity: 0, y: -100, duration: 0.7 } },
+			{ selector: 'main a', animationProps: { opacity: 0, y: -100, duration: 0.7 } },
+			{ selector: 'main canvas', animationProps: { opacity: 0, y: -100, duration: 0.7 } },
+			{ selector: 'main form', animationProps: { opacity: 0, y: -100, duration: 0.7 } }
 		],
-		recettes: [
-			{ selector: '.boutique', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
-			{ selector: '.about-paragraph-text', animationProps: { opacity: 0, y: 200, duration: 0.7 } }
+		about: [
+			{ selector: 'main h1', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
+			{ selector: 'main p', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
+			{ selector: 'main a', animationProps: { opacity: 0, y: 100, duration: 0.7 } }
 		]
 	};
 

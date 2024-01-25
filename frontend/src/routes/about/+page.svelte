@@ -9,7 +9,10 @@
 	onMount(async () => {
 		const response = await fetchMockData();
 		data = response.data;
-		setTransitionLoader(false);
+
+		if (data) {
+			setTransitionLoader(false);
+		}
 	});
 </script>
 
