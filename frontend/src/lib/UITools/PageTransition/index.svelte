@@ -14,6 +14,8 @@
 	let classUrlFrom: string | undefined | null;
 	let classUrlto: string | undefined | null;
 
+	let transitionLoaderUnsubscribe: () => void = () => {};
+
 	const smoothScrollUnsubscribe = smoothScrollStore.subscribe(($smoothScroll: any) => {
 		smoothScroll = $smoothScroll;
 	});
@@ -29,11 +31,6 @@
 		targetUrl = navigation.to?.url?.href;
 		classUrlFrom = navigation.from?.route?.id;
 		classUrlto = navigation.to?.route?.id;
-
-		console.log('currentUrl', currentUrl);
-		console.log('targetUrl', targetUrl);
-		console.log('classUrlFrom', classUrlFrom);
-		console.log('classUrlto', classUrlto);
 
 		// Vérifier si l'une des URLs est indéfinie ou si elles sont identiques
 		if (!currentUrl || !targetUrl || currentUrl === targetUrl) {
@@ -61,22 +58,23 @@
 		// Activer le transitionLoader avant l'animation de sortie
 		setTransitionLoader(true);
 
-		let transitionLoaderUnsubscribe: () => void = () => {};
-
-		// S'abonner à transitionLoader
-		await new Promise<void>((resolve) => {
-			transitionLoaderUnsubscribe = transitionLoader.subscribe(($transitionLoader) => {
-				if ($transitionLoader) {
-					resolve();
-				}
-			});
-		});
+		await waitForTransitionLoader();
 
 		// Assurez-vous que la fonction de désabonnement est définie avant de l'appeler
 		if (typeof transitionLoaderUnsubscribe === 'function') {
 			transitionLoaderUnsubscribe();
 		}
 	});
+
+	async function waitForTransitionLoader() {
+		return new Promise<void>((resolve) => {
+			transitionLoaderUnsubscribe = transitionLoader.subscribe(($transitionLoader) => {
+				if ($transitionLoader) {
+					resolve();
+				}
+			});
+		});
+	}
 
 	afterUpdate(() => {
 		if (!$transitionLoader) {
