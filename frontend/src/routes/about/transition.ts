@@ -9,7 +9,7 @@ export const enter = (node: any, { duration = 0.5, title, text, link }) => {
 
 	timeline.from(node, {
 		opacity: 1,
-		x: '-100vw',
+		x: '100vw',
 		ease: 'power2.out'
 	});
 
@@ -47,11 +47,20 @@ export const exit = (node: any, { duration = 0.5, title, text, link }) => {
 	gsap.registerPlugin(ScrollTrigger);
 
 	const timeline = gsap.timeline({ defaults: { duration } });
+
 	timeline.to(node, {
 		opacity: 1,
-		x: '-100vw',
+		x: '100vw',
 		ease: 'power2.out'
 	});
+
+	timeline.set(node, {
+		opacity: 0,
+		x: '0vw',
+		y: 0,
+		ease: 'power2.out'
+	});
+
 	timeline.to(link, {
 		opacity: 0,
 		y: -100,

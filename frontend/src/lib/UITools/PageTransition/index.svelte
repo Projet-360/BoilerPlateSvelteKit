@@ -25,8 +25,6 @@
 	});
 
 	onNavigate(async (navigation) => {
-		console.log('onNavigate');
-
 		currentUrl = navigation.from?.url?.href;
 		targetUrl = navigation.to?.url?.href;
 		classUrlFrom = navigation.from?.route?.id;
@@ -47,9 +45,6 @@
 
 		classUrlFrom = classUrlFrom?.replace(/\//g, '');
 		classUrlto = classUrlto?.replace(/\//g, '');
-
-		// Démarrer l'animation de sortie
-		await animateOut(classUrlFrom, layoutContainer);
 
 		if (smoothScroll) {
 			smoothScroll.scrollTo(0, 0, 500);

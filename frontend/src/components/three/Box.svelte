@@ -3,7 +3,7 @@
 	import { interactivity } from '@threlte/extras';
 	import { spring } from 'svelte/motion';
 	interactivity();
-	const scale = spring(1);
+	const scale = spring(5);
 </script>
 
 <T.PerspectiveCamera

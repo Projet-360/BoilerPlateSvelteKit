@@ -31,14 +31,15 @@ export const animateOut = (
 ) => {
 	const animationsForPage: { [key: string]: LayoutElement[] } = {
 		home: [
-			{ selector: 'main h1', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
-			{ selector: 'main p', animationProps: { opacity: 0, y: -100, duration: 0.7 } },
-			{ selector: 'main form', animationProps: { opacity: 0, y: -100, duration: 0.7 } }
+			{ selector: '.home h1', animationProps: { opacity: 0, y: 100, duration: 2 } },
+			{ selector: '.home p', animationProps: { opacity: 0, y: -100, duration: 2 } },
+			{ selector: '.home form', animationProps: { opacity: 0, y: -100, duration: 2 } },
+			{ selector: '.home .linkhome', animationProps: { opacity: 0, y: -100, duration: 2 } }
 		],
 		about: [
-			{ selector: 'main h1', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
-			{ selector: 'main p', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
-			{ selector: 'main a', animationProps: { opacity: 0, y: 100, duration: 0.7 } }
+			{ selector: '.about h1', animationProps: { opacity: 0, y: 100, duration: 2 } },
+			{ selector: '.about p', animationProps: { opacity: 0, y: 100, duration: 2 } },
+			{ selector: '.about .linkabout', animationProps: { opacity: 0, y: 100, duration: 2 } }
 		]
 	};
 
@@ -47,7 +48,7 @@ export const animateOut = (
 
 	return gsap
 		.to(layoutContainer, {
-			// duration: 0.7,
+			// duration: 2,
 			// opacity: 0,
 			// x: 0,
 			onComplete: () => {
@@ -62,15 +63,15 @@ export const animateIn = (classUrlTo: string | undefined | null, layoutContainer
 	// Définition des animations spécifiques pour chaque page
 	const animationsForPage: { [key: string]: LayoutElement[] } = {
 		home: [
-			{ selector: 'main h1', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
-			{ selector: 'main p', animationProps: { opacity: 0, y: -100, duration: 0.7 } },
-			{ selector: 'main a', animationProps: { opacity: 0, y: -100, duration: 0.7 } },
-			{ selector: 'main form', animationProps: { opacity: 0, y: -100, duration: 0.7 } }
+			{ selector: '.home h1', animationProps: { opacity: 0, y: 100, duration: 2 } },
+			{ selector: '.home p', animationProps: { opacity: 0, y: -100, duration: 2 } },
+			{ selector: '.home .linkhome', animationProps: { opacity: 0, y: -100, duration: 2 } },
+			{ selector: '.home form', animationProps: { opacity: 0, y: -100, duration: 2 } }
 		],
 		about: [
-			{ selector: 'main h1', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
-			{ selector: 'main p', animationProps: { opacity: 0, y: 100, duration: 0.7 } },
-			{ selector: 'main a', animationProps: { opacity: 0, y: 100, duration: 0.7 } }
+			{ selector: '.about h1', animationProps: { opacity: 0, y: 100, duration: 2 } },
+			{ selector: '.about p', animationProps: { opacity: 0, y: 100, duration: 2 } },
+			{ selector: '.about .linkabout', animationProps: { opacity: 0, y: 100, duration: 2 } }
 		]
 	};
 
@@ -79,7 +80,7 @@ export const animateIn = (classUrlTo: string | undefined | null, layoutContainer
 
 	return gsap
 		.from(layoutContainer, {
-			// duration: 0.7,
+			// duration: 2,
 			// opacity: 0,
 			// x: 0,
 			onComplete: () => {

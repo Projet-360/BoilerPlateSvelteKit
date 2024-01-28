@@ -49,11 +49,9 @@
 <Header />
 
 <SmoothScroller>
-	<PageTransition>
-		<main>
-			<slot />
-		</main>
-	</PageTransition>
+	<main>
+		<slot />
+	</main>
 </SmoothScroller>
 
 <style lang="scss" global>

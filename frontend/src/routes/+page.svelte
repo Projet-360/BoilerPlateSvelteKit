@@ -4,15 +4,22 @@
 	import { hoverable } from '$UITools/Cursor/cursorHelpers';
 	import { t } from '$UITools/Translations/index';
 	import Box from '$three/Box.svelte';
+	import gsap from 'gsap';
 
 	import Greetings from '$components/Greetings.svelte';
 	import Slider from '$components/Slider.svelte';
 	import { setTransitionLoader } from '$stores/transitionLoaderStore';
+	import { fetchMockData } from '$api/utils/mockService';
+	import { enter, exit } from './transition';
 
-	const link: string = 'https://kit.svelte.dev';
+	const linkUrl: string = 'https://kit.svelte.dev';
+	let title: HTMLElement;
+	let text: HTMLElement;
+	let link: HTMLElement;
 
 	onMount(() => {
 		setTransitionLoader(false);
+		fetchMockData;
 	});
 </script>
 
@@ -21,16 +28,28 @@
 	<meta name="description" content="Ceci est une description de la page d'exemple." />
 </svelte:head>
 
-<h1>{$t('home.title')}</h1>
-<p>{@html $t('home.text', { link })}</p>
+<div
+	class="home"
+	in:enter={{ duration: 1, title, text, link }}
+	out:exit={{ duration: 1, title, text, link }}
+>
+	<h1 bind:this={title}>{$t('home.title')}</h1>
+	<p bind:this={text}>{@html $t('home.text', { linkUrl })}</p>
+	<div class="linkhome" bind:this={link}>
+		<a href="/about" use:hoverable={'first'}>{$t('home.link')}</a>
+	</div>
 
-<a href="/about" use:hoverable={'first'}>{$t('home.link')}</a>
-
-<Greetings />
-<Slider />
-
-<div>
-	<Canvas>
-		<Box />
-	</Canvas>
+	<Greetings />
+	<Slider />
 </div>
+
+<style>
+	.lkjk {
+		height: 500px;
+	}
+
+	.home {
+		position: absolute;
+		background-color: red;
+	}
+</style>
