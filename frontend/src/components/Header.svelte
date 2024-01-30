@@ -30,6 +30,9 @@
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
 			</li>
+			<li aria-current={$page.url.pathname === '/transitionAPI' ? 'page' : undefined}>
+				<a href="/transitionAPI">transitionAPI</a>
+			</li>
 			{#if !isAuthenticated}
 				<li
 					class="CursorDezoom"

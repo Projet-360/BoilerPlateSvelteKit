@@ -1,9 +1,7 @@
 <script lang="ts">
 	import gsap from 'gsap';
 	import { t } from '$UITools/Translations/index.js';
-	import { onDestroy, onMount } from 'svelte';
-
-	import { enter, exit } from './transition';
+	import { onMount } from 'svelte';
 
 	let title: HTMLElement;
 	let text: HTMLElement;
@@ -23,17 +21,13 @@
 	<meta name="description" content="About this app" />
 </svelte:head>
 
-<div
-	class="about"
-	in:enter={{ duration: 1, title, text, link }}
-	out:exit={{ duration: 1, title, text, link }}
->
+<div class="about">
 	<div>
-		<h1 bind:this={title}>{$t('about.title')}</h1>
-		<p bind:this={text}>{@html $t('about.text')}</p>
+		<h1 bind:this={title}>Transition avec l'utilisation de API</h1>
 		<div class="linkabout" bind:this={link}>
-			<a href="/">{$t('about.link')}</a>
+			<a class="linkabout-link" href="/transitionAPI/cible">LIEN ANIMATION</a>
 		</div>
+		<img class="logo" src="logo.svg" alt="" style:--logo="logo" />
 	</div>
 </div>
 
@@ -42,14 +36,14 @@
 		transform-origin: center;
 	}
 	.about {
-		background-color: blue;
 		position: absolute;
 		width: 100vw;
 	}
 	.logo {
-		position: relative;
+		position: absolute;
 		margin-right: auto;
+		right: 0;
 		margin-left: auto;
-		transform: scale(2);
+		transform: scale(1);
 	}
 </style>

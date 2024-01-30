@@ -26,6 +26,10 @@
 // @import './pages/about';
 @import './src/CSS/pages/page';
 
+.scroll-content {
+  min-height: 100vh;
+}
+
 .initalLoader {
   @include rcc;
   background-color: white;
@@ -115,10 +119,7 @@ main {
 }
 
 .logo {
-  // position: absolute;
-  // right: 0;
   width: 200px;
   height: 200px;
-  // background-color: yellow;
   view-transition-name: var(--logo);
 }
