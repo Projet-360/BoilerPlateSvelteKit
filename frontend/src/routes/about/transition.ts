@@ -47,6 +47,8 @@ export const exit = (node: any, { duration = 0.5, title, text, link }) => {
 	gsap.registerPlugin(ScrollTrigger);
 
 	const timeline = gsap.timeline({ defaults: { duration } });
+	const dd = document.querySelectorAll('.subline');
+	console.log(dd);
 
 	timeline.to(node, {
 		opacity: 1,
@@ -67,12 +69,12 @@ export const exit = (node: any, { duration = 0.5, title, text, link }) => {
 		ease: 'power2.in'
 	});
 
-	gsap.set('.subline', {
+	gsap.set(dd, {
 		y: '0px',
 		opacity: 1
 	});
 
-	gsap.to('.subline', {
+	gsap.to(dd, {
 		y: '-100%',
 		opacity: 0,
 		duration: 0.4,

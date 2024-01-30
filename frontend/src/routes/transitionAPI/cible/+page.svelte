@@ -4,15 +4,16 @@
 	import { onMount } from 'svelte';
 
 	let title: HTMLElement;
-	let text: HTMLElement;
 	let link: HTMLElement;
 
 	onMount(() => {
 		const tl = gsap.timeline();
 
-		tl.from(title, { duration: 0.7, autoAlpha: 0, y: -30, ease: 'back.out(1.7)' })
-			.from(text, { duration: 0.7, autoAlpha: 0, y: -30, ease: 'back.out(1.7)' }, '-=0.5')
-			.from(link, { duration: 0.7, autoAlpha: 0, x: -30, ease: 'back.out(1.7)' }, '-=0.5');
+		tl.from(title, { duration: 0.7, autoAlpha: 0, y: -30, ease: 'back.out(1.7)' }).from(
+			link,
+			{ duration: 0.7, autoAlpha: 0, x: -30, ease: 'back.out(1.7)' },
+			'-=0.5'
+		);
 	});
 </script>
 
@@ -23,7 +24,7 @@
 
 <div class="about">
 	<div>
-		<h1 bind:this={title}>Transition avec l'utilisation de API</h1>
+		<h1 bind:this={title}>ET HOP !</h1>
 
 		<div class="linkabout" bind:this={link}>
 			<a class="linkabout-link" href="/transitionAPI">LIEN ANIMATION</a>

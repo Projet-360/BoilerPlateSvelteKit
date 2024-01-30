@@ -50,7 +50,7 @@ export const wrapNewLines = (
 		)
 		.join('');
 
-	console.log(lines);
+	//console.log(lines);
 
 	element.innerHTML = newLines; // Mise à jour finale avec les lignes enveloppées
 };

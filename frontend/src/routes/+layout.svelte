@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { onNavigate } from '$app/navigation';
 
 	import App from '$lib/js/index';
 	import { registerServiceWorker } from '$UITools/serviceWorker';
@@ -17,12 +18,11 @@
 	} from '$stores/initialLoaderStore';
 
 	import { fetchMockData } from '$api/utils/mockService';
-	import { onNavigate } from '$app/navigation';
 
 	onNavigate(async (navigation) => {
 		if (!document.startViewTransition) return;
 
-		console.log("1. Capture de l'état actuel du DOM");
+		//console.log("1. Capture de l'état actuel du DOM");
 
 		await new Promise((resolve) => {
 			document.startViewTransition(async () => {
@@ -64,7 +64,7 @@
 		const mockData = await fetchMockData();
 		if (mockData) {
 			setRessourceToValide(true);
-			console.log($loadingStates);
+			//console.log($loadingStates);
 		}
 	});
 </script>
