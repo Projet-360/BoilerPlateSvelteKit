@@ -19,13 +19,38 @@
 	import { fetchMockData } from '$api/utils/mockService';
 	import { onNavigate } from '$app/navigation';
 
-	onNavigate((navigation) => {
+	onNavigate(async (navigation) => {
 		if (!document.startViewTransition) return;
 
-		return new Promise((resolve) => {
+		console.log("1. Capture de l'état actuel du DOM");
+
+		await new Promise((resolve) => {
 			document.startViewTransition(async () => {
-				resolve();
-				await navigation.complete;
+				console.log("2. Déclenchement de la transition - Préparation de l'animation");
+
+				// Préparation des éléments pour l'animation de sortie
+				// Exemple : document.querySelector('.ma-classe').classList.add('etat-sortie');
+
+				console.log("3. Début de l'animation de sortie");
+				// Insérez ici la logique pour déclencher les animations de sortie
+
+				// Attendez un délai approprié pour permettre l'animation de sortie
+				// Exemple : await new Promise(resolve => setTimeout(resolve, 1000));
+
+				console.log("4. Mise à jour du DOM et début de l'animation d'entrée");
+				// Ici, vous pouvez attendre la fin de la navigation si nécessaire
+				// await navigation.complete;
+
+				// Appliquez des animations d'entrée ou d'autres transformations nécessaires
+				// Exemple : document.querySelector('.nouvelle-classe').classList.add('etat-entree');
+
+				// Assurez-vous que toutes les animations sont terminées avant de résoudre la promesse
+				// Exemple : await new Promise(resolve => setTimeout(resolve, 1000));
+
+				console.log("5. Fin de l'animation et nettoyage");
+				// Nettoyage des styles temporaires ou des classes utilisées pour l'animation
+
+				resolve(); // Fin de la transition
 			});
 		});
 	});
