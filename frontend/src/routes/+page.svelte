@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Canvas } from '@threlte/core';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { hoverable } from '$UITools/Cursor/cursorHelpers';
 	import { t } from '$UITools/Translations/index';
 	import Box from '$three/Box.svelte';
@@ -20,6 +20,12 @@
 	onMount(() => {
 		setTransitionLoader(false);
 		fetchMockData;
+
+		const tl = gsap.timeline();
+
+		tl.from(title, { duration: 0.7, autoAlpha: 0, y: -30, ease: 'back.out(1.7)' })
+			.from(text, { duration: 0.7, autoAlpha: 0, y: -30, ease: 'back.out(1.7)' }, '-=0.5')
+			.from(link, { duration: 0.7, autoAlpha: 0, x: -30, ease: 'back.out(1.7)' }, '-=0.5');
 	});
 </script>
 
@@ -28,27 +34,21 @@
 	<meta name="description" content="Ceci est une description de la page d'exemple." />
 </svelte:head>
 
-<div
-	class="home"
-	in:enter={{ duration: 1, title, text, link }}
-	out:exit={{ duration: 1, title, text, link }}
->
+<div class="home">
 	<h1 bind:this={title}>{$t('home.title')}</h1>
 	<p bind:this={text}>{@html $t('home.text', { linkUrl })}</p>
 	<div class="linkhome" bind:this={link}>
 		<a href="/about" use:hoverable={'first'}>{$t('home.link')}</a>
 	</div>
+	<img class="logo" src="logo.svg" alt="" style:--logo="logo" />
 
 	<Greetings />
 	<Slider />
 </div>
 
 <style>
-	.lkjk {
-		height: 500px;
-	}
-
 	.home {
+		width: 100vw;
 		position: absolute;
 		background-color: red;
 	}

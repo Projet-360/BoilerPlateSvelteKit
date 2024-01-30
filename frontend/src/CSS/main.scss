@@ -100,10 +100,25 @@ main {
   margin-top: 70px;
 }
 
-        .line {            
-            overflow: hidden;
-            display: block;
-        }
-        .subline {
-            display: block;
-        }
+.line {
+  overflow: hidden;
+  display: block;
+}
+
+.subline {
+  display: block;
+}
+
+
+:root {
+	view-transition-name: none;
+}
+
+.logo {
+  // position: absolute;
+  // right: 0;
+  width: 200px;
+  height: 200px;
+  // background-color: yellow;
+  view-transition-name: var(--logo);
+}

@@ -17,6 +17,18 @@
 	} from '$stores/initialLoaderStore';
 
 	import { fetchMockData } from '$api/utils/mockService';
+	import { onNavigate } from '$app/navigation';
+
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 
 	onMount(async () => {
 		new App();

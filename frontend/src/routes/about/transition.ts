@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 import { wrapNewLines } from '$lib/js/wrapNewLines';
-import { ScrollTrigger } from 'gsap/all';
+import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 
 export const enter = (node: any, { duration = 0.5, title, text, link }) => {
 	gsap.registerPlugin(ScrollTrigger);
