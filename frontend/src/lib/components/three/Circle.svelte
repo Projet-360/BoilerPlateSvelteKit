@@ -4,28 +4,27 @@
 	import * as THREE from 'three';
 
 	let container;
-	let animationFrameId; // Pour stocker l'identifiant de la boucle d'animation
-	let unsubscribe; // Pour stocker la fonction de désinscription de la souscription au store
+	let localScene;
+	let animationFrameId;
+	let unsubscribe;
 
 	onMount(() => {
 		threeStore.initialize();
-		unsubscribe = threeStore.subscribe(({ renderer, scene, camera }) => {
-			console.log('renderer', renderer);
-			console.log('scene', scene);
-			console.log('camera', camera);
+		localScene = threeStore.initialize();
+		unsubscribe = threeStore.subscribe(({ renderer, camera }) => {
 			if (renderer && container && !container.firstChild) {
 				container.appendChild(renderer.domElement);
 
 				const geometry = new THREE.SphereGeometry(1, 32, 32);
 				const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 				const mesh = new THREE.Mesh(geometry, material);
-				scene.add(mesh);
+				localScene.add(mesh);
 
 				camera.position.set(0, 0, 5);
 
 				function animate() {
 					animationFrameId = requestAnimationFrame(animate);
-					renderer.render(scene, camera);
+					renderer.render(localScene, camera);
 				}
 
 				animate();

@@ -6,7 +6,7 @@ const duration = 1;
 export const enter = (node: any, { pathIn, title, text, link }) => {
 	gsap.registerPlugin(ScrollTrigger);
 	if ((pathIn = '/')) {
-		console.log('declenchement de sortie pour la page HOME');
+		//console.log('declenchement de sortie pour la page HOME');
 	}
 
 	const timeline = gsap.timeline({ defaults: { duration } });
@@ -49,10 +49,10 @@ export const enter = (node: any, { pathIn, title, text, link }) => {
 
 export const exit = (node: any, { pathOut, title, text, link }) => {
 	gsap.registerPlugin(ScrollTrigger);
-	console.log('pathOut', pathOut);
+	//console.log('pathOut', pathOut);
 
 	if ((pathOut = '/')) {
-		console.log('declenchement de sortie pour la page HOME');
+		//console.log('declenchement de sortie pour la page HOME');
 	}
 
 	const timeline = gsap.timeline({ defaults: { duration } });

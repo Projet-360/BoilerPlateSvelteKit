@@ -56,6 +56,8 @@ function createThreeStore() {
 				helperService,
 				loaderService
 			});
+
+			return new THREE.Scene();
 		},
 		dispose: () => {
 			set(($state) => {
