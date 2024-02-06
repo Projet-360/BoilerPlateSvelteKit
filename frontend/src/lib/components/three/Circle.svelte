@@ -5,14 +5,18 @@
 
 	let container;
 	let animationFrameId; // Pour stocker l'identifiant de la boucle d'animation
+	let unsubscribe; // Pour stocker la fonction de désinscription de la souscription au store
 
 	onMount(() => {
 		threeStore.initialize();
-		const unsubscribe = threeStore.subscribe(({ renderer, scene, camera }) => {
+		unsubscribe = threeStore.subscribe(({ renderer, scene, camera }) => {
+			console.log('renderer', renderer);
+			console.log('scene', scene);
+			console.log('camera', camera);
 			if (renderer && container && !container.firstChild) {
 				container.appendChild(renderer.domElement);
 
-				const geometry = new THREE.SphereGeometry(1, 32, 32); // Ou SphereGeometry pour la sphère
+				const geometry = new THREE.SphereGeometry(1, 32, 32);
 				const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 				const mesh = new THREE.Mesh(geometry, material);
 				scene.add(mesh);
@@ -27,32 +31,14 @@
 				animate();
 			}
 		});
-
-		return () => {
-			unsubscribe();
-			if (animationFrameId) cancelAnimationFrame(animationFrameId);
-			if (container && container.firstChild) {
-				container.removeChild(container.firstChild); // Supprime le canvas du DOM
-			}
-			threeStore.dispose();
-		};
 	});
 
 	onDestroy(() => {
-		// Nettoyage spécifique de Three.js
-		threeStore.subscribe(({ scene, renderer }) => {
-			scene.traverse((object) => {
-				if (object.isMesh) {
-					object.geometry.dispose();
-					if (object.material.isMaterial) {
-						cleanMaterial(object.material);
-					} else if (Array.isArray(object.material)) {
-						object.material.forEach(cleanMaterial);
-					}
-				}
-			});
-			if (renderer) renderer.dispose(); // Nettoie le renderer et le contexte WebGL
-		})();
+		threeStore.dispose();
+		if (unsubscribe) unsubscribe();
+		if (animationFrameId) cancelAnimationFrame(animationFrameId);
+		// Ne disposez pas immédiatement des ressources ici si d'autres composants peuvent en avoir besoin
+		// Considérez une logique conditionnelle ou basée sur un état pour déterminer quand disposer réellement les ressources
 	});
 
 	function cleanMaterial(material) {

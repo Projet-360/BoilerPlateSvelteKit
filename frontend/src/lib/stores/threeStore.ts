@@ -3,29 +3,49 @@ import { writable } from 'svelte/store';
 import * as THREE from 'three';
 
 import { animationService } from '$lib/three/AnimationService';
-import { cameraService } from '$lib/three/CameraService'; // Utilisez l'instance directement
+import { cameraService } from '$lib/three/CameraService';
 import { eventService } from '$lib/three/EventService';
 import { helperService } from '$lib/three/HelperService';
 import { loaderService } from '$lib/three/LoaderService';
-import { renderService } from '$lib/three/RenderService'; // Utilisez l'instance directement
+import { renderService } from '$lib/three/RenderService';
 import { sceneService } from '$lib/three/SceneService';
+
+const MAX_WEBGL_CONTEXTS = 5;
+let renderers = []; // Stocker les instances de renderer
 
 function createThreeStore() {
 	const { subscribe, set } = writable({
 		renderer: null,
-		scene: sceneService.scene, // Utilisez directement l'instance sceneService
-		camera: null, // Initialisé plus tard
+		scene: sceneService.scene,
+		camera: null,
 		animationService,
 		eventService,
 		helperService,
 		loaderService
 	});
 
+	function manageRenderers(newRenderer) {
+		if (renderers.length >= MAX_WEBGL_CONTEXTS) {
+			const oldRenderer = renderers.shift(); // Retirez le renderer le plus ancien
+			disposeRenderer(oldRenderer);
+		}
+		renderers.push(newRenderer); // Ajoutez le nouveau renderer
+	}
+
+	function disposeRenderer(renderer) {
+		if (!renderer) return;
+		renderer.dispose();
+		if (renderer.forceContextLoss) {
+			renderer.forceContextLoss(); // Force la libération du contexte WebGL
+		}
+	}
+
 	return {
 		subscribe,
 		initialize: () => {
-			cameraService.initCamera(); // Assurez-vous d'initialiser la caméra
-			renderService.initRenderer(); // Assurez-vous d'initialiser le renderer
+			cameraService.initCamera();
+			renderService.initRenderer();
+			manageRenderers(renderService.getRenderer()); // Gérez les renderers pour ne pas dépasser le maximum
 
 			set({
 				renderer: renderService.getRenderer(),
@@ -38,33 +58,25 @@ function createThreeStore() {
 			});
 		},
 		dispose: () => {
-			if (this.renderer) {
-				// Nettoyer les objets de la scène
-				scene.traverse((object) => {
-					if (object.isMesh) {
-						if (object.geometry) object.geometry.dispose();
-						if (object.material) {
-							Array.isArray(object.material)
-								? object.material.forEach((m) => m.dispose())
-								: object.material.dispose();
-						}
-					}
-				});
+			set(($state) => {
+				renderers.forEach(disposeRenderer); // Disposez tous les renderers
+				renderers = []; // Réinitialisez le tableau des renderers
 
-				// Nettoyer le renderer et libérer le contexte WebGL
-				this.renderer.dispose();
-				this.renderer.forceContextLoss(); // Force la libération du contexte WebGL
-				this.renderer = null;
-			}
-			// Réinitialiser l'état du store
-			set({
-				renderer: null,
-				scene: new THREE.Scene(),
-				camera: new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000),
-				animationService,
-				eventService,
-				helperService,
-				loaderService
+				// Réinitialiser l'état du store
+				return {
+					renderer: null,
+					scene: new THREE.Scene(),
+					camera: new THREE.PerspectiveCamera(
+						75,
+						window.innerWidth / window.innerHeight,
+						0.1,
+						1000
+					),
+					animationService,
+					eventService,
+					helperService,
+					loaderService
+				};
 			});
 		}
 	};
