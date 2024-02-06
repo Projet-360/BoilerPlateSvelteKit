@@ -4,18 +4,19 @@
 	import { onDestroy, onMount } from 'svelte';
 
 	import { enter, exit } from './transition';
+	import { onNavigate } from '$app/navigation';
+	import Circle from '$components/three/Circle.svelte';
 
 	let title: HTMLElement;
 	let text: HTMLElement;
 	let link: HTMLElement;
+	let path: string;
 
-	onMount(() => {
-		const tl = gsap.timeline();
-
-		tl.from(title, { duration: 0.7, autoAlpha: 0, y: -30, ease: 'back.out(1.7)' })
-			.from(text, { duration: 0.7, autoAlpha: 0, y: -30, ease: 'back.out(1.7)' }, '-=0.5')
-			.from(link, { duration: 0.7, autoAlpha: 0, x: -30, ease: 'back.out(1.7)' }, '-=0.5');
+	onNavigate((navigation) => {
+		path = navigation.to?.route.id;
 	});
+
+	onMount(() => {});
 </script>
 
 <svelte:head>
@@ -23,11 +24,7 @@
 	<meta name="description" content="About this app" />
 </svelte:head>
 
-<div
-	class="about"
-	in:enter={{ duration: 1, title, text, link }}
-	out:exit={{ duration: 1, title, text, link }}
->
+<div class="about" in:enter={{ path, title, text, link }} out:exit={{ path, title, text, link }}>
 	<div>
 		<h1 bind:this={title}>{$t('about.title')}</h1>
 		<p bind:this={text}>{@html $t('about.text')}</p>
@@ -35,6 +32,7 @@
 			<a href="/">{$t('about.link')}</a>
 		</div>
 	</div>
+	<Circle />
 </div>
 
 <style>

@@ -1,4 +1,4 @@
-import notificationStore from '$stores/notificationStore';
+import notificationStore from '$lib/stores/notificationStore';
 type TranslationFunction = (key: string, options?: any) => string;
 
 export const messageNotification = (error: any, $t: App.TranslationFunction) => {

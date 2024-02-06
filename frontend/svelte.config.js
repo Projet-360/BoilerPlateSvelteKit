@@ -38,7 +38,7 @@ export default defineConfig({
 	preprocess: [
 		sveltePreprocess({
 			scss: {
-				includePaths: ['src/css']
+				includePaths: ['src/styles']
 			},
 			postcss: {
 				plugins: [autoprefixer()]
@@ -50,13 +50,13 @@ export default defineConfig({
 		alias: {
 			// this will match a file
 			$db: 'src/db',
-			$components: 'src/components',
+			$components: 'src/lib/components',
 			$modelNotifications: 'src/api/modelNotifications',
 			$utils: 'src/utils',
-			$stores: 'src/stores',
+			$stores: 'src/lib/stores',
 			$UITools: 'src/lib/UITools',
 			$language: 'src/language',
-			$three: 'src/components/three',
+			$three: 'src/lib/components/three',
 			$services: 'src/services',
 			$lib: 'src/lib',
 			$api: 'src/api'

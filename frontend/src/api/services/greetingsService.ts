@@ -4,9 +4,9 @@ import {
 	addGreeting,
 	updateGreetingInStore,
 	deleteGreetingFromStore
-} from '$stores/greetingsStore';
+} from '$lib/stores/greetingsStore';
 import socket from '$api/utils/socket';
-import type { Greeting } from '$stores/greetingsStore';
+import type { Greeting } from '$lib/stores/greetingsStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
 export const loadGreetings = async (): Promise<void> => {

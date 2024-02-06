@@ -2,7 +2,11 @@
 	import gsap from 'gsap';
 	import { onMount, onDestroy, tick } from 'svelte';
 	import { get } from 'svelte/store';
-	import { setDomLoaded, setFirstLoadComplete, loadingStates } from '$stores/initialLoaderStore';
+	import {
+		setDomLoaded,
+		setFirstLoadComplete,
+		loadingStates
+	} from '$lib/stores/initialLoaderStore';
 
 	let initalLoader: HTMLElement;
 	let observer: IntersectionObserver;

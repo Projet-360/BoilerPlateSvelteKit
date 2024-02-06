@@ -2,10 +2,10 @@
 	import { onDestroy, afterUpdate, beforeUpdate } from 'svelte';
 	import { onNavigate } from '$app/navigation';
 	import Preloader from '$UITools/PageTransition/Preloader/index.svelte';
-	import smoothScrollStore from '$stores/scrollStore';
+	import smoothScrollStore from '$lib/stores/scrollStore';
 	import { animateOut, animateIn } from './pages';
 	import type Scrollbar from 'smooth-scrollbar';
-	import { setTransitionLoader, transitionLoader } from '$stores/transitionLoaderStore';
+	import { setTransitionLoader, transitionLoader } from '$lib/stores/transitionLoaderStore';
 
 	let layoutContainer: HTMLElement;
 	let smoothScroll: Scrollbar | null;

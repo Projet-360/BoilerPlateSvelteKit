@@ -8,15 +8,21 @@
 
 	import Greetings from '$components/Greetings.svelte';
 	import Slider from '$components/Slider.svelte';
-	import { setTransitionLoader } from '$stores/transitionLoaderStore';
+	import { setTransitionLoader } from '$lib/stores/transitionLoaderStore';
 	import { fetchMockData } from '$api/utils/mockService';
 	import { enter, exit } from './transition';
-	import { isAnimatingOut } from '$stores/isAnimating';
+	import { isAnimatingOut } from '$lib/stores/isAnimating';
+	import { onNavigate } from '$app/navigation';
 
 	const linkUrl: string = 'https://kit.svelte.dev';
 	let title: HTMLElement;
 	let text: HTMLElement;
 	let link: HTMLElement;
+	let path: string;
+
+	onNavigate((navigation) => {
+		path = navigation.to?.route.id;
+	});
 
 	onMount(() => {
 		setTransitionLoader(false);
@@ -42,6 +48,7 @@
 
 	<Greetings />
 	<Slider />
+	<Box/>
 </div>
 
 <style>

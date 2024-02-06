@@ -1,9 +1,13 @@
 import gsap from 'gsap';
 import { wrapNewLines } from '$lib/js/wrapNewLines';
 import ScrollTrigger from 'gsap/dist/ScrollTrigger';
+const duration = 1;
 
-export const enter = (node: any, { duration = 0.5, title, text, link }) => {
+export const enter = (node: any, { pathIn, title, text, link }) => {
 	gsap.registerPlugin(ScrollTrigger);
+	if ((pathIn = '/')) {
+		console.log('declenchement de sortie pour la page HOME');
+	}
 
 	const timeline = gsap.timeline({ defaults: { duration } });
 
@@ -43,13 +47,15 @@ export const enter = (node: any, { duration = 0.5, title, text, link }) => {
 	};
 };
 
-export const exit = (node: any, { duration = 0.5, title, text, link }) => {
+export const exit = (node: any, { pathOut, title, text, link }) => {
 	gsap.registerPlugin(ScrollTrigger);
+	console.log('pathOut', pathOut);
+
+	if ((pathOut = '/')) {
+		console.log('declenchement de sortie pour la page HOME');
+	}
 
 	const timeline = gsap.timeline({ defaults: { duration } });
-	const dd = document.querySelectorAll('.subline');
-	console.log(dd);
-
 	timeline.to(node, {
 		opacity: 1,
 		x: '100vw',
@@ -67,18 +73,6 @@ export const exit = (node: any, { duration = 0.5, title, text, link }) => {
 		opacity: 0,
 		y: -100,
 		ease: 'power2.in'
-	});
-
-	gsap.set(dd, {
-		y: '0px',
-		opacity: 1
-	});
-
-	gsap.to(dd, {
-		y: '-100%',
-		opacity: 0,
-		duration: 0.4,
-		stagger: 0.04
 	});
 
 	return {

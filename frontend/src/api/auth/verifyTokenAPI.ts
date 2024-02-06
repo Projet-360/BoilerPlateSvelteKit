@@ -1,4 +1,4 @@
-import notificationStore from '$stores/notificationStore';
+import notificationStore from '$lib/stores/notificationStore';
 import { goto } from '$app/navigation';
 
 export async function verifyToken(token: string, $t: App.TranslationFunction) {

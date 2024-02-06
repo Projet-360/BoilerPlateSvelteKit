@@ -15,7 +15,7 @@ const config = {
 	css: {
 		preprocessorOptions: {
 			scss: {
-				additionalData: '@import "src/css/main.scss"'
+				additionalData: '@import "src/styles/main.scss"'
 			}
 		}
 	},

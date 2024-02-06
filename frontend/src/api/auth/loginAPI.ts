@@ -2,9 +2,9 @@ import { apiCall } from '$api/utils/apiCall';
 
 import { handleRoleRedirection } from '$api/utils/handleRoleRedirection';
 
-import { authStore } from '$stores/authStore';
+import { authStore } from '$lib/stores/authStore';
 
-import notificationStore from '$stores/notificationStore';
+import notificationStore from '$lib/stores/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
 let currentState: App.IAuthStore;

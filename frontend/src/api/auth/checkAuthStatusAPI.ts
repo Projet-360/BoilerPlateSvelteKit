@@ -1,4 +1,4 @@
-import { authStore } from '$stores/authStore';
+import { authStore } from '$lib/stores/authStore';
 let currentState: App.IAuthStore;
 
 authStore.subscribe((state) => {

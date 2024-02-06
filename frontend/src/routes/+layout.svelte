@@ -15,7 +15,7 @@
 		loadingStates,
 		setFirstOpen,
 		setRessourceToValide
-	} from '$stores/initialLoaderStore';
+	} from '$lib/stores/initialLoaderStore';
 
 	import { fetchMockData } from '$api/utils/mockService';
 
@@ -24,7 +24,7 @@
 
 		//console.log("1. Capture de l'état actuel du DOM");
 
-		await new Promise((resolve) => {
+		await new Promise<void>((resolve) => {
 			document.startViewTransition(async () => {
 				// console.log("2. Déclenchement de la transition - Préparation de l'animation");
 				// // Préparation des éléments pour l'animation de sortie
@@ -91,5 +91,5 @@
 </SmoothScroller>
 
 <style lang="scss" global>
-	@import './src/css/main';
+	@import './src/styles/main';
 </style>
