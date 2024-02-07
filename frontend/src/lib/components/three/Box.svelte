@@ -83,10 +83,12 @@
 		const magneticThreshold = 1.5;
 
 		if (distance < magneticThreshold) {
-			// Calculer la nouvelle position pour 'targetCube' pour qu'il soit adjacent à 'draggedObject'
+			// Calculer la nouvelle position pour 'draggedObject' pour qu'il soit adjacent à 'targetCube'
 			// On suppose que 'draggedObject' se déplace le long de l'axe X pour cet exemple
 			const direction = draggedObject.position.x < targetCube.position.x ? 1 : -1; // Déterminer la direction
-			targetCube.position.x = draggedObject.position.x + direction * cubeSize; // Positionner 'targetCube' à côté de 'draggedObject'
+
+			// Ajuster uniquement la position de 'draggedObject' pour qu'il s'arrête à la limite de 'targetCube'
+			draggedObject.position.x = targetCube.position.x - direction * cubeSize; // Ajuster la position de 'draggedObject'
 
 			// Pour un mouvement dans d'autres directions (y ou z), ajustez la position y ou z de manière similaire
 		}
