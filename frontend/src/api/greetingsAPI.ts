@@ -27,6 +27,8 @@ export async function saveGreeting(
 			body: { name, message }
 		});
 
+		console.log(response);
+
 		return { success: response !== null, data: response };
 	} catch (error) {
 		messageNotification(error, $t);

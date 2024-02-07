@@ -52,6 +52,7 @@ export const handleSaveGreeting = async (
 		name = '';
 		message = '';
 		editingId = null;
+
 		// Emit the socket event to inform other clients
 		socket.emit('saveGreetingSocket');
 		// Update the store accordingly

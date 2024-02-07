@@ -40,15 +40,15 @@
 	in:enter={{ duration: 1, title, text, link }}
 	out:exit={{ duration: 1, title, text, link }}
 >
-	<h1 bind:this={title}>{$t('home.title')}</h1>
+	<!-- <h1 bind:this={title}>{$t('home.title')}</h1>
 	<p bind:this={text}>{@html $t('home.text', { linkUrl })}</p>
 	<div class="linkhome" bind:this={link}>
 		<a href="/about" use:hoverable={'first'}>{$t('home.link')}</a>
 	</div>
 
 	<Greetings />
-	<Slider />
-	<Box/>
+	<Slider /> -->
+	<Box />
 </div>
 
 <style>

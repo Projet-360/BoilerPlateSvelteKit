@@ -80,7 +80,6 @@
 	<Loader />
 {/if}
 
-<Cursor />
 <NotificationWrapper />
 <Header />
 

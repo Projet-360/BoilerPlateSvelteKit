@@ -8,6 +8,7 @@
 		initSocketListeners
 	} from '$api/services/greetingsService';
 	import { greetingsStore } from '$stores/greetingsStore';
+	import { t } from '$UITools/Translations/index';
 
 	let name: string = '';
 	let message: string = '';
@@ -18,9 +19,13 @@
 		const cleanup = initSocketListeners();
 		return cleanup;
 	});
+
+	const save = async () => {
+		await handleSaveGreeting(name, message, editingId, $t);
+	};
 </script>
 
-<form on:submit|preventDefault={handleSaveGreeting}>
+<form on:submit|preventDefault={save}>
 	<label for="nameInput">
 		Nom :
 		<input id="nameInput" name="name" type="text" autocomplete="name" bind:value={name} />

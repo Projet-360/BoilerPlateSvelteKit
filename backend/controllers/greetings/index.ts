@@ -8,6 +8,8 @@ export const saveGreeting = async (
   next: NextFunction,
 ) => {
   const { name, message } = req.body;
+  console.log('name', name);
+  console.log('message', message);
 
   const greeting = new Greeting({ name, message });
   await greeting.save();
