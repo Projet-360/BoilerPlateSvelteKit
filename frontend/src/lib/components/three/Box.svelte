@@ -9,6 +9,7 @@
 	let scene, camera, renderer; // Three.js essentials
 	let controls, dragControls; // Controls for the scene
 	let cube1, cube2, plane; // The cubes to be dragged and dropped
+	let planeSize = 10; // La taille de votre plane, assurez-vous que cette valeur correspond à celle utilisée dans initGround
 
 	// Initialize the scene with cubes and controls
 	function initScene() {
@@ -30,6 +31,7 @@
 		// Initialize and add cubes to the scene
 		initCubes();
 		initGround();
+		initWalls();
 
 		// Add drag controls
 		initDragControls();
@@ -39,12 +41,34 @@
 	}
 
 	function initGround() {
-		const geometry = new THREE.PlaneGeometry(10, 10); // Taille du sol
+		const geometry = new THREE.PlaneGeometry(planeSize, planeSize); // Taille du sol
 		const material = new THREE.MeshBasicMaterial({ color: 0xcccccc, side: THREE.DoubleSide });
 		plane = new THREE.Mesh(geometry, material);
 		plane.rotation.x = -Math.PI / 2; // Rotation pour que le plan soit horizontal
 		plane.position.y = -0.5; // Positionnement légèrement en dessous des cubes pour commencer
 		scene.add(plane);
+	}
+
+	function initWalls() {
+		const wallHeight = 2; // Hauteur des murs
+		const wallWidth = 0.1; // Épaisseur des murs
+
+		const wallMaterial = new THREE.MeshBasicMaterial({ color: 0x888888 }); // Matériau des murs
+
+		// Mur de gauche
+		const leftWallGeometry = new THREE.BoxGeometry(wallWidth, wallHeight, planeSize);
+		const leftWall = new THREE.Mesh(leftWallGeometry, wallMaterial);
+		leftWall.position.set(-planeSize / 2, wallHeight / 2, 0); // Position à l'extrémité gauche du plane
+		leftWall.position.y = 0.5; // Positionnement légèrement en dessous des cubes pour commencer
+		scene.add(leftWall);
+
+		// Mur du fond
+		const backWallGeometry = new THREE.BoxGeometry(planeSize, wallHeight, wallWidth);
+		const backWall = new THREE.Mesh(backWallGeometry, wallMaterial);
+		backWall.position.set(0, wallHeight / 2, -planeSize / 2); // Position à l'extrémité arrière du plane
+		backWall.rotation.y = Math.PI / 1; // Rotation de 90 degrés pour le mettre perpendiculaire au mur de gauche
+		backWall.position.y = 0.5; // Positionnement légèrement en dessous des cubes pour commencer
+		scene.add(backWall);
 	}
 
 	// Initialize cubes
@@ -83,26 +107,55 @@
 
 	// Check for magnetic effect during drag
 	function checkMagneticEffect(draggedObject) {
-		const targetCube = draggedObject === cube1 ? cube2 : cube1; // Déterminer l'autre cube
-		const distanceToCube = draggedObject.position.distanceTo(targetCube.position);
-		const distanceToFloor = Math.abs(draggedObject.position.y + 0.5); // Si la base du cube est à y = 0
+		const cubeSize = 1; // Supposons que la taille des cubes est 1 unité.
+		const magneticThreshold = 1.5; // Seuil de l'effet magnétique.
 
-		const cubeSize = 1; // Taille des cubes
-		const magneticThreshold = 1.5; // Seuil de l'effet magnétique
+		const targetCube = draggedObject === cube1 ? cube2 : cube1; // Détermine l'autre cube.
+		let direction, newPos;
 
-		// Aimantation par rapport à l'autre cube
-		if (distanceToCube < magneticThreshold) {
-			const direction = draggedObject.position.x < targetCube.position.x ? 1 : -1;
-			draggedObject.position.x = targetCube.position.x - direction * cubeSize;
+		// Calcul de la distance et direction par rapport à l'autre cube
+		if (
+			Math.abs(draggedObject.position.x - targetCube.position.x) < magneticThreshold &&
+			Math.abs(draggedObject.position.z - targetCube.position.z) < magneticThreshold
+		) {
+			direction = draggedObject.position.x < targetCube.position.x ? -1 : 1;
+			newPos = targetCube.position.x + direction * cubeSize;
+			if (Math.abs(newPos) <= planeSize / 2 - cubeSize / 2) {
+				// Vérifie si le nouveau positionnement est dans les limites du plane
+				draggedObject.position.x = newPos;
+			}
+
+			direction = draggedObject.position.z < targetCube.position.z ? -1 : 1;
+			newPos = targetCube.position.z + direction * cubeSize;
+			if (Math.abs(newPos) <= planeSize / 2 - cubeSize / 2) {
+				// Vérifie si le nouveau positionnement est dans les limites du plane
+				draggedObject.position.z = newPos;
+			}
 		}
 
-		// Aimantation par rapport au sol
-		if (distanceToFloor < magneticThreshold / 2) {
-			// Seuil ajusté pour le sol
-			draggedObject.position.y = -0.5 + cubeSize / 2; // Ajuster pour que le cube "colle" au sol
+		// Fixation au sol
+		draggedObject.position.y = plane.position.y + cubeSize / 2;
+
+		// Vérification de la proximité avec les murs et ajustement
+		// Mur de gauche
+		if (draggedObject.position.x - cubeSize / 2 < -planeSize / 2) {
+			draggedObject.position.x = -planeSize / 2 + cubeSize / 2;
 		}
 
-		draggedObject.position.y = -0.5 + cubeSize / 2;
+		// Mur du fond
+		if (draggedObject.position.z - cubeSize / 2 < -planeSize / 2) {
+			draggedObject.position.z = -planeSize / 2 + cubeSize / 2;
+		}
+
+		// Mur de droite
+		if (draggedObject.position.x + cubeSize / 2 > planeSize / 2) {
+			draggedObject.position.x = planeSize / 2 - cubeSize / 2;
+		}
+
+		// Mur de devant
+		if (draggedObject.position.z + cubeSize / 2 > planeSize / 2) {
+			draggedObject.position.z = planeSize / 2 - cubeSize / 2;
+		}
 	}
 
 	// Animation loop
