@@ -8,7 +8,7 @@
 	let container; // DOM element to bind the renderer
 	let scene, camera, renderer; // Three.js essentials
 	let controls, dragControls; // Controls for the scene
-	let cube1, cube2; // The cubes to be dragged and dropped
+	let cube1, cube2, plane; // The cubes to be dragged and dropped
 
 	// Initialize the scene with cubes and controls
 	function initScene() {
@@ -29,12 +29,22 @@
 
 		// Initialize and add cubes to the scene
 		initCubes();
+		initGround();
 
 		// Add drag controls
 		initDragControls();
 
 		// Animation loop
 		animate();
+	}
+
+	function initGround() {
+		const geometry = new THREE.PlaneGeometry(10, 10); // Taille du sol
+		const material = new THREE.MeshBasicMaterial({ color: 0xcccccc, side: THREE.DoubleSide });
+		plane = new THREE.Mesh(geometry, material);
+		plane.rotation.x = -Math.PI / 2; // Rotation pour que le plan soit horizontal
+		plane.position.y = -0.5; // Positionnement légèrement en dessous des cubes pour commencer
+		scene.add(plane);
 	}
 
 	// Initialize cubes
@@ -73,25 +83,26 @@
 
 	// Check for magnetic effect during drag
 	function checkMagneticEffect(draggedObject) {
-		const targetCube = draggedObject === cube1 ? cube2 : cube1; // Determine the other cube
-		const distance = draggedObject.position.distanceTo(targetCube.position);
+		const targetCube = draggedObject === cube1 ? cube2 : cube1; // Déterminer l'autre cube
+		const distanceToCube = draggedObject.position.distanceTo(targetCube.position);
+		const distanceToFloor = Math.abs(draggedObject.position.y + 0.5); // Si la base du cube est à y = 0
 
-		// Taille des cubes (supposons qu'ils sont identiques et que la taille est 1)
-		const cubeSize = 1;
+		const cubeSize = 1; // Taille des cubes
+		const magneticThreshold = 1.5; // Seuil de l'effet magnétique
 
-		// Distance à laquelle l'effet magnétique s'applique
-		const magneticThreshold = 1.5;
-
-		if (distance < magneticThreshold) {
-			// Calculer la nouvelle position pour 'draggedObject' pour qu'il soit adjacent à 'targetCube'
-			// On suppose que 'draggedObject' se déplace le long de l'axe X pour cet exemple
-			const direction = draggedObject.position.x < targetCube.position.x ? 1 : -1; // Déterminer la direction
-
-			// Ajuster uniquement la position de 'draggedObject' pour qu'il s'arrête à la limite de 'targetCube'
-			draggedObject.position.x = targetCube.position.x - direction * cubeSize; // Ajuster la position de 'draggedObject'
-
-			// Pour un mouvement dans d'autres directions (y ou z), ajustez la position y ou z de manière similaire
+		// Aimantation par rapport à l'autre cube
+		if (distanceToCube < magneticThreshold) {
+			const direction = draggedObject.position.x < targetCube.position.x ? 1 : -1;
+			draggedObject.position.x = targetCube.position.x - direction * cubeSize;
 		}
+
+		// Aimantation par rapport au sol
+		if (distanceToFloor < magneticThreshold / 2) {
+			// Seuil ajusté pour le sol
+			draggedObject.position.y = -0.5 + cubeSize / 2; // Ajuster pour que le cube "colle" au sol
+		}
+
+		draggedObject.position.y = -0.5 + cubeSize / 2;
 	}
 
 	// Animation loop
