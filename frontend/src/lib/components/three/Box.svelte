@@ -9,6 +9,7 @@
 	let scene, camera, renderer; // Three.js essentials
 	let controls, dragControls; // Controls for the scene
 	let cube1, cube2, plane; // The cubes to be dragged and dropped
+	let light;
 	let planeSize = 10; // La taille de votre plane, assurez-vous que cette valeur correspond à celle utilisée dans initGround
 
 	// Initialize the scene with cubes and controls
@@ -22,7 +23,13 @@
 		);
 		renderer = new THREE.WebGLRenderer();
 		renderer.setSize(container.clientWidth, container.clientHeight);
+		renderer.shadowMap.enabled = true;
 		container.appendChild(renderer.domElement);
+
+		light = new THREE.DirectionalLight(0xffffff, 3);
+		light.position.set(1, 1, 1);
+		light.castShadow = true; // Permet à la lumière de générer des ombres
+		scene.add(light);
 
 		// Add orbit controls
 		controls = new OrbitControls(camera, renderer.domElement);
@@ -42,10 +49,11 @@
 
 	function initGround() {
 		const geometry = new THREE.PlaneGeometry(planeSize, planeSize); // Taille du sol
-		const material = new THREE.MeshBasicMaterial({ color: 0xcccccc, side: THREE.DoubleSide });
+		const material = new THREE.MeshStandardMaterial({ color: 0xcccccc, side: THREE.DoubleSide });
 		plane = new THREE.Mesh(geometry, material);
 		plane.rotation.x = -Math.PI / 2; // Rotation pour que le plan soit horizontal
 		plane.position.y = -0.5; // Positionnement légèrement en dessous des cubes pour commencer
+		plane.receiveShadow = true;
 		scene.add(plane);
 	}
 
@@ -53,33 +61,43 @@
 		const wallHeight = 2; // Hauteur des murs
 		const wallWidth = 0.1; // Épaisseur des murs
 
-		const wallMaterial = new THREE.MeshBasicMaterial({ color: 0x888888 }); // Matériau des murs
+		const wallMaterial = new THREE.MeshStandardMaterial({ color: 0x888888 }); // Matériau des murs
 
 		// Mur de gauche
 		const leftWallGeometry = new THREE.BoxGeometry(wallWidth, wallHeight, planeSize);
 		const leftWall = new THREE.Mesh(leftWallGeometry, wallMaterial);
 		leftWall.position.set(-planeSize / 2, wallHeight / 2, 0); // Position à l'extrémité gauche du plane
 		leftWall.position.y = 0.5; // Positionnement légèrement en dessous des cubes pour commencer
+		leftWall.receiveShadow = true;
 		scene.add(leftWall);
 
 		// Mur du fond
 		const backWallGeometry = new THREE.BoxGeometry(planeSize, wallHeight, wallWidth);
 		const backWall = new THREE.Mesh(backWallGeometry, wallMaterial);
+
 		backWall.position.set(0, wallHeight / 2, -planeSize / 2); // Position à l'extrémité arrière du plane
 		backWall.rotation.y = Math.PI / 1; // Rotation de 90 degrés pour le mettre perpendiculaire au mur de gauche
 		backWall.position.y = 0.5; // Positionnement légèrement en dessous des cubes pour commencer
+
+		backWall.receiveShadow = true;
 		scene.add(backWall);
 	}
 
 	// Initialize cubes
 	function initCubes() {
 		const geometry = new THREE.BoxGeometry(1, 1, 1);
-		const material1 = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-		const material2 = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+		const material1 = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
+		const material2 = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+
 		cube1 = new THREE.Mesh(geometry, material1);
 		cube2 = new THREE.Mesh(geometry, material2);
+
+		cube1.castShadow = true;
+		cube2.castShadow = true;
+
 		cube1.position.x = -2;
 		cube2.position.x = 2;
+
 		scene.add(cube1);
 		scene.add(cube2);
 	}
@@ -161,10 +179,9 @@
 	// Animation loop
 	function animate() {
 		requestAnimationFrame(animate);
-		controls.update(); // Only required if controls.enableDamping or .autoRotate are set to true
+		controls.update(); // Mise à jour des contrôles de la caméra si nécessaire
 		renderer.render(scene, camera);
 	}
-
 	onMount(() => {
 		initScene(); // Initialize the scene when the component mounts
 	});
