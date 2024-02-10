@@ -1,16 +1,20 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
-	import { threeStore } from '$stores/threeStore';
 	import * as THREE from 'three';
 	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 	import { DragControls } from 'three/examples/jsm/controls/DragControls.js';
+	import { PointLightHelper } from 'three';
+
+	const wallHeight = 3; // Hauteur des murs
+	const wallWidth = 0.1; // Épaisseur des murs
+	const wallMaterial = new THREE.MeshStandardMaterial({ color: 0x888888 }); // Matériau des murs
 
 	let container; // DOM element to bind the renderer
 	let scene, camera, renderer; // Three.js essentials
 	let controls, dragControls; // Controls for the scene
 	let cube1, cube2, plane; // The cubes to be dragged and dropped
 	let light;
-	let planeSize = 10; // La taille de votre plane, assurez-vous que cette valeur correspond à celle utilisée dans initGround
+	let planeSize = 15; // La taille de votre plane, assurez-vous que cette valeur correspond à celle utilisée dans initGround
 
 	// Initialize the scene with cubes and controls
 	function initScene() {
@@ -26,19 +30,16 @@
 		renderer.shadowMap.enabled = true;
 		container.appendChild(renderer.domElement);
 
-		light = new THREE.DirectionalLight(0xffffff, 3);
-		light.position.set(1, 1, 1);
-		light.castShadow = true; // Permet à la lumière de générer des ombres
-		scene.add(light);
-
 		// Add orbit controls
 		controls = new OrbitControls(camera, renderer.domElement);
+
 		camera.position.set(0, 0, 5);
 
 		// Initialize and add cubes to the scene
 		initCubes();
 		initGround();
 		initWalls();
+		initLights();
 
 		// Add drag controls
 		initDragControls();
@@ -58,11 +59,6 @@
 	}
 
 	function initWalls() {
-		const wallHeight = 2; // Hauteur des murs
-		const wallWidth = 0.1; // Épaisseur des murs
-
-		const wallMaterial = new THREE.MeshStandardMaterial({ color: 0x888888 }); // Matériau des murs
-
 		// Mur de gauche
 		const leftWallGeometry = new THREE.BoxGeometry(wallWidth, wallHeight, planeSize);
 		const leftWall = new THREE.Mesh(leftWallGeometry, wallMaterial);
@@ -83,14 +79,47 @@
 		scene.add(backWall);
 	}
 
+	function initLights() {
+		//Create a SpotLight and turn on shadows for the light
+		light = new THREE.PointLight(0xfbffe2, 15, 10);
+		light.position.set(-4, 2, -4);
+
+		let light2 = new THREE.PointLight(0xfbffe2, 15, 10);
+		light2.position.set(-4, 2, 0);
+
+		let light3 = new THREE.PointLight(0xfbffe2, 15, 10);
+		light3.position.set(0, 2, -4);
+
+		light.castShadow = true; // default false
+
+		scene.add(light);
+		scene.add(light2);
+		scene.add(light3);
+
+		light.shadow.mapSize.width = 512; // default
+		light.shadow.mapSize.height = 512; // default
+		light.shadow.camera.near = 0.5; // default
+		light.shadow.camera.far = 500; // default
+
+		const sphereSize = 1;
+
+		const pointLightHelper = new THREE.PointLightHelper(light, sphereSize);
+		scene.add(pointLightHelper);
+		const pointLightHelper2 = new THREE.PointLightHelper(light2, sphereSize);
+		scene.add(pointLightHelper2);
+		const pointLightHelper3 = new THREE.PointLightHelper(light3, sphereSize);
+		scene.add(pointLightHelper3);
+	}
+
 	// Initialize cubes
 	function initCubes() {
 		const geometry = new THREE.BoxGeometry(1, 1, 1);
+		const geometryRec = new THREE.BoxGeometry(1, 2, 1);
 		const material1 = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
 		const material2 = new THREE.MeshStandardMaterial({ color: 0xff0000 });
 
 		cube1 = new THREE.Mesh(geometry, material1);
-		cube2 = new THREE.Mesh(geometry, material2);
+		cube2 = new THREE.Mesh(geometryRec, material2);
 
 		cube1.castShadow = true;
 		cube2.castShadow = true;
@@ -126,7 +155,7 @@
 	// Check for magnetic effect during drag
 	function checkMagneticEffect(draggedObject) {
 		const cubeSize = 1; // Supposons que la taille des cubes est 1 unité.
-		const magneticThreshold = 1.5; // Seuil de l'effet magnétique.
+		const magneticThreshold = 2 * cubeSize;
 
 		const targetCube = draggedObject === cube1 ? cube2 : cube1; // Détermine l'autre cube.
 		let direction, newPos;
@@ -182,6 +211,7 @@
 		controls.update(); // Mise à jour des contrôles de la caméra si nécessaire
 		renderer.render(scene, camera);
 	}
+
 	onMount(() => {
 		initScene(); // Initialize the scene when the component mounts
 	});
@@ -205,7 +235,7 @@
 					}
 				}
 			});
-			scene.dispose();
+			//scene.dispose();
 		}
 	});
 </script>
