@@ -62,7 +62,7 @@
 		const ambientLight = new THREE.AmbientLight(0xfbffe2, 0.2);
 		scene.add(ambientLight);
 
-		const spotLight = new THREE.SpotLight(0xffffff, 5);
+		const spotLight = new THREE.SpotLight(0xffffff, 20);
 		spotLight.position.set(-2, 3, -2);
 		spotLight.castShadow = true;
 		scene.add(spotLight);
@@ -105,12 +105,29 @@
 			new THREE.MeshStandardMaterial({ color: 0xff0000 })
 		];
 
-		cubes = [1, 2].map((i) => {
-			const geometry = new THREE.BoxGeometry(cubeSize, cubeSize * i, cubeSize);
-			const cube = new THREE.Mesh(geometry, materials[i - 1]);
+		const materialsgeometry = [
+			{
+				width: 1,
+				height: 1,
+				depth: 1
+			},
+			{
+				width: 1,
+				height: 2,
+				depth: 1
+			}
+		];
+
+		// Assurez-vous que la longueur de materialsgeometry correspond à celle de votre tableau materials
+		cubes = materialsgeometry.map((geom, i) => {
+			// Utilisation de la déstructuration pour extraire les dimensions
+			const { width, height, depth } = geom;
+			const geometry = new THREE.BoxGeometry(width, height, depth);
+			const cube = new THREE.Mesh(geometry, materials[i % materials.length]); // Utilisation du modulo pour boucler sur le tableau materials si nécessaire
 			cube.castShadow = true;
-			cube.position.y = i === 1 ? 0.5 : 1; // Position initiale des cubes
-			cube.position.x = i === 1 ? -2 : 2; // Position initiale des cubes
+			cube.userData.height = height; // Stockage de la hauteur dans userData
+			cube.position.y = height / 2; // Ajustement pour placer la base du cube sur le plan
+			cube.position.x = i * 2; // Espacement entre les cubes, ajustez selon les besoins
 			scene.add(cube);
 			return cube;
 		});
@@ -141,7 +158,7 @@
 			});
 		}
 
-		draggedObject.position.y = cubeSize / 2; // Fixation au sol
+		draggedObject.position.y = draggedObject.userData.height / 2; // Fixation au sol
 
 		// Vérification de la proximité avec les murs et ajustement
 		['x', 'z'].forEach((axis) => {
