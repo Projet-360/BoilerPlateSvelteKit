@@ -39,7 +39,7 @@
 		controls = new OrbitControls(camera, renderer.domElement);
 
 		controls.enableDamping = true; // Active l'amortissement
-		controls.dampingFactor = 0.05;
+		controls.dampingFactor = 0.5;
 
 		addObjectsToScene();
 		initDragControls();
