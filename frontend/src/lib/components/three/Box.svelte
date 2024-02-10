@@ -1,13 +1,18 @@
-<script>
+<script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import * as THREE from 'three';
 	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 	import { DragControls } from 'three/examples/jsm/controls/DragControls.js';
 
-	let container;
-	let scene, camera, renderer;
-	let controls, dragControls;
-	let cubes = []; // Utilisation d'un tableau pour gérer les cubes
+	let container: HTMLDivElement | null; // Assumant que container est un élément div dans votre DOM
+
+	let scene: THREE.Scene;
+	let camera: THREE.PerspectiveCamera | THREE.OrthographicCamera; // Dépend de la caméra que vous utilisez
+	let renderer: THREE.WebGLRenderer;
+	let controls: any;
+	let dragControls: any;
+	let cubes: THREE.Mesh[] = [];
+
 	let plane,
 		walls = [];
 	const planeSize = 15;
@@ -30,19 +35,33 @@
 		setupCamera();
 		renderer = new THREE.WebGLRenderer({ antialias: true });
 		configureRenderer();
+
 		controls = new OrbitControls(camera, renderer.domElement);
+
+		controls.enableDamping = true; // Active l'amortissement
+		controls.dampingFactor = 0.05;
+
 		addObjectsToScene();
 		initDragControls();
 	}
 
 	function setupCamera() {
 		camera = new THREE.PerspectiveCamera(
-			75,
-			container.clientWidth / container.clientHeight,
-			0.1,
-			1000
+			75, // Angle de vue
+			container.clientWidth / container.clientHeight, // Rapport d'aspect
+			0.1, // Plan rapproché
+			1000 // Plan éloigné
 		);
-		camera.position.set(0, 0, 5);
+
+		// Positionnement de la caméra pour une vue avec rotation horizontale
+		const radius = 5; // Distance de la caméra au point central de la scène
+		const horizontalAngleInRadians = 220 * (Math.PI / 180); // Conversion de 50 degrés en radians
+
+		camera.position.x = radius * Math.cos(horizontalAngleInRadians);
+		camera.position.y = 2; // Hauteur de la caméra
+		camera.position.z = radius * Math.sin(horizontalAngleInRadians);
+
+		camera.lookAt(scene.position); // Oriente la caméra vers le centre de la scène
 	}
 
 	function configureRenderer() {
@@ -127,7 +146,8 @@
 			cube.castShadow = true;
 			cube.userData.height = height; // Stockage de la hauteur dans userData
 			cube.position.y = height / 2; // Ajustement pour placer la base du cube sur le plan
-			cube.position.x = i * 2; // Espacement entre les cubes, ajustez selon les besoins
+			cube.position.x = 7;
+			cube.position.z = i === 1 ? 3 : 1;
 			scene.add(cube);
 			return cube;
 		});

@@ -14,5 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "concurrently": "^8.2.2"
+  },
+  "devDependencies": {
+    "@types/three": "^0.161.2"
   }
 }
