@@ -8,17 +8,23 @@
 	let container: HTMLDivElement | null; // Assumant que container est un élément div dans votre DOM
 
 	let scene: THREE.Scene;
-	let camera: THREE.PerspectiveCamera | THREE.OrthographicCamera; // Dépend de la caméra que vous utilisez
+	let camera: THREE.PerspectiveCamera | THREE.OrthographicCamera;
 	let renderer: THREE.WebGLRenderer;
 	let controls: any;
 	let dragControls: any;
 	let cubes: THREE.Mesh[] = [];
+	let draggableModels: THREE.Object3D[] = []; // Initialisation de draggableModels comme tableau vide
+	let staticModels: THREE.Object3D[] = []; // Initialisation de staticModels si nécessaire
 
-	const modelPaths = ['/model/1.gltf ', '/model/2.gltf ', '/model/3.gltf '];
+	const modelPaths = [
+		{ path: '/model/CAR.gltf', draggable: true }
+		// { path: '/model/2.gltf', draggable: false },
+		// { path: '/model/3.gltf', draggable: true }
+	];
 
 	let plane,
 		walls = [];
-	const planeSize = 15;
+	const planeSize = 10;
 	const cubeSize = 1; // Définir une constante pour la taille des cubes
 	const wallHeight = 3;
 	const wallWidth = 0.1;
@@ -36,22 +42,47 @@
 	function initModels() {
 		const loader = new GLTFLoader();
 
-		modelPaths.forEach((path, index) => {
+		modelPaths.forEach((model) => {
 			loader.load(
-				path,
+				model.path,
 				(gltf) => {
-					const model = gltf.scene;
-					model.castShadow = true;
-					model.position.y = 0; // Ajustez selon la hauteur du modèle
-					model.position.x = index * 2; // Ajustez pour espacer les modèles
-					model.position.z = 0; // Ajustez selon vos besoins
-					scene.add(model);
-					cubes.push(model); // Stockez le modèle chargé pour une utilisation ultérieure, par exemple avec DragControls
+					const sceneModel = gltf.scene;
+					sceneModel.castShadow = true;
+					sceneModel.position.y = 0; // Ajustement selon la hauteur du modèle
+
+					if (model.path.includes('CAR.gltf')) {
+						// Ajustez ces valeurs selon la position souhaitée
+						sceneModel.position.set(-1, 0.27, 1); // position.set(x, y, z)
+						sceneModel.rotateY(1.55);
+						sceneModel.scale.set(0.8, 0.8, 0.8);
+
+						sceneModel.traverse((child) => {
+							if (child.isMesh) {
+								child.castShadow = true;
+								// Utiliser MeshPhongMaterial pour un effet brillant
+								const material = new THREE.MeshPhongMaterial({
+									color: 0x000000, // Noir
+									specular: 0x555555, // Couleur spéculaire pour le brillant
+									shininess: 0 // Intensité du brillant
+								});
+
+								// Appliquer la nouvelle matière
+								child.material = material;
+							}
+						});
+					}
+
+					// Ajouter le modèle au bon groupe
+					if (model.draggable) {
+						scene.add(sceneModel);
+						draggableModels.push(sceneModel);
+					} else {
+						scene.add(sceneModel);
+						staticModels.push(sceneModel);
+					}
 				},
 				undefined,
-				(error) => {
-					console.error('An error happened', error);
-				}
+				(error) => console.error('An error happened', error)
 			);
 		});
 	}
@@ -109,14 +140,50 @@
 		scene.add(ambientLight);
 
 		const spotLight = new THREE.SpotLight(0xffffff, 30);
-		spotLight.position.set(-2, 3, -2);
+		spotLight.position.set(-2, 5, -2);
 		spotLight.castShadow = true;
 		scene.add(spotLight);
 	}
 
 	function initGround() {
+		const textureLoader = new THREE.TextureLoader();
+
+		// Charger la texture de base
+		const groundTexture = textureLoader.load('src/dalle.jpg');
+
+		// Charger le normal map
+		const groundNormalMap = textureLoader.load('src/NormalMap.png');
+
+		// Charger l'ambient occlusion map
+		const ambientOcclusionMap = textureLoader.load('src/AmbientOcclusionMap.png');
+
+		// Charger le displacement map (nécessite une géométrie avec plus de détails pour être efficace)
+		const displacementMap = textureLoader.load('src/DisplacementMap.png');
+
+		// Charger le specular map (utilisé avec MeshPhongMaterial)
+		const specularMap = textureLoader.load('src/SpecularMap.png');
+
+		// S'assurer que toutes les textures sont répétées de manière uniforme
+		[groundTexture, groundNormalMap, ambientOcclusionMap, displacementMap, specularMap].forEach(
+			(texture) => {
+				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+				texture.repeat.set(30, 30); // Ajustez selon la taille de votre sol
+			}
+		);
+
 		const geometry = new THREE.PlaneGeometry(planeSize, planeSize);
-		const material = new THREE.MeshStandardMaterial({ color: 0xcccccc, side: THREE.DoubleSide });
+
+		// Utiliser MeshStandardMaterial ou MeshPhongMaterial selon vos besoins
+		const material = new THREE.MeshStandardMaterial({
+			map: groundTexture,
+			normalMap: groundNormalMap,
+			aoMap: ambientOcclusionMap,
+			displacementMap: displacementMap,
+			// displacementScale: 0.1, // Ajustez cette valeur selon l'effet désiré
+			// specularMap: specularMap, // Specular map est utilisé avec MeshPhongMaterial
+			side: THREE.DoubleSide
+		});
+
 		plane = new THREE.Mesh(geometry, material);
 		plane.rotation.x = -Math.PI / 2;
 		plane.receiveShadow = true;
@@ -125,10 +192,10 @@
 
 	function initWalls() {
 		const positions = [
-			{ x: -planeSize / 2, z: 0 }, // Left wall
-			{ x: planeSize / 2, z: 0 }, // Right wall
-			{ z: -planeSize / 2, x: 0 }, // Back wall
-			{ z: planeSize / 2, x: 0 } // Front wall
+			{ x: -planeSize / 2, z: 0, display: 'transparent' }, // Left wall
+			{ x: planeSize / 2, z: 0, display: 'visible' }, // Right wall
+			{ z: -planeSize / 2, x: 0, display: 'transparent' }, // Back wall
+			{ z: planeSize / 2, x: 0, display: 'visible' } // Front wall
 		];
 
 		positions.forEach((pos, index) => {
@@ -136,11 +203,18 @@
 				index < 2
 					? new THREE.BoxGeometry(wallWidth, wallHeight, planeSize)
 					: new THREE.BoxGeometry(planeSize, wallHeight, wallWidth);
+
+			// Création d'un matériau spécifique pour chaque mur, en fonction de sa propriété 'display'
+			let wallMaterial = new THREE.MeshStandardMaterial({ color: 0x888888 });
+			if (pos.display === 'transparent') {
+				wallMaterial.transparent = true;
+				wallMaterial.opacity = 0; // Réglez l'opacité selon le degré de transparence désiré
+			}
+
 			const wall = new THREE.Mesh(geometry, wallMaterial);
 			wall.position.set(pos.x, wallHeight / 2, pos.z);
 			wall.castShadow = true;
 			wall.receiveShadow = true;
-			walls.push(wall);
 			scene.add(wall);
 		});
 	}
@@ -173,7 +247,7 @@
 			cube.castShadow = true;
 			cube.userData.height = height; // Stockage de la hauteur dans userData
 			cube.position.y = height / 2; // Ajustement pour placer la base du cube sur le plan
-			cube.position.x = 7;
+			cube.position.x = 3;
 			cube.position.z = i === 1 ? 3 : 1;
 			scene.add(cube);
 			return cube;

@@ -39,7 +39,8 @@
     "svelte-preprocess": "latest",
     "tslib": "^2.4.1",
     "typescript": "^5.0.0",
-    "vite-plugin-sass": "latest"
+    "vite-plugin-sass": "latest",
+    "@types/three": "^0.161.2"
   },
   "type": "module",
   "dependencies": {
@@ -80,6 +81,7 @@
     "tslib": "*",
     "typescript": "*",
     "vite": "*",
-    "tweakpane": "^3.1.0"
+    "tweakpane": "^3.1.0",
+    "stats.js": "^0.17.0"
   }
 }
