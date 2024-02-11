@@ -3,6 +3,7 @@
 	import * as THREE from 'three';
 	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 	import { DragControls } from 'three/examples/jsm/controls/DragControls.js';
+	import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'; // Importer GLTFLoader
 
 	let container: HTMLDivElement | null; // Assumant que container est un élément div dans votre DOM
 
@@ -12,6 +13,8 @@
 	let controls: any;
 	let dragControls: any;
 	let cubes: THREE.Mesh[] = [];
+
+	const modelPaths = ['/model/1.gltf ', '/model/2.gltf ', '/model/3.gltf '];
 
 	let plane,
 		walls = [];
@@ -29,6 +32,29 @@
 	onDestroy(() => {
 		cleanup();
 	});
+
+	function initModels() {
+		const loader = new GLTFLoader();
+
+		modelPaths.forEach((path, index) => {
+			loader.load(
+				path,
+				(gltf) => {
+					const model = gltf.scene;
+					model.castShadow = true;
+					model.position.y = 0; // Ajustez selon la hauteur du modèle
+					model.position.x = index * 2; // Ajustez pour espacer les modèles
+					model.position.z = 0; // Ajustez selon vos besoins
+					scene.add(model);
+					cubes.push(model); // Stockez le modèle chargé pour une utilisation ultérieure, par exemple avec DragControls
+				},
+				undefined,
+				(error) => {
+					console.error('An error happened', error);
+				}
+			);
+		});
+	}
 
 	function initScene() {
 		scene = new THREE.Scene();
@@ -75,13 +101,14 @@
 		initGround();
 		initWalls();
 		initCubes();
+		initModels();
 	}
 
 	function initLights() {
-		const ambientLight = new THREE.AmbientLight(0xfbffe2, 0.2);
+		const ambientLight = new THREE.AmbientLight(0xfbffe2, 0.1);
 		scene.add(ambientLight);
 
-		const spotLight = new THREE.SpotLight(0xffffff, 20);
+		const spotLight = new THREE.SpotLight(0xffffff, 30);
 		spotLight.position.set(-2, 3, -2);
 		spotLight.castShadow = true;
 		scene.add(spotLight);
@@ -160,32 +187,39 @@
 		dragControls.addEventListener('drag', (event) => checkMagneticEffect(event.object));
 	}
 
-	function checkMagneticEffect(draggedObject) {
+	function checkMagneticEffect(draggedObject: THREE.Mesh) {
+		// Magnetic effect threshold
 		const magneticThreshold = 2 * cubeSize;
+		// Target cube for the magnetic effect
 		const targetCube = draggedObject === cubes[0] ? cubes[1] : cubes[0];
-		let direction, newPos;
 
-		if (
-			Math.abs(draggedObject.position.x - targetCube.position.x) < magneticThreshold &&
-			Math.abs(draggedObject.position.z - targetCube.position.z) < magneticThreshold
-		) {
-			['x', 'z'].forEach((axis) => {
-				direction = draggedObject.position[axis] < targetCube.position[axis] ? -1 : 1;
-				newPos = targetCube.position[axis] + direction * cubeSize;
+		// Check for magnetic proximity on the 'x' and 'z' axes
+		['x', 'z'].forEach((axis) => {
+			const distance = Math.abs(draggedObject.position[axis] - targetCube.position[axis]);
+			if (distance < magneticThreshold) {
+				// Determine the direction of the magnetic pull
+				const direction = draggedObject.position[axis] < targetCube.position[axis] ? -1 : 1;
+				// Calculate the new position with a slight offset to prevent overlapping
+				let newPos = targetCube.position[axis] + direction * (cubeSize + 0.01);
+
+				// Ensure the new position is within bounds
 				if (Math.abs(newPos) <= planeSize / 2 - cubeSize / 2) {
 					draggedObject.position[axis] = newPos;
 				}
-			});
-		}
+			}
+		});
 
-		draggedObject.position.y = draggedObject.userData.height / 2; // Fixation au sol
+		// Ensure the object is grounded by adjusting its 'y' position
+		draggedObject.position.y = draggedObject.userData.height / 2;
 
-		// Vérification de la proximité avec les murs et ajustement
+		// Adjust the object's position to prevent it from going beyond the 'x' and 'z' boundaries
 		['x', 'z'].forEach((axis) => {
+			// Left wall collision
 			if (draggedObject.position[axis] - cubeSize / 2 < -planeSize / 2) {
 				draggedObject.position[axis] = -planeSize / 2 + cubeSize / 2;
 			}
-			if (draggedObject.position[axis] + cubeSize / 2 > planeSize / 2) {
+			// Right wall collision
+			else if (draggedObject.position[axis] + cubeSize / 2 > planeSize / 2) {
 				draggedObject.position[axis] = planeSize / 2 - cubeSize / 2;
 			}
 		});
