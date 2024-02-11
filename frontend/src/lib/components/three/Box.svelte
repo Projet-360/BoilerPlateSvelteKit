@@ -4,6 +4,7 @@
 	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 	import { DragControls } from 'three/examples/jsm/controls/DragControls.js';
 	import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'; // Importer GLTFLoader
+	import Stats from 'stats.js'; // Importer stats.js
 
 	let container: HTMLDivElement | null; // Assumant que container est un élément div dans votre DOM
 
@@ -15,6 +16,7 @@
 	let cubes: THREE.Mesh[] = [];
 	let draggableModels: THREE.Object3D[] = []; // Initialisation de draggableModels comme tableau vide
 	let staticModels: THREE.Object3D[] = []; // Initialisation de staticModels si nécessaire
+	let stats: Stats; // Déclaration de l'instance stats
 
 	const modelPaths = [
 		{ path: '/model/CAR.gltf', draggable: true }
@@ -31,6 +33,10 @@
 	const wallMaterial = new THREE.MeshStandardMaterial({ color: 0x888888 }); // Matériau des murs
 
 	onMount(() => {
+		stats = new Stats(); // Initialisation de stats
+		stats.showPanel(0); // Panel 0 = fps
+		document.body.appendChild(stats.dom); // Ajouter le panneau stats au DOM
+
 		initScene();
 		animate();
 	});
@@ -324,6 +330,8 @@
 	}
 
 	function animate() {
+		stats.begin();
+		stats.end();
 		requestAnimationFrame(animate);
 		controls.update();
 		renderer.render(scene, camera);
