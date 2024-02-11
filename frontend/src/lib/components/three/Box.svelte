@@ -17,7 +17,7 @@
 	let staticModels: THREE.Object3D[] = []; // Initialisation de staticModels si nécessaire
 
 	const modelPaths = [
-		//		{ path: '/model/CAR.gltf', draggable: true }
+		{ path: '/model/CAR.gltf', draggable: true }
 		// { path: '/model/2.gltf', draggable: false },
 		// { path: '/model/3.gltf', draggable: true }
 	];
@@ -151,7 +151,7 @@
 
 		// Modifier ici pour la couleur rouge et activer la transparence
 		const signageMaterial = new THREE.MeshBasicMaterial({
-			color: 0xff00000, // Couleur rouge
+			color: 0xff7500, // Couleur rouge
 			transparent: true, // Activer la transparence
 			opacity: 0.2 // Régler l'opacité à 0.2
 		});
@@ -163,25 +163,25 @@
 		scene.add(signage);
 
 		// Charger la texture de base
-		const groundTexture = textureLoader.load('src/dalle.jpg');
+		const groundTexture = textureLoader.load('src/dalle/dalle.jpg');
 
 		// Charger le normal map
-		const groundNormalMap = textureLoader.load('src/NormalMap.png');
+		const groundNormalMap = textureLoader.load('src/dalle/NormalMap.png');
 
 		// Charger l'ambient occlusion map
-		const ambientOcclusionMap = textureLoader.load('src/AmbientOcclusionMap.png');
+		const ambientOcclusionMap = textureLoader.load('src/dalle/AmbientOcclusionMap.png');
 
 		// Charger le displacement map (nécessite une géométrie avec plus de détails pour être efficace)
-		const displacementMap = textureLoader.load('src/DisplacementMap.png');
+		const displacementMap = textureLoader.load('src/dalle/DisplacementMap.png');
 
 		// Charger le specular map (utilisé avec MeshPhongMaterial)
-		const specularMap = textureLoader.load('src/SpecularMap.png');
+		const specularMap = textureLoader.load('src/dalle/SpecularMap.png');
 
 		// S'assurer que toutes les textures sont répétées de manière uniforme
 		[groundTexture, groundNormalMap, ambientOcclusionMap, displacementMap, specularMap].forEach(
 			(texture) => {
 				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-				texture.repeat.set(40, 40); // Ajustez selon la taille de votre sol
+				texture.repeat.set(30, 30); // Ajustez selon la taille de votre sol
 			}
 		);
 
@@ -205,6 +205,14 @@
 	}
 
 	function initWalls() {
+		const loader = new THREE.TextureLoader();
+
+		// Charger la texture de béton
+		const concreteTexture = loader.load('/src/beton/beton.jpeg', (texture) => {
+			texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+			texture.repeat.set(2, 2); // Ajustez les valeurs de répétition selon la taille de vos murs et l'aspect désiré
+		});
+
 		const positions = [
 			{ x: -planeSize / 2, z: 0, display: 'transparent' }, // Left wall
 			{ x: planeSize / 2, z: 0, display: 'visible' }, // Right wall
@@ -218,14 +226,16 @@
 					? new THREE.BoxGeometry(wallWidth, wallHeight, planeSize)
 					: new THREE.BoxGeometry(planeSize, wallHeight, wallWidth);
 
-			// Création d'un matériau spécifique pour chaque mur, en fonction de sa propriété 'display'
-			let wallMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+			// Créer le matériau avec la texture de béton
+			const material = new THREE.MeshStandardMaterial({ map: concreteTexture });
+
+			// Appliquer la transparence si nécessaire
 			if (pos.display === 'transparent') {
-				wallMaterial.transparent = true;
-				wallMaterial.opacity = 0; // Réglez l'opacité selon le degré de transparence désiré
+				material.transparent = true;
+				material.opacity = 0; // Ajustez selon le degré de transparence désiré
 			}
 
-			const wall = new THREE.Mesh(geometry, wallMaterial);
+			const wall = new THREE.Mesh(geometry, material);
 			wall.position.set(pos.x, wallHeight / 2, pos.z);
 			wall.castShadow = true;
 			wall.receiveShadow = true;
