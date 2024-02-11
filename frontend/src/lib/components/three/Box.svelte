@@ -18,19 +18,16 @@
 	let staticModels: THREE.Object3D[] = []; // Initialisation de staticModels si nécessaire
 	let stats: Stats; // Déclaration de l'instance stats
 
-	const modelPaths = [
-		{ path: '/model/CAR.gltf', draggable: true }
-		// { path: '/model/2.gltf', draggable: false },
-		// { path: '/model/3.gltf', draggable: true }
-	];
+	const modelPaths = [{ path: '/model/car.gltf', draggable: true }];
+
+	let raycaster = new THREE.Raycaster();
+	let mouse = new THREE.Vector2();
 
 	let plane,
 		walls = [];
 	const planeSize = 10;
-	const cubeSize = 1; // Définir une constante pour la taille des cubes
 	const wallHeight = 3;
 	const wallWidth = 0.1;
-	const wallMaterial = new THREE.MeshStandardMaterial({ color: 0x888888 }); // Matériau des murs
 
 	onMount(() => {
 		stats = new Stats(); // Initialisation de stats
@@ -56,20 +53,20 @@
 					sceneModel.castShadow = true;
 					sceneModel.position.y = 0; // Ajustement selon la hauteur du modèle
 
-					if (model.path.includes('CAR.gltf')) {
+					if (model.path.includes('car.gltf')) {
 						// Ajustez ces valeurs selon la position souhaitée
-						sceneModel.position.set(0, 0.27, 1); // position.set(x, y, z)
+						sceneModel.position.set(0, 0.28, 1);
 						sceneModel.rotateY(1.55);
-						sceneModel.scale.set(0.8, 0.8, 0.8);
+						sceneModel.scale.set(2.2, 2.2, 2.2);
 
 						sceneModel.traverse((child) => {
 							if (child.isMesh) {
 								child.castShadow = true;
-								// Utiliser MeshPhongMaterial pour un effet brillant
-								const material = new THREE.MeshPhongMaterial({
-									color: 0x000000, // Noir
-									specular: 0x555555, // Couleur spéculaire pour le brillant
-									shininess: 0 // Intensité du brillant
+								// Utiliser MeshStandardMaterial pour un rendu plus réaliste
+								const material = new THREE.MeshStandardMaterial({
+									color: 0x000000, // Couleur noire
+									roughness: 1, // Augmenter la rugosité pour un aspect moins brillant
+									metalness: 0 // Matériau non métallique pour un aspect tissu
 								});
 
 								// Appliquer la nouvelle matière
@@ -105,7 +102,7 @@
 		controls.dampingFactor = 0.2;
 
 		addObjectsToScene();
-		initDragControls();
+		//initDragControls();
 	}
 
 	function setupCamera() {
@@ -137,7 +134,7 @@
 		initLights();
 		initGround();
 		initWalls();
-		initCubes();
+		addSquaresAlongWalls();
 		initModels();
 	}
 
@@ -145,7 +142,7 @@
 		const ambientLight = new THREE.AmbientLight(0xfbffe2, 0.1);
 		scene.add(ambientLight);
 
-		const spotLight = new THREE.SpotLight(0xffffff, 40);
+		const spotLight = new THREE.SpotLight(0xffffff, 60);
 		spotLight.position.set(-2, 5, -2);
 		spotLight.castShadow = true;
 		scene.add(spotLight);
@@ -169,7 +166,7 @@
 		scene.add(signage);
 
 		// Charger la texture de base
-		const groundTexture = textureLoader.load('src/dalle/dalle.jpg');
+		const groundTexture = textureLoader.load('src/dalle/dalle.png');
 
 		// Charger le normal map
 		const groundNormalMap = textureLoader.load('src/dalle/NormalMap.png');
@@ -187,7 +184,7 @@
 		[groundTexture, groundNormalMap, ambientOcclusionMap, displacementMap, specularMap].forEach(
 			(texture) => {
 				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-				texture.repeat.set(30, 30); // Ajustez selon la taille de votre sol
+				texture.repeat.set(40, 40); // Ajustez selon la taille de votre sol
 			}
 		);
 
@@ -258,12 +255,12 @@
 		const materialsgeometry = [
 			{
 				width: 1,
-				height: 1,
+				height: 3,
 				depth: 1
 			},
 			{
 				width: 1,
-				height: 2,
+				height: 3,
 				depth: 1
 			}
 		];
@@ -276,57 +273,52 @@
 			const cube = new THREE.Mesh(geometry, materials[i % materials.length]); // Utilisation du modulo pour boucler sur le tableau materials si nécessaire
 			cube.castShadow = true;
 			cube.userData.height = height; // Stockage de la hauteur dans userData
-			cube.position.y = height / 2; // Ajustement pour placer la base du cube sur le plan
-			cube.position.x = 3;
-			cube.position.z = i === 1 ? 3 : 1;
+			cube.position.y = height / 2 + 0.3; // Ajustement pour placer la base du cube sur le plan
+			cube.position.x = 4.45;
+			console.log(i);
+
+			cube.position.z = i === 1 ? 4.45 : 3.45;
 			scene.add(cube);
 			return cube;
 		});
 	}
 
-	function initDragControls() {
-		dragControls = new DragControls(cubes, camera, renderer.domElement);
-		dragControls.addEventListener('dragstart', () => (controls.enabled = false));
-		dragControls.addEventListener('dragend', () => (controls.enabled = true));
-		dragControls.addEventListener('drag', (event) => checkMagneticEffect(event.object));
+	function addSquaresAlongWalls() {
+		const squareSize = 1; // Chaque carré a une taille de 1x1
+		const halfPlaneSize = planeSize / 2; // La moitié de la taille du sol pour le positionnement
+
+		// Créer des carrés le long du côté gauche
+		for (let z = -halfPlaneSize; z < halfPlaneSize; z += squareSize) {
+			addSquare(-halfPlaneSize, z);
+		}
+
+		// Créer des carrés le long du côté droit
+		for (let z = -halfPlaneSize; z < halfPlaneSize; z += squareSize) {
+			addSquare(halfPlaneSize - squareSize, z);
+		}
+
+		// Créer des carrés le long du côté arrière
+		for (let x = -halfPlaneSize; x < halfPlaneSize; x += squareSize) {
+			addSquare(x, -halfPlaneSize);
+		}
+
+		// Créer des carrés le long du côté avant
+		for (let x = -halfPlaneSize; x < halfPlaneSize; x += squareSize) {
+			addSquare(x, halfPlaneSize - squareSize);
+		}
 	}
 
-	function checkMagneticEffect(draggedObject: THREE.Mesh) {
-		// Magnetic effect threshold
-		const magneticThreshold = 2 * cubeSize;
-		// Target cube for the magnetic effect
-		const targetCube = draggedObject === cubes[0] ? cubes[1] : cubes[0];
-
-		// Check for magnetic proximity on the 'x' and 'z' axes
-		['x', 'z'].forEach((axis) => {
-			const distance = Math.abs(draggedObject.position[axis] - targetCube.position[axis]);
-			if (distance < magneticThreshold) {
-				// Determine the direction of the magnetic pull
-				const direction = draggedObject.position[axis] < targetCube.position[axis] ? -1 : 1;
-				// Calculate the new position with a slight offset to prevent overlapping
-				let newPos = targetCube.position[axis] + direction * (cubeSize + 0.01);
-
-				// Ensure the new position is within bounds
-				if (Math.abs(newPos) <= planeSize / 2 - cubeSize / 2) {
-					draggedObject.position[axis] = newPos;
-				}
-			}
-		});
-
-		// Ensure the object is grounded by adjusting its 'y' position
-		draggedObject.position.y = draggedObject.userData.height / 2;
-
-		// Adjust the object's position to prevent it from going beyond the 'x' and 'z' boundaries
-		['x', 'z'].forEach((axis) => {
-			// Left wall collision
-			if (draggedObject.position[axis] - cubeSize / 2 < -planeSize / 2) {
-				draggedObject.position[axis] = -planeSize / 2 + cubeSize / 2;
-			}
-			// Right wall collision
-			else if (draggedObject.position[axis] + cubeSize / 2 > planeSize / 2) {
-				draggedObject.position[axis] = planeSize / 2 - cubeSize / 2;
-			}
-		});
+	// Fonction pour ajouter un carré à la scène à une position spécifiée
+	function addSquare(x: number, z: number) {
+		const squareSize = 1; // Définit la taille des carrés pleins
+		// Utilisez PlaneGeometry pour des carrés pleins
+		const squareGeometry = new THREE.PlaneGeometry(squareSize, squareSize);
+		const squareMaterial = new THREE.MeshStandardMaterial({ color: 0x4caf50 }); // Couleur des carrés
+		const squareMesh = new THREE.Mesh(squareGeometry, squareMaterial);
+		squareMesh.position.set(x + squareSize / 2, 0.5, z + squareSize / 2); // Positionnez légèrement au-dessus du sol pour éviter le z-fighting
+		squareMesh.rotation.x = -Math.PI / 2; // Orientez les carrés pour qu'ils soient parallèles au sol
+		squareMesh.receiveShadow = true; // Permet aux carrés de recevoir des ombres
+		scene.add(squareMesh);
 	}
 
 	function animate() {
