@@ -17,7 +17,7 @@
 	let staticModels: THREE.Object3D[] = []; // Initialisation de staticModels si nécessaire
 
 	const modelPaths = [
-		{ path: '/model/CAR.gltf', draggable: true }
+		//		{ path: '/model/CAR.gltf', draggable: true }
 		// { path: '/model/2.gltf', draggable: false },
 		// { path: '/model/3.gltf', draggable: true }
 	];
@@ -52,7 +52,7 @@
 
 					if (model.path.includes('CAR.gltf')) {
 						// Ajustez ces valeurs selon la position souhaitée
-						sceneModel.position.set(-1, 0.27, 1); // position.set(x, y, z)
+						sceneModel.position.set(0, 0.27, 1); // position.set(x, y, z)
 						sceneModel.rotateY(1.55);
 						sceneModel.scale.set(0.8, 0.8, 0.8);
 
@@ -96,7 +96,7 @@
 		controls = new OrbitControls(camera, renderer.domElement);
 
 		controls.enableDamping = true; // Active l'amortissement
-		controls.dampingFactor = 0.5;
+		controls.dampingFactor = 0.2;
 
 		addObjectsToScene();
 		initDragControls();
@@ -139,7 +139,7 @@
 		const ambientLight = new THREE.AmbientLight(0xfbffe2, 0.1);
 		scene.add(ambientLight);
 
-		const spotLight = new THREE.SpotLight(0xffffff, 30);
+		const spotLight = new THREE.SpotLight(0xffffff, 40);
 		spotLight.position.set(-2, 5, -2);
 		spotLight.castShadow = true;
 		scene.add(spotLight);
@@ -147,6 +147,20 @@
 
 	function initGround() {
 		const textureLoader = new THREE.TextureLoader();
+		const signageGeometry = new THREE.PlaneGeometry(2, 1); // Largeur et hauteur du rectangle de signalétique
+
+		// Modifier ici pour la couleur rouge et activer la transparence
+		const signageMaterial = new THREE.MeshBasicMaterial({
+			color: 0xff00000, // Couleur rouge
+			transparent: true, // Activer la transparence
+			opacity: 0.2 // Régler l'opacité à 0.2
+		});
+
+		const signage = new THREE.Mesh(signageGeometry, signageMaterial);
+		signage.position.set(0, 0.348, 1); // Ajustez x, y, z à l'endroit où vous voulez que la signalétique apparaisse
+		signage.rotation.x = -Math.PI / 2; // Oriente la signalétique parallèlement au sol
+		signage.scale.set(2.35, 4, 2.35); // Ajustez l'échelle si nécessaire
+		scene.add(signage);
 
 		// Charger la texture de base
 		const groundTexture = textureLoader.load('src/dalle.jpg');
@@ -167,7 +181,7 @@
 		[groundTexture, groundNormalMap, ambientOcclusionMap, displacementMap, specularMap].forEach(
 			(texture) => {
 				texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-				texture.repeat.set(30, 30); // Ajustez selon la taille de votre sol
+				texture.repeat.set(40, 40); // Ajustez selon la taille de votre sol
 			}
 		);
 
@@ -205,7 +219,7 @@
 					: new THREE.BoxGeometry(planeSize, wallHeight, wallWidth);
 
 			// Création d'un matériau spécifique pour chaque mur, en fonction de sa propriété 'display'
-			let wallMaterial = new THREE.MeshStandardMaterial({ color: 0x888888 });
+			let wallMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
 			if (pos.display === 'transparent') {
 				wallMaterial.transparent = true;
 				wallMaterial.opacity = 0; // Réglez l'opacité selon le degré de transparence désiré
