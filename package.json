@@ -8,7 +8,8 @@
     "test": "npm --prefix ./frontend run test",
     "start-mailhog": "start cmd.exe /K .\\utils\\mail\\start-mailhog.bat",
     "cleardb": "npm --prefix ./backend run cleardb",
-    "in": "cd backend && npm i && cd ../frontend && npm i"
+    "in": "cd backend && npm i && cd ../frontend && npm i",
+    "update": "npm --prefix ./backend update && npm --prefix ./frontend update"
   },
   "author": "",
   "license": "ISC",

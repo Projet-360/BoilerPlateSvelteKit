@@ -34,6 +34,7 @@
     "nodemailer": "^6.9.5",
     "redis": "^4.6.10",
     "socket.io": "^4.7.2",
+    "ua-parser-js": "^1.0.37",
     "winston": "^3.10.0"
   },
   "devDependencies": {
@@ -45,6 +46,7 @@
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20.8.6",
     "@types/nodemailer": "^6.4.11",
+    "@types/ua-parser-js": "^0.7.39",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "concurrently": "^8.2.1",
     "cross-env": "^7.0.3",

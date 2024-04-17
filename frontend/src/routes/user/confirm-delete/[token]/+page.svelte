@@ -5,10 +5,10 @@
 	import { goto } from '$app/navigation';
 
 	let token: string;
+	$: token = $page.params.token;
 
 	onMount(async () => {
 		// Récupérer le jeton de l'URL
-		$: token = $page.params.token;
 
 		if (token) {
 			// Appeler la fonction de confirmation de suppression de compte

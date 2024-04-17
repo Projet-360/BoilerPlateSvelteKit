@@ -44,10 +44,4 @@
 		position: absolute;
 		width: 100vw;
 	}
-	.logo {
-		position: relative;
-		margin-right: auto;
-		margin-left: auto;
-		transform: scale(2);
-	}
 </style>
