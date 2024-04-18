@@ -1,3 +1,3 @@
-import { userType } from './userType.js';
+import { greetingType } from './greetingType.js';
 
-export const typeDefs = [userType];
+export const typeDefs = [greetingType];

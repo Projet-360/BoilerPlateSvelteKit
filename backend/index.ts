@@ -2,13 +2,12 @@ import express from 'express';
 import mongoose from 'mongoose';
 import https from 'https';
 import fs from 'fs';
-import path from 'path';
 
 import { ApolloServer } from 'apollo-server-express';
 import { typeDefs } from './graphql/schemas/index.js';
 import { resolvers } from './graphql/resolvers/index.js';
 
-import initSocket from './services/socket.js';
+import { Server as SocketIOServer } from 'socket.io';
 import connectDB from './dbConnect.js';
 import applyMiddlewares from './middlewares/middlewares.js';
 import logger from './services/logger.js';
@@ -34,8 +33,12 @@ const httpsServer = https.createServer(
   app,
 );
 
-const io = initSocket(httpsServer);
-const apolloServer = new ApolloServer({ typeDefs, resolvers });
+const io = new SocketIOServer(httpsServer);
+const apolloServer = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req, res }) => ({ req, res, io }),
+});
 
 apolloServer.start().then(() => {
   apolloServer.applyMiddleware({ app, path: '/graphql' });

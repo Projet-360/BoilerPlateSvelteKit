@@ -1,3 +1,3 @@
-import resolversTest from './userResolver.js';
+import { greetingResolver } from './greetingResolver.js';
 
-export const resolvers = [resolversTest];
+export const resolvers = [greetingResolver];
