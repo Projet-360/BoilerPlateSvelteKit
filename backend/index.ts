@@ -19,17 +19,6 @@ dotenv.config();
 // Initialize database connection
 connectDB();
 
-// Disable SSL certificate verification (Not recommended in production)
-if (process.env.NODE_ENV === 'prod') {
-  // Production settings here
-  // For example: Enable SSL certificate verification
-  (process.env as any)['NODE_TLS_REJECT_UNAUTHORIZED'] = '1';
-} else {
-  // Development settings here
-  // WARNING: Do not disable SSL verification in production
-  (process.env as any)['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
-}
-
 // Initialize the Express app
 const app: any = express();
 
