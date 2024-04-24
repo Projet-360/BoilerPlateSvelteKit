@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { onMount } from 'svelte';
 	import {
 		prepareUpdate,
@@ -49,8 +49,8 @@
 			Supprimer
 		</button>
 	</li>
-{/each}
-<!-- 
+{/each} -->
+
 
 <script>
 	import fetchGraphQL from "$api/graphql";
@@ -92,4 +92,4 @@
   {:else}
 	<p>No greetings found or loading...</p>
   {/if}
-   -->
+  
