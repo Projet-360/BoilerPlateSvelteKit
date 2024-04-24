@@ -2,13 +2,15 @@
   "name": "boilersvelte",
   "version": "0.0.1",
   "scripts": {
-    "dev": "concurrently \"vite dev\" \"npm run prettier:watch\"",
+    "dev": "concurrently \"vite dev\" \"npm run prettier:watch\" \"npm run houdini:watch\"",
     "prettier:watch": "chokidar '**/*.js' '**/*.ts' '**/*.svelte' '**/*.scss' --command 'npm run prettier -- {path}'",
     "prettier": "prettier --write",
     "build": "vite build",
     "preview": "vite preview",
     "test": "playwright test",
-    "test:unit": "vitest"
+    "test:unit": "vitest",
+    "houdini:generate": "houdini generate",
+    "houdini:watch": "chokidar 'src/**/*.graphql' --command 'npm run houdini:generate'"
   },
   "browserslist": [
     "> 5%"

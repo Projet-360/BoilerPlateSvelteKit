@@ -59,7 +59,8 @@ export default defineConfig({
 			$three: 'src/lib/components/three',
 			$services: 'src/services',
 			$lib: 'src/lib',
-			$api: 'src/api'
+			$api: 'src/api',
+			$apollo: 'src/lib/Apollo'
 		}
 	}
 });

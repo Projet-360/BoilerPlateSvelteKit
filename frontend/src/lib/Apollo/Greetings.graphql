@@ -1,0 +1,9 @@
+
+
+query GetGreetings {
+    getGreetings {
+        id
+        name
+        message
+    }
+}
