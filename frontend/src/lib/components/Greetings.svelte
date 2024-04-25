@@ -1,4 +1,4 @@
-<!-- <script lang="ts">
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import {
 		prepareUpdate,
@@ -49,42 +49,4 @@
 			Supprimer
 		</button>
 	</li>
-{/each} -->
-
-<script>
-	import { onMount } from 'svelte';
-	import client, { gql } from '$lib/Apollo';
-
-	const GET_GREETINGS = gql`
-		query GetGreetings {
-			getGreetings {
-				id
-				name
-				message
-			}
-		}
-	`;
-
-	let greetings = [];
-
-	onMount(async () => {
-		try {
-			const { data } = await client.query({ query: GET_GREETINGS });
-			greetings = data.getGreetings;
-		} catch (error) {
-			console.error("Error fetching greetings:", error);
-		}
-	});
-</script>
-
-{#if greetings.length > 0}
-	<ul>
-		{#each greetings as greeting}
-			<li>
-				<b>{greeting.name}</b>: {greeting.message} (ID: {greeting.id})
-			</li>
-		{/each}
-	</ul>
-{:else}
-	<p>Loading greetings or none found...</p>
-{/if}
+{/each}
