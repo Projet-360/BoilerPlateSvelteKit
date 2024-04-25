@@ -1,131 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            margin: 0;
-            overflow-x: hidden;
-        }
-        header {
-            width: 100%;
-            height: 100vh;
-            background-color: blue;
-        }
+<meta charset="UTF-8">
+<title>Socket Test Client</title>
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const socket = io('https://localhost:2000', { withCredentials: true });
 
-        section {
-            width: 100%;
-            height: 100vh;
-            background-color: gold;
-        }
+    socket.on('connect', () => {
+      console.log('Successfully connected!');
+    });
 
-        p {
-            margin: 0;
-        }
+    socket.on('updateGreetings', () => {
+      console.log('Greetings updated.');
+    });
 
-        .line {            
-            overflow: hidden;
-            display: block;
-        }
-        .subline {
-            display: block;
-        }
-
-        #about-text {
-            width: 420px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+    socket.on('connect_error', (error) => {
+      console.error('Connection failed:', error);
+    });
+  });
+</script>
 </head>
 <body>
-    <header>
-
-    </header>
-    <section>
-        <p id="about-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quo labore, amet voluptas sint repellat obcaecati recusandae iure illum nisi laborum accusantium esse velit praesentium sit similique molestiae iste assumenda? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus eveniet voluptatibus excepturi rem exercitationem voluptas. Optio commodi rerum maiores labore asperiores, aliquid nisi at ipsam, fugiat temporibus veritatis soluta officiis.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quo labore, amet voluptas sint repellat obcaecati recusandae iure illum nisi laborum accusantium esse velit praesentium sit similique molestiae iste assumenda? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus eveniet voluptatibus excepturi rem exercitationem voluptas. Optio commodi rerum maiores labore asperiores, aliquid nisi at ipsam, fugiat temporibus veritatis soluta officiis.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quo labore, amet voluptas sint repellat obcaecati recusandae iure illum nisi laborum accusantium esse velit praesentium sit similique molestiae iste assumenda? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus eveniet voluptatibus excepturi rem exercitationem voluptas. Optio commodi rerum maiores labore asperiores, aliquid nisi at ipsam, fugiat temporibus veritatis soluta officiis.
-        </p>
-    </section>
-    
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js" integrity="sha512-Mf/xUqfWvDIr+1B6zfnIDIiG7XHzyP/guXUWgV6PgaQoIFeXkJQR5XWh9fqAiCiRCpemabt3naV4jhDWVnuYDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js" integrity="sha512-YzMW3OzvgtVpIIPPpjnCy8wVTq5slHRrxnLH1oD5dkVjZf8+8DJYd+GYmmWXZNmroTqKXFFzFS3XZ/LBvaNgZg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        function wrapNewLines(targetSelector, wrapEl = 'span', wrapClass = 'line', subwrapClass= 'subline') {
-        const content = document.querySelectorAll(targetSelector)
-        content.forEach(section => {
-            let sectionWidth = section.getBoundingClientRect().width
-            let words = section.innerText.split(/( )/g)
-            section.innerHTML = ''
-            words.forEach(word => {
-            section.innerHTML += `<span>${word}</span>`
-            })
-            let lines = []
-            let line = []
-            let lineWidth = 0
-            let spans = section.querySelectorAll('span')
-            spans.forEach((span, i) => {
-            let spanWidth = span.getBoundingClientRect().width
-            if (lineWidth + spanWidth <= sectionWidth - 1) {
-                line.push(span)
-                lineWidth += spanWidth
-            } else {
-                lines.push(line)
-                line = []
-                lineWidth = 0
-                line.push(span)
-                lineWidth += spanWidth
-            }
-            })
-            if (line.length) lines.push(line)
-            let newLines = lines
-            .map(
-                line =>
-                `
-                <${wrapEl} class=${wrapClass}>
-                    <${wrapEl} class=${subwrapClass}>
-                        ${line.map(span => span.innerText).join('')}
-                    </${wrapEl} class=${subwrapClass}>
-                </${wrapEl}>
-                `
-            )
-            .join('')
-            section.innerHTML = newLines
-        })
-        }
-
-        wrapNewLines('#about-text')
-
-
-
-        gsap.registerPlugin(ScrollTrigger);
-        gsap.set('.subline', {
-            y: '200px',
-            opacity: 0,
-            skewY:20,
-            skewX:20
-        });
-        let toto = gsap.to('.subline', {
-            y: '0px',
-            opacity: 1,
-            duration: .4,
-            stagger: 0.04,
-            skewY:0,
-            skewX:0,
-            scrollTrigger: {
-                //markers: true,
-                trigger: 'p',
-                toggleActions: 'restart complete reverse reset',
-            },
-        });
-
-        console.log(toto);
-    </script>
+<h1>Test WebSocket Client</h1>
 </body>
 </html>

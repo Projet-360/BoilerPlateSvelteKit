@@ -2,17 +2,17 @@ import { CorsOptions } from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const allowedOrigins = [process.env.URL_FRONT_LOCAL, process.env.URL_FRONT];
+const allowedOrigins = [
+  process.env.URL_FRONT_LOCAL,
+  process.env.URL_FRONT,
+].filter(Boolean); // Filtrer les valeurs falsy
 
 const corsConfig: CorsOptions = {
-  origin: function (
-    origin: string | undefined,
-    callback: (err: Error | null, allow?: boolean) => void,
-  ) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error('Not allowed by CORS'), false);
     }
   },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',

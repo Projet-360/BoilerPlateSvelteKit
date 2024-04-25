@@ -2,6 +2,9 @@
 import express, { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import http from 'http';
+import https from 'https';
+import fs from 'fs';
+
 import initSocket from './services/socket.js';
 
 import connectDB from './dbConnect.js'; // Database connection module
@@ -25,25 +28,25 @@ import verifyRoutes from './routes/auth/verifyRoutes.js';
 
 dotenv.config();
 
-dotenv.config();
 // Initialize database connection
 connectDB();
 
 // Initialize the Express app
 const app = express();
-const server = http.createServer(app);
-const io = initSocket(server);
 
-// Disable SSL certificate verification (Not recommended in production)
-if (process.env.NODE_ENV === 'prod') {
-  // Production settings here
-  // For example: Enable SSL certificate verification
-  (process.env as any)['NODE_TLS_REJECT_UNAUTHORIZED'] = '1';
-} else {
-  // Development settings here
-  // WARNING: Do not disable SSL verification in production
-  (process.env as any)['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
-}
+const keyPath = 'C:\\Web\\BoilerPlateSvelteKit\\backend\\SSL\\key.pem';
+const certPath = 'C:\\Web\\BoilerPlateSvelteKit\\backend\\SSL\\cert.pem';
+
+const server = https.createServer(
+  {
+    key: fs.readFileSync(keyPath),
+    cert: fs.readFileSync(certPath),
+  },
+  app,
+);
+
+//const server = http.createServer(app);
+const io = initSocket(server);
 
 // Apply middlewares to the app
 applyMiddlewares(app);

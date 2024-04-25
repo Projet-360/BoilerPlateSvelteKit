@@ -1,11 +1,12 @@
-import { Server } from 'http';
 import { Server as IOServer } from 'socket.io';
+import { Server as HttpsServer } from 'https';
 import logger from './logger.js';
 import corsConfig from '../config/corsConfig.js';
 
-export default function initSocket(httpServer: Server) {
-  const io = new IOServer(httpServer, {
+export default function initSocket(server: HttpsServer) {
+  const io = new IOServer(server, {
     cors: corsConfig,
+    transports: ['polling', 'websocket'], // Assurez-vous que le transport polling est activé
   });
 
   io.on('connection', (socket) => {
@@ -25,5 +26,6 @@ export default function initSocket(httpServer: Server) {
       logger.info(`Client disconnected: ${socket.id}`);
     });
   });
+
   return io;
 }
