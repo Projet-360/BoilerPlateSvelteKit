@@ -32,7 +32,9 @@ export const initSocketListeners = (): (() => void) => {
 
 export const prepareUpdate = (
 	greeting: Greeting
-): { name: string; message: string; editingId: string } => {
+): { name: string; message: string; editingId: string } => {	
+	console.log(greeting);
+	
 	return {
 		name: greeting.name,
 		message: greeting.message,
@@ -41,32 +43,25 @@ export const prepareUpdate = (
 };
 
 export const handleSaveGreeting = async (
-	name: string,
-	message: string,
-	editingId: string | null,
-	$t: App.TranslationFunction
-): Promise<void> => {
-	const saveResponse = await saveGreeting(name, message, editingId, $t);
-	if (saveResponse.success) {
-		// Clear the form fields and editingId
-		name = '';
-		message = '';
-		editingId = null;
-
-		// Emit the socket event to inform other clients
-		socket.emit('saveGreetingSocket');
-		// Update the store accordingly
-		if (editingId) {
-			messageNotification(editingId, $t);
-			updateGreetingInStore(editingId, { name, message });
-		} else {
-			messageNotification(editingId, $t);
-			addGreeting(saveResponse.data);
-		}
-	} else {
-		// Handle error, e.g., show notification
-	}
+    name: string,
+    message: string,
+    editingId: string | null,
+    $t: App.TranslationFunction
+): Promise<{ success: boolean; data?: any; errorMessage?: string }> => {
+    const saveResponse = await saveGreeting(name, message, editingId, $t);
+    if (saveResponse.success) {
+        socket.emit('saveGreetingSocket');
+        if (editingId) {
+            messageNotification(editingId, $t);
+            updateGreetingInStore(editingId, { name, message });
+        } else {
+            messageNotification(null, $t);
+            addGreeting(saveResponse.data);
+        }
+    }
+    return saveResponse;
 };
+
 
 export const handleDeleteGreeting = async (id: string): Promise<void> => {
 	const deleteResponse = await deleteGreeting(id);
