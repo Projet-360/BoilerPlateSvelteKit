@@ -6,7 +6,7 @@ import corsConfig from '../config/corsConfig.js';
 export default function initSocket(server: HttpsServer) {
   const io = new IOServer(server, {
     cors: corsConfig,
-    transports: ['polling', 'websocket'], // Assurez-vous que le transport polling est activé
+    transports: ['polling', 'websocket'],
   });
 
   io.on('connection', (socket) => {

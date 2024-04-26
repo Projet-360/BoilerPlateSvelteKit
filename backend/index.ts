@@ -1,21 +1,16 @@
 // Import required modules and configurations
 import express, { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
-
+import http from 'http';
 import https from 'https';
 import fs from 'fs';
 
 import initSocket from './services/socket.js';
 
-import { ApolloServer } from 'apollo-server-express';
-import { typeDefs } from './graphql/schemas/index.js';
-import { resolvers } from './graphql/resolvers/index.js';
-
 import connectDB from './dbConnect.js'; // Database connection module
 
 import applyMiddlewares from './middlewares/middlewares.js'; // Application middlewares
 import logger from './services/logger.js';
-import dotenv from 'dotenv';
 
 // Import route modules
 import checkAuthStatusRoutes from './routes/auth/checkAuthStatusRoutes.js';
@@ -30,6 +25,7 @@ import logoutRoutes from './routes/auth/logoutRoutes.js';
 import confirmTokenRoutes from './routes/auth/confirmTokenRoutes.js';
 import verifyRoutes from './routes/auth/verifyRoutes.js';
 
+import dotenv from 'dotenv';
 dotenv.config();
 
 // Initialize database connection
@@ -38,25 +34,32 @@ connectDB();
 // Initialize the Express app
 const app = express();
 
-const keyPath = 'C:\\Web\\BoilerPlateSvelteKit\\backend\\SSL\\key.pem';
-const certPath = 'C:\\Web\\BoilerPlateSvelteKit\\backend\\SSL\\cert.pem';
+// Vérifier si les chemins des clés et des certificats sont définis
+if (!process.env.KEYPATH || !process.env.CERTPATH) {
+  console.error('Les chemins des clés ou des certificats ne sont pas définis.');
+  process.exit(1); // Arrêter le processus en cas d'erreur
+}
+
+// Vérifier si les fichiers de clé et de certificat existent
+if (
+  !fs.existsSync(process.env.KEYPATH) ||
+  !fs.existsSync(process.env.CERTPATH)
+) {
+  console.error(
+    "Les fichiers de clé ou de certificat n'existent pas aux emplacements spécifiés.",
+  );
+  process.exit(1); // Arrêter le processus en cas d'erreur
+}
 
 const server = https.createServer(
   {
-    key: fs.readFileSync(keyPath),
-    cert: fs.readFileSync(certPath),
+    key: fs.readFileSync(process.env.KEYPATH),
+    cert: fs.readFileSync(process.env.CERTPATH),
   },
   app,
 );
 
-//const server = http.createServer(app);
 const io = initSocket(server);
-
-const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: ({ req, res }) => ({ req, res, io }),
-});
 
 // Apply middlewares to the app
 applyMiddlewares(app);

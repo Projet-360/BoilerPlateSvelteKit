@@ -1,0 +1,27 @@
+Puisque vous avez déjà Chocolatey installé sur votre système, vous pouvez passer directement à l'installation de mkcert sans essayer de réinstaller Chocolatey. Voici comment vous pouvez installer mkcert en utilisant Chocolatey :
+
+Installer mkcert avec Chocolatey
+Ouvrir une invite de commande en tant qu'administrateur :
+Faites un clic droit sur le menu Démarrer et choisissez "Windows PowerShell (Admin)" ou "Invite de commandes (Admin)" selon ce qui est disponible.
+Installer mkcert :
+Exécutez la commande suivante pour installer mkcert :
+powershell
+Copy code
+choco install mkcert
+Cette commande va installer mkcert sur votre machine, en utilisant Chocolatey comme gestionnaire de paquets.
+Configurer les certificats locaux :
+Une fois mkcert installé, vous devez configurer les certificats racine locaux pour que votre système reconnaisse les certificats que vous allez créer avec mkcert. Exécutez la commande suivante :
+powershell
+Copy code
+mkcert -install
+Cela ajoutera l'autorité de certification de mkcert à votre magasin de certificats, ce qui permettra à vos navigateurs et à votre système de faire confiance aux certificats générés par mkcert.
+Créer un certificat pour localhost :
+Générez ensuite un certificat pour localhost (ou tout autre nom de domaine que vous utilisez localement) en utilisant la commande suivante :
+powershell
+Copy code
+mkcert localhost
+Cette commande générera un fichier .pem pour le certificat et un fichier -key.pem pour la clé privée, que vous pouvez utiliser dans votre configuration de serveur Node.js.
+Mettre à jour la configuration de votre serveur Node.js :
+Mettez à jour les chemins de la clé et du certificat dans votre serveur Node.js pour pointer vers les fichiers que vous venez de créer avec mkcert.
+Assurez-vous que ces chemins sont corrects et accessibles par votre application Node.js.
+En suivant ces étapes, vous devriez pouvoir utiliser mkcert pour créer un environnement de développement local sécurisé avec HTTPS. Cela résoudra les problèmes d'erreur de certificat que vous rencontrez lors de vos tests locaux.
