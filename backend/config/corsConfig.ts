@@ -5,6 +5,7 @@ dotenv.config();
 const allowedOrigins = [
   process.env.URL_FRONT_LOCAL,
   process.env.URL_FRONT,
+  'https://studio.apollographql.com',
 ].filter(Boolean); // Filtrer les valeurs falsy
 
 const corsConfig: CorsOptions = {
