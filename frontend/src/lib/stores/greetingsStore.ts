@@ -23,10 +23,20 @@ export function createGreetingsStore() {
             console.log("Greeting added via socket:", greeting);
             update(greetings => [...greetings, greeting]);
         });
-        socket.on('greetingUpdated', greeting => {
-            console.log("Greeting updated via socket:", greeting);
-            update(greetings => greetings.map(g => g.id === greeting.id ? greeting : g));
-        });
+		socket.on('greetingUpdated', (greeting) => {
+			update(greetings => {
+				const index = greetings.findIndex(g => g.id === greeting.id);
+				if (index !== -1) {
+					console.log("Updating existing greeting from socket:", greeting);
+					const updatedGreetings = [...greetings];
+					updatedGreetings[index] = greeting;
+					return updatedGreetings;
+				} else {
+					console.log("Received update for non-existing greeting, adding new:", greeting);
+					return [...greetings, greeting];
+				}
+			});
+		});
         socket.on('greetingDeleted', id => {
             console.log("Greeting deleted via socket:", id);
             update(greetings => greetings.filter(g => g.id !== id));
@@ -45,7 +55,6 @@ export function createGreetingsStore() {
 			mutation: CREATE_GREETING,
 			variables: { name, message }
 		});
-		// Ne pas ajouter immédiatement ici, attendre la confirmation via socket
 		console.log("Greeting sent to be added, waiting for socket confirmation:", data.createGreeting);
 	}
 
@@ -57,7 +66,6 @@ export function createGreetingsStore() {
                 variables: { id, name, message }
             });
             console.log("Greeting updated:", data.updateGreeting);
-            update(greetings => greetings.map(g => g.id === id ? data.updateGreeting : g));
         } catch (error) {
             console.error("Error updating greeting:", error);
         }
@@ -70,7 +78,6 @@ export function createGreetingsStore() {
                 mutation: DELETE_GREETING,
                 variables: { id }
             });
-            update(greetings => greetings.filter(g => g.id !== id));
         } catch (error) {
             console.error("Error deleting greeting:", error);
         }
