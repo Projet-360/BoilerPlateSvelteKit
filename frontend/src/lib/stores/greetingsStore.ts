@@ -6,30 +6,33 @@ import { GET_GREETINGS, CREATE_GREETING, UPDATE_GREETING, DELETE_GREETING } from
 export function createGreetingsStore() {
     const { subscribe, set, update } = writable([]);
 
-    async function loadInitialGreetings() {
-        console.log("Loading initial greetings...");
-        try {
-            const { data } = await client.query({ query: GET_GREETINGS });
-            console.log("Initial greetings loaded:", data.getGreetings);
-			set([]); 
-            set(data.getGreetings);
-        } catch (error) {
-            console.error("Error loading initial greetings:", error);
-        }
-    }
+	async function loadInitialGreetings() {
+		try {
+			const { data } = await client.query({ query: GET_GREETINGS });
+			set(data.getGreetings.map(greeting => ({
+				...greeting,
+				_id: greeting._id  // Assurez-vous que _id est correctement mappé
+			})));
+			console.log("Initial greetings loaded:", data.getGreetings);
+		} catch (error) {
+			console.error("Error loading initial greetings:", error);
+		}
+	}
 
     function setupSocketListeners() {
         socket.on('greetingAdded', greeting => {
             console.log("Greeting added via socket:", greeting);
             update(greetings => [...greetings, greeting]);
         });
-		socket.on('greetingUpdated', (greeting) => {
+		socket.on('greetingUpdated', (greeting) => {	
 			update(greetings => {
-				const index = greetings.findIndex(g => g.id === greeting.id);
+				const index = greetings.findIndex(g => {
+					return g.id === greeting._id;  // Assurez-vous de retourner le résultat de la comparaison
+				});		
 				if (index !== -1) {
 					console.log("Updating existing greeting from socket:", greeting);
 					const updatedGreetings = [...greetings];
-					updatedGreetings[index] = greeting;
+					updatedGreetings[index] = greeting;  // Assurez-vous que cette affectation est correcte
 					return updatedGreetings;
 				} else {
 					console.log("Received update for non-existing greeting, adding new:", greeting);

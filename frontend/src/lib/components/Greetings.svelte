@@ -12,6 +12,7 @@
     });
 
     const cleanup = greetingsStore.setupSocketListeners();
+    
     onDestroy(() => {
         console.log("Cleaning up listeners...");
         cleanup();
