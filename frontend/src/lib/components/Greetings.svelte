@@ -12,11 +12,11 @@
     });
 
     const cleanup = greetingsStore.setupSocketListeners();
-    
+
     onDestroy(() => {
         console.log("Cleaning up listeners...");
         cleanup();
-    });    
+    });
 
     async function handleSubmit() {
         console.log("Form submitted:", { name, message, editingId });

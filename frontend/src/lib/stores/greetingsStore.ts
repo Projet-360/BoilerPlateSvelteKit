@@ -8,7 +8,8 @@ export function createGreetingsStore() {
 
 	async function loadInitialGreetings() {
 		try {
-			const { data } = await client.query({ query: GET_GREETINGS });
+			const { data } = await client.query({ query: GET_GREETINGS, fetchPolicy: 'network-only' });
+
 			set(data.getGreetings.map(greeting => ({
 				...greeting,
 				_id: greeting._id  // Assurez-vous que _id est correctement mappé
