@@ -1,27 +1,16 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
     import { greetingsStore } from '$stores/greetingsStore';
 
-    let name = '';
-    let message = '';
-    let editingId = null;
+    let name: string = '';
+    let message: string = '';
+    let editingId: string = null;
 
     onMount(() => {
         greetingsStore.loadInitialGreetings();
     });
 
-
-    function handleAddOrUpdate() {
-        const greeting = { id: editingId, name, message };
-        if (editingId) {
-            greetingsStore.updateGreetingInStore(editingId, greeting);
-        } else {
-            greetingsStore.addGreeting(greeting);
-        }
-        clearForm();
-    }
-
-    function handleDelete(id) {
+    function handleDelete(id: string) {
         greetingsStore.deleteGreetingFromStore(id);
     }
 
@@ -31,7 +20,7 @@
         editingId = null;
     }
 </script>
-<form on:submit|preventDefault={handleAddOrUpdate}>
+<form >
     <label for="name">Nom:</label>
     <input id="name" bind:value={name} />
 
@@ -48,7 +37,7 @@
     {#each $greetingsStore as greeting}
         <li>
             {greeting.name}: {greeting.message}
-            <button on:click={() => { editingId = greeting.id; name = greeting.name; message = greeting.message; }}>Edit</button>
+            
             <button on:click={() => handleDelete(greeting.id)}>Delete</button>
         </li>
     {/each}

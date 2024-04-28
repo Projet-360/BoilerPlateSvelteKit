@@ -1,60 +1,35 @@
-import type { Writable } from 'svelte/store';
+// stores/greetingsStore.ts
 import { writable } from 'svelte/store';
-import socket from '$api/utils/socket';
 import client from '$apollo';
 import { GET_GREETINGS, CREATE_GREETING, UPDATE_GREETING, DELETE_GREETING } from '$apollo/Greetings';
+import socket from '$api/utils/socket';
 
 function createGreetingsStore() {
     const { subscribe, set, update } = writable([]);
 
-    // Écouter les événements Socket.io pour les mises à jour globales
     function setupSocketListeners() {
-        socket.on('greetingAdded', greeting => {
-            addGreeting(greeting, false);
-        });
-
-        socket.on('greetingUpdated', greeting => {
-            updateGreetingInStore(greeting.id, greeting, false);
-        });
-
         socket.on('greetingDeleted', id => {
-            deleteGreetingFromStore(id, false);
+            console.log("Socket event - greetingDeleted:", id);
+            deleteGreetingFromStore(id, false); // No mutation trigger
         });
+
+        return () => {
+            socket.off('greetingDeleted');
+        }
     }
 
-	async function loadInitialGreetings() {
+    async function loadInitialGreetings() {
         try {
             const { data } = await client.query({ query: GET_GREETINGS });
+            console.log("Initial greetings loaded:", data.getGreetings);
             set(data.getGreetings);
         } catch (error) {
-            console.error("Erreur lors de la récupération des salutations initiales:", error);
-        }
-    }
-
-
-    function addGreeting(greeting, triggerMutation = true) {
-        update(greetings => [greeting, ...greetings]);
-        if (triggerMutation) {
-            client.mutate({
-                mutation: CREATE_GREETING,
-                variables: { name: greeting.name, message: greeting.message }
-            });
-        }
-    }
-
-    function updateGreetingInStore(id, updatedGreeting, triggerMutation = true) {
-        update(greetings =>
-            greetings.map(g => g.id === id ? { ...g, ...updatedGreeting } : g)
-        );
-        if (triggerMutation) {
-            client.mutate({
-                mutation: UPDATE_GREETING,
-                variables: { id, name: updatedGreeting.name, message: updatedGreeting.message }
-            });
+            console.error("Error loading initial greetings:", error);
         }
     }
 
     function deleteGreetingFromStore(id, triggerMutation = true) {
+        console.log("Deleting greeting:", id, "Trigger mutation:", triggerMutation);
         update(greetings => greetings.filter(g => g.id !== id));
         if (triggerMutation) {
             client.mutate({
@@ -64,15 +39,14 @@ function createGreetingsStore() {
         }
     }
 
-    setupSocketListeners();
+    const cleanup = setupSocketListeners();
 
     return {
         subscribe,
         set,
-		loadInitialGreetings, 
-        addGreeting,
-        updateGreetingInStore,
-        deleteGreetingFromStore
+        loadInitialGreetings,
+        deleteGreetingFromStore,
+        cleanup
     };
 }
 
