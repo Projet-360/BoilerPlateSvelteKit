@@ -114,7 +114,7 @@ fetchData();
 
 
 env front: 
-VITE_MONGO_ONLINE=mongodb+srv://pierrefabiendev:lNy9vN07FA7l1Hmb@mongosveltekit.csdduve.mongodb.net/
+VITE_MONGO_ONLINE=mongodb+srv://pierrefabiendev:NprOwMcUgwl6xonz@mongosveltekit.csdduve.mongodb.net/
 VITE_MONGO_LOCAL=mongodb://localhost:27018/BoilerPlateSvelteKitDB
 VITE_DATABASE_NAME=BoilerPlateSvelteKitDB
 VITE_TOKEN_EXPIRY=1
@@ -132,7 +132,7 @@ VITE_NODE_ENV=dev
 VITE_DB_ENV=atlas
 
 back:
-MONGO_ONLINE=mongodb+srv://pierrefabiendev:lNy9vN07FA7l1Hmb@mongosveltekit.csdduve.mongodb.net/
+MONGO_ONLINE=mongodb+srv://pierrefabiendev:NprOwMcUgwl6xonz@mongosveltekit.csdduve.mongodb.net/
 MONGO_LOCAL=mongodb://localhost:27018/BoilerPlateSvelteKitDB
 DATABASE_NAME=BoilerPlateSvelteKitDB
 TOKEN_EXPIRY=1

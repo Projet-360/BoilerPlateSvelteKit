@@ -1,69 +1,116 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-    import {
-        handleSaveGreeting,
-        handleDeleteGreeting,
-        loadGreetings,
-        initSocketListeners
-    } from '$api/services/greetingsService';
-    import { greetingsStore } from '$stores/greetingsStore';
-    import { t } from '$UITools/Translations/index';
+    import { onMount, onDestroy } from 'svelte';
+    import socket from '$api/utils/socket';
+    import { greetingsStore, addGreeting, updateGreetingInStore, deleteGreetingFromStore } from '$stores/greetingsStore';
+    import client from '../../Apollo';
+    import { GET_GREETINGS, CREATE_GREETING, UPDATE_GREETING, DELETE_GREETING } from '../../Apollo/Greetings';
 
-    let name: string = '';
-    let message: string = '';
-    let editingId: string | null = null;
+    let name = '';
+    let message = '';
+    let editingId = null;
 
-    onMount(() => {
-        loadGreetings();
-        const cleanup = initSocketListeners();
-        return cleanup;
-    });
+    // Fonction pour charger les salutations initiales via GraphQL
+    async function loadGreetings() {
+        try {
+            const { data } = await client.query({ query: GET_GREETINGS });
+            greetingsStore.set(data.getGreetings);
+        } catch (error) {
+            console.error("Erreur lors de la récupération des salutations:", error);
+        }
+    }
 
-    const clearForm = () => {
+    // Fonction pour ajouter ou mettre à jour une salutation
+    async function addOrUpdateGreeting() {
+        const mutation = editingId ? UPDATE_GREETING : CREATE_GREETING;
+        try {
+            const { data } = await client.mutate({
+                mutation,
+                variables: { id: editingId, name, message },
+                update: (cache, { data }) => {
+                    // Mettre à jour le store directement ici
+                    if (editingId) {
+                        updateGreetingInStore(editingId, data.updateGreeting);
+                    } else {
+                        addGreeting(data.createGreeting);
+                    }
+                }
+            });
+            clearForm();
+        } catch (error) {
+            console.error("Erreur lors de la mutation:", error);
+        }
+    }
+
+    // Fonction pour préparer la mise à jour d'une salutation
+    function prepareUpdate(greeting) {
+        editingId = greeting.id;
+        name = greeting.name;
+        message = greeting.message;
+    }
+
+    // Fonction pour supprimer une salutation
+    async function deleteGreeting(id) {
+        try {
+            await client.mutate({
+                mutation: DELETE_GREETING,
+                variables: { id },
+            });
+            deleteGreetingFromStore(id);
+        } catch (error) {
+            console.error("Erreur lors de la suppression de la salutation:", error);
+        }
+    }
+
+    // Fonction pour nettoyer le formulaire
+    function clearForm() {
         name = '';
         message = '';
         editingId = null;
-    };
-
-    const save = async () => {
-        const response = await handleSaveGreeting(name, message, editingId, $t);
-        if (response.success) {
-            clearForm();
-        } else {
-
-        }
-    };
-
-    function updateForm(greeting) {
-        name = greeting.name;
-        message = greeting.message;
-        editingId = greeting._id;
     }
+
+    // Gestion des événements Socket.io
+    onMount(() => {
+        loadGreetings();
+
+        socket.on('greetingAdded', (greeting) => {
+            addGreeting(greeting);
+        });
+
+        socket.on('greetingUpdated', (greeting) => {
+            updateGreetingInStore(greeting.id, greeting);
+        });
+
+        socket.on('greetingDeleted', (id) => {
+            deleteGreetingFromStore(id);
+        });
+
+        return () => {
+            socket.off('greetingAdded');
+            socket.off('greetingUpdated');
+            socket.off('greetingDeleted');
+        };
+    });
 </script>
 
+<form on:submit|preventDefault={addOrUpdateGreeting}>
+    <label for="name">Nom:</label>
+    <input id="name" bind:value={name} />
 
-<form on:submit|preventDefault={save}>
-	<label for="nameInput">
-		Nom :
-		<input id="nameInput" name="name" type="text" autocomplete="name" bind:value={name} />
-	</label>
+    <label for="message">Message:</label>
+    <input id="message" bind:value={message} />
 
-	<label for="messageInput">
-		Message :
-		<input id="messageInput" name="message" type="text" autocomplete="on" bind:value={message} />
-	</label>
-	<button type="submit">Envoyer</button>
+    <button type="submit">{editingId ? 'Mettre à jour' : 'Ajouter'}</button>
+    {#if editingId}
+        <button type="button" on:click={clearForm}>Annuler</button>
+    {/if}
 </form>
 
-{#each $greetingsStore as greeting}
-	<li>
-		{greeting.name}: {greeting.message}
-		<button on:click={() => updateForm(greeting)}>Modifier</button>
-		<button
-			on:click={() => handleDeleteGreeting(greeting._id)}
-			disabled={editingId === greeting._id}
-		>
-			Supprimer
-		</button>
-	</li>
-{/each}
+<ul>
+    {#each $greetingsStore as greeting}
+        <li>
+            {greeting.name}: {greeting.message}
+            <button on:click={() => prepareUpdate(greeting)}>Modifier</button>
+            <button on:click={() => deleteGreeting(greeting.id)}>Supprimer</button>
+        </li>
+    {/each}
+</ul>

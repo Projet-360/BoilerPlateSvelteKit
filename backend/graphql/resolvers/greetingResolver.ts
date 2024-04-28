@@ -31,13 +31,16 @@ export const greetingResolver = {
       { name, message }: GreetingInput,
       context: Context,
     ) => {
-      console.log('create');
-      const newGreeting = new Greeting({ name, message });
-      const result = await newGreeting.save();
-      pubsub.publish(GREETING_ADDED, { greetingAdded: result });
-
-      context.io.emit('greetingAdded', result);
-      return result;
+      try {
+        const newGreeting = new Greeting({ name, message });
+        const result = await newGreeting.save();
+        pubsub.publish(GREETING_ADDED, { greetingAdded: result });
+        context.io.emit('greetingAdded', result);
+        return result;
+      } catch (error) {
+        console.error('Error creating greeting:', error);
+        throw new Error('Error creating greeting');
+      }
     },
     updateGreeting: async (
       _: any,

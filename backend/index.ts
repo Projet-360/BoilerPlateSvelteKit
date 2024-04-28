@@ -1,10 +1,9 @@
-// Import required modules and configurations
 import express, { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import https from 'https';
 import fs from 'fs';
 
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, gql } from 'apollo-server-express';
 import { typeDefs } from './graphql/schemas/index.js';
 import { resolvers } from './graphql/resolvers/index.js';
 
@@ -65,7 +64,6 @@ const server = https.createServer(
 );
 
 const io = initSocket(server);
-app.use(cors(corsConfig));
 
 // Apply middlewares to the app
 applyMiddlewares(app);
@@ -73,6 +71,10 @@ applyMiddlewares(app);
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => ({ 
+    io, 
+    req 
+  })
 });
 
 // Start the ApolloServer

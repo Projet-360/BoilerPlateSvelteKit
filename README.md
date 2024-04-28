@@ -86,11 +86,11 @@ Merci d'avoir pris le temps de lire ce README. J'attends vos retours avec impati
 
 
 env front: 
-VITE_URL_BACK=http://localhost:2000
+VITE_URL_BACK=https://localhost:2000
 VITE_SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
 
 back:
-MONGO_ONLINE=mongodb+srv://pierrefabiendev:lNy9vN07FA7l1Hmb@mongosveltekit.csdduve.mongodb.net/
+MONGO_ONLINE=mongodb+srv://pierrefabiendev:NprOwMcUgwl6xonz@mongosveltekit.csdduve.mongodb.net/
 DATABASE_NAME=BoilerPlateSvelteKitDB
 TOKEN_EXPIRY=1
 VERIFICATION_EXPIRY_HOURS=1h
