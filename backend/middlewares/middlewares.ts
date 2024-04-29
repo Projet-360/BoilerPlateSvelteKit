@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import corsConfig from '../config/corsConfig.js';
 import errorHandler from './errorHandler.js';
 import checkBlacklist from './checkBlacklist.js';
+import { graphqlValidationMiddleware } from './../validations/index.js';
 
 // Apply middlewares
 export default (app: Application) => {
@@ -15,6 +16,8 @@ export default (app: Application) => {
 
   // Parse incoming JSON payloads
   app.use(express.json());
+
+  app.use('/graphql', graphqlValidationMiddleware);
 
   // Parse incoming cookies from the headers
   app.use(cookieParser());

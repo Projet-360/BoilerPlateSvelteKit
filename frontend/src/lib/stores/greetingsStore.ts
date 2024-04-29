@@ -20,7 +20,7 @@ export function createGreetingsStore() {
 
 			notificationStore.addNotification($t('data.greetingsSuccessGet'), 'success');
 		} catch (error) {
-			notificationStore.addNotification($t('data.greetingsSuccessGet'), 'error');
+			notificationStore.addNotification($t('data.greetingsFailedGet'), 'error');
 		}
 	}
 

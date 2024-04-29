@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import https from 'https';
 import fs from 'fs';
 
-import { ApolloServer, gql } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
 import { typeDefs } from './graphql/schemas/index.js';
 import { resolvers } from './graphql/resolvers/index.js';
 
