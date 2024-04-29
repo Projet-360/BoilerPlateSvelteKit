@@ -103,7 +103,8 @@ EMAIL_USER=no_reply@SvelteKit.com
 EMAIL_PASSWORD=passwordTest
 MAIL_SERVER=no_reply@SvelteKit.com
 NODE_ENV=dev
-
+KEYPATH=C:/Web/Boilerplate/backend/SSL/localhost-key.pem
+CERTPATH=C:/Web/Boilerplate/backend/SSL/localhost.pem
 
 A FAIRE:
 intégrer 0Auth

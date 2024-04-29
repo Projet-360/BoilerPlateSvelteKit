@@ -15,7 +15,6 @@ export function createGreetingsStore() {
 
 			set(data.getGreetings.map((greeting: App.Greeting) => ({
 				...greeting,
-				_id: greeting.id
 			})));
 
 			notificationStore.addNotification($t('data.greetingsSuccessGet'), 'success');
@@ -32,7 +31,7 @@ export function createGreetingsStore() {
 		socket.on('greetingUpdated', (greeting: App.Greeting) => {	
 			update(greetings => {
 				const index = greetings.findIndex(g => {
-					return g.id === greeting._id;  // Assurez-vous de retourner le résultat de la comparaison
+					return g.id === greeting.id;  // Assurez-vous de retourner le résultat de la comparaison
 				});		
 				if (index !== -1) {
 					console.log("Updating existing greeting from socket:", greeting);
@@ -45,9 +44,11 @@ export function createGreetingsStore() {
 				}
 			});
 		});
-        socket.on('greetingDeleted', id => {
+        socket.on('greetingDeleted', id => {                        
             update(greetings => greetings.filter(g => {
-                g._id !== id
+                console.log('greetings', g);
+                console.log('greeting', id);
+                return g.id !== id
             }));
         });
 
@@ -85,8 +86,8 @@ export function createGreetingsStore() {
     }
 
     async function deleteGreeting(greeting: any) {
-        console.log("Deleting greeting:", greeting._id);
-        let id = greeting._id
+        let id = greeting.id
+
         try {
             await client.mutate({
                 mutation: DELETE_GREETING,
