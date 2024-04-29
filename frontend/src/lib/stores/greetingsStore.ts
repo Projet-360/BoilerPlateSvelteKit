@@ -12,7 +12,7 @@ export function createGreetingsStore() {
 
 			set(data.getGreetings.map((greeting: App.Greeting) => ({
 				...greeting,
-				_id: greeting._id  // Assurez-vous que _id est correctement mappé
+				_id: greeting.id
 			})));
 			console.log("Initial greetings loaded:", data.getGreetings);
 		} catch (error) {
@@ -42,8 +42,12 @@ export function createGreetingsStore() {
 			});
 		});
         socket.on('greetingDeleted', id => {
+            console.log(id);
+            
             console.log("Greeting deleted via socket:", id);
-            update(greetings => greetings.filter(g => g.id !== id));
+            update(greetings => greetings.filter(g => {
+                g._id !== id
+            }));
         });
 
         return () => {
@@ -75,8 +79,9 @@ export function createGreetingsStore() {
         }
     }
 
-    async function deleteGreeting(id: string) {
-        console.log("Deleting greeting:", id);
+    async function deleteGreeting(greeting: any) {
+        console.log("Deleting greeting:", greeting._id);
+        let id = greeting._id
         try {
             await client.mutate({
                 mutation: DELETE_GREETING,

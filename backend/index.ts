@@ -28,8 +28,6 @@ import confirmTokenRoutes from './routes/auth/confirmTokenRoutes.js';
 import verifyRoutes from './routes/auth/verifyRoutes.js';
 
 import dotenv from 'dotenv';
-import corsConfig from './config/corsConfig.js';
-import cors from 'cors';
 dotenv.config();
 
 // Initialize database connection
@@ -71,10 +69,10 @@ applyMiddlewares(app);
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ 
-    io, 
-    req 
-  })
+  context: ({ req }) => ({
+    io,
+    req,
+  }),
 });
 
 // Start the ApolloServer

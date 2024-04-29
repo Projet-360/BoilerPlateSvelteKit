@@ -62,7 +62,7 @@
         <li>
             {greeting.name}: {greeting.message}
             <button on:click={() => editGreeting(greeting)}>Edit</button>
-            <button on:click={() => greetingsStore.deleteGreeting(greeting.id)}>Delete</button>
+            <button on:click={() => greetingsStore.deleteGreeting(greeting)}>Delete</button>
         </li>
     {/each}
 </ul>

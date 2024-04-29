@@ -3,7 +3,7 @@
 
 declare namespace App {
 	type Greeting = {
-		_id: string;
+		id: string;
 		name: string;
 		message: string;
 	};
