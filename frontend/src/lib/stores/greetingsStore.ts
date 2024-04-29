@@ -46,9 +46,8 @@ export function createGreetingsStore() {
 		});
         socket.on('greetingDeleted', id => {                        
             update(greetings => greetings.filter(g => {
-                console.log('greetings', g);
-                console.log('greeting', id);
-                return g.id !== id
+                let idToDelete = g.id || g._id
+                return idToDelete !== id
             }));
         });
 
@@ -85,9 +84,9 @@ export function createGreetingsStore() {
         }
     }
 
-    async function deleteGreeting(greeting: any) {
-        let id = greeting.id
-
+    async function deleteGreeting(greeting: App.Greeting) {
+        let id = greeting.id || greeting._id
+        
         try {
             await client.mutate({
                 mutation: DELETE_GREETING,
