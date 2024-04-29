@@ -5,7 +5,7 @@
 
     let name: string = '';
     let message: string = '';
-    let editingId: string | null = null;
+    let id: string | null = null;
 
     onMount(() => {
         greetingsStore.loadInitialGreetings($t);
@@ -19,9 +19,9 @@
     });
 
     async function handleSubmit() {
-        console.log("Form submitted:", { name, message, editingId });
-        if (editingId) {
-            await greetingsStore.updateGreeting(editingId, name, message);
+        console.log("Form submitted:", { name, message, id });
+        if (id) {
+            await greetingsStore.updateGreeting(id, name, message);
         } else {
             await greetingsStore.addGreeting(name, message, $t);
         }
@@ -32,14 +32,16 @@
         console.log("Form cleared");
         name = '';
         message = '';
-        editingId = null;
+        id = null;
     }
 
     function editGreeting(greeting: App.Greeting) {
         console.log("Editing greeting:", greeting);
+
         name = greeting.name;
         message = greeting.message;
-        editingId = greeting.id;
+        // Utilisation d'une ternaire pour clarifier la logique de fallback
+        id = greeting.id ? greeting.id : (greeting._id ? greeting._id : null);
     }
 </script>
 
@@ -51,8 +53,8 @@
     <label for="message">Message:</label>
     <input id="message" bind:value={message} />
 
-    <button type="submit">{editingId ? 'Mettre à jour' : 'Ajouter'}</button>
-    {#if editingId}
+    <button type="submit">{id ? 'Mettre à jour' : 'Ajouter'}</button>
+    {#if id}
         <button type="button" on:click={clearForm}>Annuler</button>
     {/if}
 </form>

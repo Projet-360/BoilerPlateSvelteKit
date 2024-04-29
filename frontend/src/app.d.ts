@@ -6,8 +6,9 @@ declare namespace App {
 		id: string;
 		name: string;
 		message: string;
+		_id?: string;  // `_id` est optionnel, utilisé principalement pour le mapping initial.
 	};
-
+	
 	interface Session {
 		sessionId: string;
 		device: string; // Exemple: 'Desktop - Chrome'

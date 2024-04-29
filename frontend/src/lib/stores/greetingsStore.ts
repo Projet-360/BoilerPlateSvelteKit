@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import type { Writable } from 'svelte/store';
 import socket from '$api/utils/socket';
 import client from '$apollo';
 import { GET_GREETINGS, CREATE_GREETING, UPDATE_GREETING, DELETE_GREETING } from '$apollo/Greetings';
@@ -7,7 +8,7 @@ import notificationStore from '$lib/stores/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
 export function createGreetingsStore() {
-    const { subscribe, set, update } = writable([]);
+    const { subscribe, set, update }: Writable<App.Greeting[]> = writable<App.Greeting[]>([]);
 
 	async function loadInitialGreetings($t: App.TranslationFunction) {
 		try {
@@ -31,12 +32,16 @@ export function createGreetingsStore() {
 		socket.on('greetingUpdated', (greeting: App.Greeting) => {	
 			update(greetings => {
 				const index = greetings.findIndex(g => {
-					return g.id === greeting.id;  // Assurez-vous de retourner le résultat de la comparaison
-				});		
+                    let greetingToUpdate = greeting.id || greeting._id;
+                    let greetingsToUpdate = g.id || g._id;
+                    
+					return greetingsToUpdate === greetingToUpdate;
+				});
+
 				if (index !== -1) {
 					console.log("Updating existing greeting from socket:", greeting);
 					const updatedGreetings = [...greetings];
-					updatedGreetings[index] = greeting;  // Assurez-vous que cette affectation est correcte
+					updatedGreetings[index] = greeting;
 					return updatedGreetings;
 				} else {
 					console.log("Received update for non-existing greeting, adding new:", greeting);
