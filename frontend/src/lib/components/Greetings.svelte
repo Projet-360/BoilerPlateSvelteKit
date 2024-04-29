@@ -1,14 +1,14 @@
 <script lang="ts">
     import { onMount, onDestroy } from 'svelte';
     import { greetingsStore } from '$stores/greetingsStore';
+    import { t } from '$UITools/Translations/index';
 
     let name: string = '';
     let message: string = '';
     let editingId: string | null = null;
 
     onMount(() => {
-        console.log("Component mounted, loading initial greetings...");
-        greetingsStore.loadInitialGreetings();
+        greetingsStore.loadInitialGreetings($t);
     });
 
     const cleanup = greetingsStore.setupSocketListeners();
@@ -23,7 +23,7 @@
         if (editingId) {
             await greetingsStore.updateGreeting(editingId, name, message);
         } else {
-            await greetingsStore.addGreeting(name, message);
+            await greetingsStore.addGreeting(name, message, $t);
         }
         clearForm();
     }

@@ -1,0 +1,5 @@
+{
+    "greetingsSuccessGet": "les greetings ont bien étés reçues.",
+    "greetingsFailedGet": "les greetings n'ont pas étés reçues.",
+    "greetingsSuccessSent": "La greeting à bien été envoyé."
+}

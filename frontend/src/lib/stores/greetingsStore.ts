@@ -3,10 +3,13 @@ import socket from '$api/utils/socket';
 import client from '$apollo';
 import { GET_GREETINGS, CREATE_GREETING, UPDATE_GREETING, DELETE_GREETING } from '$apollo/Greetings';
 
+import notificationStore from '$lib/stores/notificationStore';
+import { messageNotification } from '$modelNotifications/messageNotification';
+
 export function createGreetingsStore() {
     const { subscribe, set, update } = writable([]);
 
-	async function loadInitialGreetings() {
+	async function loadInitialGreetings($t: App.TranslationFunction) {
 		try {
 			const { data } = await client.query({ query: GET_GREETINGS, fetchPolicy: 'network-only' });
 
@@ -14,9 +17,10 @@ export function createGreetingsStore() {
 				...greeting,
 				_id: greeting.id
 			})));
-			console.log("Initial greetings loaded:", data.getGreetings);
+
+			notificationStore.addNotification($t('data.greetingsSuccessGet'), 'success');
 		} catch (error) {
-			console.error("Error loading initial greetings:", error);
+			notificationStore.addNotification($t('data.greetingsSuccessGet'), 'error');
 		}
 	}
 
@@ -42,9 +46,6 @@ export function createGreetingsStore() {
 			});
 		});
         socket.on('greetingDeleted', id => {
-            console.log(id);
-            
-            console.log("Greeting deleted via socket:", id);
             update(greetings => greetings.filter(g => {
                 g._id !== id
             }));
@@ -57,14 +58,18 @@ export function createGreetingsStore() {
         };
     }
 
-	async function addGreeting(name: string, message: string) {
-		console.log("Sending request to add greeting:", name, message);
-		const { data } = await client.mutate({
-			mutation: CREATE_GREETING,
-			variables: { name, message }
-		});
-		console.log("Greeting sent to be added, waiting for socket confirmation:", data.createGreeting);
-	}
+    async function addGreeting(name: string, message: string, $t: App.TranslationFunction) {
+        try {
+            const { data } = await client.mutate({
+                mutation: CREATE_GREETING,
+                variables: { name, message }
+            });
+            notificationStore.addNotification($t('data.greetingsSuccessSent'), 'success');
+        } catch (error) {
+            console.error("Error adding greeting:", error);
+            messageNotification(error, $t);
+        }
+    }
 
     async function updateGreeting(id: string, name: string, message: string) {
         console.log("Updating greeting:", id);

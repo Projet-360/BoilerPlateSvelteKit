@@ -16,6 +16,11 @@ export const config = {
 	loaders: [
 		{
 			locale: 'en',
+			key: 'data',
+			loader: async () => (await import('./en/data.json')).default
+		},
+		{
+			locale: 'en',
 			key: 'general',
 			loader: async () => (await import('./en/general.json')).default
 		},
@@ -63,6 +68,11 @@ export const config = {
 			locale: 'en',
 			key: 'validation',
 			loader: async () => (await import('./en/validation.json')).default
+		},
+		{
+			locale: 'fr',
+			key: 'data',
+			loader: async () => (await import('./fr/data.json')).default
 		},
 		{
 			locale: 'fr',

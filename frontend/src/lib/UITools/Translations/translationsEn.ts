@@ -10,7 +10,10 @@ import forgotPasswordToken from './en/forgot-password-token.json';
 import user from './en/user.json';
 import validation from './en/validation.json';
 
+import data from './en/data.json';
+
 const translationsEn = {
+	data,
 	general,
 	about,
 	home,
