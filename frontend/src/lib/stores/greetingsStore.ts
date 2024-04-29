@@ -10,7 +10,7 @@ export function createGreetingsStore() {
 		try {
 			const { data } = await client.query({ query: GET_GREETINGS, fetchPolicy: 'network-only' });
 
-			set(data.getGreetings.map(greeting => ({
+			set(data.getGreetings.map((greeting: App.Greeting) => ({
 				...greeting,
 				_id: greeting._id  // Assurez-vous que _id est correctement mappé
 			})));
@@ -21,11 +21,11 @@ export function createGreetingsStore() {
 	}
 
     function setupSocketListeners() {
-        socket.on('greetingAdded', greeting => {
+        socket.on('greetingAdded', (greeting: App.Greeting) => {
             console.log("Greeting added via socket:", greeting);
             update(greetings => [...greetings, greeting]);
         });
-		socket.on('greetingUpdated', (greeting) => {	
+		socket.on('greetingUpdated', (greeting: App.Greeting) => {	
 			update(greetings => {
 				const index = greetings.findIndex(g => {
 					return g.id === greeting._id;  // Assurez-vous de retourner le résultat de la comparaison
