@@ -1,7 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
-import https from 'https';
-import fs from 'fs';
 
 import { ApolloServer } from 'apollo-server-express';
 import { typeDefs } from './graphql/schemas/index.js';
@@ -13,6 +11,7 @@ import connectDB from './dbConnect.js'; // Database connection module
 
 import applyMiddlewares from './middlewares/middlewares.js'; // Application middlewares
 import logger from './services/logger.js';
+import { setupHttpsServer } from './config/https.js';
 
 // Import route modules
 import checkAuthStatusRoutes from './routes/auth/checkAuthStatusRoutes.js';
@@ -36,36 +35,16 @@ connectDB();
 // Initialize the Express app
 const app: any = express();
 
-// Vérifier si les chemins des clés et des certificats sont définis
-if (!process.env.KEYPATH || !process.env.CERTPATH) {
-  console.error('Les chemins des clés ou des certificats ne sont pas définis.');
-  process.exit(1); // Arrêter le processus en cas d'erreur
-}
+// Setup the HTTPS
+const server = setupHttpsServer(app);
 
-// Vérifier si les fichiers de clé et de certificat existent
-if (
-  !fs.existsSync(process.env.KEYPATH) ||
-  !fs.existsSync(process.env.CERTPATH)
-) {
-  console.error(
-    "Les fichiers de clé ou de certificat n'existent pas aux emplacements spécifiés.",
-  );
-  process.exit(1); // Arrêter le processus en cas d'erreur
-}
-
-const server = https.createServer(
-  {
-    key: fs.readFileSync(process.env.KEYPATH),
-    cert: fs.readFileSync(process.env.CERTPATH),
-  },
-  app,
-);
-
+// Setup the Socket
 const io = initSocket(server);
 
 // Apply middlewares to the app
 applyMiddlewares(app);
 
+// Setup the Apollo Server
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
