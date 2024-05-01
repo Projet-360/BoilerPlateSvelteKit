@@ -73,8 +73,7 @@ export function createGreetingsStore() {
             });
             notificationStore.addNotification($t('data.greetingsSuccessSent'), 'success');
         } catch (error) {
-            console.error("Error greeting:", JSON.stringify(error, null, 2));
-            console.log("Handled ApolloError:", error);
+            console.error("Error greeting:", JSON.stringify(error, null, 2));            
             messageNotification(error, $t);
             throw error;
         }
