@@ -129,6 +129,8 @@ export const hashPassword = async (password: string) => {
  */
 export const checkEmailExists = async (email: string) => {
   const existingUserByEmail = await User.findOne({ email });
+  console.log(existingUserByEmail);
+
   if (existingUserByEmail) {
     throwError('EMAIL_EXIST', 'EMAIL_EXIST', HTTP_STATUS.BAD_REQUEST);
   }

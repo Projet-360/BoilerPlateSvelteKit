@@ -3,7 +3,9 @@ import { writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 import client from '$apollo';
 import { LOGIN, LOGOUT, SIGNUP } from '$apollo/User';
-import { gql } from "@apollo/client/core";
+
+import notificationStore from './notificationStore';
+import { messageNotification } from '$modelNotifications/messageNotification';
 
 // Définition du store d'authentification
 function createAuthStore() {
@@ -24,8 +26,10 @@ function createAuthStore() {
                     mutation: SIGNUP,
                     variables: { username, email, password }
                 });
+                notificationStore.addNotification($t('data.signupSuccess'), 'success');
             } catch (error) {
-                console.error("Signup failed:", error);
+                console.error("Error greeting:", JSON.stringify(error, null, 2));
+                messageNotification(error, $t);
             }
         },
     };

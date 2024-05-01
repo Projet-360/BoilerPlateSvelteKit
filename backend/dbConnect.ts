@@ -8,9 +8,11 @@ dotenv.config();
 // Asynchronous function to connect to the MongoDB database
 const connectDB = async () => {
   try {
+    const mongoURI = `${process.env.MONGO_ONLINE}${process.env.DATABASE_NAME}`;
+
     // Attempt to connect to MongoDB using the determined URL
     await mongoose.connect(
-      process.env.MONGO_ONLINE as string,
+      mongoURI as string,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

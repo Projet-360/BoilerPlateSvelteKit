@@ -134,3 +134,10 @@ savoir prendre en considération le fait d'initialiser dans des const l'utilisat
 - Faire les messages coté admin et user de notification
 - faire les tests coté admin et user
 - Mettre en ligne l'app
+
+Si 1000 est utilisé 
+
+netstat -ano | findstr :1000
+
+taskkill /PID <PID> /F
+taskkill /PID 8352 /F

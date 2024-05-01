@@ -1,3 +1,7 @@
+import * as authService from '../../services/authService.js';
+import CustomError from '../../errors/CustomError.js';
+import logger from '../../services/logger.js';
+
 interface SignupArgs {
   username: string;
   email: string;
@@ -23,11 +27,35 @@ export const userResolver = {
       { username, email, password }: SignupArgs,
       context: Context,
     ) => {
-      console.log('Signup attempt', username, email, password);
+      try {
+        // Vérifier si l'email existe déjà
+        await authService.checkEmailExists(email);
 
-      // Vous pouvez choisir de retourner un message simple ou rien du tout.
-      // Si vous choisissez de ne rien retourner, assurez-vous que votre schéma GraphQL le permet.
-      return { message: 'Attempt logged' }; // Retourne un message indiquant que la tentative a été consignée.
+        // Hachage du mot de passe
+        const hashedPassword = await authService.hashPassword(password);
+
+        // Création de l'utilisateur
+        const role = 'user'; // Définissez le rôle par défaut ou ajustez selon la logique
+        const newUser = await authService.createUser(
+          username,
+          email,
+          hashedPassword,
+          role,
+        );
+
+        // Gestion des tokens
+        await authService.createSignupToken(newUser);
+        await authService.createVerificationToken(newUser);
+
+        // // Notification via Socket.io
+        // context.io.emit('user signed up', { username, email });
+
+        // Réponse de succès
+        return { message: 'SUCCESS_LOGIN' };
+      } catch (error: any) {
+        logger.info(error);
+        throw new CustomError('SignupError', error.message, 400);
+      }
     },
   },
 };

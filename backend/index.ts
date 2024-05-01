@@ -18,7 +18,6 @@ import checkAuthStatusRoutes from './routes/auth/checkAuthStatusRoutes.js';
 import adminRoutes from './routes/auth/adminRoutes.js';
 import userRoutes from './routes/auth/userRoutes.js';
 import forgotRoutes from './routes/auth/forgotRoutes.js';
-import signupRoutes from './routes/auth/signupRoutes.js';
 import sessionRoutes from './routes/auth/sessionRoutes.js';
 import loginRoutes from './routes/auth/loginRoutes.js';
 import logoutRoutes from './routes/auth/logoutRoutes.js';
@@ -48,9 +47,9 @@ const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => {
-    console.log('Apollo context accessed');
-    console.log(req.body);
-
+    // console.log('Apollo context accessed');
+    // console.log(req.body);
+    // console.log(`Request from ${req.ip}`);
     return { io, req };
   },
 });
@@ -64,7 +63,6 @@ apolloServer.start().then(() => {
   app.use('/auth', adminRoutes);
   app.use('/auth', userRoutes);
 
-  app.use('/auth', signupRoutes);
   app.use('/auth', loginRoutes);
   app.use('/auth', logoutRoutes);
   app.use('/auth', verifyRoutes);

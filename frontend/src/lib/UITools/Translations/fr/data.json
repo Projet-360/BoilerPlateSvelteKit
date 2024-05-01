@@ -3,5 +3,7 @@
     "greetingsFailedGet": "les greetings n'ont pas étés reçues.",
     "greetingsSuccessSent": "La greeting à bien été envoyé.",
     "greetingsSuccessUpdated": "La greeting à bien été mise à jour.",
-    "greetingsSuccessDeleted": "La greeting à bien été supprimée."
+    "greetingsSuccessDeleted": "La greeting à bien été supprimée.",
+
+    "signupSuccess": "Vous avez reçu un email pour valider votre compte."
 }
