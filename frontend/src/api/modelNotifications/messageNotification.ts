@@ -25,9 +25,6 @@ export const messageNotification = (error: any, $t: App.TranslationFunction) => 
 			case 'NAME_REQUIRED':
 				errorMessage = $t('validation.NAME_REQUIRED');
 				break;
-			case 'MESSAGE_REQUIRED':
-				errorMessage = $t('validation.MESSAGE_REQUIRED');
-				break;
 			case 'EMAIL_EXIST':
 				errorMessage = $t('validation.EMAIL_EXIST');
 				break;

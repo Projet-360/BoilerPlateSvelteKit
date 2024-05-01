@@ -30,17 +30,23 @@ export const passwordValidators = [
 ];
 
 export const nameValidator = [
-  check('name').not().isEmpty().withMessage(messageReturn.NAME_REQUIRED),
-  check('name').escape(),
-  check('name')
+  check('variables.name')
+    .not()
+    .isEmpty()
+    .withMessage(messageReturn.NAME_REQUIRED),
+  check('variables.name').escape(),
+  check('variables.name')
     .isLength({ min: 5, max: 50 })
     .withMessage(messageReturn.NAME_MIN_MAX_CARAC),
 ];
 
 export const messageValidator = [
-  check('message').not().isEmpty().withMessage(messageReturn.MESSAGE_REQUIRED),
-  check('message').escape(),
-  check('message')
+  check('variables.message')
+    .not()
+    .isEmpty()
+    .withMessage(messageReturn.MESSAGE_REQUIRED),
+  check('variables.message').escape(),
+  check('variables.message')
     .isLength({ min: 5, max: 500 })
     .withMessage(messageReturn.MESSAGE_MIN_MAX_CARAC),
 ];
