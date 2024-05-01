@@ -12,7 +12,7 @@ export function graphqlValidationMiddleware(
   next: NextFunction,
 ) {
   const operationName = req.body.operationName;
-  console.log(operationName);
+  console.log('Received variables:', req.body.variables);
 
   let validators;
   switch (operationName) {
@@ -22,7 +22,7 @@ export function graphqlValidationMiddleware(
     default:
       return next();
   }
-
+  //avant
   Promise.all(validators.map((validation) => validation.run(req))).then(() => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

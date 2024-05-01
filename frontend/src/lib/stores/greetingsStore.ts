@@ -71,8 +71,9 @@ export function createGreetingsStore() {
             });
             notificationStore.addNotification($t('data.greetingsSuccessSent'), 'success');
         } catch (error) {
-            console.error("Error adding greeting:", error);
+            console.error("Error adding greeting:", JSON.stringify(error, null, 2));
             messageNotification(error, $t);
+            throw error;
         }
     }
 

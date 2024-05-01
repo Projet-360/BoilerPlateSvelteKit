@@ -4,19 +4,30 @@ type TranslationFunction = (key: string, options?: any) => string;
 export const messageNotification = (error: any, $t: App.TranslationFunction) => {
 	let errorMessages: any = [];
 
-	// Gérer le format de l'erreur
-	if (typeof error === 'string') {
-		errorMessages = error.split(',');
-	} else if (error && error.message) {
-		errorMessages = error.message.split(',');
-	} else {
-		errorMessages = ["Une erreur inconnue s'est produite."];
-	}
+    // Gérer le format de l'erreur ApolloError avec les erreurs structurées
+    if (error.networkError && error.networkError.result && error.networkError.result.errors) {
+        error.networkError.result.errors.forEach((err: { msg: string }) => {
+            errorMessages.push(err.msg);  // Collecter les messages d'erreur pour la notification
+        });
+    } else if (error.message) {
+        // Cas où l'erreur n'est pas structurée comme prévu
+        errorMessages = error.message.split(',');
+    } else {
+        // Cas de fallback si l'erreur est inattendue ou mal formée
+        errorMessages = ["Une erreur inconnue s'est produite."];
+    }
+
 
 	// Itération sur chaque message d'erreur
 	errorMessages.forEach((errorMsg: string) => {
 		let errorMessage;
 		switch (errorMsg.trim()) {
+			case 'NAME_REQUIRED':
+				errorMessage = $t('validation.NAME_REQUIRED');
+				break;
+			case 'MESSAGE_REQUIRED':
+				errorMessage = $t('validation.MESSAGE_REQUIRED');
+				break;
 			case 'EMAIL_EXIST':
 				errorMessage = $t('validation.EMAIL_EXIST');
 				break;
