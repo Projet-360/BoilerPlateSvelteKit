@@ -1,31 +1,25 @@
-import { User } from 'models/UserModel.js';
+import bcrypt from 'bcryptjs';
+import { User } from './../../models/UserModel.js'; // Assurez-vous que l'interface IUser est bien exportée depuis le modèle User
+import { UserInputError, AuthenticationError } from 'apollo-server-express';
+
+interface SignupArgs {
+  username: string;
+  email: string;
+  password: string;
+}
+
+// Adapter IUser pour matcher avec les types GraphQL si nécessaire
+interface IUserGraphql {
+  id: string;
+  username: string;
+  email: string;
+  role: 'user' | 'admin' | 'moderator' | undefined;
+}
 
 export const userResolver = {
-  Query: {
-    currentUser: (parent, args, context) => {
-      // Supposons que context.user est défini si l'utilisateur est authentifié
-      return context.user
-        ? context.models.User.findById(context.user.id)
-        : null;
-    },
-    currentSessions: (parent, args, context) => {
-      // Récupérer et retourner les sessions de l'utilisateur authentifié
-      return context.models.Session.find({ userId: context.user.id });
-    },
-  },
   Mutation: {
-    login: async (parent, { username, password }, context) => {
-      // Implémentation du login
-      const { user, token } = await context.auth.authenticate(
-        username,
-        password,
-      );
-      return { user, token };
-    },
-    logout: (parent, args, context) => {
-      // Implémentation du logout
-      context.auth.logout();
-      return true;
+    signup: async (_: any, { username, email, password }: SignupArgs) => {
+      console.log('le resolver', username, email, password);
     },
   },
 };

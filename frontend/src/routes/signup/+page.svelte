@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { signup } from '$api/auth/signupAPI';
 	import { setTransitionLoader } from '$stores/transitionLoaderStore';
 	import { t } from '$UITools/Translations/index';
+	import { authStore } from '$stores/authStore';
 
 	let username = '';
 	let email = '';
@@ -13,7 +13,7 @@
 	});
 
 	async function handleSignup() {
-		await signup(username, email, password, $t);
+		await authStore.signup(username, email, password, $t);
 	}
 </script>
 

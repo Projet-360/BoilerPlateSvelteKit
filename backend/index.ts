@@ -20,7 +20,6 @@ import userRoutes from './routes/auth/userRoutes.js';
 import forgotRoutes from './routes/auth/forgotRoutes.js';
 import signupRoutes from './routes/auth/signupRoutes.js';
 import sessionRoutes from './routes/auth/sessionRoutes.js';
-import greetingRoutes from './routes/greetingRoutes.js';
 import loginRoutes from './routes/auth/loginRoutes.js';
 import logoutRoutes from './routes/auth/logoutRoutes.js';
 import confirmTokenRoutes from './routes/auth/confirmTokenRoutes.js';
@@ -72,8 +71,6 @@ apolloServer.start().then(() => {
 
   app.use('/auth', forgotRoutes);
   app.use('/auth', sessionRoutes);
-
-  app.use('/api', greetingRoutes(io));
 
   // Error handling middleware
   app.use((err: any, req: Request, res: Response, next: NextFunction) => {
