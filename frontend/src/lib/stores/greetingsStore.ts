@@ -20,7 +20,9 @@ export function createGreetingsStore() {
 
 			notificationStore.addNotification($t('data.greetingsSuccessGet'), 'success');
 		} catch (error) {
+            console.error("Error greeting:", JSON.stringify(error, null, 2));
 			notificationStore.addNotification($t('data.greetingsFailedGet'), 'error');
+            throw error;
 		}
 	}
 
@@ -71,6 +73,8 @@ export function createGreetingsStore() {
             });
             notificationStore.addNotification($t('data.greetingsSuccessSent'), 'success');
         } catch (error) {
+            console.error("Error greeting:", JSON.stringify(error, null, 2));
+            console.log("Handled ApolloError:", error);
             messageNotification(error, $t);
             throw error;
         }
@@ -85,7 +89,9 @@ export function createGreetingsStore() {
             });
             notificationStore.addNotification($t('data.greetingsSuccessUpdated'), 'success');
         } catch (error) {
+            console.error("Error greeting:", JSON.stringify(error, null, 2));
             messageNotification(error, $t);
+            throw error;
         }
     }
 
@@ -99,7 +105,9 @@ export function createGreetingsStore() {
             });
             notificationStore.addNotification($t('data.greetingsSuccessDeleted'), 'success');
         } catch (error) {
+            console.error("Error greeting:", JSON.stringify(error, null, 2));
             messageNotification(error, $t);
+            throw error;
         }
     }
 
