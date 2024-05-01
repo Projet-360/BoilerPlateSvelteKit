@@ -7,7 +7,7 @@ import { GET_GREETINGS, CREATE_GREETING, UPDATE_GREETING, DELETE_GREETING } from
 import notificationStore from '$lib/stores/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
-export function createGreetingsStore() {
+export function GreetingsStore() {
     const { subscribe, set, update }: Writable<App.Greeting[]> = writable<App.Greeting[]>([]);
 
 	async function loadInitialGreetings($t: App.TranslationFunction) {
@@ -120,4 +120,4 @@ export function createGreetingsStore() {
     };
 }
 
-export const greetingsStore = createGreetingsStore();
+export const greetingsStore = GreetingsStore();
