@@ -4,7 +4,7 @@ import { ValidationChain, check } from 'express-validator';
 import { messageReturn } from '../constants/errorMessages.js';
 
 export const usernameValidators = [
-  check('username')
+  check('variables.username')
     .notEmpty()
     .withMessage(messageReturn.USERNAME_REQUIRED)
     .isLength({ min: 3, max: 20 })
@@ -12,11 +12,11 @@ export const usernameValidators = [
 ];
 
 export const emailValidators = [
-  check('email').isEmail().withMessage(messageReturn.VALID_EMAIL),
+  check('variables.email').isEmail().withMessage(messageReturn.VALID_EMAIL),
 ];
 
 export const passwordValidators = [
-  check('password')
+  check('variables.password')
     .isLength({ min: 8 })
     .withMessage(messageReturn.NUMBE_CARAC_PASSWORD)
     .matches(/[a-z]/)
