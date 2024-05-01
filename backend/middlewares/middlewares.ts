@@ -11,20 +11,27 @@ import { graphqlValidationMiddleware } from './../validations/index.js';
 
 // Apply middlewares
 export default (app: Application) => {
-  // Apply CORS settings from external config file
+  console.log('Applying CORS Middleware');
   app.use(cors(corsConfig));
+  console.log('CORS Middleware Applied');
 
-  // Parse incoming JSON payloads
+  console.log('Applying JSON Middleware');
   app.use(express.json());
+  console.log('JSON Middleware Applied');
 
-  app.use('/graphql', graphqlValidationMiddleware);
-
-  // Parse incoming cookies from the headers
+  console.log('Applying Cookie Middleware');
   app.use(cookieParser());
+  console.log('Cookie Middleware Applied');
 
-  // Custom middleware to check if token is blacklisted
+  console.log('Applying Blacklist Check');
   app.use(checkBlacklist);
+  console.log('Blacklist Check Applied');
 
-  // Custom error-handling middleware
+  console.log('Applying GraphQL Validation Middleware');
+  app.use('/graphql', graphqlValidationMiddleware);
+  console.log('GraphQL Validation Middleware Applied');
+
+  console.log('Applying Error Handler');
   app.use(errorHandler);
+  console.log('Error Handler Applied');
 };

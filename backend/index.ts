@@ -47,17 +47,18 @@ applyMiddlewares(app);
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({
-    io,
-    req,
-  }),
+  context: ({ req }) => {
+    console.log('Apollo context accessed');
+    console.log(req.body);
+
+    return { io, req };
+  },
 });
 
 // Start the ApolloServer
 apolloServer.start().then(() => {
   // Apply ApolloServer middleware to Express app
   apolloServer.applyMiddleware({ app, path: '/graphql' });
-
   // Route definitions
   app.use('/auth', checkAuthStatusRoutes);
   app.use('/auth', adminRoutes);
