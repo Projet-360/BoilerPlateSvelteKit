@@ -1,5 +1,7 @@
 {
-    "greetingsSuccessGet": "The greetings were received successfully.",
-    "greetingsFailedGet": "The greetings were not received.",
-    "greetingsSuccessSent": "The greeting was sent successfully."
+    "greetingsSuccessGet": "Greetings have been received successfully.",
+    "greetingsFailedGet": "Failed to receive greetings.",
+    "greetingsSuccessSent": "The greeting has been sent successfully.",
+    "greetingsSuccessUpdated": "The greeting has been updated successfully.",
+    "greetingsSuccessDeleted": "The greeting has been deleted successfully."
 }

@@ -4,6 +4,7 @@ import { greetingsValidators } from './validators.js';
 
 const OPERATION_NAMES = {
   CREATE_GREETING: 'CreateGreeting',
+  UPDATE_GREETING: 'UpdateGreeting',
 };
 
 export function graphqlValidationMiddleware(
@@ -17,6 +18,9 @@ export function graphqlValidationMiddleware(
   let validators;
   switch (operationName) {
     case OPERATION_NAMES.CREATE_GREETING:
+      validators = greetingsValidators;
+      break;
+    case OPERATION_NAMES.UPDATE_GREETING:
       validators = greetingsValidators;
       break;
     default:

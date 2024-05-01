@@ -71,26 +71,25 @@ export function createGreetingsStore() {
             });
             notificationStore.addNotification($t('data.greetingsSuccessSent'), 'success');
         } catch (error) {
-            console.error("Error adding greeting:", JSON.stringify(error, null, 2));
             messageNotification(error, $t);
             throw error;
         }
     }
 
-    async function updateGreeting(id: string, name: string, message: string) {
+    async function updateGreeting(id: string, name: string, message: string, $t: App.TranslationFunction) {
         console.log("Updating greeting:", id);
         try {
             const { data } = await client.mutate({
                 mutation: UPDATE_GREETING,
                 variables: { id, name, message }
             });
-            console.log("Greeting updated:", data.updateGreeting);
+            notificationStore.addNotification($t('data.greetingsSuccessUpdated'), 'success');
         } catch (error) {
-            console.error("Error updating greeting:", error);
+            messageNotification(error, $t);
         }
     }
 
-    async function deleteGreeting(greeting: App.Greeting) {
+    async function deleteGreeting(greeting: App.Greeting, $t: App.TranslationFunction) {
         let id = greeting.id || greeting._id
         
         try {
@@ -98,8 +97,9 @@ export function createGreetingsStore() {
                 mutation: DELETE_GREETING,
                 variables: { id }
             });
+            notificationStore.addNotification($t('data.greetingsSuccessDeleted'), 'success');
         } catch (error) {
-            console.error("Error deleting greeting:", error);
+            messageNotification(error, $t);
         }
     }
 

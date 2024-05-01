@@ -21,7 +21,7 @@
     async function handleSubmit() {
         console.log("Form submitted:", { name, message, id });
         if (id) {
-            await greetingsStore.updateGreeting(id, name, message);
+            await greetingsStore.updateGreeting(id, name, message, $t);
         } else {
             await greetingsStore.addGreeting(name, message, $t);
         }
@@ -64,7 +64,7 @@
         <li>
             {greeting.name}: {greeting.message}
             <button on:click={() => editGreeting(greeting)}>Edit</button>
-            <button on:click={() => greetingsStore.deleteGreeting(greeting)}>Delete</button>
+            <button on:click={() => greetingsStore.deleteGreeting(greeting, $t)}>Delete</button>
         </li>
     {/each}
 </ul>
