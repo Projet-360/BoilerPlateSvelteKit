@@ -4,7 +4,7 @@ import { handleRoleRedirection } from '$api/utils/handleRoleRedirection';
 
 import { authStore } from '$stores/Data/authStore';
 
-import notificationStore from '$stores/UX/notificationStore';
+import notificationStore from '$lib/stores/UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
 let currentState: App.IAuthStore;

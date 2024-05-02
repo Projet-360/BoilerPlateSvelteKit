@@ -1,5 +1,5 @@
-import { cursorStore } from '$stores/UX/cursorStore';
-import { shapeStore } from '$stores/UX/shapeStore';
+import { cursorStore } from '$lib/stores/UX/cursorStore';
+import { shapeStore } from '$lib/stores/UX/shapeStore';
 import animations from './animations';
 
 let animationFrameId: number;

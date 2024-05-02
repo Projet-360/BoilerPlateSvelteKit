@@ -4,7 +4,7 @@ import socket from '$api/utils/socket';
 import client from '$apollo';
 import { GET_GREETINGS, CREATE_GREETING, UPDATE_GREETING, DELETE_GREETING } from '$apollo/Greetings';
 
-import notificationStore from '$stores/UX/notificationStore';
+import notificationStore from '$lib/stores/UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
 export function GreetingsStore() {
