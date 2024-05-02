@@ -1,9 +1,11 @@
+import { Request, Response } from 'express';
+import UAParser from 'ua-parser-js';
+
 import * as authService from '../../services/authService.js';
 import CustomError from '../../errors/CustomError.js';
 import logger from '../../services/logger.js';
-import UAParser from 'ua-parser-js';
 import { Session } from '../../models/sessionModel.js';
-import { Request, Response } from 'express';
+import BlacklistedToken from '../../models/BlacklistedTokenModel.js';
 
 interface SignupArgs {
   username: string;
@@ -18,6 +20,11 @@ interface LoginArgs {
 
 interface TokenArgs {
   token: string;
+}
+
+interface LogoutResponse {
+  success: Boolean;
+  message: String;
 }
 
 interface Context {
@@ -141,6 +148,26 @@ export const userResolver = {
       } catch (error: any) {
         logger.error('Error in login mutation:', error);
         throw new CustomError('LoginError', error.message, 400);
+      }
+    },
+    logout: async (
+      _: any,
+      __: any,
+      { req, res }: Context,
+    ): Promise<{ success: boolean; message: string }> => {
+      try {
+        const token = req.cookies.token;
+        if (token) {
+          const newBlacklistedToken = new BlacklistedToken({ token });
+          await newBlacklistedToken.save();
+
+          res.clearCookie('token');
+          return { success: true, message: 'Déconnexion réussie' };
+        } else {
+          throw new Error('No token provided');
+        }
+      } catch (error: any) {
+        throw new CustomError('LogoutError', error.message, 400);
       }
     },
   },

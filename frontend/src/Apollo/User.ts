@@ -31,7 +31,6 @@ mutation Login($email: String!, $password: String!) {
 export const LOGOUT = gql`
 mutation Logout {
     logout {
-      success
       message
     }
   }
