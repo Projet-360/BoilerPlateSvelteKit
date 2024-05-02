@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { t } from '$UITools/Translations/index';
-	import { login } from '$api/auth/loginAPI';
 	import { onMount } from 'svelte';
 	import { setTransitionLoader } from '$stores/transitionLoaderStore';
+	import { authStore } from '$stores/authStore';
 
 	let email = '';
 	let password = '';
@@ -13,7 +13,7 @@
 	});
 
 	async function handleLogin() {
-		await login(email, password, $t);
+		await authStore.login(email, password, $t);
 	}
 
 	function goToResetPassword() {

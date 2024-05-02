@@ -11,9 +11,17 @@ export const userType = gql`
       email: String!
       password: String!
     ): MessageResponse
+    login(email: String!, password: String!): LoginResponse
   }
 
   type MessageResponse {
     message: String
+  }
+
+  type LoginResponse {
+    success: Boolean!
+    role: String
+    userId: String
+    sessionId: String
   }
 `;

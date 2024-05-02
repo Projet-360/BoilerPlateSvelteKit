@@ -18,6 +18,15 @@ function createAuthStore() {
         sessions: [] // Initialisé avec un tableau vide
     });
 
+    let currentState = {
+        userId: null,
+        role: null,
+        isAuthenticated: false,
+        currentSessionId: undefined,
+        sessions: []
+    };
+
+
     return {
         subscribe,
         signup: async (username: string, email: string, password: string, $t: App.TranslationFunction) => {
@@ -46,7 +55,31 @@ function createAuthStore() {
                 console.error("Error verifying token:", JSON.stringify(error, null, 2));
                 notificationStore.addNotification($t('validation.emailVerificationFailed'), 'error');
             }
-        }
+        },
+        login: async (email: string, password: string, $t: App.TranslationFunction) => {
+            try {
+                const { data } = await client.mutate({
+                    mutation: LOGIN,
+                    variables: { email, password }
+                });
+                if (data.login.success) {
+                    set({
+                        userId: data.login.userId,
+                        role: data.login.role,
+                        isAuthenticated: true,
+                        currentSessionId: data.login.sessionId,
+                        sessions: [...currentState.sessions, data.login.sessionId] // assuming session tracking
+                    });
+                    goto('/');
+                    notificationStore.addNotification($t('validation.SUCCESS_LOGIN'), 'success');
+                } else {
+                    notificationStore.addNotification($t('validation.FAIL_LOGIN'), 'error');
+                }
+            } catch (error) {
+                console.error("Error during login:", JSON.stringify(error, null, 2));
+                messageNotification(error, $t);
+            }
+        },
     };
 }
 
