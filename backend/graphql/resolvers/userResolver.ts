@@ -22,6 +22,14 @@ interface TokenArgs {
   token: string;
 }
 
+export interface LoginResponse {
+  success: boolean;
+  token: string;
+  userId: string;
+  role?: string; // Change here: Allow role to be undefined
+  sessionId: string;
+}
+
 interface LogoutResponse {
   success: Boolean;
   message: String;
@@ -94,32 +102,28 @@ export const userResolver = {
         throw new CustomError('SignupError', error.message, 400);
       }
     },
-    login: async (_: any, { email, password }: LoginArgs, context: Context) => {
+    login: async (
+      _: any,
+      { email, password }: LoginArgs,
+      { req, res }: Context,
+    ): Promise<LoginResponse> => {
       try {
         const loginResult = await authService.login(email, password);
-
         if (!loginResult) {
-          throw new Error('Login failed');
+          throw new CustomError('LoginFailed', 'Login failed', 400);
         }
 
         const { token, _id, role } = loginResult;
+        authService.setAuthCookie(res, token);
 
-        // Définir le cookie de manière sécurisée
-        context.res.cookie('auth_token', token, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === 'production', // Assurez-vous que les cookies sont sécurisés en production
-          sameSite: 'strict',
-        });
-
-        // Analyser le User Agent
-        const userAgentString = context.req.headers['user-agent'];
+        const userAgentString = req.headers['user-agent'];
         const parser = new UAParser(userAgentString);
         const browserInfo = parser.getBrowser();
         const osInfo = parser.getOS();
         const deviceInfo = parser.getDevice();
 
         const sessionData = {
-          userId: _id,
+          userId: _id.toString(),
           userAgent: userAgentString,
           browser: {
             name: browserInfo.name,
@@ -130,10 +134,7 @@ export const userResolver = {
             version: osInfo.version,
           },
           device: deviceInfo.model || 'unknown',
-          ip:
-            context.req.ip ||
-            context.req.headers['x-forwarded-for'] ||
-            'IP not available',
+          ip: req.ip,
         };
 
         const session = new Session(sessionData);
@@ -141,8 +142,9 @@ export const userResolver = {
 
         return {
           success: true,
-          role,
-          userId: _id,
+          token,
+          userId: _id.toString(),
+          role: role || 'defaultRole', // Default value for role
           sessionId: session._id.toString(),
         };
       } catch (error: any) {
