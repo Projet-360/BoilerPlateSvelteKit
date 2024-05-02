@@ -2,7 +2,8 @@
 import { writable } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 import client from '$apollo';
-import { LOGIN, LOGOUT, SIGNUP } from '$apollo/User';
+import { LOGIN, LOGOUT, SIGNUP, VERIFY_TOKEN } from '$apollo/User';
+import { goto } from '$app/navigation';
 
 import notificationStore from './notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
@@ -19,7 +20,6 @@ function createAuthStore() {
 
     return {
         subscribe,
-        // Fonction asynchrone pour l'inscription d'un utilisateur
         signup: async (username: string, email: string, password: string, $t: App.TranslationFunction) => {
             try {
                 const { data } = await client.mutate({
@@ -32,6 +32,21 @@ function createAuthStore() {
                 messageNotification(error, $t);
             }
         },
+        verifyToken: async (token: string, $t: App.TranslationFunction) => {
+            try {
+                const { data } = await client.query({
+                    query: VERIFY_TOKEN,
+                    variables: { token }
+                });
+        
+                goto('/');
+                notificationStore.addNotification($t('validation.emailVerified'), 'success');                
+            } catch (error) {
+                // Il est important de gérer les erreurs correctement
+                console.error("Error verifying token:", JSON.stringify(error, null, 2));
+                notificationStore.addNotification($t('validation.emailVerificationFailed'), 'error');
+            }
+        }
     };
 }
 

@@ -9,6 +9,14 @@ export const SIGNUP = gql`
     }
 `
 
+export const VERIFY_TOKEN = gql`
+  query VerifyToken($token: String!) {
+    verifyToken(token: $token) {
+      message
+    }
+  }  
+`
+
 export const LOGIN = gql`
 mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -144,11 +152,4 @@ mutation UpdateUserInfo($userId: ID!, $userInfo: UpdateUserInfoInput!) {
   }  
 `
 
-export const VERIFY_TOKEN = gql`
-mutation VerifyToken($token: String!) {
-    verifyToken(token: $token) {
-      success
-      message
-    }
-  }  
-`
+

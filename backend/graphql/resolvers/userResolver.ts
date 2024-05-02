@@ -8,6 +8,10 @@ interface SignupArgs {
   password: string;
 }
 
+interface TokenArgs {
+  token: string;
+}
+
 interface Context {
   io: any;
 }
@@ -21,6 +25,21 @@ interface IUserGraphql {
 }
 
 export const userResolver = {
+  Query: {
+    verifyToken: async (_: any, { token }: TokenArgs, context: Context) => {
+      try {
+        const verified = await authService.verifyToken(token);
+        if (verified) {
+          return { message: 'Token verified successfully' };
+        } else {
+          return { message: 'Token verification failed' };
+        }
+      } catch (error: any) {
+        logger.error('Error verifying token:', error);
+        throw new CustomError('TokenVerificationError', error.message, 400);
+      }
+    },
+  },
   Mutation: {
     signup: async (
       _: any,

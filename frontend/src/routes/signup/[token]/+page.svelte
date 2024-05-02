@@ -2,13 +2,13 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { t } from '$UITools/Translations/index';
-	import { verifyToken } from '$api/auth/verifyTokenAPI';
+	import { authStore } from '$stores/authStore';
 
 	let token;
 
 	onMount(() => {
 		token = $page.params.token;
-		verifyToken(token, $t);
+		authStore.verifyToken(token, $t);
 	});
 </script>
 

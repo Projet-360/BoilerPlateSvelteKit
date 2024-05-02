@@ -22,7 +22,6 @@ import sessionRoutes from './routes/auth/sessionRoutes.js';
 import loginRoutes from './routes/auth/loginRoutes.js';
 import logoutRoutes from './routes/auth/logoutRoutes.js';
 import confirmTokenRoutes from './routes/auth/confirmTokenRoutes.js';
-import verifyRoutes from './routes/auth/verifyRoutes.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -65,7 +64,6 @@ apolloServer.start().then(() => {
 
   app.use('/auth', loginRoutes);
   app.use('/auth', logoutRoutes);
-  app.use('/auth', verifyRoutes);
   app.use('/auth', confirmTokenRoutes);
 
   app.use('/auth', forgotRoutes);

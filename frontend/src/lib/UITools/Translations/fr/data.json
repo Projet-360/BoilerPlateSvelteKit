@@ -5,5 +5,6 @@
     "greetingsSuccessUpdated": "La greeting à bien été mise à jour.",
     "greetingsSuccessDeleted": "La greeting à bien été supprimée.",
 
-    "signupSuccess": "Vous avez reçu un email pour valider votre compte."
+    "signupSuccess": "Vous avez reçu un email pour valider votre compte.",
+    "emailVerified": "Votre adresse mail est bien validée"
 }
