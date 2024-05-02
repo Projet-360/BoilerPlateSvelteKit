@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { authStore } from '$stores/authStore';
+	import { authStore } from '$stores/Data/authStore';
 	import { t } from '$UITools/Translations/index';
 	import { logout } from '$api/auth/logoutAPI';
 

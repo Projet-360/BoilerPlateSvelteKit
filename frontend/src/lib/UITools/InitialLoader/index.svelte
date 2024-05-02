@@ -6,7 +6,7 @@
 		setDomLoaded,
 		setFirstLoadComplete,
 		loadingStates
-	} from '$lib/stores/initialLoaderStore';
+	} from '$lib/stores/UX/initialLoaderStore';
 
 	let initalLoader: HTMLElement;
 	let observer: IntersectionObserver;

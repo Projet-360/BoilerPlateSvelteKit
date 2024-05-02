@@ -5,7 +5,7 @@ import client from '$apollo';
 import { LOGIN, LOGOUT, SIGNUP, VERIFY_TOKEN } from '$apollo/User';
 import { goto } from '$app/navigation';
 
-import notificationStore from './notificationStore';
+import notificationStore from '../UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
 // Définition du store d'authentification

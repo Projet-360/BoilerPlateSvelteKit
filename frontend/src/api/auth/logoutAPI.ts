@@ -1,6 +1,6 @@
 import { goto } from '$app/navigation';
-import { authStore } from '$lib/stores/authStore';
-import notificationStore from '$lib/stores/notificationStore.js';
+import { authStore } from '$stores/Data/authStore';
+import notificationStore from '$stores/UX/notificationStore.js';
 import { t } from '$UITools/Translations/index';
 
 export async function logout($t: App.TranslationFunction) {

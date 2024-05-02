@@ -1,6 +1,6 @@
 <script>
 	import { onMount, onDestroy } from 'svelte';
-	import { threeStore } from '$stores/threeStore';
+	import { threeStore } from '$stores/UX/threeStore';
 	import * as THREE from 'three';
 
 	let container;

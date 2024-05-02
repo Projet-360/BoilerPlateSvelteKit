@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { getAllUsers, updateUser } from '$api/auth/adminAPI';
-	import notificationStore from '$stores/notificationStore';
+	import notificationStore from '$stores/UX/notificationStore';
 	import { t } from '$UITools/Translations';
 
 	// Déclaration du type pour les utilisateurs, si vous avez un tel type défini

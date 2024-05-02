@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { setTransitionLoader } from '$stores/transitionLoaderStore';
+	import { setTransitionLoader } from '$stores/UX/transitionLoaderStore';
 	import { t } from '$UITools/Translations/index';
-	import { authStore } from '$stores/authStore';
+	import { authStore } from '$stores/Data/authStore';
 
 	let username = '';
 	let email = '';

@@ -6,8 +6,8 @@
 	const { interpolate } = flubber;
 
 	import bankPath from './bankPath/index';
-	import { shapeStore } from '$lib/stores/shapeStore';
-	import { cursorStore } from '$lib/stores/cursorStore';
+	import { shapeStore } from '$lib/stores/UX/shapeStore';
+	import { cursorStore } from '$lib/stores/UX/cursorStore';
 	import { animateCursor } from './cursorHelpers';
 
 	// Type pour le store cursorStore

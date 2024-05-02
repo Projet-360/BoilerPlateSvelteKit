@@ -2,8 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { t } from '$UITools/Translations/index';
 	import { onMount } from 'svelte';
-	import { setTransitionLoader } from '$stores/transitionLoaderStore';
-	import { authStore } from '$stores/authStore';
+	import { setTransitionLoader } from '$stores/UX/transitionLoaderStore';
+	import { authStore } from '$stores/Data/authStore';
 
 	let email = '';
 	let password = '';

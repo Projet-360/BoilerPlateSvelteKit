@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount, onDestroy } from 'svelte';
-    import { greetingsStore } from '$stores/greetingsStore';
+    import { greetingsStore } from '$stores/Data/greetingsStore';
     import { t } from '$UITools/Translations/index';
 
     let name: string = '';

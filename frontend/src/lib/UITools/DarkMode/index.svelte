@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { localStorageStore } from "$stores/localStorageStore";
+  import { localStorageStore } from "$stores/Data/localStorageStore";
 
   const darkMode = localStorageStore("darkMode", false);
 

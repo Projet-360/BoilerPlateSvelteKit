@@ -1,4 +1,4 @@
-// src/stores/threeStore.js
+// src/stores/UX/threeStore.js
 import { writable } from 'svelte/store';
 import * as THREE from 'three';
 
