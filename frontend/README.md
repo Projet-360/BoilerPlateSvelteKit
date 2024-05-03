@@ -43,8 +43,8 @@ Vous vous demandez pourquoi contribuer à ce projet ? Voici pourquoi :
 
 ## 🌐 Accès Local
 
-- Frontend : [http://localhost:1000](http://localhost:1000)
-- Backend : [http://localhost:2000](http://localhost:2000)
+- Frontend : [https://localhost:1000](https://localhost:1000)
+- Backend : [https://localhost:2000](https://localhost:2000)
 - Mail : [http://localhost:8025](http://localhost:8025)
 
 ## 🎨 Caractéristiques Principales
@@ -119,8 +119,8 @@ VITE_MONGO_LOCAL=mongodb://localhost:27018/BoilerPlateSvelteKitDB
 VITE_DATABASE_NAME=BoilerPlateSvelteKitDB
 VITE_TOKEN_EXPIRY=1
 VITE_URL_FRONT=http://127.0.0.1:1000
-VITE_URL_FRONT_LOCAL=http://localhost:1000
-VITE_URL_BACK=http://localhost:2000
+VITE_URL_FRONT_LOCAL=https://localhost:1000
+VITE_URL_BACK=https://localhost:2000
 VITE_PORT: 2000
 VITE_SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
 VITE_MAIL_HOST=localhost
@@ -137,8 +137,8 @@ MONGO_LOCAL=mongodb://localhost:27018/BoilerPlateSvelteKitDB
 DATABASE_NAME=BoilerPlateSvelteKitDB
 TOKEN_EXPIRY=1
 URL_FRONT=http://127.0.0.1:1000
-URL_FRONT_LOCAL=http://localhost:1000
-URL_BACK=http://localhost:2000
+URL_FRONT_LOCAL=https://localhost:1000
+URL_BACK=https://localhost:2000
 PORT: 2000
 SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
 MAIL_HOST=localhost

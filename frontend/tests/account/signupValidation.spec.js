@@ -26,7 +26,7 @@ test.describe.parallel('Signup Validation Tests', () => {
 	// Create a new page for each test
 	test.beforeEach(async () => {
 		page = await context.newPage();
-		await page.goto('http://localhost:1000/signup', { waitUntil: 'networkidle' });
+		await page.goto('https://localhost:1000/signup', { waitUntil: 'networkidle' });
 	});
 
 	// Clean up after each test

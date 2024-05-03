@@ -43,8 +43,8 @@ Vous vous demandez pourquoi contribuer à ce projet ? Voici pourquoi :
 
 ## 🌐 Accès Local
 
-- Frontend : [http://localhost:1000](http://localhost:1000)
-- Backend : [http://localhost:2000](http://localhost:2000)
+- Frontend : [https://localhost:1000](https://localhost:1000)
+- Backend : [https://localhost:2000](https://localhost:2000)
 - Mail : [http://localhost:8025](http://localhost:8025)
 
 ## 🎨 Caractéristiques Principales
@@ -94,7 +94,7 @@ MONGO_ONLINE=mongodb+srv://pierrefabiendev:NprOwMcUgwl6xonz@mongosveltekit.csddu
 DATABASE_NAME=BoilerPlateSvelteKitDB
 TOKEN_EXPIRY=1
 VERIFICATION_EXPIRY_HOURS=1h
-URL_FRONT_LOCAL=http://localhost:1000
+URL_FRONT_LOCAL=https://localhost:1000
 PORT: 2000
 SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
 MAIL_HOST=localhost

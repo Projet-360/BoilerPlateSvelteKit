@@ -1,16 +1,15 @@
-import { register } from 'node:module';
-import { pathToFileURL } from 'node:url';
-import { register as tsNodeRegister } from 'ts-node';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const tsNode = require('ts-node');
 
 // Configure ts-node
-tsNodeRegister({
-    project: './tsconfig.json', // Path to your tsconfig.json file
-    transpileOnly: true, // for faster builds without type checks
+tsNode.register({
+    project: './tsconfig.json', // Chemin vers votre fichier tsconfig.json
+    transpileOnly: true, // Pour des constructions plus rapides sans vérification de type
     compilerOptions: {
         module: 'ESNext',
         target: 'ES2020'
     }
 });
 
-// Register the module for '.ts' files handling
-register('ts-node/esm', pathToFileURL('./'));
+// Vous pouvez désormais exécuter des fichiers TypeScript qui utilisent des imports ES

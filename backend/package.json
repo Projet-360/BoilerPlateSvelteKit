@@ -8,7 +8,7 @@
     "build": "tsc",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "dev": "concurrently \"npm run dev:node\" \"npm run prettier:watch\"",
-    "dev:node": "cross-env NODE_ENV=dev nodemon --watch \"**/*.ts\" --exec 'node --import ./register.js ./index.ts'",
+    "dev:node": "cross-env NODE_ENV=dev nodemon --watch \"**/*.ts\" --exec 'node --loader ts-node/esm index.ts'",
     "cleardb": "node --loader ts-node/esm clear-db.ts",
     "docs": "typedoc --out docs",
     "format": "prettier --write \"./**/*.ts\"",
@@ -65,6 +65,6 @@
     "prettier": "^3.0.3",
     "ts-node": "^10.9.2",
     "typedoc": "^0.25.2",
-    "typescript": "^5.2.2"
+    "typescript": "^5.4.5"
   }
 }

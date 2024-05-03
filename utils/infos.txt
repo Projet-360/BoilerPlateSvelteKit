@@ -35,8 +35,8 @@
     MailHog:
     https://github.com/mailhog/MailHog/releases/v1.0.0
 
-    Front:  http://localhost:1000
-    Back:   http://localhost:2000
+    Front:  https://localhost:1000
+    Back:   https://localhost:2000
     Mail:   http://localhost:8025
 
 
