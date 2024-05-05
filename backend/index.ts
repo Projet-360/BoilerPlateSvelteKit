@@ -14,7 +14,6 @@ import logger from './services/logger.js';
 import { setupHttpsServer } from './config/https.js';
 
 // Import route modules
-import checkAuthStatusRoutes from './routes/auth/checkAuthStatusRoutes.js';
 import adminRoutes from './routes/auth/adminRoutes.js';
 import userRoutes from './routes/auth/userRoutes.js';
 import forgotRoutes from './routes/auth/forgotRoutes.js';

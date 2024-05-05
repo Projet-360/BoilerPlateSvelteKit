@@ -22,7 +22,7 @@ export async function handle({ event, resolve }) {
 		
 		if (user) {
 			event.locals.user = user;
-			console.log('User est ajouté aux locals:', event.locals.user);
+			//console.log('User est ajouté aux locals:', event.locals.user);
 		}
 	}
 

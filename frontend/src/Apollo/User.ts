@@ -1,6 +1,16 @@
 
 import { gql } from "@apollo/client/core";
 
+export const CHECK_AUTH = gql`
+query CheckAuth {
+    checkAuth {
+      isAuthenticated
+      role
+      userId
+    }
+  }
+`
+
 export const SIGNUP = gql`
   mutation Signup($username: String!, $email: String!, $password: String!) {
       signup(username: $username, email: $email, password: $password) {
@@ -61,15 +71,7 @@ export const UPDATE_USER = gql`
   }
 `;
 
-export const CHECK_AUTH_STATUS = gql`
-query CheckAuthStatus {
-    checkAuth {
-      isAuthenticated
-      role
-      userId
-    }
-  }
-`
+
 
 export const SEND_EMAIL_RESET_PASSWORD = gql`
 mutation SendEmailResetPassword($email: String!) {

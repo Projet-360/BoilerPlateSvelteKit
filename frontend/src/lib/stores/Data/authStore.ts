@@ -1,7 +1,7 @@
 // Importations
 import { writable} from 'svelte/store';
 import client from '$apollo';
-import { CHECK_AUTH_STATUS, LOGIN, LOGOUT, RESET_FORGOT_NEW_PASSWORD, SEND_EMAIL_RESET_PASSWORD, SIGNUP, VERIFY_TOKEN } from '$apollo/User';
+import { CHECK_AUTH, LOGIN, LOGOUT, RESET_FORGOT_NEW_PASSWORD, SEND_EMAIL_RESET_PASSWORD, SIGNUP, VERIFY_TOKEN } from '$apollo/User';
 import { goto } from '$app/navigation';
 import notificationStore from '../UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
@@ -27,9 +27,9 @@ function createAuthStore() {
     async function checkAuth() {
         try {
             const { data } = await client.query({
-                query: CHECK_AUTH_STATUS,
+                query: CHECK_AUTH,
                 fetchPolicy: 'network-only'  // Assurez-vous que cela ne vient pas du cache
-            });            
+            });
             
             if (data && data.checkAuth) {
                 update(state => ({

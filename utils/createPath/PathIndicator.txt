@@ -14,7 +14,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\backend\constants\HTTP_STATUS.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\controllers
 C:\wamp64\www\BoilerPlateSvelteKit\backend\controllers\auth
 C:\wamp64\www\BoilerPlateSvelteKit\backend\controllers\auth\adminController.ts
-C:\wamp64\www\BoilerPlateSvelteKit\backend\controllers\auth\checkAuthStatusController.ts
+C:\wamp64\www\BoilerPlateSvelteKit\backend\controllers\auth\CheckAuthController.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\controllers\auth\forgotController.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\controllers\auth\loginControllers.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\controllers\auth\logoutControllers.ts
@@ -42,7 +42,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\backend\models\UserModel.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\routes
 C:\wamp64\www\BoilerPlateSvelteKit\backend\routes\auth
 C:\wamp64\www\BoilerPlateSvelteKit\backend\routes\auth\adminRoutes.ts
-C:\wamp64\www\BoilerPlateSvelteKit\backend\routes\auth\checkAuthStatusRoutes.ts
+C:\wamp64\www\BoilerPlateSvelteKit\backend\routes\auth\CheckAuthRoutes.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\routes\auth\confirmTokenRoutes.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\routes\auth\forgotRoutes.ts
 C:\wamp64\www\BoilerPlateSvelteKit\backend\routes\auth\loginRoutes.ts
@@ -86,7 +86,7 @@ C:\wamp64\www\BoilerPlateSvelteKit\frontend\src
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\auth
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\auth\adminAPI.ts
-C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\auth\checkAuthStatusAPI.ts
+C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\auth\CheckAuthAPI.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\auth\forgotAPI.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\auth\loginAPI.ts
 C:\wamp64\www\BoilerPlateSvelteKit\frontend\src\api\auth\logoutAPI.ts
