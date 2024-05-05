@@ -175,7 +175,7 @@ export const userResolver = {
       _: any,
       __: any,
       { req, res }: Context,
-    ): Promise<{ success: boolean; message: string }> => {
+    ): Promise<{ message: string }> => {
       try {
         const token = req.cookies.token;
         if (token) {
@@ -183,7 +183,7 @@ export const userResolver = {
           await newBlacklistedToken.save();
 
           res.clearCookie('token');
-          return { success: true, message: 'Déconnexion réussie' };
+          return { message: 'Déconnexion réussie' };
         } else {
           throw new Error('No token provided');
         }

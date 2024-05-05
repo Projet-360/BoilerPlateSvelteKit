@@ -10,15 +10,15 @@ export default function initSocket(server: HttpsServer) {
   });
 
   io.on('connection', (socket) => {
-    logger.info(`New client connected: ${socket.id}`);
+    //logger.info(`New client connected: ${socket.id}`);
 
     socket.on('saveGreetingSocket', () => {
-      logger.info(`Greeting sent from client: ${socket.id}`);
+      //logger.info(`Greeting sent from client: ${socket.id}`);
       io.emit('updateGreetings');
     });
 
     socket.on('deleteGreetingSocket', () => {
-      logger.info(`Greeting deleted from client: ${socket.id}`);
+      //logger.info(`Greeting deleted from client: ${socket.id}`);
       io.emit('updateGreetings');
     });
 

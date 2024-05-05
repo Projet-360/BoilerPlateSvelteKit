@@ -46,10 +46,10 @@ const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req, res }) => {
-    // Ici, tu peux accéder et afficher des informations de débogage si nécessaire
-    console.log('Apollo context accessed');
-    console.log(req.body); // Afficher le corps de la requête pour le débogage
-    console.log(`Request from ${req.ip}`); // Afficher l'IP pour le débogage
+    // // Ici, tu peux accéder et afficher des informations de débogage si nécessaire
+    // console.log('Apollo context accessed');
+    // console.log(req.body); // Afficher le corps de la requête pour le débogage
+    // console.log(`Request from ${req.ip}`); // Afficher l'IP pour le débogage
 
     // Assure-toi que 'io' est correctement initialisé et disponible ici si tu en as besoin
     return { req, res, io }; // Ajoute 'io' si tu utilises Socket.io ou une fonctionnalité similaire

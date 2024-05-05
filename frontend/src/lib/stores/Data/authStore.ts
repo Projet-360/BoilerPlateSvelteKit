@@ -1,6 +1,5 @@
 // Importations
 import { writable} from 'svelte/store';
-import type { Writable } from 'svelte/store';
 import client from '$apollo';
 import { CHECK_AUTH_STATUS, LOGIN, LOGOUT, SIGNUP, VERIFY_TOKEN } from '$apollo/User';
 import { goto } from '$app/navigation';
@@ -24,8 +23,7 @@ function createAuthStore() {
         currentSessionId: undefined,
         sessions: []
     };
-
-
+    
     async function signup(username: string, email: string, password: string, $t: App.TranslationFunction) {
         try {
             const { data } = await client.mutate({
@@ -82,8 +80,7 @@ function createAuthStore() {
             const { data } = await client.mutate({
                 mutation: LOGOUT
             });
-
-            if (data.logout.success) {
+            
                 set({
                     userId: null,
                     role: null,
@@ -93,9 +90,6 @@ function createAuthStore() {
                 });
                 notificationStore.addNotification($t('logout.successLogout'), 'success');
                 goto('/');
-            } else {
-                notificationStore.addNotification(data.logout.message, 'error');
-            }
         } catch (error) {
             console.error("Error during logout:", JSON.stringify(error, null, 2));
             notificationStore.addNotification($t('logout.failedLogout'), 'error');
