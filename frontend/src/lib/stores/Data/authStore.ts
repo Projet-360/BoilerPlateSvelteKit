@@ -44,7 +44,6 @@ function createAuthStore() {
         }
     }
 
-
     async function signup(username: string, email: string, password: string, $t: App.TranslationFunction) {
         try {
             const { data } = await client.mutate({
