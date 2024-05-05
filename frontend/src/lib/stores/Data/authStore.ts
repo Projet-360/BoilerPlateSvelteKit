@@ -24,6 +24,27 @@ function createAuthStore() {
         sessions: []
     };
     
+    async function checkAuth() {
+        try {
+            const { data } = await client.query({
+                query: CHECK_AUTH_STATUS,
+                fetchPolicy: 'network-only'  // Assurez-vous que cela ne vient pas du cache
+            });            
+            
+            if (data && data.checkAuth) {
+                update(state => ({
+                    ...state,
+                    userId: data.checkAuth.userId,
+                    role: data.checkAuth.role,
+                    isAuthenticated:  data.checkAuth.isAuthenticated,
+                }));
+            }
+        } catch (error) {
+            console.error('Error checking authentication:', error);
+        }
+    }
+
+
     async function signup(username: string, email: string, password: string, $t: App.TranslationFunction) {
         try {
             const { data } = await client.mutate({
@@ -95,27 +116,6 @@ function createAuthStore() {
             notificationStore.addNotification($t('logout.failedLogout'), 'error');
         }
     }
-
-    async function checkAuth() {
-        try {
-            const { data } = await client.query({
-                query: CHECK_AUTH_STATUS,
-                fetchPolicy: 'network-only'  // Assurez-vous que cela ne vient pas du cache
-            });            
-            
-            if (data && data.checkAuth) {
-                update(state => ({
-                    ...state,
-                    userId: data.checkAuth.userId,
-                    role: data.checkAuth.role,
-                    isAuthenticated:  data.checkAuth.isAuthenticated,
-                }));
-            }
-        } catch (error) {
-            console.error('Error checking authentication:', error);
-        }
-    }
-
     async function sendEmailResetPassword(email: string, $t: App.TranslationFunction) {   
         try {     
             const { data } = await client.mutate({
@@ -124,13 +124,12 @@ function createAuthStore() {
             });
             console.log(data);
             
-            notificationStore.addNotification($t('data.successSendResetPassword'), 'success');
+            notificationStore.addNotification($t('data.successSendEmailResetPassword'), 'success');
             goto('/');
         } catch (error) {
             console.error('Error checking authentication:', error);
         }
     }
-
 
     async function ResetForgotNewPassword(	
         token: string,
