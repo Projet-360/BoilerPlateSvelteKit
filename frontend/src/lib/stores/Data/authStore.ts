@@ -107,10 +107,7 @@ function createAuthStore() {
             const { data } = await client.query({
                 query: CHECK_AUTH_STATUS,
                 fetchPolicy: 'network-only'  // Assurez-vous que cela ne vient pas du cache
-            });
-
-            console.log('data', data);
-            
+            });            
             
             if (data && data.checkAuth) {
                 update(state => ({

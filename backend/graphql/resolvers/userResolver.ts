@@ -49,10 +49,7 @@ interface IUserGraphql {
 export const userResolver = {
   Query: {
     checkAuth: async (_: any, __: any, { req, res }: Context) => {
-      console.log('entre');
-      console.log('entre 2', req);
       const token = req.cookies.token;
-      console.log('token', token);
       if (!token || token === 'undefined' || token === 'null') {
         return { isAuthenticated: false };
       }
@@ -62,7 +59,6 @@ export const userResolver = {
         res.clearCookie('token');
         return { isAuthenticated: false };
       }
-      console.log('kkkk');
 
       const result = await authService.checkAuthentication(token);
       if (result.isAuthenticated) {
