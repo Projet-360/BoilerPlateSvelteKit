@@ -41,19 +41,21 @@ const io = initSocket(server);
 // Apply middlewares to the app
 applyMiddlewares(app);
 
-// Setup the Apollo Server
+app.use((req: Request, res: Response, next: NextFunction) => {
+  req.apolloContext = { next };
+  next();
+});
+
+// Configuration d'Apollo Server
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req, res }) => {
-    // // Ici, tu peux accéder et afficher des informations de débogage si nécessaire
-    // console.log('Apollo context accessed');
-    // console.log(req.body); // Afficher le corps de la requête pour le débogage
-    // console.log(`Request from ${req.ip}`); // Afficher l'IP pour le débogage
-
-    // Assure-toi que 'io' est correctement initialisé et disponible ici si tu en as besoin
-    return { req, res, io }; // Ajoute 'io' si tu utilises Socket.io ou une fonctionnalité similaire
-  },
+  context: ({ req, res }) => ({
+    req,
+    res,
+    next: req.apolloContext?.next,
+    io, // Assurez-vous que io est correctement initialisé avant
+  }),
 });
 
 // Start the ApolloServer
@@ -65,11 +67,11 @@ apolloServer.start().then(() => {
   app.use('/auth', adminRoutes);
   app.use('/auth', userRoutes);
 
-  app.use('/auth', loginRoutes);
-  app.use('/auth', logoutRoutes);
-  app.use('/auth', confirmTokenRoutes);
+  // app.use('/auth', loginRoutes);
+  // app.use('/auth', logoutRoutes);
+  //app.use('/auth', confirmTokenRoutes);
 
-  app.use('/auth', forgotRoutes);
+  //app.use('/auth', forgotRoutes);
   app.use('/auth', sessionRoutes);
 
   // Error handling middleware

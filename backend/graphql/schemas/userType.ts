@@ -14,6 +14,7 @@ export const userType = gql`
     ): MessageResponse
     login(email: String!, password: String!): LoginResponse
     logout: MessageResponse
+    sendEmailResetPassword(email: String!): MessageResponse
   }
 
   type MessageResponse {

@@ -6,5 +6,6 @@
     "greetingsSuccessDeleted": "La greeting à bien été supprimée.",
 
     "signupSuccess": "Vous avez reçu un email pour valider votre compte.",
-    "emailVerified": "Votre adresse mail est bien validée"
+    "emailTokenVerifiedSuccess": "Votre adresse mail est bien validée",
+    "emailTokenVerifiedFailed": "Votre clé n'est plus valide"
 }

@@ -1,5 +1,6 @@
 // app.d.ts
 import mongoose from 'mongoose';
+import { NextFunction } from 'express';
 
 // Enlevez l'importation mongoose d'ici
 declare global {
@@ -40,5 +41,12 @@ declare global {
       user?: App.IUser;
     }
   }
+
+  namespace Express {
+    interface Request {
+      apolloContext?: {
+        next: NextFunction;
+      };
+    }
+  }
 }
-// Pas besoin d'exporter quoi que ce soit ici

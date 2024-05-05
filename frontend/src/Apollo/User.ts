@@ -74,7 +74,6 @@ query CheckAuthStatus {
 export const SEND_EMAIL_RESET_PASSWORD = gql`
 mutation SendEmailResetPassword($email: String!) {
     sendEmailResetPassword(email: $email) {
-      success
       message
     }
   }
@@ -83,7 +82,6 @@ mutation SendEmailResetPassword($email: String!) {
 export const RESET_FORGOT_NEW_PASSWORD = gql`
 mutation ResetForgotNewPassword($token: String!, $newPassword: String!, $confirmPassword: String!) {
     resetForgotNewPassword(token: $token, newPassword: $newPassword, confirmPassword: $confirmPassword) {
-      success
       message
     }
   }

@@ -1,7 +1,7 @@
 // Importations
 import { writable} from 'svelte/store';
 import client from '$apollo';
-import { CHECK_AUTH_STATUS, LOGIN, LOGOUT, SIGNUP, VERIFY_TOKEN } from '$apollo/User';
+import { CHECK_AUTH_STATUS, LOGIN, LOGOUT, SEND_EMAIL_RESET_PASSWORD, SIGNUP, VERIFY_TOKEN } from '$apollo/User';
 import { goto } from '$app/navigation';
 import notificationStore from '../UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
@@ -43,10 +43,10 @@ function createAuthStore() {
                 variables: { token }
             });
             goto('/');
-            notificationStore.addNotification($t('validation.emailVerified'), 'success');                
+            notificationStore.addNotification($t('data.emailTokenVerifiedSuccess'), 'success');                
         } catch (error) {
             handleErrors(error, $t, 'verifyToken');
-            notificationStore.addNotification($t('validation.emailVerificationFailed'), 'error');
+            notificationStore.addNotification($t('data.emailTokenVerifiedFailed'), 'error');
         }
     }
 
@@ -80,7 +80,7 @@ function createAuthStore() {
             const { data } = await client.mutate({
                 mutation: LOGOUT
             });
-            
+
                 set({
                     userId: null,
                     role: null,
@@ -116,6 +116,21 @@ function createAuthStore() {
         }
     }
 
+    async function sendEmailResetPassword(email: string, $t: App.TranslationFunction) {   
+        try {     
+            const { data } = await client.mutate({
+                mutation: SEND_EMAIL_RESET_PASSWORD,
+                variables: { email}
+            });
+            console.log(data);
+            
+            notificationStore.addNotification($t('data.successSendResetPassword'), 'success');
+            goto('/');
+        } catch (error) {
+            console.error('Error checking authentication:', error);
+        }
+    }
+
     const handleErrors = (error: any, $t: App.TranslationFunction, context: string) => {
         console.error(`Error during ${context}:`, JSON.stringify(error, null, 2));
         messageNotification(error, $t);
@@ -127,7 +142,8 @@ function createAuthStore() {
         verifyToken,
         login,
         logout,
-        checkAuth
+        checkAuth,
+        sendEmailResetPassword
     };
 }
 

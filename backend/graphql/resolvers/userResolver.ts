@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import UAParser from 'ua-parser-js';
 
 import * as authService from '../../services/authService.js';
@@ -6,6 +6,8 @@ import CustomError from '../../errors/CustomError.js';
 import logger from '../../services/logger.js';
 import { Session } from '../../models/sessionModel.js';
 import BlacklistedToken from '../../models/BlacklistedTokenModel.js';
+import { User } from '../../models/UserModel.js';
+import { HTTP_STATUS } from '../../constants/HTTP_STATUS.js';
 
 interface SignupArgs {
   username: string;
@@ -35,15 +37,8 @@ interface LogoutResponse {
 interface Context {
   req: Request;
   res: Response;
+  next: NextFunction;
   io: any;
-}
-
-// Adapter IUser pour matcher avec les types GraphQL si nécessaire
-interface IUserGraphql {
-  id: string;
-  username: string;
-  email: string;
-  role: 'user' | 'admin' | 'moderator' | undefined;
 }
 
 export const userResolver = {
@@ -189,6 +184,35 @@ export const userResolver = {
         }
       } catch (error: any) {
         throw new CustomError('LogoutError', error.message, 400);
+      }
+    },
+    sendEmailResetPassword: async (
+      _: any,
+      { email }: LoginArgs,
+      { req, res, next }: Context,
+    ) => {
+      try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+          return next(new CustomError('USER_NOT_FOUND', 'USER_NOT_FOUND', 404));
+        }
+
+        if (!user.isVerified) {
+          return next(
+            new CustomError('EMAIL_NOT_VERIFIED', 'EMAIL_NOT_VERIFIED', 404),
+          );
+        }
+
+        await authService.requestForgotPassword(user as App.IUser);
+
+        return { message: 'SUCCESS_SEND_EMAIL_RESET_PASSWORD' };
+      } catch (error: any) {
+        logger.error(
+          'Erreur lors de la réinitialisation du mot de passe:',
+          error,
+        );
+        next(new CustomError('ResetPasswordError', error.message, 500));
       }
     },
   },
