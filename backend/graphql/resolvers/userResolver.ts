@@ -23,7 +23,6 @@ interface TokenArgs {
 }
 
 export interface LoginResponse {
-  success: boolean;
   token: string;
   userId: string;
   role?: string; // Change here: Allow role to be undefined
@@ -31,7 +30,6 @@ export interface LoginResponse {
 }
 
 interface LogoutResponse {
-  success: Boolean;
   message: String;
 }
 
@@ -109,6 +107,7 @@ export const userResolver = {
     ): Promise<LoginResponse> => {
       try {
         const loginResult = await authService.login(email, password);
+
         if (!loginResult) {
           throw new CustomError('LoginFailed', 'Login failed', 400);
         }
@@ -141,7 +140,6 @@ export const userResolver = {
         await session.save();
 
         return {
-          success: true,
           token,
           userId: _id.toString(),
           role: role || 'defaultRole', // Default value for role

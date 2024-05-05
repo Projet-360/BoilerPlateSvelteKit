@@ -20,7 +20,6 @@ export const userType = gql`
   }
 
   type LoginResponse {
-    success: Boolean!
     role: String
     userId: String
     sessionId: String

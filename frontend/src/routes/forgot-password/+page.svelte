@@ -2,11 +2,12 @@
 	import { t } from '$UITools/Translations/index';
 
 	import { sendEmailResetPassword } from '$api/auth/forgotAPI';
+	import { authStore } from '$stores/Data/authStore';
 
 	let email = '';
 
 	async function handleResetPassword() {
-		await sendEmailResetPassword(email, $t);
+		await authStore.sendEmailResetPassword(email, $t);
 	}
 </script>
 
