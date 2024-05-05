@@ -18,6 +18,7 @@
 	} from '$lib/stores/UX/initialLoaderStore';
 
 	import { fetchMockData } from '$api/utils/mockService';
+	import { authStore } from '$stores/Data/authStore';
 
 	onNavigate(async (navigation) => {
 		if (!document.startViewTransition) return;
@@ -59,6 +60,8 @@
 		registerServiceWorker();
 		// Détermine le premier chargement de l'application
 		setFirstOpen(true);
+
+		authStore.checkAuth()
 
 		// Test de chargement de ressource au démarrage de l'application
 		const mockData = await fetchMockData();

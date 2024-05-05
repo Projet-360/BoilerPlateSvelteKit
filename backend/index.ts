@@ -61,7 +61,7 @@ apolloServer.start().then(() => {
   // Apply ApolloServer middleware to Express app
   apolloServer.applyMiddleware({ app, path: '/graphql', cors: false });
   // Route definitions
-  app.use('/auth', checkAuthStatusRoutes);
+  //app.use('/auth', checkAuthStatusRoutes);
   app.use('/auth', adminRoutes);
   app.use('/auth', userRoutes);
 

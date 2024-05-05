@@ -2,14 +2,14 @@
 import { writable} from 'svelte/store';
 import type { Writable } from 'svelte/store';
 import client from '$apollo';
-import { LOGIN, LOGOUT, SIGNUP, VERIFY_TOKEN } from '$apollo/User';
+import { CHECK_AUTH_STATUS, LOGIN, LOGOUT, SIGNUP, VERIFY_TOKEN } from '$apollo/User';
 import { goto } from '$app/navigation';
 import notificationStore from '../UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
 // Initialisation du store
 function createAuthStore() {
-    const { subscribe, set } = writable<App.IAuthStore>({
+    const { subscribe, set, update } = writable<App.IAuthStore>({
         userId: null,
         role: null,
         isAuthenticated: false,
@@ -58,7 +58,6 @@ function createAuthStore() {
                 mutation: LOGIN,
                 variables: { email, password }
             });
-            console.log('reponse login', data);
             
             if (data.login && data.login.userId && data.login.role && data.login.sessionId) {
                 set({   
@@ -103,6 +102,29 @@ function createAuthStore() {
         }
     }
 
+    async function checkAuth() {
+        try {
+            const { data } = await client.query({
+                query: CHECK_AUTH_STATUS,
+                fetchPolicy: 'network-only'  // Assurez-vous que cela ne vient pas du cache
+            });
+
+            console.log('data', data);
+            
+            
+            if (data && data.checkAuth) {
+                update(state => ({
+                    ...state,
+                    userId: data.checkAuth.userId,
+                    role: data.checkAuth.role,
+                    isAuthenticated:  data.checkAuth.isAuthenticated,
+                }));
+            }
+        } catch (error) {
+            console.error('Error checking authentication:', error);
+        }
+    }
+
     const handleErrors = (error: any, $t: App.TranslationFunction, context: string) => {
         console.error(`Error during ${context}:`, JSON.stringify(error, null, 2));
         messageNotification(error, $t);
@@ -113,7 +135,8 @@ function createAuthStore() {
         signup,
         verifyToken,
         login,
-        logout
+        logout,
+        checkAuth
     };
 }
 
