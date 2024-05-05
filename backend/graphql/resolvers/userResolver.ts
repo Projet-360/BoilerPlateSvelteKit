@@ -23,7 +23,6 @@ interface TokenArgs {
 }
 
 export interface LoginResponse {
-  token: string;
   userId: string;
   role?: string; // Change here: Allow role to be undefined
   sessionId: string;
@@ -140,7 +139,6 @@ export const userResolver = {
         await session.save();
 
         return {
-          token,
           userId: _id.toString(),
           role: role || 'defaultRole', // Default value for role
           sessionId: session._id.toString(),

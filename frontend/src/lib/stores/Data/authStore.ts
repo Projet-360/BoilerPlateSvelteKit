@@ -58,8 +58,10 @@ function createAuthStore() {
                 mutation: LOGIN,
                 variables: { email, password }
             });
-            if (data.login.success) {
-                set({
+            console.log('reponse login', data);
+            
+            if (data.login && data.login.userId && data.login.role && data.login.sessionId) {
+                set({   
                     userId: data.login.userId,
                     role: data.login.role,
                     isAuthenticated: true,
