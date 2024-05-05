@@ -1,7 +1,7 @@
 
 import { gql } from "@apollo/client/core";
 
-export const CHECK_AUTH = gql`
+export const CHECKAUTH = gql`
 query CheckAuth {
     checkAuth {
       isAuthenticated

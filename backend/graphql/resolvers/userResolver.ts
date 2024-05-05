@@ -61,7 +61,7 @@ export const userResolver = {
         return { isAuthenticated: false };
       }
 
-      const result = await authService.checkAuthentication(token);
+      const result = await authService.checkAuthService(token);
       if (result.isAuthenticated) {
         return {
           isAuthenticated: true,

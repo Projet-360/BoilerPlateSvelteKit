@@ -173,7 +173,7 @@ export const createUser = async (
  * - _id: {string} [Optional] The user's ID.
  * - role: {string} [Optional] The user's role.
  */
-export const checkAuthentication = async (token: string) => {
+export const checkAuthService = async (token: string) => {
   if (!token) {
     logger.info("Le client n'est pas connecté");
     return { isAuthenticated: false };
