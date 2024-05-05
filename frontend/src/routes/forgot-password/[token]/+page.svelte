@@ -4,7 +4,7 @@
 	import { t } from '$UITools/Translations/index';
 	import notificationStore from '$stores/UX/notificationStore';
 
-	import { ResetForgotNewPassword } from '$api/auth/forgotAPI';
+	import { authStore } from '$stores/Data/authStore';
 
 	let newPassword = '';
 	let confirmPassword = '';
@@ -20,7 +20,7 @@
 			return;
 		}
 
-		await ResetForgotNewPassword(token, newPassword, confirmPassword, $t);
+		await authStore.ResetForgotNewPassword(token, newPassword, confirmPassword, $t);
 	}
 </script>
 

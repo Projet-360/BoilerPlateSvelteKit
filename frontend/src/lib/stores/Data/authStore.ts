@@ -1,7 +1,7 @@
 // Importations
 import { writable} from 'svelte/store';
 import client from '$apollo';
-import { CHECK_AUTH_STATUS, LOGIN, LOGOUT, SEND_EMAIL_RESET_PASSWORD, SIGNUP, VERIFY_TOKEN } from '$apollo/User';
+import { CHECK_AUTH_STATUS, LOGIN, LOGOUT, RESET_FORGOT_NEW_PASSWORD, SEND_EMAIL_RESET_PASSWORD, SIGNUP, VERIFY_TOKEN } from '$apollo/User';
 import { goto } from '$app/navigation';
 import notificationStore from '../UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
@@ -131,6 +131,26 @@ function createAuthStore() {
         }
     }
 
+
+    async function ResetForgotNewPassword(	
+        token: string,
+        newPassword: string,
+        confirmPassword: string,
+        $t: App.TranslationFunction) {   
+        try {     
+            const { data } = await client.mutate({
+                mutation: RESET_FORGOT_NEW_PASSWORD,
+                variables: { token, newPassword, confirmPassword}
+            });
+            console.log(data);
+            
+            notificationStore.addNotification($t('data.successSendResetPassword'), 'success');
+            goto('/');
+        } catch (error) {
+            console.error('Error checking authentication:', error);
+        }
+    }
+
     const handleErrors = (error: any, $t: App.TranslationFunction, context: string) => {
         console.error(`Error during ${context}:`, JSON.stringify(error, null, 2));
         messageNotification(error, $t);
@@ -143,7 +163,8 @@ function createAuthStore() {
         login,
         logout,
         checkAuth,
-        sendEmailResetPassword
+        sendEmailResetPassword,
+        ResetForgotNewPassword
     };
 }
 

@@ -41,6 +41,12 @@ interface Context {
   io: any;
 }
 
+interface ResetForgotNewPasswordArgs {
+  token: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
 export const userResolver = {
   Query: {
     checkAuth: async (_: any, __: any, { req, res }: Context) => {
@@ -207,6 +213,53 @@ export const userResolver = {
         await authService.requestForgotPassword(user as App.IUser);
 
         return { message: 'SUCCESS_SEND_EMAIL_RESET_PASSWORD' };
+      } catch (error: any) {
+        logger.error(
+          'Erreur lors de la réinitialisation du mot de passe:',
+          error,
+        );
+        next(new CustomError('ResetPasswordError', error.message, 500));
+      }
+    },
+    resetForgotNewPassword: async (
+      _: any,
+      { token, newPassword, confirmPassword }: ResetForgotNewPasswordArgs,
+      { req, res, next }: Context,
+    ) => {
+      try {
+        // Validation: Check if newPassword and confirmPassword are the same
+        if (newPassword !== confirmPassword) {
+          return next(
+            new CustomError(
+              'FORGOT_PASSWORD_INVALID',
+              'FORGOT_PASSWORD_INVALID',
+              400,
+            ),
+          );
+        }
+
+        // Trouver l'utilisateur avec le token de réinitialisation
+        const user = await User.findOne({
+          resetToken: token,
+          resetTokenExpiration: { $gt: Date.now() },
+        });
+
+        if (!user) {
+          return next(
+            new CustomError(
+              'TOKEN_INVALID_OR_EXPIRED',
+              'TOKEN_INVALID_OR_EXPIRED',
+              400,
+            ),
+          );
+        }
+
+        await authService.requestresetForgotPassword(
+          user as App.IUser,
+          newPassword,
+        );
+
+        return { message: 'SUCCESS_SEND_RESET_PASSWORD' };
       } catch (error: any) {
         logger.error(
           'Erreur lors de la réinitialisation du mot de passe:',
