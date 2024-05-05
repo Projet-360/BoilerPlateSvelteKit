@@ -55,9 +55,9 @@ const generateAndSaveResetToken = async (user: App.IUser) => {
  * @returns {Object} - An object containing the JWT token.
  */
 export const createSignupToken = (user: App.IUser) => {
-  const { _id, username, email, role } = user;
+  const { _id, username, role } = user;
   const token = jwt.sign(
-    { _id, username, email, role },
+    { _id, username, role },
     process.env.SECRETKEY as string,
     {
       expiresIn: process.env.TOKEN_EXPIRY,
@@ -243,7 +243,7 @@ export const login = async (email: string, password: string) => {
 
   // Continue with the rest of your code...
   const token = jwt.sign(
-    { _id: user._id, email: user.email, role: user.role },
+    { _id: user._id, role: user.role },
     process.env.SECRETKEY as string,
     {
       expiresIn: '1h',
