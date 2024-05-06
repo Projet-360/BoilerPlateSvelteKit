@@ -13,9 +13,9 @@ export function GreetingsStore() {
     return {
         subscribe,
         getGreetings: ($t: App.TranslationFunction) => getGreetings($t, set),
-        createGreeting: ($t: App.TranslationFunction, name: string, message: string) => createGreeting(name, message, $t),
-        updateGreeting: ($t: App.TranslationFunction, id: string, name: string, message: string) => updateGreeting(id, name, message, $t, update),
-        deleteGreeting: ($t: App.TranslationFunction, greeting: App.Greeting) => deleteGreeting(greeting, $t, update),
+        createGreeting: (name: string, message: string, $t: App.TranslationFunction) => createGreeting(name, message, $t),
+        updateGreeting: (id: string, name: string, message: string, $t: App.TranslationFunction) => updateGreeting(id, name, message, $t),
+        deleteGreeting: ( greeting: App.Greeting, $t: App.TranslationFunction) => deleteGreeting(greeting, $t),
         setupSocketListeners: () => setupSocketListeners(update)
     };
 }

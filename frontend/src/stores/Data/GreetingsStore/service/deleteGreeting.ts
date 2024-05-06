@@ -4,7 +4,7 @@ import { DELETE_GREETING } from '$apollo/Greetings';
 import notificationStore from '$stores/UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
-export async function deleteGreeting(greeting: App.Greeting, $t: App.TranslationFunction, update: Function) {
+export async function deleteGreeting(greeting: App.Greeting, $t: App.TranslationFunction) {
     try {
         const id = greeting.id || greeting._id;
         await client.mutate({

@@ -4,7 +4,7 @@ import { UPDATE_GREETING } from '$apollo/Greetings';
 import notificationStore from '$stores/UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
-export async function updateGreeting(id: string, name: string, message: string, $t: App.TranslationFunction, update: Function) {
+export async function updateGreeting(id: string, name: string, message: string, $t: App.TranslationFunction) {
     try {
         const { data } = await client.mutate({
             mutation: UPDATE_GREETING,

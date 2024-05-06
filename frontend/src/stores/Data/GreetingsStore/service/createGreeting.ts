@@ -1,10 +1,11 @@
-// createGreeting.ts
 import client from '$apollo';
 import { CREATE_GREETING } from '$apollo/Greetings';
 import notificationStore from '$stores/UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
 export async function createGreeting(name: string, message: string, $t: App.TranslationFunction) {
+    console.log('name', name);
+    console.log('message', message);
     try {
         const { data } = await client.mutate({
             mutation: CREATE_GREETING,
