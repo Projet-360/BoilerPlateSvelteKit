@@ -1,11 +1,10 @@
-// getGreetings.ts
 import client from '$apollo';
-import { GET_GREETINGS } from '$apollo/Greetings';
+import { GETGREETINGS } from '$apollo/Greetings';
 import notificationStore from '$stores/UX/notificationStore';
 
 export async function getGreetings($t: App.TranslationFunction, set: Function) {
     try {
-        const { data } = await client.query({ query: GET_GREETINGS, fetchPolicy: 'network-only' });
+        const { data } = await client.query({ query: GETGREETINGS, fetchPolicy: 'network-only' });
 
         set(data.getGreetings.map((greeting: App.Greeting) => ({
             ...greeting,

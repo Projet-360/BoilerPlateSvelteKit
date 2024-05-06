@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client/core";
 
-export const GET_GREETINGS = gql`
+export const GETGREETINGS = gql`
   query GetGreetings {
     getGreetings {
       id
