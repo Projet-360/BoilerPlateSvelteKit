@@ -7,6 +7,8 @@ query CheckAuth {
       isAuthenticated
       role
       userId
+      username
+      email      
     }
   }
 `
@@ -19,7 +21,7 @@ export const SIGNUP = gql`
     }
 `
 
-export const VERIFY_TOKEN = gql`
+export const VERIFYTOKEN = gql`
   query VerifyToken($token: String!) {
     verifyToken(token: $token) {
       message
@@ -71,9 +73,7 @@ export const UPDATE_USER = gql`
   }
 `;
 
-
-
-export const SEND_EMAIL_RESET_PASSWORD = gql`
+export const SENDEMAILRESETPASSWORD = gql`
 mutation SendEmailResetPassword($email: String!) {
     sendEmailResetPassword(email: $email) {
       message
@@ -81,7 +81,7 @@ mutation SendEmailResetPassword($email: String!) {
   }
 `
 
-export const RESET_FORGOT_NEW_PASSWORD = gql`
+export const RESETFORGOTNEWPASSWORD = gql`
 mutation ResetForgotNewPassword($token: String!, $newPassword: String!, $confirmPassword: String!) {
     resetForgotNewPassword(token: $token, newPassword: $newPassword, confirmPassword: $confirmPassword) {
       message
@@ -132,7 +132,7 @@ mutation ConfirmAccountDeletion($token: String!) {
   }  
 `
 
-export const UPDATE_USER_INFO = gql`
+export const UPDATEUSERINFO = gql`
 mutation UpdateUserInfo($userId: ID!, $userInfo: UpdateUserInfoInput!) {
     updateUserInfo(userId: $userId, userInfo: $userInfo) {
       success

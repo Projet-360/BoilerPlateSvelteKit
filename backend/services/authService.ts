@@ -207,7 +207,9 @@ export const checkAuthService = async (token: string) => {
     isAuthenticated: true,
     token,
     _id: decoded._id,
-    role: user.role, // Ajout du rôle ici
+    role: user.role,
+    name: user.username,
+    email: user.email,
   };
 };
 

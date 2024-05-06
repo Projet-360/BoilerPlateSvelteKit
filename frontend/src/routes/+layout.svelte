@@ -55,6 +55,8 @@
 		});
 	});
 
+	$:console.log($authStore);
+	
 	onMount(async () => {
 		new App();
 		registerServiceWorker();
@@ -63,6 +65,7 @@
 
 		authStore.checkAuth()
 
+		
 		// Test de chargement de ressource au démarrage de l'application
 		const mockData = await fetchMockData();
 		if (mockData) {

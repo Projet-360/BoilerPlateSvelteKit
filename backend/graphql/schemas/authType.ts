@@ -37,5 +37,7 @@ export const authType = gql`
     isAuthenticated: Boolean
     role: String
     userId: String
+    username: String
+    email: String
   }
 `;

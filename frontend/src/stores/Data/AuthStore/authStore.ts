@@ -1,7 +1,7 @@
 // Importations
 import { writable} from 'svelte/store';
 import client from '$apollo';
-import { CHECKAUTH, GETDASHBOARDDATA, LOGIN, LOGOUT, REQUEST_ACCOUNT_DELETION, RESET_FORGOT_NEW_PASSWORD, SEND_EMAIL_RESET_PASSWORD, SIGNUP, UPDATE_USER_INFO, VERIFY_TOKEN } from '$apollo/AuthGQL'; 
+import { CHECKAUTH, GETDASHBOARDDATA, LOGIN, LOGOUT, REQUEST_ACCOUNT_DELETION, RESETFORGOTNEWPASSWORD, SENDEMAILRESETPASSWORD, SIGNUP, UPDATEUSERINFO, VERIFYTOKEN } from '$apollo/AuthGQL'; 
 
 import { goto } from '$app/navigation';
 import notificationStore from '../../UX/notificationStore';
@@ -106,7 +106,7 @@ function createAuthStore() {
     async function verifyToken(token: string, $t: App.TranslationFunction) {
         try {
             const { data } = await client.query({
-                query: VERIFY_TOKEN,
+                query: VERIFYTOKEN,
                 variables: { token }
             });
             goto('/');
@@ -120,7 +120,7 @@ function createAuthStore() {
     async function sendEmailResetPassword(email: string, $t: App.TranslationFunction) {   
         try {     
             const { data } = await client.mutate({
-                mutation: SEND_EMAIL_RESET_PASSWORD,
+                mutation: SENDEMAILRESETPASSWORD,
                 variables: { email}
             });
             console.log(data);
@@ -139,7 +139,7 @@ function createAuthStore() {
         $t: App.TranslationFunction) {   
         try {     
             const { data } = await client.mutate({
-                mutation: RESET_FORGOT_NEW_PASSWORD,
+                mutation: RESETFORGOTNEWPASSWORD,
                 variables: { token, newPassword, confirmPassword}
             });
             console.log(data);
@@ -156,7 +156,7 @@ function createAuthStore() {
         try {
             const headers = new Headers();
             const { data } = await client.mutate({
-                mutation: UPDATE_USER_INFO,
+                mutation: UPDATEUSERINFO,
                 variables: { userInfo }
             });
             console.log(data);
@@ -213,70 +213,69 @@ function createAuthStore() {
     async function confirmAccountDeletion(token: string) {
     }
 
-    
-    async function sessions(req: Request, res: Response) {
-        if (!req.user || !req.user._id) {
-        console.log('Utilisateur non authentifié dans /sessions');
-        return res.status(401).json({ message: 'Utilisateur non authentifié' });
-        }
+//     async function sessions(req: Request, res: Response) {
+//         if (!req.user || !req.user._id) {
+//         console.log('Utilisateur non authentifié dans /sessions');
+//         return res.status(401).json({ message: 'Utilisateur non authentifié' });
+//         }
 
-        try {
-        const sessions = await Session.find({ userId: req.user._id }).exec();
-        console.log('sessions', sessions);
-        res.json(
-            sessions.map((s) => ({
-            id: s._id,
-            userAgent: s.userAgent,
-            browser: s.browser, // Assurez-vous que ces champs existent dans votre modèle
-            os: s.os, // Assurez-vous que ces champs existent dans votre modèle
-            device: s.device, // Assurez-vous que ces champs existent dans votre modèle
-            ip: s.ip,
-            createdAt: s.createdAt,
-            })),
-        );
-        } catch (error) {
-        console.error('Erreur lors de la récupération des sessions', error);
-        res.status(500).json({ message: 'Erreur interne du serveur' });
-        }
-  };
+//         try {
+//         const sessions = await Session.find({ userId: req.user._id }).exec();
+//         console.log('sessions', sessions);
+//         res.json(
+//             sessions.map((s) => ({
+//             id: s._id,
+//             userAgent: s.userAgent,
+//             browser: s.browser, // Assurez-vous que ces champs existent dans votre modèle
+//             os: s.os, // Assurez-vous que ces champs existent dans votre modèle
+//             device: s.device, // Assurez-vous que ces champs existent dans votre modèle
+//             ip: s.ip,
+//             createdAt: s.createdAt,
+//             })),
+//         );
+//         } catch (error) {
+//         console.error('Erreur lors de la récupération des sessions', error);
+//         res.status(500).json({ message: 'Erreur interne du serveur' });
+//         }
+//     };
   
-  async function  sessionID(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ) {
-    const { sessionId } = req.params;
+//   async function  sessionID(
+//     req: Request,
+//     res: Response,
+//     next: NextFunction,
+//   ) {
+//     const { sessionId } = req.params;
   
-    if (!req.user || !req.user._id) {
-      return res.status(401).json({ message: 'Utilisateur non authentifié' });
-    }
+//     if (!req.user || !req.user._id) {
+//       return res.status(401).json({ message: 'Utilisateur non authentifié' });
+//     }
   
-    try {
-      const session = await Session.findOneAndDelete({
-        _id: sessionId,
-        userId: req.user._id,
-      }).exec();
+//     try {
+//       const session = await Session.findOneAndDelete({
+//         _id: sessionId,
+//         userId: req.user._id,
+//       }).exec();
   
-      if (!session) {
-        return res
-          .status(404)
-          .json({ message: 'Session non trouvée ou déjà fermée' });
-      }
+//       if (!session) {
+//         return res
+//           .status(404)
+//           .json({ message: 'Session non trouvée ou déjà fermée' });
+//       }
   
-      // Supposons que le token est stocké dans un cookie nommé 'token'
-      const token = req.cookies.token;
-      if (token) {
-        const newBlacklistedToken = new BlacklistedToken({ token });
-        await newBlacklistedToken.save();
-        res.clearCookie('token');
-      }
+//       // Supposons que le token est stocké dans un cookie nommé 'token'
+//       const token = req.cookies.token;
+//       if (token) {
+//         const newBlacklistedToken = new BlacklistedToken({ token });
+//         await newBlacklistedToken.save();
+//         res.clearCookie('token');
+//       }
   
-      res.json({ message: 'Session fermée avec succès' });
-    } catch (error) {
-      console.error('Erreur lors de la fermeture de la session :', error);
-      return res.status(500).json({ message: 'Erreur interne du serveur' });
-    }
-  };
+//       res.json({ message: 'Session fermée avec succès' });
+//     } catch (error) {
+//       console.error('Erreur lors de la fermeture de la session :', error);
+//       return res.status(500).json({ message: 'Erreur interne du serveur' });
+//     }
+//   };
 
     const handleErrors = (error: any, $t: App.TranslationFunction, context: string) => {
         console.error(`Error during ${context}:`, JSON.stringify(error, null, 2));
@@ -296,8 +295,8 @@ function createAuthStore() {
         getDashboardData,
         requestAccountDeletion,
         confirmAccountDeletion,
-        sessions,
-        sessionID
+        // sessions,
+        // sessionID
     };
 }
 

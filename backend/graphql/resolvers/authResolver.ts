@@ -55,20 +55,19 @@ export const authResolver = {
         throw new CustomError('TokenVerificationError', error.message, 400);
       }
     },
-    getDashboardData: async (_: any, __: any, { req, res }: Context) => {
-      if (!req.user as any) {
-        return res.status(401).json({ message: 'User not authenticated' });
+    getDashboardData: async (_: any, __: any, { req }: Context) => {
+      console.log('req.user', req.user);
+
+      if (!req.user || !req.user.id) {
+        throw new Error('User not authenticated or user ID missing');
       }
 
-      const _id = req.user!._id;
       try {
-        const userInfo = await authService.getUserInfo(_id.toString());
-        console.log(userInfo);
-
-        res.json({ userInfo });
-      } catch (error: any) {
-        console.error(error);
-        res.status(500).json({ message: error.message });
+        const userInfo = await authService.getUserInfo(req.user.id);
+        return { userInfo }; // Ensure this matches your GraphQL schema expectations
+      } catch (error) {
+        console.error('Failed to fetch user info:', error);
+        throw new Error('Failed to fetch user info');
       }
     },
   },
@@ -197,7 +196,7 @@ export const authResolver = {
 
         await authService.requestForgotPassword(user as App.IUser);
 
-        return { message: 'SUCCESS_SEND_EMAIL_RESET_PASSWORD' };
+        return { message: 'SUCCESS_SENDEMAILRESETPASSWORD' };
       } catch (error: any) {
         logger.error(
           'Erreur lors de la réinitialisation du mot de passe:',
