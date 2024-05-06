@@ -1,5 +1,5 @@
 import client from '$apollo';
-import { CREATE_GREETING } from '$apollo/Greetings';
+import { CREATE_GREETING } from '$apollo/GreetingGQL';
 import notificationStore from '$stores/UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 

@@ -1,5 +1,5 @@
 import client from '$apollo';
-import { GETGREETINGS } from '$apollo/Greetings';
+import { GETGREETINGS } from '$apollo/GreetingGQL';
 import notificationStore from '$stores/UX/notificationStore';
 
 export async function getGreetings($t: App.TranslationFunction, set: Function) {

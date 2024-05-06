@@ -1,6 +1,6 @@
 // updateGreeting.ts
 import client from '$apollo';
-import { UPDATE_GREETING } from '$apollo/Greetings';
+import { UPDATE_GREETING } from '$apollo/GreetingGQL';
 import notificationStore from '$stores/UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
