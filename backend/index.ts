@@ -16,11 +16,7 @@ import { setupHttpsServer } from './config/https.js';
 // Import route modules
 import adminRoutes from './routes/auth/adminRoutes.js';
 import userRoutes from './routes/auth/userRoutes.js';
-import forgotRoutes from './routes/auth/forgotRoutes.js';
 import sessionRoutes from './routes/auth/sessionRoutes.js';
-import loginRoutes from './routes/auth/loginRoutes.js';
-import logoutRoutes from './routes/auth/logoutRoutes.js';
-import confirmTokenRoutes from './routes/auth/confirmTokenRoutes.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
