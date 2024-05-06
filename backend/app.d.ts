@@ -34,6 +34,15 @@ declare global {
       ip: string;
       createdAt: Date;
     }
+
+    interface GreetingInput {
+      name: string;
+      message: string;
+    }
+  }
+
+  interface Context {
+    io: any;
   }
 
   namespace Express {
