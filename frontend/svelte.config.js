@@ -50,13 +50,13 @@ export default defineConfig({
 		alias: {
 			// this will match a file
 			$db: 'src/db',
-			$components: 'src/lib/components',
+			$components: 'src/components',
 			$modelNotifications: 'src/api/modelNotifications',
 			$utils: 'src/utils',
 			$stores: 'src/stores',
 			$UITools: 'src/lib/UITools',
 			$language: 'src/language',
-			$three: 'src/lib/components/three',
+			$three: 'src/components/three',
 			$services: 'src/services',
 			$lib: 'src/lib',
 			$api: 'src/api',
