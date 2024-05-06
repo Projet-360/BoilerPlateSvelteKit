@@ -1,10 +1,9 @@
 <script lang="ts">
+	import { authStore } from '$stores/Data/AuthStore/authStore.js';
 	import { hoverable } from '$UITools/Cursor/cursorHelpers.js';
 	import { onMount } from 'svelte';
-	import { getDashboardData, updateUserInfo } from '$api/auth/userAPI';
+
 	import { t } from '$UITools/Translations/index';
-	import { sendEmailResetPassword } from '$api/auth/forgotAPI';
-	import { requestAccountDeletion } from '$api/auth/userAPI';
 	import SessionAccount from '$components/sessionAccount.svelte';
 
 	let userData: App.User;
@@ -16,8 +15,8 @@
 
 	const handleUpdate = async () => {
 		try {
-			await updateUserInfo({ username, email }, $t);
-			const data = await getDashboardData();
+			await authStore.updateUserInfo({ username, email }, $t);
+			const data = await authStore.getDashboardData();
 			userData = data;
 			({ id, username, email, role, isVerified } = userData.userInfo);
 		} catch (error) {
@@ -26,16 +25,16 @@
 	};
 
 	const handlePasswordReset = async () => {
-		await sendEmailResetPassword(email, $t);
+		await authStore.sendEmailResetPassword(email, $t);
 	};
 
 	const DeleteAccount = async (id: string) => {
-		await requestAccountDeletion(id, $t);
+		await authStore.requestAccountDeletion(id, $t);
 	};
 
 	onMount(async () => {
 		try {
-			const data = await getDashboardData();
+			const data = await authStore.getDashboardData();
 			userData = data;
 			({ id, username, email, role, isVerified } = userData.userInfo);
 		} catch (error) {

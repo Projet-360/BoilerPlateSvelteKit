@@ -1,7 +1,7 @@
 // Importations
 import { writable} from 'svelte/store';
 import client from '$apollo';
-import { CHECKAUTH, LOGIN, LOGOUT, RESET_FORGOT_NEW_PASSWORD, SEND_EMAIL_RESET_PASSWORD, SIGNUP, VERIFY_TOKEN } from '$apollo/AuthGQL'; 
+import { CHECKAUTH, GET_DASHBOARD_DATA, LOGIN, LOGOUT, REQUEST_ACCOUNT_DELETION, RESET_FORGOT_NEW_PASSWORD, SEND_EMAIL_RESET_PASSWORD, SIGNUP, UPDATE_USER_INFO, VERIFY_TOKEN } from '$apollo/AuthGQL'; 
 
 import { goto } from '$app/navigation';
 import notificationStore from '../../UX/notificationStore';
@@ -117,7 +117,6 @@ function createAuthStore() {
         }
     }
 
-
     async function sendEmailResetPassword(email: string, $t: App.TranslationFunction) {   
         try {     
             const { data } = await client.mutate({
@@ -152,6 +151,68 @@ function createAuthStore() {
         }
     }
 
+    // USER
+    async function updateUserInfo(userInfo: App.UserInfo, $t: App.TranslationFunction) {
+        try {
+            const headers = new Headers();
+            const { data } = await client.mutate({
+                mutation: UPDATE_USER_INFO,
+                variables: { userInfo }
+            });
+            console.log(data);
+    
+            if (data.success) {
+                notificationStore.addNotification($t('validation.UPDATE_SUCCESS'), 'success');
+    
+                if (data.notification) {
+                    notificationStore.addNotification(data.notification, 'success');
+                    authStore.logout($t);
+                }
+                return data;
+            } else {
+                throw new Error($t('validation.UPDATE_FAILURE'));
+            }
+        } catch (error) {
+            messageNotification(error, $t);
+            throw error;
+        }
+    };
+
+    async function getDashboardData() {
+        try {
+            const headers = new Headers();
+            const { data } = await client.query({
+                query: GET_DASHBOARD_DATA,
+                fetchPolicy: 'network-only'  
+            });
+            return data;
+        } catch (error) {
+            throw error;
+        }
+    }
+    
+
+    async function requestAccountDeletion(id: string, $t: App.TranslationFunction) {
+        try {
+            const headers = new Headers();
+            const { data } = await client.mutate({
+                mutation: REQUEST_ACCOUNT_DELETION,
+                variables: { id }
+            });
+            console.log(data);
+    
+            if (data.success) {
+                notificationStore.addNotification($t('validation.DELETE_ACCOUNT_EMAIL_SENT'), 'success');
+            }
+        } catch (error) {
+            messageNotification(error, $t);
+            throw error;
+        }
+    }
+    
+    async function confirmAccountDeletion(token: string) {
+    }
+
     const handleErrors = (error: any, $t: App.TranslationFunction, context: string) => {
         console.error(`Error during ${context}:`, JSON.stringify(error, null, 2));
         messageNotification(error, $t);
@@ -165,7 +226,10 @@ function createAuthStore() {
         logout,
         checkAuth,
         sendEmailResetPassword,
-        ResetForgotNewPassword
+        ResetForgotNewPassword,
+        updateUserInfo,
+        getDashboardData,
+        requestAccountDeletion
     };
 }
 

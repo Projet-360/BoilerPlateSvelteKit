@@ -3,7 +3,7 @@ import { apiCall } from '$api/utils/apiCall';
 import notificationStore from '$stores/UX/notificationStore';
 
 import { messageNotification } from '$modelNotifications/messageNotification';
-import { logout } from '$api/auth/logoutAPI.js';
+import { authStore } from '$stores/Data/AuthStore/authStore';
 
 export async function getDashboardData() {
 	try {
@@ -54,7 +54,7 @@ export const updateUserInfo = async (userInfo: App.UserInfo, $t: App.Translation
 
 			if (data.notification) {
 				notificationStore.addNotification(data.notification, 'success');
-				logout($t);
+				authStore.logout($t);
 			}
 			return data;
 		} else {

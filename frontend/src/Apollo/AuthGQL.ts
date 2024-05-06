@@ -103,7 +103,6 @@ query GetUserSessions {
 export const CLOSE_USER_SESSION = gql`
 mutation CloseUserSession($sessionId: ID!) {
     closeUserSession(sessionId: $sessionId) {
-      success
       message
     }
   }
@@ -112,8 +111,7 @@ mutation CloseUserSession($sessionId: ID!) {
 export const GET_DASHBOARD_DATA = gql`
 query GetDashboardData {
     dashboardData {
-      stats
-      recentActivities
+      message
     }
   }
 `
@@ -121,7 +119,6 @@ query GetDashboardData {
 export const REQUEST_ACCOUNT_DELETION = gql`
 mutation RequestAccountDeletion($userId: ID!) {
     requestAccountDeletion(userId: $userId) {
-      success
       message
     }
   }
@@ -130,7 +127,6 @@ mutation RequestAccountDeletion($userId: ID!) {
 export const CONFIRM_ACCOUNT_DELETION = gql`
 mutation ConfirmAccountDeletion($token: String!) {
     confirmAccountDeletion(token: $token) {
-      success
       message
     }
   }  

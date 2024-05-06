@@ -14,9 +14,9 @@ import logger from './services/logger.js';
 import { setupHttpsServer } from './config/https.js';
 
 // Import route modules
-import adminRoutes from './routes/auth/adminRoutes.js';
-import userRoutes from './routes/auth/userRoutes.js';
-import sessionRoutes from './routes/auth/sessionRoutes.js';
+// import adminRoutes from './routes/auth/adminRoutes.js';
+// import userRoutes from './routes/auth/userRoutes.js';
+// import sessionRoutes from './routes/auth/sessionRoutes.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -58,11 +58,11 @@ apolloServer.start().then(() => {
   // Apply ApolloServer middleware to Express app
   apolloServer.applyMiddleware({ app, path: '/graphql', cors: false });
 
-  app.use('/auth', adminRoutes);
-  app.use('/auth', userRoutes);
+  // app.use('/auth', adminRoutes);
+  // app.use('/auth', userRoutes);
 
-  //app.use('/auth', forgotRoutes);
-  app.use('/auth', sessionRoutes);
+  // //app.use('/auth', forgotRoutes);
+  // app.use('/auth', sessionRoutes);
 
   // Error handling middleware
   app.use((err: any, req: Request, res: Response, next: NextFunction) => {
