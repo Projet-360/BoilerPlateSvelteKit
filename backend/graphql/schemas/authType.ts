@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const userType = gql`
+export const authType = gql`
   type Query {
     verifyToken(token: String!): MessageResponse
     checkAuth: CheckAuth

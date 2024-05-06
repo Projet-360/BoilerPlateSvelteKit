@@ -1,4 +1,4 @@
 import { greetingType } from './greetingType.js';
-import { userType } from './userType.js';
+import { authType } from './authType.js';
 
-export const typeDefs = [greetingType, userType];
+export const typeDefs = [greetingType, authType];

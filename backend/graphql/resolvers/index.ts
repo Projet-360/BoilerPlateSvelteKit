@@ -1,4 +1,4 @@
 import { greetingResolver } from './Greetings/greetingResolver.js';
-import { userResolver } from './userResolver.js';
+import { authResolver } from './authResolver.js';
 
-export const resolvers = [greetingResolver, userResolver];
+export const resolvers = [greetingResolver, authResolver];

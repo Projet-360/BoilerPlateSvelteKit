@@ -16,7 +16,7 @@ interface Context {
   io: any;
 }
 
-export const userResolver = {
+export const authResolver = {
   Query: {
     checkAuth: async (_: any, __: any, { req, res }: Context) => {
       const token = req.cookies.token;
