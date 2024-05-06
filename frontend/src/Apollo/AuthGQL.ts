@@ -108,9 +108,9 @@ mutation CloseUserSession($sessionId: ID!) {
   }
 `
 
-export const GET_DASHBOARD_DATA = gql`
+export const GETDASHBOARDDATA = gql`
 query GetDashboardData {
-    dashboardData {
+    getDashboardData {
       message
     }
   }

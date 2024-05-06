@@ -55,6 +55,22 @@ export const authResolver = {
         throw new CustomError('TokenVerificationError', error.message, 400);
       }
     },
+    getDashboardData: async (_: any, __: any, { req, res }: Context) => {
+      if (!req.user as any) {
+        return res.status(401).json({ message: 'User not authenticated' });
+      }
+
+      const _id = req.user!._id;
+      try {
+        const userInfo = await authService.getUserInfo(_id.toString());
+        console.log(userInfo);
+
+        res.json({ userInfo });
+      } catch (error: any) {
+        console.error(error);
+        res.status(500).json({ message: error.message });
+      }
+    },
   },
   Mutation: {
     signup: async (
