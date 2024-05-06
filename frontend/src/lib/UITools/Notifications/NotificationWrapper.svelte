@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Notification from '$UITools/Notifications/Notification.svelte';
-	import notificationStore from '$lib/stores/UX/notificationStore';
+	import notificationStore from '$stores/UX/notificationStore';
 </script>
 
 <div class="notification-wrapper">

@@ -30,10 +30,6 @@ export interface LoginResponse {
   sessionId: string;
 }
 
-interface LogoutResponse {
-  message: String;
-}
-
 interface Context {
   req: Request;
   res: Response;

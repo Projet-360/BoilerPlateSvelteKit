@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { windowStore } from '$lib/stores/UX/windowStore';
-	import smoothScrollStore from '$lib/stores/UX/scrollStore';
+	import { windowStore } from '$stores/UX/windowStore';
+	import smoothScrollStore from '$stores/UX/scrollStore';
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/dist/ScrollTrigger';
 	import Scrollbar from 'smooth-scrollbar';

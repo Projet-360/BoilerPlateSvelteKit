@@ -1,6 +1,6 @@
 import { apiCall } from '$api/utils/apiCall';
 
-import notificationStore from '$lib/stores/UX/notificationStore';
+import notificationStore from '$stores/UX/notificationStore';
 
 import { messageNotification } from '$modelNotifications/messageNotification';
 import { logout } from '$api/auth/logoutAPI.js';

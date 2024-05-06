@@ -57,20 +57,6 @@ function createAuthStore() {
         }
     }
 
-    async function verifyToken(token: string, $t: App.TranslationFunction) {
-        try {
-            const { data } = await client.query({
-                query: VERIFY_TOKEN,
-                variables: { token }
-            });
-            goto('/');
-            notificationStore.addNotification($t('data.emailTokenVerifiedSuccess'), 'success');                
-        } catch (error) {
-            handleErrors(error, $t, 'verifyToken');
-            notificationStore.addNotification($t('data.emailTokenVerifiedFailed'), 'error');
-        }
-    }
-
     async function login(email: string, password: string, $t: App.TranslationFunction) {
         try {
             const { data } = await client.mutate({
@@ -115,7 +101,23 @@ function createAuthStore() {
             console.error("Error during logout:", JSON.stringify(error, null, 2));
             notificationStore.addNotification($t('logout.failedLogout'), 'error');
         }
+    }    
+
+    async function verifyToken(token: string, $t: App.TranslationFunction) {
+        try {
+            const { data } = await client.query({
+                query: VERIFY_TOKEN,
+                variables: { token }
+            });
+            goto('/');
+            notificationStore.addNotification($t('data.emailTokenVerifiedSuccess'), 'success');                
+        } catch (error) {
+            handleErrors(error, $t, 'verifyToken');
+            notificationStore.addNotification($t('data.emailTokenVerifiedFailed'), 'error');
+        }
     }
+
+
     async function sendEmailResetPassword(email: string, $t: App.TranslationFunction) {   
         try {     
             const { data } = await client.mutate({

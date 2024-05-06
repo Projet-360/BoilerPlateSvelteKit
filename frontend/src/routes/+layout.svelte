@@ -15,7 +15,7 @@
 		loadingStates,
 		setFirstOpen,
 		setRessourceToValide
-	} from '$lib/stores/UX/initialLoaderStore';
+	} from '$stores/UX/initialLoaderStore';
 
 	import { fetchMockData } from '$api/utils/mockService';
 	import { authStore } from '$stores/Data/authStore';

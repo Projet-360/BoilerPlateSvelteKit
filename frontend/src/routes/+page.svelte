@@ -8,10 +8,10 @@
 
 	import Greetings from '$components/Greetings.svelte';
 	import Slider from '$components/Slider.svelte';
-	import { setTransitionLoader } from '$lib/stores/UX/transitionLoaderStore';
+	import { setTransitionLoader } from '$stores/UX/transitionLoaderStore';
 	import { fetchMockData } from '$api/utils/mockService';
 	import { enter, exit } from './transition';
-	import { isAnimatingOut } from '$lib/stores/UX/isAnimating';
+	import { isAnimatingOut } from '$stores/UX/isAnimating';
 	import { onNavigate } from '$app/navigation';
 
 	const linkUrl: string = 'https://kit.svelte.dev';
