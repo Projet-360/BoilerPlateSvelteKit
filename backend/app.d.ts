@@ -35,14 +35,51 @@ declare global {
       createdAt: Date;
     }
 
+    interface Context {
+      req: Request;
+      res: Response;
+      next: NextFunction;
+      io: any;
+    }
+
+    interface SignupArgs {
+      username: string;
+      email: string;
+      password: string;
+    }
+
+    interface LoginArgs {
+      email: string;
+      password: string;
+    }
+
+    interface TokenArgs {
+      token: string;
+    }
+
     interface GreetingInput {
       name: string;
       message: string;
     }
-  }
 
-  interface Context {
-    io: any;
+    export interface LoginResponse {
+      userId: string;
+      role?: string; // Change here: Allow role to be undefined
+      sessionId: string;
+    }
+
+    interface Context {
+      req: Request;
+      res: Response;
+      next: NextFunction;
+      io: any;
+    }
+
+    interface ResetForgotNewPasswordArgs {
+      token: string;
+      newPassword: string;
+      confirmPassword: string;
+    }
   }
 
   namespace Express {

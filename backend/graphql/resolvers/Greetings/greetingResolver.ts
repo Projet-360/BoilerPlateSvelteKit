@@ -20,7 +20,7 @@ export const greetingResolver = {
     createGreeting: async (
       _: any,
       { name, message }: App.GreetingInput,
-      context: Context,
+      context: App.Context,
     ) => {
       try {
         const newGreeting = new Greeting({ name, message });
@@ -36,7 +36,7 @@ export const greetingResolver = {
     updateGreeting: async (
       _: any,
       { id, name, message }: { id: string; name: string; message: string },
-      context: Context,
+      context: App.Context,
     ) => {
       console.log('update');
       const result = await Greeting.findByIdAndUpdate(
@@ -51,7 +51,7 @@ export const greetingResolver = {
     deleteGreeting: async (
       _: any,
       { id }: { id: string },
-      context: Context,
+      context: App.Context,
     ) => {
       await Greeting.findByIdAndRemove(id);
       pubsub.publish(GREETING_DELETED, { greetingDeleted: id });

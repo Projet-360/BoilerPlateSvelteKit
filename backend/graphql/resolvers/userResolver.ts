@@ -9,38 +9,11 @@ import BlacklistedToken from '../../models/BlacklistedTokenModel.js';
 import { User } from '../../models/UserModel.js';
 import { HTTP_STATUS } from '../../constants/HTTP_STATUS.js';
 
-interface SignupArgs {
-  username: string;
-  email: string;
-  password: string;
-}
-
-interface LoginArgs {
-  email: string;
-  password: string;
-}
-
-interface TokenArgs {
-  token: string;
-}
-
-export interface LoginResponse {
-  userId: string;
-  role?: string; // Change here: Allow role to be undefined
-  sessionId: string;
-}
-
 interface Context {
   req: Request;
   res: Response;
   next: NextFunction;
   io: any;
-}
-
-interface ResetForgotNewPasswordArgs {
-  token: string;
-  newPassword: string;
-  confirmPassword: string;
 }
 
 export const userResolver = {
@@ -68,7 +41,7 @@ export const userResolver = {
         return { isAuthenticated: false };
       }
     },
-    verifyToken: async (_: any, { token }: TokenArgs, context: Context) => {
+    verifyToken: async (_: any, { token }: App.TokenArgs, context: Context) => {
       try {
         const verified = await authService.verifyToken(token);
 
@@ -86,7 +59,7 @@ export const userResolver = {
   Mutation: {
     signup: async (
       _: any,
-      { username, email, password }: SignupArgs,
+      { username, email, password }: App.SignupArgs,
       context: Context,
     ) => {
       try {
@@ -121,9 +94,9 @@ export const userResolver = {
     },
     login: async (
       _: any,
-      { email, password }: LoginArgs,
+      { email, password }: App.LoginArgs,
       { req, res }: Context,
-    ): Promise<LoginResponse> => {
+    ): Promise<App.LoginResponse> => {
       try {
         const loginResult = await authService.login(email, password);
 
@@ -190,7 +163,7 @@ export const userResolver = {
     },
     sendEmailResetPassword: async (
       _: any,
-      { email }: LoginArgs,
+      { email }: App.LoginArgs,
       { req, res, next }: Context,
     ) => {
       try {
@@ -219,7 +192,7 @@ export const userResolver = {
     },
     resetForgotNewPassword: async (
       _: any,
-      { token, newPassword, confirmPassword }: ResetForgotNewPasswordArgs,
+      { token, newPassword, confirmPassword }: App.ResetForgotNewPasswordArgs,
       { req, res, next }: Context,
     ) => {
       try {
