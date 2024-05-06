@@ -1,5 +1,5 @@
 import { PubSub } from 'graphql-subscriptions';
-import Greeting from './../../models/GreetingModel.js';
+import Greeting from '../../../models/GreetingModel.js';
 
 const pubsub = new PubSub();
 

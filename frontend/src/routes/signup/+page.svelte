@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { setTransitionLoader } from '$stores/UX/transitionLoaderStore';
 	import { t } from '$UITools/Translations/index';
-	import { authStore } from '$stores/Data/authStore';
+	import { authStore } from '$stores/Data/AuthStore/authStore.js';
 
 	let username = '';
 	let email = '';

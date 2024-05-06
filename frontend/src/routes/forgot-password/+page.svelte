@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { t } from '$UITools/Translations/index';
-	import { authStore } from '$stores/Data/authStore';
+	import { authStore } from '$stores/Data/AuthStore/authStore.js';
 
 	let email = '';
 

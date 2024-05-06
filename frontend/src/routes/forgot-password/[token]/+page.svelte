@@ -4,7 +4,7 @@
 	import { t } from '$UITools/Translations/index';
 	import notificationStore from '$stores/UX/notificationStore';
 
-	import { authStore } from '$stores/Data/authStore';
+	import { authStore } from '$stores/Data/AuthStore/authStore.js';
 
 	let newPassword = '';
 	let confirmPassword = '';

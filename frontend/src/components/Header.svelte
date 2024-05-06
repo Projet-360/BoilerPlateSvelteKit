@@ -3,7 +3,7 @@
 	import DarkMode from '$UITools/DarkMode/index.svelte';
 	import { t, locale, locales } from '$UITools/Translations/index';
 
-	import { authStore } from '$stores/Data/authStore';
+	import { authStore } from '$stores/Data/AuthStore/authStore.js';
 	import Logout from './Logout.svelte';
 	import FullScreen from './FullScreen.svelte';
 

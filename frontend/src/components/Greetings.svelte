@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount, onDestroy } from 'svelte';
-    import { greetingsStore } from '$stores/Data/greetingsStore';
+    import { greetingsStore } from '$stores/Data/GreetingsStore/greetingsStore';
     import { t } from '$UITools/Translations/index';
 
     let name: string = '';
@@ -8,7 +8,7 @@
     let id: string | null = null;
 
     onMount(() => {
-        greetingsStore.loadInitialGreetings($t);
+        greetingsStore.getGreetings($t);
     });
 
     const cleanup = greetingsStore.setupSocketListeners();
@@ -23,7 +23,7 @@
         if (id) {
             await greetingsStore.updateGreeting(id, name, message, $t);
         } else {
-            await greetingsStore.addGreeting(name, message, $t);
+            await greetingsStore.createGreeting(name, message, $t);
         }
         clearForm();
     }

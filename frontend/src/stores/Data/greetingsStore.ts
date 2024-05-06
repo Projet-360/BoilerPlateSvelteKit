@@ -10,7 +10,7 @@ import { messageNotification } from '$modelNotifications/messageNotification';
 export function GreetingsStore() {
     const { subscribe, set, update }: Writable<App.Greeting[]> = writable<App.Greeting[]>([]);
 
-	async function loadInitialGreetings($t: App.TranslationFunction) {
+	async function getGreetings($t: App.TranslationFunction) {
 		try {
 			const { data } = await client.query({ query: GET_GREETINGS, fetchPolicy: 'network-only' });
 
@@ -65,7 +65,7 @@ export function GreetingsStore() {
         };
     }
 
-    async function addGreeting(name: string, message: string, $t: App.TranslationFunction) {
+    async function createGreeting(name: string, message: string, $t: App.TranslationFunction) {
         try {
             const { data } = await client.mutate({
                 mutation: CREATE_GREETING,
@@ -112,8 +112,8 @@ export function GreetingsStore() {
 
     return {
         subscribe,
-        loadInitialGreetings, 
-        addGreeting,
+        getGreetings, 
+        createGreeting,
         updateGreeting,
         deleteGreeting,
         setupSocketListeners

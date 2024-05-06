@@ -2,7 +2,7 @@ import { apiCall } from '$api/utils/apiCall';
 
 import { handleRoleRedirection } from '$api/utils/handleRoleRedirection';
 
-import { authStore } from '$stores/Data/authStore';
+import { authStore } from '$stores/Data/AuthStore/authStore.js';
 
 import notificationStore from '$stores/UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';

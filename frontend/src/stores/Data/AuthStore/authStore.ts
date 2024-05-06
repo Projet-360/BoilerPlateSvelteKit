@@ -4,7 +4,7 @@ import client from '$apollo';
 import { CHECKAUTH, LOGIN, LOGOUT, RESET_FORGOT_NEW_PASSWORD, SEND_EMAIL_RESET_PASSWORD, SIGNUP, VERIFY_TOKEN } from '$apollo/Auth'; 
 
 import { goto } from '$app/navigation';
-import notificationStore from '../UX/notificationStore';
+import notificationStore from '../../UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
 
 // Initialisation du store

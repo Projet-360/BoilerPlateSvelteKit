@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { authStore } from '$stores/Data/authStore';
+	import { authStore } from '$stores/Data/AuthStore/authStore.js';
 	import { t } from '$UITools/Translations/index';
 
 	let isAuthenticated: boolean;

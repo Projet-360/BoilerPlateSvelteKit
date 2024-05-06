@@ -18,7 +18,7 @@
 	} from '$stores/UX/initialLoaderStore';
 
 	import { fetchMockData } from '$api/utils/mockService';
-	import { authStore } from '$stores/Data/authStore';
+	import { authStore } from '$stores/Data/AuthStore/authStore.js';
 
 	onNavigate(async (navigation) => {
 		if (!document.startViewTransition) return;
