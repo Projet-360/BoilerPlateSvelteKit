@@ -1,7 +1,7 @@
 // validators.js
 
 import { ValidationChain, check } from 'express-validator';
-import { messageReturn } from '../constants/errorMessages.js';
+import { messageReturn } from '../../constants/errorMessages.js';
 
 export const usernameValidators = [
   check('variables.username')

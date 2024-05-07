@@ -15,8 +15,8 @@ export function graphqlValidationMiddleware(
   next: NextFunction,
 ) {
   const operationName = req.body.operationName;
-  // console.log(operationName);
-  // console.log('Received variables:', req.body.variables);
+  console.log(operationName);
+  console.log('Received variables:', req.body.variables);
 
   let validators;
   switch (operationName) {
