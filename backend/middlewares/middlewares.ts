@@ -8,7 +8,7 @@ import corsConfig from '../config/corsConfig.js';
 import errorHandler from './errorHandler.js';
 import checkBlacklist from './checkBlacklist.js';
 import { graphqlValidationMiddleware } from './validations/index.js';
-import { graphLimiterMiddleware } from './graphLimiterMiddleware.js';
+import { graphQLMiddleware } from './graphQLMiddleware.js';
 
 // Apply middlewares
 export default (app: Application) => {
@@ -28,10 +28,10 @@ export default (app: Application) => {
   app.use(checkBlacklist);
   //console.log('Blacklist Check Applied');
 
-  app.use('/graphql', graphLimiterMiddleware);
+  app.use('/graphql', graphQLMiddleware);
 
   //console.log('Applying GraphQL Validation Middleware');
-  app.use('/graphql', graphqlValidationMiddleware);
+  //app.use('/graphql', graphqlValidationMiddleware);
   //console.log('GraphQL Validation Middleware Applied');
 
   //console.log('Applying Error Handler');

@@ -13,11 +13,6 @@ import applyMiddlewares from './middlewares/middlewares.js'; // Application midd
 import logger from './services/logger.js';
 import { setupHttpsServer } from './config/https.js';
 
-// Import route modules
-// import adminRoutes from './routes/auth/adminRoutes.js';
-// import userRoutes from './routes/auth/userRoutes.js';
-// import sessionRoutes from './routes/auth/sessionRoutes.js';
-
 import dotenv from 'dotenv';
 dotenv.config();
 

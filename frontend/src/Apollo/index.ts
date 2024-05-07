@@ -1,22 +1,30 @@
-import {
-    ApolloClient,
-    InMemoryCache,
-    HttpLink,
-    gql
-} from '@apollo/client/core/index.js'; // Importation correcte des modules Apollo Client
+import { ApolloClient, InMemoryCache, HttpLink, ApolloLink } from '@apollo/client/core/index.js';
+import { onError } from '@apollo/client/link/error';
+import type { ErrorResponse } from '@apollo/client/link/error';
 
-
-// Configuration de HttpLink avec credentials inclus
 const httpLink = new HttpLink({
     uri: 'https://localhost:2000/graphql',
-    credentials: 'include',
+    credentials: 'include', // Inclure les cookies pour les requêtes cross-origin
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    }
 });
 
-// Création du client Apollo avec le lien HTTP configuré
+const errorLink = onError(({ graphQLErrors, networkError, response }: ErrorResponse) => {
+    if (graphQLErrors) {
+        graphQLErrors.forEach(({ message, locations, path }) => {
+            console.error(`[GraphQL error]: Message: ${message}, Location: ${locations?.map(l => `${l.line}:${l.column}`).join(', ')}, Path: ${path}`);
+        });
+    }
+    if (networkError) {
+        console.error(`[Network error]: ${networkError}`);
+    }
+});
+
 const client = new ApolloClient({
-    link: httpLink,
+    link: ApolloLink.from([errorLink, httpLink]),
     cache: new InMemoryCache()
 });
 
 export default client;
-export { gql };
