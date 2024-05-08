@@ -133,23 +133,42 @@ export const authResolver = {
         const { token, _id, role } = loginResult;
         authService.setAuthCookie(res, process.env.TOKEN_NAME as string, token);
 
-        const userData = authService.getUserInfo(_id);
+        const userData = await authService.getUserInfo(_id);
 
         const sessionData = {
           userId: _id.toString(),
           ...fingerPrint,
         };
 
-        const session = new Session(sessionData);
-        await session.save();
+        // Vérifier si une session avec les mêmes données existe déjà
+        const existingSession = await Session.findOne({
+          userId: sessionData.userId,
+          userAgent: sessionData.userAgent,
+          screenResolution: sessionData.screenResolution,
+          timezone: sessionData.timezone,
+          webglVendor: sessionData.webglVendor,
+          webglRenderer: sessionData.webglRenderer,
+          canvasFingerprint: sessionData.canvasFingerprint,
+        });
+
+        let sessionId;
+        if (existingSession) {
+          // Utiliser l'ID de la session existante
+          sessionId = existingSession._id.toString();
+        } else {
+          // Créer et enregistrer une nouvelle session si elle n'existe pas déjà
+          const session = new Session(sessionData);
+          await session.save();
+          sessionId = session._id.toString();
+        }
 
         return {
           userId: _id.toString(),
-          role: role || 'defaultRole', // Default value for role
-          sessionId: session._id.toString(),
+          role: role || 'defaultRole', // Valeur par défaut pour le rôle
+          sessionId: sessionId,
           userData: {
-            username: (await userData).username,
-            email: (await userData).email,
+            username: userData.username,
+            email: userData.email,
           },
         };
       } catch (error: any) {

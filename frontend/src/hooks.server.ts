@@ -14,7 +14,7 @@ async function verifyToken(token: string) {
 }
 
 export async function handle({ event, resolve }) {
-	const cookies = event.cookies.get('token');
+	const cookies = event.cookies.get(process.env.TOKEN_NAME as string);
 	console.log('cookie from hook', cookies);
 
 	if (cookies) {

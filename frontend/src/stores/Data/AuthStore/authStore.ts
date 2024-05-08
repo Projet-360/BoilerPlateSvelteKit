@@ -95,8 +95,8 @@ function createAuthStore() {
                         email: data.login.userData.email,
                     }
                 });
-                handleRoleRedirection(data.login.role)
                 notificationStore.addNotification($t('validation.SUCCESS_LOGIN'), 'success');
+                handleRoleRedirection(data.login.role)
             } else {
                 notificationStore.addNotification($t('validation.FAIL_LOGIN'), 'error');
             }

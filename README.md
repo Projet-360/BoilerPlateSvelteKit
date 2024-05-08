@@ -88,6 +88,11 @@ Merci d'avoir pris le temps de lire ce README. J'attends vos retours avec impati
 env front: 
 VITE_URL_BACK=https://localhost:2000
 VITE_SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
+KEYPATH=C:/Web/Boilerplate/backend/SSL/localhost-key.pem
+CERTPATH=C:/Web/Boilerplate/backend/SSL/localhost.pem
+TOKEN_NAME=tokenNameVAR
+
+
 
 back:
 MONGO_ONLINE=mongodb+srv://pierrefabiendev:NprOwMcUgwl6xonz@mongosveltekit.csdduve.mongodb.net/
@@ -95,6 +100,7 @@ DATABASE_NAME=BoilerPlateSvelteKitDB
 TOKEN_EXPIRY=1
 VERIFICATION_EXPIRY_HOURS=1h
 URL_FRONT_LOCAL=https://localhost:1000
+URL_FRONT=https://exemple.com
 PORT: 2000
 SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj
 MAIL_HOST=localhost
@@ -105,6 +111,7 @@ MAIL_SERVER=no_reply@SvelteKit.com
 NODE_ENV=dev
 KEYPATH=C:/Web/Boilerplate/backend/SSL/localhost-key.pem
 CERTPATH=C:/Web/Boilerplate/backend/SSL/localhost.pem
+TOKEN_NAME=tokenNameVAR
 
 A FAIRE:
 intégrer 0Auth
