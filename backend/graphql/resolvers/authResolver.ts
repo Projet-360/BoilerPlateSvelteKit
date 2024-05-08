@@ -31,11 +31,17 @@ export const authResolver = {
       }
 
       const result = await authService.checkAuthService(token);
+      console.log(result);
+
       if (result.isAuthenticated) {
         return {
           isAuthenticated: true,
           userId: result._id,
           role: result.role,
+          userData: {
+            username: result.name,
+            email: result.email,
+          },
         };
       } else {
         return { isAuthenticated: false };

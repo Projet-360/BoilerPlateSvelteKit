@@ -15,20 +15,18 @@ declare namespace App {
 		lastActive: Date;
 	}
 
-	export interface IAuthStore {
-		userId: string | null;
-		role: string | null;
-		isAuthenticated: boolean;
-		sessionId?: string;
+	export interface userData {
+		username: string | null;
+		email: string | null;
 	}
 
-	// Mettez à jour votre interface IAuthStore pour inclure les détails de session
 	export interface IAuthStore {
 		userId: string | null;
 		role: string | null;
 		isAuthenticated: boolean;
 		currentSessionId?: string; // L'identifiant de la session actuelle
 		sessions?: Session[]; // Une liste de toutes les sessions actives de l'utilisateur
+		userData: userData;
 	}
 
 	interface UserInfo {

@@ -33,11 +33,15 @@ export const authType = gql`
     sessionId: String
   }
 
+  type UserData {
+    username: String
+    email: String
+  }
+
   type CheckAuth {
     isAuthenticated: Boolean
     role: String
     userId: String
-    username: String
-    email: String
+    userData: UserData
   }
 `;

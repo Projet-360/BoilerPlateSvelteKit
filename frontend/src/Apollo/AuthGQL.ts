@@ -7,8 +7,10 @@ query CheckAuth {
       isAuthenticated
       role
       userId
-      username
-      email      
+      userData {
+        username
+        email
+      }
     }
   }
 `

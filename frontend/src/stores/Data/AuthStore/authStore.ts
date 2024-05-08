@@ -11,26 +11,34 @@ import { messageNotification } from '$modelNotifications/messageNotification';
 function createAuthStore() {
     const { subscribe, set, update } = writable<App.IAuthStore>({
         userId: null,
+        currentSessionId: undefined,
         role: null,
         isAuthenticated: false,
-        currentSessionId: undefined,
-        sessions: []
+        sessions: [],
+        userData: {
+            username: null,
+            email: null,
+        }
     });
 
     let currentState = {
         userId: null,
+        currentSessionId: undefined,
         role: null,
         isAuthenticated: false,
-        currentSessionId: undefined,
-        sessions: []
+        sessions: [],
+        userData: {
+            username: null,
+            email: null,
+        }
     };
     
     async function checkAuth() {
         try {
             const { data } = await client.query({
                 query: CHECKAUTH,
-                fetchPolicy: 'network-only'  // Assurez-vous que cela ne vient pas du cache
-            });
+                fetchPolicy: 'network-only'
+            });           
             
             if (data && data.checkAuth) {
                 update(state => ({
@@ -38,13 +46,16 @@ function createAuthStore() {
                     userId: data.checkAuth.userId,
                     role: data.checkAuth.role,
                     isAuthenticated:  data.checkAuth.isAuthenticated,
+                    userData: {
+                        username: data.checkAuth.userData.username,
+                        email: data.checkAuth.userData.email,
+                    }
                 }));
             }
         } catch (error) {
             console.error('Error checking authentication:', error);
         }
     }
-
     async function signup(username: string, email: string, password: string, $t: App.TranslationFunction) {
         try {
             const { data } = await client.mutate({
@@ -67,10 +78,14 @@ function createAuthStore() {
             if (data.login && data.login.userId && data.login.role && data.login.sessionId) {
                 set({   
                     userId: data.login.userId,
+                    currentSessionId: data.login.sessionId,
                     role: data.login.role,
                     isAuthenticated: true,
-                    currentSessionId: data.login.sessionId,
-                    sessions: [...currentState.sessions, data.login.sessionId]
+                    sessions: [...currentState.sessions, data.login.sessionId],
+                    userData: {
+                        username: data.checkAuth.userData.username,
+                        email: data.checkAuth.userData.email,
+                    }
                 });
                 goto('/');
                 notificationStore.addNotification($t('validation.SUCCESS_LOGIN'), 'success');
@@ -90,10 +105,14 @@ function createAuthStore() {
 
                 set({
                     userId: null,
+                    currentSessionId: undefined,
                     role: null,
                     isAuthenticated: false,
-                    currentSessionId: undefined,
-                    sessions: []
+                    sessions: [],
+                    userData: {
+                        username: null,
+                        email: null,
+                    },
                 });
                 notificationStore.addNotification($t('logout.successLogout'), 'success');
                 goto('/');

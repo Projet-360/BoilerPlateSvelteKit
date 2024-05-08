@@ -55,7 +55,7 @@
 		});
 	});
 
-	$:console.log($authStore);
+	$:console.log('authStore', $authStore);
 	
 	onMount(async () => {
 		new App();
