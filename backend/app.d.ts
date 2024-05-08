@@ -64,7 +64,7 @@ declare global {
 
     export interface LoginResponse {
       userId: string;
-      role?: string; // Change here: Allow role to be undefined
+      role?: string;
       sessionId: string;
       userData: {
         username: string;
