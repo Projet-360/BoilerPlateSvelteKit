@@ -7,6 +7,7 @@ import { CHECKAUTH, GETDASHBOARDDATA, LOGIN, LOGOUT, REQUEST_ACCOUNT_DELETION, R
 import { goto } from '$app/navigation';
 import notificationStore from '../../UX/notificationStore';
 import { messageNotification } from '$modelNotifications/messageNotification';
+import { handleRoleRedirection } from '$api/utils/handleRoleRedirection';
 
 // Initialisation du store
 function createAuthStore() {
@@ -94,7 +95,7 @@ function createAuthStore() {
                         email: data.login.userData.email,
                     }
                 });
-                goto('/');
+                handleRoleRedirection(data.login.role)
                 notificationStore.addNotification($t('validation.SUCCESS_LOGIN'), 'success');
             } else {
                 notificationStore.addNotification($t('validation.FAIL_LOGIN'), 'error');

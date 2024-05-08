@@ -1,6 +1,6 @@
 import { goto } from '$app/navigation';
 
-export function handleRoleRedirection(role: string, isAuthenticated: boolean) {
+export function handleRoleRedirection(role: string) {
 	switch (role) {
 		case 'admin':
 			goto('/dashboard');

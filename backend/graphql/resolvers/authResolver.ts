@@ -163,14 +163,13 @@ export const authResolver = {
       { req, res }: Context,
     ): Promise<{ message: string }> => {
       try {
-        const tokenKey = process.env.TOKEN_NAME as string;
-        const token = req.cookies[tokenKey];
+        const token = req.cookies[process.env.TOKEN_NAME as string];
 
         if (token) {
           const newBlacklistedToken = new BlacklistedToken({ token });
           await newBlacklistedToken.save();
 
-          res.clearCookie('token');
+          res.clearCookie(process.env.TOKEN_NAME as string);
           return { message: 'Déconnexion réussie' };
         } else {
           throw new Error('No token provided');
