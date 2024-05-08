@@ -1,6 +1,7 @@
 // Importations
 import { writable} from 'svelte/store';
 import client from '$apollo';
+import { collectFingerprint } from '$lib/js/fingerPrint';
 import { CHECKAUTH, GETDASHBOARDDATA, LOGIN, LOGOUT, REQUEST_ACCOUNT_DELETION, RESETFORGOTNEWPASSWORD, SENDEMAILRESETPASSWORD, SIGNUP, UPDATEUSERINFO, VERIFYTOKEN } from '$apollo/AuthGQL'; 
 
 import { goto } from '$app/navigation';
@@ -59,6 +60,7 @@ function createAuthStore() {
 
     async function signup(username: string, email: string, password: string, $t: App.TranslationFunction) {
         try {
+
             const { data } = await client.mutate({
                 mutation: SIGNUP,
                 variables: { username, email, password }
@@ -71,9 +73,11 @@ function createAuthStore() {
 
     async function login(email: string, password: string, $t: App.TranslationFunction) {
         try {
+            const fingerPrint = await collectFingerprint()
+            
             const { data } = await client.mutate({
                 mutation: LOGIN,
-                variables: { email, password }
+                variables: { email, password , fingerPrint }
             });
             
             console.log('data', data);

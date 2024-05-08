@@ -1,19 +1,23 @@
 import mongoose from 'mongoose';
 
-const sessionModel = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  userAgent: { type: String, required: true },
-  browser: {
-    name: { type: String, default: null }, // Nom du navigateur
-    version: { type: String, default: null }, // Version du navigateur
+const sessionModel = new mongoose.Schema(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User', // Assurez-vous que 'User' est le nom du modèle pour vos utilisateurs
+      required: true,
+    },
+    userAgent: { type: String, required: true },
+    screenResolution: { type: String, required: true },
+    timezone: { type: String, required: true },
+    webglVendor: { type: String, required: false },
+    webglRenderer: { type: String, required: false },
+    canvasFingerprint: { type: String, required: true },
+    localIPs: [{ type: String, required: true }], // Un tableau de chaînes
   },
-  os: {
-    name: { type: String, default: null }, // Nom du système d'exploitation
-    version: { type: String, default: null }, // Version du système d'exploitation
+  {
+    timestamps: true, // Ajoute createdAt et updatedAt automatiquement
   },
-  device: { type: String, default: 'unknown' }, // Type de l'appareil (mobile, tablette, etc.), 'unknown' si non identifié
-  ip: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now, expires: '1d' }, // Expire après 1 jour
-});
+);
 
 export const Session = mongoose.model<App.ISession>('Session', sessionModel);

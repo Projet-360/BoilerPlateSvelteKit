@@ -9,7 +9,8 @@ const checkBlacklist = async (
 ) => {
   try {
     // Retrieve the token from the request cookies
-    const token = req.cookies.token;
+    const tokenKey = process.env.TOKEN_NAME as string;
+    const token = req.cookies[tokenKey];
 
     // Check if the token exists in the BlacklistedToken collection
     const isBlacklisted = await BlacklistedToken.findOne({ token });

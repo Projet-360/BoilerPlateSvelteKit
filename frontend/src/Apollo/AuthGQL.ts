@@ -32,8 +32,8 @@ export const VERIFYTOKEN = gql`
 `
 
 export const LOGIN = gql`
-mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
+mutation Login($email: String!, $password: String!, $fingerPrint: fingerPrint!) {
+    login(email: $email, password: $password, fingerPrint: $fingerPrint) {
       role
       userId
       sessionId

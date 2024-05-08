@@ -401,7 +401,7 @@ export const getUserInfo = async (_id: any) => {
  * // Set an authentication cookie in the response
  * setAuthCookie(res, 'some-jwt-token');
  */
-export function setAuthCookie(res: Response, token: string) {
+export function setAuthCookie(res: Response, tokenName: string, token: string) {
   // Define cookie options
   const cookieOptions: CookieOptions = {
     httpOnly: true,
@@ -411,7 +411,7 @@ export function setAuthCookie(res: Response, token: string) {
   };
 
   // Set the cookie in the response
-  res.cookie('token', token, cookieOptions);
+  res.cookie(tokenName, token, cookieOptions);
 }
 
 /**

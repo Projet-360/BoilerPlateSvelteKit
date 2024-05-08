@@ -9,6 +9,9 @@ import BlacklistedToken from '../../models/BlacklistedTokenModel.js';
 import { User } from '../../models/UserModel.js';
 import { HTTP_STATUS } from '../../constants/HTTP_STATUS.js';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 interface Context {
   req: Request;
   res: Response;
@@ -19,19 +22,21 @@ interface Context {
 export const authResolver = {
   Query: {
     checkAuth: async (_: any, __: any, { req, res }: Context) => {
-      const token = req.cookies.token;
+      const tokenKey = process.env.TOKEN_NAME as string;
+      const token = req.cookies[tokenKey];
+
       if (!token || token === 'undefined' || token === 'null') {
         return { isAuthenticated: false };
       }
 
       const isBlacklisted = await BlacklistedToken.findOne({ token });
       if (isBlacklisted) {
-        res.clearCookie('token');
+        res.clearCookie(process.env.TOKEN_NAME as string);
         return { isAuthenticated: false };
       }
 
       const result = await authService.checkAuthService(token);
-      console.log(result);
+      console.log('result', result);
 
       if (result.isAuthenticated) {
         return {
@@ -115,7 +120,7 @@ export const authResolver = {
     },
     login: async (
       _: any,
-      { email, password }: App.LoginArgs,
+      { email, password, fingerPrint }: App.LoginArgs,
       { req, res }: Context,
     ): Promise<App.LoginResponse> => {
       try {
@@ -126,28 +131,13 @@ export const authResolver = {
         }
 
         const { token, _id, role } = loginResult;
-        authService.setAuthCookie(res, token);
-        const userData = authService.getUserInfo(_id);
+        authService.setAuthCookie(res, process.env.TOKEN_NAME as string, token);
 
-        const userAgentString = req.headers['user-agent'];
-        const parser = new UAParser(userAgentString);
-        const browserInfo = parser.getBrowser();
-        const osInfo = parser.getOS();
-        const deviceInfo = parser.getDevice();
+        const userData = authService.getUserInfo(_id);
 
         const sessionData = {
           userId: _id.toString(),
-          userAgent: userAgentString,
-          browser: {
-            name: browserInfo.name,
-            version: browserInfo.version,
-          },
-          os: {
-            name: osInfo.name,
-            version: osInfo.version,
-          },
-          device: deviceInfo.model || 'unknown',
-          ip: req.ip,
+          ...fingerPrint,
         };
 
         const session = new Session(sessionData);
@@ -173,7 +163,9 @@ export const authResolver = {
       { req, res }: Context,
     ): Promise<{ message: string }> => {
       try {
-        const token = req.cookies.token;
+        const tokenKey = process.env.TOKEN_NAME as string;
+        const token = req.cookies[tokenKey];
+
         if (token) {
           const newBlacklistedToken = new BlacklistedToken({ token });
           await newBlacklistedToken.save();

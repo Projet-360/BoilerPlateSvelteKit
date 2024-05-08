@@ -9,7 +9,8 @@ export const isAuthenticated = (
   res: Response,
   next: NextFunction,
 ) => {
-  const token = req.cookies['token'];
+  const tokenKey = process.env.TOKEN_NAME as string;
+  const token = req.cookies[tokenKey];
 
   if (!token) {
     return res.status(401).json({ error: 'Unauthorized' });

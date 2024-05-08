@@ -15,6 +15,16 @@ declare namespace App {
 		lastActive: Date;
 	}
 
+	type FingerprintData = {
+		userAgent: string;
+		screenResolution: string;
+		timezone: string;
+		webglVendor: string | undefined;
+		webglRenderer: string | undefined;
+		canvasFingerprint: string;
+		localIPs: string[];
+	};
+	
 	export interface userData {
 		username: string | null;
 		email: string | null;

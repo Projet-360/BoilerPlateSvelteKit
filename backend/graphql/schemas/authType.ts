@@ -13,7 +13,11 @@ export const authType = gql`
       email: String!
       password: String!
     ): MessageResponse
-    login(email: String!, password: String!): LoginResponse
+    login(
+      email: String!
+      password: String!
+      fingerPrint: fingerPrint!
+    ): LoginResponse
     logout: MessageResponse
     sendEmailResetPassword(email: String!): MessageResponse
     resetForgotNewPassword(
@@ -21,6 +25,16 @@ export const authType = gql`
       newPassword: String!
       confirmPassword: String!
     ): MessageResponse
+  }
+
+  input fingerPrint {
+    userAgent: String
+    screenResolution: String
+    timezone: String
+    webglVendor: String
+    webglRenderer: String
+    canvasFingerprint: String
+    localIPs: [String]
   }
 
   type MessageResponse {

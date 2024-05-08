@@ -5,6 +5,16 @@ import { NextFunction } from 'express';
 // Enlevez l'importation mongoose d'ici
 declare global {
   namespace App {
+    type FingerprintData = {
+      userAgent: string;
+      screenResolution: string;
+      timezone: string;
+      webglVendor: string | undefined;
+      webglRenderer: string | undefined;
+      canvasFingerprint: string;
+      localIPs: string[];
+    };
+
     interface IUser extends mongoose.Document {
       _id: mongoose.Schema.Types.ObjectId;
       username: string;
@@ -51,6 +61,7 @@ declare global {
     interface LoginArgs {
       email: string;
       password: string;
+      fingerPrint: FingerprintData;
     }
 
     interface TokenArgs {
