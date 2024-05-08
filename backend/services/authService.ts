@@ -366,7 +366,7 @@ export const requestresetForgotPassword = async (
  *
  * @throws {Error} Will throw an error if the user is not found or any other error occurs.
  */
-export const getUserInfo = async (_id: string) => {
+export const getUserInfo = async (_id: any) => {
   try {
     const user = await User.findById(_id).select('-password');
 

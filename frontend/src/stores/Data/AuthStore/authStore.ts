@@ -38,7 +38,11 @@ function createAuthStore() {
             const { data } = await client.query({
                 query: CHECKAUTH,
                 fetchPolicy: 'network-only'
-            });           
+            });     
+            
+            if (data && data.checkAuth) {
+                console.log('data', data.checkAuth);
+            }
             
             if (data && data.checkAuth) {
                 update(state => ({
@@ -56,6 +60,7 @@ function createAuthStore() {
             console.error('Error checking authentication:', error);
         }
     }
+
     async function signup(username: string, email: string, password: string, $t: App.TranslationFunction) {
         try {
             const { data } = await client.mutate({
@@ -75,16 +80,18 @@ function createAuthStore() {
                 variables: { email, password }
             });
             
+            console.log('data', data);
+            
             if (data.login && data.login.userId && data.login.role && data.login.sessionId) {
                 set({   
                     userId: data.login.userId,
                     currentSessionId: data.login.sessionId,
                     role: data.login.role,
                     isAuthenticated: true,
-                    sessions: [...currentState.sessions, data.login.sessionId],
+                    //sessions: [...currentState.sessions, data.login.sessionId],
                     userData: {
-                        username: data.checkAuth.userData.username,
-                        email: data.checkAuth.userData.email,
+                        username: data.login.userData.username,
+                        email: data.login.userData.email,
                     }
                 });
                 goto('/');

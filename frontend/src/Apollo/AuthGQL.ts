@@ -37,6 +37,10 @@ mutation Login($email: String!, $password: String!) {
       role
       userId
       sessionId
+      userData {
+        username
+        email
+      }
     }
   }  
 `;

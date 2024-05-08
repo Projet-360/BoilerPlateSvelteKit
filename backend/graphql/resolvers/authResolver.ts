@@ -127,6 +127,7 @@ export const authResolver = {
 
         const { token, _id, role } = loginResult;
         authService.setAuthCookie(res, token);
+        const userData = authService.getUserInfo(_id);
 
         const userAgentString = req.headers['user-agent'];
         const parser = new UAParser(userAgentString);
@@ -156,6 +157,10 @@ export const authResolver = {
           userId: _id.toString(),
           role: role || 'defaultRole', // Default value for role
           sessionId: session._id.toString(),
+          userData: {
+            username: (await userData).username,
+            email: (await userData).email,
+          },
         };
       } catch (error: any) {
         logger.error('Error in login mutation:', error);

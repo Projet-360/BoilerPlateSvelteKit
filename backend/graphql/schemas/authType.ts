@@ -31,6 +31,7 @@ export const authType = gql`
     role: String
     userId: String
     sessionId: String
+    userData: UserData
   }
 
   type UserData {

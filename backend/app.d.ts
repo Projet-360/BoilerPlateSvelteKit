@@ -66,6 +66,10 @@ declare global {
       userId: string;
       role?: string; // Change here: Allow role to be undefined
       sessionId: string;
+      userData: {
+        username: string;
+        email: string;
+      };
     }
 
     interface Context {
