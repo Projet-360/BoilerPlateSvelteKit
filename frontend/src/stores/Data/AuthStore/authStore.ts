@@ -40,11 +40,7 @@ function createAuthStore() {
                 fetchPolicy: 'network-only'
             });     
             
-            if (data && data.checkAuth) {
-                console.log('data', data.checkAuth);
-            }
-            
-            if (data && data.checkAuth) {
+            if (data && data.checkAuth.userId !== null && data.checkAuth.role !== null ) {
                 update(state => ({
                     ...state,
                     userId: data.checkAuth.userId,
