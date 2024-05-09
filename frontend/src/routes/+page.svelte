@@ -9,7 +9,7 @@
 	import Greetings from '$components/Greetings.svelte';
 	import Slider from '$components/Slider.svelte';
 	import { setTransitionLoader } from '$stores/UX/transitionLoaderStore';
-	import { fetchMockData } from '$api/utils/mockService';
+	import { fetchMockData } from '$apollo/mockService';
 	import { enter, exit } from './transition';
 	import { isAnimatingOut } from '$stores/UX/isAnimating';
 	import { onNavigate } from '$app/navigation';

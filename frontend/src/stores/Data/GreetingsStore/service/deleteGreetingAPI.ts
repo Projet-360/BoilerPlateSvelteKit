@@ -1,14 +1,14 @@
 // deleteGreeting.ts
 import client from '$apollo';
-import { DELETE_GREETING } from '$apollo/GreetingGQL';
+import { deleteGreetingGQL } from '$apollo/Greetings/deleteGreetingGQL';
 import notificationStore from '$stores/UX/notificationStore';
-import { messageNotification } from '$modelNotifications/messageNotification';
+import { messageNotification } from '$apollo/modelNotifications/messageNotification';
 
-export async function deleteGreeting(greeting: App.Greeting, $t: App.TranslationFunction) {
+async function deleteGreetingAPI(greeting: App.Greeting, $t: App.TranslationFunction) {
     try {
         const id = greeting.id || greeting._id;
         await client.mutate({
-            mutation: DELETE_GREETING,
+            mutation: deleteGreetingGQL,
             variables: { id }
         });
 
@@ -19,3 +19,5 @@ export async function deleteGreeting(greeting: App.Greeting, $t: App.Translation
         throw error;
     }
 }
+
+export default deleteGreetingAPI

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { getAllUsers, updateUser } from '$api/auth/adminAPI';
 	import notificationStore from '$stores/UX/notificationStore';
 	import { t } from '$UITools/Translations';
 
@@ -17,17 +16,17 @@
 	let isLoading = true; // Indicateur de chargement
 
 	function fetchUsers(): void {
-		getAllUsers()
-			.then((fetchedUsers: AppUser[]) => {
-				users = fetchedUsers.filter((user) => user !== null && user._id !== null);
-			})
-			.catch((error: Error) => {
-				console.error('Erreur lors de la récupération des utilisateurs:', error);
-				notificationStore.addNotification('Impossible de charger les utilisateurs.', 'error');
-			})
-			.finally(() => {
-				isLoading = false; // Les données sont chargées, nous pouvons enlever l'indicateur de chargement
-			});
+		// getAllUsers()
+		// 	.then((fetchedUsers: AppUser[]) => {
+		// 		users = fetchedUsers.filter((user) => user !== null && user._id !== null);
+		// 	})
+		// 	.catch((error: Error) => {
+		// 		console.error('Erreur lors de la récupération des utilisateurs:', error);
+		// 		notificationStore.addNotification('Impossible de charger les utilisateurs.', 'error');
+		// 	})
+		// 	.finally(() => {
+		// 		isLoading = false; // Les données sont chargées, nous pouvons enlever l'indicateur de chargement
+		// 	});
 	}
 
 	onMount(async () => {
@@ -56,20 +55,20 @@
 		}
 
 		try {
-			const { user, notification } = await updateUser(userId, userToUpdate, $t);
+			// const { user, notification } = await updateUser(userId, userToUpdate, $t);
 
-			// Vérifiez que la mise à jour a réussi avant d'ajouter la notification de succès.
-			if (user && notification) {
-				const index = users.findIndex((u) => u._id === userId);
-				if (index !== -1) {
-					users[index] = user;
-					notificationStore.addNotification(
-						`Utilisateur mis à jour avec succès: ${notification}`,
-						'success'
-					);
-				}
-			} else {
-			}
+			// // Vérifiez que la mise à jour a réussi avant d'ajouter la notification de succès.
+			// if (user && notification) {
+			// 	const index = users.findIndex((u) => u._id === userId);
+			// 	if (index !== -1) {
+			// 		users[index] = user;
+			// 		notificationStore.addNotification(
+			// 			`Utilisateur mis à jour avec succès: ${notification}`,
+			// 			'success'
+			// 		);
+			// 	}
+			// } else {
+			// }
 		} catch (error: any) {
 			console.error('Error:', error);
 			notificationStore.addNotification(

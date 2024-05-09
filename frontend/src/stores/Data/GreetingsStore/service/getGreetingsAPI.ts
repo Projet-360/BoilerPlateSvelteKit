@@ -1,12 +1,12 @@
 import client from '$apollo';
-import { GETGREETINGS } from '$apollo/GreetingGQL';
+import { getGreetingsGQL } from '$apollo/Greetings/getGreetingsGQL';
 import notificationStore from '$stores/UX/notificationStore';
 
-export async function getGreetings($t: App.TranslationFunction, set: Function) {
+async function getGreetingsAPI($t: App.TranslationFunction, set: Function) {
     try {
-        const { data } = await client.query({ query: GETGREETINGS, fetchPolicy: 'network-only' });
+        const { data } = await client.query({ query: getGreetingsGQL, fetchPolicy: 'network-only' });
 
-        set(data.getGreetings.map((greeting: App.Greeting) => ({
+        set(data.getGreetingsGQL.map((greeting: App.Greeting) => ({
             ...greeting,
         })));
 
@@ -17,3 +17,5 @@ export async function getGreetings($t: App.TranslationFunction, set: Function) {
         throw error;
     }
 }
+
+export default getGreetingsAPI

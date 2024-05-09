@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getUserSessions, closeUserSession } from '$api/auth/sessionAPI';
 	import notificationStore from '$stores/UX/notificationStore'; // Supposons que vous ayez un store pour les notifications
 
 	let sessions: App.Session[] = [];
@@ -8,7 +7,7 @@
 	// Fonction pour charger les sessions de l'utilisateur
 	async function loadSessions() {
 		try {
-			sessions = await getUserSessions();
+			//sessions = await getUserSessions();
 		} catch (error) {
 			console.error('Erreur lors du chargement des sessions :', error);
 			// Afficher un message d'erreur à l'utilisateur
@@ -19,7 +18,7 @@
 	// Fonction pour gérer la fermeture d'une session
 	async function handleCloseSession(sessionId: string) {
 		try {
-			await closeUserSession(sessionId);
+			//await closeUserSession(sessionId);
 			sessions = sessions.filter((session) => session.userId !== sessionId);
 			// Afficher un message de succès à l'utilisateur
 			notificationStore.addNotification('Session fermée avec succès.', 'success');

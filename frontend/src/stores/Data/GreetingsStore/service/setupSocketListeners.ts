@@ -1,8 +1,8 @@
 // setupSocketListeners.ts
-import socket from '$api/utils/socket';
+import socket from '$apollo/socket';
 
 // Assurez-vous que App.Greeting est bien le type approprié pour les éléments de la liste des salutations.
-export function setupSocketListeners(update: (updater: (greetings: App.Greeting[]) => App.Greeting[]) => void) {
+function setupSocketListeners(update: (updater: (greetings: App.Greeting[]) => App.Greeting[]) => void) {
     socket.on('greetingAdded', (greeting: App.Greeting) => {
         console.log("Greeting added via socket:", greeting);
         update(greetings => [...greetings, greeting]);
@@ -33,3 +33,5 @@ export function setupSocketListeners(update: (updater: (greetings: App.Greeting[
         socket.off('greetingDeleted');
     };
 }
+
+export default setupSocketListeners

@@ -1,13 +1,13 @@
 // updateGreeting.ts
 import client from '$apollo';
-import { UPDATE_GREETING } from '$apollo/GreetingGQL';
+import { updateGreetingGQL } from '$apollo/Greetings/updateGreetingGQL';
 import notificationStore from '$stores/UX/notificationStore';
-import { messageNotification } from '$modelNotifications/messageNotification';
+import { messageNotification } from '$apollo/modelNotifications/messageNotification';
 
-export async function updateGreeting(id: string, name: string, message: string, $t: App.TranslationFunction) {
+async function updateGreetingAPI(id: string, name: string, message: string, $t: App.TranslationFunction) {
     try {
         const { data } = await client.mutate({
-            mutation: UPDATE_GREETING,
+            mutation: updateGreetingGQL,
             variables: { id, name, message }
         });
 
@@ -18,3 +18,5 @@ export async function updateGreeting(id: string, name: string, message: string, 
         throw error;
     }
 }
+
+export default updateGreetingAPI

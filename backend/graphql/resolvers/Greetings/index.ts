@@ -9,7 +9,7 @@ const GREETING_DELETED = 'GREETING_DELETED';
 
 export const greetingResolver = {
   Query: {
-    getGreetings: async () => {
+    getGreetingsGQL: async () => {
       return await Greeting.find();
     },
     getGreetingById: async (_: any, { id }: { id: string }) => {

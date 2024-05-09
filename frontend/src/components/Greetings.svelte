@@ -8,7 +8,7 @@
     let id: string | null = null;
 
     onMount(() => {
-        greetingsStore.getGreetings($t);
+        greetingsStore.getGreetingsGQL($t);
     });
 
     const cleanup = greetingsStore.setupSocketListeners();

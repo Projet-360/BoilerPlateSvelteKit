@@ -1,12 +1,12 @@
 import client from '$apollo';
-import { CREATE_GREETING } from '$apollo/GreetingGQL';
+import { createGreetingGQL } from '$apollo/Greetings/createGreetingGQL';
 import notificationStore from '$stores/UX/notificationStore';
-import { messageNotification } from '$modelNotifications/messageNotification';
+import { messageNotification } from '$apollo/modelNotifications/messageNotification';
 
-export async function createGreeting(name: string, message: string, $t: App.TranslationFunction) {
+async function createGreetingAPI(name: string, message: string, $t: App.TranslationFunction) {
     try {
         const { data } = await client.mutate({
-            mutation: CREATE_GREETING,
+            mutation: createGreetingGQL,
             variables: { name, message }
         });
         
@@ -17,3 +17,5 @@ export async function createGreeting(name: string, message: string, $t: App.Tran
         throw error;
     }
 }
+
+export default createGreetingAPI

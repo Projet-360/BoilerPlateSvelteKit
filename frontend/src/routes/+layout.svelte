@@ -17,7 +17,7 @@
 		setRessourceToValide
 	} from '$stores/UX/initialLoaderStore';
 
-	import { fetchMockData } from '$api/utils/mockService';
+	import { fetchMockData } from '$apollo/mockService';
 	import { authStore } from '$stores/Data/AuthStore/authStore.js';
 
 	onNavigate(async (navigation) => {

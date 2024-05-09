@@ -3,8 +3,8 @@ import { validationResult } from 'express-validator';
 import { greetingsValidators, signupValidators } from './validators.js';
 
 const OPERATION_NAMES = {
-  CREATE_GREETING: 'CreateGreeting',
-  UPDATE_GREETING: 'UpdateGreeting',
+  createGreetingGQL: 'CreateGreeting',
+  updateGreetingGQL: 'UpdateGreeting',
 
   SIGNUP: 'Signup',
 };
@@ -20,10 +20,10 @@ export function graphqlValidationMiddleware(
 
   let validators;
   switch (operationName) {
-    case OPERATION_NAMES.CREATE_GREETING:
+    case OPERATION_NAMES.createGreetingGQL:
       validators = greetingsValidators;
       break;
-    case OPERATION_NAMES.UPDATE_GREETING:
+    case OPERATION_NAMES.updateGreetingGQL:
       validators = greetingsValidators;
       break;
     case OPERATION_NAMES.SIGNUP:
