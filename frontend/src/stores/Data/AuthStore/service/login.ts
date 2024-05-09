@@ -1,6 +1,6 @@
 import { handleRoleRedirection } from "$api/utils/handleRoleRedirection";
 import client from "$apollo";
-import { LOGIN } from "$apollo/AuthGQL";
+import { LOGIN } from "$apollo/Auth/login";
 import { collectFingerprint } from "$lib/js/fingerPrint";
 import notificationStore from "$stores/UX/notificationStore";
 import { handleErrors } from "./handleErrors";

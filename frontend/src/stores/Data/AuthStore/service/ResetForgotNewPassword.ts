@@ -1,5 +1,5 @@
 import client from "$apollo";
-import { RESETFORGOTNEWPASSWORD } from "$apollo/AuthGQL";
+import { RESETFORGOTNEWPASSWORD } from "$apollo/Auth/resetForgotNewPassword";
 import { goto } from "$app/navigation";
 import notificationStore from "$stores/UX/notificationStore";
 

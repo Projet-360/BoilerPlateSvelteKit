@@ -1,6 +1,6 @@
 // Importations nécessaires
 import client from '$apollo';
-import { CHECKAUTH } from '$apollo/AuthGQL'; // Importation des requêtes GraphQL
+import { CHECKAUTH } from '$apollo/Auth/checkAuth';
 import { authStore } from '../authStore';
 
 

@@ -1,5 +1,5 @@
 import client from "$apollo";
-import { GETDASHBOARDDATA } from "$apollo/AuthGQL";
+import { GETDASHBOARDDATA } from "$apollo/Auth/getDashboardData";
 
 export async function getDashboardData() {
     try {

@@ -1,5 +1,5 @@
 import client from "$apollo";
-import { SIGNUP } from "$apollo/AuthGQL";
+import { SIGNUP } from "$apollo/Auth/signup";
 import notificationStore from "$stores/UX/notificationStore";
 import { handleErrors } from "./handleErrors";
 

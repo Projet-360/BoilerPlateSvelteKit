@@ -1,5 +1,5 @@
 import client from "$apollo";
-import { UPDATEUSERINFO } from "$apollo/AuthGQL";
+import { UPDATEUSERINFO } from "$apollo/Auth/updateUserInfo";
 import { messageNotification } from "$modelNotifications/messageNotification";
 import notificationStore from "$stores/UX/notificationStore";
 import { authStore } from "../authStore";

@@ -1,5 +1,5 @@
 import client from "$apollo";
-import { REQUEST_ACCOUNT_DELETION } from "$apollo/AuthGQL";
+import { REQUEST_ACCOUNT_DELETION } from "$apollo/Auth/requestAccountDeletion";
 import { messageNotification } from "$modelNotifications/messageNotification";
 import notificationStore from "$stores/UX/notificationStore";
 

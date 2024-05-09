@@ -1,5 +1,5 @@
 import client from "$apollo";
-import { VERIFYTOKEN } from "$apollo/AuthGQL";
+import { VERIFYTOKEN } from "$apollo/Auth/verifyToken";
 import { goto } from "$app/navigation";
 import notificationStore from "$stores/UX/notificationStore";
 import { handleErrors } from "./handleErrors";

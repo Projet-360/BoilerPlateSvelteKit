@@ -1,5 +1,5 @@
 import client from "$apollo";
-import { LOGOUT } from "$apollo/AuthGQL";
+import { LOGOUT } from "$apollo/Auth/logout";
 import { goto } from "$app/navigation";
 import notificationStore from "$stores/UX/notificationStore";
 import { writable } from "svelte/store";
