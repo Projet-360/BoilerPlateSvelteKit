@@ -8,7 +8,7 @@
     let id: string | null = null;
 
     onMount(() => {
-        greetingsStore.getGreetingsGQL($t);
+        greetingsStore.getGreetingsAPI($t);
     });
 
     const cleanup = greetingsStore.setupSocketListeners();
@@ -21,9 +21,9 @@
     async function handleSubmit() {
         console.log("Form submitted:", { name, message, id });
         if (id) {
-            await greetingsStore.updateGreeting(id, name, message, $t);
+            await greetingsStore.updateGreetingAPI(id, name, message, $t);
         } else {
-            await greetingsStore.createGreeting(name, message, $t);
+            await greetingsStore.createGreetingAPI(name, message, $t);
         }
         clearForm();
     }
@@ -64,7 +64,7 @@
         <li>
             {greeting.name}: {greeting.message}
             <button on:click={() => editGreeting(greeting)}>Edit</button>
-            <button on:click={() => greetingsStore.deleteGreeting(greeting, $t)}>Delete</button>
+            <button on:click={() => greetingsStore.deleteGreetingAPI(greeting, $t)}>Delete</button>
         </li>
     {/each}
 </ul>

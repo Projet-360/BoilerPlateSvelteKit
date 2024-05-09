@@ -9,7 +9,7 @@
 	});
 
 	function handleLogout() {
-		authStore.logout($t);
+		authStore.logoutAPI($t);
 	}
 </script>
 

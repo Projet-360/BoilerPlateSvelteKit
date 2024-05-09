@@ -8,7 +8,7 @@ export const greetingType = gql`
   }
 
   type Query {
-    getGreetingsGQL: [Greeting!]!
+    getGreetings: [Greeting!]!
     getGreetingById(id: ID!): Greeting
   }
 
