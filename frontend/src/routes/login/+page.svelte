@@ -13,7 +13,7 @@
 	});
 
 	async function handleLogin() {
-		await authStore.login(email, password, $t);
+		await authStore.loginAPI(email, password, $t);
 	}
 
 	function goToResetPassword() {

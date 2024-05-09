@@ -1,16 +1,16 @@
 // Importations
 import { writable} from 'svelte/store';
 
-import { checkAuthAPI } from './service/checkAuthAPI';
-import { signup } from './service/signup';
-import { login } from './service/login';
-import { logout } from './service/logout';
-import { verifyToken } from './service/verifyToken';
-import { sendEmailResetPassword } from './service/sendEmailResetPassword';
-import { ResetForgotNewPassword } from './service/ResetForgotNewPassword';
-import { updateUserInfo } from './service/updateUserInfo';
-import { getDashboardData } from './service/getDashboardData';
-import { requestAccountDeletion } from './service/requestAccountDeletion';
+import checkAuthAPI from './service/checkAuthAPI';
+import signupAPI from './service/signupAPI';
+import loginAPI from './service/loginAPI';
+import logoutAPI from './service/logoutAPI';
+import verifyTokenAPI from './service/verifyTokenAPI';
+import sendEmailResetPasswordAPI from './service/sendEmailResetPasswordAPI';
+import ResetForgotNewPasswordAPI from './service/ResetForgotNewPasswordAPI';
+import updateUserInfoAPI from './service/updateUserInfoAPI';
+import getDashboardDataAPI from './service/getDashboardDataAPI';
+import requestAccountDeletionAPI from './service/requestAccountDeletionAPI';
 
 // Initialisation du store
 function AuthStore() {
@@ -31,16 +31,16 @@ function AuthStore() {
         set,
         update, 
 
-        signup,
-        verifyToken,
-        login,
-        logout,
+        signupAPI,
+        verifyTokenAPI,
+        loginAPI,
+        logoutAPI,
         checkAuthAPI,
-        sendEmailResetPassword,
-        ResetForgotNewPassword,
-        updateUserInfo,
-        getDashboardData,
-        requestAccountDeletion,
+        sendEmailResetPasswordAPI,
+        ResetForgotNewPasswordAPI,
+        updateUserInfoAPI,
+        getDashboardDataAPI,
+        requestAccountDeletionAPI,
     };
 }
 

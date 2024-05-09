@@ -1,13 +1,13 @@
 import client from "$apollo";
-import { VERIFYTOKEN } from "$apollo/Auth/verifyToken";
+import { verifyTokenGQL } from "$apollo/Auth/verifyTokenGQL";
 import { goto } from "$app/navigation";
 import notificationStore from "$stores/UX/notificationStore";
-import { handleErrors } from "./handleErrors";
+import handleErrors from "./handleErrors";
 
-export async function verifyToken(token: string, $t: App.TranslationFunction) {
+async function verifyTokenAPI(token: string, $t: App.TranslationFunction) {
     try {
         const { data } = await client.query({
-            query: VERIFYTOKEN,
+            query: verifyTokenGQL,
             variables: { token }
         });
         goto('/');
@@ -17,3 +17,5 @@ export async function verifyToken(token: string, $t: App.TranslationFunction) {
         notificationStore.addNotification($t('data.emailTokenVerifiedFailed'), 'error');
     }
 }
+
+export default verifyTokenAPI

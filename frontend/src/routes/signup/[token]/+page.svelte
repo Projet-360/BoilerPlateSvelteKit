@@ -8,7 +8,7 @@
 
 	onMount(() => {
 		token = $page.params.token;
-		authStore.verifyToken(token, $t);
+		authStore.verifyTokenAPI(token, $t);
 	});
 </script>
 

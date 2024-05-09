@@ -15,8 +15,8 @@
 
 	const handleUpdate = async () => {
 		try {
-			await authStore.updateUserInfo({ username, email }, $t);
-			const data = await authStore.getDashboardData();
+			await authStore.updateUserInfoAPI({ username, email }, $t);
+			const data = await authStore.getDashboardDataAPI();
 			userData = data;
 			console.log(data);
 			
@@ -27,16 +27,16 @@
 	};
 
 	const handlePasswordReset = async () => {
-		await authStore.sendEmailResetPassword(email, $t);
+		await authStore.sendEmailResetPasswordAPI(email, $t);
 	};
 
 	const DeleteAccount = async (id: string) => {
-		await authStore.requestAccountDeletion(id, $t);
+		await authStore.requestAccountDeletionAPI(id, $t);
 	};
 
 	onMount(async () => {
 		try {
-			const data = await authStore.getDashboardData();
+			const data = await authStore.getDashboardDataAPI();
 			userData = data.getDashboardData;
 			console.log('userData', userData.userId);
 

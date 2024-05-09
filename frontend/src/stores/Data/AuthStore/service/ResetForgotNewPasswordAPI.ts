@@ -1,16 +1,16 @@
 import client from "$apollo";
-import { RESETFORGOTNEWPASSWORD } from "$apollo/Auth/resetForgotNewPassword";
+import { resetForgotNewPasswordGQL } from "$apollo/Auth/resetForgotNewPasswordGQL";
 import { goto } from "$app/navigation";
 import notificationStore from "$stores/UX/notificationStore";
 
-export async function ResetForgotNewPassword(	
+async function ResetForgotNewPasswordAPI(	
     token: string,
     newPassword: string,
     confirmPassword: string,
     $t: App.TranslationFunction) {   
     try {     
         const { data } = await client.mutate({
-            mutation: RESETFORGOTNEWPASSWORD,
+            mutation: resetForgotNewPasswordGQL,
             variables: { token, newPassword, confirmPassword}
         });
         console.log(data);
@@ -21,3 +21,5 @@ export async function ResetForgotNewPassword(
         console.error('Error checking authentication:', error);
     }
 }
+
+export default ResetForgotNewPasswordAPI

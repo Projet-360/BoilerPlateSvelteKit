@@ -1,13 +1,13 @@
 import client from "$apollo";
-import { UPDATEUSERINFO } from "$apollo/Auth/updateUserInfo";
+import updateUserInfoGQL from "$apollo/Auth/updateUserInfoGQL";
 import { messageNotification } from "$modelNotifications/messageNotification";
 import notificationStore from "$stores/UX/notificationStore";
 import { authStore } from "../authStore";
 
-export async function updateUserInfo(userInfo: App.UserInfo, $t: App.TranslationFunction) {
+async function updateUserInfoAPI(userInfo: App.UserInfo, $t: App.TranslationFunction) {
     try {
         const { data } = await client.mutate({
-            mutation: UPDATEUSERINFO,
+            mutation: updateUserInfoGQL,
             variables: { userInfo }
         });
         console.log(data);
@@ -17,7 +17,7 @@ export async function updateUserInfo(userInfo: App.UserInfo, $t: App.Translation
 
             if (data.notification) {
                 notificationStore.addNotification(data.notification, 'success');
-                authStore.logout($t);
+                authStore.logoutAPI($t);
             }
             return data;
         } else {
@@ -28,3 +28,5 @@ export async function updateUserInfo(userInfo: App.UserInfo, $t: App.Translation
         throw error;
     }
 };
+
+export default updateUserInfoAPI

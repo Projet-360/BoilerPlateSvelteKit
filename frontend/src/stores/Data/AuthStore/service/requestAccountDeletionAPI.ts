@@ -1,12 +1,12 @@
 import client from "$apollo";
-import { REQUEST_ACCOUNT_DELETION } from "$apollo/Auth/requestAccountDeletion";
+import { requestAccountDeletionGQL } from "$apollo/Auth/requestAccountDeletionGQL";
 import { messageNotification } from "$modelNotifications/messageNotification";
 import notificationStore from "$stores/UX/notificationStore";
 
-export async function requestAccountDeletion(id: string, $t: App.TranslationFunction) {
+async function requestAccountDeletionAPI(id: string, $t: App.TranslationFunction) {
     try {
         const { data } = await client.mutate({
-            mutation: REQUEST_ACCOUNT_DELETION,
+            mutation: requestAccountDeletionGQL,
             variables: { id }
         });
         console.log(data);
@@ -19,3 +19,5 @@ export async function requestAccountDeletion(id: string, $t: App.TranslationFunc
         throw error;
     }
 }
+
+export default requestAccountDeletionAPI

@@ -1,13 +1,13 @@
 import client from "$apollo";
-import { SIGNUP } from "$apollo/Auth/signup";
+import { signupGQL } from "$apollo/Auth/signupGQL";
 import notificationStore from "$stores/UX/notificationStore";
-import { handleErrors } from "./handleErrors";
+import handleErrors from "./handleErrors";
 
-export async function signup(username: string, email: string, password: string, $t: App.TranslationFunction) {
+async function signupAPI(username: string, email: string, password: string, $t: App.TranslationFunction) {
     try {
 
         const { data } = await client.mutate({
-            mutation: SIGNUP,
+            mutation: signupGQL,
             variables: { username, email, password }
         });
         notificationStore.addNotification($t('data.signupSuccess'), 'success');
@@ -15,3 +15,5 @@ export async function signup(username: string, email: string, password: string, 
         handleErrors(error, $t, 'signup');
     }
 }
+
+export default signupAPI

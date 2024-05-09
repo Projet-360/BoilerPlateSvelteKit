@@ -20,7 +20,7 @@
 			return;
 		}
 
-		await authStore.ResetForgotNewPassword(token, newPassword, confirmPassword, $t);
+		await authStore.ResetForgotNewPasswordAPI(token, newPassword, confirmPassword, $t);
 	}
 </script>
 

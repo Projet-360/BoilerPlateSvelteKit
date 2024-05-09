@@ -1,10 +1,10 @@
 import client from "$apollo";
-import { GETDASHBOARDDATA } from "$apollo/Auth/getDashboardData";
+import { getDashboardDataGQL } from "$apollo/Auth/getDashboardDataGQL";
 
-export async function getDashboardData() {
+async function getDashboardDataAPI() {
     try {
         const { data } = await client.query({
-            query: GETDASHBOARDDATA,
+            query: getDashboardDataGQL,
             fetchPolicy: 'network-only'  
         });        
         return data;
@@ -12,3 +12,5 @@ export async function getDashboardData() {
         throw error;
     }
 }
+
+export default getDashboardDataAPI

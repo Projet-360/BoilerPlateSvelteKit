@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client/core";
 
-export const GETDASHBOARDDATA = gql`
+export const getDashboardDataGQL = gql`
 query GetDashboardData {
     getDashboardData {
       userId

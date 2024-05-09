@@ -13,7 +13,7 @@
 	});
 
 	async function handleSignup() {
-		await authStore.signup(username, email, password, $t);
+		await authStore.signupAPI(username, email, password, $t);
 	}
 </script>
 

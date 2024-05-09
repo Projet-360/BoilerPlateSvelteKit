@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client/core";
 
-export const UPDATEUSERINFO = gql`
+const updateUserInfoGQL = gql`
 mutation UpdateUserInfo($userId: ID!, $userInfo: UpdateUserInfoInput!) {
     updateUserInfo(userId: $userId, userInfo: $userInfo) {
       success
@@ -13,4 +13,4 @@ mutation UpdateUserInfo($userId: ID!, $userInfo: UpdateUserInfoInput!) {
     }
   }  
 `
-
+export default updateUserInfoGQL

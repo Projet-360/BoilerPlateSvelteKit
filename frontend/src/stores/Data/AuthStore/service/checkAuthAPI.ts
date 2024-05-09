@@ -5,7 +5,7 @@ import { authStore } from '../authStore';
 
 
 // Définition de la fonction checkAuth
-export async function checkAuthAPI() {
+async function checkAuthAPI() {
     try {
         const { data } = await client.query({
             query: checkAuthGQL,
@@ -28,3 +28,5 @@ export async function checkAuthAPI() {
         console.error('Error checking authentication:', error);
     }
 }
+
+export default checkAuthAPI

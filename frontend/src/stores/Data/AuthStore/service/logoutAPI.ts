@@ -1,5 +1,5 @@
 import client from "$apollo";
-import { LOGOUT } from "$apollo/Auth/logout";
+import { logoutGQL } from "$apollo/Auth/logoutGQL";
 import { goto } from "$app/navigation";
 import notificationStore from "$stores/UX/notificationStore";
 import { writable } from "svelte/store";
@@ -7,10 +7,10 @@ import { writable } from "svelte/store";
 
 const { set } = writable<App.IAuthStore>();
 
-export async function logout($t: App.TranslationFunction) {
+async function logoutAPI($t: App.TranslationFunction) {
     try {
         const { data } = await client.mutate({
-            mutation: LOGOUT
+            mutation: logoutGQL
         });
 
             set({
@@ -30,4 +30,6 @@ export async function logout($t: App.TranslationFunction) {
         console.error("Error during logout:", JSON.stringify(error, null, 2));
         notificationStore.addNotification($t('logout.failedLogout'), 'error');
     }
-}    
+}
+
+export default logoutAPI
