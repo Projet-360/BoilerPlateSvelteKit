@@ -18,6 +18,8 @@
 			await authStore.updateUserInfo({ username, email }, $t);
 			const data = await authStore.getDashboardData();
 			userData = data;
+			console.log(data);
+			
 			({ id, username, email, role, isVerified } = userData.userInfo);
 		} catch (error) {
 			console.error("Erreur lors de la mise à jour des informations de l'utilisateur :", error);

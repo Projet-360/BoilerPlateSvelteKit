@@ -7,7 +7,6 @@ import logger from '../../services/logger.js';
 import { Session } from '../../models/sessionModel.js';
 import BlacklistedToken from '../../models/BlacklistedTokenModel.js';
 import { User } from '../../models/UserModel.js';
-import { HTTP_STATUS } from '../../constants/HTTP_STATUS.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -67,14 +66,21 @@ export const authResolver = {
       }
     },
     getDashboardData: async (_: any, __: any, { req }: Context) => {
+      const tokenKey = process.env.TOKEN_NAME as string;
+      const token = req.cookies[tokenKey];
       console.log('req.user', req.user);
+      const result = await authService.checkAuthService(token);
 
-      if (!req.user || !req.user.id) {
+      console.log('resultscece', result);
+      console.log('resultscece', result._id);
+      if (!result || !result._id) {
         throw new Error('User not authenticated or user ID missing');
       }
 
       try {
-        const userInfo = await authService.getUserInfo(req.user.id);
+        const userInfo = await authService.getUserInfo(result._id);
+        console.log(userInfo, 'userInfo');
+
         return { userInfo }; // Ensure this matches your GraphQL schema expectations
       } catch (error) {
         console.error('Failed to fetch user info:', error);
