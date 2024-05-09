@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
 
 import dotenv from 'dotenv';
-import checkAuth from './Auth/checkAuth.js';
-import verifyToken from './Auth/verifyToken.js';
-import getDashboardData from './Auth/getDashboardData.js';
-import signup from './Auth/signup.js';
-import login from './Auth/login.js';
-import logout from './Auth/logout.js';
-import sendEmailResetPassword from './Auth/sendEmailResetPassword.js';
-import resetForgotNewPassword from './Auth/resetForgotNewPassword.js';
+import checkAuth from './checkAuth.js';
+import verifyToken from './verifyToken.js';
+import getDashboardData from './getDashboardData.js';
+import signup from './signup.js';
+import login from './login.js';
+import logout from './logout.js';
+import sendEmailResetPassword from './sendEmailResetPassword.js';
+import resetForgotNewPassword from './resetForgotNewPassword.js';
 dotenv.config();
 
 interface Context {
