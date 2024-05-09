@@ -341,7 +341,7 @@ export const requestForgotPassword = async (user: App.IUser) => {
  *
  * @throws Will throw an error if the new password cannot be hashed or saved.
  */
-export const requestresetForgotPassword = async (
+export const requestResetForgotPassword = async (
   user: App.IUser,
   newPassword: string,
 ) => {

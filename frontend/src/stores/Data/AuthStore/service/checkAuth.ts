@@ -1,6 +1,5 @@
 // Importations nécessaires
 import client from '$apollo';
-import { writable } from 'svelte/store'; // Importation si nécessaire pour le store
 import { CHECKAUTH } from '$apollo/AuthGQL'; // Importation des requêtes GraphQL
 import { authStore } from '../authStore';
 
@@ -11,7 +10,7 @@ export async function checkAuth() {
         const { data } = await client.query({
             query: CHECKAUTH,
             fetchPolicy: 'network-only'
-        });     
+        });
         
         if (data && data.checkAuth.userId !== null && data.checkAuth.role !== null ) {
             authStore.update(state => ({

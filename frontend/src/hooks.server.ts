@@ -19,6 +19,7 @@ export async function handle({ event, resolve }) {
 
 	if (cookies) {
 		const user = await verifyToken(cookies);
+		console.log(user, 'skhjvgsjkhg');
 		
 		if (user) {
 			event.locals.user = user;

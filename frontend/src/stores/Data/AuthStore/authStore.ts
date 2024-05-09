@@ -40,8 +40,6 @@ function AuthStore() {
         updateUserInfo,
         getDashboardData,
         requestAccountDeletion,
-        // sessions,
-        // sessionID
     };
 }
 
