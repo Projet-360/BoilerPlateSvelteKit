@@ -1,7 +1,7 @@
 // Importations
 import { writable} from 'svelte/store';
 
-import { checkAuth } from './service/checkAuth';
+import { checkAuthAPI } from './service/checkAuthAPI';
 import { signup } from './service/signup';
 import { login } from './service/login';
 import { logout } from './service/logout';
@@ -30,11 +30,12 @@ function AuthStore() {
         subscribe,
         set,
         update, 
+
         signup,
         verifyToken,
         login,
         logout,
-        checkAuth,
+        checkAuthAPI,
         sendEmailResetPassword,
         ResetForgotNewPassword,
         updateUserInfo,

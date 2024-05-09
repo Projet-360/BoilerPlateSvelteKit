@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import * as authService from '../../../services/authService.js';
-import BlacklistedToken from '../../../models/BlacklistedTokenModel.js';
+import * as authService from '../../../../services/authService.js';
+import BlacklistedToken from '../../../../models/BlacklistedTokenModel.js';
 
-const checkAuth = async (req: Request, res: Response) => {
+const checkAuthResolver = async (req: Request, res: Response) => {
   const tokenKey = process.env.TOKEN_NAME as string;
   const token = req.cookies[tokenKey];
 
@@ -33,4 +33,4 @@ const checkAuth = async (req: Request, res: Response) => {
   }
 };
 
-export default checkAuth;
+export default checkAuthResolver;

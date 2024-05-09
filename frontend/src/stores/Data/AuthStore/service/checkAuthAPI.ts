@@ -1,14 +1,14 @@
 // Importations nécessaires
 import client from '$apollo';
-import { CHECKAUTH } from '$apollo/Auth/checkAuth';
+import { checkAuthGQL } from '$apollo/Auth/checkAuthGQL';
 import { authStore } from '../authStore';
 
 
 // Définition de la fonction checkAuth
-export async function checkAuth() {
+export async function checkAuthAPI() {
     try {
         const { data } = await client.query({
-            query: CHECKAUTH,
+            query: checkAuthGQL,
             fetchPolicy: 'network-only'
         });
         

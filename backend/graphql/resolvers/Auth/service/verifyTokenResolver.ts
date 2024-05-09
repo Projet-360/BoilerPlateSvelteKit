@@ -1,8 +1,8 @@
-import * as authService from '../../../services/authService.js';
-import logger from '../../../services/logger.js';
-import CustomError from '../../../errors/CustomError.js';
+import * as authService from '../../../../services/authService.js';
+import logger from '../../../../services/logger.js';
+import CustomError from '../../../../errors/CustomError.js';
 
-const verifyToken = async (token: string) => {
+const verifyTokenResolver = async (token: string) => {
   try {
     const verified = await authService.verifyToken(token);
 
@@ -16,5 +16,4 @@ const verifyToken = async (token: string) => {
     throw new CustomError('TokenVerificationError', error.message, 400);
   }
 };
-
-export default verifyToken;
+export default verifyTokenResolver;

@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import * as authService from '../../../services/authService.js';
-import { Session } from '../../../models/sessionModel.js';
-import CustomError from '../../../errors/CustomError.js';
+import * as authService from '../../../../services/authService.js';
+import { Session } from '../../../../models/sessionModel.js';
+import CustomError from '../../../../errors/CustomError.js';
 
-const login = async (
+const loginResolver = async (
   email: string,
   password: string,
   fingerPrint: any,
@@ -61,5 +61,4 @@ const login = async (
     throw new CustomError('LoginError', error.message, 400);
   }
 };
-
-export default login;
+export default loginResolver;

@@ -63,7 +63,7 @@
 		// Détermine le premier chargement de l'application
 		setFirstOpen(true);
 
-		authStore.checkAuth()
+		authStore.checkAuthAPI()
 
 		
 		// Test de chargement de ressource au démarrage de l'application

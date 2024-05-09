@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import BlacklistedToken from '../../../models/BlacklistedTokenModel.js';
-import CustomError from '../../../errors/CustomError.js';
+import BlacklistedToken from '../../../../models/BlacklistedTokenModel.js';
+import CustomError from '../../../../errors/CustomError.js';
 
-const logout = async (req: Request, res: Response) => {
+const logoutResolver = async (req: Request, res: Response) => {
   try {
     const token = req.cookies[process.env.TOKEN_NAME as string];
 
@@ -19,5 +19,4 @@ const logout = async (req: Request, res: Response) => {
     throw new CustomError('LogoutError', error.message, 400);
   }
 };
-
-export default logout;
+export default logoutResolver;

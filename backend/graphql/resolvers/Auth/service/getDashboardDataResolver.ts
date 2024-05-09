@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import * as authService from '../../../services/authService.js';
+import * as authService from '../../../../services/authService.js';
 
-const getDashboardData = async (req: Request) => {
+const getDashboardDataResolver = async (req: Request) => {
   const tokenKey = process.env.TOKEN_NAME as string;
   const token = req.cookies[tokenKey];
   console.log('token', token);
@@ -33,5 +33,4 @@ const getDashboardData = async (req: Request) => {
     throw new Error('Failed to fetch user info');
   }
 };
-
-export default getDashboardData;
+export default getDashboardDataResolver;

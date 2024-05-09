@@ -1,9 +1,13 @@
 import { Request, Response } from 'express';
-import * as authService from '../../../services/authService.js';
-import logger from '../../../services/logger.js';
-import CustomError from '../../../errors/CustomError.js';
+import * as authService from '../../../../services/authService.js';
+import logger from '../../../../services/logger.js';
+import CustomError from '../../../../errors/CustomError.js';
 
-const signup = async (username: string, email: string, password: string) => {
+const signupResolver = async (
+  username: string,
+  email: string,
+  password: string,
+) => {
   try {
     // Vérifier si l'email existe déjà
     await authService.checkEmailExists(email);
@@ -34,5 +38,4 @@ const signup = async (username: string, email: string, password: string) => {
     throw new CustomError('SignupError', error.message, 400);
   }
 };
-
-export default signup;
+export default signupResolver;
