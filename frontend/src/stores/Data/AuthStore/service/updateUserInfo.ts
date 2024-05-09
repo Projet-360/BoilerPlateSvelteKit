@@ -6,7 +6,6 @@ import { authStore } from "../authStore";
 
 export async function updateUserInfo(userInfo: App.UserInfo, $t: App.TranslationFunction) {
     try {
-        const headers = new Headers();
         const { data } = await client.mutate({
             mutation: UPDATEUSERINFO,
             variables: { userInfo }

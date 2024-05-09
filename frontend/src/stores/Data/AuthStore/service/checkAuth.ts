@@ -2,10 +2,8 @@
 import client from '$apollo';
 import { writable } from 'svelte/store'; // Importation si nécessaire pour le store
 import { CHECKAUTH } from '$apollo/AuthGQL'; // Importation des requêtes GraphQL
+import { authStore } from '../authStore';
 
-// Supposons que `update` est une méthode de mise à jour de votre store Svelte.
-// Si `update` est une méthode personnalisée, assurez-vous de l'importer ou de la définir correctement.
-const { update } = writable<App.IAuthStore>();
 
 // Définition de la fonction checkAuth
 export async function checkAuth() {
@@ -16,7 +14,7 @@ export async function checkAuth() {
         });     
         
         if (data && data.checkAuth.userId !== null && data.checkAuth.role !== null ) {
-            update(state => ({
+            authStore.update(state => ({
                 ...state,
                 userId: data.checkAuth.userId,
                 role: data.checkAuth.role,

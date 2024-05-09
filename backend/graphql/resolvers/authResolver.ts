@@ -35,7 +35,6 @@ export const authResolver = {
       }
 
       const result = await authService.checkAuthService(token);
-      console.log('result', result);
 
       if (result.isAuthenticated) {
         return {
@@ -68,20 +67,30 @@ export const authResolver = {
     getDashboardData: async (_: any, __: any, { req }: Context) => {
       const tokenKey = process.env.TOKEN_NAME as string;
       const token = req.cookies[tokenKey];
-      console.log('req.user', req.user);
+      console.log('token', token);
       const result = await authService.checkAuthService(token);
 
-      console.log('resultscece', result);
-      console.log('resultscece', result._id);
       if (!result || !result._id) {
         throw new Error('User not authenticated or user ID missing');
       }
 
       try {
         const userInfo = await authService.getUserInfo(result._id);
-        console.log(userInfo, 'userInfo');
 
-        return { userInfo }; // Ensure this matches your GraphQL schema expectations
+        const dataReturn: App.GetDashboardDataResponse = {
+          userId: userInfo.id,
+          role: userInfo.role,
+          sessionId: 'session wip',
+          isVerified: userInfo.isVerified,
+          userData: {
+            username: userInfo.username as string,
+            email: userInfo.email as string,
+          },
+        };
+
+        console.log('dataReturn', dataReturn);
+
+        return dataReturn; // Ensure this matches your GraphQL schema expectations
       } catch (error) {
         console.error('Failed to fetch user info:', error);
         throw new Error('Failed to fetch user info');

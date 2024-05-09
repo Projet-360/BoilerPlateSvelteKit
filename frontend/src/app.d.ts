@@ -51,6 +51,17 @@ declare namespace App {
 		role: string;
 	}
 
+	interface GetDashboardData {
+		userId: string;
+		role: string;
+		sessionId: string;
+		isVerified: boolean;
+		userData: {
+		  username: string;
+		  email: string;
+		};
+	  }
+
 	interface AnimationOptions {
 		x?: number;
 		y?: number;

@@ -3,11 +3,8 @@ import client from "$apollo";
 import { LOGIN } from "$apollo/AuthGQL";
 import { collectFingerprint } from "$lib/js/fingerPrint";
 import notificationStore from "$stores/UX/notificationStore";
-import { writable } from "svelte/store";
 import { handleErrors } from "./handleErrors";
-
-
-const { set } = writable<App.IAuthStore>();
+import { authStore } from "../authStore";
 
 export async function login(email: string, password: string, $t: App.TranslationFunction) {
     try {
@@ -19,7 +16,7 @@ export async function login(email: string, password: string, $t: App.Translation
         });
         
         if (data.login && data.login.userId && data.login.role && data.login.sessionId) {
-            set({   
+            authStore.set({   
                 userId: data.login.userId,
                 currentSessionId: data.login.sessionId,
                 role: data.login.role,

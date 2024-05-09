@@ -14,7 +14,7 @@ import { requestAccountDeletion } from './service/requestAccountDeletion';
 
 // Initialisation du store
 function AuthStore() {
-    const { subscribe } = writable<App.IAuthStore>({
+    const { subscribe, set, update } = writable<App.IAuthStore>({
         userId: null,
         currentSessionId: undefined,
         role: null,
@@ -28,6 +28,8 @@ function AuthStore() {
 
     return {
         subscribe,
+        set,
+        update, 
         signup,
         verifyToken,
         login,

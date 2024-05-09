@@ -4,7 +4,7 @@ export const authType = gql`
   type Query {
     verifyToken(token: String!): MessageResponse
     checkAuth: CheckAuth
-    getDashboardData: MessageResponse
+    getDashboardData: getDashboardDataResponse
   }
 
   type Mutation {
@@ -39,6 +39,14 @@ export const authType = gql`
 
   type MessageResponse {
     message: String
+  }
+
+  type getDashboardDataResponse {
+    userId: String
+    role: String
+    sessionId: String
+    isVerified: Boolean
+    userData: UserData
   }
 
   type LoginResponse {

@@ -117,7 +117,14 @@ mutation CloseUserSession($sessionId: ID!) {
 export const GETDASHBOARDDATA = gql`
 query GetDashboardData {
     getDashboardData {
-      message
+      userId
+      role
+      sessionId
+      isVerified
+      userData {
+        username
+        email
+      }
     }
   }
 `

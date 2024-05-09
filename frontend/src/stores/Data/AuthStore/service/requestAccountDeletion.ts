@@ -5,7 +5,6 @@ import notificationStore from "$stores/UX/notificationStore";
 
 export async function requestAccountDeletion(id: string, $t: App.TranslationFunction) {
     try {
-        const headers = new Headers();
         const { data } = await client.mutate({
             mutation: REQUEST_ACCOUNT_DELETION,
             variables: { id }

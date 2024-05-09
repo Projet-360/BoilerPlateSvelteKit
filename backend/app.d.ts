@@ -83,6 +83,17 @@ declare global {
       };
     }
 
+    export interface GetDashboardDataResponse {
+      userId: string;
+      role?: string;
+      sessionId: string;
+      isVerified?: boolean;
+      userData: {
+        username: string;
+        email: string;
+      };
+    }
+
     interface Context {
       req: Request;
       res: Response;

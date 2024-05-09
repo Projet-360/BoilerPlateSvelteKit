@@ -6,7 +6,7 @@
 	import { t } from '$UITools/Translations/index';
 	import SessionAccount from '$components/sessionAccount.svelte';
 
-	let userData: App.User;
+	let userData: App.GetDashboardData;
 	let id: string = '';
 	let username: string = '';
 	let email: string = '';
@@ -20,7 +20,7 @@
 			userData = data;
 			console.log(data);
 			
-			({ id, username, email, role, isVerified } = userData.userInfo);
+			// ({ _id, name, email, role, isVerified } = userData);
 		} catch (error) {
 			console.error("Erreur lors de la mise à jour des informations de l'utilisateur :", error);
 		}
@@ -37,8 +37,14 @@
 	onMount(async () => {
 		try {
 			const data = await authStore.getDashboardData();
-			userData = data;
-			({ id, username, email, role, isVerified } = userData.userInfo);
+			userData = data.getDashboardData;
+			console.log('userData', userData.userId);
+
+			(
+				id = userData.userId,
+				{ username, email } = userData.userData,
+				{ role, isVerified } = userData
+			);
 		} catch (error) {
 			console.error('Error:', error);
 		}
@@ -70,7 +76,7 @@
 				<button on:click={handleUpdate}>Mettre à jour</button>
 			</form>
 
-			<SessionAccount />
+			<!-- <SessionAccount /> -->
 		{:else}
 			<h2>{$t('user.loader')}</h2>
 		{/if}
