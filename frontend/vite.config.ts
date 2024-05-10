@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 
+
 dotenv.config(); // This loads the .env file at the root of your project
 
 const keyPath = process.env.KEYPATH;
@@ -32,7 +33,8 @@ const config = {
         https: {
             key: fs.readFileSync(keyPath),
             cert: fs.readFileSync(certPath)
-        }
+        },
+        proxy: {},
     }
 };
 
