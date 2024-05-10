@@ -1,6 +1,4 @@
 import rateLimit from 'express-rate-limit';
-import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
-import { messageReturn } from '../constants/errorMessages.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -14,8 +12,8 @@ export const rateLimiter = rateLimit({
   windowMs: RATE_LIMIT_WINDOW_MS,
   max: RATE_LIMIT_MAX_REQUESTS,
   handler: function (req, res) {
-    res.status(HTTP_STATUS.TOO_MANY_REQUESTS).json({
-      message: messageReturn.RATE_LIMIT,
+    res.status(429).json({
+      message: 'RATE_LIMIT',
     });
   },
 });
@@ -27,8 +25,8 @@ export const bruteForceRateLimiter = rateLimit({
   windowMs: BRUTE_FORCE_WINDOW_MS,
   max: BRUTE_FORCE_MAX_REQUESTS,
   handler: function (req, res) {
-    res.status(HTTP_STATUS.TOO_MANY_REQUESTS).json({
-      message: messageReturn.RATE_LIMIT,
+    res.status(429).json({
+      message: 'RATE_LIMIT',
     });
   },
 });

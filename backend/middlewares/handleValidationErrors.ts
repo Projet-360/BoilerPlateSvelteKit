@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { validationResult } from 'express-validator';
-import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
-import CustomError from './../errors/CustomError.js';
+import CustomError from '../services/errors/CustomError.js';
 
 // Middleware function to handle validation errors
 export const handleValidationErrors = (
@@ -22,7 +21,7 @@ export const handleValidationErrors = (
     const validationError = new CustomError(
       'ValidationError',
       errorMessages,
-      HTTP_STATUS.BAD_REQUEST,
+      400,
     );
 
     // Pass the validation error to the next middleware

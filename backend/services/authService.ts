@@ -6,14 +6,13 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import crypto, { randomBytes } from 'crypto';
 
 import dotenv from 'dotenv';
-
-import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
+dotenv.config();
 
 import { User } from '../models/UserModel.js';
 import EmailVerificationToken from '../models/EmailVerificationTokenModel.js';
 import BlacklistedToken from '../models/BlacklistedTokenModel.js';
 
-import CustomError from './../errors/CustomError.js';
+import CustomError from './errors/CustomError.js';
 
 import {
   sendVerificationEmail,
@@ -21,8 +20,6 @@ import {
 } from './emailService.js';
 
 import logger from './logger.js';
-
-dotenv.config();
 
 // Function to generate a random token
 const generateToken = () => {
@@ -132,7 +129,7 @@ export const checkEmailExists = async (email: string) => {
   console.log(existingUserByEmail);
 
   if (existingUserByEmail) {
-    throwError('EMAIL_EXIST', 'EMAIL_EXIST', HTTP_STATUS.BAD_REQUEST);
+    throwError('EMAIL_EXIST', 'EMAIL_EXIST', 400);
   }
 };
 

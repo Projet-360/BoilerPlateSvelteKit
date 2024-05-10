@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as authService from '../../../../services/authService.js';
 import { Session } from '../../../../models/sessionModel.js';
-import CustomError from '../../../../errors/CustomError.js';
+import CustomError from '../../../../services/errors/CustomError.js';
 
 const loginResolver = async (
   email: string,

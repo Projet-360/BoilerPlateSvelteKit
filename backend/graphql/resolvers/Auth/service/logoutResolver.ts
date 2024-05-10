@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import BlacklistedToken from '../../../../models/BlacklistedTokenModel.js';
-import CustomError from '../../../../errors/CustomError.js';
+import CustomError from '../../../../services/errors/CustomError.js';
 
 const logoutResolver = async (req: Request, res: Response) => {
   try {

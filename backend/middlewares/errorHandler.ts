@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express'; // Import types from express
-import { HTTP_STATUS } from '../constants/HTTP_STATUS.js';
-import CustomError from './../errors/CustomError.js';
+import CustomError from '../services/errors/CustomError.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -16,7 +15,7 @@ const errorHandler = (
 ) => {
   console.error(err.stack);
 
-  let statusCode = HTTP_STATUS.INTERNAL_SERVER_ERROR; // Default to Internal Server Error
+  let statusCode = 500; // Default to Internal Server Error
 
   // Check if the error is an instance of CustomError
   if (err instanceof CustomError) {
@@ -26,7 +25,7 @@ const errorHandler = (
 
   // If the error is not a CustomError but has the name 'ValidationError', set status to Bad Request
   if (err.name === 'ValidationError') {
-    statusCode = HTTP_STATUS.BAD_REQUEST;
+    statusCode = 400;
   }
 
   // Determine the error message based on the environment

@@ -1,6 +1,6 @@
 import * as authService from '../../../../services/authService.js';
 import logger from '../../../../services/logger.js';
-import CustomError from '../../../../errors/CustomError.js';
+import CustomError from '../../../../services/errors/CustomError.js';
 
 const verifyTokenResolver = async (token: string) => {
   try {

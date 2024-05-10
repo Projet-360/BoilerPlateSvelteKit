@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { User } from '../../../../models/UserModel.js';
 import * as authService from '../../../../services/authService.js';
-import CustomError from '../../../../errors/CustomError.js';
+import CustomError from '../../../../services/errors/CustomError.js';
 
 const sendEmailResetPasswordResolver = async (
   email: string,
