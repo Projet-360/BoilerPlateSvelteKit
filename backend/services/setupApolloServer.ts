@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { typeDefs } from './graphql/schemas/index.js';
-import { resolvers } from './graphql/resolvers/index.js';
+import { typeDefs } from '../graphql/schemas/index.js';
+import { resolvers } from '../graphql/resolvers/index.js';
 
 /**
  * Sets up the Apollo Server for the application.

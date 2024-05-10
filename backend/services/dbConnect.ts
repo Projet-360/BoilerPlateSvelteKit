@@ -1,7 +1,7 @@
 // Importation des modules nécessaires
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import logger from './services/logger.js';
+import logger from './logger.js';
 
 // Activation de la configuration à partir des variables d'environnement
 dotenv.config();

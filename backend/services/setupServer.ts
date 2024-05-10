@@ -1,7 +1,7 @@
-import { setupHttpsServer } from './config/https.js';
+import { setupHttpsServer } from '../config/https.js';
 import connectDB from './dbConnect.js';
 import express from 'express';
-import initSocket from './services/socket.js';
+import initSocket from './socket.js';
 
 /**
  * Initializes the server by connecting to the database, setting up Express app, HTTPS server, and Socket connection.

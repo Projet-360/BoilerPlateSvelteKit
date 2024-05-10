@@ -1,6 +1,6 @@
 import { MongoClient, ObjectId } from 'mongodb';
 import dotenv from 'dotenv';
-import logger from './services/logger.js';
+import logger from './logger.js';
 
 dotenv.config();
 

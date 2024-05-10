@@ -1,8 +1,8 @@
 import applyMiddlewares from './middlewares/middlewares.js';
-import setupServer from './setupServer.js';
-import setupApolloServer from './setupApolloServer.js';
-import startApolloServer from './startApolloServer.js';
-import killServer from './killServer.js';
+import setupServer from './services/setupServer.js';
+import setupApolloServer from './services/setupApolloServer.js';
+import startApolloServer from './services/startApolloServer.js';
+import killServer from './services/killServer.js';
 
 import dotenv from 'dotenv';
 dotenv.config();

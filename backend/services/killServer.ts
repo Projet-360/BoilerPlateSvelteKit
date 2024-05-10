@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import logger from './services/logger.js';
+import logger from './logger.js';
 
 /**
  * A function that handles graceful shutdown of the server.

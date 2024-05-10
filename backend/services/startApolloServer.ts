@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server-express';
 import { Server as HttpsServer } from 'https';
 import { Server as IOServer } from 'socket.io';
-import logger from './services/logger.js';
+import logger from './logger.js';
 
 const startApolloServer = async (
   apolloServer: ApolloServer,
