@@ -1,6 +1,6 @@
 import fs from 'fs';
 import https from 'https';
-import type { Express } from 'express'; // Importe le type Express pour une meilleure intégration avec TypeScript
+import type { Application } from 'express'; // Importe le type Express pour une meilleure intégration avec TypeScript
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -12,7 +12,7 @@ dotenv.config();
  * @param app L'application Express à laquelle le serveur HTTPS sera lié.
  * @returns Le serveur HTTPS configuré.
  */
-export function setupHttpsServer(app: Express): https.Server {
+export function setupHttpsServer(app: Application): https.Server {
   // Vérifier si les chemins des clés et des certificats sont définis dans les variables d'environnement
   if (!process.env.KEYPATH || !process.env.CERTPATH) {
     console.error(

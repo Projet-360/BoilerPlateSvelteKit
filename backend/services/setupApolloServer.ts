@@ -1,16 +1,16 @@
-import { Request, Response, NextFunction } from 'express';
+import { Server as IOServer } from 'socket.io';
+import { Request, Response, NextFunction, Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { typeDefs } from '../graphql/schemas/index.js';
 import { resolvers } from '../graphql/resolvers/index.js';
-
 /**
  * Sets up the Apollo Server for the application.
  *
  * @param {any} app - The Express application.
- * @param {any} io - The Socket.IO instance.
+ * @param {IOServer} io - The Socket.IO instance.
  * @return {void} This function does not return a value.
  */
-const setupApolloServer = (app: any, io: any) => {
+const setupApolloServer = (app: Application, io: IOServer) => {
   app.use((req: Request, res: Response, next: NextFunction) => {
     req.apolloContext = { next };
     next();

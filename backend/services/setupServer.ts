@@ -1,6 +1,6 @@
 import { setupHttpsServer } from '../config/https.js';
 import connectDB from './dbConnect.js';
-import express from 'express';
+import express, { Application } from 'express';
 import initSocket from './socket.js';
 
 /**
@@ -12,7 +12,7 @@ const setupServer = () => {
   connectDB();
 
   // Initialize the Express app
-  const app: any = express();
+  const app: Application = express();
 
   // Setup the HTTPS
   const server = setupHttpsServer(app);
