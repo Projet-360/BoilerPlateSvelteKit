@@ -1,4 +1,3 @@
-// Importation des modules nécessaires
 import fs from 'fs';
 import https from 'https';
 import type { Express } from 'express'; // Importe le type Express pour une meilleure intégration avec TypeScript

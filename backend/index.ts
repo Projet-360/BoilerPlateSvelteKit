@@ -7,9 +7,9 @@ import { resolvers } from './graphql/resolvers/index.js';
 
 import initSocket from './services/socket.js';
 
-import connectDB from './dbConnect.js'; // Database connection module
+import connectDB from './dbConnect.js';
 
-import applyMiddlewares from './middlewares/middlewares.js'; // Application middlewares
+import applyMiddlewares from './middlewares/middlewares.js';
 import logger from './services/logger.js';
 import { setupHttpsServer } from './config/https.js';
 

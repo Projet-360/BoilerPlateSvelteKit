@@ -1,16 +1,26 @@
-// Import the required modules
+// Importation des modules nécessaires
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import logger from './services/logger.js';
 
+// Activation de la configuration à partir des variables d'environnement
 dotenv.config();
 
-// Asynchronous function to connect to the MongoDB database
+/**
+ * Asynchronous function to connect to the MongoDB database.
+ * It reads the database connection string from the environment variables,
+ * attempts to connect to MongoDB using the Mongoose library, and logs the outcome.
+ *
+ * @async
+ * @function connectDB
+ * @returns {Promise<void>} A promise that resolves if the connection is successful, or rejects with an error.
+ */
 const connectDB = async () => {
   try {
+    // Construction de l'URI de connexion à partir des variables d'environnement
     const mongoURI = `${process.env.MONGO_ONLINE}${process.env.DATABASE_NAME}`;
 
-    // Attempt to connect to MongoDB using the determined URL
+    // Tentative de connexion à la base de données MongoDB
     await mongoose.connect(
       mongoURI as string,
       {
@@ -19,14 +29,15 @@ const connectDB = async () => {
       } as any,
     );
 
-    // Log success message if the connection is established
+    // Enregistrement d'un message de succès si la connexion est établie
     logger.info('Connected to MongoDB');
   } catch (err) {
-    // Log the error message if the connection fails
+    // Enregistrement du message d'erreur en cas d'échec de la connexion
     logger.error('Failed to connect to MongoDB', err);
-    // Either propagate the error or return a rejected Promise
-    return Promise.reject(err);
+    // Propagation de l'erreur
+    throw err;
   }
 };
 
+// Exportation de la fonction connectDB pour utilisation dans d'autres parties de l'application
 export default connectDB;
