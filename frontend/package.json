@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "concurrently \"vite dev\" \"npm run prettier:watch\"",
-    "prettier:watch": "chokidar '**/*.js' '**/*.ts' '**/*.svelte' '**/*.scss' --command 'npm run prettier -- {path}'",
+    "prettier:watch": "chokidar \"src/**/*.{js,ts,svelte,scss}\" --command \"npx prettier --write {path}\"",
     "prettier": "prettier --write",
     "build": "vite build",
     "preview": "vite preview",
@@ -25,7 +25,7 @@
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
     "autoprefixer": "latest",
-    "chokidar-cli": "latest",
+    "chokidar-cli": "^3.0.0",
     "concurrently": "latest",
     "eslint": "latest",
     "eslint-config-prettier": "latest",

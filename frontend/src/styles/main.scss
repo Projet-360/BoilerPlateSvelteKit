@@ -1,17 +1,17 @@
 /* Variables and mixins declared here will be available in all other SCSS files */
 //C:\wamp64\www\BoilerPlateSvelteKit\src\CSS\utils\_variables.scss
-@import "./src/styles/utils/variables";
-@import "./src/styles/utils/functions";
-@import "./src/styles/utils/breackpoints";
-@import "./src/styles/utils/flex";
-@import "./src/styles/utils/mixins";
-@import "./src/styles/utils/vendors";
+@import './src/styles/utils/variables';
+@import './src/styles/utils/functions';
+@import './src/styles/utils/breackpoints';
+@import './src/styles/utils/flex';
+@import './src/styles/utils/mixins';
+@import './src/styles/utils/vendors';
 
-@import "./src/styles/base/fonts";
-@import "./src/styles/base/reset";
-@import "./src/styles/base/normalize";
+@import './src/styles/base/fonts';
+@import './src/styles/base/reset';
+@import './src/styles/base/normalize';
 
-@import "./base/darkMode";
+@import './base/darkMode';
 
 // @import './shared/links';
 // @import './shared/sections';Nous allons intégrer
@@ -113,9 +113,8 @@ main {
   display: block;
 }
 
-
 :root {
-	view-transition-name: none;
+  view-transition-name: none;
 }
 
 .logo {
