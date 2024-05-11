@@ -62,6 +62,11 @@ export declare namespace App {
 		canvasFingerprint: string;
 		localIPs: string[];
 	};
+
+	interface GreetingInput {
+		name: string;
+		message: string;
+	  }
 	
 	export interface userData {
 		username: string | null;

@@ -13,9 +13,7 @@
 		"moduleResolution": "Bundler"
 	},
 	"include": [
-		"./src/**/*.ts",
-		"./src/**/*.d.ts",
-		"./../../Types/app.d.ts",
-		"./../../**/*.d.ts",
+		"./../**/*.ts",
+		"./../../**/*.d.ts"
 	]
 }
