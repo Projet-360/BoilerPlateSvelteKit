@@ -12,7 +12,10 @@
     "strict": true,
     "skipLibCheck": true,
     "typeRoots": ["./node_modules/@types", "./"],
-    "types": ["./app.d.ts"],
+    "types": [
+      "./../Types/app.d.ts",
+      "./../**/*.d.ts",
+    ],
     "noEmit": true
   }
 }

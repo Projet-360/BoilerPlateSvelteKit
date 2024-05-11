@@ -1,7 +1,45 @@
-// See https://kit.svelte.dev/docs/types#app
-// for information about these interfaces
+// app.d.ts
+import mongoose from 'mongoose';
+import { NextFunction } from 'express';
 
-declare namespace App {
+export declare namespace App {
+
+	interface IUser extends mongoose.Document {
+		_id: mongoose.Schema.Types.ObjectId;
+		username: string;
+		email: string;
+		password: string;
+		isVerified?: boolean;
+		resetToken?: string;
+		resetTokenExpiration?: Date;
+		deleteToken?: string; // Ajout pour la suppression du compte
+		deleteTokenExpiration?: Date; // Ajout pour la suppression du compte
+		role?: 'user' | 'admin' | 'moderator';
+	}
+
+	interface ISession extends Document {
+		userId: mongoose.Schema.Types.ObjectId; // ou string si vous n'utilisez pas ObjectId
+		userAgent: string; // la chaîne complète du User Agent
+		browser: {
+		name: string | null;
+		version: string | null;
+		};
+		os: {
+		name: string | null;
+		version: string | null;
+		};
+		device: string; // 'unknown' si non identifié ou le type de l'appareil
+		ip: string;
+		createdAt: Date;
+	}
+
+	interface Context {
+		req: Request;
+		res: Response;
+		next: NextFunction;
+		io: any;
+	}
+
 	type Greeting = {
 		id: string;
 		name: string;
@@ -75,15 +113,26 @@ declare namespace App {
 		type: string; // ou enum si vous avez des types spécifiques
 	}
 
-	interface ApiCallOptions {
-		url: string;
-		method?: string;
-		headers?: Headers | Record<string, string> | null;
-		body?: Record<string, any> | null;
-		credentials?: RequestCredentials | null;
-		handleSuccess?: ((data: any) => void) | null;
-		handleError?: ((error: any) => void) | null;
+	export type TranslationFunction = (key: string, options?: any) => string;
+	
+	namespace Express {
+		interface Request {
+			user?: App.IUser;
+		}
+	}
+	  
+	interface ResetForgotNewPasswordArgs {
+	token: string;
+	newPassword: string;
+	confirmPassword: string;
 	}
 
-	export type TranslationFunction = (key: string, options?: any) => string;
+	
+	namespace Express {
+		interface Request {
+			apolloContext?: {
+			next: NextFunction;
+			};
+		}
+	}
 }
