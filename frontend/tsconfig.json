@@ -9,8 +9,7 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"types": ["src/app.d.ts"],
-		"moduleResolution": "Bundler"
+		"moduleResolution": "node"
 	},
 	"include": [
 		"./../**/*.ts",
