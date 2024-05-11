@@ -1,0 +1,208 @@
+// app.d.ts
+import mongoose from 'mongoose';
+import { NextFunction } from 'express';
+
+declare global {
+  namespace App {
+    type FingerprintData = {
+      userAgent: string;
+      screenResolution: string;
+      timezone: string;
+      webglVendor: string | undefined;
+      webglRenderer: string | undefined;
+      canvasFingerprint: string;
+      localIPs: string[];
+    };
+
+    interface IUser extends mongoose.Document {
+      _id: mongoose.Schema.Types.ObjectId;
+      username: string;
+      email: string;
+      password: string;
+      isVerified?: boolean;
+      resetToken?: string;
+      resetTokenExpiration?: Date;
+      deleteToken?: string; // Ajout pour la suppression du compte
+      deleteTokenExpiration?: Date; // Ajout pour la suppression du compte
+      role?: 'user' | 'admin' | 'moderator';
+      // ... autres méthodes et propriétés
+    }
+
+    interface ISession extends Document {
+      userId: mongoose.Schema.Types.ObjectId; // ou string si vous n'utilisez pas ObjectId
+      userAgent: string; // la chaîne complète du User Agent
+      browser: {
+        name: string | null;
+        version: string | null;
+      };
+      os: {
+        name: string | null;
+        version: string | null;
+      };
+      device: string; // 'unknown' si non identifié ou le type de l'appareil
+      ip: string;
+      createdAt: Date;
+    }
+
+    interface Context {
+      req: Request;
+      res: Response;
+      next: NextFunction;
+      io: any;
+    }
+
+    interface SignupArgs {
+      username: string;
+      email: string;
+      password: string;
+    }
+
+    interface LoginArgs {
+      email: string;
+      password: string;
+      fingerPrint: FingerprintData;
+    }
+
+    interface TokenArgs {
+      token: string;
+    }
+
+    interface GreetingInput {
+      name: string;
+      message: string;
+    }
+
+    export interface LoginResponse {
+      userId: string;
+      role?: string;
+      sessionId: string;
+      userData: {
+        username: string;
+        email: string;
+      };
+    }
+
+    export interface GetDashboardDataResponse {
+      userId: string;
+      role?: string;
+      sessionId: string;
+      isVerified?: boolean;
+      userData: {
+        username: string;
+        email: string;
+      };
+    }
+
+    interface Context {
+      req: Request;
+      res: Response;
+      next: NextFunction;
+      io: any;
+    }
+
+    interface ResetForgotNewPasswordArgs {
+      token: string;
+      newPassword: string;
+      confirmPassword: string;
+    }
+  }
+
+  namespace Express {
+    interface Request {
+      user?: App.IUser;
+    }
+  }
+
+  namespace Express {
+    interface Request {
+      apolloContext?: {
+        next: NextFunction;
+      };
+    }
+  }
+
+  type Greeting = {
+    id: string;
+    name: string;
+    message: string;
+    _id?: string; // `_id` est optionnel, utilisé principalement pour le mapping initial.
+  };
+
+  interface Session {
+    sessionId: string;
+    device: string; // Exemple: 'Desktop - Chrome'
+    lastActive: Date;
+  }
+
+  type FingerprintData = {
+    userAgent: string;
+    screenResolution: string;
+    timezone: string;
+    webglVendor: string | undefined;
+    webglRenderer: string | undefined;
+    canvasFingerprint: string;
+    localIPs: string[];
+  };
+
+  export interface userData {
+    username: string | null;
+    email: string | null;
+  }
+
+  export interface IAuthStore {
+    userId: string | null;
+    role: string | null;
+    isAuthenticated: boolean;
+    currentSessionId?: string; // L'identifiant de la session actuelle
+    sessions?: Session[]; // Une liste de toutes les sessions actives de l'utilisateur
+    userData: userData;
+  }
+
+  interface UserInfo {
+    name: string;
+    email: string;
+  }
+
+  interface User {
+    _id: string;
+    username: string;
+    email: string;
+    role: string;
+  }
+
+  interface GetDashboardData {
+    userId: string;
+    role: string;
+    sessionId: string;
+    isVerified: boolean;
+    userData: {
+      username: string;
+      email: string;
+    };
+  }
+
+  interface AnimationOptions {
+    x?: number;
+    y?: number;
+    duration: number;
+    delay?: number;
+  }
+
+  interface Notification {
+    id: number;
+    message: string;
+    type: string; // ou enum si vous avez des types spécifiques
+  }
+
+  interface ApiCallOptions {
+    url: string;
+    method?: string;
+    headers?: Headers | Record<string, string> | null;
+    body?: Record<string, any> | null;
+    credentials?: RequestCredentials | null;
+    handleSuccess?: ((data: any) => void) | null;
+    handleError?: ((error: any) => void) | null;
+  }
+
+  export type TranslationFunction = (key: string, options?: any) => string;
+}
