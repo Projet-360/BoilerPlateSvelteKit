@@ -4,12 +4,23 @@
 
   let isAuthenticated: boolean
 
-  authStore.subscribe(($authStore) => {
+  authStore.subscribe(($authStore: App.IAuthStore) => {
     isAuthenticated = $authStore && $authStore.isAuthenticated ? true : false
   })
 
   function handleLogout() {
     authStore.logoutAPI($t)
+    authStore.set({
+      userId: null,
+      currentSessionId: undefined,
+      role: null,
+      isAuthenticated: false,
+      sessions: [],
+      userData: {
+        username: null,
+        email: null,
+      },
+    })
   }
 </script>
 
