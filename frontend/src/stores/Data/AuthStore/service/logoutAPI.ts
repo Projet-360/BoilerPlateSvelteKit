@@ -2,15 +2,24 @@ import client from '$apollo'
 import { logoutGQL } from '$apollo/Auth/logoutGQL'
 import { goto } from '$app/navigation'
 import notificationStore from '$stores/UX/notificationStore'
-import { writable } from 'svelte/store'
 import { authStore } from '../authStore'
-
-const { set } = writable<App.IAuthStore>()
 
 async function logoutAPI($t: App.TranslationFunction) {
   try {
     const { data } = await client.mutate({
       mutation: logoutGQL,
+    })
+
+    authStore.set({
+      userId: null,
+      currentSessionId: undefined,
+      role: null,
+      isAuthenticated: false,
+      sessions: [],
+      userData: {
+        username: null,
+        email: null,
+      },
     })
 
     notificationStore.addNotification($t('data.logout-logout'), 'success')
