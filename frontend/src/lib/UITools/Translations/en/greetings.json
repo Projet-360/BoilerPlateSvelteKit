@@ -1,7 +1,0 @@
-{
-    "MESSAGE_REQUIRED": "The message field is required.",
-    "GREETING_ADDED": "A new greeting has been added successfully.",
-    "GREETING_GET": "The greeting message has been retrieved.",
-    "GREETING_UPDATED": "The greeting message has been updated successfully.",
-    "GREETING_DELETED": "The greeting message has been deleted successfully."
-}

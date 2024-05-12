@@ -12,7 +12,7 @@ async function requestAccountDeletionAPI(id: string, $t: App.TranslationFunction
         console.log(data);
 
         if (data.success) {
-            notificationStore.addNotification($t('validation.DELETE_ACCOUNT_EMAIL_SENT'), 'success');
+            notificationStore.addNotification($t('data.DELETE_ACCOUNT_EMAIL_SENT'), 'success');
         }
     } catch (error) {
         messageNotification(error, $t);

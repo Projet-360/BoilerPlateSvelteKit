@@ -72,7 +72,7 @@ declare global {
       message: string;
     }
 
-    export interface LoginResponse {
+    interface LoginResponse {
       userId: string;
       role?: string;
       sessionId: string;
@@ -82,7 +82,7 @@ declare global {
       };
     }
 
-    export interface GetDashboardDataResponse {
+    interface GetDashboardDataResponse {
       userId: string;
       role?: string;
       sessionId: string;
@@ -144,12 +144,12 @@ declare global {
     localIPs: string[];
   };
 
-  export interface userData {
+  interface userData {
     username: string | null;
     email: string | null;
   }
 
-  export interface IAuthStore {
+  interface IAuthStore {
     userId: string | null;
     role: string | null;
     isAuthenticated: boolean;

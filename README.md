@@ -148,3 +148,11 @@ netstat -ano | findstr :1000
 
 taskkill /PID <PID> /F
 taskkill /PID 8352 /F
+
+
+
+
+Faire les lang serieux
+Finir les API
+Faire le middleware
+Faire passer les test

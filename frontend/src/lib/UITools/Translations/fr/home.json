@@ -1,5 +1,0 @@
-{
-  "title": "Accueil",
-  "text": "Voici le lien Github <a href=\"{{link}}\">lien</a>",
-  "link": "Exemple de polymorhisme"
-}

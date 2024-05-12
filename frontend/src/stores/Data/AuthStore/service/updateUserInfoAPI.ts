@@ -13,7 +13,7 @@ async function updateUserInfoAPI(userInfo: App.UserInfo, $t: App.TranslationFunc
         console.log(data);
 
         if (data.success) {
-            notificationStore.addNotification($t('validation.UPDATE_SUCCESS'), 'success');
+            notificationStore.addNotification($t('data.UPDATE_SUCCESS'), 'success');
 
             if (data.notification) {
                 notificationStore.addNotification(data.notification, 'success');
@@ -21,7 +21,7 @@ async function updateUserInfoAPI(userInfo: App.UserInfo, $t: App.TranslationFunc
             }
             return data;
         } else {
-            throw new Error($t('validation.UPDATE_FAILURE'));
+            throw new Error($t('data.UPDATE_FAILURE'));
         }
     } catch (error) {
         messageNotification(error, $t);
