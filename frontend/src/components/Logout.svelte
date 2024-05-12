@@ -4,7 +4,7 @@
 
   let isAuthenticated: boolean
 
-  authStore.subscribe(($authStore: App.IAuthStore) => {
+  authStore.subscribe(($authStore: TS.IAuthStore) => {
     isAuthenticated = $authStore && $authStore.isAuthenticated ? true : false
   })
 

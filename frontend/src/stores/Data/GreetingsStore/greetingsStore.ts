@@ -8,14 +8,14 @@ import deleteGreetingAPI from './service/deleteGreetingAPI';
 import setupSocketListeners from './service/setupSocketListeners';
 
 export function GreetingsStore() {
-    const { subscribe, set, update }: Writable<App.Greeting[]> = writable<App.Greeting[]>([]);
+    const { subscribe, set, update }: Writable<TS.Greeting[]> = writable<TS.Greeting[]>([]);
 
     return {
         subscribe,
-        getGreetingsAPI: ($t: App.TranslationFunction) => getGreetingsAPI($t, set),
-        createGreetingAPI: (name: string, message: string, $t: App.TranslationFunction) => createGreetingAPI(name, message, $t),
-        updateGreetingAPI: (id: string, name: string, message: string, $t: App.TranslationFunction) => updateGreetingAPI(id, name, message, $t),
-        deleteGreetingAPI: ( greeting: App.Greeting, $t: App.TranslationFunction) => deleteGreetingAPI(greeting, $t),
+        getGreetingsAPI: ($t: TS.TranslationFunction) => getGreetingsAPI($t, set),
+        createGreetingAPI: (name: string, message: string, $t: TS.TranslationFunction) => createGreetingAPI(name, message, $t),
+        updateGreetingAPI: (id: string, name: string, message: string, $t: TS.TranslationFunction) => updateGreetingAPI(id, name, message, $t),
+        deleteGreetingAPI: ( greeting: TS.Greeting, $t: TS.TranslationFunction) => deleteGreetingAPI(greeting, $t),
         setupSocketListeners: () => setupSocketListeners(update)
     };
 }

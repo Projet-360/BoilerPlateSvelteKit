@@ -20,7 +20,7 @@ const sendEmailResetPasswordResolver = async (
       );
     }
 
-    await authService.requestForgotPassword(user as App.IUser);
+    await authService.requestForgotPassword(user as TS.IUser);
 
     return { message: 'SUCCESS_SENDEMAILRESETPASSWORD' };
   } catch (error: any) {

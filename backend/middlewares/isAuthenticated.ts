@@ -25,7 +25,7 @@ export const isAuthenticated = (
         return res.status(401).json({ error: 'Invalid token' });
       }
 
-      req.user = decoded as App.IUser;
+      req.user = decoded as TS.IUser;
       next();
     },
   );

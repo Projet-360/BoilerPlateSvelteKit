@@ -43,7 +43,7 @@ async function getWebRTCIPs(): Promise<string[]> {
 }
 
 
-export async function collectFingerprint(): Promise<App.FingerprintData> {
+export async function collectFingerprint(): Promise<TS.FingerprintData> {
     const gl = await getWebGLContext();
     let webglVendor: string | undefined = undefined;
     let webglRenderer: string | undefined = undefined;

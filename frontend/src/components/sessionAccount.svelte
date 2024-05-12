@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import notificationStore from '$stores/UX/notificationStore'; // Supposons que vous ayez un store pour les notifications
 
-	let sessions: App.Session[] = [];
+	let sessions: TS.Session[] = [];
 
 	// Fonction pour charger les sessions de l'utilisateur
 	async function loadSessions() {

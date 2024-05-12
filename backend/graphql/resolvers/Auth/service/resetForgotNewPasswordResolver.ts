@@ -38,7 +38,7 @@ const resetForgotNewPasswordResolver = async (
     }
 
     await authService.requestResetForgotPassword(
-      user as App.IUser,
+      user as TS.IUser,
       newPassword,
     );
 

@@ -35,7 +35,7 @@
         id = null;
     }
 
-    function editGreeting(greeting: App.Greeting) {
+    function editGreeting(greeting: TS.Greeting) {
         console.log("Editing greeting:", greeting);
 
         name = greeting.name;

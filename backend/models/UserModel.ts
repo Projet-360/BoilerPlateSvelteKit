@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 
 // Define the user schema
-const userModel = new mongoose.Schema<App.IUser>({
+const userModel = new mongoose.Schema<TS.IUser>({
   // Username field, required
   username: { type: String, required: true },
   // Email field, required, must be unique, and match the given regular expression
@@ -27,4 +27,4 @@ const userModel = new mongoose.Schema<App.IUser>({
 });
 
 // Export the User model
-export const User = mongoose.model<App.IUser>('User', userModel);
+export const User = mongoose.model<TS.IUser>('User', userModel);

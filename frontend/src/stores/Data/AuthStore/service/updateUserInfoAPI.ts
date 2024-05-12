@@ -4,7 +4,7 @@ import { messageNotification } from "$lib/utils/messageNotification";
 import notificationStore from "$stores/UX/notificationStore";
 import { authStore } from "../authStore";
 
-async function updateUserInfoAPI(userInfo: App.UserInfo, $t: App.TranslationFunction) {
+async function updateUserInfoAPI(userInfo: TS.UserInfo, $t: TS.TranslationFunction) {
     try {
         const { data } = await client.mutate({
             mutation: updateUserInfoGQL,

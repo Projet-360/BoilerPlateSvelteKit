@@ -3,7 +3,7 @@ import { sendEmailResetPasswordGQL } from "$apollo/Auth/sendEmailResetPasswordGQ
 import { goto } from "$app/navigation";
 import notificationStore from "$stores/UX/notificationStore";
 
-async function sendEmailResetPasswordAPI(email: string, $t: App.TranslationFunction) {   
+async function sendEmailResetPasswordAPI(email: string, $t: TS.TranslationFunction) {   
     try {     
         const { data } = await client.mutate({
             mutation: sendEmailResetPasswordGQL,

@@ -3,7 +3,7 @@ import { createGreetingGQL } from '$apollo/Greetings/createGreetingGQL';
 import notificationStore from '$stores/UX/notificationStore';
 import { messageNotification } from '$lib/utils/messageNotification';
 
-async function createGreetingAPI(name: string, message: string, $t: App.TranslationFunction) {
+async function createGreetingAPI(name: string, message: string, $t: TS.TranslationFunction) {
     try {
         const { data } = await client.mutate({
             mutation: createGreetingGQL,

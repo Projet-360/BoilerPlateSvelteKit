@@ -6,7 +6,7 @@
   import { t } from '$UITools/Translations/index'
   import SessionAccount from '$components/sessionAccount.svelte'
 
-  let userData: App.GetDashboardData
+  let userData: TS.GetDashboardData
   let id: string = ''
   let username: string = ''
   let email: string = ''

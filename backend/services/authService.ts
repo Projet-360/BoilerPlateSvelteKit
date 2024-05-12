@@ -32,7 +32,7 @@ const throwError = (type: string, message: string, status: number) => {
 };
 
 // Generate and save reset password token, then send the email
-const generateAndSaveResetToken = async (user: App.IUser) => {
+const generateAndSaveResetToken = async (user: TS.IUser) => {
   const resetToken = generateToken();
   user.resetToken = resetToken;
   user.resetTokenExpiration = new Date(Date.now() + 3600000);
@@ -51,7 +51,7 @@ const generateAndSaveResetToken = async (user: App.IUser) => {
  *
  * @returns {Object} - An object containing the JWT token.
  */
-export const createSignupToken = (user: App.IUser) => {
+export const createSignupToken = (user: TS.IUser) => {
   const { _id, username, role } = user;
   const token = jwt.sign(
     { _id, username, role },
@@ -72,7 +72,7 @@ export const createSignupToken = (user: App.IUser) => {
  *
  * @returns {Promise<Object>} - A promise that resolves with an object containing the verification token.
  */
-export const createVerificationToken = async (user: App.IUser) => {
+export const createVerificationToken = async (user: TS.IUser) => {
   // Generate verification token and send email
   const verificationToken = generateToken();
   await sendVerificationEmail(user.email, verificationToken);
@@ -149,7 +149,7 @@ export const createUser = async (
   email: string,
   hashedPassword: string,
   role: string,
-): Promise<App.IUser> => {
+): Promise<TS.IUser> => {
   const newUser = new User({ username, email, password: hashedPassword, role });
   await newUser.save();
   return newUser;
@@ -220,7 +220,7 @@ export const checkAuthService = async (token: string) => {
  */
 export const login = async (email: string, password: string) => {
   // Find the user by email
-  const user: App.IUser | null = await User.findOne({ email });
+  const user: TS.IUser | null = await User.findOne({ email });
 
   // Handle error cases first
   if (!user) {
@@ -317,7 +317,7 @@ export const verifyToken = async (token: string) => {
  *
  * @throws Will throw an error if the reset token cannot be generated or saved.
  */
-export const requestForgotPassword = async (user: App.IUser) => {
+export const requestForgotPassword = async (user: TS.IUser) => {
   await generateAndSaveResetToken(user);
   return { message: 'EMAIL_FORGOT_PASSWORD' };
 };
@@ -339,7 +339,7 @@ export const requestForgotPassword = async (user: App.IUser) => {
  * @throws Will throw an error if the new password cannot be hashed or saved.
  */
 export const requestResetForgotPassword = async (
-  user: App.IUser,
+  user: TS.IUser,
   newPassword: string,
 ) => {
   const hashedPassword = await hash(newPassword, 12);
@@ -367,7 +367,7 @@ export const getUserInfo = async (_id: any) => {
   try {
     const user = await User.findById(_id).select('-password');
 
-    const { id, username, email, role, isVerified } = user as App.IUser;
+    const { id, username, email, role, isVerified } = user as TS.IUser;
 
     const userInfo = {
       id,
@@ -433,9 +433,9 @@ export function setAuthCookie(res: Response, tokenName: string, token: string) {
  * // Update the email and username of a user
  * updateUserInfo('some-user-id', { email: 'new.email@example.com', username: 'newUsername' });
  */
-export const updateUserInfo = async (_id: string, updateData: any) => {
+export const updateUserInfo = async (id: string, updateData: any) => {
   try {
-    const currentUser = await User.findById(_id);
+    const currentUser = await User.findById(id);
     if (!currentUser) {
       throw new Error('Utilisateur non trouvé.');
     }
@@ -445,7 +445,7 @@ export const updateUserInfo = async (_id: string, updateData: any) => {
     if (updateData.email && currentUser.email !== updateData.email) {
       updateData.isVerified = false;
       const verificationInfo = await createVerificationToken(
-        currentUser as App.IUser,
+        currentUser as TS.IUser,
       );
       notification = 'MAIL_CHANGED';
     }
@@ -458,7 +458,7 @@ export const updateUserInfo = async (_id: string, updateData: any) => {
       notification = 'ROLE_CHANGED';
     }
 
-    const updatedUser = await User.findByIdAndUpdate(_id, updateData, {
+    const updatedUser = await User.findByIdAndUpdate(id, updateData, {
       new: true,
       runValidators: true,
     });
@@ -502,7 +502,7 @@ export const getAllUsers = async () => {
  * const updateData = { email: 'new.email@example.com' };
  * const result = await updateUser('someUserId', updateData);
  */
-export const updateUser = async (_id: string, updateData: App.IUser) => {
+export const updateUser = async (_id: string, updateData: TS.IUser) => {
   const user = await User.findByIdAndUpdate(_id, updateData, { new: true });
   return { success: true, notification: 'Utilisateur mis à jour', user };
 };

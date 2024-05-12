@@ -4,7 +4,7 @@ import { goto } from "$app/navigation";
 import notificationStore from "$stores/UX/notificationStore";
 import handleErrors from "./handleErrors";
 
-async function verifyTokenAPI(token: string, $t: App.TranslationFunction) {
+async function verifyTokenAPI(token: string, $t: TS.TranslationFunction) {
     try {
         const { data } = await client.query({
             query: verifyTokenGQL,

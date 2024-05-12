@@ -15,7 +15,7 @@ import getAllUsersAPI from './service/getAllUsersAPI'
 
 // Initialisation du store
 function AuthStore() {
-  const { subscribe, set, update } = writable<App.IAuthStore>({
+  const { subscribe, set, update } = writable<TS.IAuthStore>({
     userId: null,
     currentSessionId: undefined,
     role: null,

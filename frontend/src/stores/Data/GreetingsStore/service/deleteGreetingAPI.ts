@@ -5,8 +5,8 @@ import notificationStore from '$stores/UX/notificationStore'
 import { messageNotification } from '$lib/utils/messageNotification'
 
 async function deleteGreetingAPI(
-  greeting: App.Greeting,
-  $t: App.TranslationFunction,
+  greeting: TS.Greeting,
+  $t: TS.TranslationFunction,
 ) {
   try {
     const id = greeting.id || greeting._id

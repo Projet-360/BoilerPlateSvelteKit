@@ -14,7 +14,7 @@ const getDashboardDataResolver = async (req: Request) => {
   try {
     const userInfo = await authService.getUserInfo(result._id);
 
-    const dataReturn: App.GetDashboardDataResponse = {
+    const dataReturn: TS.GetDashboardDataResponse = {
       userId: userInfo.id,
       role: userInfo.role,
       sessionId: 'session wip',

@@ -1,7 +1,7 @@
 import notificationStore from '$stores/UX/notificationStore';
 type TranslationFunction = (key: string, options?: any) => string;
 
-export const messageNotification = (error: any, $t: App.TranslationFunction) => {
+export const messageNotification = (error: any, $t: TS.TranslationFunction) => {
 	let errorMessages: any = [];
 
     // Gérer le format de l'erreur ApolloError avec les erreurs structurées

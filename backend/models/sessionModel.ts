@@ -20,7 +20,7 @@ const sessionModel = new mongoose.Schema(
   },
 );
 
-export const Session = mongoose.model<App.FingerprintData>(
+export const Session = mongoose.model<TS.FingerprintData>(
   'Session',
   sessionModel,
 );

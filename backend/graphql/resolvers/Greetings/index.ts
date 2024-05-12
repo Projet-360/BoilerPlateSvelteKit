@@ -19,8 +19,8 @@ export const greetingResolver = {
   Mutation: {
     createGreeting: async (
       _: any,
-      { name, message }: App.GreetingInput,
-      context: App.Context,
+      { name, message }: TS.GreetingInput,
+      context: TS.Context,
     ) => {
       try {
         const newGreeting = new Greeting({ name, message });
@@ -36,7 +36,7 @@ export const greetingResolver = {
     updateGreeting: async (
       _: any,
       { id, name, message }: { id: string; name: string; message: string },
-      context: App.Context,
+      context: TS.Context,
     ) => {
       console.log('update');
       const result = await Greeting.findByIdAndUpdate(
@@ -51,7 +51,7 @@ export const greetingResolver = {
     deleteGreeting: async (
       _: any,
       { id }: { id: string },
-      context: App.Context,
+      context: TS.Context,
     ) => {
       await Greeting.findByIdAndRemove(id);
       pubsub.publish(GREETING_DELETED, { greetingDeleted: id });

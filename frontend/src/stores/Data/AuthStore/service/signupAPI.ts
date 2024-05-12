@@ -3,7 +3,7 @@ import { signupGQL } from "$apollo/Auth/signupGQL";
 import notificationStore from "$stores/UX/notificationStore";
 import handleErrors from "./handleErrors";
 
-async function signupAPI(username: string, email: string, password: string, $t: App.TranslationFunction) {
+async function signupAPI(username: string, email: string, password: string, $t: TS.TranslationFunction) {
     try {
 
         const { data } = await client.mutate({

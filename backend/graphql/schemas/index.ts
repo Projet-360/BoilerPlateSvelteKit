@@ -9,6 +9,7 @@ import { signupType } from './Auth/signupType.js';
 import { verifyTokenType } from './Auth/verifyTokenType.js';
 import { checkAuthType } from './Auth/checkAuthType.js';
 import { getAllUsersType } from './Auth/getAllUsersType.js';
+import { updateUserInfoType } from './Auth/updateUserInfoType.js';
 
 export const typeDefs = [
   greetingType,
@@ -22,4 +23,5 @@ export const typeDefs = [
   signupType,
   verifyTokenType,
   getAllUsersType,
+  updateUserInfoType,
 ];

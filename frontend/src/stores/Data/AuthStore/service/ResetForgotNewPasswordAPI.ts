@@ -7,7 +7,7 @@ async function ResetForgotNewPasswordAPI(
     token: string,
     newPassword: string,
     confirmPassword: string,
-    $t: App.TranslationFunction) {   
+    $t: TS.TranslationFunction) {   
     try {     
         const { data } = await client.mutate({
             mutation: resetForgotNewPasswordGQL,

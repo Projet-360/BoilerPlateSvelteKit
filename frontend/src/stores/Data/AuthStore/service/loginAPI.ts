@@ -9,7 +9,7 @@ import { authStore } from '../authStore'
 async function loginAPI(
   email: string,
   password: string,
-  $t: App.TranslationFunction,
+  $t: TS.TranslationFunction,
 ) {
   try {
     const fingerPrint = await collectFingerprint()

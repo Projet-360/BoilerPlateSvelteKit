@@ -1,9 +1,9 @@
-// app.d.ts
+// TS.d.ts
 import mongoose from 'mongoose';
 import { NextFunction } from 'express';
 
 declare global {
-  namespace App {
+  namespace TS {
     type FingerprintData = {
       userAgent: string;
       screenResolution: string;
@@ -89,22 +89,8 @@ declare global {
       newPassword: string;
       confirmPassword: string;
     }
-  }
 
-  namespace Express {
-    interface Request {
-      user?: App.IUser;
-    }
-  }
-
-  namespace Express {
-    interface Request {
-      apolloContext?: {
-        next: NextFunction;
-      };
-    }
-  }
-
+    
   type Greeting = {
     id: string;
     name: string;
@@ -188,5 +174,21 @@ declare global {
     handleError?: ((error: any) => void) | null;
   }
 
-  export type TranslationFunction = (key: string, options?: any) => string;
+  type TranslationFunction = (key: string, options?: any) => string;
+  }
+
+  namespace Express {
+    interface Request {
+      user?: TS.IUser;
+    }
+  }
+
+  namespace Express {
+    interface Request {
+      apolloContext?: {
+        next: NextFunction;
+      };
+    }
+  }
 }
+export {}; 

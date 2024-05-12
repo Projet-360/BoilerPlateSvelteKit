@@ -4,7 +4,7 @@ import { goto } from '$app/navigation'
 import notificationStore from '$stores/UX/notificationStore'
 import { authStore } from '../authStore'
 
-async function logoutAPI($t: App.TranslationFunction) {
+async function logoutAPI($t: TS.TranslationFunction) {
   try {
     const { data } = await client.mutate({
       mutation: logoutGQL,
