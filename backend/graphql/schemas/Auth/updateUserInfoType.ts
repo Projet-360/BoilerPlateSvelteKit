@@ -6,7 +6,6 @@ export const updateUserInfoType = gql`
       id: String!
       username: String!
       email: String!
-      role: String!
     ): MessageResponse
   }
 
@@ -14,6 +13,5 @@ export const updateUserInfoType = gql`
     id: String!
     username: String!
     email: String!
-    role: String!
   }
 `;

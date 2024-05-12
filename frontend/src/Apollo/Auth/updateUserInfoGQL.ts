@@ -1,21 +1,12 @@
 import { gql } from '@apollo/client/core'
 
 const updateUserInfoGQL = gql`
-  mutation UpdateUserInfo($userId: ID!, $userInfo: UpdateUserInfoInput!) {
-    updateUserInfo(userId: $userId, userInfo: $userInfo) {
-      user {
-        id
-        username
-        email
-        role
-      }
+  mutation UpdateUserInfo($id: String!, $username: String!, $email: String!) {
+    updateUserInfo(id: $id, username: $username, email: $email) {
+      id
+      username
+      email
     }
-  }
-
-  input UpdateUserInfoInput {
-    username: String!
-    email: String!
-    role: String!
   }
 `
 export default updateUserInfoGQL

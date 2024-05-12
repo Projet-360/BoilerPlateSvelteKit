@@ -3,94 +3,93 @@ import mongoose from 'mongoose';
 import { NextFunction } from 'express';
 
 declare global {
-    namespace TS {
-      type FingerprintData = {
-        userAgent: string;
-        screenResolution: string;
-        timezone: string;
-        webglVendor: string | undefined;
-        webglRenderer: string | undefined;
-        canvasFingerprint: string;
-        localIPs: string[];
+  namespace TS {
+    type FingerprintData = {
+      userAgent: string;
+      screenResolution: string;
+      timezone: string;
+      webglVendor: string | undefined;
+      webglRenderer: string | undefined;
+      canvasFingerprint: string;
+      localIPs: string[];
+    };
+
+    interface IUser extends mongoose.Document {
+      _id: mongoose.Schema.Types.ObjectId;
+      username: string;
+      email: string;
+      password: string;
+      isVerified?: boolean;
+      resetToken?: string;
+      resetTokenExpiration?: Date;
+      deleteToken?: string; // Ajout pour la suppression du compte
+      deleteTokenExpiration?: Date; // Ajout pour la suppression du compte
+      role?: 'user' | 'admin' | 'moderator';
+      // ... autres méthodes et propriétés
+    }
+
+    interface Context {
+      req: Request;
+      res: Response;
+      next: NextFunction;
+      io: any;
+    }
+
+    interface SignupArgs {
+      username: string;
+      email: string;
+      password: string;
+    }
+
+    interface LoginArgs {
+      email: string;
+      password: string;
+      fingerPrint: FingerprintData;
+    }
+
+    interface TokenArgs {
+      token: string;
+    }
+
+    interface GreetingInput {
+      name: string;
+      message: string;
+    }
+
+    interface LoginResponse {
+      userId: string;
+      role?: string;
+      sessionId: string;
+      userData: {
+        username: string;
+        email: string;
       };
+    }
 
-      interface IUser extends mongoose.Document {
-        _id: mongoose.Schema.Types.ObjectId;
+    interface GetDashboardDataResponse {
+      userId: string;
+      role?: string;
+      sessionId: string;
+      isVerified?: boolean;
+      userData: {
         username: string;
         email: string;
-        password: string;
-        isVerified?: boolean;
-        resetToken?: string;
-        resetTokenExpiration?: Date;
-        deleteToken?: string; // Ajout pour la suppression du compte
-        deleteTokenExpiration?: Date; // Ajout pour la suppression du compte
-        role?: 'user' | 'admin' | 'moderator';
-        // ... autres méthodes et propriétés
-      }
+      };
+    }
 
-      interface Context {
-        req: Request;
-        res: Response;
-        next: NextFunction;
-        io: any;
-      }
+    interface Context {
+      req: Request;
+      res: Response;
+      next: NextFunction;
+      io: any;
+    }
 
-      interface SignupArgs {
-        username: string;
-        email: string;
-        password: string;
-      }
+    interface ResetForgotNewPasswordArgs {
+      token: string;
+      newPassword: string;
+      confirmPassword: string;
+    }
 
-      interface LoginArgs {
-        email: string;
-        password: string;
-        fingerPrint: FingerprintData;
-      }
-
-      interface TokenArgs {
-        token: string;
-      }
-
-      interface GreetingInput {
-        name: string;
-        message: string;
-      }
-
-      interface LoginResponse {
-        userId: string;
-        role?: string;
-        sessionId: string;
-        userData: {
-          username: string;
-          email: string;
-        };
-      }
-
-      interface GetDashboardDataResponse {
-        userId: string;
-        role?: string;
-        sessionId: string;
-        isVerified?: boolean;
-        userData: {
-          username: string;
-          email: string;
-        };
-      }
-
-      interface Context {
-        req: Request;
-        res: Response;
-        next: NextFunction;
-        io: any;
-      }
-
-      interface ResetForgotNewPasswordArgs {
-        token: string;
-        newPassword: string;
-        confirmPassword: string;
-      }
-
-      
     type Greeting = {
       id: string;
       name: string;
@@ -175,7 +174,6 @@ declare global {
     }
 
     type TranslationFunction = (key: string, options?: any) => string;
-    
   }
 
   namespace Express {
@@ -192,4 +190,4 @@ declare global {
     }
   }
 }
-export {}; 
+export {};

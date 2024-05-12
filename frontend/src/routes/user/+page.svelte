@@ -6,7 +6,7 @@
   import { t } from '$UITools/Translations/index'
   import SessionAccount from '$components/sessionAccount.svelte'
 
-  let userData: TS.GetDashboardData
+  let userData: TS.userData
   let id: string = ''
   let username: string = ''
   let email: string = ''
@@ -15,12 +15,9 @@
 
   const handleUpdate = async () => {
     try {
-      await authStore.updateUserInfoAPI({ username, email }, $t)
+      await authStore.updateUserInfoAPI(id, username, email, $t)
       const data = await authStore.getDashboardDataAPI()
       userData = data
-      console.log(data)
-
-      // ({ _id, name, email, role, isVerified } = userData);
     } catch (error) {
       console.error(
         "Erreur lors de la mise à jour des informations de l'utilisateur :",

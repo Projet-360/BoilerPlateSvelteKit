@@ -37,10 +37,7 @@ const resetForgotNewPasswordResolver = async (
       );
     }
 
-    await authService.requestResetForgotPassword(
-      user as TS.IUser,
-      newPassword,
-    );
+    await authService.requestResetForgotPassword(user as TS.IUser, newPassword);
 
     return { message: 'SUCCESS_SEND_RESET_PASSWORD' };
   } catch (error: any) {

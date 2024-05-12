@@ -12,6 +12,7 @@ import logoutResolver from './service/logoutResolver.js';
 import sendEmailResetPasswordResolver from './service/sendEmailResetPassword.js';
 import resetForgotNewPasswordResolver from './service/resetForgotNewPasswordResolver.js';
 import getAllUsersResolver from './service/getAllUsersResolver.js';
+import updateUserInfoResolver from './service/updateUserInfoResolver.js';
 
 interface Context {
   req: Request;
@@ -67,5 +68,10 @@ export const authResolver = {
         args.confirmPassword,
         context.next,
       ),
+
+    updateUserInfo: async (
+      _: any,
+      args: { id: string; username: string; email: string },
+    ) => updateUserInfoResolver(args.id, args.username, args.email),
   },
 };

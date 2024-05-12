@@ -25,8 +25,6 @@ const getDashboardDataResolver = async (req: Request) => {
       },
     };
 
-    console.log('dataReturn', dataReturn);
-
     return dataReturn; // Ensure this matches your GraphQL schema expectations
   } catch (error) {
     console.error('Failed to fetch user info:', error);

@@ -6,19 +6,23 @@ const updateUserInfoResolver = async (
   id: string,
   username: string,
   email: string,
-  role: string,
 ) => {
   try {
     const verified = await authService.updateUserInfo(id, {
       username,
       email,
-      role,
     });
 
-    if (verified) {
-      return { message: 'Token verified successfully' };
-    } else {
-      return { message: 'Token verification failed' };
+    console.log('verified', verified);
+
+    if (verified && verified.updatedUser) {
+      const dataReturn = {
+        id: verified.updatedUser.id,
+        username: verified.updatedUser.username,
+        email: verified.updatedUser.email,
+      };
+
+      return dataReturn;
     }
   } catch (error: any) {
     logger.error('Error verifying token:', error);
