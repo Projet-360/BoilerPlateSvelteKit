@@ -1,6 +1,6 @@
 import client from "$apollo";
 import { requestAccountDeletionGQL } from "$apollo/Auth/requestAccountDeletionGQL";
-import { messageNotification } from "$apollo/modelNotifications/messageNotification";
+import { messageNotification } from "$lib/utils/messageNotification";
 import notificationStore from "$stores/UX/notificationStore";
 
 async function requestAccountDeletionAPI(id: string, $t: App.TranslationFunction) {

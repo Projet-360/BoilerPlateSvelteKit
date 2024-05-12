@@ -1,7 +1,7 @@
 import client from '$apollo';
 import { createGreetingGQL } from '$apollo/Greetings/createGreetingGQL';
 import notificationStore from '$stores/UX/notificationStore';
-import { messageNotification } from '$apollo/modelNotifications/messageNotification';
+import { messageNotification } from '$lib/utils/messageNotification';
 
 async function createGreetingAPI(name: string, message: string, $t: App.TranslationFunction) {
     try {
