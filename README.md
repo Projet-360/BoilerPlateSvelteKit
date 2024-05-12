@@ -146,9 +146,10 @@ savoir prendre en considération le fait d'initialiser dans des const l'utilisat
 Si 1000 est utilisé 
 
 netstat -ano | findstr :1000
+netstat -ano | findstr :8025
 
 taskkill /PID <PID> /F
-taskkill /PID 8352 /F
+taskkill /PID 11504 /F
 
 
 
