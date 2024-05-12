@@ -100,6 +100,7 @@ DATABASE_NAME=BoilerPlateSvelteKitDB
 TOKEN_EXPIRY=1
 VERIFICATION_EXPIRY_HOURS=1h
 URL_FRONT_LOCAL=https://localhost:1000
+URL_GRAPHQL=https://localhost:2000/graphql
 URL_FRONT=https://exemple.com
 PORT: 2000
 SECRETKEY=kjqhfkjefhllhswfmosjgmsrdgjmdsligj

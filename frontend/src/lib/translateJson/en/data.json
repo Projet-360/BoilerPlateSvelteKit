@@ -1,4 +1,8 @@
 {
+    "language": "Choose a language:",
+    "fr": "French",
+    "en": "English",
+    
     "greetingsSuccessGet": "Greetings have been received successfully.",
     "greetingsFailedGet": "Failed to receive greetings.",
     "greetingsSuccessSent": "The greeting has been sent successfully.",
@@ -23,10 +27,6 @@
     "forgot-password-token-newPassword": "New password :",
     "forgot-password-token-confirmPassword": "Confirm password :",
     "forgot-password-token-link": "Reset password",
-
-    "language": "Choose a language:",
-    "fr": "French",
-    "en": "English",
 
     "home-title": "Home",
     "home-text": "You have the link Github <a href=\"{{link}}\">lien</a>",

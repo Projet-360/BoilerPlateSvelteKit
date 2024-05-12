@@ -1,4 +1,4 @@
-import { handleRoleRedirection } from '$lib/handleRoleRedirection'
+import { handleRoleRedirection } from '$lib/utils/handleRoleRedirection'
 import client from '$apollo'
 import { loginGQL } from '$apollo/Auth/loginGQL'
 import { collectFingerprint } from '$lib/js/fingerPrint'
