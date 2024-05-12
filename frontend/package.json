@@ -25,7 +25,7 @@
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
     "autoprefixer": "latest",
-    "chokidar-cli": "^3.0.0",
+    "chokidar-cli": "latest",
     "concurrently": "latest",
     "eslint": "latest",
     "eslint-config-prettier": "latest",

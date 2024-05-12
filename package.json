@@ -9,6 +9,7 @@
     "start-mailhog": ".\\utils\\mail\\start-mailhog.bat",
     "cleardb": "npm --prefix ./backend run cleardb",
     "in": "npm i && cd backend && npm i && cd ../frontend && npm i",
+    "build": "cd ./frontend && npm run build",
     "update": "npm --prefix ./backend update && npm --prefix ./frontend update",
     "kill-mailhog": "taskkill /IM MailHog_windows_amd64.exe /F",
     "kill-mailhog-on-exit": "wait-on exit:SIGINT exit:SIGTERM && npm run kill-mailhog"

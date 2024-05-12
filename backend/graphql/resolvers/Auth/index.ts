@@ -11,6 +11,7 @@ import loginResolver from './service/loginResolver.js';
 import logoutResolver from './service/logoutResolver.js';
 import sendEmailResetPasswordResolver from './service/sendEmailResetPassword.js';
 import resetForgotNewPasswordResolver from './service/resetForgotNewPasswordResolver.js';
+import getAllUsersResolver from './service/getAllUsersResolver.js';
 
 interface Context {
   req: Request;
@@ -29,6 +30,9 @@ export const authResolver = {
 
     getDashboardData: async (_: any, __: any, context: Context) =>
       getDashboardDataResolver(context.req),
+
+    getAllUsers: async (_: any, __: any, context: Context) =>
+      getAllUsersResolver(context.req, context.res),
   },
   Mutation: {
     signup: async (

@@ -152,8 +152,6 @@ taskkill /PID 8352 /F
 
 
 
-
-Faire les lang serieux
 Finir les API
 Faire le middleware
 Faire passer les test

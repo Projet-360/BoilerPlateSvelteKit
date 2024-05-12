@@ -8,6 +8,7 @@ import { sendEmailResetPasswordType } from './Auth/sendEmailResetPasswordType.js
 import { signupType } from './Auth/signupType.js';
 import { verifyTokenType } from './Auth/verifyTokenType.js';
 import { checkAuthType } from './Auth/checkAuthType.js';
+import { getAllUsersType } from './Auth/getAllUsersType.js';
 
 export const typeDefs = [
   greetingType,
@@ -20,4 +21,5 @@ export const typeDefs = [
   sendEmailResetPasswordType,
   signupType,
   verifyTokenType,
+  getAllUsersType,
 ];

@@ -28,22 +28,6 @@ declare global {
       // ... autres méthodes et propriétés
     }
 
-    interface ISession extends Document {
-      userId: mongoose.Schema.Types.ObjectId; // ou string si vous n'utilisez pas ObjectId
-      userAgent: string; // la chaîne complète du User Agent
-      browser: {
-        name: string | null;
-        version: string | null;
-      };
-      os: {
-        name: string | null;
-        version: string | null;
-      };
-      device: string; // 'unknown' si non identifié ou le type de l'appareil
-      ip: string;
-      createdAt: Date;
-    }
-
     interface Context {
       req: Request;
       res: Response;
