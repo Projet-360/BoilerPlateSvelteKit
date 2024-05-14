@@ -8,8 +8,15 @@ async function sendEmailResetPasswordAPI(email: string, $t: TS.TranslationFuncti
         const { data } = await client.mutate({
             mutation: sendEmailResetPasswordGQL,
             variables: { email}
-        });        
-        notificationStore.addNotification($t('data.successSendEmailResetPassword'), 'success');
+        });
+        if (data.sendEmailResetPassword.message === 'USER_NOT_FOUND') {
+            notificationStore.addNotification($t('data.USER_NOT_FOUND'), 'error');
+        } else if(data.sendEmailResetPassword.message === 'EMAIL_NOT_VERIFIED') {
+            notificationStore.addNotification($t('data.EMAIL_NOT_VERIFIED'), 'error');
+        } else {
+
+            notificationStore.addNotification($t('data.successSendEmailResetPassword'), 'success');
+        }
         goto('/');
     } catch (error) {
         console.error('Error checking authentication:', error);

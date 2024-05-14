@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser';
 import corsConfig from '../config/corsConfig.js';
 import errorHandler from './errorHandler.js';
 import checkBlacklist from './checkBlacklist.js';
-import { graphqlValidationMiddleware } from './validations/index.js';
+//import { graphqlValidationMiddleware } from './validations/index.js';
 import { graphQLMiddleware } from './graphQLMiddleware.js';
 
 // Apply middlewares
@@ -28,11 +28,9 @@ export default (app: Application) => {
   app.use(checkBlacklist);
   //console.log('Blacklist Check Applied');
 
+  //console.log('Applying graphQLMiddleware Check');
   app.use('/graphql', graphQLMiddleware);
-
-  //console.log('Applying GraphQL Validation Middleware');
-  //app.use('/graphql', graphqlValidationMiddleware);
-  //console.log('GraphQL Validation Middleware Applied');
+  //console.log('graphQLMiddleware Check Applied');
 
   //console.log('Applying Error Handler');
   app.use(errorHandler);

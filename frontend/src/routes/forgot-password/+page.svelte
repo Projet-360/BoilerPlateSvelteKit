@@ -5,7 +5,7 @@
   let email = ''
 
   async function handleResetPassword() {
-    await authStore.sendEmailResetPassword(email, $t)
+    await authStore.sendEmailResetPasswordAPI(email, $t)
   }
 </script>
 
