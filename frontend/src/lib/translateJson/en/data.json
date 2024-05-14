@@ -12,8 +12,8 @@
     "signupSuccess": "you received an email to validate your account",
     "emailTokenVerifiedSuccess": "Your email is validate",
     "emailTokenVerifiedFailed": "Your key is not valid",
-    "successSendEmailResetPassword": "Vous avez recu un email pour modifier votre mot de passe.",
-    "successSendResetPassword": "Votre mot de passe à bien été modifié.",
+    "successSendEmailResetPassword": "Email sent to reset your forgot password X",
+    "successSendResetPassword": "Your password has been successfully updated",
 
     "about-title": "About",
     "about-text": "This is the about page",
@@ -36,7 +36,7 @@
     "login-link": "Forgot your password ?",
 
     "logout-logout": "Logout",
-    "logout-successLogout": "Goodbye !",
+    "logout-successLogout": "Logout",
 
     "signup-button": "Register",
     "signup-verifytoken": "Check in progress...",
