@@ -12,7 +12,7 @@
     "signupSuccess": "you received an email to validate your account",
     "emailTokenVerifiedSuccess": "Your email is validate",
     "emailTokenVerifiedFailed": "Your key is not valid",
-    "successSendEmailResetPassword": "Email sent to reset your forgot password X",
+    "successSendEmailResetPassword": "Email sent to reset your forgot password",
     "successSendResetPassword": "Your password has been successfully updated",
 
     "about-title": "About",
