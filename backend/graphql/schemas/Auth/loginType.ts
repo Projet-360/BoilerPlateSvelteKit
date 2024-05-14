@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const loginType = gql`
+const loginType = gql`
   type Mutation {
     login(
       email: String!
@@ -31,3 +31,5 @@ export const loginType = gql`
     email: String
   }
 `;
+
+export default loginType;

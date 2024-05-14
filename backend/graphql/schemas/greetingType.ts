@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const greetingType = gql`
+const greetingType = gql`
   type Greeting {
     id: ID!
     name: String!
@@ -24,3 +24,5 @@ export const greetingType = gql`
     greetingDeleted: ID!
   }
 `;
+
+export default greetingType;

@@ -1,17 +1,7 @@
 // Importations
 import { writable } from 'svelte/store'
 
-import checkAuthAPI from './service/checkAuthAPI'
-import signupAPI from './service/signupAPI'
-import loginAPI from './service/loginAPI'
-import logoutAPI from './service/logoutAPI'
-import verifyTokenAPI from './service/verifyTokenAPI'
-import sendEmailResetPasswordAPI from './service/sendEmailResetPasswordAPI'
-import ResetForgotNewPasswordAPI from './service/ResetForgotNewPasswordAPI'
-import updateUserInfoAPI from './service/updateUserInfoAPI'
-import getDashboardDataAPI from './service/getDashboardDataAPI'
-import requestAccountDeletionAPI from './service/requestAccountDeletionAPI'
-import getAllUsersAPI from './service/getAllUsersAPI'
+import * as API from './service'
 
 // Initialisation du store
 function AuthStore() {
@@ -32,17 +22,7 @@ function AuthStore() {
     set,
     update,
 
-    signupAPI,
-    verifyTokenAPI,
-    loginAPI,
-    logoutAPI,
-    checkAuthAPI,
-    sendEmailResetPasswordAPI,
-    ResetForgotNewPasswordAPI,
-    updateUserInfoAPI,
-    getDashboardDataAPI,
-    requestAccountDeletionAPI,
-    getAllUsersAPI,
+    ...API,
   }
 }
 

@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const resetForgotNewPasswordType = gql`
+const resetForgotNewPasswordType = gql`
   type Mutation {
     resetForgotNewPassword(
       token: String!
@@ -13,3 +13,5 @@ export const resetForgotNewPasswordType = gql`
     message: String
   }
 `;
+
+export default resetForgotNewPasswordType;

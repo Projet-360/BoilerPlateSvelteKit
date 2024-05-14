@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const updateUserInfoType = gql`
+const updateUserInfoType = gql`
   type Mutation {
     updateUserInfo(
       id: String!
@@ -15,3 +15,5 @@ export const updateUserInfoType = gql`
     email: String!
   }
 `;
+
+export default updateUserInfoType;

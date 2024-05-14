@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const checkAuthType = gql`
+const checkAuthType = gql`
   type Query {
     checkAuth: CheckAuth
   }
@@ -12,3 +12,5 @@ export const checkAuthType = gql`
     userData: UserData
   }
 `;
+
+export default checkAuthType;

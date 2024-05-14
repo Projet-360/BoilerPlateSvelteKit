@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const logoutType = gql`
+const logoutType = gql`
   type Mutation {
     logout: MessageResponse
   }
@@ -9,3 +9,5 @@ export const logoutType = gql`
     message: String
   }
 `;
+
+export default logoutType;

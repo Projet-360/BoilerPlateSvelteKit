@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const getAllUsersType = gql`
+const getAllUsersType = gql`
   type Query {
     getAllUsers: [getAllUsers]
   }
@@ -12,3 +12,5 @@ export const getAllUsersType = gql`
     role: String
   }
 `;
+
+export default getAllUsersType;

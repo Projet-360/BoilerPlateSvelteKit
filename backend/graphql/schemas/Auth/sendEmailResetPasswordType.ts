@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const sendEmailResetPasswordType = gql`
+const sendEmailResetPasswordType = gql`
   type Mutation {
     sendEmailResetPassword(email: String!): MessageResponse
   }
@@ -9,3 +9,5 @@ export const sendEmailResetPasswordType = gql`
     message: String
   }
 `;
+
+export default sendEmailResetPasswordType;

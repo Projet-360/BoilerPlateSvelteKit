@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const getDashboardDataType = gql`
+const getDashboardDataType = gql`
   type Query {
     getDashboardData: getDashboardDataResponse
   }
@@ -18,3 +18,5 @@ export const getDashboardDataType = gql`
     email: String
   }
 `;
+
+export default getDashboardDataType;

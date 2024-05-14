@@ -1,6 +1,6 @@
 import { gql } from 'apollo-server-express';
 
-export const verifyTokenType = gql`
+const verifyTokenType = gql`
   type Query {
     verifyToken(token: String!): MessageResponse
   }
@@ -9,3 +9,5 @@ export const verifyTokenType = gql`
     message: String
   }
 `;
+
+export default verifyTokenType;
