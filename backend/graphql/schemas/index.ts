@@ -10,6 +10,7 @@ import { verifyTokenType } from './Auth/verifyTokenType.js';
 import { checkAuthType } from './Auth/checkAuthType.js';
 import { getAllUsersType } from './Auth/getAllUsersType.js';
 import { updateUserInfoType } from './Auth/updateUserInfoType.js';
+import { requestAccountDeletionType } from './Auth/requestAccountDeletionType.js';
 
 export const typeDefs = [
   greetingType,
@@ -24,4 +25,5 @@ export const typeDefs = [
   verifyTokenType,
   getAllUsersType,
   updateUserInfoType,
+  requestAccountDeletionType,
 ];

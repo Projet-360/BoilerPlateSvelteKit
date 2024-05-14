@@ -69,6 +69,7 @@
     "NAME_REQUIRED": "The name field is required.",
     "MESSAGE_MIN_MAX_CARAC": "The message must be between 10 and 500 characters long.",
     "MESSAGE_REQUIRED": "The message field is required.",
+    "DELETE_ACCOUNT_EMAIL_SENT": "An email has been sent to delete your account.",
 
     "UPDATE_SUCCESS":"Your informations have been successfully updated.",
     "UPDATE_FAILURE":"Your informations have not been successfully updated."

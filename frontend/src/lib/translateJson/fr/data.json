@@ -69,6 +69,7 @@
 	"NAME_REQUIRED": "Le champ du nom est obligatoire.",
 	"MESSAGE_MIN_MAX_CARAC": "Le message doit être composé de 10 à 500 caractères.",
 	"MESSAGE_REQUIRED": "Le champ du message est obligatoire.",
+    "DELETE_ACCOUNT_EMAIL_SENT": "Un email a été envoyé pour supprimer votre compte.",
 
     "UPDATE_SUCCESS":"Vos informations ont bien été mis à jour.",
     "UPDATE_FAILURE":"Vos informations n'ont pas été mis à jour."

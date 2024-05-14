@@ -13,6 +13,7 @@ import sendEmailResetPasswordResolver from './service/sendEmailResetPassword.js'
 import resetForgotNewPasswordResolver from './service/resetForgotNewPasswordResolver.js';
 import getAllUsersResolver from './service/getAllUsersResolver.js';
 import updateUserInfoResolver from './service/updateUserInfoResolver.js';
+import requestAccountDeletionResolver from './service/requestAccountDeletionResolver.js';
 
 interface Context {
   req: Request;
@@ -73,5 +74,11 @@ export const authResolver = {
       _: any,
       args: { id: string; username: string; email: string },
     ) => updateUserInfoResolver(args.id, args.username, args.email),
+
+    requestAccountDeletion: async (
+      _: any,
+      args: { id: string },
+      context: Context,
+    ) => requestAccountDeletionResolver(args.id, context.req, context.res),
   },
 };

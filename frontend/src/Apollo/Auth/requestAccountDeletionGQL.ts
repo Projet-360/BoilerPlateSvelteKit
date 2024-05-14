@@ -1,8 +1,8 @@
-import { gql } from "@apollo/client/core";
+import { gql } from '@apollo/client/core'
 
 export const requestAccountDeletionGQL = gql`
-mutation RequestAccountDeletion($userId: ID!) {
-    requestAccountDeletion(userId: $userId) {
+  mutation RequestAccountDeletion($id: ID!) {
+    requestAccountDeletion(id: $id) {
       message
     }
   }

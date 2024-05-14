@@ -1,0 +1,89 @@
+Pour générer des fichiers de manière efficace et automatique à partir d'une spécification donnée, il est crucial de fournir des détails clairs et complets, comme vous l'avez fait. Voici la transformation que vous souhaitez :
+
+Fichier GQL - Transformez une définition de type GraphQL du serveur (apollo-server-express) pour l'utiliser avec le client (@apollo/client/core) ou inversement. Cette transformation implique le renommage de l'importation et de la constante, ainsi que l'ajout d'une requête explicite.
+
+Fichier API - Créez une fonction API qui utilise la requête GraphQL pour interagir avec le serveur. Cela nécessite d'importer le client GraphQL et la requête, de définir une fonction asynchrone, et de gérer les erreurs.
+
+Fichier Resolver - Élaborez un résolveur de base pour une requête GraphQL, incluant les imports nécessaires pour intégrer des services et des modèles spécifiques.
+
+Chacun de ces fichiers s'inscrit dans une architecture plus large et implique l'utilisation de techniques spécifiques pour le développement backend et frontend avec GraphQL. Cela assure non seulement la cohérence du code mais également sa maintenance et son évolutivité.
+
+Le type pour gql coté backend
+import { gql } from 'apollo-server-express';
+
+export const checkAuthType = gql`
+  type Query {
+    checkAuth: CheckAuth
+  }
+
+  type CheckAuth {
+    isAuthenticated: Boolean
+    role: String
+    userId: String
+    userData: UserData
+  }
+`;
+
+
+
+
+La partie GQL frontend
+import { gql } from "@apollo/client/core";
+
+export const checkAuthGQL = gql`
+query CheckAuth {
+    checkAuth {
+      isAuthenticated
+      role
+      userId
+      userData {
+        username
+        email
+      }
+    }
+  }
+`
+
+
+
+
+la fonction front end câblée au store
+le fichier checkAuthGQL
+import client from '$apollo';
+import { checkAuthGQL } from '$apollo/Auth/checkAuthGQL';
+import { authStore } from '../authStore';
+
+async function checkAuthAPI() {
+    try {
+        const { data } = await client.query({
+            query: checkAuthGQL,
+            fetchPolicy: 'network-only'
+        });
+        
+    } catch (error) {
+        console.error('Error checking authentication:', error);
+    }
+}
+
+export default checkAuthAPI
+
+
+
+
+Un petit code dans le index qui importe la fonction resolver
+    checkAuth: async (_: any, __: any, context: Context) =>
+      checkAuthResolver(context.req, context.res),
+
+
+
+Le resolver que tu dois générer en mode fonctions d'export 
+import { Request, Response } from 'express';
+
+const checkAuthResolver = async (req: Request, res: Response) => {
+  
+  
+};
+
+export default checkAuthResolver;
+
+Tu dois générer les mêmes fichiers si je te donne un schéma type coté back ou front.
