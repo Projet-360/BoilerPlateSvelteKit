@@ -15,7 +15,7 @@ export const emailValidators = [
 ];
 
 export const passwordValidators = [
-  check('variables.newPassword')
+  check('variables.password')
     .isLength({ min: 8 })
     .withMessage('NUMBE_CARAC_PASSWORD')
     .matches(/[a-z]/)
