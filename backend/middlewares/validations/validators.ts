@@ -15,7 +15,35 @@ export const emailValidators = [
 ];
 
 export const passwordValidators = [
-  check('variables.password')
+  check('variables.newPassword')
+    .isLength({ min: 8 })
+    .withMessage('NUMBE_CARAC_PASSWORD')
+    .matches(/[a-z]/)
+    .withMessage('MIN_PASSWORD')
+    .matches(/[A-Z]/)
+    .withMessage('MAJ_PASSWORD')
+    .matches(/[0-9]/)
+    .withMessage('NUMBER_PASSWORD')
+    .matches(/[!@#$%^&*(),\.\?":{}|<>_-]/)
+    .withMessage('SPECIAL_CARAC_PASSWORD'),
+];
+
+export const newPasswordValidators = [
+  check('variables.newPassword')
+    .isLength({ min: 8 })
+    .withMessage('NUMBE_CARAC_PASSWORD')
+    .matches(/[a-z]/)
+    .withMessage('MIN_PASSWORD')
+    .matches(/[A-Z]/)
+    .withMessage('MAJ_PASSWORD')
+    .matches(/[0-9]/)
+    .withMessage('NUMBER_PASSWORD')
+    .matches(/[!@#$%^&*(),\.\?":{}|<>_-]/)
+    .withMessage('SPECIAL_CARAC_PASSWORD'),
+];
+
+export const confirmPasswordValidators = [
+  check('variables.confirmPassword')
     .isLength({ min: 8 })
     .withMessage('NUMBE_CARAC_PASSWORD')
     .matches(/[a-z]/)
@@ -56,4 +84,8 @@ export const updateUserValidators: ValidationChain[] = [
 export const greetingsValidators: ValidationChain[] = [
   ...nameValidator,
   ...messageValidator,
+];
+export const resetForgotNewPassword: ValidationChain[] = [
+  ...newPasswordValidators,
+  ...confirmPasswordValidators,
 ];

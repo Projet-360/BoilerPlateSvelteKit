@@ -9,6 +9,8 @@ const resetForgotNewPasswordResolver = async (
   confirmPassword: string,
   next: NextFunction,
 ) => {
+  console.log('token', token, newPassword, confirmPassword);
+
   try {
     // Validation: Check if newPassword and confirmPassword are the same
     if (newPassword !== confirmPassword) {

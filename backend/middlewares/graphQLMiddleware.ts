@@ -3,7 +3,7 @@ import logger from '../services/logger.js';
 import { validationResult } from 'express-validator';
 import {
   greetingsValidators,
-  passwordValidators,
+  resetForgotNewPassword,
   signupValidators,
 } from './validations/validators.js';
 
@@ -50,7 +50,7 @@ export const graphQLMiddleware = (
       validators = signupValidators;
       break;
     case 'ResetForgotNewPassword':
-      validators = passwordValidators;
+      validators = resetForgotNewPassword;
       break;
     default:
       return next();
