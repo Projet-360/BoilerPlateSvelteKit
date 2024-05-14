@@ -1,4 +1,4 @@
-import applyMiddlewares from './middlewares/middlewares.js';
+import applyMiddlewares from './middlewares/index.js';
 import setupServer from './services/setupServer.js';
 import setupApolloServer from './services/setupApolloServer.js';
 import startApolloServer from './services/startApolloServer.js';
