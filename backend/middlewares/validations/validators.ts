@@ -15,7 +15,7 @@ export const emailValidators = [
 ];
 
 export const passwordValidators = [
-  check('variables.password')
+  check('variables.password' || 'variables.newPassword' || 'variables.confirmPassword')
     .isLength({ min: 8 })
     .withMessage('NUMBE_CARAC_PASSWORD')
     .matches(/[a-z]/)
@@ -28,33 +28,6 @@ export const passwordValidators = [
     .withMessage('SPECIAL_CARAC_PASSWORD'),
 ];
 
-export const newPasswordValidators = [
-  check('variables.newPassword')
-    .isLength({ min: 8 })
-    .withMessage('NUMBE_CARAC_PASSWORD')
-    .matches(/[a-z]/)
-    .withMessage('MIN_PASSWORD')
-    .matches(/[A-Z]/)
-    .withMessage('MAJ_PASSWORD')
-    .matches(/[0-9]/)
-    .withMessage('NUMBER_PASSWORD')
-    .matches(/[!@#$%^&*(),\.\?":{}|<>_-]/)
-    .withMessage('SPECIAL_CARAC_PASSWORD'),
-];
-
-export const confirmPasswordValidators = [
-  check('variables.confirmPassword')
-    .isLength({ min: 8 })
-    .withMessage('NUMBE_CARAC_PASSWORD')
-    .matches(/[a-z]/)
-    .withMessage('MIN_PASSWORD')
-    .matches(/[A-Z]/)
-    .withMessage('MAJ_PASSWORD')
-    .matches(/[0-9]/)
-    .withMessage('NUMBER_PASSWORD')
-    .matches(/[!@#$%^&*(),\.\?":{}|<>_-]/)
-    .withMessage('SPECIAL_CARAC_PASSWORD'),
-];
 
 export const nameValidator = [
   check('variables.name').not().isEmpty().withMessage('NAME_REQUIRED'),
@@ -86,6 +59,6 @@ export const greetingsValidators: ValidationChain[] = [
   ...messageValidator,
 ];
 export const resetForgotNewPassword: ValidationChain[] = [
-  ...newPasswordValidators,
-  ...confirmPasswordValidators,
+  ...passwordValidators,
+  ...passwordValidators,
 ];
