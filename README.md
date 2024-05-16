@@ -149,10 +149,16 @@ netstat -ano | findstr :1000
 netstat -ano | findstr :8025
 
 taskkill /PID <PID> /F
-taskkill /PID 21712 /F
+taskkill /PID 13648 /F
 
 
+Revoir les auth et faire une verification du token avec le role
+Faire le middleware mieux pour les validators split code
+finir les req sur les comptes
+faire les sessions
+réfléchir a une manière de pouvoir faire des sauvegardes de bdd concernant les utilisateurs lors de la suppression de compte
 
-Finir les API
-Faire le middleware
-Faire passer les test
+créer un email d'urgence si le role à été modifier dans le token
+
+-L'id ne doit jamais être envoyé dans une req, c'est le backend qui doit la consulter par le token
+-

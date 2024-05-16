@@ -21,6 +21,11 @@ import {
 
 import logger from './logger.js';
 
+interface ExtendedJwtPayload extends JwtPayload {
+  _id: string; // Votre payload doit contenir l'_id et potentiellement le rôle
+  role: string;
+}
+
 // Function to generate a random token
 const generateToken = () => {
   return crypto.randomBytes(32).toString('hex');
@@ -185,29 +190,45 @@ export const checkAuthService = async (token: string) => {
     };
   }
 
-  const decoded = jwt.verify(
-    token,
-    process.env.SECRETKEY as string,
-  ) as JwtPayload;
+  try {
+    const decoded = jwt.verify(
+      token,
+      process.env.SECRETKEY as string,
+    ) as ExtendedJwtPayload;
 
-  // Chercher l'utilisateur en fonction de _id pour obtenir le rôle
-  const user = await User.findById(decoded._id);
+    const user = await User.findById(decoded._id);
 
-  if (!user) {
+    if (!user) {
+      return {
+        isAuthenticated: false,
+        message: 'Utilisateur non trouvé.',
+      };
+    }
+
+    // Vérifiez si le rôle dans le token correspond au rôle actuel de l'utilisateur
+    if (user.role !== decoded.role) {
+      logger.info('Le rôle de l’utilisateur a été modifié');
+      return {
+        isAuthenticated: false,
+        message: 'Le rôle de l’utilisateur a été modifié.',
+      };
+    }
+
+    return {
+      isAuthenticated: true,
+      token,
+      _id: user._id,
+      role: user.role,
+      name: user.username,
+      email: user.email,
+    };
+  } catch (error) {
+    logger.error('Erreur lors de la vérification du token : ', error);
     return {
       isAuthenticated: false,
-      message: 'Utilisateur non trouvé.',
+      message: 'Échec de la vérification du token.',
     };
   }
-
-  return {
-    isAuthenticated: true,
-    token,
-    _id: decoded._id,
-    role: user.role,
-    name: user.username,
-    email: user.email,
-  };
 };
 
 /**
@@ -522,3 +543,5 @@ export const generateDeleteToken = (): Promise<string> => {
     });
   });
 };
+
+export const verifyTokenUser = async (token: string) => {};
