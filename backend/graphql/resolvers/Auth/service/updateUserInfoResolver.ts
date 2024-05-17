@@ -3,11 +3,7 @@ import logger from '../../../../services/logger.js';
 import CustomError from '../../../../services/errors/CustomError.js';
 import { Request } from 'express';
 
-const updateUserInfoResolver = async (
-  username: string,
-  email: string,
-  req: Request,
-) => {
+const updateUserInfoResolver = async (username: string, req: Request) => {
   try {
     const tokenKey = process.env.TOKEN_NAME as string;
     const token = req.cookies[tokenKey];
@@ -21,16 +17,13 @@ const updateUserInfoResolver = async (
 
     const verified = await authService.updateUserInfo(id, {
       username,
-      email,
     });
 
     console.log('verified', verified);
 
     if (verified && verified.updatedUser) {
       const dataReturn = {
-        id: verified.updatedUser.id,
         username: verified.updatedUser.username,
-        email: verified.updatedUser.email,
       };
 
       return dataReturn;
