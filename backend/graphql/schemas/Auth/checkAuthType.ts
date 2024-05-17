@@ -8,7 +8,6 @@ const checkAuthType = gql`
   type CheckAuth {
     isAuthenticated: Boolean
     role: String
-    userData: UserData
   }
 `;
 

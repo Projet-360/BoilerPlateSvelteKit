@@ -19,15 +19,10 @@ async function loginAPI(
       variables: { email, password, fingerPrint },
     })
 
-    if (data.login && data.login.role && data.login.sessionId) {
+    if (data.login && data.login.role) {
       authStore.set({
-        currentSessionId: data.login.sessionId,
         role: data.login.role,
         isAuthenticated: true,
-        userData: {
-          username: data.login.userData.username,
-          email: data.login.userData.email,
-        },
       })
       notificationStore.addNotification($t('data.SUCCESS_LOGIN'), 'success')
       handleRoleRedirection(data.login.role)

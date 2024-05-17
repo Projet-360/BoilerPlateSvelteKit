@@ -20,7 +20,6 @@ const getDashboardDataResolver = async (req: Request) => {
       isVerified: userInfo.isVerified,
       userData: {
         username: userInfo.username as string,
-        email: userInfo.email as string,
       },
     };
 

@@ -22,10 +22,6 @@ const checkAuthResolver = async (req: Request, res: Response) => {
     return {
       isAuthenticated: true,
       role: result.role,
-      userData: {
-        username: result.name,
-        email: result.email,
-      },
     };
   } else {
     return { isAuthenticated: false };

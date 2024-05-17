@@ -5,10 +5,6 @@ export const checkAuthGQL = gql`
     checkAuth {
       isAuthenticated
       role
-      userData {
-        username
-        email
-      }
     }
   }
 `

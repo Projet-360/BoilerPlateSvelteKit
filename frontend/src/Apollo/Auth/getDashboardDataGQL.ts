@@ -1,14 +1,13 @@
-import { gql } from "@apollo/client/core";
+import { gql } from '@apollo/client/core'
 
 export const getDashboardDataGQL = gql`
-query GetDashboardData {
+  query GetDashboardData {
     getDashboardData {
       role
       sessionId
       isVerified
       userData {
         username
-        email
       }
     }
   }

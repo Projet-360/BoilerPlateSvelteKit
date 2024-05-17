@@ -38,8 +38,7 @@
       const data = await authStore.getDashboardDataAPI()
       userData = data.getDashboardData
       username = data.getDashboardData.userData.username
-      email = data.getDashboardData.userData.email
-      role = data.getDashboardData.userData.role
+      role = data.getDashboardData.role
       isVerified = data.getDashboardData.isVerified
     } catch (error) {
       console.error('Error:', error)
@@ -59,8 +58,6 @@
       <form>
         <label for="username">Username</label>
         <input id="username" type="text" bind:value="{username}" />
-        <label for="email">Email</label>
-        <input id="email" type="email" bind:value="{email}" />
         <button on:click="{handlePasswordReset}"
           >Réinitialiser le mot de passe</button
         >

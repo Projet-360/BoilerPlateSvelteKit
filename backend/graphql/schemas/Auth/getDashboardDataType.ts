@@ -14,7 +14,6 @@ const getDashboardDataType = gql`
 
   type UserData {
     username: String
-    email: String
   }
 `;
 

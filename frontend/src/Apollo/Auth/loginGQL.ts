@@ -8,11 +8,6 @@ export const loginGQL = gql`
   ) {
     login(email: $email, password: $password, fingerPrint: $fingerPrint) {
       role
-      sessionId
-      userData {
-        username
-        email
-      }
     }
   }
 `

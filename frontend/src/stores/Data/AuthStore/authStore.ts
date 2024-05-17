@@ -9,11 +9,6 @@ function AuthStore() {
     currentSessionId: undefined,
     role: null,
     isAuthenticated: false,
-    sessions: [],
-    userData: {
-      username: null,
-      email: null,
-    },
   })
 
   return {

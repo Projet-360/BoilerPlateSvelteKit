@@ -21,13 +21,6 @@ const loginType = gql`
 
   type LoginResponse {
     role: String
-    sessionId: String
-    userData: UserData
-  }
-
-  type UserData {
-    username: String
-    email: String
   }
 `;
 

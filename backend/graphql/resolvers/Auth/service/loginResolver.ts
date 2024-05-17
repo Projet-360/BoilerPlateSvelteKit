@@ -51,12 +51,7 @@ const loginResolver = async (
     console.log('Session ID:', sessionId);
 
     return {
-      role: role || 'defaultRole', // Valeur par défaut pour le rôle
-      sessionId: sessionId,
-      userData: {
-        username: userData.username,
-        email: userData.email,
-      },
+      role: role,
     };
   } catch (error: any) {
     throw new CustomError('LoginError', error.message, 400);

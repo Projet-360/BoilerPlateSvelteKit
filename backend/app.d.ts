@@ -72,7 +72,6 @@ declare global {
       isVerified?: boolean;
       userData: {
         username: string;
-        email: string;
       };
     }
 
@@ -114,15 +113,12 @@ declare global {
 
     interface userData {
       username: string | null;
-      email: string | null;
     }
 
     interface IAuthStore {
       role: string | null;
       isAuthenticated: boolean;
       currentSessionId?: string; // L'identifiant de la session actuelle
-      sessions?: Session[]; // Une liste de toutes les sessions actives de l'utilisateur
-      userData: userData;
     }
 
     interface UserInfo {

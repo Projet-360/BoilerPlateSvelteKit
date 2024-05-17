@@ -14,7 +14,6 @@ async function logoutAPI($t: TS.TranslationFunction) {
       currentSessionId: undefined,
       role: null,
       isAuthenticated: false,
-      sessions: [],
       userData: {
         username: null,
         email: null,

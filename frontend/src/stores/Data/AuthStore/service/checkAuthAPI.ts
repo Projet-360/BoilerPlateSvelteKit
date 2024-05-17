@@ -16,10 +16,6 @@ async function checkAuthAPI() {
         ...state,
         role: data.checkAuth.role,
         isAuthenticated: data.checkAuth.isAuthenticated,
-        userData: {
-          username: data.checkAuth.userData.username,
-          email: data.checkAuth.userData.email,
-        },
       }))
     }
   } catch (error) {
