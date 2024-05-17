@@ -5,12 +5,14 @@ import { sendDeleteAccountEmail } from '../../../../services/emailService.js';
 import logger from '../../../../services/logger.js';
 
 // Resolver pour la mutation requestAccountDeletion
-const requestAccountDeletionResolver = async (
-  id: string,
-  req: Request,
-  res: Response,
-) => {
+const requestAccountDeletionResolver = async (req: Request, res: Response) => {
   try {
+    const tokenKey = process.env.TOKEN_NAME as string;
+    const token = req.cookies[tokenKey];
+
+    const idReceived = await authService.getIDByToken(token);
+    const id: string = idReceived.id;
+
     // Génération d'un jeton de suppression sécurisé
     const deleteToken = await authService.generateDeleteToken();
 
@@ -27,7 +29,7 @@ const requestAccountDeletionResolver = async (
     // Envoyer l'email de suppression
     await sendDeleteAccountEmail(user.email, deleteToken);
 
-    res.status(200).json({ message: 'DELETE_ACCOUNT_EMAIL_SENT' });
+    return { message: 'DELETE_ACCOUNT_EMAIL_SENT' };
   } catch (error: any) {
     logger.error('Erreur lors de la demande de suppression de compte:', error);
     res.status(500).json({ message: 'Erreur du serveur.' });

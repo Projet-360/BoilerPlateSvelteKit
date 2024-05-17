@@ -29,8 +29,8 @@
     await authStore.sendEmailResetPasswordAPI(email, $t)
   }
 
-  const DeleteAccount = async (id: string) => {
-    await authStore.requestAccountDeletionAPI(id, $t)
+  const DeleteAccount = async () => {
+    await authStore.requestAccountDeletionAPI($t)
   }
 
   onMount(async () => {
@@ -71,8 +71,7 @@
           disabled
         />
 
-        <!-- <button on:click="{() => DeleteAccount(id)}">Supprimer le compte</button
-        > -->
+        <button on:click="{() => DeleteAccount()}">Supprimer le compte</button>
 
         <!-- <button on:click="{handleUpdate}">Mettre à jour</button> -->
       </form>

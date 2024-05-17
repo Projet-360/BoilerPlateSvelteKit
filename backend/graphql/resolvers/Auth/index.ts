@@ -76,10 +76,7 @@ export const authResolver = {
       context: Context,
     ) => updateUserInfoResolver(args.username, args.email, context.req),
 
-    requestAccountDeletion: async (
-      _: any,
-      args: { id: string },
-      context: Context,
-    ) => requestAccountDeletionResolver(args.id, context.req, context.res),
+    requestAccountDeletion: async (_: any, args: {}, context: Context) =>
+      requestAccountDeletionResolver(context.req, context.res),
   },
 };
