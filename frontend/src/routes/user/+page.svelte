@@ -58,11 +58,11 @@
       <form>
         <label for="username">Username</label>
         <input id="username" type="text" bind:value="{username}" />
+        <button on:click="{handleUpdate}">Mettre à jour le username</button>
         <button on:click="{handlePasswordReset}"
           >Réinitialiser le mot de passe</button
         >
         <button on:click="{() => DeleteAccount()}">Supprimer le compte</button>
-        <button on:click="{handleUpdate}">Mettre à jour le username</button>
 
         <p><label for="role">Role</label>: {role}</p>
         <label for="isVerified">Is Verified</label>

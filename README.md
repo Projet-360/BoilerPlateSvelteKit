@@ -160,5 +160,4 @@ réfléchir a une manière de pouvoir faire des sauvegardes de bdd concernant le
 
 créer un email d'urgence si le role à été modifier dans le token
 
--L'id ne doit jamais être envoyé dans une req, c'est le backend qui doit la consulter par le token
--au mieux aucune information user ne doit etre disponible dans les stores
+assurer les déconnection pour le compte isverified

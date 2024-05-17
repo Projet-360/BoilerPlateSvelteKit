@@ -11,13 +11,8 @@ async function logoutAPI($t: TS.TranslationFunction) {
     })
 
     authStore.set({
-      currentSessionId: undefined,
       role: null,
       isAuthenticated: false,
-      userData: {
-        username: null,
-        email: null,
-      },
     })
 
     notificationStore.addNotification($t('data.logout-logout'), 'success')
