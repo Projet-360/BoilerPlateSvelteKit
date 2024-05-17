@@ -26,7 +26,7 @@
   }
 
   const handlePasswordReset = async () => {
-    await authStore.sendEmailResetPasswordAPI(email, $t)
+    await authStore.sendEmailResetPasswordByUserAPI($t)
   }
 
   const DeleteAccount = async () => {
