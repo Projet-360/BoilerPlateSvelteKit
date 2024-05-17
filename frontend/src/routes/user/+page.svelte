@@ -7,24 +7,23 @@
   import SessionAccount from '$components/sessionAccount.svelte'
 
   let userData: TS.userData
-  let id: string = ''
   let username: string = ''
   let email: string = ''
   let role: string = ''
   let isVerified = false
 
-  const handleUpdate = async () => {
-    try {
-      await authStore.updateUserInfoAPI(id, username, email, $t)
-      const data = await authStore.getDashboardDataAPI()
-      userData = data
-    } catch (error) {
-      console.error(
-        "Erreur lors de la mise à jour des informations de l'utilisateur :",
-        error,
-      )
-    }
-  }
+  // const handleUpdate = async () => {
+  //   try {
+  //     await authStore.updateUserInfoAPI(username, email, $t)
+  //     const data = await authStore.getDashboardDataAPI()
+  //     userData = data
+  //   } catch (error) {
+  //     console.error(
+  //       "Erreur lors de la mise à jour des informations de l'utilisateur :",
+  //       error,
+  //     )
+  //   }
+  // }
 
   const handlePasswordReset = async () => {
     await authStore.sendEmailResetPasswordAPI(email, $t)
@@ -38,10 +37,10 @@
     try {
       const data = await authStore.getDashboardDataAPI()
       userData = data.getDashboardData
-      console.log('userData', userData.userId)
-      ;(id = userData.userId),
-        ({ username, email } = userData.userData),
-        ({ role, isVerified } = userData)
+      username = data.getDashboardData.userData.username
+      email = data.getDashboardData.userData.email
+      role = data.getDashboardData.userData.role
+      isVerified = data.getDashboardData.isVerified
     } catch (error) {
       console.error('Error:', error)
     }
@@ -75,10 +74,10 @@
           disabled
         />
 
-        <button on:click="{() => DeleteAccount(id)}">Supprimer le compte</button
-        >
+        <!-- <button on:click="{() => DeleteAccount(id)}">Supprimer le compte</button
+        > -->
 
-        <button on:click="{handleUpdate}">Mettre à jour</button>
+        <!-- <button on:click="{handleUpdate}">Mettre à jour</button> -->
       </form>
 
       <!-- <SessionAccount /> -->

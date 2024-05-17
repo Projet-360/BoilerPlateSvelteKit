@@ -1,11 +1,10 @@
-import { gql } from "@apollo/client/core";
+import { gql } from '@apollo/client/core'
 
 export const checkAuthGQL = gql`
-query CheckAuth {
+  query CheckAuth {
     checkAuth {
       isAuthenticated
       role
-      userId
       userData {
         username
         email

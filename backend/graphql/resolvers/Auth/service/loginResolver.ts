@@ -48,8 +48,9 @@ const loginResolver = async (
       sessionId = session._id.toString();
     }
 
+    console.log('Session ID:', sessionId);
+
     return {
-      userId: _id.toString(),
       role: role || 'defaultRole', // Valeur par défaut pour le rôle
       sessionId: sessionId,
       userData: {

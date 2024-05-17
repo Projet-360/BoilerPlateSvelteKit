@@ -19,14 +19,8 @@ async function loginAPI(
       variables: { email, password, fingerPrint },
     })
 
-    if (
-      data.login &&
-      data.login.userId &&
-      data.login.role &&
-      data.login.sessionId
-    ) {
+    if (data.login && data.login.role && data.login.sessionId) {
       authStore.set({
-        userId: data.login.userId,
         currentSessionId: data.login.sessionId,
         role: data.login.role,
         isAuthenticated: true,

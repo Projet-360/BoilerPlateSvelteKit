@@ -67,7 +67,6 @@ declare global {
     }
 
     interface GetDashboardDataResponse {
-      userId: string;
       role?: string;
       sessionId: string;
       isVerified?: boolean;
@@ -119,7 +118,6 @@ declare global {
     }
 
     interface IAuthStore {
-      userId: string | null;
       role: string | null;
       isAuthenticated: boolean;
       currentSessionId?: string; // L'identifiant de la session actuelle
@@ -140,7 +138,6 @@ declare global {
     }
 
     interface GetDashboardData {
-      userId: string;
       role: string;
       sessionId: string;
       isVerified: boolean;

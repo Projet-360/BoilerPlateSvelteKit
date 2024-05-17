@@ -15,7 +15,6 @@ const getDashboardDataResolver = async (req: Request) => {
     const userInfo = await authService.getUserInfo(result._id);
 
     const dataReturn: TS.GetDashboardDataResponse = {
-      userId: userInfo.id,
       role: userInfo.role,
       sessionId: 'session wip',
       isVerified: userInfo.isVerified,

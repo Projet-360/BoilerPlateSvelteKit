@@ -21,7 +21,6 @@ const checkAuthResolver = async (req: Request, res: Response) => {
   if (result.isAuthenticated) {
     return {
       isAuthenticated: true,
-      userId: result._id,
       role: result.role,
       userData: {
         username: result.name,

@@ -544,4 +544,13 @@ export const generateDeleteToken = (): Promise<string> => {
   });
 };
 
-export const verifyTokenUser = async (token: string) => {};
+export const getIDByToken = async (token: string) => {
+  const decoded = jwt.verify(
+    token,
+    process.env.SECRETKEY as string,
+  ) as ExtendedJwtPayload;
+
+  return {
+    id: decoded._id,
+  };
+};

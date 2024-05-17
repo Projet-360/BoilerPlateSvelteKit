@@ -11,7 +11,6 @@ async function logoutAPI($t: TS.TranslationFunction) {
     })
 
     authStore.set({
-      userId: null,
       currentSessionId: undefined,
       role: null,
       isAuthenticated: false,

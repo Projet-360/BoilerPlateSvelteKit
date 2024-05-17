@@ -6,7 +6,6 @@ const getDashboardDataType = gql`
   }
 
   type getDashboardDataResponse {
-    userId: String
     role: String
     sessionId: String
     isVerified: Boolean

@@ -5,7 +5,6 @@ import notificationStore from '$stores/UX/notificationStore'
 import { authStore } from '../authStore'
 
 async function updateUserInfoAPI(
-  id: string,
   username: string,
   email: string,
   $t: TS.TranslationFunction,
@@ -13,14 +12,10 @@ async function updateUserInfoAPI(
   try {
     const { data } = await client.mutate({
       mutation: updateUserInfoGQL,
-      variables: { id, username, email },
+      variables: { username, email },
     })
 
-    if (
-      (data.updateUserInfo.email,
-      data.updateUserInfo.id,
-      data.updateUserInfo.username)
-    ) {
+    if ((data.updateUserInfo.email, data.updateUserInfo.username)) {
       notificationStore.addNotification($t('data.UPDATE_SUCCESS'), 'success')
     } else {
       throw new Error($t('data.UPDATE_FAILURE'))
