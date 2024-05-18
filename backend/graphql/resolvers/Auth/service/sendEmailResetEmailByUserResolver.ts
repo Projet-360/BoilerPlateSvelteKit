@@ -4,7 +4,7 @@ import * as authService from '../../../../services/authService.js';
 import CustomError from '../../../../services/errors/CustomError.js';
 
 const sendEmailResetEmailByUserResolver = async (
-  newEmail: string, // Utilisez newEmail pour éviter la confusion
+  newEmail: string,
   next: NextFunction,
   req: Request,
 ) => {

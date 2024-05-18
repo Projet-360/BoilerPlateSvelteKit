@@ -15,6 +15,7 @@ import getAllUsersResolver from './service/getAllUsersResolver.js';
 import updateUserInfoResolver from './service/updateUserInfoResolver.js';
 import requestAccountDeletionResolver from './service/requestAccountDeletionResolver.js';
 import sendEmailResetPasswordByUserResolver from './service/sendEmailResetPasswordByUserResolver.js';
+import sendEmailResetEmailByUserResolver from './service/sendEmailResetEmailByUserResolver.js';
 
 interface Context {
   req: Request;
@@ -92,10 +93,6 @@ export const authResolver = {
       args: { email: string },
       context: Context,
     ) =>
-      sendEmailResetPasswordByUserResolver(
-        args.email,
-        context.req,
-        context.next,
-      ),
+      sendEmailResetEmailByUserResolver(args.email, context.next, context.req),
   },
 };
