@@ -8,7 +8,6 @@
 
   let userData: TS.userData
   let username: string = ''
-  let email: string = ''
   let role: string = ''
   let isVerified = false
 
@@ -59,9 +58,12 @@
         <label for="username">Username</label>
         <input id="username" type="text" bind:value="{username}" />
         <button on:click="{handleUpdate}">Mettre à jour le username</button>
-        <button on:click="{handlePasswordReset}"
-          >Réinitialiser le mot de passe</button
+        <button on:click="{handlePasswordReset}">Changer le mot de passe</button
         >
+        <a href="/user/change-email" use:hoverable="{'first'}"
+          >changer votre email</a
+        >
+
         <button on:click="{() => DeleteAccount()}">Supprimer le compte</button>
 
         <p><label for="role">Role</label>: {role}</p>

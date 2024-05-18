@@ -86,5 +86,16 @@ export const authResolver = {
         context.res,
         context.next,
       ),
+
+    sendEmailResetEmailByUser: async (
+      _: any,
+      args: { email: string },
+      context: Context,
+    ) =>
+      sendEmailResetPasswordByUserResolver(
+        args.email,
+        context.req,
+        context.next,
+      ),
   },
 };
